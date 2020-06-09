@@ -1,0 +1,471 @@
+# 
+# Translators:
+# phil_dhis2, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
+# Wanda <wanda@frontlineaids.org>, 2020
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2020-05-20T21:46:25.914Z\n"
+"PO-Revision-Date: 2020-05-18 10:55+0000\n"
+"Last-Translator: Wanda <wanda@frontlineaids.org>, 2020\n"
+"Language-Team: Ukrainian (https://www.transifex.com/hisp-uio/teams/100509/uk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+msgid "Data"
+msgstr "Дані"
+
+msgid "Data Type"
+msgstr ""
+
+msgid "Totals"
+msgstr "Підсумки"
+
+msgid "Details"
+msgstr "Деталі"
+
+msgid "Detail"
+msgstr ""
+
+msgid "Move to {{axisName}}"
+msgstr ""
+
+msgid "Add to {{axisName}}"
+msgstr ""
+
+msgid "Remove"
+msgstr "Прибрати"
+
+msgid "Not available for {{visualizationType}}"
+msgstr ""
+
+msgid "Requires 2 or more data items"
+msgstr ""
+
+msgid "Only available when data is in Series"
+msgstr ""
+
+msgid "Remove Assigned Categories"
+msgstr ""
+
+msgid "Add Assigned Categories"
+msgstr ""
+
+msgid "Manage chart axes"
+msgstr ""
+
+msgid "Filter dimensions"
+msgstr ""
+
+msgid "Main dimensions"
+msgstr ""
+
+msgid "Your dimensions"
+msgstr ""
+
+msgid "Dimension recommended with selected data"
+msgstr ""
+
+msgid "Search"
+msgstr "Пошук"
+
+msgid "Selected Data"
+msgstr ""
+
+msgid "Deselect All"
+msgstr ""
+
+msgid "Select all"
+msgstr "Вибрати усе"
+
+msgid "Organisation units"
+msgstr "Організаційні підрозділи"
+
+msgid "Period"
+msgstr "Період"
+
+msgid "Year"
+msgstr "Рік"
+
+msgid "Relative periods"
+msgstr "Відносні періоди"
+
+msgid "Fixed periods"
+msgstr ""
+
+msgid "Period type"
+msgstr ""
+
+msgid "January"
+msgstr "Січень"
+
+msgid "February"
+msgstr "Лютий"
+
+msgid "March"
+msgstr "Березень"
+
+msgid "April"
+msgstr "Квітень"
+
+msgid "May"
+msgstr "Травень"
+
+msgid "June"
+msgstr "Червень"
+
+msgid "July"
+msgstr "Липень"
+
+msgid "August"
+msgstr "Серпень"
+
+msgid "September"
+msgstr "Вересень"
+
+msgid "October"
+msgstr "Жовтень"
+
+msgid "November"
+msgstr "Листопад"
+
+msgid "December"
+msgstr "Грудень"
+
+msgid "Week {{weekNumber}}"
+msgstr ""
+
+msgid "Bi-Week {{biWeekNumber}}"
+msgstr ""
+
+msgid "Daily"
+msgstr "Щодня"
+
+msgid "Weekly"
+msgstr "Щотижня"
+
+msgid "Bi-weekly"
+msgstr "Щодвотижневий"
+
+msgid "Weekly (Start Wednesday)"
+msgstr ""
+
+msgid "Weekly (Start Thursday)"
+msgstr ""
+
+msgid "Weekly (Start Saturday)"
+msgstr ""
+
+msgid "Weekly (Start Sunday)"
+msgstr ""
+
+msgid "Monthly"
+msgstr "Щомісячно"
+
+msgid "Bi-monthly"
+msgstr "Щодва місяці"
+
+msgid "Quarterly"
+msgstr "Щоквартально"
+
+msgid "Six-monthly"
+msgstr "Раз на півріччя"
+
+msgid "Six-monthly April"
+msgstr "Раз на півріччя квітень"
+
+msgid "Yearly"
+msgstr "Щорічно"
+
+msgid "Financial year (Start November)"
+msgstr ""
+
+msgid "Financial year (Start October)"
+msgstr "Фінансовий рік (Початок у жовтні)"
+
+msgid "Financial year (Start July)"
+msgstr "Фінансовий рік (Початок у липні)"
+
+msgid "Financial year (Start April)"
+msgstr "Фінансовий рік (Початок у квітні)"
+
+msgid "Today"
+msgstr "Сьогодні"
+
+msgid "Yesterday"
+msgstr "Вчора"
+
+msgid "Last 3 days"
+msgstr "Минулі 3 дні"
+
+msgid "Last 7 days"
+msgstr "Минулі 7 днів"
+
+msgid "Last 14 days"
+msgstr "Минулі 14 днів"
+
+msgid "This week"
+msgstr "Поточний тиждень"
+
+msgid "Last week"
+msgstr "Минулий тиждень"
+
+msgid "Last 4 weeks"
+msgstr "Останні 4 тижні"
+
+msgid "Last 12 weeks"
+msgstr "Останні 12 тижнів"
+
+msgid "Last 52 weeks"
+msgstr "Останні 52 тижні"
+
+msgid "Weeks this year"
+msgstr "Тижні поточного року"
+
+msgid "This bi-week"
+msgstr "Теперішній двотижневий проміжок"
+
+msgid "Last bi-week"
+msgstr "Попередній двотижневий проміжок"
+
+msgid "Last 4 bi-weeks"
+msgstr "Попередні 4 двотижневі проміжки"
+
+msgid "This month"
+msgstr "Поточний місяць"
+
+msgid "Last month"
+msgstr "Останній місяць"
+
+msgid "Last 3 months"
+msgstr "Останні 3 місяці"
+
+msgid "Last 6 months"
+msgstr "Останні 6 місяців"
+
+msgid "Last 12 months"
+msgstr "Останні 12 місяців"
+
+msgid "Months this year"
+msgstr "Місяців поточного року"
+
+msgid "This bi-month"
+msgstr "Поточний двомісячний період"
+
+msgid "Last bi-month"
+msgstr "Останні два місяці"
+
+msgid "Last 6 bi-months"
+msgstr "Останні 6 двомісячних періоди"
+
+msgid "Bi-months this year"
+msgstr "Щодва місяці поточного року"
+
+msgid "This quarter"
+msgstr "Поточний квартал"
+
+msgid "Last quarter"
+msgstr "Минулий квартал"
+
+msgid "Last 4 quarters"
+msgstr "Останні 4 квартали"
+
+msgid "Quarters this year"
+msgstr "Квартали поточного року"
+
+msgid "This six-month"
+msgstr "Поточне півріччя"
+
+msgid "Last six-month"
+msgstr "Останнє півріччя"
+
+msgid "Last 2 six-month"
+msgstr ""
+
+msgid "This financial year"
+msgstr "Поточний фінансовий рік"
+
+msgid "Last financial year"
+msgstr "Минулий фінансовий рік"
+
+msgid "Last 5 financial years"
+msgstr "Останні 5 фінансових років"
+
+msgid "This year"
+msgstr "Поточний рік"
+
+msgid "Last year"
+msgstr "Минулий рік"
+
+msgid "Last 5 years"
+msgstr "Останні 5 років"
+
+msgid "Days"
+msgstr "Дні"
+
+msgid "Weeks"
+msgstr "Тижні"
+
+msgid "Bi-weeks"
+msgstr "Двотижневі проміжки"
+
+msgid "Months"
+msgstr "Місяці"
+
+msgid "Bi-months"
+msgstr "Двомісячні періоди"
+
+msgid "Quarters"
+msgstr "Квартали"
+
+msgid "Six-months"
+msgstr "Півріччя"
+
+msgid "Financial Years"
+msgstr ""
+
+msgid "Years"
+msgstr "Роки"
+
+msgid "Series"
+msgstr ""
+
+msgid "Category"
+msgstr "Категорія"
+
+msgid "Filter"
+msgstr "Фільтр"
+
+msgid "Columns"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
+
+msgid "Reporting rate"
+msgstr ""
+
+msgid "Reporting rate on time"
+msgstr ""
+
+msgid "Actual reports"
+msgstr ""
+
+msgid "Actual reports on time"
+msgstr ""
+
+msgid "Expected reports"
+msgstr ""
+
+msgid "Program"
+msgstr "Програма"
+
+msgid "Indicators"
+msgstr "Показники"
+
+msgid "Select indicator group"
+msgstr "Обрати групу показників"
+
+msgid "[ All groups ]"
+msgstr ""
+
+msgid "Data elements"
+msgstr "Елементи даних"
+
+msgid "Select data element group"
+msgstr "Обрати групу елементів даних"
+
+msgid "[ All data elements ]"
+msgstr ""
+
+msgid "Data sets"
+msgstr "Набори даних"
+
+msgid "Select data sets"
+msgstr ""
+
+msgid "[ All metrics ]"
+msgstr ""
+
+msgid "Event data items"
+msgstr "Складові дані події"
+
+msgid "Select a program"
+msgstr ""
+
+msgid "Program indicators"
+msgstr "Програмні показники"
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr ""
+
+msgid "Organisation Unit"
+msgstr "Організаційний підрозділ"
+
+msgid "Assigned Categories"
+msgstr ""
+
+msgid "Column"
+msgstr "Стовпчик"
+
+msgid "Stacked column"
+msgstr ""
+
+msgid "Bar"
+msgstr ""
+
+msgid "Stacked bar"
+msgstr ""
+
+msgid "Line"
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Pie"
+msgstr ""
+
+msgid "Radar"
+msgstr ""
+
+msgid "Gauge"
+msgstr ""
+
+msgid "Year over year (line)"
+msgstr ""
+
+msgid "Year over year (column)"
+msgstr ""
+
+msgid "Single value"
+msgstr ""
+
+msgid "Pivot table"
+msgstr "Зведена таблиця"
+
+msgid "Target"
+msgstr "Ціль"
+
+msgid "Base"
+msgstr ""
+
+msgid "No data"
+msgstr "Немає даних"
