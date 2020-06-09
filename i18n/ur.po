@@ -1,0 +1,374 @@
+# 
+# Translators:
+# phil_dhis2, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2020-05-13T16:46:50.486Z\n"
+"PO-Revision-Date: 2020-04-29 08:10+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
+"Language-Team: Urdu (https://www.transifex.com/hisp-uio/teams/100509/ur/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ur\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Data"
+msgstr "ڈیٹا"
+
+msgid "Data Type"
+msgstr ""
+
+msgid "Totals"
+msgstr "مجموعی طور پر"
+
+msgid "Details"
+msgstr "تفصیلات"
+
+msgid "Detail"
+msgstr ""
+
+msgid "Search dimensions"
+msgstr ""
+
+msgid "Dimension recommended with selected data"
+msgstr ""
+
+msgid "Search"
+msgstr "تلاش کریں"
+
+msgid "Selected Data"
+msgstr ""
+
+msgid "Deselect All"
+msgstr ""
+
+msgid "Select all"
+msgstr "تمام کو چنو"
+
+msgid "Organisation units"
+msgstr "تنظیمی یونٹس"
+
+msgid "Period"
+msgstr "مدت"
+
+msgid "Year"
+msgstr "سال"
+
+msgid "Relative periods"
+msgstr "رشتہ دار دور"
+
+msgid "Fixed periods"
+msgstr "فکسڈ مدت"
+
+msgid "Period type"
+msgstr "مدت کی قسم"
+
+msgid "January"
+msgstr "جنوری"
+
+msgid "February"
+msgstr "فروری"
+
+msgid "March"
+msgstr "مارچ"
+
+msgid "April"
+msgstr "اپریل"
+
+msgid "May"
+msgstr "مئی"
+
+msgid "June"
+msgstr "جون"
+
+msgid "July"
+msgstr "جولائی"
+
+msgid "August"
+msgstr "اگست"
+
+msgid "September"
+msgstr "ستمبر"
+
+msgid "October"
+msgstr "اکتوبر"
+
+msgid "November"
+msgstr "نومبر"
+
+msgid "December"
+msgstr "دسمبر"
+
+msgid "Week {{weekNumber}}"
+msgstr ""
+
+msgid "Bi-Week {{biWeekNumber}}"
+msgstr ""
+
+msgid "Daily"
+msgstr "روزانہ"
+
+msgid "Weekly"
+msgstr "ہفتہ وار"
+
+msgid "Bi-weekly"
+msgstr ""
+
+msgid "Weekly (Start Wednesday)"
+msgstr "ہفتہ وار (بدھ شروع کریں)"
+
+msgid "Weekly (Start Thursday)"
+msgstr "ہفتہ وار (جمعرات شروع کریں)"
+
+msgid "Weekly (Start Saturday)"
+msgstr "ہفتہ وار (ہفتہ شروع کریں)"
+
+msgid "Weekly (Start Sunday)"
+msgstr "ہفتہ (اتوار شروع کریں)"
+
+msgid "Monthly"
+msgstr "ماہانہ"
+
+msgid "Bi-monthly"
+msgstr "دو ماہی"
+
+msgid "Quarterly"
+msgstr "سہ ماہی"
+
+msgid "Six-monthly"
+msgstr "چھ ماہی"
+
+msgid "Six-monthly April"
+msgstr "چھ ماہی اپریل"
+
+msgid "Yearly"
+msgstr "سالانہ"
+
+msgid "Financial year (Start November)"
+msgstr ""
+
+msgid "Financial year (Start October)"
+msgstr "مالی سال (اکتوبر شروع کریں)"
+
+msgid "Financial year (Start July)"
+msgstr "مالی سال (جولائی شروع کریں)"
+
+msgid "Financial year (Start April)"
+msgstr "مالی سال (اپریل شروع کریں)"
+
+msgid "Today"
+msgstr "آج"
+
+msgid "Yesterday"
+msgstr "کل"
+
+msgid "Last 3 days"
+msgstr "آخری 3 دن"
+
+msgid "Last 7 days"
+msgstr "آخری 7 دن"
+
+msgid "Last 14 days"
+msgstr "آخری 14 دن"
+
+msgid "This week"
+msgstr "اس ہفتے"
+
+msgid "Last week"
+msgstr "آخری ہفتہ"
+
+msgid "Last 4 weeks"
+msgstr "آخری ۴ ہفتے"
+
+msgid "Last 12 weeks"
+msgstr "آخری ۱۲ ہفتے"
+
+msgid "Last 52 weeks"
+msgstr "آخری ۵۲ ہفتے"
+
+msgid "Weeks this year"
+msgstr "اس سال ہفتہ"
+
+msgid "This bi-week"
+msgstr ""
+
+msgid "Last bi-week"
+msgstr ""
+
+msgid "Last 4 bi-weeks"
+msgstr ""
+
+msgid "This month"
+msgstr "اس مہینے"
+
+msgid "Last month"
+msgstr "آخری ماہ"
+
+msgid "Last 3 months"
+msgstr "آخری ۳ ماہ"
+
+msgid "Last 6 months"
+msgstr "آخری ۶ ماہ"
+
+msgid "Last 12 months"
+msgstr "آخری ۱۲ ماہ"
+
+msgid "Months this year"
+msgstr "ماہ اس سال"
+
+msgid "This bi-month"
+msgstr "یہ دو ماہ"
+
+msgid "Last bi-month"
+msgstr "آخری دو ماہ"
+
+msgid "Last 6 bi-months"
+msgstr "آخری ۶ دو ماہانہ"
+
+msgid "Bi-months this year"
+msgstr "اس مہینے میں مہینے"
+
+msgid "This quarter"
+msgstr "اس سہ ماہی"
+
+msgid "Last quarter"
+msgstr "آخری سہ ماہ"
+
+msgid "Last 4 quarters"
+msgstr "آخری ۴ سہ ماہی"
+
+msgid "Quarters this year"
+msgstr "سہ ماہی اس سال"
+
+msgid "This six-month"
+msgstr "یہ چھ ماہ"
+
+msgid "Last six-month"
+msgstr "آخری ۶ ماہ"
+
+msgid "Last 2 six-month"
+msgstr ""
+
+msgid "This financial year"
+msgstr "اس مالیاتی سال"
+
+msgid "Last financial year"
+msgstr "آخری مالیاتی سال"
+
+msgid "Last 5 financial years"
+msgstr "آخری ۵ مالیاتی سال"
+
+msgid "This year"
+msgstr "اس سال"
+
+msgid "Last year"
+msgstr "آخری سال"
+
+msgid "Last 5 years"
+msgstr "آخری ۵ سال"
+
+msgid "Days"
+msgstr "دن"
+
+msgid "Weeks"
+msgstr "ہفتوں"
+
+msgid "Bi-weeks"
+msgstr ""
+
+msgid "Months"
+msgstr "مہینے"
+
+msgid "Bi-months"
+msgstr "دو ماہ"
+
+msgid "Quarters"
+msgstr "چوتھائی"
+
+msgid "Six-months"
+msgstr "چھ ماہ"
+
+msgid "Financial Years"
+msgstr ""
+
+msgid "Years"
+msgstr "سال"
+
+msgid "Reporting rate"
+msgstr ""
+
+msgid "Reporting rate on time"
+msgstr ""
+
+msgid "Actual reports"
+msgstr "اصل رپورٹ"
+
+msgid "Actual reports on time"
+msgstr ""
+
+msgid "Expected reports"
+msgstr "متوقع رپورٹ"
+
+msgid "Program"
+msgstr "پروگرام"
+
+msgid "Indicators"
+msgstr "اشارے"
+
+msgid "Select indicator group"
+msgstr "اشارے گروپ منتخب کریں"
+
+msgid "[ All groups ]"
+msgstr "[ تمام گروپ ]"
+
+msgid "Data elements"
+msgstr "ڈیٹا عنصر"
+
+msgid "Select data element group"
+msgstr "ڈیٹا عنصر گروپ منتخب کریں"
+
+msgid "[ All data elements ]"
+msgstr "[ تمام ڈیٹا عناصر ]"
+
+msgid "Data sets"
+msgstr "ڈیٹا سیٹس"
+
+msgid "Select data sets"
+msgstr "ڈیٹا سیٹ کا انتخاب کریں"
+
+msgid "[ All metrics ]"
+msgstr "[ تمام میٹرکس ]"
+
+msgid "Event data items"
+msgstr "واقعہ کے اعداد و شمار کی اشیاء"
+
+msgid "Select a program"
+msgstr ""
+
+msgid "Program indicators"
+msgstr "پروگرام اشارے"
+
+msgid "Organisation Unit"
+msgstr ""
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr ""
+
+msgid "No data"
+msgstr "کوئی مواد نہیں"
