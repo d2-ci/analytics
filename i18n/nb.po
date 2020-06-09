@@ -1,0 +1,473 @@
+# 
+# Translators:
+# Karoline Tufte Lien <karoline@dhis2.org>, 2020
+# Caroline Hesthagen Holen <caroline@devotta.no>, 2020
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2020-05-22T11:34:10.538Z\n"
+"PO-Revision-Date: 2020-04-28 22:05+0000\n"
+"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2020\n"
+"Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nb\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Data Type"
+msgstr "Datatype"
+
+msgid "Totals"
+msgstr "Totalsummer"
+
+msgid "Details"
+msgstr "Detaljer"
+
+msgid "Detail"
+msgstr "Detalj"
+
+msgid "Move to {{axisName}}"
+msgstr "Flytt til {{axisName}}"
+
+msgid "Add to {{axisName}}"
+msgstr "Legg til {{axisName}}"
+
+msgid "Remove"
+msgstr "Fjern"
+
+msgid "Not available for {{visualizationType}}"
+msgstr "Ikke tilgjengelig for {{visualizationType}}"
+
+msgid "Requires 2 or more data items"
+msgstr "Krever 2 eller flere datapunkter"
+
+msgid "Only available when data is in Series"
+msgstr "Bare tilgjengelig når data er i Serier"
+
+msgid "Remove Assigned Categories"
+msgstr "Fjern Tildelte Kategorier"
+
+msgid "Add Assigned Categories"
+msgstr "Legg tildelte kategorier"
+
+msgid "Manage chart axes"
+msgstr "Administrer diagramakser"
+
+msgid "Filter dimensions"
+msgstr "Filterdimensjoner"
+
+msgid "Main dimensions"
+msgstr "Hoveddimensjoner"
+
+msgid "Your dimensions"
+msgstr "Dine dimensjoner"
+
+msgid "Dimension recommended with selected data"
+msgstr "Dimensjon anbefalt med valgte data"
+
+msgid "Search"
+msgstr "Søk"
+
+msgid "Selected Data"
+msgstr "Valgt data"
+
+msgid "Deselect All"
+msgstr "Fjern valg"
+
+msgid "Select all"
+msgstr "Velg alt"
+
+msgid "Period type"
+msgstr "Periodetype"
+
+msgid "Year"
+msgstr "År"
+
+msgid "Select year"
+msgstr "Velg år"
+
+msgid "Relative periods"
+msgstr "Relative perioder"
+
+msgid "Fixed periods"
+msgstr "Faste perioder"
+
+msgid "No periods selected"
+msgstr "Ingen perioder er valgt"
+
+msgid "January"
+msgstr "Januar"
+
+msgid "February"
+msgstr "Februar"
+
+msgid "March"
+msgstr "Mars"
+
+msgid "April"
+msgstr "April"
+
+msgid "May"
+msgstr "Mai"
+
+msgid "June"
+msgstr "Juni"
+
+msgid "July"
+msgstr "Juli"
+
+msgid "August"
+msgstr "August"
+
+msgid "September"
+msgstr "September"
+
+msgid "October"
+msgstr "Oktober"
+
+msgid "November"
+msgstr "November"
+
+msgid "December"
+msgstr "Desember"
+
+msgid "Week {{weekNumber}}"
+msgstr "Uke {{weekNumber}}"
+
+msgid "Bi-Week {{biWeekNumber}}"
+msgstr "Touke {{biWeekNumber}}"
+
+msgid "Daily"
+msgstr "Daglig"
+
+msgid "Weekly"
+msgstr "Ukentlig"
+
+msgid "Bi-weekly"
+msgstr "Toukentlig"
+
+msgid "Weekly (Start Wednesday)"
+msgstr "Ukentlig (start onsdag)"
+
+msgid "Weekly (Start Thursday)"
+msgstr "Ukentlig (start torsdag)"
+
+msgid "Weekly (Start Saturday)"
+msgstr "Ukentlig (start lørdag)"
+
+msgid "Weekly (Start Sunday)"
+msgstr "Ukentlig (start søndag)"
+
+msgid "Monthly"
+msgstr "Månedlig"
+
+msgid "Bi-monthly"
+msgstr "Tomånedlig"
+
+msgid "Quarterly"
+msgstr "Kvartalsvis"
+
+msgid "Six-monthly"
+msgstr "Halvårlig"
+
+msgid "Six-monthly April"
+msgstr "Halvårig April"
+
+msgid "Yearly"
+msgstr "Årlig"
+
+msgid "Financial year (Start November)"
+msgstr "Regnskapsår (start november)"
+
+msgid "Financial year (Start October)"
+msgstr "Regnskapsår (start oktober)"
+
+msgid "Financial year (Start July)"
+msgstr "Regnskapsår (start juli)"
+
+msgid "Financial year (Start April)"
+msgstr "Regnskapsår (start april)"
+
+msgid "Today"
+msgstr "I dag"
+
+msgid "Yesterday"
+msgstr "I går"
+
+msgid "Last 3 days"
+msgstr "Siste 3 dager"
+
+msgid "Last 7 days"
+msgstr "Siste 7 dager"
+
+msgid "Last 14 days"
+msgstr "Siste 14 dager"
+
+msgid "This week"
+msgstr "Denne uken"
+
+msgid "Last week"
+msgstr "Forrige uke"
+
+msgid "Last 4 weeks"
+msgstr "Siste 4 uker"
+
+msgid "Last 12 weeks"
+msgstr "Siste 12 uker"
+
+msgid "Last 52 weeks"
+msgstr "Siste 52 uker"
+
+msgid "Weeks this year"
+msgstr "Uker inneværende år"
+
+msgid "This bi-week"
+msgstr "Denne touken"
+
+msgid "Last bi-week"
+msgstr "Sist touke"
+
+msgid "Last 4 bi-weeks"
+msgstr "Siste 4 touker"
+
+msgid "This month"
+msgstr "Denne måneden"
+
+msgid "Last month"
+msgstr "Forrige måned"
+
+msgid "Last 3 months"
+msgstr "Siste 3 måneder"
+
+msgid "Last 6 months"
+msgstr "Siste 6 måneder"
+
+msgid "Last 12 months"
+msgstr "Siste 12 måneder"
+
+msgid "Months this year"
+msgstr "Måneder i år"
+
+msgid "This bi-month"
+msgstr "Denne tomåneden"
+
+msgid "Last bi-month"
+msgstr "Siste tomåned"
+
+msgid "Last 6 bi-months"
+msgstr "Siste 6 tomåneder"
+
+msgid "Bi-months this year"
+msgstr "Tomåneder i år"
+
+msgid "This quarter"
+msgstr "Dette kvartalet"
+
+msgid "Last quarter"
+msgstr "Siste kvartal"
+
+msgid "Last 4 quarters"
+msgstr "Siste 4 kvartaler"
+
+msgid "Quarters this year"
+msgstr "Kvartaler i år"
+
+msgid "This six-month"
+msgstr "Dette halvåret"
+
+msgid "Last six-month"
+msgstr "Siste halvår"
+
+msgid "Last 2 six-month"
+msgstr "Siste to halvår"
+
+msgid "This financial year"
+msgstr "Dette regnskapsåret"
+
+msgid "Last financial year"
+msgstr "Siste regnskapsår"
+
+msgid "Last 5 financial years"
+msgstr "Siste 5 regnskapsår"
+
+msgid "This year"
+msgstr "Dette året"
+
+msgid "Last year"
+msgstr "Forrige år"
+
+msgid "Last 5 years"
+msgstr "Siste 5 år"
+
+msgid "Days"
+msgstr "Dager"
+
+msgid "Weeks"
+msgstr "Uker"
+
+msgid "Bi-weeks"
+msgstr "Touker"
+
+msgid "Months"
+msgstr "Måneder"
+
+msgid "Bi-months"
+msgstr "Tomåneder"
+
+msgid "Quarters"
+msgstr "Kvartaler"
+
+msgid "Six-months"
+msgstr "Halvår"
+
+msgid "Financial Years"
+msgstr "Regnskapsår"
+
+msgid "Years"
+msgstr "År"
+
+msgid "Series"
+msgstr "Serie"
+
+msgid "Category"
+msgstr "Kategori"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Columns"
+msgstr "Kolonner"
+
+msgid "Rows"
+msgstr "Rader"
+
+msgid "Reporting rate"
+msgstr "Rapporteringfrekvens"
+
+msgid "Reporting rate on time"
+msgstr "Rapporteringsfrekvens i tide"
+
+msgid "Actual reports"
+msgstr "Faktiske rapporter"
+
+msgid "Actual reports on time"
+msgstr "Faktiske rapporter i tide"
+
+msgid "Expected reports"
+msgstr "Forventede rapporter"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Select a program"
+msgstr "Velg et program"
+
+msgid "Indicators"
+msgstr "Indikatorer"
+
+msgid "Select indicator group"
+msgstr "Velg indikatorgruppe"
+
+msgid "[ All groups ]"
+msgstr "[ Alle grupper ]"
+
+msgid "Data elements"
+msgstr "Dataelementer"
+
+msgid "Select data element group"
+msgstr "Velg dataelementgrupper"
+
+msgid "[ All data elements ]"
+msgstr "[ Alle dataelementer ]"
+
+msgid "Data sets"
+msgstr "Datasett"
+
+msgid "Select data sets"
+msgstr "Velg datasett"
+
+msgid "[ All metrics ]"
+msgstr "[ Alle beregninger ]"
+
+msgid "Event data items"
+msgstr "Hendelsesdatapunkter"
+
+msgid "Program indicators"
+msgstr "Programindikatorer"
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr "{{dynamicOuNames}} og {{lastOuName}}"
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr "{{allDynamicOuNames}}-nivåer"
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr "{{allDynamicOuNames}}-grupper"
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} nivåer i {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}}-grupper i {{staticOuNames}}"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Period"
+msgstr "Periode"
+
+msgid "Organisation Unit"
+msgstr "Organisasjonsenhet"
+
+msgid "Assigned Categories"
+msgstr "Tildelte Kategorier"
+
+msgid "Column"
+msgstr "Stolpe"
+
+msgid "Stacked column"
+msgstr "Stablet stående stolpe"
+
+msgid "Bar"
+msgstr "Liggende stolpe"
+
+msgid "Stacked bar"
+msgstr "Liggende stablet stolpe"
+
+msgid "Line"
+msgstr "Linje"
+
+msgid "Area"
+msgstr "Areal"
+
+msgid "Pie"
+msgstr "Sektor"
+
+msgid "Radar"
+msgstr "Radar"
+
+msgid "Gauge"
+msgstr "Radialmåler"
+
+msgid "Year over year (line)"
+msgstr "År over år (linje)"
+
+msgid "Year over year (column)"
+msgstr "År over år (stolpe)"
+
+msgid "Single value"
+msgstr "Enkeltverdi"
+
+msgid "Pivot table"
+msgstr "Pivottabell"
+
+msgid "Target"
+msgstr "Mål"
+
+msgid "Base"
+msgstr "Grunn"
+
+msgid "No data"
+msgstr "Ingen data"

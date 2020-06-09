@@ -1,0 +1,475 @@
+# 
+# Translators:
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
+# phil_dhis2, 2020
+# ericbp <ericbarredap@gmail.com>, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2020-05-22T11:34:10.538Z\n"
+"PO-Revision-Date: 2020-04-28 22:05+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
+"Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Data Type"
+msgstr "Tipo de datos"
+
+msgid "Totals"
+msgstr "Totales"
+
+msgid "Details"
+msgstr "Detalles"
+
+msgid "Detail"
+msgstr "Detalle"
+
+msgid "Move to {{axisName}}"
+msgstr "Mover a {{Nombredeleje}}"
+
+msgid "Add to {{axisName}}"
+msgstr "Añadir a {{Nombredeleje}}"
+
+msgid "Remove"
+msgstr "Eliminar"
+
+msgid "Not available for {{visualizationType}}"
+msgstr ""
+
+msgid "Requires 2 or more data items"
+msgstr ""
+
+msgid "Only available when data is in Series"
+msgstr ""
+
+msgid "Remove Assigned Categories"
+msgstr ""
+
+msgid "Add Assigned Categories"
+msgstr ""
+
+msgid "Manage chart axes"
+msgstr ""
+
+msgid "Filter dimensions"
+msgstr ""
+
+msgid "Main dimensions"
+msgstr ""
+
+msgid "Your dimensions"
+msgstr ""
+
+msgid "Dimension recommended with selected data"
+msgstr ""
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Selected Data"
+msgstr ""
+
+msgid "Deselect All"
+msgstr ""
+
+msgid "Select all"
+msgstr "Seleccionar todos"
+
+msgid "Period type"
+msgstr "Tipo de periodo"
+
+msgid "Year"
+msgstr "Año"
+
+msgid "Select year"
+msgstr "Seleccionar año"
+
+msgid "Relative periods"
+msgstr "Periodos relativos"
+
+msgid "Fixed periods"
+msgstr "Periodos fijos"
+
+msgid "No periods selected"
+msgstr "No se ha seleccionado ningún periodo"
+
+msgid "January"
+msgstr "Enero"
+
+msgid "February"
+msgstr "Febrero"
+
+msgid "March"
+msgstr "Marzo"
+
+msgid "April"
+msgstr "Abril"
+
+msgid "May"
+msgstr "Mayo"
+
+msgid "June"
+msgstr "Junio"
+
+msgid "July"
+msgstr "Julio"
+
+msgid "August"
+msgstr "Agosto"
+
+msgid "September"
+msgstr "Septiembre"
+
+msgid "October"
+msgstr "Octubre"
+
+msgid "November"
+msgstr "Noviembre"
+
+msgid "December"
+msgstr "Diciembre"
+
+msgid "Week {{weekNumber}}"
+msgstr ""
+
+msgid "Bi-Week {{biWeekNumber}}"
+msgstr ""
+
+msgid "Daily"
+msgstr "Diario"
+
+msgid "Weekly"
+msgstr "Semanal"
+
+msgid "Bi-weekly"
+msgstr ""
+
+msgid "Weekly (Start Wednesday)"
+msgstr ""
+
+msgid "Weekly (Start Thursday)"
+msgstr ""
+
+msgid "Weekly (Start Saturday)"
+msgstr ""
+
+msgid "Weekly (Start Sunday)"
+msgstr ""
+
+msgid "Monthly"
+msgstr "Mensual"
+
+msgid "Bi-monthly"
+msgstr "Bimestral"
+
+msgid "Quarterly"
+msgstr "Trimestral"
+
+msgid "Six-monthly"
+msgstr "Semestral"
+
+msgid "Six-monthly April"
+msgstr "Semestral Abril"
+
+msgid "Yearly"
+msgstr "Anual"
+
+msgid "Financial year (Start November)"
+msgstr ""
+
+msgid "Financial year (Start October)"
+msgstr "Año fiscal - Octubre"
+
+msgid "Financial year (Start July)"
+msgstr "Año fiscal - Julio"
+
+msgid "Financial year (Start April)"
+msgstr "Año fiscal - Abril"
+
+msgid "Today"
+msgstr "Hoy"
+
+msgid "Yesterday"
+msgstr "Ayer"
+
+msgid "Last 3 days"
+msgstr "Últimos 3 días"
+
+msgid "Last 7 days"
+msgstr "Últimos 7 diass"
+
+msgid "Last 14 days"
+msgstr "Últimos 14 días"
+
+msgid "This week"
+msgstr "Esta semana"
+
+msgid "Last week"
+msgstr "Última semana"
+
+msgid "Last 4 weeks"
+msgstr "Últimas 4 semanas"
+
+msgid "Last 12 weeks"
+msgstr "Últimas 12 semanas"
+
+msgid "Last 52 weeks"
+msgstr "Últimas 52 semanas"
+
+msgid "Weeks this year"
+msgstr "Semanas de este año"
+
+msgid "This bi-week"
+msgstr ""
+
+msgid "Last bi-week"
+msgstr ""
+
+msgid "Last 4 bi-weeks"
+msgstr ""
+
+msgid "This month"
+msgstr "Este mes"
+
+msgid "Last month"
+msgstr "Mes anterior"
+
+msgid "Last 3 months"
+msgstr "Últimos 3 meses"
+
+msgid "Last 6 months"
+msgstr "Últimos 6 meses"
+
+msgid "Last 12 months"
+msgstr "Ultimos 12 meses"
+
+msgid "Months this year"
+msgstr "Meses este año"
+
+msgid "This bi-month"
+msgstr "Este bimestre"
+
+msgid "Last bi-month"
+msgstr "Bimestre anterior"
+
+msgid "Last 6 bi-months"
+msgstr "Últimos 6 bimestres"
+
+msgid "Bi-months this year"
+msgstr ""
+
+msgid "This quarter"
+msgstr "Este trimestre"
+
+msgid "Last quarter"
+msgstr "El trimestre pasado"
+
+msgid "Last 4 quarters"
+msgstr "Últimos 4 trimestres"
+
+msgid "Quarters this year"
+msgstr "Trimestres de este año"
+
+msgid "This six-month"
+msgstr "Este semestre"
+
+msgid "Last six-month"
+msgstr "Último semestre"
+
+msgid "Last 2 six-month"
+msgstr ""
+
+msgid "This financial year"
+msgstr "Este año fiscal"
+
+msgid "Last financial year"
+msgstr "Último ejercicio financiero"
+
+msgid "Last 5 financial years"
+msgstr "Últimos 5 ejercicios financieros"
+
+msgid "This year"
+msgstr "Este año"
+
+msgid "Last year"
+msgstr "El año pasado"
+
+msgid "Last 5 years"
+msgstr "Últimos 5 años"
+
+msgid "Days"
+msgstr "Días"
+
+msgid "Weeks"
+msgstr "Semanas"
+
+msgid "Bi-weeks"
+msgstr ""
+
+msgid "Months"
+msgstr "Meses"
+
+msgid "Bi-months"
+msgstr "Bimestres"
+
+msgid "Quarters"
+msgstr "Trimestral"
+
+msgid "Six-months"
+msgstr "Semestres"
+
+msgid "Financial Years"
+msgstr ""
+
+msgid "Years"
+msgstr "Años"
+
+msgid "Series"
+msgstr ""
+
+msgid "Category"
+msgstr "Categoría"
+
+msgid "Filter"
+msgstr "filtro"
+
+msgid "Columns"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
+
+msgid "Reporting rate"
+msgstr ""
+
+msgid "Reporting rate on time"
+msgstr ""
+
+msgid "Actual reports"
+msgstr ""
+
+msgid "Actual reports on time"
+msgstr ""
+
+msgid "Expected reports"
+msgstr ""
+
+msgid "Program"
+msgstr "Programa"
+
+msgid "Select a program"
+msgstr ""
+
+msgid "Indicators"
+msgstr "Indicadores"
+
+msgid "Select indicator group"
+msgstr "Elija un grupo de indicadores"
+
+msgid "[ All groups ]"
+msgstr ""
+
+msgid "Data elements"
+msgstr "Elementos de datos"
+
+msgid "Select data element group"
+msgstr "Seleccionar grupo de elementos de datos"
+
+msgid "[ All data elements ]"
+msgstr ""
+
+msgid "Data sets"
+msgstr "Sets de datos"
+
+msgid "Select data sets"
+msgstr ""
+
+msgid "[ All metrics ]"
+msgstr ""
+
+msgid "Event data items"
+msgstr "Datos de eventos"
+
+msgid "Program indicators"
+msgstr "Indicadores de programa"
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr ""
+
+msgid "Data"
+msgstr "Datos"
+
+msgid "Period"
+msgstr "Periodo"
+
+msgid "Organisation Unit"
+msgstr "Unidad Organizativa"
+
+msgid "Assigned Categories"
+msgstr ""
+
+msgid "Column"
+msgstr "Columna"
+
+msgid "Stacked column"
+msgstr "Columna apilada"
+
+msgid "Bar"
+msgstr "Barra"
+
+msgid "Stacked bar"
+msgstr "Barra apilada"
+
+msgid "Line"
+msgstr "Línea"
+
+msgid "Area"
+msgstr "Área"
+
+msgid "Pie"
+msgstr "Pastel"
+
+msgid "Radar"
+msgstr "Radar"
+
+msgid "Gauge"
+msgstr "Calibre"
+
+msgid "Year over year (line)"
+msgstr "Año tras año (línea)"
+
+msgid "Year over year (column)"
+msgstr "Año tras año (columna)"
+
+msgid "Single value"
+msgstr "Valor único"
+
+msgid "Pivot table"
+msgstr "Tabla dinámica"
+
+msgid "Target"
+msgstr "Objetivo"
+
+msgid "Base"
+msgstr ""
+
+msgid "No data"
+msgstr "No hay datos"
