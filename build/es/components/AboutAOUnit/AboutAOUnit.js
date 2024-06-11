@@ -55,7 +55,7 @@ const AboutAOUnit = /*#__PURE__*/forwardRef((_ref3, ref) => {
     fromServerDate
   } = useTimeZoneConversion();
   const queries = useMemo(() => getQueries(type), [type]);
-  console.log('testing build from d2-ci');
+  console.log('testing build from d2-ci 2');
   const {
     data,
     loading: dataIsLoading,
