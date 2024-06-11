@@ -6,7 +6,7 @@
     "Shared with {{commaSeparatedListOfUsersAndGroups}}": "Shared with {{commaSeparatedListOfUsersAndGroups}}",
     "Not shared with any users or groups": "Not shared with any users or groups",
     "No description": "No description",
-    "Testing testing {{time}}": "Testing testing {{time}}",
+    "Last updated {{time}}": "Last updated {{time}}",
     "Created {{time}} by {{author}}": "Created {{time}} by {{author}}",
     "Created {{time}}": "Created {{time}}",
     "Viewed {{count}} times": "Viewed 1 time",

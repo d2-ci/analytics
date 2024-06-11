@@ -64,7 +64,6 @@ const AboutAOUnit = /*#__PURE__*/(0, _react.forwardRef)((_ref3, ref) => {
     fromServerDate
   } = (0, _appRuntime.useTimeZoneConversion)();
   const queries = (0, _react.useMemo)(() => getQueries(type), [type]);
-  console.log('testing build from d2-ci 3');
   const {
     data,
     loading: dataIsLoading,
@@ -172,7 +171,7 @@ const AboutAOUnit = /*#__PURE__*/(0, _react.forwardRef)((_ref3, ref) => {
     className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + "detailLine"
   }, /*#__PURE__*/_react.default.createElement(_ui.IconClock16, {
     color: _ui.colors.grey700
-  }), _d2I18n.default.t('Testing testing {{time}}', {
+  }), _d2I18n.default.t('Last updated {{time}}', {
     time: (0, _moment.default)(fromServerDate(data.ao.lastUpdated)).fromNow()
   })), /*#__PURE__*/_react.default.createElement("p", {
     className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + "detailLine"
