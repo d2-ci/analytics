@@ -11,7 +11,7 @@ const formatDataLabel = function () {
   let y = arguments.length > 1 ? arguments[1] : undefined;
   let percentage = arguments.length > 2 ? arguments[2] : undefined;
   const value = (0, _renderValue.separateDigitGroups)(y.toString()).join(' ');
-  return '<span style="font-weight:normal">' + name + '</span><br/>' + value + '<span style="font-weight:normal"> (' + parseFloat(percentage.toFixed(1)) + ' %)</span>';
+  return '<span style="font-weight:normal">' + name + '</span><br/>' + value + '<span style="font-weight:normal"> (' + parseFloat(percentage.toFixed(1)) + '%)</span>';
 };
 exports.formatDataLabel = formatDataLabel;
 function _default(series, colors) {
