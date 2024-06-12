@@ -1,3 +1,11 @@
+import { separateDigitGroups } from '../../../../../modules/renderValue.js';
+export const formatDataLabel = function () {
+  let name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  let y = arguments.length > 1 ? arguments[1] : undefined;
+  let percentage = arguments.length > 2 ? arguments[2] : undefined;
+  const value = separateDigitGroups(y.toString()).join(' ');
+  return '<span style="font-weight:normal">' + name + '</span><br/>' + value + '<span style="font-weight:normal"> (' + parseFloat(percentage.toFixed(1)) + '%)</span>';
+};
 export default function (series, colors) {
   return [{
     colorByPoint: true,
@@ -9,7 +17,7 @@ export default function (series, colors) {
       enabled: true,
       padding: 0,
       formatter: function () {
-        return '<span style="font-weight:normal">' + this.point.name + '</span><br/>' + this.y + '<span style="font-weight:normal"> (' + this.percentage.toFixed(1) + ' %)</span>';
+        return formatDataLabel(this.point.name, this.y, this.percentage);
       }
     },
     tooltip: {

@@ -1,8 +1,8 @@
 import { NUMBER_TYPE_ROW_PERCENTAGE, NUMBER_TYPE_COLUMN_PERCENTAGE } from './pivotTable/pivotTableConstants.js';
 import { isNumericValueType } from './valueTypes.js';
 const trimTrailingZeros = stringValue => stringValue.replace(/\.?0+$/, '');
-const decimalSeparator = '.';
-const separateDigitGroups = (stringValue, decimalSeparator) => {
+export const separateDigitGroups = function (stringValue) {
+  let decimalSeparator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '.';
   const isNegative = stringValue[0] === '-';
   const [integer, remainder] = stringValue.replace(/^-/, '').split('.');
   const groups = [];
@@ -45,9 +45,9 @@ export const renderValue = (value, valueType, visualization) => {
   }
   if (visualization.numberType === NUMBER_TYPE_ROW_PERCENTAGE || visualization.numberType === NUMBER_TYPE_COLUMN_PERCENTAGE) {
     const stringValue = trimTrailingZeros(toFixedPrecisionString(value * 100, visualization.skipRounding));
-    return separateDigitGroups(stringValue, decimalSeparator).join(getSeparator(visualization)) + '%';
+    return separateDigitGroups(stringValue).join(getSeparator(visualization)) + '%';
   } else {
     const stringValue = toFixedPrecisionString(value, visualization.skipRounding);
-    return separateDigitGroups(stringValue, decimalSeparator).join(getSeparator(visualization));
+    return separateDigitGroups(stringValue).join(getSeparator(visualization));
   }
 };

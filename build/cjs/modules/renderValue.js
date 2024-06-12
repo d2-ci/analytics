@@ -3,12 +3,12 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.renderValue = void 0;
+exports.separateDigitGroups = exports.renderValue = void 0;
 var _pivotTableConstants = require("./pivotTable/pivotTableConstants.js");
 var _valueTypes = require("./valueTypes.js");
 const trimTrailingZeros = stringValue => stringValue.replace(/\.?0+$/, '');
-const decimalSeparator = '.';
-const separateDigitGroups = (stringValue, decimalSeparator) => {
+const separateDigitGroups = function (stringValue) {
+  let decimalSeparator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '.';
   const isNegative = stringValue[0] === '-';
   const [integer, remainder] = stringValue.replace(/^-/, '').split('.');
   const groups = [];
@@ -26,6 +26,7 @@ const separateDigitGroups = (stringValue, decimalSeparator) => {
   }
   return groups;
 };
+exports.separateDigitGroups = separateDigitGroups;
 const getSeparator = visualization => {
   switch (visualization.digitGroupSeparator) {
     case 'SPACE':
@@ -51,10 +52,10 @@ const renderValue = (value, valueType, visualization) => {
   }
   if (visualization.numberType === _pivotTableConstants.NUMBER_TYPE_ROW_PERCENTAGE || visualization.numberType === _pivotTableConstants.NUMBER_TYPE_COLUMN_PERCENTAGE) {
     const stringValue = trimTrailingZeros(toFixedPrecisionString(value * 100, visualization.skipRounding));
-    return separateDigitGroups(stringValue, decimalSeparator).join(getSeparator(visualization)) + '%';
+    return separateDigitGroups(stringValue).join(getSeparator(visualization)) + '%';
   } else {
     const stringValue = toFixedPrecisionString(value, visualization.skipRounding);
-    return separateDigitGroups(stringValue, decimalSeparator).join(getSeparator(visualization));
+    return separateDigitGroups(stringValue).join(getSeparator(visualization));
   }
 };
 exports.renderValue = renderValue;
