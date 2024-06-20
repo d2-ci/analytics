@@ -33,8 +33,6 @@ export const PivotTableValueCell = _ref => {
       classes: [cellContent.cellType, isClickable && 'clickable']
     });
   }
-
-  // TODO: Add support for 'INTEGER' type (requires server changes)
   const legendStyle = cellContent.cellType === CELL_TYPE_VALUE && (isNumericValueType(cellContent.valueType) || isBooleanValueType(cellContent.valueType)) ? applyLegendSet(cellContent.rawValue, cellContent.dxDimension, engine) : undefined;
   const width = engine.adaptiveClippingController.columns.sizes[engine.columnMap[column]].size;
   const height = engine.adaptiveClippingController.rows.sizes[engine.rowMap[row]].size;
