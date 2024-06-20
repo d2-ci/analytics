@@ -75,11 +75,12 @@ export const DashboardPluginWrapper = _ref2 => {
   })) : null;
 };
 DashboardPluginWrapper.defaultProps = {
+  isParentCached: false,
   onInstallationStatusChange: Function.prototype
 };
 DashboardPluginWrapper.propTypes = {
-  cacheId: PropTypes.string.isRequired,
-  children: PropTypes.func.isRequired,
-  isParentCached: PropTypes.bool.isRequired,
+  cacheId: PropTypes.string,
+  children: PropTypes.func,
+  isParentCached: PropTypes.bool,
   onInstallationStatusChange: PropTypes.func
 };
