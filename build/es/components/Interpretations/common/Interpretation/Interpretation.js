@@ -1,0 +1,96 @@
+import i18n from '@dhis2/d2-i18n';
+import { Button, SharingDialog, IconReply16, IconShare16, IconThumbUp16, IconEdit16 } from '@dhis2/ui';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { Message, MessageStatsBar, MessageIconButton } from '../index.js';
+import { InterpretationDeleteButton } from './InterpretationDeleteButton.js';
+import { InterpretationUpdateForm } from './InterpretationUpdateForm.js';
+import { useLike } from './useLike.js';
+export const Interpretation = _ref => {
+  let {
+    interpretation,
+    currentUser,
+    onClick,
+    onUpdated,
+    onDeleted,
+    disabled,
+    onReplyIconClick,
+    onLikeToggled
+  } = _ref;
+  const [isUpdateMode, setIsUpdateMode] = useState(false);
+  const [showSharingDialog, setShowSharingDialog] = useState(false);
+  const {
+    toggleLike,
+    isLikedByCurrentUser,
+    toggleLikeInProgress
+  } = useLike({
+    interpretation,
+    currentUser,
+    onComplete: likedBy => onLikeToggled({
+      id: interpretation.id,
+      likedBy
+    })
+  });
+  const shouldShowButton = !!onClick && !disabled;
+  return isUpdateMode ? /*#__PURE__*/React.createElement(InterpretationUpdateForm, {
+    close: () => setIsUpdateMode(false),
+    id: interpretation.id,
+    showSharingLink: interpretation.access.manage,
+    onComplete: onUpdated,
+    text: interpretation.text,
+    currentUser: currentUser
+  }) : /*#__PURE__*/React.createElement(Message, {
+    text: interpretation.text,
+    created: interpretation.created,
+    username: interpretation.user.displayName
+  }, !disabled && /*#__PURE__*/React.createElement(MessageStatsBar, null, /*#__PURE__*/React.createElement(MessageIconButton, {
+    tooltipContent: isLikedByCurrentUser ? i18n.t('Unlike') : i18n.t('Like'),
+    iconComponent: IconThumbUp16,
+    onClick: toggleLike,
+    selected: isLikedByCurrentUser,
+    count: interpretation.likes,
+    disabled: toggleLikeInProgress,
+    dataTest: "interpretation-like-unlike-button"
+  }), /*#__PURE__*/React.createElement(MessageIconButton, {
+    tooltipContent: i18n.t('Reply'),
+    iconComponent: IconReply16,
+    onClick: () => onReplyIconClick(interpretation.id),
+    count: interpretation.comments.length,
+    dataTest: "interpretation-reply-button"
+  }), interpretation.access.manage && /*#__PURE__*/React.createElement(MessageIconButton, {
+    iconComponent: IconShare16,
+    tooltipContent: i18n.t('Share'),
+    onClick: () => setShowSharingDialog(true),
+    dataTest: "interpretation-share-button"
+  }), showSharingDialog && /*#__PURE__*/React.createElement(SharingDialog, {
+    open: true,
+    type: 'interpretation',
+    id: interpretation.id,
+    onClose: () => setShowSharingDialog(false)
+  }), interpretation.access.update && /*#__PURE__*/React.createElement(MessageIconButton, {
+    iconComponent: IconEdit16,
+    tooltipContent: i18n.t('Edit'),
+    onClick: () => setIsUpdateMode(true),
+    dataTest: "interpretation-edit-button"
+  }), interpretation.access.delete && /*#__PURE__*/React.createElement(InterpretationDeleteButton, {
+    id: interpretation.id,
+    onComplete: onDeleted
+  })), shouldShowButton && /*#__PURE__*/React.createElement(Button, {
+    secondary: true,
+    small: true,
+    onClick: (_, event) => {
+      event.stopPropagation();
+      onClick(interpretation.id);
+    }
+  }, i18n.t('See interpretation')));
+};
+Interpretation.propTypes = {
+  currentUser: PropTypes.object.isRequired,
+  interpretation: PropTypes.object.isRequired,
+  onDeleted: PropTypes.func.isRequired,
+  onLikeToggled: PropTypes.func.isRequired,
+  onReplyIconClick: PropTypes.func.isRequired,
+  onUpdated: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func
+};
