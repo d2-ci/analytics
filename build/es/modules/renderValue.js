@@ -1,5 +1,5 @@
 import { NUMBER_TYPE_ROW_PERCENTAGE, NUMBER_TYPE_COLUMN_PERCENTAGE } from './pivotTable/pivotTableConstants.js';
-import { isNumericValueType } from './valueTypes.js';
+import { isNumericValueType, isBooleanValueType } from './valueTypes.js';
 const trimTrailingZeros = stringValue => stringValue.replace(/\.?0+$/, '');
 export const separateDigitGroups = function (stringValue) {
   let decimalSeparator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '.';
@@ -40,7 +40,7 @@ const toFixedPrecisionString = (value, skipRounding) => {
   return value.toFixed(precision);
 };
 export const renderValue = (value, valueType, visualization) => {
-  if (!isNumericValueType(valueType) || value === undefined) {
+  if (!(isNumericValueType(valueType) || isBooleanValueType(valueType)) || value === undefined) {
     return String(value).replace(/[^\S\n]+/, ' ');
   }
   if (visualization.numberType === NUMBER_TYPE_ROW_PERCENTAGE || visualization.numberType === NUMBER_TYPE_COLUMN_PERCENTAGE) {

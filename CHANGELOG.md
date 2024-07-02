@@ -1,3 +1,24 @@
+## [26.7.6](https://github.com/dhis2/analytics/compare/v26.7.5...v26.7.6) (2024-06-26)
+
+
+### Bug Fixes
+
+* apply legend to all numeric and boolean types (DHIS2-17611) ([#1683](https://github.com/dhis2/analytics/issues/1683)) ([e93b106](https://github.com/dhis2/analytics/commit/e93b106f7e0b3ab9ebae8a21a07d5cebee3d48d3))
+
+## [26.7.5](https://github.com/dhis2/analytics/compare/v26.7.4...v26.7.5) (2024-06-25)
+
+
+### Bug Fixes
+
+* update multicalendar dep for translations (DHIS2-16904) ([#1685](https://github.com/dhis2/analytics/issues/1685)) ([b3a48ba](https://github.com/dhis2/analytics/commit/b3a48ba8cff9956468a2670c0dda16549247bd18))
+
+## [26.7.4](https://github.com/dhis2/analytics/compare/v26.7.3...v26.7.4) (2024-06-20)
+
+
+### Bug Fixes
+
+* **pivot-table:** use a scoped base selector and global sub selectors ([#1681](https://github.com/dhis2/analytics/issues/1681)) ([44b753a](https://github.com/dhis2/analytics/commit/44b753a5dc618d20e92a056691819ea5cee351b3))
+
 ## [26.7.3](https://github.com/dhis2/analytics/compare/v26.7.2...v26.7.3) (2024-06-16)
 
 

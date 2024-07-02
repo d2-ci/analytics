@@ -47,7 +47,7 @@ const toFixedPrecisionString = (value, skipRounding) => {
   return value.toFixed(precision);
 };
 const renderValue = (value, valueType, visualization) => {
-  if (!(0, _valueTypes.isNumericValueType)(valueType) || value === undefined) {
+  if (!((0, _valueTypes.isNumericValueType)(valueType) || (0, _valueTypes.isBooleanValueType)(valueType)) || value === undefined) {
     return String(value).replace(/[^\S\n]+/, ' ');
   }
   if (visualization.numberType === _pivotTableConstants.NUMBER_TYPE_ROW_PERCENTAGE || visualization.numberType === _pivotTableConstants.NUMBER_TYPE_COLUMN_PERCENTAGE) {
