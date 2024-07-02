@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = _default;
+exports.default = subtitle;
 var _isString = _interopRequireDefault(require("d2-utilizr/lib/isString"));
 var _fontStyle = require("../../../../../modules/fontStyle.js");
 var _visTypes = require("../../../../../modules/visTypes.js");
@@ -27,7 +27,7 @@ function getDefault(layout, dashboard, filterTitle) {
     text: dashboard || (0, _isString.default)(layout.title) ? filterTitle : undefined
   };
 }
-function _default(series, layout, metaData, dashboard) {
+function subtitle(series, layout, metaData, dashboard) {
   const fontStyle = (0, _fontStyle.mergeFontStyleWithDefault)(layout.fontStyle && layout.fontStyle[_fontStyle.FONT_STYLE_VISUALIZATION_SUBTITLE], _fontStyle.FONT_STYLE_VISUALIZATION_SUBTITLE);
   let subtitle = {
     text: undefined

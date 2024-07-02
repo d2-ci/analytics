@@ -1,8 +1,8 @@
 import _JSXStyle from "styled-jsx/style";
-import { CircularLoader } from '@dhis2-ui/loader';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui-constants';
 import { IconSync16 } from '@dhis2/ui-icons';
+import { CircularLoader } from '@dhis2-ui/loader';
 import PropTypes from 'prop-types';
 import React from 'react';
 import menuButtonStyles from './MenuButton.styles.js';

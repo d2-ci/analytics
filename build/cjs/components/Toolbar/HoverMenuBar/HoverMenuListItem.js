@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.HoverMenuListItem = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
+var _uiIcons = require("@dhis2/ui-icons");
 var _popper = require("@dhis2-ui/popper");
 var _portal = require("@dhis2-ui/portal");
-var _uiIcons = require("@dhis2/ui-icons");
 var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));

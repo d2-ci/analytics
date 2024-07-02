@@ -1,5 +1,5 @@
 import getFilterText from '../../../../util/getFilterText.js';
-export default function (layout, metaData, dashboard) {
+export default function yearOverYear(layout, metaData, dashboard) {
   const titleFragments = [];
   if (layout.columns && layout.columns.length && !dashboard) {
     titleFragments.push(getFilterText(layout.columns, metaData));

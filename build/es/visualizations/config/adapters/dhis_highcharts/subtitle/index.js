@@ -20,7 +20,7 @@ function getDefault(layout, dashboard, filterTitle) {
     text: dashboard || isString(layout.title) ? filterTitle : undefined
   };
 }
-export default function (series, layout, metaData, dashboard) {
+export default function subtitle(series, layout, metaData, dashboard) {
   const fontStyle = mergeFontStyleWithDefault(layout.fontStyle && layout.fontStyle[FONT_STYLE_VISUALIZATION_SUBTITLE], FONT_STYLE_VISUALIZATION_SUBTITLE);
   let subtitle = {
     text: undefined
