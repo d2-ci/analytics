@@ -124,7 +124,9 @@ const PeriodTransfer = _ref2 => {
   }, _DimensionSelectorStyle.default));
   const onSelectFixedPeriods = filter => {
     setFixedFilter(filter);
-    setAllPeriods((0, _fixedPeriods.getFixedPeriodsOptionsById)(filter.periodType, periodsSettings).getPeriods(fixedPeriodConfig(Number(filter.year)), periodsSettings));
+    if (filter.year.match(/[0-9]{4}/)) {
+      setAllPeriods((0, _fixedPeriods.getFixedPeriodsOptionsById)(filter.periodType, periodsSettings).getPeriods(fixedPeriodConfig(Number(filter.year)), periodsSettings));
+    }
   };
   const renderEmptySelection = () => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
     className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "emptyList"
