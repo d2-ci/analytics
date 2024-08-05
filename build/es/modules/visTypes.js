@@ -75,7 +75,7 @@ const twoCategoryChartTypes = [VIS_TYPE_COLUMN, VIS_TYPE_STACKED_COLUMN, VIS_TYP
 const columnBasedTypes = [VIS_TYPE_COLUMN, VIS_TYPE_BAR, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, VIS_TYPE_STACKED_COLUMN, VIS_TYPE_STACKED_BAR];
 const verticalTypes = [VIS_TYPE_BAR, VIS_TYPE_STACKED_BAR, VIS_TYPE_GAUGE];
 const legendSetTypes = [VIS_TYPE_COLUMN, VIS_TYPE_BAR, VIS_TYPE_GAUGE, VIS_TYPE_SINGLE_VALUE, VIS_TYPE_PIVOT_TABLE, VIS_TYPE_STACKED_COLUMN, VIS_TYPE_STACKED_BAR];
-export const defaultVisType = VIS_TYPE_COLUMN;
+export const defaultVisType = VIS_TYPE_PIVOT_TABLE;
 export const isStacked = type => stackedTypes.includes(type);
 export const isYearOverYear = type => yearOverYearTypes.includes(type);
 export const isDualAxisType = type => dualAxisTypes.includes(type);
