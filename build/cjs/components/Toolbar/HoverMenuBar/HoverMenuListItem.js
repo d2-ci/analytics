@@ -5,9 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.HoverMenuListItem = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
-var _uiIcons = require("@dhis2/ui-icons");
-var _popper = require("@dhis2-ui/popper");
-var _portal = require("@dhis2-ui/portal");
+var _ui = require("@dhis2/ui");
 var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
@@ -53,9 +51,9 @@ const HoverMenuListItem = _ref => {
     className: `jsx-${_HoverMenuListItemStyles.default.__hash}` + " " + "label"
   }, label), !!children && /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_HoverMenuListItemStyles.default.__hash}` + " " + "chevron"
-  }, /*#__PURE__*/_react.default.createElement(_uiIcons.IconChevronRight24, null)), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, /*#__PURE__*/_react.default.createElement(_ui.IconChevronRight24, null)), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _HoverMenuListItemStyles.default.__hash
-  }, _HoverMenuListItemStyles.default)), children && isSubMenuOpen && /*#__PURE__*/_react.default.createElement(_portal.Portal, null, /*#__PURE__*/_react.default.createElement(_popper.Popper, {
+  }, _HoverMenuListItemStyles.default)), children && isSubMenuOpen && /*#__PURE__*/_react.default.createElement(_ui.Portal, null, /*#__PURE__*/_react.default.createElement(_ui.Popper, {
     placement: "right-start",
     reference: ref
   }, /*#__PURE__*/_react.default.createElement(_HoverMenuList.HoverMenuList, {

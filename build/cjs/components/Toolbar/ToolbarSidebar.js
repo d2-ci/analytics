@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ToolbarSidebar = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
-var _uiConstants = require("@dhis2/ui-constants");
+var _ui = require("@dhis2/ui");
 var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
@@ -18,13 +18,13 @@ const ToolbarSidebar = _ref => {
   } = _ref;
   return /*#__PURE__*/_react.default.createElement("div", {
     "data-test": dataTest,
-    className: _style.default.dynamic([["1150014343", [_uiConstants.colors.grey400]]]) + " " + ((0, _classnames.default)('container', {
+    className: _style.default.dynamic([["1150014343", [_ui.colors.grey400]]]) + " " + ((0, _classnames.default)('container', {
       isHidden
     }) || "")
   }, children, /*#__PURE__*/_react.default.createElement(_style.default, {
     id: "1150014343",
-    dynamic: [_uiConstants.colors.grey400]
-  }, [`div.__jsx-style-dynamic-selector{width:260px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:stretch;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;border-right:1px solid ${_uiConstants.colors.grey400};}`, "div.isHidden.__jsx-style-dynamic-selector{display:none;}"]));
+    dynamic: [_ui.colors.grey400]
+  }, [`div.__jsx-style-dynamic-selector{width:260px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:stretch;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;border-right:1px solid ${_ui.colors.grey400};}`, "div.isHidden.__jsx-style-dynamic-selector{display:none;}"]));
 };
 exports.ToolbarSidebar = ToolbarSidebar;
 ToolbarSidebar.defaultProps = {

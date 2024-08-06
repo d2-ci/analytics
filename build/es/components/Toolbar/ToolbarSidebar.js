@@ -1,5 +1,5 @@
 import _JSXStyle from "styled-jsx/style";
-import { colors } from '@dhis2/ui-constants';
+import { colors } from '@dhis2/ui';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
