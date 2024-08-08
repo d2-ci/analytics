@@ -102,7 +102,6 @@ const generateDimensionStrings = function () {
   let dimensions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   let options = arguments.length > 1 ? arguments[1] : undefined;
   const sortedDimensions = (0, _sortBy.default)(dimensions, 'dimension');
-  console.log('arrays the same?', sortedDimensions === dimensions);
   return sortedDimensions.map(_ref7 => {
     let {
       dimension,
@@ -110,7 +109,7 @@ const generateDimensionStrings = function () {
     } = _ref7;
     if (Array.isArray(items) && items.length) {
       if (options && options.sorted) {
-        items.sort();
+        items = items.slice().sort();
       }
       return `${dimension}:${items.join(';')}`;
     }
