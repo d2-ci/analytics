@@ -26,7 +26,7 @@ describe('generateDimensionString', () => {
       dimension: 'dim1',
       items: ['item1']
     }],
-    output: ['dim2:item2;item1', 'dim1:item1'],
+    output: ['dim1:item1', 'dim2:item2;item1'],
     outputSorted: ['dim1:item1', 'dim2:item1;item2']
   }];
   it('should return dimension strings correctly formatted', () => {

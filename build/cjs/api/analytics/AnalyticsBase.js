@@ -56,8 +56,12 @@ const analyticsDataQuery = {
       parameters
     } = _ref4;
     return {
-      dimension: dimensions.length ? dimensions : undefined,
-      filter: filters.length ? filters : undefined,
+      dimension: dimensions.length ? generateDimensionStrings(dimensions, {
+        sorted: true
+      }) : undefined,
+      filter: filters.length ? generateDimensionStrings(filters, {
+        sorted: true
+      }) : undefined,
       ...parameters,
       skipMeta: true,
       skipData: false
@@ -85,8 +89,8 @@ const analyticsMetaDataQuery = {
       parameters
     } = _ref6;
     return {
-      dimension: dimensions.length ? dimensions : undefined,
-      filter: filters.length ? filters : undefined,
+      dimension: dimensions.length ? generateDimensionStrings(dimensions) : undefined,
+      filter: filters.length ? generateDimensionStrings(filters) : undefined,
       ...parameters,
       skipMeta: false,
       skipData: true,
@@ -97,17 +101,15 @@ const analyticsMetaDataQuery = {
 const generateDimensionStrings = function () {
   let dimensions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   let options = arguments.length > 1 ? arguments[1] : undefined;
-  if (options && options.sorted) {
-    dimensions = (0, _sortBy.default)(dimensions, 'dimension');
-  }
-  return dimensions.map(_ref7 => {
+  const sortedDimensions = (0, _sortBy.default)(dimensions, 'dimension');
+  return sortedDimensions.map(_ref7 => {
     let {
       dimension,
       items
     } = _ref7;
     if (Array.isArray(items) && items.length) {
       if (options && options.sorted) {
-        items.sort();
+        items = items.slice().sort();
       }
       return `${dimension}:${items.join(';')}`;
     }
@@ -170,8 +172,8 @@ class AnalyticsBase {
         path: req.path,
         program: req.program,
         trackedEntityType: req.trackedEntityType,
-        dimensions: generateDimensionStrings(req.dimensions),
-        filters: generateDimensionStrings(req.filters),
+        dimensions: req.dimensions,
+        filters: req.filters,
         parameters: req.parameters,
         dataParams: dataReq.parameters,
         metaDataParams: metaDataReq.parameters
