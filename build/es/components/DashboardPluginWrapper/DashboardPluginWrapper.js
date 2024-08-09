@@ -27,11 +27,7 @@ const CacheableSectionWrapper = _ref => {
       // -- a back-up to imperative `removeCachedData`
       remove();
     }
-
-    // NB: Adding `startRecording` to dependencies causes
-    // an infinite recording loop as-is (probably need to memoize it)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isParentCached]);
+  }, [isCached, isParentCached, remove, startRecording]);
   return /*#__PURE__*/React.createElement(CacheableSection, {
     id: id,
     loadingMask: /*#__PURE__*/React.createElement(LoadingMask, null)
