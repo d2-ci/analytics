@@ -43,7 +43,7 @@ const toFixedPrecisionString = (value, skipRounding) => {
     // Values returned from the server should keep their string representation
     return value;
   }
-  const precision = skipRounding ? 10 : value > -1 && value < 1 ? 2 : 1;
+  const precision = skipRounding ? 10 : 2;
   return value.toFixed(precision);
 };
 const renderValue = (value, valueType, visualization) => {
