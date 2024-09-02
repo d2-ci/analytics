@@ -68,6 +68,8 @@ function highcharts(config, el) {
   }
 }
 function singleValue(config, el, extraOptions) {
+  console.log('el', el);
+  let elClientHeight, elClientWidth;
   return _highcharts.default.chart(el, {
     accessibility: {
       enabled: false
@@ -75,10 +77,18 @@ function singleValue(config, el, extraOptions) {
     chart: {
       backgroundColor: 'transparent',
       events: {
-        load: function () {
-          (0, _index.default)(config, el, extraOptions, this);
+        redraw: function () {
+          if (el.clientHeight !== elClientHeight || el.clientWidth !== elClientWidth) {
+            console.log('resize!!!', el);
+            elClientHeight = el.clientHeight;
+            elClientWidth = el.clientWidth;
+            (0, _index.default)(config, el, extraOptions, this);
+          } else {
+            console.log('No action needed');
+          }
         }
-      }
+      },
+      animation: false
     },
     credits: {
       enabled: false

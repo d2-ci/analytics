@@ -20,7 +20,7 @@ const generateValueSVG = _ref => {
     containerHeight,
     topMargin = 0
   } = _ref;
-  console.log('show value');
+  console.log('show value', renderer);
   const showIcon = icon && formattedValue !== noData.text;
   const textSize = (0, _textSize.getTextSize)(formattedValue, containerWidth, containerHeight, showIcon);
   const textWidth = (0, _textSize.getTextWidth)(formattedValue, `${textSize}px Roboto`);
@@ -33,6 +33,15 @@ const generateValueSVG = _ref => {
   svgValue.setAttribute('x', '50%');
   svgValue.setAttribute('y', '50%');
   svgValue.setAttribute('style', 'overflow: visible');
+  const box = renderer.rect(0, 0, containerWidth, containerHeight).attr({
+    with: '50%',
+    height: '50%',
+    x: '50%',
+    y: '50%'
+  }).css({
+    overflow: 'visible',
+    backgroundColor: 'green'
+  }).add();
   let fillColor = _ui.colors.grey900;
   if (valueColor) {
     fillColor = valueColor;
