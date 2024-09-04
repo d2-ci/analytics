@@ -10,6 +10,7 @@ var _highchartsMore = _interopRequireDefault(require("highcharts/highcharts-more
 var _boost = _interopRequireDefault(require("highcharts/modules/boost"));
 var _exporting = _interopRequireDefault(require("highcharts/modules/exporting"));
 var _noDataToDisplay = _interopRequireDefault(require("highcharts/modules/no-data-to-display"));
+var _offlineExporting = _interopRequireDefault(require("highcharts/modules/offline-exporting"));
 var _patternFill = _interopRequireDefault(require("highcharts/modules/pattern-fill"));
 var _solidGauge = _interopRequireDefault(require("highcharts/modules/solid-gauge"));
 var _index = _interopRequireDefault(require("./renderSingleValueSvg/index.js"));
@@ -19,6 +20,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _solidGauge.default)(_highcharts.default);
 (0, _noDataToDisplay.default)(_highcharts.default);
 (0, _exporting.default)(_highcharts.default);
+(0, _offlineExporting.default)(_highcharts.default);
 (0, _patternFill.default)(_highcharts.default);
 (0, _boost.default)(_highcharts.default);
 function drawLegendSymbolWrap() {
@@ -68,8 +70,6 @@ function highcharts(config, el) {
   }
 }
 function singleValue(config, el, extraOptions) {
-  console.log('el', el);
-  let elClientHeight, elClientWidth;
   return _highcharts.default.chart(el, {
     accessibility: {
       enabled: false
@@ -77,15 +77,8 @@ function singleValue(config, el, extraOptions) {
     chart: {
       backgroundColor: 'transparent',
       events: {
-        redraw: function () {
-          if (el.clientHeight !== elClientHeight || el.clientWidth !== elClientWidth) {
-            console.log('resize!!!', el);
-            elClientHeight = el.clientHeight;
-            elClientWidth = el.clientWidth;
-            (0, _index.default)(config, el, extraOptions, this);
-          } else {
-            console.log('No action needed');
-          }
+        load: function () {
+          (0, _index.default)(config, el, extraOptions, this);
         }
       },
       animation: false
@@ -93,9 +86,18 @@ function singleValue(config, el, extraOptions) {
     credits: {
       enabled: false
     },
-    // exporting: {
-    //     enabled: false,
-    // },
+    exporting: {
+      enabled: true,
+      error: (options, error) => {
+        console.log('options', options);
+        console.log(error);
+      },
+      chartOptions: {
+        title: {
+          text: null
+        }
+      }
+    },
     lang: {
       noData: null
     },
