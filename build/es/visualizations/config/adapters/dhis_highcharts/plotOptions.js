@@ -64,6 +64,6 @@ export default (_ref => {
         }
       } : {};
     default:
-      return {};
+      return null;
   }
 });

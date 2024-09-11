@@ -10,6 +10,7 @@ var _visTypes = require("../../../../../modules/visTypes.js");
 var _getFilterText = _interopRequireDefault(require("../../../../util/getFilterText.js"));
 var _getTextAlignOption = require("../getTextAlignOption.js");
 var _scatter = _interopRequireDefault(require("./scatter.js"));
+var _singleValue = _interopRequireDefault(require("./singleValue.js"));
 var _yearOverYear = _interopRequireDefault(require("./yearOverYear.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const DASHBOARD_TITLE_STYLE = {
@@ -43,6 +44,9 @@ function _default(layout, metaData, dashboard) {
     title.text = customTitle;
   } else {
     switch (layout.type) {
+      case _visTypes.VIS_TYPE_SINGLE_VALUE:
+        title.text = (0, _singleValue.default)(layout, metaData, dashboard);
+        break;
       case _visTypes.VIS_TYPE_GAUGE:
       case _visTypes.VIS_TYPE_YEAR_OVER_YEAR_LINE:
       case _visTypes.VIS_TYPE_YEAR_OVER_YEAR_COLUMN:

@@ -1,9 +1,10 @@
 import isString from 'd2-utilizr/lib/isString';
 import { FONT_STYLE_OPTION_ITALIC, FONT_STYLE_OPTION_BOLD, FONT_STYLE_OPTION_TEXT_COLOR, FONT_STYLE_OPTION_FONT_SIZE, FONT_STYLE_OPTION_TEXT_ALIGN, FONT_STYLE_VISUALIZATION_SUBTITLE, mergeFontStyleWithDefault } from '../../../../../modules/fontStyle.js';
-import { VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, isVerticalType, VIS_TYPE_SCATTER } from '../../../../../modules/visTypes.js';
+import { VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, isVerticalType, VIS_TYPE_SCATTER, VIS_TYPE_SINGLE_VALUE } from '../../../../../modules/visTypes.js';
 import getFilterText from '../../../../util/getFilterText.js';
 import { getTextAlignOption } from '../getTextAlignOption.js';
 import getYearOverYearTitle from '../title/yearOverYear.js';
+import getSingleValueSubtitle from './singleValue.js';
 const DASHBOARD_SUBTITLE = {
   style: {
     // DHIS2-578: dynamically truncate subtitle when it's taking more than 1 line
@@ -36,6 +37,9 @@ export default function (series, layout, metaData, dashboard) {
   } else {
     const filterTitle = getFilterText(layout.filters, metaData);
     switch (layout.type) {
+      case VIS_TYPE_SINGLE_VALUE:
+        subtitle.text = getSingleValueSubtitle(layout, metaData);
+        break;
       case VIS_TYPE_YEAR_OVER_YEAR_LINE:
       case VIS_TYPE_YEAR_OVER_YEAR_COLUMN:
         subtitle.text = getYearOverYearTitle(layout, metaData, Boolean(!dashboard));

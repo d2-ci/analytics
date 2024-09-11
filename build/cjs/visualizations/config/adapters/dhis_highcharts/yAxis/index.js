@@ -107,13 +107,12 @@ function getDefault(layout, series, extraOptions) {
   return axes;
 }
 function _default(layout, series, extraOptions) {
-  let yAxis;
   switch (layout.type) {
+    case _visTypes.VIS_TYPE_SINGLE_VALUE:
+      return null;
     case _visTypes.VIS_TYPE_GAUGE:
-      yAxis = (0, _gauge.default)(layout, series, extraOptions.legendSets[0]);
-      break;
+      return (0, _gauge.default)(layout, series, extraOptions.legendSets[0]);
     default:
-      yAxis = getDefault(layout, series, extraOptions);
+      return getDefault(layout, series, extraOptions);
   }
-  return yAxis;
 }

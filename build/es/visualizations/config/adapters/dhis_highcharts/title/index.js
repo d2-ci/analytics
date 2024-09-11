@@ -1,9 +1,10 @@
 import isString from 'd2-utilizr/lib/isString';
 import { FONT_STYLE_OPTION_ITALIC, FONT_STYLE_OPTION_BOLD, FONT_STYLE_OPTION_TEXT_COLOR, FONT_STYLE_OPTION_FONT_SIZE, FONT_STYLE_OPTION_TEXT_ALIGN, FONT_STYLE_VISUALIZATION_TITLE, mergeFontStyleWithDefault } from '../../../../../modules/fontStyle.js';
-import { VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, VIS_TYPE_GAUGE, isVerticalType, VIS_TYPE_SCATTER } from '../../../../../modules/visTypes.js';
+import { VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, VIS_TYPE_GAUGE, isVerticalType, VIS_TYPE_SCATTER, VIS_TYPE_SINGLE_VALUE } from '../../../../../modules/visTypes.js';
 import getFilterText from '../../../../util/getFilterText.js';
 import { getTextAlignOption } from '../getTextAlignOption.js';
 import getScatterTitle from './scatter.js';
+import getSingleValueTitle from './singleValue.js';
 import getYearOverYearTitle from './yearOverYear.js';
 const DASHBOARD_TITLE_STYLE = {
   margin: 15,
@@ -36,6 +37,9 @@ export default function (layout, metaData, dashboard) {
     title.text = customTitle;
   } else {
     switch (layout.type) {
+      case VIS_TYPE_SINGLE_VALUE:
+        title.text = getSingleValueTitle(layout, metaData, dashboard);
+        break;
       case VIS_TYPE_GAUGE:
       case VIS_TYPE_YEAR_OVER_YEAR_LINE:
       case VIS_TYPE_YEAR_OVER_YEAR_COLUMN:

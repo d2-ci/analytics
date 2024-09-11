@@ -40,6 +40,8 @@ function _default(type) {
         type: 'scatter',
         zoomType: 'xy'
       };
+    case _visTypes.VIS_TYPE_SINGLE_VALUE:
+      return {};
     case _visTypes.VIS_TYPE_COLUMN:
     case _visTypes.VIS_TYPE_STACKED_COLUMN:
     case _visTypes.VIS_TYPE_YEAR_OVER_YEAR_COLUMN:

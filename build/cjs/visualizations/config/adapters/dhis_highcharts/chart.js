@@ -37,5 +37,7 @@ const getEvents = () => ({
 function _default(layout, el, dashboard) {
   return Object.assign({}, (0, _type.default)(layout.type), {
     renderTo: el || layout.el
-  }, DEFAULT_CHART, dashboard ? DASHBOARD_CHART : undefined, getEvents());
+  }, DEFAULT_CHART, dashboard ? DASHBOARD_CHART : undefined, getEvents(), {
+    backgroundColor: 'red'
+  });
 }
