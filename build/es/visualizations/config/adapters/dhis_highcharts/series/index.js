@@ -2,7 +2,7 @@ import { colors } from '@dhis2/ui';
 import { hasCustomAxes } from '../../../../../modules/axis.js';
 import { axisHasRelativeItems } from '../../../../../modules/layout/axisHasRelativeItems.js';
 import { getLegendSetByDisplayStrategy } from '../../../../../modules/legends.js';
-import { VIS_TYPE_PIE, VIS_TYPE_GAUGE, isDualAxisType, isYearOverYear, VIS_TYPE_LINE, VIS_TYPE_SCATTER } from '../../../../../modules/visTypes.js';
+import { VIS_TYPE_PIE, VIS_TYPE_GAUGE, isDualAxisType, isYearOverYear, VIS_TYPE_LINE, VIS_TYPE_SCATTER, VIS_TYPE_SINGLE_VALUE } from '../../../../../modules/visTypes.js';
 import { getAxisStringFromId } from '../../../../util/axisId.js';
 import { colorSets, COLOR_SET_PATTERNS } from '../../../../util/colors/colorSets.js';
 import { generateColors } from '../../../../util/colors/gradientColorGenerator.js';
@@ -153,6 +153,7 @@ function getDefault(_ref) {
   return series;
 }
 export default function (_ref2) {
+  var _series;
   let {
     series,
     metaData,
@@ -163,6 +164,9 @@ export default function (_ref2) {
     displayStrategy
   } = _ref2;
   switch (layout.type) {
+    case VIS_TYPE_SINGLE_VALUE:
+      series = null;
+      break;
     case VIS_TYPE_PIE:
       series = getPie(series, Object.values(getIdColorMap(series, layout, extraOptions)));
       break;
@@ -183,7 +187,7 @@ export default function (_ref2) {
         displayStrategy
       });
   }
-  series.forEach(seriesObj => {
+  (_series = series) === null || _series === void 0 ? void 0 : _series.forEach(seriesObj => {
     // animation
     seriesObj.animation = {
       duration: getAnimation(extraOptions.animation, DEFAULT_ANIMATION_DURATION)

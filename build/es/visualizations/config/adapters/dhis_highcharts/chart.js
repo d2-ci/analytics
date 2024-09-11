@@ -1,3 +1,4 @@
+import { renderCustomSVG } from './custom/index.js';
 import getType from './type.js';
 const DEFAULT_CHART = {
   spacingTop: 20,
@@ -22,6 +23,7 @@ const getEvents = () => ({
           });
         }
       });
+      renderCustomSVG.call(this);
     }
   }
 });

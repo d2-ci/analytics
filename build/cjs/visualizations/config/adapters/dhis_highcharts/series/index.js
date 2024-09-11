@@ -160,6 +160,7 @@ function getDefault(_ref) {
   return series;
 }
 function _default(_ref2) {
+  var _series;
   let {
     series,
     metaData,
@@ -170,6 +171,9 @@ function _default(_ref2) {
     displayStrategy
   } = _ref2;
   switch (layout.type) {
+    case _visTypes.VIS_TYPE_SINGLE_VALUE:
+      series = null;
+      break;
     case _visTypes.VIS_TYPE_PIE:
       series = (0, _pie.default)(series, Object.values(getIdColorMap(series, layout, extraOptions)));
       break;
@@ -190,7 +194,7 @@ function _default(_ref2) {
         displayStrategy
       });
   }
-  series.forEach(seriesObj => {
+  (_series = series) === null || _series === void 0 ? void 0 : _series.forEach(seriesObj => {
     // animation
     seriesObj.animation = {
       duration: getAnimation(extraOptions.animation, DEFAULT_ANIMATION_DURATION)

@@ -23,7 +23,7 @@ const generateValueSVG = _ref => {
   } = _ref;
   const showIcon = icon && formattedValue !== noData.text;
   const group = renderer.g('value').css({
-    transform: 'scale(0.5) translate(100%, 100%)'
+    transform: 'translate(50%, 50%)'
   }).add();
   const textSize = (0, _textSize.getTextSize)(formattedValue, containerWidth, containerHeight, showIcon);
   const textWidth = (0, _textSize.getTextWidth)(formattedValue, `${textSize}px Roboto`);
@@ -53,25 +53,22 @@ const generateValueSVG = _ref => {
     const svgIconDocument = parser.parseFromString(icon, 'image/svg+xml');
     const iconElHeight = svgIconDocument.documentElement.getAttribute('height');
     const iconElWidth = svgIconDocument.documentElement.getAttribute('width');
-    const x = (iconSize + (0, _textSize.getIconPadding)(textSize) + textWidth) / 2 * -1;
-    const y = (iconSize / 2 - topMargin / 2) * -1;
     const iconGroup = renderer.g('icon').attr('data-test', 'visualization-icon').css({
-      color: 'green'
-      // color: fillColor,
+      color: fillColor
     });
     /* Force the group element to have the same dimensions as the original
      * SVG image by adding this rect. This ensures the icon has the intended
      * whitespace around it and makes scaling and translating easier. */
     renderer.rect(0, 0, iconElWidth, iconElHeight).add(iconGroup);
     Array.from(svgIconDocument.documentElement.children).forEach(node => iconGroup.element.appendChild(node));
-    iconGroup.add();
-    const formattedValueBox = formattedValueText.getBBox();
-    const targetHeight = textSize / 2;
-    const scaleFactor = targetHeight / iconElHeight;
-    console.log(formattedValueBox);
+    const formattedValueTextBox = formattedValueText.getBBox();
+    const scaleFactor = textSize / iconElHeight;
+    const textHeight = formattedValueTextBox.height / 2;
+    const iconHeight = iconElHeight * scaleFactor / 2;
+    const translateY = (formattedValueTextBox.y + (textHeight - iconHeight)) / scaleFactor;
     iconGroup.css({
-      transform: `scale(${scaleFactor}) translate(16px, 104px)`
-    });
+      transform: `scale(${scaleFactor}) translate(-98px, ${translateY}px)`
+    }).add(group);
   }
   if (subText) {
     renderer.text(subText).attr({

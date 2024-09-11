@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = _default;
+var _index = require("./custom/index.js");
 var _type = _interopRequireDefault(require("./type.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const DEFAULT_CHART = {
@@ -29,6 +30,7 @@ const getEvents = () => ({
           });
         }
       });
+      _index.renderCustomSVG.call(this);
     }
   }
 });

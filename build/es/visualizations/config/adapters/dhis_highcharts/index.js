@@ -6,6 +6,7 @@ import { isStacked, isLegendSetType, VIS_TYPE_SCATTER, VIS_TYPE_GAUGE, VIS_TYPE_
 import { defaultMultiAxisTheme1 } from '../../../util/colors/themes.js';
 import addTrendLines, { isRegressionIneligible } from './addTrendLines.js';
 import getChart from './chart.js';
+import { getCustomSVGOptions } from './custom/index.js';
 import getScatterData from './getScatterData.js';
 import getSortedConfig from './getSortedConfig.js';
 import getTrimmedConfig from './getTrimmedConfig.js';
@@ -174,7 +175,17 @@ export default function (_ref) {
     } : xAxis);
   }
 
+  /* The config object passed to the Highcharts Chart constructor
+   * can contain arbitrary properties, which are made accessible
+   * under the Chart instance's `userOptions` member. This means
+   * that in event callback functions the custom SVG options are
+   * accessible as `this.userOptions.customSVGOptions` */
+  config.customSVGOptions = getCustomSVGOptions({
+    layout
+  });
+
   // force apply extra config
   Object.assign(config, extraConfig);
+  console.log('CONFIG', objectClean(config));
   return objectClean(config);
 }

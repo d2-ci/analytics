@@ -2,8 +2,8 @@ import { storiesOf } from '@storybook/react';
 import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import { createVisualization } from '../index.js';
 const constainerStyleBase = {
-  width: 400,
-  height: 400,
+  width: 800,
+  height: 800,
   border: '1px solid magenta',
   marginBottom: 14
 };
@@ -385,11 +385,16 @@ const data = [{
         dimensionItemType: 'INDICATOR',
         valueType: 'NUMBER',
         totalAggregationType: 'AVERAGE',
+        // indicatorType: {
+        //     name: 'Per cent',
+        //     displayName: 'Per cent',
+        //     factor: 100,
+        //     number: false,
+        // },
         indicatorType: {
-          name: 'Per cent',
-          displayName: 'Per cent',
-          factor: 100,
-          number: false
+          name: 'Custom',
+          displayName: 'Custom subtext',
+          number: true
         }
       }
     },
@@ -583,7 +588,7 @@ storiesOf('SingleValue', module).add('default', () => {
     if (oldContainerRef.current && newContainerRef.current) {
       requestAnimationFrame(() => {
         createVisualization(data, layout, oldContainerRef.current, extraOptions, undefined, undefined, 'dhis');
-        const newVisualization = createVisualization(data, layout, newContainerRef.current, extraOptions, undefined, undefined, 'singleValue');
+        const newVisualization = createVisualization(data, layout, newContainerRef.current, extraOptions, undefined, undefined, 'highcharts');
         newChartRef.current = newVisualization.visualization;
       });
     }
@@ -643,7 +648,7 @@ storiesOf('SingleValue', module).add('default', () => {
       ...containerStyle,
       ...{
         opacity: 0.45,
-        transform: 'translateX(410px)',
+        transform: `translateX(${width + 10}px)`,
         zIndex: 10,
         backgroundColor: 'purple'
       }

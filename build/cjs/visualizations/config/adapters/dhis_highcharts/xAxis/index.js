@@ -54,6 +54,7 @@ function _default(store, layout, extraOptions, series) {
     switch (layout.type) {
       case _visTypes.VIS_TYPE_PIE:
       case _visTypes.VIS_TYPE_GAUGE:
+      case _visTypes.VIS_TYPE_SINGLE_VALUE:
         xAxis = noAxis();
         break;
       case _visTypes.VIS_TYPE_YEAR_OVER_YEAR_LINE:
