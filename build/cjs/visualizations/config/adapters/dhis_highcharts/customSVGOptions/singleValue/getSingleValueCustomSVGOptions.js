@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getSingleValueCustomSVGOptions = getSingleValueCustomSVGOptions;
 var _getSingleValueFormattedValue = require("./getSingleValueFormattedValue.js");
+var _getSingleValueSubtext = require("./getSingleValueSubtext.js");
 function getSingleValueCustomSVGOptions(_ref) {
   let {
-    extraConfig,
     layout,
     extraOptions,
     metaData,
@@ -15,21 +15,14 @@ function getSingleValueCustomSVGOptions(_ref) {
   } = _ref;
   const {
     dashboard,
-    legendSets,
-    fontStyle,
-    noData,
-    legendOptions,
     icon
   } = extraOptions;
   const value = series[0];
-  console.log('++++setSingleValueOptions++++', '\nextraConfig: ', extraConfig, '\nlayout: ', layout, '\nmetaData: ', metaData, '\nseries: ', series, '\ndashboard: ', dashboard, '\nlegendSets: ', legendSets, '\nfontStyle: ', fontStyle, '\nnoData: ', noData, '\nlegendOptions: ', legendOptions, '\nicon: ', icon, '\n=============');
-  const customSVGOptions = {
+  return {
     value,
     formattedValue: (0, _getSingleValueFormattedValue.getSingleValueFormattedValue)(value, layout, metaData),
     icon,
     dashboard,
-    subText: 'Test'
+    subText: (0, _getSingleValueSubtext.getSingleValueSubtext)(metaData)
   };
-  console.log('singleValueCustomSvgOptions', customSVGOptions);
-  return customSVGOptions;
 }
