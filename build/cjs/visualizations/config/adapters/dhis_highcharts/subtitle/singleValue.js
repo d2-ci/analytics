@@ -4,7 +4,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = getSingleValueSubtitle;
+Object.defineProperty(exports, "getSingleValueSubtitleColor", {
+  enumerable: true,
+  get: function () {
+    return _index.getSingleValueTextColor;
+  }
+});
 var _getFilterText = _interopRequireDefault(require("../../../../util/getFilterText.js"));
+var _index = require("../customSVGOptions/singleValue/index.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function getSingleValueSubtitle(layout, metaData) {
   if (layout.hideSubtitle) {

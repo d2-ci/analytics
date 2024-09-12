@@ -6,12 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 exports.getCustomSVGOptions = getCustomSVGOptions;
 exports.renderCustomSVG = renderCustomSVG;
 var _visTypes = require("../../../../../modules/visTypes.js");
+var _index = require("./singleValue/index.js");
 function renderCustomSVG() {
   const renderer = this.renderer;
   const options = this.userOptions.customSVGOptions;
   switch (options.visualizationType) {
     case _visTypes.VIS_TYPE_SINGLE_VALUE:
-      console.log('now render SV viz', renderer, options);
+      console.log('now render SV viz', this);
       break;
     default:
       break;
@@ -19,7 +20,11 @@ function renderCustomSVG() {
 }
 function getCustomSVGOptions(_ref) {
   let {
-    layout
+    extraConfig,
+    layout,
+    extraOptions,
+    metaData,
+    series
   } = _ref;
   const baseOptions = {
     visualizationType: layout.type
@@ -28,9 +33,15 @@ function getCustomSVGOptions(_ref) {
     case _visTypes.VIS_TYPE_SINGLE_VALUE:
       return {
         ...baseOptions,
-        test: 1
+        ...(0, _index.getSingleValueCustomSVGOptions)({
+          extraConfig,
+          layout,
+          extraOptions,
+          metaData,
+          series
+        })
       };
     default:
-      return null;
+      break;
   }
 }

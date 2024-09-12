@@ -12,7 +12,7 @@ var _visTypes = require("../../../../modules/visTypes.js");
 var _themes = require("../../../util/colors/themes.js");
 var _addTrendLines = _interopRequireWildcard(require("./addTrendLines.js"));
 var _chart = _interopRequireDefault(require("./chart.js"));
-var _index2 = require("./custom/index.js");
+var _index2 = require("./customSVGOptions/index.js");
 var _getScatterData = _interopRequireDefault(require("./getScatterData.js"));
 var _getSortedConfig = _interopRequireDefault(require("./getSortedConfig.js"));
 var _getTrimmedConfig = _interopRequireDefault(require("./getTrimmedConfig.js"));
@@ -68,11 +68,11 @@ function _default(_ref) {
   }
   let config = {
     // type etc
-    chart: (0, _chart.default)(_layout, el, _extraOptions.dashboard),
+    chart: (0, _chart.default)(_layout, el, _extraOptions, series),
     // title
-    title: (0, _index6.default)(_layout, store.data[0].metaData, _extraOptions.dashboard),
+    title: (0, _index6.default)(_layout, store.data[0].metaData, _extraOptions, series),
     // subtitle
-    subtitle: (0, _index5.default)(series, _layout, store.data[0].metaData, _extraOptions.dashboard),
+    subtitle: (0, _index5.default)(series, _layout, store.data[0].metaData, _extraOptions),
     // x-axis
     xAxis: (0, _index7.default)(store, _layout, _extraOptions, series),
     // y-axis
@@ -101,7 +101,7 @@ function _default(_ref) {
       noData: _extraOptions.noData.text,
       resetZoom: _extraOptions.resetZoom.text
     },
-    noData: (0, _noData.default)(),
+    noData: (0, _noData.default)(_layout.type),
     // credits
     credits: {
       enabled: false
@@ -110,7 +110,19 @@ function _default(_ref) {
     exporting: {
       // disable exporting context menu
       enabled: false
-    }
+    },
+    /* The config object passed to the Highcharts Chart constructor
+     * can contain arbitrary properties, which are made accessible
+     * under the Chart instance's `userOptions` member. This means
+     * that in event callback functions the custom SVG options are
+     * accessible as `this.userOptions.customSVGOptions` */
+    customSVGOptions: (0, _index2.getCustomSVGOptions)({
+      extraConfig,
+      layout: _layout,
+      extraOptions: _extraOptions,
+      metaData: store.data[0].metaData,
+      series
+    })
   };
 
   // get plot options for scatter
@@ -183,15 +195,6 @@ function _default(_ref) {
       categories: xAxis.categories.flat()
     } : xAxis);
   }
-
-  /* The config object passed to the Highcharts Chart constructor
-   * can contain arbitrary properties, which are made accessible
-   * under the Chart instance's `userOptions` member. This means
-   * that in event callback functions the custom SVG options are
-   * accessible as `this.userOptions.customSVGOptions` */
-  config.customSVGOptions = (0, _index2.getCustomSVGOptions)({
-    layout
-  });
 
   // force apply extra config
   Object.assign(config, extraConfig);

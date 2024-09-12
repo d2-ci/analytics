@@ -1,4 +1,6 @@
-import { renderCustomSVG } from './custom/index.js';
+import { VIS_TYPE_SINGLE_VALUE } from '../../../../modules/visTypes.js';
+import { renderCustomSVG } from './customSVGOptions/index.js';
+import { getSingleValueBackgroundColor } from './customSVGOptions/singleValue/index.js';
 import getType from './type.js';
 const DEFAULT_CHART = {
   spacingTop: 20,
@@ -27,10 +29,10 @@ const getEvents = () => ({
     }
   }
 });
-export default function (layout, el, dashboard) {
+export default function (layout, el, extraOptions, series) {
   return Object.assign({}, getType(layout.type), {
     renderTo: el || layout.el
-  }, DEFAULT_CHART, dashboard ? DASHBOARD_CHART : undefined, getEvents(), {
-    backgroundColor: 'red'
-  });
+  }, DEFAULT_CHART, extraOptions.dashboard ? DASHBOARD_CHART : undefined, getEvents(), layout.type === VIS_TYPE_SINGLE_VALUE ? {
+    backgroundColor: getSingleValueBackgroundColor(extraOptions.legendOptions, extraOptions.legendSets, series[0])
+  } : undefined);
 }

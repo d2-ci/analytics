@@ -306,6 +306,7 @@ function _default(config, parentEl, _ref6) {
     legendOptions,
     icon
   } = _ref6;
+  console.log('CONFIG OLD', config);
   const legendSet = legendOptions && legendSets[0];
   const legendColor = legendSet && (0, _legends.getColorByValueFromLegendSet)(legendSet, config.value);
   let valueColor, titleColor, backgroundColor;

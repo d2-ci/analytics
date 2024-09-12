@@ -3,10 +3,17 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = _default;
+Object.defineProperty(exports, "getSingleValueTitleColor", {
+  enumerable: true,
+  get: function () {
+    return _index.getSingleValueTextColor;
+  }
+});
+exports.getSingleValueTitleText = getSingleValueTitleText;
 var _getFilterText = _interopRequireDefault(require("../../../../util/getFilterText.js"));
+var _index = require("../customSVGOptions/singleValue/index.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _default(layout, metaData, dashboard) {
+function getSingleValueTitleText(layout, metaData) {
   if (layout.hideTitle) {
     return '';
   }

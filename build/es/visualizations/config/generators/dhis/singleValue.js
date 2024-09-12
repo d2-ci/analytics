@@ -300,6 +300,7 @@ export default function (config, parentEl, _ref6) {
     legendOptions,
     icon
   } = _ref6;
+  console.log('CONFIG OLD', config);
   const legendSet = legendOptions && legendSets[0];
   const legendColor = legendSet && getColorByValueFromLegendSet(legendSet, config.value);
   let valueColor, titleColor, backgroundColor;

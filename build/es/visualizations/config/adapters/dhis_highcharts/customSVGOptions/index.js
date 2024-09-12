@@ -1,10 +1,11 @@
 import { VIS_TYPE_SINGLE_VALUE } from '../../../../../modules/visTypes.js';
+import { getSingleValueCustomSVGOptions } from './singleValue/index.js';
 export function renderCustomSVG() {
   const renderer = this.renderer;
   const options = this.userOptions.customSVGOptions;
   switch (options.visualizationType) {
     case VIS_TYPE_SINGLE_VALUE:
-      console.log('now render SV viz', renderer, options);
+      console.log('now render SV viz', this);
       break;
     default:
       break;
@@ -12,7 +13,11 @@ export function renderCustomSVG() {
 }
 export function getCustomSVGOptions(_ref) {
   let {
-    layout
+    extraConfig,
+    layout,
+    extraOptions,
+    metaData,
+    series
   } = _ref;
   const baseOptions = {
     visualizationType: layout.type
@@ -21,9 +26,15 @@ export function getCustomSVGOptions(_ref) {
     case VIS_TYPE_SINGLE_VALUE:
       return {
         ...baseOptions,
-        test: 1
+        ...getSingleValueCustomSVGOptions({
+          extraConfig,
+          layout,
+          extraOptions,
+          metaData,
+          series
+        })
       };
     default:
-      return null;
+      break;
   }
 }

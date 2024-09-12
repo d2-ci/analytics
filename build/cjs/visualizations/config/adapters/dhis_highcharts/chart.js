@@ -4,7 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = _default;
-var _index = require("./custom/index.js");
+var _visTypes = require("../../../../modules/visTypes.js");
+var _index = require("./customSVGOptions/index.js");
+var _index2 = require("./customSVGOptions/singleValue/index.js");
 var _type = _interopRequireDefault(require("./type.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const DEFAULT_CHART = {
@@ -34,10 +36,10 @@ const getEvents = () => ({
     }
   }
 });
-function _default(layout, el, dashboard) {
+function _default(layout, el, extraOptions, series) {
   return Object.assign({}, (0, _type.default)(layout.type), {
     renderTo: el || layout.el
-  }, DEFAULT_CHART, dashboard ? DASHBOARD_CHART : undefined, getEvents(), {
-    backgroundColor: 'red'
-  });
+  }, DEFAULT_CHART, extraOptions.dashboard ? DASHBOARD_CHART : undefined, getEvents(), layout.type === _visTypes.VIS_TYPE_SINGLE_VALUE ? {
+    backgroundColor: (0, _index2.getSingleValueBackgroundColor)(extraOptions.legendOptions, extraOptions.legendSets, series[0])
+  } : undefined);
 }

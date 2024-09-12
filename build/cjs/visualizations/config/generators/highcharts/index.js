@@ -60,6 +60,7 @@ function highcharts(config, el) {
     config.accessibility = {
       enabled: false
     };
+    console.log('Homt ie hier?', config);
     if (config.lang) {
       _highcharts.default.setOptions({
         lang: config.lang
