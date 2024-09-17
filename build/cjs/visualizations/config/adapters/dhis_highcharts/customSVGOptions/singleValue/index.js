@@ -21,6 +21,6 @@ Object.defineProperty(exports, "getSingleValueTextColor", {
     return _getSingleValueTextColor.getSingleValueTextColor;
   }
 });
-var _getSingleValueCustomSVGOptions = require("./getSingleValueCustomSVGOptions.js");
-var _getSingleValueBackgroundColor = require("./getSingleValueBackgroundColor.js");
-var _getSingleValueTextColor = require("./getSingleValueTextColor.js");
+var _getSingleValueCustomSVGOptions = require("./config/getSingleValueCustomSVGOptions.js");
+var _getSingleValueBackgroundColor = require("./config/getSingleValueBackgroundColor.js");
+var _getSingleValueTextColor = require("./config/getSingleValueTextColor.js");

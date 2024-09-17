@@ -7,12 +7,14 @@ exports.getCustomSVGOptions = getCustomSVGOptions;
 exports.renderCustomSVG = renderCustomSVG;
 var _visTypes = require("../../../../../modules/visTypes.js");
 var _index = require("./singleValue/index.js");
+var _renderSingleValueSVG = require("./singleValue/renderer/renderSingleValueSVG.js");
 function renderCustomSVG() {
-  const renderer = this.renderer;
-  const options = this.userOptions.customSVGOptions;
-  switch (options.visualizationType) {
+  const {
+    visualizationType
+  } = this.userOptions.customSVGOptions;
+  switch (visualizationType) {
     case _visTypes.VIS_TYPE_SINGLE_VALUE:
-      console.log('now render SV viz', this);
+      _renderSingleValueSVG.renderSingleValueSVG.call(this);
       break;
     default:
       break;

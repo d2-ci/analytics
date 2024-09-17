@@ -14,7 +14,7 @@ var _getFilterText = _interopRequireDefault(require("../../../../util/getFilterT
 var _index = require("../customSVGOptions/singleValue/index.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function getSingleValueSubtitle(layout, metaData) {
-  if (layout.hideSubtitle) {
+  if (layout.hideSubtitle || 1 === 0) {
     return '';
   }
   if (typeof layout.subtitle === 'string' && layout.subtitle.length) {

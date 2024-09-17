@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = _default;
 var _ui = require("@dhis2/ui");
 var _legends = require("../../../../../modules/legends.js");
-var _shouldUseContrastColor = require("../../../adapters/dhis_highcharts/customSVGOptions/singleValue/shouldUseContrastColor.js");
+var _shouldUseContrastColor = require("../../../adapters/dhis_highcharts/customSVGOptions/singleValue/config/shouldUseContrastColor.js");
 var _generateDVItem = require("./generateDVItem.js");
 function _default(config, parentEl, _ref, chart) {
   let {
