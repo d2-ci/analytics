@@ -6,8 +6,7 @@ import { DynamicStyles } from './styles.js';
 export function renderSingleValueSVG() {
   const color = this.title.styles.color;
   const {
-    dashboard,
-    formattedValue,
+    /* dashboard, */formattedValue,
     icon,
     subText
   } = this.userOptions.customSVGOptions;

@@ -1,26 +1,24 @@
 "use strict";
 
-var _visTypes = require("../../../../../../modules/visTypes.js");
-var _singleValue = _interopRequireDefault(require("../singleValue.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _singleValue = require("../singleValue.js");
 jest.mock('../../../../../util/getFilterText', () => () => 'The filter text');
 describe('getSingleValueTitle', () => {
   it('returns empty title when flag hideTitle exists', () => {
-    expect((0, _singleValue.default)({
+    expect((0, _singleValue.getSingleValueTitleText)({
       hideTitle: true
     })).toEqual('');
   });
   it('returns the title provided in the layout', () => {
     const title = 'The title was already set';
-    expect((0, _singleValue.default)({
+    expect((0, _singleValue.getSingleValueTitleText)({
       title
     })).toEqual(title);
   });
   it('returns null when layout does not have columns', () => {
-    expect((0, _singleValue.default)({})).toEqual('');
+    expect((0, _singleValue.getSingleValueTitleText)({})).toEqual('');
   });
   it('returns the filter text based on column items', () => {
-    expect((0, _singleValue.default)({
+    expect((0, _singleValue.getSingleValueTitleText)({
       columns: [{
         items: [{}]
       }]
@@ -28,7 +26,7 @@ describe('getSingleValueTitle', () => {
   });
   describe('not dashboard', () => {
     it('returns filter text as title', () => {
-      expect((0, _singleValue.default)({
+      expect((0, _singleValue.getSingleValueTitleText)({
         columns: [{
           items: [{}]
         }],
@@ -38,7 +36,7 @@ describe('getSingleValueTitle', () => {
   });
   describe('dashboard', () => {
     it('returns empty string', () => {
-      expect((0, _singleValue.default)({
+      expect((0, _singleValue.getSingleValueTitleText)({
         filters: {}
       }, {}, true)).toEqual('');
     });

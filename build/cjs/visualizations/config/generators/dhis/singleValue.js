@@ -101,7 +101,6 @@ const generateValueSVG = _ref => {
     // embed icon to allow changing color
     // (elements with fill need to use "currentColor" for this to work)
     const iconSvgNode = document.createElementNS(svgNS, 'svg');
-    console.log('old', iconSize);
     iconSvgNode.setAttribute('viewBox', '0 0 48 48');
     iconSvgNode.setAttribute('width', iconSize);
     iconSvgNode.setAttribute('height', iconSize);
@@ -306,7 +305,6 @@ function _default(config, parentEl, _ref6) {
     legendOptions,
     icon
   } = _ref6;
-  console.log('CONFIG OLD', config);
   const legendSet = legendOptions && legendSets[0];
   const legendColor = legendSet && (0, _legends.getColorByValueFromLegendSet)(legendSet, config.value);
   let valueColor, titleColor, backgroundColor;

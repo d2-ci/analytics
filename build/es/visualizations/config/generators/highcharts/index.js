@@ -6,7 +6,6 @@ import HNDTD from 'highcharts/modules/no-data-to-display';
 import HOE from 'highcharts/modules/offline-exporting';
 import HPF from 'highcharts/modules/pattern-fill';
 import HSG from 'highcharts/modules/solid-gauge';
-import renderSingleValueSvg from './renderSingleValueSvg/index.js';
 
 // apply
 HM(H);
@@ -45,7 +44,7 @@ function drawLegendSymbolWrap() {
     }
   });
 }
-export function highcharts(config, el) {
+export default function (config, el) {
   if (config) {
     config.chart.renderTo = el || config.chart.renderTo;
 
@@ -53,7 +52,6 @@ export function highcharts(config, el) {
     config.accessibility = {
       enabled: false
     };
-    console.log('Homt ie hier?', config);
     if (config.lang) {
       H.setOptions({
         lang: config.lang
@@ -62,40 +60,4 @@ export function highcharts(config, el) {
     drawLegendSymbolWrap();
     return new H.Chart(config);
   }
-}
-export function singleValue(config, el, extraOptions) {
-  return H.chart(el, {
-    accessibility: {
-      enabled: false
-    },
-    chart: {
-      backgroundColor: 'transparent',
-      events: {
-        load: function () {
-          renderSingleValueSvg(config, el, extraOptions, this);
-        }
-      },
-      animation: false
-    },
-    credits: {
-      enabled: false
-    },
-    exporting: {
-      enabled: true,
-      error: (options, error) => {
-        console.log('options', options);
-        console.log(error);
-      },
-      chartOptions: {
-        title: {
-          text: null
-        }
-      }
-    },
-    lang: {
-      noData: null
-    },
-    noData: {},
-    title: null
-  });
 }

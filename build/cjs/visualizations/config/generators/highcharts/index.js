@@ -3,8 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.highcharts = highcharts;
-exports.singleValue = singleValue;
+exports.default = _default;
 var _highcharts = _interopRequireDefault(require("highcharts"));
 var _highchartsMore = _interopRequireDefault(require("highcharts/highcharts-more"));
 var _boost = _interopRequireDefault(require("highcharts/modules/boost"));
@@ -13,7 +12,6 @@ var _noDataToDisplay = _interopRequireDefault(require("highcharts/modules/no-dat
 var _offlineExporting = _interopRequireDefault(require("highcharts/modules/offline-exporting"));
 var _patternFill = _interopRequireDefault(require("highcharts/modules/pattern-fill"));
 var _solidGauge = _interopRequireDefault(require("highcharts/modules/solid-gauge"));
-var _index = _interopRequireDefault(require("./renderSingleValueSvg/index.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 // apply
 (0, _highchartsMore.default)(_highcharts.default);
@@ -52,7 +50,7 @@ function drawLegendSymbolWrap() {
     }
   });
 }
-function highcharts(config, el) {
+function _default(config, el) {
   if (config) {
     config.chart.renderTo = el || config.chart.renderTo;
 
@@ -60,7 +58,6 @@ function highcharts(config, el) {
     config.accessibility = {
       enabled: false
     };
-    console.log('Homt ie hier?', config);
     if (config.lang) {
       _highcharts.default.setOptions({
         lang: config.lang
@@ -69,40 +66,4 @@ function highcharts(config, el) {
     drawLegendSymbolWrap();
     return new _highcharts.default.Chart(config);
   }
-}
-function singleValue(config, el, extraOptions) {
-  return _highcharts.default.chart(el, {
-    accessibility: {
-      enabled: false
-    },
-    chart: {
-      backgroundColor: 'transparent',
-      events: {
-        load: function () {
-          (0, _index.default)(config, el, extraOptions, this);
-        }
-      },
-      animation: false
-    },
-    credits: {
-      enabled: false
-    },
-    exporting: {
-      enabled: true,
-      error: (options, error) => {
-        console.log('options', options);
-        console.log(error);
-      },
-      chartOptions: {
-        title: {
-          text: null
-        }
-      }
-    },
-    lang: {
-      noData: null
-    },
-    noData: {},
-    title: null
-  });
 }
