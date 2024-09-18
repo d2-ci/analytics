@@ -20,13 +20,13 @@ function renderSingleValueSVG() {
   const dynamicStyles = new _styles.DynamicStyles();
   const valueElement = this.renderer.text(formattedValue).css({
     color,
-    visibility: 'visible'
+    visibility: 'hidden'
   }).add();
   const subTextElement = subText ? this.renderer.text(subText).css({
     color,
-    visibility: 'visible'
+    visibility: 'hidden'
   }).add() : null;
-  const iconElement = icon ? _addIconElement.addIconElement.call(this, icon) : null;
+  const iconElement = icon ? _addIconElement.addIconElement.call(this, icon, color) : null;
   let fitsWithinContainer = false;
   let styles = {};
   while (!fitsWithinContainer && dynamicStyles.hasNext()) {
@@ -36,6 +36,13 @@ function renderSingleValueSVG() {
     fitsWithinContainer = (0, _checkIfFitsWithinContainer.checkIfFitsWithinContainer)(_getAvailableSpace.getAvailableSpace.call(this, styles.spacing.valueTop), valueElement, subTextElement, icon, subText, styles.spacing);
   }
   _positionElements.positionElements.call(this, valueElement, subTextElement, iconElement, styles.spacing);
-  console.log('+++++Render the SVG++++++', '\ncolor: ', color, '\ndashboard: ', dashboard, '\nformattedValue: ', formattedValue, '\nicon: ', icon, '\nsubText: ', subText, '\n=============');
-  console.log('CHART', this);
+  valueElement.css({
+    visibility: 'visible'
+  });
+  iconElement === null || iconElement === void 0 ? void 0 : iconElement.css({
+    visibility: 'visible'
+  });
+  subTextElement === null || subTextElement === void 0 ? void 0 : subTextElement.css({
+    visibility: 'visible'
+  });
 }
