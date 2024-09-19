@@ -75,6 +75,10 @@ export default function (layout, metaData, extraOptions, series) {
   switch (layout.type) {
     case VIS_TYPE_SINGLE_VALUE:
       title.style.color = getSingleValueTitleColor(fontStyle[FONT_STYLE_OPTION_TEXT_COLOR], series[0], legendOptions, legendSets);
+      if (dashboard) {
+        // TODO: is this always what we want?
+        title.style.fontWeight = 'normal';
+      }
       break;
     default:
       title.style.color = fontStyle[FONT_STYLE_OPTION_TEXT_COLOR];

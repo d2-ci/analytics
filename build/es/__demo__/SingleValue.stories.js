@@ -13,7 +13,7 @@ const innerContainerStyle = {
   justifyContent: 'center',
   height: '100%'
 };
-const data = [{
+const baseDataObj = {
   response: {
     headers: [{
       name: 'dx',
@@ -384,18 +384,7 @@ const data = [{
         legendSet: 'BtxOoQuLyg1',
         dimensionItemType: 'INDICATOR',
         valueType: 'NUMBER',
-        totalAggregationType: 'AVERAGE',
-        // indicatorType: {
-        //     name: 'Per cent',
-        //     displayName: 'Per cent',
-        //     factor: 100,
-        //     number: false,
-        // },
-        indicatorType: {
-          name: 'Custom',
-          displayName: 'Custom subtext',
-          number: true
-        }
+        totalAggregationType: 'AVERAGE'
       }
     },
     dimensions: {
@@ -405,7 +394,22 @@ const data = [{
       co: []
     }
   }
-}];
+};
+const numberIndicatorType = {
+  name: 'Plain',
+  number: true
+};
+const subtextIndicatorType = {
+  name: 'Custom',
+  displayName: 'Custom subtext',
+  number: true
+};
+const percentIndicatorType = {
+  name: 'Per cent',
+  displayName: 'Per cent',
+  factor: 100,
+  number: false
+};
 const layout = {
   name: 'BCG coverage last 12 months - Bo',
   created: '2013-10-16T19:50:52.464',
@@ -566,17 +570,21 @@ const layout = {
   axes: []
 };
 const icon = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M32 12.5C32 13.0523 32.4477 13.5 33 13.5C33.5523 13.5 34 13.0523 34 12.5V11C34 10.4477 33.5523 10 33 10C32.4477 10 32 10.4477 32 11V12.5Z" fill="currentColor"/><path d="M16 24V27H18V24H21V22H18V19H16V22H13V24H16Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M4 17C4 15.3431 5.34315 14 7 14H27C28.6569 14 30 15.3431 30 17V19H31V18H32V17C32 16.4477 32.4477 16 33 16C33.5523 16 34 16.4477 34 17V18H35V19H35.718C36.4722 19 37.1987 19.284 37.7529 19.7956L43.0348 24.6713C43.6501 25.2392 44 26.0384 44 26.8757V35H38.874C38.4299 36.7252 36.8638 38 35 38C33.1362 38 31.5701 36.7252 31.126 35H15.874C15.4299 36.7252 13.8638 38 12 38C10.1362 38 8.57006 36.7252 8.12602 35H4V17ZM31.126 33C31.5701 31.2748 33.1362 30 35 30C36.8638 30 38.4299 31.2748 38.874 33H42V28L30 28V33H31.126ZM30 26L41.5257 26L36.3963 21.2652C36.2116 21.0947 35.9694 21 35.718 21H30V26ZM27 16C27.5523 16 28 16.4477 28 17V33H15.874C15.4299 31.2748 13.8638 30 12 30C10.1362 30 8.57006 31.2748 8.12602 33H6V17C6 16.4477 6.44772 16 7 16H27ZM12 36C13.1046 36 14 35.1046 14 34C14 32.8954 13.1046 32 12 32C10.8954 32 10 32.8954 10 34C10 35.1046 10.8954 36 12 36ZM37 34C37 35.1046 36.1046 36 35 36C33.8954 36 33 35.1046 33 34C33 32.8954 33.8954 32 35 32C36.1046 32 37 32.8954 37 34Z" fill="currentColor"/><path d="M36.5 17C36.5 16.4477 36.9477 16 37.5 16H39C39.5523 16 40 16.4477 40 17C40 17.5523 39.5523 18 39 18H37.5C36.9477 18 36.5 17.5523 36.5 17Z" fill="currentColor"/><path d="M35.8285 12.759C35.4193 13.1298 35.3881 13.7622 35.759 14.1715C36.1298 14.5807 36.7622 14.6119 37.1715 14.241L38.0857 13.4126C38.4949 13.0417 38.5261 12.4093 38.1552 12.0001C37.7844 11.5908 37.152 11.5597 36.7427 11.9306L35.8285 12.759Z" fill="currentColor"/></svg>';
-const extraOptions = {
-  dashboard: false,
+const baseExtraOptions = {
+  dashboard: true,
   animation: 200,
   legendSets: [],
   icon
 };
+const indicatorTypes = ['plain', 'percent', 'subtext'];
 storiesOf('SingleValue', module).add('default', () => {
   const newChartRef = useRef(null);
   const oldContainerRef = useRef(null);
   const newContainerRef = useRef(null);
   const [transpose, setTranspose] = useState(false);
+  const [dashboard, setDashboard] = useState(false);
+  const [showIcon, setShowIcon] = useState(false);
+  const [indicatorType, setIndicatorType] = useState('plain');
   const [width, setWidth] = useState(constainerStyleBase.width);
   const [height, setHeight] = useState(constainerStyleBase.height);
   const containerStyle = useMemo(() => ({
@@ -587,14 +595,32 @@ storiesOf('SingleValue', module).add('default', () => {
   useEffect(() => {
     if (oldContainerRef.current && newContainerRef.current) {
       requestAnimationFrame(() => {
-        createVisualization(data, layout, oldContainerRef.current, extraOptions, undefined, undefined, 'dhis');
-        const newVisualization = createVisualization(data, layout, newContainerRef.current, extraOptions, undefined, undefined, 'highcharts');
+        const extraOptions = {
+          ...baseExtraOptions,
+          dashboard,
+          icon: showIcon ? icon : undefined
+        };
+        const dataObj = {
+          ...baseDataObj
+        };
+        if (indicatorType === 'plain') {
+          dataObj.metaData.items.FnYCr2EAzWS.indicatorType = numberIndicatorType;
+        }
+        if (indicatorType === 'percent') {
+          dataObj.metaData.items.FnYCr2EAzWS.indicatorType = percentIndicatorType;
+        }
+        if (indicatorType === 'subtext') {
+          dataObj.metaData.items.FnYCr2EAzWS.indicatorType = subtextIndicatorType;
+        }
+        createVisualization([dataObj], layout, oldContainerRef.current, extraOptions, undefined, undefined, 'dhis');
+        const newVisualization = createVisualization([dataObj], layout, newContainerRef.current, extraOptions, undefined, undefined, 'highcharts');
         newChartRef.current = newVisualization.visualization;
       });
     }
-  }, [containerStyle]);
+  }, [containerStyle, dashboard, showIcon, indicatorType]);
   const downloadOffline = useCallback(() => {
     if (newChartRef.current) {
+      const currentBackgroundColor = newChartRef.current.userOptions.chart.backgroundColor;
       newChartRef.current.exportChartLocal({
         sourceHeight: 768,
         sourceWidth: 1024,
@@ -603,6 +629,10 @@ storiesOf('SingleValue', module).add('default', () => {
         filename: 'testOfflineDownload',
         showExportInProgress: true,
         type: 'image/png'
+      }, {
+        chart: {
+          backgroundColor: currentBackgroundColor === 'transparent' ? '#ffffff' : currentBackgroundColor
+        }
       });
     }
   }, []);
@@ -610,7 +640,8 @@ storiesOf('SingleValue', module).add('default', () => {
     style: {
       display: 'flex',
       gap: 12,
-      marginBottom: 20
+      marginBottom: 20,
+      alignItems: 'center'
     }
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
     htmlFor: "width"
@@ -632,7 +663,21 @@ storiesOf('SingleValue', module).add('default', () => {
     step: "5",
     onChange: event => setHeight(parseInt(event.target.value)),
     value: height.toString()
-  })), /*#__PURE__*/React.createElement("button", {
+  })), /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    checked: dashboard,
+    onChange: () => setDashboard(!dashboard),
+    type: "checkbox"
+  }), "\xA0Dashboard view"), /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    checked: showIcon,
+    onChange: () => setShowIcon(!showIcon),
+    type: "checkbox"
+  }), "\xA0Show icon"), /*#__PURE__*/React.createElement("label", null, "Indicator type\xA0", /*#__PURE__*/React.createElement("select", {
+    onChange: event => setIndicatorType(event.target.value)
+  }, indicatorTypes.map((type, index) => {
+    return /*#__PURE__*/React.createElement("option", {
+      key: index
+    }, type);
+  }))), /*#__PURE__*/React.createElement("button", {
     onClick: downloadOffline
   }, "Download offline"), /*#__PURE__*/React.createElement("button", {
     onClick: () => {

@@ -41,5 +41,7 @@ function _default(layout, el, extraOptions, series) {
     renderTo: el || layout.el
   }, DEFAULT_CHART, extraOptions.dashboard ? DASHBOARD_CHART : undefined, getEvents(), layout.type === _visTypes.VIS_TYPE_SINGLE_VALUE ? {
     backgroundColor: (0, _index2.getSingleValueBackgroundColor)(extraOptions.legendOptions, extraOptions.legendSets, series[0])
+  } : undefined, layout.type === _visTypes.VIS_TYPE_SINGLE_VALUE && extraOptions.dashboard ? {
+    spacingTop: 7
   } : undefined);
 }

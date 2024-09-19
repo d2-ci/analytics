@@ -78,10 +78,23 @@ function _default(series, layout, metaData, extraOptions) {
   switch (layout.type) {
     case _visTypes.VIS_TYPE_SINGLE_VALUE:
       subtitle.style.color = (0, _singleValue.getSingleValueSubtitleColor)(fontStyle[_fontStyle.FONT_STYLE_OPTION_TEXT_COLOR], series[0], legendOptions, legendSets);
+      if (dashboard) {
+        // Single value subtitle text should be multiline
+        /* TODO: The default color of the subtitle now is #4a5768 but the
+         * original implementation used #666, which is a lighter grey.
+         * If we want to keep this color, changes are needed here. */
+        Object.assign(subtitle.style, {
+          wordWrap: 'normal',
+          whiteSpace: 'normal',
+          overflow: 'visible',
+          textOverflow: 'initial'
+        });
+      }
       break;
     default:
       subtitle.style.color = fontStyle[_fontStyle.FONT_STYLE_OPTION_TEXT_COLOR];
       break;
   }
+  console.log('subtitle', subtitle);
   return subtitle;
 }
