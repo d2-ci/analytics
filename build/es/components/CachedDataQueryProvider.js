@@ -8,7 +8,8 @@ const CachedDataQueryProvider = _ref => {
   let {
     query,
     dataTransformation,
-    children
+    children,
+    translucent = true
   } = _ref;
   const {
     data: rawData,
@@ -21,7 +22,7 @@ const CachedDataQueryProvider = _ref => {
   const data = rawData && dataTransformation ? dataTransformation(rawData) : rawData;
   if (loading) {
     return /*#__PURE__*/React.createElement(Layer, {
-      translucent: true
+      translucent: translucent
     }, /*#__PURE__*/React.createElement(CenteredContent, null, /*#__PURE__*/React.createElement(CircularLoader, null)));
   }
   if (error) {
@@ -38,7 +39,8 @@ const CachedDataQueryProvider = _ref => {
 CachedDataQueryProvider.propTypes = {
   children: PropTypes.node.isRequired,
   query: PropTypes.object.isRequired,
-  dataTransformation: PropTypes.func
+  dataTransformation: PropTypes.func,
+  translucent: PropTypes.bool
 };
 const useCachedDataQuery = () => useContext(CachedDataQueryCtx);
 export { CachedDataQueryProvider, useCachedDataQuery };
