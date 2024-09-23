@@ -550,7 +550,12 @@ class PivotTableEngine {
       } else {
         totalCell.valueType = currentValueType;
       }
-      if ((dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType) === _valueTypes.VALUE_TYPE_NUMBER) {
+
+      // compute subtotals and totals for all numeric and boolean value types
+      // in that case, force value type of subtotal and total cells to NUMBER to format them correctly
+      // (see DHIS2-9155)
+      if ((0, _valueTypes.isNumericValueType)(dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType) || (0, _valueTypes.isBooleanValueType)(dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType)) {
+        totalCell.valueType = _valueTypes.VALUE_TYPE_NUMBER;
         dataFields.forEach(field => {
           const headerIndex = this.dimensionLookup.dataHeaders[field];
           const value = (0, _parseValue.parseValue)(dataRow[headerIndex]);
