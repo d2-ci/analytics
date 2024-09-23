@@ -20,7 +20,10 @@ export const getOuLevelAndGroupText = (filter, metaData) => {
   return filterFragments.join(' - ');
 };
 const getLevelAndGroupText = (items, metaData, isLevel) => {
-  const getNameFromMetadata = id => metaData.items[id] ? metaData.items[id].name : id;
+  const getNameFromMetadata = id => {
+    var _items$find;
+    return metaData.items[id] ? metaData.items[id].name : ((_items$find = items.find(item => item.id === id)) === null || _items$find === void 0 ? void 0 : _items$find.name) || id;
+  };
   const dynamicOuItems = items.filter(item => isLevel ? ouIdHelper.hasLevelPrefix(item.id) : ouIdHelper.hasGroupPrefix(item.id));
   const lastItem = dynamicOuItems.length > 1 ? dynamicOuItems.pop() : null;
   const dynamicOuNames = dynamicOuItems.map(item => getNameFromMetadata(ouIdHelper.removePrefix(item.id))).join(', ');
