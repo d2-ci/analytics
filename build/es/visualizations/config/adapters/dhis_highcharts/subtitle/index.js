@@ -86,6 +86,5 @@ export default function (series, layout, metaData, extraOptions) {
       subtitle.style.color = fontStyle[FONT_STYLE_OPTION_TEXT_COLOR];
       break;
   }
-  console.log('subtitle', subtitle);
   return subtitle;
 }
