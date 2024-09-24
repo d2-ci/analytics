@@ -13,7 +13,7 @@ function getSingleValueTextColor(baseColor, value, legendOptions, legendSets) {
   if (!legendColor) {
     return baseColor;
   }
-  if (_legends.LEGEND_DISPLAY_STYLE_TEXT) {
+  if (legendOptions.style === _legends.LEGEND_DISPLAY_STYLE_TEXT) {
     return legendColor;
   }
   return (0, _shouldUseContrastColor.shouldUseContrastColor)(legendColor) ? _ui.colors.white : baseColor;

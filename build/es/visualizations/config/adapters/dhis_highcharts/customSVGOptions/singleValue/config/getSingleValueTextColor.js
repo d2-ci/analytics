@@ -7,7 +7,7 @@ export function getSingleValueTextColor(baseColor, value, legendOptions, legendS
   if (!legendColor) {
     return baseColor;
   }
-  if (LEGEND_DISPLAY_STYLE_TEXT) {
+  if (legendOptions.style === LEGEND_DISPLAY_STYLE_TEXT) {
     return legendColor;
   }
   return shouldUseContrastColor(legendColor) ? colors.white : baseColor;
