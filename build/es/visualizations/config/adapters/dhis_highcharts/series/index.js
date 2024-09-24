@@ -165,7 +165,7 @@ export default function (_ref2) {
   } = _ref2;
   switch (layout.type) {
     case VIS_TYPE_SINGLE_VALUE:
-      series = null;
+      series = [];
       break;
     case VIS_TYPE_PIE:
       series = getPie(series, Object.values(getIdColorMap(series, layout, extraOptions)));
