@@ -16,6 +16,6 @@ function computeSpacingTop(valueSpacingTop) {
     return titleRect.y + titleRect.height + valueSpacingTop;
   } else {
     // If neither are present only adjust for valueSpacingTop
-    return this.chartHeight - valueSpacingTop;
+    return valueSpacingTop;
   }
 }

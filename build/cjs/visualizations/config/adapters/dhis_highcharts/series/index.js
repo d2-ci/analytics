@@ -172,7 +172,7 @@ function _default(_ref2) {
   } = _ref2;
   switch (layout.type) {
     case _visTypes.VIS_TYPE_SINGLE_VALUE:
-      series = null;
+      series = [];
       break;
     case _visTypes.VIS_TYPE_PIE:
       series = (0, _pie.default)(series, Object.values(getIdColorMap(series, layout, extraOptions)));
