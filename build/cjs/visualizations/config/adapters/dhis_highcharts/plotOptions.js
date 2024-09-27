@@ -72,6 +72,9 @@ var _default = _ref => {
           states: {
             inactive: {
               enabled: false
+            },
+            hover: {
+              brightness: -0.3 // darken
             }
           }
         }
