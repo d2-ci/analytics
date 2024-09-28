@@ -54,7 +54,6 @@ export default (_ref => {
             events: {
               click: function () {
                 var _this$graphic;
-                console.log('jj onClick handler', this.category, this.series.name);
                 onClick((_this$graphic = this.graphic) === null || _this$graphic === void 0 ? void 0 : _this$graphic.element, {
                   category: this.category,
                   series: this.series.name

@@ -133,7 +133,7 @@ function _default(_ref) {
       } : {})
     });
   }
-  console.log('jj config.plotOptions', config.plotOptions);
+  console.log('config.plotOptions', config.plotOptions);
 
   // hide empty categories
   if (_layout.hideEmptyRowItems !== 'NONE') {
