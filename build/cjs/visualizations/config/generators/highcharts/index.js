@@ -21,6 +21,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _offlineExporting.default)(_highcharts.default);
 (0, _patternFill.default)(_highcharts.default);
 (0, _boost.default)(_highcharts.default);
+
+/* Whitelist some additional SVG attributes here. Without this,
+ * the PDF export for the SingleValue visualization breaks. */
+_highcharts.default.AST.allowedAttributes.push('fill-rule', 'clip-rule');
 function drawLegendSymbolWrap() {
   const pick = _highcharts.default.pick;
   _highcharts.default.wrap(_highcharts.default.seriesTypes.column.prototype, 'drawLegendSymbol', function (proceed, legend, item) {

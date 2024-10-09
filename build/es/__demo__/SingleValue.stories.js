@@ -583,8 +583,9 @@ storiesOf('SingleValue', module).add('default', () => {
   const newContainerRef = useRef(null);
   const [transpose, setTranspose] = useState(false);
   const [dashboard, setDashboard] = useState(false);
-  const [showIcon, setShowIcon] = useState(false);
-  const [indicatorType, setIndicatorType] = useState('plain');
+  const [showIcon, setShowIcon] = useState(true);
+  const [indicatorType, setIndicatorType] = useState('subtext');
+  const [exportAsPdf, setExportAsPdf] = useState(true);
   const [width, setWidth] = useState(constainerStyleBase.width);
   const [height, setHeight] = useState(constainerStyleBase.height);
   const containerStyle = useMemo(() => ({
@@ -628,14 +629,14 @@ storiesOf('SingleValue', module).add('default', () => {
         fallbackToExportServer: false,
         filename: 'testOfflineDownload',
         showExportInProgress: true,
-        type: 'image/png'
+        type: exportAsPdf ? 'application/pdf' : 'image/png'
       }, {
         chart: {
           backgroundColor: currentBackgroundColor === 'transparent' ? '#ffffff' : currentBackgroundColor
         }
       });
     }
-  }, []);
+  }, [exportAsPdf]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
@@ -677,7 +678,11 @@ storiesOf('SingleValue', module).add('default', () => {
     return /*#__PURE__*/React.createElement("option", {
       key: index
     }, type);
-  }))), /*#__PURE__*/React.createElement("button", {
+  }))), /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    checked: exportAsPdf,
+    onChange: () => setExportAsPdf(!exportAsPdf),
+    type: "checkbox"
+  }), "\xA0Export as PDF"), /*#__PURE__*/React.createElement("button", {
     onClick: downloadOffline
   }, "Download offline"), /*#__PURE__*/React.createElement("button", {
     onClick: () => {

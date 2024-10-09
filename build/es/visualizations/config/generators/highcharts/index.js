@@ -15,6 +15,10 @@ HE(H);
 HOE(H);
 HPF(H);
 HB(H);
+
+/* Whitelist some additional SVG attributes here. Without this,
+ * the PDF export for the SingleValue visualization breaks. */
+H.AST.allowedAttributes.push('fill-rule', 'clip-rule');
 function drawLegendSymbolWrap() {
   const pick = H.pick;
   H.wrap(H.seriesTypes.column.prototype, 'drawLegendSymbol', function (proceed, legend, item) {
