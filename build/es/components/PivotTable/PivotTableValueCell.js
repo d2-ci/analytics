@@ -7,7 +7,7 @@ import { PivotTableCell } from './PivotTableCell.js';
 import { PivotTableEmptyCell } from './PivotTableEmptyCell.js';
 import { usePivotTableEngine } from './PivotTableEngineContext.js';
 export const PivotTableValueCell = _ref => {
-  var _cellContent$rendered;
+  var _cellContent$titleVal, _cellContent$rendered;
   let {
     row,
     column,
@@ -45,7 +45,7 @@ export const PivotTableValueCell = _ref => {
   return /*#__PURE__*/React.createElement(PivotTableCell, {
     key: column,
     classes: classes,
-    title: cellContent.renderedValue,
+    title: (_cellContent$titleVal = cellContent.titleValue) !== null && _cellContent$titleVal !== void 0 ? _cellContent$titleVal : cellContent.renderedValue,
     style: style,
     onClick: isClickable ? onClick : undefined,
     ref: cellRef,

@@ -10,7 +10,7 @@ import { VALUE_TYPE_NUMBER, VALUE_TYPE_TEXT, isBooleanValueType, isCumulativeVal
 import { AdaptiveClippingController } from './AdaptiveClippingController.js';
 import { addToTotalIfNumber } from './addToTotalIfNumber.js';
 import { parseValue } from './parseValue.js';
-import { AGGREGATE_TYPE_NA, AGGREGATE_TYPE_AVERAGE, AGGREGATE_TYPE_SUM, CELL_TYPE_VALUE, CELL_TYPE_TOTAL, CELL_TYPE_SUBTOTAL, SORT_ORDER_ASCENDING, SORT_ORDER_DESCENDING, DISPLAY_DENSITY_PADDING_COMPACT, DISPLAY_DENSITY_PADDING_COMFORTABLE, DISPLAY_DENSITY_OPTION_COMFORTABLE, DISPLAY_DENSITY_OPTION_COMPACT, DISPLAY_DENSITY_OPTION_NORMAL, DISPLAY_DENSITY_PADDING_NORMAL, FONT_SIZE_OPTION_SMALL, FONT_SIZE_SMALL, FONT_SIZE_OPTION_LARGE, FONT_SIZE_LARGE, FONT_SIZE_OPTION_NORMAL, FONT_SIZE_NORMAL, NUMBER_TYPE_COLUMN_PERCENTAGE, NUMBER_TYPE_ROW_PERCENTAGE, NUMBER_TYPE_VALUE } from './pivotTableConstants.js';
+import { AGGREGATE_TYPE_NA, AGGREGATE_TYPE_AVERAGE, AGGREGATE_TYPE_SUM, CELL_TYPE_VALUE, CELL_TYPE_TOTAL, CELL_TYPE_SUBTOTAL, SORT_ORDER_ASCENDING, SORT_ORDER_DESCENDING, DISPLAY_DENSITY_PADDING_COMPACT, DISPLAY_DENSITY_PADDING_COMFORTABLE, DISPLAY_DENSITY_OPTION_COMFORTABLE, DISPLAY_DENSITY_OPTION_COMPACT, DISPLAY_DENSITY_OPTION_NORMAL, DISPLAY_DENSITY_PADDING_NORMAL, FONT_SIZE_OPTION_SMALL, FONT_SIZE_SMALL, FONT_SIZE_OPTION_LARGE, FONT_SIZE_LARGE, FONT_SIZE_OPTION_NORMAL, FONT_SIZE_NORMAL, NUMBER_TYPE_COLUMN_PERCENTAGE, NUMBER_TYPE_ROW_PERCENTAGE, NUMBER_TYPE_VALUE, VALUE_TYPE_NA } from './pivotTableConstants.js';
 const dataFields = ['value', 'numerator', 'denominator', 'factor', 'multiplier', 'divisor'];
 const defaultOptions = {
   hideEmptyColumns: false,
@@ -258,7 +258,19 @@ export class PivotTableEngine {
       rawCell.rawValue = rawValue;
       rawCell.renderedValue = renderedValue;
     }
+    if ([CELL_TYPE_TOTAL, CELL_TYPE_SUBTOTAL].includes(rawCell.cellType) && rawCell.rawValue === AGGREGATE_TYPE_NA) {
+      rawCell.titleValue = i18n.t('Not applicable');
+    }
     if (this.options.cumulativeValues) {
+      let titleValue;
+      if (this.data[row] && this.data[row][column]) {
+        const dataRow = this.data[row][column];
+        const rawValue = cellType === CELL_TYPE_VALUE ? dataRow[this.dimensionLookup.dataHeaders.value] : dataRow.value;
+        titleValue = i18n.t('Value: {{value}}', {
+          value: renderValue(rawValue, valueType, this.visualization),
+          nsSeparator: '^^'
+        });
+      }
       const cumulativeValue = this.getCumulative({
         row,
         column
@@ -267,6 +279,7 @@ export class PivotTableEngine {
         // force to NUMBER for accumulated values
         rawCell.valueType = valueType === undefined || valueType === null ? VALUE_TYPE_NUMBER : valueType;
         rawCell.empty = false;
+        rawCell.titleValue = titleValue;
         rawCell.rawValue = cumulativeValue;
         rawCell.renderedValue = renderValue(cumulativeValue, valueType, this.visualization);
       }
@@ -365,15 +378,7 @@ export class PivotTableEngine {
       return undefined;
     }
     const cellValue = this.data[row][column];
-    if (!cellValue) {
-      // Empty cell
-      // The cell still needs to get the valueType to render correctly 0 and cumulative values
-      return {
-        valueType: VALUE_TYPE_NUMBER,
-        totalAggregationType: AGGREGATE_TYPE_SUM
-      };
-    }
-    if (!Array.isArray(cellValue)) {
+    if (cellValue && !Array.isArray(cellValue)) {
       // This is a total cell
       return {
         valueType: cellValue.valueType,
@@ -545,7 +550,7 @@ export class PivotTableEngine {
       const currentValueType = isNumericValueType(dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType) || isBooleanValueType(dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType) ? VALUE_TYPE_NUMBER : dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType;
       const previousValueType = totalCell.valueType;
       if (previousValueType && currentValueType !== previousValueType) {
-        totalCell.valueType = AGGREGATE_TYPE_NA;
+        totalCell.valueType = VALUE_TYPE_NA;
       } else {
         totalCell.valueType = currentValueType;
       }
@@ -671,6 +676,11 @@ export class PivotTableEngine {
     const totalCell = this.data[row][column];
     if (totalCell && totalCell.count) {
       totalCell.value = applyTotalAggregationType(totalCell, this.computeOverrideTotalAggregationType(totalCell, this.visualization));
+
+      // override valueType for styling cells with N/A value
+      if (totalCell.value === AGGREGATE_TYPE_NA) {
+        totalCell.valueType = VALUE_TYPE_NA;
+      }
       this.adaptiveClippingController.add({
         row,
         column
@@ -775,6 +785,8 @@ export class PivotTableEngine {
           // only accumulate numeric (except for PERCENTAGE and UNIT_INTERVAL) and boolean values
           // accumulating other value types like text values does not make sense
           if (isCumulativeValueType(valueType)) {
+            // initialise to 0 for cumulative types
+            acc ||= 0;
             if (this.data[row] && this.data[row][column]) {
               const dataRow = this.data[row][column];
               const rawValue = cellType === CELL_TYPE_VALUE ? dataRow[this.dimensionLookup.dataHeaders.value] : dataRow.value;
@@ -783,7 +795,7 @@ export class PivotTableEngine {
             this.accumulators.rows[row][column] = acc;
           }
           return acc;
-        }, 0);
+        }, '');
       });
     } else {
       this.accumulators = {

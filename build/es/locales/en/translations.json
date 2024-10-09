@@ -357,6 +357,8 @@
     "{{thresholdFactor}} × Modified Z-score high": "{{thresholdFactor}} × Modified Z-score high",
     "{{thresholdFactor}} × Z-score low": "{{thresholdFactor}} × Z-score low",
     "{{thresholdFactor}} × Z-score high": "{{thresholdFactor}} × Z-score high",
+    "Not applicable": "Not applicable",
+    "Value: {{value}}": "Value: {{value}}",
     "Data": "Data",
     "Organisation unit": "Organisation unit",
     "Assigned Categories": "Assigned Categories",
