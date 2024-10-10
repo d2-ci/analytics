@@ -626,6 +626,13 @@ const indicatorTypes = ['plain', 'percent', 'subtext'];
   const downloadOffline = (0, _react2.useCallback)(() => {
     if (newChartRef.current) {
       const currentBackgroundColor = newChartRef.current.userOptions.chart.backgroundColor;
+      newChartRef.current.update({
+        exporting: {
+          chartOptions: {
+            isPDF: exportAsPdf
+          }
+        }
+      });
       newChartRef.current.exportChartLocal({
         sourceHeight: 768,
         sourceWidth: 1024,

@@ -10,13 +10,14 @@ var _getAvailableSpace = require("./getAvailableSpace.js");
 var _positionElements = require("./positionElements.js");
 var _styles = require("./styles.js");
 function renderSingleValueSVG() {
+  var _this$userOptions;
   const {
     formattedValue,
     icon,
     subText,
     fontColor
   } = this.userOptions.customSVGOptions;
-  const dynamicStyles = new _styles.DynamicStyles();
+  const dynamicStyles = new _styles.DynamicStyles((_this$userOptions = this.userOptions) === null || _this$userOptions === void 0 ? void 0 : _this$userOptions.isPDF);
   const valueElement = this.renderer.text(formattedValue).css({
     color: fontColor,
     visibility: 'hidden'

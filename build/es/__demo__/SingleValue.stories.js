@@ -622,6 +622,13 @@ storiesOf('SingleValue', module).add('default', () => {
   const downloadOffline = useCallback(() => {
     if (newChartRef.current) {
       const currentBackgroundColor = newChartRef.current.userOptions.chart.backgroundColor;
+      newChartRef.current.update({
+        exporting: {
+          chartOptions: {
+            isPDF: exportAsPdf
+          }
+        }
+      });
       newChartRef.current.exportChartLocal({
         sourceHeight: 768,
         sourceWidth: 1024,

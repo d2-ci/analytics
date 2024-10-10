@@ -4,13 +4,14 @@ import { getAvailableSpace } from './getAvailableSpace.js';
 import { positionElements } from './positionElements.js';
 import { DynamicStyles } from './styles.js';
 export function renderSingleValueSVG() {
+  var _this$userOptions;
   const {
     formattedValue,
     icon,
     subText,
     fontColor
   } = this.userOptions.customSVGOptions;
-  const dynamicStyles = new DynamicStyles();
+  const dynamicStyles = new DynamicStyles((_this$userOptions = this.userOptions) === null || _this$userOptions === void 0 ? void 0 : _this$userOptions.isPDF);
   const valueElement = this.renderer.text(formattedValue).css({
     color: fontColor,
     visibility: 'hidden'
