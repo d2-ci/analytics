@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.checkIfFitsWithinContainer = checkIfFitsWithinContainer;
 var _constants = require("./constants.js");
 function checkIfFitsWithinContainer(availableSpace, valueElement, subTextElement, icon, subText, spacing) {
-  const valueRect = valueElement.getBBox();
-  const subTextRect = subText ? subTextElement.getBBox() : {
+  const valueRect = valueElement.getBBox(true);
+  const subTextRect = subText ? subTextElement.getBBox(true) : {
     width: 0,
     height: 0
   };
