@@ -7,6 +7,7 @@ import { defaultMultiAxisTheme1 } from '../../../util/colors/themes.js';
 import addTrendLines, { isRegressionIneligible } from './addTrendLines.js';
 import getChart from './chart.js';
 import { getCustomSVGOptions } from './customSVGOptions/index.js';
+import getExporting from './exporting.js';
 import getScatterData from './getScatterData.js';
 import getSortedConfig from './getSortedConfig.js';
 import getTrimmedConfig from './getTrimmedConfig.js';
@@ -98,10 +99,7 @@ export default function (_ref) {
       enabled: false
     },
     // exporting
-    exporting: {
-      // disable exporting context menu
-      enabled: false
-    },
+    exporting: getExporting(_layout.type),
     /* The config object passed to the Highcharts Chart constructor
      * can contain arbitrary properties, which are made accessible
      * under the Chart instance's `userOptions` member. This means
@@ -189,5 +187,6 @@ export default function (_ref) {
 
   // force apply extra config
   Object.assign(config, extraConfig);
+  console.log(objectClean(config));
   return objectClean(config);
 }

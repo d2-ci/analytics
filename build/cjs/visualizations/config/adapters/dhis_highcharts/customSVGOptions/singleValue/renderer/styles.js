@@ -6,77 +6,77 @@ Object.defineProperty(exports, "__esModule", {
 exports.MIN_SIDE_WHITESPACE = exports.DynamicStyles = void 0;
 const baseStyle = {
   value: {
-    fontWeight: 300
+    'font-weight': 300
   },
   subText: {}
 };
 const valueStyles = [{
-  fontSize: 200,
-  letterSpacing: -6
+  'font-size': '200px',
+  'letter-spacing': '-6px'
 }, {
-  fontSize: 182,
-  letterSpacing: -5.5
+  'font-size': '182px',
+  'letter-spacing': '-5.5px'
 }, {
-  fontSize: 164,
-  letterSpacing: -5
+  'font-size': '164px',
+  'letter-spacing': '-5px'
 }, {
-  fontSize: 146,
-  letterSpacing: -4.5
+  'font-size': '146px',
+  'letter-spacing': '-4.5px'
 }, {
-  fontSize: 128,
-  letterSpacing: -4
+  'font-size': '128px',
+  'letter-spacing': '-4px'
 }, {
-  fontSize: 110,
-  letterSpacing: -3.5
+  'font-size': '110px',
+  'letter-spacing': '-3.5px'
 }, {
-  fontSize: 92,
-  letterSpacing: -3
+  'font-size': '92px',
+  'letter-spacing': '-3px'
 }, {
-  fontSize: 74,
-  letterSpacing: -2.5
+  'font-size': '74px',
+  'letter-spacing': '-2.5px'
 }, {
-  fontSize: 56,
-  letterSpacing: -2
+  'font-size': '56px',
+  'letter-spacing': '-2px'
 }, {
-  fontSize: 38,
-  letterSpacing: -1.5
+  'font-size': '38px',
+  'letter-spacing': '-1.5px'
 }, {
-  fontSize: 20,
-  letterSpacing: -1
+  'font-size': '20px',
+  'letter-spacing': '-1px'
 }];
 const subTextStyles = [{
-  fontSize: 67,
-  letterSpacing: -2
+  'font-size': '67px',
+  'letter-spacing': '-2px'
 }, {
-  fontSize: 61,
-  letterSpacing: -1.8
+  'font-size': '61px',
+  'letter-spacing': '-1.8px'
 }, {
-  fontSize: 55,
-  letterSpacing: -1.6
+  'font-size': '55px',
+  'letter-spacing': '-1.6px'
 }, {
-  fontSize: 49,
-  letterSpacing: -1.4
+  'font-size': '49px',
+  'letter-spacing': '-1.4px'
 }, {
-  fontSize: 43,
-  letterSpacing: -1.2
+  'font-size': '43px',
+  'letter-spacing': '-1.2px'
 }, {
-  fontSize: 37,
-  letterSpacing: -1
+  'font-size': '37px',
+  'letter-spacing': '-1px'
 }, {
-  fontSize: 31,
-  letterSpacing: -0.8
+  'font-size': '31px',
+  'letter-spacing': '-0.8px'
 }, {
-  fontSize: 25,
-  letterSpacing: -0.6
+  'font-size': '25px',
+  'letter-spacing': '-0.6px'
 }, {
-  fontSize: 19,
-  letterSpacing: -0.4
+  'font-size': '19px',
+  'letter-spacing': '-0.4px'
 }, {
-  fontSize: 13,
-  letterSpacing: 0.2
+  'font-size': '13px',
+  'letter-spacing': '0.2px'
 }, {
-  fontSize: 7,
-  letterSpacing: 0
+  'font-size': '7px',
+  'letter-spacing': '0px'
 }];
 const spacings = [{
   valueTop: 8,

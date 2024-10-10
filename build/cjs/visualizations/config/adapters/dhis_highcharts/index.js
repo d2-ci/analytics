@@ -13,6 +13,7 @@ var _themes = require("../../../util/colors/themes.js");
 var _addTrendLines = _interopRequireWildcard(require("./addTrendLines.js"));
 var _chart = _interopRequireDefault(require("./chart.js"));
 var _index2 = require("./customSVGOptions/index.js");
+var _exporting = _interopRequireDefault(require("./exporting.js"));
 var _getScatterData = _interopRequireDefault(require("./getScatterData.js"));
 var _getSortedConfig = _interopRequireDefault(require("./getSortedConfig.js"));
 var _getTrimmedConfig = _interopRequireDefault(require("./getTrimmedConfig.js"));
@@ -107,10 +108,7 @@ function _default(_ref) {
       enabled: false
     },
     // exporting
-    exporting: {
-      // disable exporting context menu
-      enabled: false
-    },
+    exporting: (0, _exporting.default)(_layout.type),
     /* The config object passed to the Highcharts Chart constructor
      * can contain arbitrary properties, which are made accessible
      * under the Chart instance's `userOptions` member. This means
@@ -198,5 +196,6 @@ function _default(_ref) {
 
   // force apply extra config
   Object.assign(config, extraConfig);
+  console.log((0, _objectClean.default)(config));
   return (0, _objectClean.default)(config);
 }
