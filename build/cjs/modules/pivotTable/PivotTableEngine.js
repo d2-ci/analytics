@@ -385,6 +385,11 @@ class PivotTableEngine {
       return undefined;
     }
     const cellValue = this.data[row][column];
+
+    // empty cell
+    if (!cellValue) {
+      return undefined;
+    }
     if (cellValue && !Array.isArray(cellValue)) {
       // This is a total cell
       return {
