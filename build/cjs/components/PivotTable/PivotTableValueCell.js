@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.PivotTableValueCell = void 0;
+var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _applyLegendSet = require("../../modules/pivotTable/applyLegendSet.js");
@@ -54,7 +55,10 @@ const PivotTableValueCell = _ref => {
   return /*#__PURE__*/_react.default.createElement(_PivotTableCell.PivotTableCell, {
     key: column,
     classes: classes,
-    title: (_cellContent$titleVal = cellContent.titleValue) !== null && _cellContent$titleVal !== void 0 ? _cellContent$titleVal : cellContent.renderedValue,
+    title: (_cellContent$titleVal = cellContent.titleValue) !== null && _cellContent$titleVal !== void 0 ? _cellContent$titleVal : _d2I18n.default.t('Value: {{value}}', {
+      value: cellContent.renderedValue,
+      nsSeparator: '^^'
+    }),
     style: style,
     onClick: isClickable ? onClick : undefined,
     ref: cellRef,

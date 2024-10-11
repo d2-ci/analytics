@@ -10,7 +10,7 @@ import { VALUE_TYPE_NUMBER, VALUE_TYPE_TEXT, isBooleanValueType, isCumulativeVal
 import { AdaptiveClippingController } from './AdaptiveClippingController.js';
 import { addToTotalIfNumber } from './addToTotalIfNumber.js';
 import { parseValue } from './parseValue.js';
-import { AGGREGATE_TYPE_NA, AGGREGATE_TYPE_AVERAGE, AGGREGATE_TYPE_SUM, CELL_TYPE_VALUE, CELL_TYPE_TOTAL, CELL_TYPE_SUBTOTAL, SORT_ORDER_ASCENDING, SORT_ORDER_DESCENDING, DISPLAY_DENSITY_PADDING_COMPACT, DISPLAY_DENSITY_PADDING_COMFORTABLE, DISPLAY_DENSITY_OPTION_COMFORTABLE, DISPLAY_DENSITY_OPTION_COMPACT, DISPLAY_DENSITY_OPTION_NORMAL, DISPLAY_DENSITY_PADDING_NORMAL, FONT_SIZE_OPTION_SMALL, FONT_SIZE_SMALL, FONT_SIZE_OPTION_LARGE, FONT_SIZE_LARGE, FONT_SIZE_OPTION_NORMAL, FONT_SIZE_NORMAL, NUMBER_TYPE_COLUMN_PERCENTAGE, NUMBER_TYPE_ROW_PERCENTAGE, NUMBER_TYPE_VALUE, VALUE_TYPE_NA } from './pivotTableConstants.js';
+import { AGGREGATE_TYPE_NA, AGGREGATE_TYPE_AVERAGE, AGGREGATE_TYPE_SUM, CELL_TYPE_VALUE, CELL_TYPE_TOTAL, CELL_TYPE_SUBTOTAL, SORT_ORDER_ASCENDING, SORT_ORDER_DESCENDING, DISPLAY_DENSITY_PADDING_COMPACT, DISPLAY_DENSITY_PADDING_COMFORTABLE, DISPLAY_DENSITY_OPTION_COMFORTABLE, DISPLAY_DENSITY_OPTION_COMPACT, DISPLAY_DENSITY_OPTION_NORMAL, DISPLAY_DENSITY_PADDING_NORMAL, FONT_SIZE_OPTION_SMALL, FONT_SIZE_SMALL, FONT_SIZE_OPTION_LARGE, FONT_SIZE_LARGE, FONT_SIZE_OPTION_NORMAL, FONT_SIZE_NORMAL, NUMBER_TYPE_COLUMN_PERCENTAGE, NUMBER_TYPE_ROW_PERCENTAGE, NUMBER_TYPE_VALUE, VALUE_TYPE_NA, VALUE_NA } from './pivotTableConstants.js';
 const dataFields = ['value', 'numerator', 'denominator', 'factor', 'multiplier', 'divisor'];
 const defaultOptions = {
   hideEmptyColumns: false,
@@ -153,7 +153,7 @@ const applyTotalAggregationType = (_ref2, overrideTotalAggregationType) => {
   } = _ref2;
   switch (overrideTotalAggregationType || totalAggregationType) {
     case AGGREGATE_TYPE_NA:
-      return 'N/A';
+      return VALUE_NA;
     case AGGREGATE_TYPE_AVERAGE:
       return (numerator || value) * multiplier / (denominator * divisor || 1);
     case AGGREGATE_TYPE_SUM:
@@ -276,8 +276,9 @@ export class PivotTableEngine {
         column
       });
       if (cumulativeValue !== undefined && cumulativeValue !== null) {
-        // force to NUMBER for accumulated values
-        rawCell.valueType = valueType === undefined || valueType === null ? VALUE_TYPE_NUMBER : valueType;
+        // force to TEXT for N/A (accumulated) values
+        // force to NUMBER for accumulated values if no valueType present
+        rawCell.valueType = cumulativeValue === VALUE_NA ? VALUE_TYPE_NA : valueType === undefined || valueType === null ? VALUE_TYPE_NUMBER : valueType;
         rawCell.empty = false;
         rawCell.titleValue = titleValue;
         rawCell.rawValue = cumulativeValue;
@@ -789,7 +790,7 @@ export class PivotTableEngine {
 
           // only accumulate numeric (except for PERCENTAGE and UNIT_INTERVAL) and boolean values
           // accumulating other value types like text values does not make sense
-          if (isCumulativeValueType(valueType)) {
+          if (acc !== VALUE_NA && isCumulativeValueType(valueType)) {
             // initialise to 0 for cumulative types
             // (||= is not transformed correctly in Babel with the current setup)
             acc || (acc = 0);
@@ -798,8 +799,12 @@ export class PivotTableEngine {
               const rawValue = cellType === CELL_TYPE_VALUE ? dataRow[this.dimensionLookup.dataHeaders.value] : dataRow.value;
               acc += parseValue(rawValue);
             }
-            this.accumulators.rows[row][column] = acc;
+          } else {
+            // show N/A from the first non-cumulative type and onwards
+            // only if a previous value is present (this is to avoid filling empty rows with N/A)
+            acc = acc ? VALUE_NA : '';
           }
+          this.accumulators.rows[row][column] = acc;
           return acc;
         }, '');
       });

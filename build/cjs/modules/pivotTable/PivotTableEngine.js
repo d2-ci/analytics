@@ -160,7 +160,7 @@ const applyTotalAggregationType = (_ref2, overrideTotalAggregationType) => {
   } = _ref2;
   switch (overrideTotalAggregationType || totalAggregationType) {
     case _pivotTableConstants.AGGREGATE_TYPE_NA:
-      return 'N/A';
+      return _pivotTableConstants.VALUE_NA;
     case _pivotTableConstants.AGGREGATE_TYPE_AVERAGE:
       return (numerator || value) * multiplier / (denominator * divisor || 1);
     case _pivotTableConstants.AGGREGATE_TYPE_SUM:
@@ -283,8 +283,9 @@ class PivotTableEngine {
         column
       });
       if (cumulativeValue !== undefined && cumulativeValue !== null) {
-        // force to NUMBER for accumulated values
-        rawCell.valueType = valueType === undefined || valueType === null ? _valueTypes.VALUE_TYPE_NUMBER : valueType;
+        // force to TEXT for N/A (accumulated) values
+        // force to NUMBER for accumulated values if no valueType present
+        rawCell.valueType = cumulativeValue === _pivotTableConstants.VALUE_NA ? _pivotTableConstants.VALUE_TYPE_NA : valueType === undefined || valueType === null ? _valueTypes.VALUE_TYPE_NUMBER : valueType;
         rawCell.empty = false;
         rawCell.titleValue = titleValue;
         rawCell.rawValue = cumulativeValue;
@@ -796,7 +797,7 @@ class PivotTableEngine {
 
           // only accumulate numeric (except for PERCENTAGE and UNIT_INTERVAL) and boolean values
           // accumulating other value types like text values does not make sense
-          if ((0, _valueTypes.isCumulativeValueType)(valueType)) {
+          if (acc !== _pivotTableConstants.VALUE_NA && (0, _valueTypes.isCumulativeValueType)(valueType)) {
             // initialise to 0 for cumulative types
             // (||= is not transformed correctly in Babel with the current setup)
             acc || (acc = 0);
@@ -805,8 +806,12 @@ class PivotTableEngine {
               const rawValue = cellType === _pivotTableConstants.CELL_TYPE_VALUE ? dataRow[this.dimensionLookup.dataHeaders.value] : dataRow.value;
               acc += (0, _parseValue.parseValue)(rawValue);
             }
-            this.accumulators.rows[row][column] = acc;
+          } else {
+            // show N/A from the first non-cumulative type and onwards
+            // only if a previous value is present (this is to avoid filling empty rows with N/A)
+            acc = acc ? _pivotTableConstants.VALUE_NA : '';
           }
+          this.accumulators.rows[row][column] = acc;
           return acc;
         }, '');
       });

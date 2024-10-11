@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import { applyLegendSet } from '../../modules/pivotTable/applyLegendSet.js';
@@ -45,7 +46,10 @@ export const PivotTableValueCell = _ref => {
   return /*#__PURE__*/React.createElement(PivotTableCell, {
     key: column,
     classes: classes,
-    title: (_cellContent$titleVal = cellContent.titleValue) !== null && _cellContent$titleVal !== void 0 ? _cellContent$titleVal : cellContent.renderedValue,
+    title: (_cellContent$titleVal = cellContent.titleValue) !== null && _cellContent$titleVal !== void 0 ? _cellContent$titleVal : i18n.t('Value: {{value}}', {
+      value: cellContent.renderedValue,
+      nsSeparator: '^^'
+    }),
     style: style,
     onClick: isClickable ? onClick : undefined,
     ref: cellRef,
