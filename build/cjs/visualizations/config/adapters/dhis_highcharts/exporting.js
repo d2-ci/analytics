@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = getExporting;
 var _visTypes = require("../../../../modules/visTypes.js");
 var _renderSingleValueSVG = require("./customSVGOptions/singleValue/renderer/renderSingleValueSVG.js");
-function getExporting(layoutType) {
+function getExporting(visType) {
   const exporting = {
     // disable exporting context menu
     enabled: false
   };
-  switch (layoutType) {
+  switch (visType) {
     case _visTypes.VIS_TYPE_SINGLE_VALUE:
       return {
         ...exporting,

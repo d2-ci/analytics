@@ -21,7 +21,7 @@ const DASHBOARD_CHART = {
   spacingBottom: 2,
   spacingLeft: 5
 };
-const getEvents = () => ({
+const getEvents = visType => ({
   events: {
     load: function () {
       // Align legend icon with legend text
@@ -32,14 +32,14 @@ const getEvents = () => ({
           });
         }
       });
-      _index.renderCustomSVG.call(this);
+      _index.renderCustomSVG.call(this, visType);
     }
   }
 });
 function _default(layout, el, extraOptions, series) {
   return Object.assign({}, (0, _type.default)(layout.type), {
     renderTo: el || layout.el
-  }, DEFAULT_CHART, extraOptions.dashboard ? DASHBOARD_CHART : undefined, getEvents(), layout.type === _visTypes.VIS_TYPE_SINGLE_VALUE ? {
+  }, DEFAULT_CHART, extraOptions.dashboard ? DASHBOARD_CHART : undefined, getEvents(layout.type), layout.type === _visTypes.VIS_TYPE_SINGLE_VALUE ? {
     backgroundColor: (0, _index2.getSingleValueBackgroundColor)(layout.legend, extraOptions.legendSets, series[0])
   } : undefined, layout.type === _visTypes.VIS_TYPE_SINGLE_VALUE && extraOptions.dashboard ? {
     spacingTop: 7

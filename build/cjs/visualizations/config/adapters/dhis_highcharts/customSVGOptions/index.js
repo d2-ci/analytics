@@ -8,11 +8,8 @@ exports.renderCustomSVG = renderCustomSVG;
 var _visTypes = require("../../../../../modules/visTypes.js");
 var _index = require("./singleValue/index.js");
 var _renderSingleValueSVG = require("./singleValue/renderer/renderSingleValueSVG.js");
-function renderCustomSVG() {
-  const {
-    visualizationType
-  } = this.userOptions.customSVGOptions;
-  switch (visualizationType) {
+function renderCustomSVG(visType) {
+  switch (visType) {
     case _visTypes.VIS_TYPE_SINGLE_VALUE:
       _renderSingleValueSVG.renderSingleValueSVG.call(this);
       break;
