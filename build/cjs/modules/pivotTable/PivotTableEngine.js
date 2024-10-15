@@ -797,7 +797,7 @@ class PivotTableEngine {
 
           // only accumulate numeric (except for PERCENTAGE and UNIT_INTERVAL) and boolean values
           // accumulating other value types like text values does not make sense
-          if (acc !== _pivotTableConstants.VALUE_NA && (0, _valueTypes.isCumulativeValueType)(valueType)) {
+          if ((0, _valueTypes.isCumulativeValueType)(valueType)) {
             // initialise to 0 for cumulative types
             // (||= is not transformed correctly in Babel with the current setup)
             acc || (acc = 0);
@@ -806,12 +806,8 @@ class PivotTableEngine {
               const rawValue = cellType === _pivotTableConstants.CELL_TYPE_VALUE ? dataRow[this.dimensionLookup.dataHeaders.value] : dataRow.value;
               acc += (0, _parseValue.parseValue)(rawValue);
             }
-          } else {
-            // show N/A from the first non-cumulative type and onwards
-            // only if a previous value is present (this is to avoid filling empty rows with N/A)
-            acc = acc ? _pivotTableConstants.VALUE_NA : '';
+            this.accumulators.rows[row][column] = acc;
           }
-          this.accumulators.rows[row][column] = acc;
           return acc;
         }, '');
       });
