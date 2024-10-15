@@ -187,6 +187,5 @@ export default function (_ref) {
 
   // force apply extra config
   Object.assign(config, extraConfig);
-  console.log(objectClean(config));
   return objectClean(config);
 }
