@@ -17,7 +17,7 @@ function renderSingleValueSVG() {
     subText,
     fontColor
   } = this.userOptions.customSVGOptions;
-  const dynamicStyles = new _styles.DynamicStyles((_this$userOptions = this.userOptions) === null || _this$userOptions === void 0 ? void 0 : _this$userOptions.isPDF);
+  const dynamicStyles = new _styles.DynamicStyles((_this$userOptions = this.userOptions) === null || _this$userOptions === void 0 ? void 0 : _this$userOptions.isPdfExport);
   const valueElement = this.renderer.text(formattedValue).css({
     color: fontColor,
     visibility: 'hidden'
