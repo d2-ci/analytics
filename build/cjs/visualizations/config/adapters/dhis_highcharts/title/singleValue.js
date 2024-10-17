@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 Object.defineProperty(exports, "getSingleValueTitleColor", {
   enumerable: true,
   get: function () {
-    return _index.getSingleValueTextColor;
+    return _index.getSingleValueTitleColor;
   }
 });
 exports.getSingleValueTitleText = getSingleValueTitleText;

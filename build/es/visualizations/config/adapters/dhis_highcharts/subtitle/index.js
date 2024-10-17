@@ -1,5 +1,5 @@
 import isString from 'd2-utilizr/lib/isString';
-import { FONT_STYLE_OPTION_ITALIC, FONT_STYLE_OPTION_BOLD, FONT_STYLE_OPTION_TEXT_COLOR, FONT_STYLE_OPTION_FONT_SIZE, FONT_STYLE_OPTION_TEXT_ALIGN, FONT_STYLE_VISUALIZATION_SUBTITLE, mergeFontStyleWithDefault } from '../../../../../modules/fontStyle.js';
+import { FONT_STYLE_OPTION_ITALIC, FONT_STYLE_OPTION_BOLD, FONT_STYLE_OPTION_TEXT_COLOR, FONT_STYLE_OPTION_FONT_SIZE, FONT_STYLE_OPTION_TEXT_ALIGN, FONT_STYLE_VISUALIZATION_SUBTITLE, mergeFontStyleWithDefault, defaultFontStyle } from '../../../../../modules/fontStyle.js';
 import { VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, isVerticalType, VIS_TYPE_SCATTER, VIS_TYPE_SINGLE_VALUE } from '../../../../../modules/visTypes.js';
 import getFilterText from '../../../../util/getFilterText.js';
 import { getTextAlignOption } from '../getTextAlignOption.js';
@@ -68,18 +68,23 @@ export default function (series, layout, metaData, extraOptions) {
   }
   switch (layout.type) {
     case VIS_TYPE_SINGLE_VALUE:
-      subtitle.style.color = getSingleValueSubtitleColor(fontStyle[FONT_STYLE_OPTION_TEXT_COLOR], series[0], legendOptions, legendSets);
-      if (dashboard) {
-        // Single value subtitle text should be multiline
-        /* TODO: The default color of the subtitle now is #4a5768 but the
-         * original implementation used #666, which is a lighter grey.
-         * If we want to keep this color, changes are needed here. */
-        Object.assign(subtitle.style, {
-          wordWrap: 'normal',
-          whiteSpace: 'normal',
-          overflow: 'visible',
-          textOverflow: 'initial'
-        });
+      {
+        var _defaultFontStyle$FON, _layout$fontStyle, _layout$fontStyle$FON;
+        const defaultColor = defaultFontStyle === null || defaultFontStyle === void 0 ? void 0 : (_defaultFontStyle$FON = defaultFontStyle[FONT_STYLE_VISUALIZATION_SUBTITLE]) === null || _defaultFontStyle$FON === void 0 ? void 0 : _defaultFontStyle$FON[FONT_STYLE_OPTION_TEXT_COLOR];
+        const customColor = layout === null || layout === void 0 ? void 0 : (_layout$fontStyle = layout.fontStyle) === null || _layout$fontStyle === void 0 ? void 0 : (_layout$fontStyle$FON = _layout$fontStyle[FONT_STYLE_VISUALIZATION_SUBTITLE]) === null || _layout$fontStyle$FON === void 0 ? void 0 : _layout$fontStyle$FON[FONT_STYLE_OPTION_TEXT_COLOR];
+        subtitle.style.color = getSingleValueSubtitleColor(customColor, defaultColor, series[0], legendOptions, legendSets);
+        if (dashboard) {
+          // Single value subtitle text should be multiline
+          /* TODO: The default color of the subtitle now is #4a5768 but the
+           * original implementation used #666, which is a lighter grey.
+           * If we want to keep this color, changes are needed here. */
+          Object.assign(subtitle.style, {
+            wordWrap: 'normal',
+            whiteSpace: 'normal',
+            overflow: 'visible',
+            textOverflow: 'initial'
+          });
+        }
       }
       break;
     default:

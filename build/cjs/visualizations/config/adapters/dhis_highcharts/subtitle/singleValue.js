@@ -7,7 +7,7 @@ exports.default = getSingleValueSubtitle;
 Object.defineProperty(exports, "getSingleValueSubtitleColor", {
   enumerable: true,
   get: function () {
-    return _index.getSingleValueTextColor;
+    return _index.getSingleValueTitleColor;
   }
 });
 var _getFilterText = _interopRequireDefault(require("../../../../util/getFilterText.js"));

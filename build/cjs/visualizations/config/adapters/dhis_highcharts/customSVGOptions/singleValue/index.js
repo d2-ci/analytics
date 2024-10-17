@@ -15,12 +15,12 @@ Object.defineProperty(exports, "getSingleValueCustomSVGOptions", {
     return _getSingleValueCustomSVGOptions.getSingleValueCustomSVGOptions;
   }
 });
-Object.defineProperty(exports, "getSingleValueTextColor", {
+Object.defineProperty(exports, "getSingleValueTitleColor", {
   enumerable: true,
   get: function () {
-    return _getSingleValueTextColor.getSingleValueTextColor;
+    return _getSingleValueTitleColor.getSingleValueTitleColor;
   }
 });
 var _getSingleValueCustomSVGOptions = require("./config/getSingleValueCustomSVGOptions.js");
 var _getSingleValueBackgroundColor = require("./config/getSingleValueBackgroundColor.js");
-var _getSingleValueTextColor = require("./config/getSingleValueTextColor.js");
+var _getSingleValueTitleColor = require("./config/getSingleValueTitleColor.js");
