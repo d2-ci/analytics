@@ -18,11 +18,11 @@ function renderSingleValueSVG() {
     fontColor
   } = this.userOptions.customSVGOptions;
   const dynamicStyles = new _styles.DynamicStyles((_this$userOptions = this.userOptions) === null || _this$userOptions === void 0 ? void 0 : _this$userOptions.isPdfExport);
-  const valueElement = this.renderer.text(formattedValue).css({
+  const valueElement = this.renderer.text(formattedValue).attr('data-test', 'visualization-primary-value').css({
     color: fontColor,
     visibility: 'hidden'
   }).add();
-  const subTextElement = subText ? this.renderer.text(subText).css({
+  const subTextElement = subText ? this.renderer.text(subText).attr('data-test', 'visualization-subtext').css({
     color: fontColor,
     visibility: 'hidden'
   }).add() : null;
