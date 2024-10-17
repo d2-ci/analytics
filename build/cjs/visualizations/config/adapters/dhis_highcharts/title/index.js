@@ -39,9 +39,9 @@ function _default(layout, metaData, extraOptions, series) {
   }
   const {
     dashboard,
-    legendSets,
-    legendOptions
+    legendSets
   } = extraOptions;
+  const legendOptions = layout.legend;
   const fontStyle = (0, _fontStyle.mergeFontStyleWithDefault)(layout.fontStyle && layout.fontStyle[_fontStyle.FONT_STYLE_VISUALIZATION_TITLE], _fontStyle.FONT_STYLE_VISUALIZATION_TITLE);
   const title = Object.assign({
     text: undefined

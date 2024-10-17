@@ -25,9 +25,9 @@ export default function (series, layout, metaData, extraOptions) {
   }
   const {
     dashboard,
-    legendSets,
-    legendOptions
+    legendSets
   } = extraOptions;
+  const legendOptions = layout.legend;
   const fontStyle = mergeFontStyleWithDefault(layout.fontStyle && layout.fontStyle[FONT_STYLE_VISUALIZATION_SUBTITLE], FONT_STYLE_VISUALIZATION_SUBTITLE);
   const subtitle = Object.assign({
     text: undefined
