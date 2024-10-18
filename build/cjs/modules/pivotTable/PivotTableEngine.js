@@ -794,10 +794,11 @@ class PivotTableEngine {
             column
           });
           const valueType = (dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType) || _valueTypes.VALUE_TYPE_TEXT;
+          const totalAggregationType = dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.totalAggregationType;
 
           // only accumulate numeric (except for PERCENTAGE and UNIT_INTERVAL) and boolean values
           // accumulating other value types like text values does not make sense
-          if ((0, _valueTypes.isCumulativeValueType)(valueType)) {
+          if ((0, _valueTypes.isCumulativeValueType)(valueType) && totalAggregationType === _pivotTableConstants.AGGREGATE_TYPE_AVERAGE) {
             // initialise to 0 for cumulative types
             // (||= is not transformed correctly in Babel with the current setup)
             acc || (acc = 0);
