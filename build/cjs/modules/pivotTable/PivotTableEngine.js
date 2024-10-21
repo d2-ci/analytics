@@ -160,7 +160,7 @@ const applyTotalAggregationType = (_ref2, overrideTotalAggregationType) => {
   } = _ref2;
   switch (overrideTotalAggregationType || totalAggregationType) {
     case _pivotTableConstants.AGGREGATE_TYPE_NA:
-      return 'N/A';
+      return _pivotTableConstants.VALUE_NA;
     case _pivotTableConstants.AGGREGATE_TYPE_AVERAGE:
       return (numerator || value) * multiplier / (denominator * divisor || 1);
     case _pivotTableConstants.AGGREGATE_TYPE_SUM:
@@ -265,15 +265,29 @@ class PivotTableEngine {
       rawCell.rawValue = rawValue;
       rawCell.renderedValue = renderedValue;
     }
+    if ([_pivotTableConstants.CELL_TYPE_TOTAL, _pivotTableConstants.CELL_TYPE_SUBTOTAL].includes(rawCell.cellType) && rawCell.rawValue === _pivotTableConstants.AGGREGATE_TYPE_NA) {
+      rawCell.titleValue = _d2I18n.default.t('Not applicable');
+    }
     if (this.options.cumulativeValues) {
+      let titleValue;
+      if (this.data[row] && this.data[row][column]) {
+        const dataRow = this.data[row][column];
+        const rawValue = cellType === _pivotTableConstants.CELL_TYPE_VALUE ? dataRow[this.dimensionLookup.dataHeaders.value] : dataRow.value;
+        titleValue = _d2I18n.default.t('Value: {{value}}', {
+          value: (0, _renderValue.renderValue)(rawValue, valueType, this.visualization),
+          nsSeparator: '^^'
+        });
+      }
       const cumulativeValue = this.getCumulative({
         row,
         column
       });
       if (cumulativeValue !== undefined && cumulativeValue !== null) {
-        // force to NUMBER for accumulated values
-        rawCell.valueType = valueType === undefined || valueType === null ? _valueTypes.VALUE_TYPE_NUMBER : valueType;
+        // force to TEXT for N/A (accumulated) values
+        // force to NUMBER for accumulated values if no valueType present
+        rawCell.valueType = cumulativeValue === _pivotTableConstants.VALUE_NA ? _pivotTableConstants.VALUE_TYPE_NA : valueType === undefined || valueType === null ? _valueTypes.VALUE_TYPE_NUMBER : valueType;
         rawCell.empty = false;
+        rawCell.titleValue = titleValue;
         rawCell.rawValue = cumulativeValue;
         rawCell.renderedValue = (0, _renderValue.renderValue)(cumulativeValue, valueType, this.visualization);
       }
@@ -372,15 +386,12 @@ class PivotTableEngine {
       return undefined;
     }
     const cellValue = this.data[row][column];
+
+    // empty cell
     if (!cellValue) {
-      // Empty cell
-      // The cell still needs to get the valueType to render correctly 0 and cumulative values
-      return {
-        valueType: _valueTypes.VALUE_TYPE_NUMBER,
-        totalAggregationType: _pivotTableConstants.AGGREGATE_TYPE_SUM
-      };
+      return undefined;
     }
-    if (!Array.isArray(cellValue)) {
+    if (cellValue && !Array.isArray(cellValue)) {
       // This is a total cell
       return {
         valueType: cellValue.valueType,
@@ -543,19 +554,26 @@ class PivotTableEngine {
       } else {
         totalCell.totalAggregationType = currentAggType;
       }
-      const currentValueType = dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType;
+
+      // Force value type of total cells to NUMBER for value cells with numeric or boolean types.
+      // This is to simplify the code below where we compare the previous value type.
+      // All numeric/boolean value types use the same style for rendering the total cell (right aligned content)
+      // and using NUMBER for the total cell is enough for that.
+      // (see DHIS2-9155)
+      const currentValueType = (0, _valueTypes.isNumericValueType)(dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType) || (0, _valueTypes.isBooleanValueType)(dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType) ? _valueTypes.VALUE_TYPE_NUMBER : dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType;
       const previousValueType = totalCell.valueType;
       if (previousValueType && currentValueType !== previousValueType) {
-        totalCell.valueType = _pivotTableConstants.AGGREGATE_TYPE_NA;
+        totalCell.valueType = _pivotTableConstants.VALUE_TYPE_NA;
       } else {
         totalCell.valueType = currentValueType;
       }
 
-      // compute subtotals and totals for all numeric and boolean value types
-      // in that case, force value type of subtotal and total cells to NUMBER to format them correctly
+      // Compute totals for all numeric and boolean value types only.
+      // In practice valueType here is NUMBER (see the comment above).
+      // When is not, it means there is some value cell with a valueType other than numeric/boolean,
+      // the total should not be computed then.
       // (see DHIS2-9155)
-      if ((0, _valueTypes.isNumericValueType)(dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType) || (0, _valueTypes.isBooleanValueType)(dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType)) {
-        totalCell.valueType = _valueTypes.VALUE_TYPE_NUMBER;
+      if ((0, _valueTypes.isNumericValueType)(totalCell.valueType)) {
         dataFields.forEach(field => {
           const headerIndex = this.dimensionLookup.dataHeaders[field];
           const value = (0, _parseValue.parseValue)(dataRow[headerIndex]);
@@ -649,6 +667,17 @@ class PivotTableEngine {
       }
     }
   }
+  computeOverrideTotalAggregationType(totalCell, visualization) {
+    // Avoid undefined on total cells with valueTypes that cannot be totalized.
+    // This happens for example when a column/row has all value cells of type TEXT.
+    if (!((0, _valueTypes.isNumericValueType)(totalCell.valueType) || (0, _valueTypes.isBooleanValueType)(totalCell.valueType))) {
+      return _pivotTableConstants.AGGREGATE_TYPE_NA;
+    }
+
+    // DHIS2-15698: do not override total aggregation type when numberType option is not present
+    // (numberType option default is VALUE)
+    return visualization.numberType && visualization.numberType !== _pivotTableConstants.NUMBER_TYPE_VALUE && _pivotTableConstants.AGGREGATE_TYPE_SUM;
+  }
   finalizeTotal(_ref11) {
     let {
       row,
@@ -659,10 +688,12 @@ class PivotTableEngine {
     }
     const totalCell = this.data[row][column];
     if (totalCell && totalCell.count) {
-      totalCell.value = applyTotalAggregationType(totalCell,
-      // DHIS2-15698: do not override total aggregation type when numberType option is not present
-      // (numberType option default is VALUE)
-      this.visualization.numberType && this.visualization.numberType !== _pivotTableConstants.NUMBER_TYPE_VALUE && _pivotTableConstants.AGGREGATE_TYPE_SUM);
+      totalCell.value = applyTotalAggregationType(totalCell, this.computeOverrideTotalAggregationType(totalCell, this.visualization));
+
+      // override valueType for styling cells with N/A value
+      if (totalCell.value === _pivotTableConstants.AGGREGATE_TYPE_NA) {
+        totalCell.valueType = _pivotTableConstants.VALUE_TYPE_NA;
+      }
       this.adaptiveClippingController.add({
         row,
         column
@@ -763,10 +794,14 @@ class PivotTableEngine {
             column
           });
           const valueType = (dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.valueType) || _valueTypes.VALUE_TYPE_TEXT;
+          const totalAggregationType = dxDimension === null || dxDimension === void 0 ? void 0 : dxDimension.totalAggregationType;
 
-          // only accumulate numeric values
-          // accumulating text values does not make sense
-          if (valueType === _valueTypes.VALUE_TYPE_NUMBER) {
+          // only accumulate numeric (except for PERCENTAGE and UNIT_INTERVAL) and boolean values
+          // accumulating other value types like text values does not make sense
+          if ((0, _valueTypes.isCumulativeValueType)(valueType) && totalAggregationType === _pivotTableConstants.AGGREGATE_TYPE_SUM) {
+            // initialise to 0 for cumulative types
+            // (||= is not transformed correctly in Babel with the current setup)
+            acc || (acc = 0);
             if (this.data[row] && this.data[row][column]) {
               const dataRow = this.data[row][column];
               const rawValue = cellType === _pivotTableConstants.CELL_TYPE_VALUE ? dataRow[this.dimensionLookup.dataHeaders.value] : dataRow.value;
@@ -775,7 +810,7 @@ class PivotTableEngine {
             this.accumulators.rows[row][column] = acc;
           }
           return acc;
-        }, 0);
+        }, '');
       });
     } else {
       this.accumulators = {
