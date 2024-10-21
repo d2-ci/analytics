@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.getSingleValueTextColor = getSingleValueTextColor;
 var _ui = require("@dhis2/ui");
 var _legends = require("../../../../../../../modules/legends.js");
+var _shouldUseContrastColor = require("../../../../../../util/shouldUseContrastColor.js");
 var _getSingleValueLegendColor = require("./getSingleValueLegendColor.js");
-var _shouldUseContrastColor = require("./shouldUseContrastColor.js");
 function getSingleValueTextColor(baseColor, value, legendOptions, legendSets) {
   const legendColor = (0, _getSingleValueLegendColor.getSingleValueLegendColor)(legendOptions, legendSets, value);
   if (!legendColor) {
