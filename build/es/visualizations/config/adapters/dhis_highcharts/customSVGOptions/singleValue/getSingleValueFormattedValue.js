@@ -1,5 +1,5 @@
-import { renderValue } from '../../../../../../../modules/renderValue.js';
-import { VALUE_TYPE_TEXT } from '../../../../../../../modules/valueTypes.js';
+import { renderValue } from '../../../../../../modules/renderValue.js';
+import { VALUE_TYPE_TEXT } from '../../../../../../modules/valueTypes.js';
 export const INDICATOR_FACTOR_100 = 100;
 export function getSingleValueFormattedValue(value, layout, metaData) {
   const valueType = metaData.items[metaData.dimensions.dx[0]].valueType;

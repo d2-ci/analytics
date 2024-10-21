@@ -5,7 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = getExporting;
 var _visTypes = require("../../../../modules/visTypes.js");
-var _renderSingleValueSVG = require("./customSVGOptions/singleValue/renderer/renderSingleValueSVG.js");
+var _index = _interopRequireDefault(require("./events/loadCustomSVG/singleValue/index.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function getExporting(visType) {
   const exporting = {
     // disable exporting context menu
@@ -18,7 +19,7 @@ function getExporting(visType) {
         chartOptions: {
           chart: {
             events: {
-              load: _renderSingleValueSVG.renderSingleValueSVG
+              load: _index.default
             }
           }
         }

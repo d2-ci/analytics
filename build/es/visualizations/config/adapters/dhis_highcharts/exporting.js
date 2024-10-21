@@ -1,5 +1,5 @@
 import { VIS_TYPE_SINGLE_VALUE } from '../../../../modules/visTypes.js';
-import { renderSingleValueSVG } from './customSVGOptions/singleValue/renderer/renderSingleValueSVG.js';
+import loadSingleValueSVG from './events/loadCustomSVG/singleValue/index.js';
 export default function getExporting(visType) {
   const exporting = {
     // disable exporting context menu
@@ -12,7 +12,7 @@ export default function getExporting(visType) {
         chartOptions: {
           chart: {
             events: {
-              load: renderSingleValueSVG
+              load: loadSingleValueSVG
             }
           }
         }

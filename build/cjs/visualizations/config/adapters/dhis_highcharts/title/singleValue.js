@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 Object.defineProperty(exports, "getSingleValueTitleColor", {
   enumerable: true,
   get: function () {
-    return _index.getSingleValueTitleColor;
+    return _getSingleValueTitleColor.getSingleValueTitleColor;
   }
 });
 exports.getSingleValueTitleText = getSingleValueTitleText;
 var _getFilterText = _interopRequireDefault(require("../../../../util/getFilterText.js"));
-var _index = require("../customSVGOptions/singleValue/index.js");
+var _getSingleValueTitleColor = require("../customSVGOptions/singleValue/getSingleValueTitleColor.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function getSingleValueTitleText(layout, metaData) {
   if (layout.hideTitle) {

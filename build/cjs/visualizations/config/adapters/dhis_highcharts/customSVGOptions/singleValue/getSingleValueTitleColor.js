@@ -5,8 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getSingleValueTitleColor = getSingleValueTitleColor;
 var _ui = require("@dhis2/ui");
-var _legends = require("../../../../../../../modules/legends.js");
-var _shouldUseContrastColor = require("../../../../../../util/shouldUseContrastColor.js");
+var _legends = require("../../../../../../modules/legends.js");
+var _shouldUseContrastColor = require("../../../../../util/shouldUseContrastColor.js");
 var _getSingleValueLegendColor = require("./getSingleValueLegendColor.js");
 function getSingleValueTitleColor(customColor, defaultColor, value, legendOptions, legendSets) {
   // Never override custom color

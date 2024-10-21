@@ -5,8 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.INDICATOR_FACTOR_100 = void 0;
 exports.getSingleValueFormattedValue = getSingleValueFormattedValue;
-var _renderValue = require("../../../../../../../modules/renderValue.js");
-var _valueTypes = require("../../../../../../../modules/valueTypes.js");
+var _renderValue = require("../../../../../../modules/renderValue.js");
+var _valueTypes = require("../../../../../../modules/valueTypes.js");
 const INDICATOR_FACTOR_100 = 100;
 exports.INDICATOR_FACTOR_100 = INDICATOR_FACTOR_100;
 function getSingleValueFormattedValue(value, layout, metaData) {

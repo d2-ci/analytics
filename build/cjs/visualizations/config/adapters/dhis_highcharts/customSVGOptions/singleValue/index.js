@@ -3,24 +3,29 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "getSingleValueBackgroundColor", {
-  enumerable: true,
-  get: function () {
-    return _getSingleValueBackgroundColor.getSingleValueBackgroundColor;
-  }
-});
-Object.defineProperty(exports, "getSingleValueCustomSVGOptions", {
-  enumerable: true,
-  get: function () {
-    return _getSingleValueCustomSVGOptions.getSingleValueCustomSVGOptions;
-  }
-});
-Object.defineProperty(exports, "getSingleValueTitleColor", {
-  enumerable: true,
-  get: function () {
-    return _getSingleValueTitleColor.getSingleValueTitleColor;
-  }
-});
-var _getSingleValueCustomSVGOptions = require("./config/getSingleValueCustomSVGOptions.js");
-var _getSingleValueBackgroundColor = require("./config/getSingleValueBackgroundColor.js");
-var _getSingleValueTitleColor = require("./config/getSingleValueTitleColor.js");
+exports.default = getSingleValueCustomSVGOptions;
+var _ui = require("@dhis2/ui");
+var _getSingleValueFormattedValue = require("./getSingleValueFormattedValue.js");
+var _getSingleValueSubtext = require("./getSingleValueSubtext.js");
+var _getSingleValueTextColor = require("./getSingleValueTextColor.js");
+function getSingleValueCustomSVGOptions(_ref) {
+  let {
+    layout,
+    extraOptions,
+    metaData,
+    series
+  } = _ref;
+  const {
+    dashboard,
+    icon
+  } = extraOptions;
+  const value = series[0];
+  return {
+    value,
+    fontColor: (0, _getSingleValueTextColor.getSingleValueTextColor)(_ui.colors.grey900, value, layout.legend, extraOptions.legendSets),
+    formattedValue: (0, _getSingleValueFormattedValue.getSingleValueFormattedValue)(value, layout, metaData),
+    icon,
+    dashboard,
+    subText: (0, _getSingleValueSubtext.getSingleValueSubtext)(metaData)
+  };
+}
