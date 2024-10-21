@@ -629,7 +629,7 @@ const indicatorTypes = ['plain', 'percent', 'subtext'];
       newChartRef.current.update({
         exporting: {
           chartOptions: {
-            isPDF: exportAsPdf
+            isPdfExport: exportAsPdf
           }
         }
       });
