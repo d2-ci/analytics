@@ -583,9 +583,7 @@ const baseExtraOptions = {
 const indicatorTypes = ['plain', 'percent', 'subtext'];
 (0, _react.storiesOf)('SingleValue', module).add('default', () => {
   const newChartRef = (0, _react2.useRef)(null);
-  const oldContainerRef = (0, _react2.useRef)(null);
   const newContainerRef = (0, _react2.useRef)(null);
-  const [transpose, setTranspose] = (0, _react2.useState)(false);
   const [dashboard, setDashboard] = (0, _react2.useState)(false);
   const [showIcon, setShowIcon] = (0, _react2.useState)(true);
   const [indicatorType, setIndicatorType] = (0, _react2.useState)('subtext');
@@ -598,7 +596,7 @@ const indicatorTypes = ['plain', 'percent', 'subtext'];
     height
   }), [width, height]);
   (0, _react2.useEffect)(() => {
-    if (oldContainerRef.current && newContainerRef.current) {
+    if (newContainerRef.current) {
       requestAnimationFrame(() => {
         const extraOptions = {
           ...baseExtraOptions,
@@ -617,7 +615,6 @@ const indicatorTypes = ['plain', 'percent', 'subtext'];
         if (indicatorType === 'subtext') {
           dataObj.metaData.items.FnYCr2EAzWS.indicatorType = subtextIndicatorType;
         }
-        (0, _index.createVisualization)([dataObj], layout, oldContainerRef.current, extraOptions, undefined, undefined, 'dhis');
         const newVisualization = (0, _index.createVisualization)([dataObj], layout, newContainerRef.current, extraOptions, undefined, undefined, 'highcharts');
         newChartRef.current = newVisualization.visualization;
       });
@@ -695,29 +692,12 @@ const indicatorTypes = ['plain', 'percent', 'subtext'];
     type: "checkbox"
   }), "\xA0Export as PDF"), /*#__PURE__*/_react2.default.createElement("button", {
     onClick: downloadOffline
-  }, "Download offline"), /*#__PURE__*/_react2.default.createElement("button", {
-    onClick: () => {
-      setTranspose(!transpose);
-    }
-  }, transpose ? 'Show side by side' : 'Transpose old and new')), /*#__PURE__*/_react2.default.createElement("div", {
+  }, "Download offline")), /*#__PURE__*/_react2.default.createElement("div", {
     style: {
       display: 'flex',
       gap: 12
     }
   }, /*#__PURE__*/_react2.default.createElement("div", {
-    style: transpose ? {
-      ...containerStyle,
-      ...{
-        opacity: 0.45,
-        transform: `translateX(${width + 10}px)`,
-        zIndex: 10,
-        backgroundColor: 'purple'
-      }
-    } : containerStyle
-  }, /*#__PURE__*/_react2.default.createElement("div", {
-    ref: oldContainerRef,
-    style: innerContainerStyle
-  })), /*#__PURE__*/_react2.default.createElement("div", {
     style: containerStyle
   }, /*#__PURE__*/_react2.default.createElement("div", {
     ref: newContainerRef,
