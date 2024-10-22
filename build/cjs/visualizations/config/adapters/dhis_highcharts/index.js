@@ -17,6 +17,7 @@ var _exporting = _interopRequireDefault(require("./exporting.js"));
 var _getScatterData = _interopRequireDefault(require("./getScatterData.js"));
 var _getSortedConfig = _interopRequireDefault(require("./getSortedConfig.js"));
 var _getTrimmedConfig = _interopRequireDefault(require("./getTrimmedConfig.js"));
+var _lang = _interopRequireDefault(require("./lang.js"));
 var _legend = _interopRequireDefault(require("./legend.js"));
 var _legendSet = require("./legendSet.js");
 var _noData = _interopRequireDefault(require("./noData.js"));
@@ -98,10 +99,7 @@ function _default(_ref) {
     // pane
     pane: (0, _index4.default)(_layout.type),
     // no data + zoom
-    lang: {
-      noData: _extraOptions.noData.text,
-      resetZoom: _extraOptions.resetZoom.text
-    },
+    lang: (0, _lang.default)(_layout.type, _extraOptions),
     noData: (0, _noData.default)(_layout.type),
     // credits
     credits: {
@@ -196,5 +194,6 @@ function _default(_ref) {
 
   // force apply extra config
   Object.assign(config, extraConfig);
+  console.log((0, _objectClean.default)(config));
   return (0, _objectClean.default)(config);
 }

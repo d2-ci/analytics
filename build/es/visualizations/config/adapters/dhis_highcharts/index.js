@@ -11,6 +11,7 @@ import getExporting from './exporting.js';
 import getScatterData from './getScatterData.js';
 import getSortedConfig from './getSortedConfig.js';
 import getTrimmedConfig from './getTrimmedConfig.js';
+import getLang from './lang.js';
 import getLegend from './legend.js';
 import { applyLegendSet, getLegendSetTooltip } from './legendSet.js';
 import getNoData from './noData.js';
@@ -89,10 +90,7 @@ export default function (_ref) {
     // pane
     pane: getPane(_layout.type),
     // no data + zoom
-    lang: {
-      noData: _extraOptions.noData.text,
-      resetZoom: _extraOptions.resetZoom.text
-    },
+    lang: getLang(_layout.type, _extraOptions),
     noData: getNoData(_layout.type),
     // credits
     credits: {
@@ -187,5 +185,6 @@ export default function (_ref) {
 
   // force apply extra config
   Object.assign(config, extraConfig);
+  console.log(objectClean(config));
   return objectClean(config);
 }
