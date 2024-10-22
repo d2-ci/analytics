@@ -11,21 +11,23 @@ var _index = require("../../../../modules/outliers/index.js");
 var _visTypes = require("../../../../modules/visTypes.js");
 var _themes = require("../../../util/colors/themes.js");
 var _addTrendLines = _interopRequireWildcard(require("./addTrendLines.js"));
-var _chart = _interopRequireDefault(require("./chart.js"));
-var _index2 = require("./customSVGOptions/index.js");
+var _index2 = _interopRequireDefault(require("./chart/index.js"));
+var _index3 = _interopRequireDefault(require("./customSVGOptions/index.js"));
+var _exporting = _interopRequireDefault(require("./exporting.js"));
 var _getScatterData = _interopRequireDefault(require("./getScatterData.js"));
 var _getSortedConfig = _interopRequireDefault(require("./getSortedConfig.js"));
 var _getTrimmedConfig = _interopRequireDefault(require("./getTrimmedConfig.js"));
+var _lang = _interopRequireDefault(require("./lang.js"));
 var _legend = _interopRequireDefault(require("./legend.js"));
 var _legendSet = require("./legendSet.js");
 var _noData = _interopRequireDefault(require("./noData.js"));
-var _index3 = _interopRequireDefault(require("./pane/index.js"));
+var _index4 = _interopRequireDefault(require("./pane/index.js"));
 var _plotOptions = _interopRequireDefault(require("./plotOptions.js"));
-var _index4 = _interopRequireDefault(require("./series/index.js"));
-var _index5 = _interopRequireDefault(require("./subtitle/index.js"));
-var _index6 = _interopRequireDefault(require("./title/index.js"));
-var _index7 = _interopRequireDefault(require("./xAxis/index.js"));
-var _index8 = _interopRequireDefault(require("./yAxis/index.js"));
+var _index5 = _interopRequireDefault(require("./series/index.js"));
+var _index6 = _interopRequireDefault(require("./subtitle/index.js"));
+var _index7 = _interopRequireDefault(require("./title/index.js"));
+var _index8 = _interopRequireDefault(require("./xAxis/index.js"));
+var _index9 = _interopRequireDefault(require("./yAxis/index.js"));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -68,17 +70,17 @@ function _default(_ref) {
   }
   let config = {
     // type etc
-    chart: (0, _chart.default)(_layout, el, _extraOptions, series),
+    chart: (0, _index2.default)(_layout, el, _extraOptions, series),
     // title
-    title: (0, _index6.default)(_layout, store.data[0].metaData, _extraOptions, series),
+    title: (0, _index7.default)(_layout, store.data[0].metaData, _extraOptions, series),
     // subtitle
-    subtitle: (0, _index5.default)(series, _layout, store.data[0].metaData, _extraOptions),
+    subtitle: (0, _index6.default)(series, _layout, store.data[0].metaData, _extraOptions),
     // x-axis
-    xAxis: (0, _index7.default)(store, _layout, _extraOptions, series),
+    xAxis: (0, _index8.default)(store, _layout, _extraOptions, series),
     // y-axis
-    yAxis: (0, _index8.default)(_layout, series, _extraOptions),
+    yAxis: (0, _index9.default)(_layout, series, _extraOptions),
     // series
-    series: (0, _index4.default)({
+    series: (0, _index5.default)({
       series: series.slice(),
       metaData: store.data[0].metaData.items,
       layout: _layout,
@@ -95,28 +97,22 @@ function _default(_ref) {
       dashboard: _extraOptions.dashboard
     }),
     // pane
-    pane: (0, _index3.default)(_layout.type),
+    pane: (0, _index4.default)(_layout.type),
     // no data + zoom
-    lang: {
-      noData: _extraOptions.noData.text,
-      resetZoom: _extraOptions.resetZoom.text
-    },
+    lang: (0, _lang.default)(_layout.type, _extraOptions),
     noData: (0, _noData.default)(_layout.type),
     // credits
     credits: {
       enabled: false
     },
     // exporting
-    exporting: {
-      // disable exporting context menu
-      enabled: false
-    },
+    exporting: (0, _exporting.default)(_layout.type),
     /* The config object passed to the Highcharts Chart constructor
      * can contain arbitrary properties, which are made accessible
      * under the Chart instance's `userOptions` member. This means
      * that in event callback functions the custom SVG options are
      * accessible as `this.userOptions.customSVGOptions` */
-    customSVGOptions: (0, _index2.getCustomSVGOptions)({
+    customSVGOptions: (0, _index3.default)({
       extraConfig,
       layout: _layout,
       extraOptions: _extraOptions,
@@ -198,5 +194,6 @@ function _default(_ref) {
 
   // force apply extra config
   Object.assign(config, extraConfig);
+  console.log((0, _objectClean.default)(config));
   return (0, _objectClean.default)(config);
 }

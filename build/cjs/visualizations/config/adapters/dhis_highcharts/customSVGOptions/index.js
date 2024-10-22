@@ -3,23 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getCustomSVGOptions = getCustomSVGOptions;
-exports.renderCustomSVG = renderCustomSVG;
+exports.default = getCustomSVGOptions;
 var _visTypes = require("../../../../../modules/visTypes.js");
-var _index = require("./singleValue/index.js");
-var _renderSingleValueSVG = require("./singleValue/renderer/renderSingleValueSVG.js");
-function renderCustomSVG() {
-  const {
-    visualizationType
-  } = this.userOptions.customSVGOptions;
-  switch (visualizationType) {
-    case _visTypes.VIS_TYPE_SINGLE_VALUE:
-      _renderSingleValueSVG.renderSingleValueSVG.call(this);
-      break;
-    default:
-      break;
-  }
-}
+var _index = _interopRequireDefault(require("./singleValue/index.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function getCustomSVGOptions(_ref) {
   let {
     extraConfig,
@@ -35,7 +22,7 @@ function getCustomSVGOptions(_ref) {
     case _visTypes.VIS_TYPE_SINGLE_VALUE:
       return {
         ...baseOptions,
-        ...(0, _index.getSingleValueCustomSVGOptions)({
+        ...(0, _index.default)({
           extraConfig,
           layout,
           extraOptions,

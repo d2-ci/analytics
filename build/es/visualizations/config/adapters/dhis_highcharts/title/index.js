@@ -1,5 +1,5 @@
 import isString from 'd2-utilizr/lib/isString';
-import { FONT_STYLE_OPTION_ITALIC, FONT_STYLE_OPTION_BOLD, FONT_STYLE_OPTION_TEXT_COLOR, FONT_STYLE_OPTION_FONT_SIZE, FONT_STYLE_OPTION_TEXT_ALIGN, FONT_STYLE_VISUALIZATION_TITLE, mergeFontStyleWithDefault } from '../../../../../modules/fontStyle.js';
+import { FONT_STYLE_OPTION_ITALIC, FONT_STYLE_OPTION_BOLD, FONT_STYLE_OPTION_TEXT_COLOR, FONT_STYLE_OPTION_FONT_SIZE, FONT_STYLE_OPTION_TEXT_ALIGN, FONT_STYLE_VISUALIZATION_TITLE, mergeFontStyleWithDefault, defaultFontStyle } from '../../../../../modules/fontStyle.js';
 import { VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, VIS_TYPE_GAUGE, isVerticalType, VIS_TYPE_SCATTER, VIS_TYPE_SINGLE_VALUE } from '../../../../../modules/visTypes.js';
 import getFilterText from '../../../../util/getFilterText.js';
 import { getTextAlignOption } from '../getTextAlignOption.js';
@@ -32,9 +32,9 @@ export default function (layout, metaData, extraOptions, series) {
   }
   const {
     dashboard,
-    legendSets,
-    legendOptions
+    legendSets
   } = extraOptions;
+  const legendOptions = layout.legend;
   const fontStyle = mergeFontStyleWithDefault(layout.fontStyle && layout.fontStyle[FONT_STYLE_VISUALIZATION_TITLE], FONT_STYLE_VISUALIZATION_TITLE);
   const title = Object.assign({
     text: undefined
@@ -74,10 +74,15 @@ export default function (layout, metaData, extraOptions, series) {
   }
   switch (layout.type) {
     case VIS_TYPE_SINGLE_VALUE:
-      title.style.color = getSingleValueTitleColor(fontStyle[FONT_STYLE_OPTION_TEXT_COLOR], series[0], legendOptions, legendSets);
-      if (dashboard) {
-        // TODO: is this always what we want?
-        title.style.fontWeight = 'normal';
+      {
+        var _defaultFontStyle$FON, _layout$fontStyle, _layout$fontStyle$FON;
+        const defaultColor = defaultFontStyle === null || defaultFontStyle === void 0 ? void 0 : (_defaultFontStyle$FON = defaultFontStyle[FONT_STYLE_VISUALIZATION_TITLE]) === null || _defaultFontStyle$FON === void 0 ? void 0 : _defaultFontStyle$FON[FONT_STYLE_OPTION_TEXT_COLOR];
+        const customColor = layout === null || layout === void 0 ? void 0 : (_layout$fontStyle = layout.fontStyle) === null || _layout$fontStyle === void 0 ? void 0 : (_layout$fontStyle$FON = _layout$fontStyle[FONT_STYLE_VISUALIZATION_TITLE]) === null || _layout$fontStyle$FON === void 0 ? void 0 : _layout$fontStyle$FON[FONT_STYLE_OPTION_TEXT_COLOR];
+        title.style.color = getSingleValueTitleColor(customColor, defaultColor, series[0], legendOptions, legendSets);
+        if (dashboard) {
+          // TODO: is this always what we want?
+          title.style.fontWeight = 'normal';
+        }
       }
       break;
     default:

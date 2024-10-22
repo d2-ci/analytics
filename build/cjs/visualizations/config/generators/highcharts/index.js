@@ -12,6 +12,7 @@ var _noDataToDisplay = _interopRequireDefault(require("highcharts/modules/no-dat
 var _offlineExporting = _interopRequireDefault(require("highcharts/modules/offline-exporting"));
 var _patternFill = _interopRequireDefault(require("highcharts/modules/pattern-fill"));
 var _solidGauge = _interopRequireDefault(require("highcharts/modules/solid-gauge"));
+var _index = _interopRequireDefault(require("./pdfExportBugFixPlugin/index.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 // apply
 (0, _highchartsMore.default)(_highcharts.default);
@@ -21,6 +22,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _offlineExporting.default)(_highcharts.default);
 (0, _patternFill.default)(_highcharts.default);
 (0, _boost.default)(_highcharts.default);
+(0, _index.default)(_highcharts.default);
+
+/* Whitelist some additional SVG attributes here. Without this,
+ * the PDF export for the SingleValue visualization breaks. */
+_highcharts.default.AST.allowedAttributes.push('fill-rule', 'clip-rule');
 function drawLegendSymbolWrap() {
   const pick = _highcharts.default.pick;
   _highcharts.default.wrap(_highcharts.default.seriesTypes.column.prototype, 'drawLegendSymbol', function (proceed, legend, item) {

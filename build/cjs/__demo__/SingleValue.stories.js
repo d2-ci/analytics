@@ -585,8 +585,9 @@ const indicatorTypes = ['plain', 'percent', 'subtext'];
   const newChartRef = (0, _react2.useRef)(null);
   const newContainerRef = (0, _react2.useRef)(null);
   const [dashboard, setDashboard] = (0, _react2.useState)(false);
-  const [showIcon, setShowIcon] = (0, _react2.useState)(false);
-  const [indicatorType, setIndicatorType] = (0, _react2.useState)('plain');
+  const [showIcon, setShowIcon] = (0, _react2.useState)(true);
+  const [indicatorType, setIndicatorType] = (0, _react2.useState)('subtext');
+  const [exportAsPdf, setExportAsPdf] = (0, _react2.useState)(true);
   const [width, setWidth] = (0, _react2.useState)(constainerStyleBase.width);
   const [height, setHeight] = (0, _react2.useState)(constainerStyleBase.height);
   const containerStyle = (0, _react2.useMemo)(() => ({
@@ -622,6 +623,13 @@ const indicatorTypes = ['plain', 'percent', 'subtext'];
   const downloadOffline = (0, _react2.useCallback)(() => {
     if (newChartRef.current) {
       const currentBackgroundColor = newChartRef.current.userOptions.chart.backgroundColor;
+      newChartRef.current.update({
+        exporting: {
+          chartOptions: {
+            isPdfExport: exportAsPdf
+          }
+        }
+      });
       newChartRef.current.exportChartLocal({
         sourceHeight: 768,
         sourceWidth: 1024,
@@ -629,14 +637,14 @@ const indicatorTypes = ['plain', 'percent', 'subtext'];
         fallbackToExportServer: false,
         filename: 'testOfflineDownload',
         showExportInProgress: true,
-        type: 'image/png'
+        type: exportAsPdf ? 'application/pdf' : 'image/png'
       }, {
         chart: {
           backgroundColor: currentBackgroundColor === 'transparent' ? '#ffffff' : currentBackgroundColor
         }
       });
     }
-  }, []);
+  }, [exportAsPdf]);
   return /*#__PURE__*/_react2.default.createElement(_react2.default.Fragment, null, /*#__PURE__*/_react2.default.createElement("div", {
     style: {
       display: 'flex',
@@ -678,7 +686,11 @@ const indicatorTypes = ['plain', 'percent', 'subtext'];
     return /*#__PURE__*/_react2.default.createElement("option", {
       key: index
     }, type);
-  }))), /*#__PURE__*/_react2.default.createElement("button", {
+  }))), /*#__PURE__*/_react2.default.createElement("label", null, /*#__PURE__*/_react2.default.createElement("input", {
+    checked: exportAsPdf,
+    onChange: () => setExportAsPdf(!exportAsPdf),
+    type: "checkbox"
+  }), "\xA0Export as PDF"), /*#__PURE__*/_react2.default.createElement("button", {
     onClick: downloadOffline
   }, "Download offline")), /*#__PURE__*/_react2.default.createElement("div", {
     style: {

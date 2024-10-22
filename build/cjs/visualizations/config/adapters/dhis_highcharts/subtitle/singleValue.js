@@ -7,11 +7,11 @@ exports.default = getSingleValueSubtitle;
 Object.defineProperty(exports, "getSingleValueSubtitleColor", {
   enumerable: true,
   get: function () {
-    return _index.getSingleValueTextColor;
+    return _getSingleValueTitleColor.getSingleValueTitleColor;
   }
 });
 var _getFilterText = _interopRequireDefault(require("../../../../util/getFilterText.js"));
-var _index = require("../customSVGOptions/singleValue/index.js");
+var _getSingleValueTitleColor = require("../customSVGOptions/singleValue/getSingleValueTitleColor.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function getSingleValueSubtitle(layout, metaData) {
   if (layout.hideSubtitle || 1 === 0) {
