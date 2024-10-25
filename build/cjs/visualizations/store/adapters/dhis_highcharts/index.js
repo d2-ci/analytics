@@ -9,6 +9,7 @@ var _arrayUnique = _interopRequireDefault(require("d2-utilizr/lib/arrayUnique"))
 var _visTypes = require("../../../../modules/visTypes.js");
 var _gauge = _interopRequireDefault(require("./gauge.js"));
 var _pie = _interopRequireDefault(require("./pie.js"));
+var _singleValue = _interopRequireDefault(require("./singleValue.js"));
 var _twoCategory = _interopRequireDefault(require("./twoCategory.js"));
 var _yearOnYear = _interopRequireDefault(require("./yearOnYear.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -70,6 +71,8 @@ function getSeriesFunction(type, categoryIds) {
     return _twoCategory.default;
   }
   switch (type) {
+    case _visTypes.VIS_TYPE_SINGLE_VALUE:
+      return _singleValue.default;
     case _visTypes.VIS_TYPE_PIE:
       return _pie.default;
     case _visTypes.VIS_TYPE_GAUGE:

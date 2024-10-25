@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.PivotTableValueCell = void 0;
+var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _applyLegendSet = require("../../modules/pivotTable/applyLegendSet.js");
@@ -16,7 +17,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const PivotTableValueCell = _ref => {
-  var _cellContent$rendered;
+  var _cellContent$titleVal, _cellContent$rendered;
   let {
     row,
     column,
@@ -54,7 +55,10 @@ const PivotTableValueCell = _ref => {
   return /*#__PURE__*/_react.default.createElement(_PivotTableCell.PivotTableCell, {
     key: column,
     classes: classes,
-    title: cellContent.renderedValue,
+    title: (_cellContent$titleVal = cellContent.titleValue) !== null && _cellContent$titleVal !== void 0 ? _cellContent$titleVal : _d2I18n.default.t('Value: {{value}}', {
+      value: cellContent.renderedValue,
+      nsSeparator: '^^'
+    }),
     style: style,
     onClick: isClickable ? onClick : undefined,
     ref: cellRef,
