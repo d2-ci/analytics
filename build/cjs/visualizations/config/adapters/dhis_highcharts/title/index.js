@@ -10,6 +10,7 @@ var _visTypes = require("../../../../../modules/visTypes.js");
 var _getFilterText = _interopRequireDefault(require("../../../../util/getFilterText.js"));
 var _getTextAlignOption = require("../getTextAlignOption.js");
 var _scatter = _interopRequireDefault(require("./scatter.js"));
+var _singleValue = require("./singleValue.js");
 var _yearOverYear = _interopRequireDefault(require("./yearOverYear.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const DASHBOARD_TITLE_STYLE = {
@@ -30,19 +31,41 @@ function getDefault(layout, metaData, dashboard) {
   }
   return null;
 }
-function _default(layout, metaData, dashboard) {
-  const fontStyle = (0, _fontStyle.mergeFontStyleWithDefault)(layout.fontStyle && layout.fontStyle[_fontStyle.FONT_STYLE_VISUALIZATION_TITLE], _fontStyle.FONT_STYLE_VISUALIZATION_TITLE);
-  const title = {
-    text: undefined
-  };
+function _default(layout, metaData, extraOptions, series) {
   if (layout.hideTitle) {
-    return title;
+    return {
+      text: undefined
+    };
   }
-  const customTitle = layout.title && layout.displayTitle || layout.title;
-  if ((0, _isString.default)(customTitle) && customTitle.length) {
-    title.text = customTitle;
+  const {
+    dashboard,
+    legendSets
+  } = extraOptions;
+  const legendOptions = layout.legend;
+  const fontStyle = (0, _fontStyle.mergeFontStyleWithDefault)(layout.fontStyle && layout.fontStyle[_fontStyle.FONT_STYLE_VISUALIZATION_TITLE], _fontStyle.FONT_STYLE_VISUALIZATION_TITLE);
+  const title = Object.assign({
+    text: undefined
+  }, dashboard ? DASHBOARD_TITLE_STYLE : {
+    margin: 30,
+    align: (0, _getTextAlignOption.getTextAlignOption)(fontStyle[_fontStyle.FONT_STYLE_OPTION_TEXT_ALIGN], _fontStyle.FONT_STYLE_VISUALIZATION_TITLE, (0, _visTypes.isVerticalType)(layout.type)),
+    style: {
+      color: undefined,
+      fontSize: `${fontStyle[_fontStyle.FONT_STYLE_OPTION_FONT_SIZE]}px`,
+      fontWeight: fontStyle[_fontStyle.FONT_STYLE_OPTION_BOLD] ? _fontStyle.FONT_STYLE_OPTION_BOLD : 'normal',
+      fontStyle: fontStyle[_fontStyle.FONT_STYLE_OPTION_ITALIC] ? _fontStyle.FONT_STYLE_OPTION_ITALIC : 'normal',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
+  });
+  const customTitleText = layout.title && layout.displayTitle || layout.title;
+  if ((0, _isString.default)(customTitleText) && customTitleText.length) {
+    title.text = customTitleText;
   } else {
     switch (layout.type) {
+      case _visTypes.VIS_TYPE_SINGLE_VALUE:
+        title.text = (0, _singleValue.getSingleValueTitleText)(layout, metaData, dashboard);
+        break;
       case _visTypes.VIS_TYPE_GAUGE:
       case _visTypes.VIS_TYPE_YEAR_OVER_YEAR_LINE:
       case _visTypes.VIS_TYPE_YEAR_OVER_YEAR_COLUMN:
@@ -56,17 +79,22 @@ function _default(layout, metaData, dashboard) {
         break;
     }
   }
-  return Object.assign({}, dashboard ? DASHBOARD_TITLE_STYLE : {
-    margin: 30,
-    align: (0, _getTextAlignOption.getTextAlignOption)(fontStyle[_fontStyle.FONT_STYLE_OPTION_TEXT_ALIGN], _fontStyle.FONT_STYLE_VISUALIZATION_TITLE, (0, _visTypes.isVerticalType)(layout.type)),
-    style: {
-      color: fontStyle[_fontStyle.FONT_STYLE_OPTION_TEXT_COLOR],
-      fontSize: `${fontStyle[_fontStyle.FONT_STYLE_OPTION_FONT_SIZE]}px`,
-      fontWeight: fontStyle[_fontStyle.FONT_STYLE_OPTION_BOLD] ? _fontStyle.FONT_STYLE_OPTION_BOLD : 'normal',
-      fontStyle: fontStyle[_fontStyle.FONT_STYLE_OPTION_ITALIC] ? _fontStyle.FONT_STYLE_OPTION_ITALIC : 'normal',
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis'
-    }
-  }, title);
+  switch (layout.type) {
+    case _visTypes.VIS_TYPE_SINGLE_VALUE:
+      {
+        var _defaultFontStyle$FON, _layout$fontStyle, _layout$fontStyle$FON;
+        const defaultColor = _fontStyle.defaultFontStyle === null || _fontStyle.defaultFontStyle === void 0 ? void 0 : (_defaultFontStyle$FON = _fontStyle.defaultFontStyle[_fontStyle.FONT_STYLE_VISUALIZATION_TITLE]) === null || _defaultFontStyle$FON === void 0 ? void 0 : _defaultFontStyle$FON[_fontStyle.FONT_STYLE_OPTION_TEXT_COLOR];
+        const customColor = layout === null || layout === void 0 ? void 0 : (_layout$fontStyle = layout.fontStyle) === null || _layout$fontStyle === void 0 ? void 0 : (_layout$fontStyle$FON = _layout$fontStyle[_fontStyle.FONT_STYLE_VISUALIZATION_TITLE]) === null || _layout$fontStyle$FON === void 0 ? void 0 : _layout$fontStyle$FON[_fontStyle.FONT_STYLE_OPTION_TEXT_COLOR];
+        title.style.color = (0, _singleValue.getSingleValueTitleColor)(customColor, defaultColor, series[0], legendOptions, legendSets);
+        if (dashboard) {
+          // TODO: is this always what we want?
+          title.style.fontWeight = 'normal';
+        }
+      }
+      break;
+    default:
+      title.style.color = fontStyle[_fontStyle.FONT_STYLE_OPTION_TEXT_COLOR];
+      break;
+  }
+  return title;
 }

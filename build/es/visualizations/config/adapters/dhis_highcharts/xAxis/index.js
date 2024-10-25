@@ -1,6 +1,6 @@
 import objectClean from 'd2-utilizr/lib/objectClean';
 import { FONT_STYLE_HORIZONTAL_AXIS_TITLE, FONT_STYLE_AXIS_LABELS, FONT_STYLE_OPTION_TEXT_COLOR, FONT_STYLE_OPTION_FONT_SIZE, FONT_STYLE_OPTION_BOLD, FONT_STYLE_OPTION_ITALIC, mergeFontStyleWithDefault } from '../../../../../modules/fontStyle.js';
-import { VIS_TYPE_GAUGE, VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, VIS_TYPE_PIE, VIS_TYPE_RADAR, VIS_TYPE_SCATTER, isTwoCategoryChartType } from '../../../../../modules/visTypes.js';
+import { VIS_TYPE_GAUGE, VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, VIS_TYPE_PIE, VIS_TYPE_RADAR, VIS_TYPE_SCATTER, isTwoCategoryChartType, VIS_TYPE_SINGLE_VALUE } from '../../../../../modules/visTypes.js';
 import { getAxis } from '../../../../util/axes.js';
 import getAxisTitle from '../getAxisTitle.js';
 import getCategories from '../getCategories.js';
@@ -44,6 +44,7 @@ export default function (store, layout, extraOptions, series) {
     switch (layout.type) {
       case VIS_TYPE_PIE:
       case VIS_TYPE_GAUGE:
+      case VIS_TYPE_SINGLE_VALUE:
         xAxis = noAxis();
         break;
       case VIS_TYPE_YEAR_OVER_YEAR_LINE:
