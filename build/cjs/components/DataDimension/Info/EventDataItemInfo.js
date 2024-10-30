@@ -1,0 +1,127 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.EventDataItemInfo = void 0;
+var _style = _interopRequireDefault(require("styled-jsx/style"));
+var _appRuntime = require("@dhis2/app-runtime");
+var _propTypes = _interopRequireDefault(require("prop-types"));
+var _react = _interopRequireDefault(require("react"));
+var _index = _interopRequireDefault(require("../../../locales/index.js"));
+var _dataTypes = require("../../../modules/dataTypes.js");
+var _InfoTable = require("./InfoTable.js");
+var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+const programDataElementQuery = {
+  programDataElement: {
+    resource: 'dataElements',
+    id: _ref => {
+      let {
+        id
+      } = _ref;
+      return id;
+    },
+    params: _ref2 => {
+      let {
+        displayNameProp
+      } = _ref2;
+      return {
+        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},valueType,aggregationType,zeroIsSignificant,legendSets[id,displayName]`
+      };
+    }
+  }
+};
+const programAttributeQuery = {
+  programAttribute: {
+    resource: 'trackedEntityAttributes',
+    id: _ref3 => {
+      let {
+        id
+      } = _ref3;
+      return id;
+    },
+    params: _ref4 => {
+      let {
+        displayNameProp
+      } = _ref4;
+      return {
+        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)}`
+      };
+    }
+  }
+};
+const EventDataItemInfo = _ref5 => {
+  let {
+    type,
+    id,
+    displayNameProp
+  } = _ref5;
+  const {
+    loading,
+    error,
+    data
+  } = (0, _appRuntime.useDataQuery)(type === _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? programDataElementQuery : programAttributeQuery, {
+    // strip program id (if present)
+    variables: {
+      id: id.split('.').reverse()[0],
+      displayNameProp
+    }
+  });
+  const renderProgramDataElementInfo = () => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InfoTable.InfoTable, {
+    data: data === null || data === void 0 ? void 0 : data.programDataElement,
+    loading: loading,
+    error: error
+  }, /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Value type')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data === null || data === void 0 ? void 0 : data.programDataElement.valueType)), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Aggregation type')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data === null || data === void 0 ? void 0 : data.programDataElement.aggregationType)), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Legend sets')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("ul", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data === null || data === void 0 ? void 0 : data.programDataElement.legendSets.map(_ref6 => {
+    let {
+      id,
+      displayName
+    } = _ref6;
+    return /*#__PURE__*/_react.default.createElement("li", {
+      key: id,
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, displayName);
+  })))), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Zero is significant')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data !== null && data !== void 0 && data.programDataElement.zeroIsSignificant ? _index.default.t('True') : _index.default.t('False')))), /*#__PURE__*/_react.default.createElement(_style.default, {
+    id: _InfoPopoverStyle.default.__hash
+  }, _InfoPopoverStyle.default));
+  const renderProgramAttributeInfo = () => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InfoTable.InfoTable, {
+    data: data === null || data === void 0 ? void 0 : data.programAttribute,
+    loading: loading,
+    error: error
+  }), /*#__PURE__*/_react.default.createElement(_style.default, {
+    id: _InfoPopoverStyle.default.__hash
+  }, _InfoPopoverStyle.default));
+  return type === _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? renderProgramDataElementInfo() : renderProgramAttributeInfo();
+};
+exports.EventDataItemInfo = EventDataItemInfo;
+EventDataItemInfo.propTypes = {
+  displayNameProp: _propTypes.default.string,
+  id: _propTypes.default.string,
+  type: _propTypes.default.string
+};
