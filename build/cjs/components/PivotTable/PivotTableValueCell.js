@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.PivotTableValueCell = void 0;
+var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _applyLegendSet = require("../../modules/pivotTable/applyLegendSet.js");
@@ -16,7 +17,7 @@ function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return 
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const PivotTableValueCell = _ref => {
-  var _cellContent$rendered;
+  var _cellContent$titleVal, _cellContent$rendered;
   let {
     row,
     column,
@@ -54,7 +55,10 @@ const PivotTableValueCell = _ref => {
   return /*#__PURE__*/_react.default.createElement(_PivotTableCell.PivotTableCell, {
     key: column,
     classes: classes,
-    title: cellContent.renderedValue,
+    title: (_cellContent$titleVal = cellContent.titleValue) !== null && _cellContent$titleVal !== void 0 ? _cellContent$titleVal : _d2I18n.default.t('Value: {{value}}', {
+      value: cellContent.renderedValue,
+      nsSeparator: '^^'
+    }),
     style: style,
     onClick: isClickable ? onClick : undefined,
     ref: cellRef,

@@ -5,10 +5,13 @@ import { getOutlierHelper } from '../../../../modules/outliers/index.js';
 import { isStacked, isLegendSetType, VIS_TYPE_SCATTER, VIS_TYPE_GAUGE, VIS_TYPE_LINE } from '../../../../modules/visTypes.js';
 import { defaultMultiAxisTheme1 } from '../../../util/colors/themes.js';
 import addTrendLines, { isRegressionIneligible } from './addTrendLines.js';
-import getChart from './chart.js';
+import getChart from './chart/index.js';
+import getCustomSVGOptions from './customSVGOptions/index.js';
+import getExporting from './exporting.js';
 import getScatterData from './getScatterData.js';
 import getSortedConfig from './getSortedConfig.js';
 import getTrimmedConfig from './getTrimmedConfig.js';
+import getLang from './lang.js';
 import getLegend from './legend.js';
 import { applyLegendSet, getLegendSetTooltip } from './legendSet.js';
 import getNoData from './noData.js';
@@ -58,11 +61,11 @@ export default function (_ref) {
   }
   let config = {
     // type etc
-    chart: getChart(_layout, el, _extraOptions.dashboard),
+    chart: getChart(_layout, el, _extraOptions, series),
     // title
-    title: getTitle(_layout, store.data[0].metaData, _extraOptions.dashboard),
+    title: getTitle(_layout, store.data[0].metaData, _extraOptions, series),
     // subtitle
-    subtitle: getSubtitle(series, _layout, store.data[0].metaData, _extraOptions.dashboard),
+    subtitle: getSubtitle(series, _layout, store.data[0].metaData, _extraOptions),
     // x-axis
     xAxis: getXAxis(store, _layout, _extraOptions, series),
     // y-axis
@@ -87,20 +90,26 @@ export default function (_ref) {
     // pane
     pane: getPane(_layout.type),
     // no data + zoom
-    lang: {
-      noData: _extraOptions.noData.text,
-      resetZoom: _extraOptions.resetZoom.text
-    },
-    noData: getNoData(),
+    lang: getLang(_layout.type, _extraOptions),
+    noData: getNoData(_layout.type),
     // credits
     credits: {
       enabled: false
     },
     // exporting
-    exporting: {
-      // disable exporting context menu
-      enabled: false
-    }
+    exporting: getExporting(_layout.type),
+    /* The config object passed to the Highcharts Chart constructor
+     * can contain arbitrary properties, which are made accessible
+     * under the Chart instance's `userOptions` member. This means
+     * that in event callback functions the custom SVG options are
+     * accessible as `this.userOptions.customSVGOptions` */
+    customSVGOptions: getCustomSVGOptions({
+      extraConfig,
+      layout: _layout,
+      extraOptions: _extraOptions,
+      metaData: store.data[0].metaData,
+      series
+    })
   };
 
   // get plot options for scatter
@@ -176,5 +185,6 @@ export default function (_ref) {
 
   // force apply extra config
   Object.assign(config, extraConfig);
+  console.log(objectClean(config));
   return objectClean(config);
 }

@@ -71,7 +71,7 @@ var _default = _ref => {
         }
       } : {};
     default:
-      return {};
+      return null;
   }
 };
 exports.default = _default;
