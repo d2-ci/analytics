@@ -1,0 +1,12 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TRANSFER_SELECTED_WIDTH = exports.TRANSFER_OPTIONS_WIDTH = exports.TRANSFER_HEIGHT = void 0;
+const TRANSFER_OPTIONS_WIDTH = '420px';
+exports.TRANSFER_OPTIONS_WIDTH = TRANSFER_OPTIONS_WIDTH;
+const TRANSFER_SELECTED_WIDTH = '298px';
+exports.TRANSFER_SELECTED_WIDTH = TRANSFER_SELECTED_WIDTH;
+const TRANSFER_HEIGHT = '512px';
+exports.TRANSFER_HEIGHT = TRANSFER_HEIGHT;
