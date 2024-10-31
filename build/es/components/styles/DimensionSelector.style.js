@@ -1,0 +1,4 @@
+import { spacers, colors } from '@dhis2/ui';
+const _defaultExport = [`.filterContainer.jsx-336728173{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;margin-bottom:${spacers.dp12};margin-top:${spacers.dp8};}`, `.emptyList.jsx-336728173{text-align:center;font-size:14px;line-height:16px;margin:${spacers.dp24} 0 0;color:${colors.grey700};}`, ".rightHeader.jsx-336728173{font-size:14px;font-weight:400;}", `.leftHeader.jsx-336728173{padding:${spacers.dp12} ${spacers.dp4};}`, `.info-container.jsx-336728173{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;margin-bottom:${spacers.dp8};padding:${spacers.dp8};background-color:${colors.grey200};border-radius:3px;}`, `.info-text.jsx-336728173{padding-left:${spacers.dp8};color:${colors.grey900};font-size:12px;line-height:16px;}`, `.calculation-button.jsx-336728173{margin:${spacers.dp8} 0;}`];
+_defaultExport.__hash = "336728173";
+export default _defaultExport;
