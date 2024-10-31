@@ -1,0 +1,283 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DimensionItem matches the snapshot 1`] = `
+<Fragment>
+  <CssVariables
+    colors={true}
+    elevations={false}
+    layers={false}
+    spacers={false}
+    theme={false}
+  />
+  <li
+    className="item"
+    name="Period"
+    onClick={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOver={[Function]}
+    style={Object {}}
+  >
+    <div
+      className="label"
+      data-test="undefined-button-pe"
+      tabIndex={0}
+    >
+      <div
+        className="iconWrapper"
+      >
+        <SvgClock16
+          className="fixedDimensionIcon"
+        />
+      </div>
+      <div
+        className="labelWrapper"
+      >
+        <span
+          className="labelText"
+        >
+          <span
+            data-dimensionid="pe"
+          >
+            Period
+          </span>
+        </span>
+        <RecommendedIcon
+          dataTest="undefined-recommended-icon"
+          isRecommended={false}
+        />
+      </div>
+    </div>
+  </li>
+  <style />
+</Fragment>
+`;
+
+exports[`DimensionItem matches the snapshot with locked 1`] = `
+<Fragment>
+  <CssVariables
+    colors={true}
+    elevations={false}
+    layers={false}
+    spacers={false}
+    theme={false}
+  />
+  <li
+    className="item"
+    name="Period"
+    onClick={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOver={[Function]}
+    style={Object {}}
+  >
+    <div
+      className="label"
+      data-test="undefined-button-pe"
+      tabIndex={0}
+    >
+      <div
+        className="iconWrapper"
+      >
+        <SvgClock16
+          className="fixedDimensionIcon"
+        />
+      </div>
+      <div
+        className="labelWrapper"
+      >
+        <span
+          className="labelText"
+        >
+          <span
+            data-dimensionid="pe"
+          >
+            Period
+          </span>
+        </span>
+        <RecommendedIcon
+          dataTest="undefined-recommended-icon"
+          isRecommended={false}
+        />
+      </div>
+    </div>
+    <div
+      className="lockWrapper"
+    >
+      <svg
+        fill="none"
+        height="9"
+        width="7"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M3.5 1A1.5 1.5 0 0 0 2 2.5V3h3v-.5A1.5 1.5 0 0 0 3.5 1ZM1 2.5V3H0v6h7V3H6v-.5a2.5 2.5 0 0 0-5 0ZM1 8V4h5v4H1Zm3-1V5H3v2h1Z"
+          fill="none"
+          fillRule="evenodd"
+        />
+      </svg>
+    </div>
+    <style />
+  </li>
+  <style />
+</Fragment>
+`;
+
+exports[`DimensionItem matches the snapshot with onOptionsClick 1`] = `
+<Fragment>
+  <CssVariables
+    colors={true}
+    elevations={false}
+    layers={false}
+    spacers={false}
+    theme={false}
+  />
+  <li
+    className="item"
+    name="Period"
+    onClick={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOver={[Function]}
+    style={Object {}}
+  >
+    <div
+      className="label"
+      data-test="undefined-button-pe"
+      tabIndex={0}
+    >
+      <div
+        className="iconWrapper"
+      >
+        <SvgClock16
+          className="fixedDimensionIcon"
+        />
+      </div>
+      <div
+        className="labelWrapper"
+      >
+        <span
+          className="labelText"
+        >
+          <span
+            data-dimensionid="pe"
+          >
+            Period
+          </span>
+        </span>
+        <RecommendedIcon
+          dataTest="undefined-recommended-icon"
+          isRecommended={false}
+        />
+      </div>
+    </div>
+    <div
+      className="optionsWrapper"
+      data-test="undefined-menu-pe"
+    />
+  </li>
+  <style />
+</Fragment>
+`;
+
+exports[`DimensionItem matches the snapshot with recommended 1`] = `
+<Fragment>
+  <CssVariables
+    colors={true}
+    elevations={false}
+    layers={false}
+    spacers={false}
+    theme={false}
+  />
+  <li
+    className="item"
+    name="Period"
+    onClick={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOver={[Function]}
+    style={Object {}}
+  >
+    <div
+      className="label"
+      data-test="undefined-button-pe"
+      tabIndex={0}
+    >
+      <div
+        className="iconWrapper"
+      >
+        <SvgClock16
+          className="fixedDimensionIcon"
+        />
+      </div>
+      <div
+        className="labelWrapper"
+      >
+        <span
+          className="labelText"
+        >
+          <span
+            data-dimensionid="pe"
+          >
+            Period
+          </span>
+        </span>
+        <RecommendedIcon
+          dataTest="undefined-recommended-icon"
+          isRecommended={true}
+        />
+      </div>
+    </div>
+  </li>
+  <style />
+</Fragment>
+`;
+
+exports[`DimensionItem matches the snapshot with selected 1`] = `
+<Fragment>
+  <CssVariables
+    colors={true}
+    elevations={false}
+    layers={false}
+    spacers={false}
+    theme={false}
+  />
+  <li
+    className="item selected"
+    name="Period"
+    onClick={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOver={[Function]}
+    style={Object {}}
+  >
+    <div
+      className="label"
+      data-test="undefined-button-pe"
+      tabIndex={0}
+    >
+      <div
+        className="iconWrapper"
+      >
+        <SvgClock16
+          className="fixedDimensionIcon"
+        />
+      </div>
+      <div
+        className="labelWrapper"
+      >
+        <span
+          className="labelText"
+        >
+          <span
+            data-dimensionid="pe"
+          >
+            Period
+          </span>
+        </span>
+        <RecommendedIcon
+          dataTest="undefined-recommended-icon"
+          isRecommended={false}
+        />
+      </div>
+    </div>
+  </li>
+  <style />
+</Fragment>
+`;
