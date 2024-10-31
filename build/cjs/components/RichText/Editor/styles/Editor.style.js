@@ -1,0 +1,19 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.tooltipAnchorClasses = exports.toolbarClasses = exports.mainClasses = exports.emojisPopoverClasses = void 0;
+var _ui = require("@dhis2/ui");
+const mainClasses = [".container.jsx-185829738{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:100%;height:100%;}", `.preview.jsx-185829738{padding:${_ui.spacers.dp8} ${_ui.spacers.dp12};font-size:14px;line-height:${_ui.spacers.dp16};color:${_ui.colors.grey900};overflow-y:auto;-webkit-scroll-behavior:smooth;-moz-scroll-behavior:smooth;-ms-scroll-behavior:smooth;scroll-behavior:smooth;}`, ".edit.jsx-185829738{width:100%;height:100%;-webkit-scroll-behavior:smooth;-moz-scroll-behavior:smooth;-ms-scroll-behavior:smooth;scroll-behavior:smooth;}", `.textarea.jsx-185829738{width:100%;height:100%;box-sizing:border-box;padding:${_ui.spacers.dp8} 15px;color:${_ui.colors.grey900};background-color:${_ui.colors.white};border:1px solid ${_ui.colors.grey500};border-radius:3px;box-shadow:inset 0 0 0 1px rgba(102,113,123,0.15), inset 0 1px 2px 0 rgba(102,113,123,0.1);outline:0;font-size:14px;line-height:${_ui.spacers.dp16};-webkit-user-select:text;-moz-user-select:text;-ms-user-select:text;user-select:text;resize:none;}`, ".textarea.resizable.jsx-185829738{resize:vertical;}", `.textarea.jsx-185829738:focus{outline:none;box-shadow:0 0 0 3px ${_ui.theme.focus};width:calc(100% - 6px);height:calc(100% - 3px);padding:${_ui.spacers.dp8} ${_ui.spacers.dp12};margin-left:3px;}`, `.textarea.jsx-185829738:disabled{background-color:${_ui.colors.grey100};border-color:${_ui.colors.grey500};color:${_ui.theme.disabled};cursor:not-allowed;}`];
+exports.mainClasses = mainClasses;
+mainClasses.__hash = "185829738";
+const toolbarClasses = [`.toolbar.jsx-2267496677{background:${_ui.colors.grey050};border-radius:3px;border:1px solid ${_ui.colors.grey300};margin-bottom:${_ui.spacers.dp4};}`, `.actionsWrapper.jsx-2267496677{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:${_ui.spacers.dp4};-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;padding:${_ui.spacers.dp4};}`, `.mainActions.jsx-2267496677{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;gap:${_ui.spacers.dp4};margin-top:${_ui.spacers.dp2};}`, ".sideActions.jsx-2267496677{-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;}", `.previewWrapper.jsx-2267496677{margin:${_ui.spacers.dp4};text-align:right;}`];
+exports.toolbarClasses = toolbarClasses;
+toolbarClasses.__hash = "2267496677";
+const tooltipAnchorClasses = [".tooltip.jsx-2182400256{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}"];
+exports.tooltipAnchorClasses = tooltipAnchorClasses;
+tooltipAnchorClasses.__hash = "2182400256";
+const emojisPopoverClasses = [`.emojisList.jsx-2802175370{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;gap:${_ui.spacers.dp8};list-style-type:none;margin:0 ${_ui.spacers.dp4} 0 ${_ui.spacers.dp8};padding:0;}`, ".emojisList.jsx-2802175370 li.jsx-2802175370{cursor:pointer;}"];
+exports.emojisPopoverClasses = emojisPopoverClasses;
+emojisPopoverClasses.__hash = "2802175370";
