@@ -4,8 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.PivotTableEngine = void 0;
-var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _times = _interopRequireDefault(require("lodash/times"));
+var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _dataTypes = require("../dataTypes.js");
 var _predefinedDimensions = require("../predefinedDimensions.js");
 var _renderValue = require("../renderValue.js");
@@ -266,14 +266,14 @@ class PivotTableEngine {
       rawCell.renderedValue = renderedValue;
     }
     if ([_pivotTableConstants.CELL_TYPE_TOTAL, _pivotTableConstants.CELL_TYPE_SUBTOTAL].includes(rawCell.cellType) && rawCell.rawValue === _pivotTableConstants.AGGREGATE_TYPE_NA) {
-      rawCell.titleValue = _d2I18n.default.t('Not applicable');
+      rawCell.titleValue = _index.default.t('Not applicable');
     }
     if (this.options.cumulativeValues) {
       let titleValue;
       if (this.data[row] && this.data[row][column]) {
         const dataRow = this.data[row][column];
         const rawValue = cellType === _pivotTableConstants.CELL_TYPE_VALUE ? dataRow[this.dimensionLookup.dataHeaders.value] : dataRow.value;
-        titleValue = _d2I18n.default.t('Value: {{value}}', {
+        titleValue = _index.default.t('Value: {{value}}', {
           value: (0, _renderValue.renderValue)(rawValue, valueType, this.visualization),
           nsSeparator: '^^'
         });
@@ -352,19 +352,19 @@ class PivotTableEngine {
       return null;
     }
     if (rowLevel === lastRowLevel && this.dimensionLookup.rows[lastRowLevel] && columnLevel === lastColumnLevel && this.dimensionLookup.columns[lastColumnLevel]) {
-      return `${_d2I18n.default.t(this.dimensionLookup.rows[lastRowLevel].meta.name)} / ${_d2I18n.default.t(this.dimensionLookup.columns[lastColumnLevel].meta.name)}`;
+      return `${_index.default.t(this.dimensionLookup.rows[lastRowLevel].meta.name)} / ${_index.default.t(this.dimensionLookup.columns[lastColumnLevel].meta.name)}`;
     }
     if (lastRowLevel === -1) {
-      return _d2I18n.default.t(this.dimensionLookup.columns[columnLevel].meta.name);
+      return _index.default.t(this.dimensionLookup.columns[columnLevel].meta.name);
     }
     if (lastColumnLevel === -1) {
-      return _d2I18n.default.t(this.dimensionLookup.rows[rowLevel].meta.name);
+      return _index.default.t(this.dimensionLookup.rows[rowLevel].meta.name);
     }
     if (rowLevel === lastRowLevel && this.dimensionLookup.columns[columnLevel]) {
-      return _d2I18n.default.t(this.dimensionLookup.columns[columnLevel].meta.name);
+      return _index.default.t(this.dimensionLookup.columns[columnLevel].meta.name);
     }
     if (columnLevel === lastColumnLevel && this.dimensionLookup.rows[rowLevel]) {
-      return _d2I18n.default.t(this.dimensionLookup.rows[rowLevel].meta.name);
+      return _index.default.t(this.dimensionLookup.rows[rowLevel].meta.name);
     }
   }
   getCellDxDimension(_ref8) {

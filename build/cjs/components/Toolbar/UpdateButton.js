@@ -6,11 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.UpdateButton = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _loader = require("@dhis2-ui/loader");
-var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _uiConstants = require("@dhis2/ui-constants");
 var _uiIcons = require("@dhis2/ui-icons");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
+var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _MenuButtonStyles = _interopRequireDefault(require("./MenuButton.styles.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const UpdateButton = _ref => {
@@ -27,7 +27,7 @@ const UpdateButton = _ref => {
     className: `jsx-${_MenuButtonStyles.default.__hash}` + " " + _style.default.dynamic([["2364287882", [_uiConstants.colors.blue700, _uiConstants.colors.blue100, _uiConstants.colors.blue200]]])
   }, loading ? /*#__PURE__*/_react.default.createElement(_loader.CircularLoader, {
     extrasmall: true
-  }) : /*#__PURE__*/_react.default.createElement(_uiIcons.IconSync16, null), _d2I18n.default.t('Update'), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }) : /*#__PURE__*/_react.default.createElement(_uiIcons.IconSync16, null), _index.default.t('Update'), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _MenuButtonStyles.default.__hash
   }, _MenuButtonStyles.default), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: "2364287882",

@@ -5,13 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = exports.LAST_DROPZONE_ID = exports.FORMULA_BOX_ID = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
-var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _ui = require("@dhis2/ui");
 var _core = require("@dnd-kit/core");
 var _sortable = require("@dnd-kit/sortable");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _FormulaIcon = _interopRequireDefault(require("../../../assets/FormulaIcon.js"));
+var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _DropZone = _interopRequireDefault(require("./DropZone.js"));
 var _FormulaItem = _interopRequireDefault(require("./FormulaItem.js"));
 var _FormulaFieldStyle = _interopRequireDefault(require("./styles/FormulaField.style.js"));
@@ -25,7 +25,7 @@ const Placeholder = () => /*#__PURE__*/_react.default.createElement("div", {
   className: `jsx-${_FormulaFieldStyle.default.__hash}` + " " + "placeholder"
 }, /*#__PURE__*/_react.default.createElement(_FormulaIcon.default, null), /*#__PURE__*/_react.default.createElement("span", {
   className: `jsx-${_FormulaFieldStyle.default.__hash}` + " " + "help-text"
-}, _d2I18n.default.t('Drag items here, or double click in the list, to start building a calculation formula')), /*#__PURE__*/_react.default.createElement(_style.default, {
+}, _index.default.t('Drag items here, or double click in the list, to start building a calculation formula')), /*#__PURE__*/_react.default.createElement(_style.default, {
   id: _FormulaFieldStyle.default.__hash
 }, _FormulaFieldStyle.default));
 const FormulaField = _ref => {
