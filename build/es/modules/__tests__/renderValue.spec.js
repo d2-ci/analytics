@@ -8,19 +8,19 @@ const tests = [
 // Numbers
 {
   value: 1000.5,
-  expected: '1 000.5',
+  expected: '1 000.50',
   valueType: VALUE_TYPE_NUMBER,
   round: true,
   dgs: DGS_SPACE
 }, {
-  value: 33777889.55,
-  expected: '33,777,889.5',
+  value: 33777889.555,
+  expected: '33,777,889.55',
   valueType: VALUE_TYPE_NUMBER,
   round: true,
   dgs: DGS_COMMA
 }, {
   value: 33777889.556,
-  expected: '33 777 889.6',
+  expected: '33 777 889.56',
   valueType: VALUE_TYPE_NUMBER,
   round: true,
   dgs: DGS_SPACE
@@ -33,7 +33,7 @@ const tests = [
   dgs: DGS_SPACE
 }, {
   value: 33777889.56,
-  expected: '33777889.6',
+  expected: '33777889.56',
   valueType: VALUE_TYPE_NUMBER,
   round: true,
   dgs: DGS_NONE
@@ -51,7 +51,7 @@ const tests = [
   dgs: DGS_SPACE
 }, {
   value: 1.101,
-  expected: '1.1',
+  expected: '1.10',
   valueType: VALUE_TYPE_NUMBER,
   round: true,
   dgs: DGS_SPACE
@@ -105,15 +105,15 @@ const tests = [
   round: false,
   dgs: DGS_SPACE
 }, {
-  value: -0.0234,
-  expected: '-2.3%',
+  value: -0.02345,
+  expected: '-2.34%',
   valueType: VALUE_TYPE_NUMBER,
   numberType: NUMBER_TYPE_ROW_PERCENTAGE,
   round: true,
   dgs: DGS_SPACE
 }, {
-  value: -0.0234,
-  expected: '-2.34%',
+  value: -0.02345,
+  expected: '-2.345%',
   valueType: VALUE_TYPE_NUMBER,
   numberType: NUMBER_TYPE_ROW_PERCENTAGE,
   round: false,

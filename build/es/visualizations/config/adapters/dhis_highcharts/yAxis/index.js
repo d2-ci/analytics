@@ -2,7 +2,7 @@ import arrayClean from 'd2-utilizr/lib/arrayClean';
 import objectClean from 'd2-utilizr/lib/objectClean';
 import i18n from '../../../../../locales/index.js';
 import { FONT_STYLE_VERTICAL_AXIS_TITLE, mergeFontStyleWithDefault, TEXT_ALIGN_RIGHT } from '../../../../../modules/fontStyle.js';
-import { isDualAxisType, isStacked, VIS_TYPE_GAUGE, VIS_TYPE_SCATTER } from '../../../../../modules/visTypes.js';
+import { isDualAxisType, isStacked, VIS_TYPE_GAUGE, VIS_TYPE_SCATTER, VIS_TYPE_SINGLE_VALUE } from '../../../../../modules/visTypes.js';
 import { getAxis } from '../../../../util/axes.js';
 import { getAxisStringFromId } from '../../../../util/axisId.js';
 import { getGridLineColor, getLabels, getMaxValue, getMinValue, getRegressionLine } from '../axis.js';
@@ -100,13 +100,12 @@ function getDefault(layout, series, extraOptions) {
   return axes;
 }
 export default function (layout, series, extraOptions) {
-  let yAxis;
   switch (layout.type) {
+    case VIS_TYPE_SINGLE_VALUE:
+      return null;
     case VIS_TYPE_GAUGE:
-      yAxis = getGauge(layout, series, extraOptions.legendSets[0]);
-      break;
+      return getGauge(layout, series, extraOptions.legendSets[0]);
     default:
-      yAxis = getDefault(layout, series, extraOptions);
+      return getDefault(layout, series, extraOptions);
   }
-  return yAxis;
 }
