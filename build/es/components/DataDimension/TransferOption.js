@@ -50,7 +50,7 @@ export const TransferOption = _ref => {
       inactive: active !== undefined && !active
     }) || "")
   }, /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + "group"
+    className: `jsx-${styles.__hash}` + " " + "labelGroup"
   }, /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "icon"
   }, icon), /*#__PURE__*/React.createElement("span", {
@@ -63,7 +63,7 @@ export const TransferOption = _ref => {
     "data-test": `${dataTest}-edit-button`,
     className: `jsx-${styles.__hash}` + " " + "edit"
   }, /*#__PURE__*/React.createElement(IconEdit16, null))), /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + (cx('group', 'nowrap') || "")
+    className: `jsx-${styles.__hash}` + " " + (cx('group', 'nowrap', 'typeGroup') || "")
   }, /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "type"
   }, dimensionType), /*#__PURE__*/React.createElement("span", {

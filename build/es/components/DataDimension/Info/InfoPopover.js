@@ -36,7 +36,9 @@ export const InfoPopover = _ref => {
     placement: "bottom-end",
     reference: reference,
     onClickOutside: onClose,
-    maxWidth: 480
+    maxWidth: 480,
+    arrow: false,
+    elevation: "rgba(0, 0, 0, 0.1) 0px 1px 5px, rgba(0, 0, 0, 0.07) 0px 3.6px 13px, rgba(0, 0, 0, 0.06) 0px 8.4px 23px, rgba(0, 0, 0, 0.05) 0px 23px 35px"
   }, /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "popover"
   }, type === DIMENSION_TYPE_DATA_ELEMENT && /*#__PURE__*/React.createElement(DataElementInfo, infoProps), type === DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM && /*#__PURE__*/React.createElement(CalculationInfo, infoProps), type === REPORTING_RATE /* TODO: verify this! */ && /*#__PURE__*/React.createElement(DataSetInfo, infoProps), type === DIMENSION_TYPE_INDICATOR && /*#__PURE__*/React.createElement(IndicatorInfo, infoProps), [DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT].includes(type) && /*#__PURE__*/React.createElement(EventDataItemInfo, infoProps), type === DIMENSION_TYPE_PROGRAM_INDICATOR && /*#__PURE__*/React.createElement(ProgramIndicatorInfo, infoProps))), /*#__PURE__*/React.createElement(_JSXStyle, {

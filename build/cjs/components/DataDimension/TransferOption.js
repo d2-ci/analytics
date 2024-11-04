@@ -57,7 +57,7 @@ const TransferOption = _ref => {
       inactive: active !== undefined && !active
     }) || "")
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "group"
+    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "labelGroup"
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "icon"
   }, icon), /*#__PURE__*/_react.default.createElement("span", {
@@ -70,7 +70,7 @@ const TransferOption = _ref => {
     "data-test": `${dataTest}-edit-button`,
     className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "edit"
   }, /*#__PURE__*/_react.default.createElement(_ui.IconEdit16, null))), /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + ((0, _classnames.default)('group', 'nowrap') || "")
+    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + ((0, _classnames.default)('group', 'nowrap', 'typeGroup') || "")
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "type"
   }, dimensionType), /*#__PURE__*/_react.default.createElement("span", {
