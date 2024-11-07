@@ -2,8 +2,8 @@ import { DataProvider } from '@dhis2/app-runtime';
 import React, { useState } from 'react';
 import OrgUnitDimension from '../components/OrgUnitDimension/OrgUnitDimension.js';
 const Wrapper = story => /*#__PURE__*/React.createElement(DataProvider, {
-  baseUrl: "https://debug.dhis2.org/analytics-dev/",
-  apiVersion: ""
+  baseUrl: "https://test.e2e.dhis2.org/analytics-41dev/",
+  apiVersion: "41"
 }, story());
 const defaultRootOrgUnits = ['ImspTQPwCqd']; // Sierra Leone
 

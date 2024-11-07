@@ -4,16 +4,27 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = exports.WeeklyExcluded = exports.UsingRightFooter = exports.OneSelected = exports.NoneSelected = exports.MonthlyExcluded = exports.AllBelowQuarterlyExcluded = void 0;
+var _appRuntime = require("@dhis2/app-runtime");
+var _appServiceConfig = require("@dhis2/app-service-config");
 var _react = _interopRequireDefault(require("react"));
 var _PeriodDimension = _interopRequireDefault(require("../components/PeriodDimension/PeriodDimension.js"));
 var _index = require("../components/PeriodDimension/utils/index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const Wrapper = story => /*#__PURE__*/_react.default.createElement(_appServiceConfig.ConfigProvider, {
+  config: {
+    systemInfo: {}
+  }
+}, /*#__PURE__*/_react.default.createElement(_appRuntime.DataProvider, {
+  baseUrl: "https://test.e2e.dhis2.org/analytics-41dev/",
+  apiVersion: "41"
+}, story()));
 const selectedPeriods = [{
   id: 'LAST_12_MONTHS',
   name: 'Last 12 months'
 }];
 var _default = exports.default = {
-  title: 'PeriodDimension'
+  title: 'PeriodDimension',
+  decorators: [Wrapper]
 };
 const NoneSelected = () => {
   return /*#__PURE__*/_react.default.createElement(_PeriodDimension.default, {

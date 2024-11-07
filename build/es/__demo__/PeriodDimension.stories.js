@@ -1,12 +1,23 @@
+import { DataProvider } from '@dhis2/app-runtime';
+import { ConfigProvider } from '@dhis2/app-service-config';
 import React from 'react';
 import PeriodDimension from '../components/PeriodDimension/PeriodDimension.js';
 import { MONTHLY, WEEKLY, WEEKLYWED, WEEKLYTHU, WEEKLYSAT, WEEKLYSUN, DAILY, BIWEEKLY, BIMONTHLY } from '../components/PeriodDimension/utils/index.js';
+const Wrapper = story => /*#__PURE__*/React.createElement(ConfigProvider, {
+  config: {
+    systemInfo: {}
+  }
+}, /*#__PURE__*/React.createElement(DataProvider, {
+  baseUrl: "https://test.e2e.dhis2.org/analytics-41dev/",
+  apiVersion: "41"
+}, story()));
 const selectedPeriods = [{
   id: 'LAST_12_MONTHS',
   name: 'Last 12 months'
 }];
 export default {
-  title: 'PeriodDimension'
+  title: 'PeriodDimension',
+  decorators: [Wrapper]
 };
 export const NoneSelected = () => {
   return /*#__PURE__*/React.createElement(PeriodDimension, {
