@@ -13,7 +13,7 @@ var _react = _interopRequireDefault(require("react"));
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const getCommonFields = displayNameProp => `id,code,created,lastUpdated,createdBy,${displayNameProp}~rename(displayName),displayDescription`;
+const getCommonFields = displayNameProp => `attributeValues[id,displayName],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
 exports.getCommonFields = getCommonFields;
 const InfoTable = _ref => {
   let {
@@ -39,7 +39,13 @@ const InfoTable = _ref => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Name')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.displayName)), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data.displayName)), children, /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Description')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.displayDescription || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
@@ -49,21 +55,55 @@ const InfoTable = _ref => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Description')), /*#__PURE__*/_react.default.createElement("td", {
+  }, _index.default.t('ID')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.displayDescription)), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data.id)), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Last updated date')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, `${(0, _moment.default)(fromServerDate(data.lastUpdated)).fromNow()} (${(0, _moment.default)(fromServerDate(data.lastUpdated)).format('YYYY-MM-DD')})`)), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Created date')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, `${(0, _moment.default)(fromServerDate(data.created)).fromNow()} (${(0, _moment.default)(fromServerDate(data.created)).format('YYYY-MM-DD')})`)), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Created by')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.createdBy.displayName)), /*#__PURE__*/_react.default.createElement("tr", {
+  }, `${data.createdBy.displayName}, ${data.createdBy.username}`)), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Last updated')), /*#__PURE__*/_react.default.createElement("td", {
+  }, _index.default.t('API link')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, `${(0, _moment.default)(fromServerDate(data.lastUpdated)).fromNow()} (${(0, _moment.default)(fromServerDate(data.lastUpdated)).format('YYYY-MM-DD')})`)), children))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, /*#__PURE__*/_react.default.createElement("a", {
+    href: data.href,
+    target: "_blank",
+    rel: "noreferrer",
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Open in API')))), Boolean(data.attributeValues.length) && /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Custom attributes')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("ul", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.attributeValues.map(_ref2 => {
+    let {
+      id,
+      displayName
+    } = _ref2;
+    return /*#__PURE__*/_react.default.createElement("li", {
+      key: id,
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, displayName);
+  }))))))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };

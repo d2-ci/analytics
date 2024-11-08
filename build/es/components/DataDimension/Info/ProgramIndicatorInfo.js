@@ -1,7 +1,8 @@
 import _JSXStyle from "styled-jsx/style";
-import { useDataQuery } from '@dhis2/app-runtime';
+import { useDataMutation, useDataEngine } from '@dhis2/app-runtime';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { validateExpressionMutation } from '../../../api/expression.js';
 import i18n from '../../../locales/index.js';
 import { getCommonFields, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
@@ -19,7 +20,7 @@ const programIndicatorQuery = {
         displayNameProp
       } = _ref2;
       return {
-        fields: `${getCommonFields(displayNameProp)},expression,filter`
+        fields: `${getCommonFields(displayNameProp)},aggregationType,analyticsPeriodBoundaries[analyticsPeriodBoundaryType,boundaryTarget,id,offsetPeriodType,offsetPeriods],analyticsType,decimals,expression,filter,legendSets[id,displayName],program[displayName]`
       };
     }
   }
@@ -29,16 +30,47 @@ export const ProgramIndicatorInfo = _ref3 => {
     id,
     displayNameProp
   } = _ref3;
-  const {
-    loading,
-    error,
-    data
-  } = useDataQuery(programIndicatorQuery, {
-    variables: {
-      id,
-      displayNameProp
-    }
+  const [data, setData] = useState();
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState(true);
+  const engine = useDataEngine();
+  const [getHumanReadableExpression] = useDataMutation(validateExpressionMutation, {
+    onError: setError
   });
+  const fetchData = useCallback(async () => {
+    const {
+      programIndicator
+    } = await engine.query(programIndicatorQuery, {
+      variables: {
+        id,
+        displayNameProp
+      },
+      onError: setError
+    });
+    if (programIndicator.expression) {
+      const result = await getHumanReadableExpression({
+        expression: programIndicator.expression
+      });
+      if (result !== null && result !== void 0 && result.description) {
+        programIndicator.humanReadableExpression = result.description;
+      }
+    }
+    if (programIndicator.filter) {
+      const result = await getHumanReadableExpression({
+        expression: programIndicator.filter
+      });
+      if (result !== null && result !== void 0 && result.description) {
+        programIndicator.humanReadableFilter = result.description;
+      }
+    }
+    setData({
+      programIndicator
+    });
+    setLoading(false);
+  }, [displayNameProp, engine, id, getHumanReadableExpression]);
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InfoTable, {
     data: data === null || data === void 0 ? void 0 : data.programIndicator,
     loading: loading,
@@ -47,9 +79,82 @@ export const ProgramIndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
-  }, i18n.t('Expression')), /*#__PURE__*/React.createElement("td", {
-    className: `jsx-${styles.__hash}` + " " + "code"
-  }, data === null || data === void 0 ? void 0 : data.programIndicator.expression))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, i18n.t('Program')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, data === null || data === void 0 ? void 0 : data.programIndicator.program.displayName)), /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Analytics type')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, (data === null || data === void 0 ? void 0 : data.programIndicator.analyticsType) === 'ENROLLMENT' ? i18n.t('Enrollment') : i18n.t('Event'))), /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Analytics period boundaries')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("ul", {
+    className: `jsx-${styles.__hash}`
+  }, data === null || data === void 0 ? void 0 : data.programIndicator.analyticsPeriodBoundaries.map(_ref4 => {
+    let {
+      analyticsPeriodBoundaryType,
+      boundaryTarget,
+      id,
+      offsetPeriodType,
+      offsetPeriods
+    } = _ref4;
+    return /*#__PURE__*/React.createElement("li", {
+      key: id,
+      className: `jsx-${styles.__hash}`
+    }, /*#__PURE__*/React.createElement("span", {
+      className: `jsx-${styles.__hash}`
+    }, `${i18n.t('Type')}: ${analyticsPeriodBoundaryType}`), /*#__PURE__*/React.createElement("span", {
+      className: `jsx-${styles.__hash}`
+    }, `${i18n.t('Target')}: ${boundaryTarget}`), offsetPeriods && offsetPeriodType && /*#__PURE__*/React.createElement("span", {
+      className: `jsx-${styles.__hash}`
+    }, `${i18n.t('Offset')}: ${offsetPeriodType} x ${offsetPeriods}`));
+  })))), /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Expression in human readable format')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, (data === null || data === void 0 ? void 0 : data.programIndicator.humanReadableExpression) || i18n.t('None'))), /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Filter expression in human readable format')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, (data === null || data === void 0 ? void 0 : data.programIndicator.humanReadableFilter) || i18n.t('None'))), /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Aggregation type')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, data === null || data === void 0 ? void 0 : data.programIndicator.aggregationType)), (data === null || data === void 0 ? void 0 : data.programIndicator.decimals) && /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Decimals in output')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, data.programIndicator.decimals)), Boolean(data === null || data === void 0 ? void 0 : data.programIndicator.legendSets.length) && /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Legend set(s)')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, data.programIndicator.legendSets.length === 1 ? data.programIndicator.legendSets[0].displayName : /*#__PURE__*/React.createElement("ul", {
+    className: `jsx-${styles.__hash}`
+  }, data.programIndicator.legendSets.map(_ref5 => {
+    let {
+      id,
+      displayName
+    } = _ref5;
+    return /*#__PURE__*/React.createElement("li", {
+      key: id,
+      className: `jsx-${styles.__hash}`
+    }, displayName);
+  }))))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

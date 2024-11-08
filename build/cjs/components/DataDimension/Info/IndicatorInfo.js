@@ -7,10 +7,13 @@ exports.IndicatorInfo = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _appRuntime = require("@dhis2/app-runtime");
 var _propTypes = _interopRequireDefault(require("prop-types"));
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
+var _expression = require("../../../api/expression.js");
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _InfoTable = require("./InfoTable.js");
 var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const indicatorQuery = {
   indicator: {
@@ -26,7 +29,7 @@ const indicatorQuery = {
         displayNameProp
       } = _ref2;
       return {
-        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},indicatorType[displayName],annualized,numerator,displayNumeratorDescription,denominator,displayDenominatorDescription`
+        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},annualized,dataSets[id,displayName],decimals,denominator,displayDenominatorDescription,displayNumeratorDescription,indicatorGroups[id,displayName],indicatorType[displayName,factor],legendSets[id,displayName],numerator`
       };
     }
   }
@@ -36,16 +39,47 @@ const IndicatorInfo = _ref3 => {
     id,
     displayNameProp
   } = _ref3;
-  const {
-    loading,
-    error,
-    data
-  } = (0, _appRuntime.useDataQuery)(indicatorQuery, {
-    variables: {
-      id,
-      displayNameProp
-    }
+  const [data, setData] = (0, _react.useState)();
+  const [error, setError] = (0, _react.useState)();
+  const [loading, setLoading] = (0, _react.useState)(true);
+  const engine = (0, _appRuntime.useDataEngine)();
+  const [getHumanReadableExpression] = (0, _appRuntime.useDataMutation)(_expression.validateExpressionMutation, {
+    onError: setError
   });
+  const fetchData = (0, _react.useCallback)(async () => {
+    const {
+      indicator
+    } = await engine.query(indicatorQuery, {
+      variables: {
+        id,
+        displayNameProp
+      },
+      onError: setError
+    });
+    if (indicator.denominator) {
+      const result = await getHumanReadableExpression({
+        expression: indicator.denominator
+      });
+      if (result !== null && result !== void 0 && result.description) {
+        indicator.humanReadableDenominatorExpression = result.description;
+      }
+    }
+    if (indicator.numerator) {
+      const result = await getHumanReadableExpression({
+        expression: indicator.numerator
+      });
+      if (result !== null && result !== void 0 && result.description) {
+        indicator.humanReadableNumeratorExpression = result.description;
+      }
+    }
+    setData({
+      indicator
+    });
+    setLoading(false);
+  }, [displayNameProp, engine, getHumanReadableExpression, id]);
+  (0, _react.useEffect)(() => {
+    fetchData();
+  }, [fetchData]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InfoTable.InfoTable, {
     data: data === null || data === void 0 ? void 0 : data.indicator,
     loading: loading,
@@ -54,27 +88,96 @@ const IndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Indicator type')), /*#__PURE__*/_react.default.createElement("td", {
+  }, _index.default.t('Numerator description')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.indicator.type)), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data === null || data === void 0 ? void 0 : data.indicator.displayNumeratorDescription)), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Numerator expression in human readable format')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, (data === null || data === void 0 ? void 0 : data.indicator.humanReadableNumeratorExpression) || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Denominator description')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data === null || data === void 0 ? void 0 : data.indicator.displayDenominatorDescription)), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Denominator expression in human readable format')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, (data === null || data === void 0 ? void 0 : data.indicator.humanReadableDenominatorExpression) || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Annualized')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data !== null && data !== void 0 && data.indicator.annualized ? _index.default.t('True') : _index.default.t('False'))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data !== null && data !== void 0 && data.indicator.annualized ? _index.default.t('Yes') : _index.default.t('No'))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Numerator')), /*#__PURE__*/_react.default.createElement("td", {
+  }, _index.default.t('Indicator type')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.indicator.numerator, ": $", data === null || data === void 0 ? void 0 : data.indicator.displayNumerator)), /*#__PURE__*/_react.default.createElement("tr", {
+  }, `${data === null || data === void 0 ? void 0 : data.indicator.displayName}, ${data === null || data === void 0 ? void 0 : data.indicator.factor}`)), (data === null || data === void 0 ? void 0 : data.indicator.decimals) && /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Denominator')), /*#__PURE__*/_react.default.createElement("td", {
+  }, _index.default.t('Decimals in output')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.indicator.denominator, ": $", data === null || data === void 0 ? void 0 : data.indicator.displayDenominator))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, data.indicator.decimals)), Boolean(data === null || data === void 0 ? void 0 : data.indicator.dataSets.length) && /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Data set(s)')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.indicator.dataSets.length === 1 ? data.indicator.dataSets[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.indicator.dataSets.map(_ref4 => {
+    let {
+      id,
+      displayName
+    } = _ref4;
+    return /*#__PURE__*/_react.default.createElement("li", {
+      key: id,
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, displayName);
+  })))), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Group membership')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, (data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups.length) === 1 ? data.indicator.indicatorGroups[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups.map(_ref5 => {
+    let {
+      id,
+      displayName
+    } = _ref5;
+    return /*#__PURE__*/_react.default.createElement("li", {
+      key: id,
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, displayName);
+  })))), Boolean(data === null || data === void 0 ? void 0 : data.indicator.legendSets.length) && /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Legend set(s)')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.indicator.legendSets.length === 1 ? data.indicator.legendSets[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.indicator.legendSets.map(_ref6 => {
+    let {
+      id,
+      displayName
+    } = _ref6;
+    return /*#__PURE__*/_react.default.createElement("li", {
+      key: id,
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, displayName);
+  }))))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };

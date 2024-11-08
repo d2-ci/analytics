@@ -7,10 +7,13 @@ exports.ProgramIndicatorInfo = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _appRuntime = require("@dhis2/app-runtime");
 var _propTypes = _interopRequireDefault(require("prop-types"));
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
+var _expression = require("../../../api/expression.js");
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _InfoTable = require("./InfoTable.js");
 var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const programIndicatorQuery = {
   programIndicator: {
@@ -26,7 +29,7 @@ const programIndicatorQuery = {
         displayNameProp
       } = _ref2;
       return {
-        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},expression,filter`
+        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},aggregationType,analyticsPeriodBoundaries[analyticsPeriodBoundaryType,boundaryTarget,id,offsetPeriodType,offsetPeriods],analyticsType,decimals,expression,filter,legendSets[id,displayName],program[displayName]`
       };
     }
   }
@@ -36,16 +39,47 @@ const ProgramIndicatorInfo = _ref3 => {
     id,
     displayNameProp
   } = _ref3;
-  const {
-    loading,
-    error,
-    data
-  } = (0, _appRuntime.useDataQuery)(programIndicatorQuery, {
-    variables: {
-      id,
-      displayNameProp
-    }
+  const [data, setData] = (0, _react.useState)();
+  const [error, setError] = (0, _react.useState)();
+  const [loading, setLoading] = (0, _react.useState)(true);
+  const engine = (0, _appRuntime.useDataEngine)();
+  const [getHumanReadableExpression] = (0, _appRuntime.useDataMutation)(_expression.validateExpressionMutation, {
+    onError: setError
   });
+  const fetchData = (0, _react.useCallback)(async () => {
+    const {
+      programIndicator
+    } = await engine.query(programIndicatorQuery, {
+      variables: {
+        id,
+        displayNameProp
+      },
+      onError: setError
+    });
+    if (programIndicator.expression) {
+      const result = await getHumanReadableExpression({
+        expression: programIndicator.expression
+      });
+      if (result !== null && result !== void 0 && result.description) {
+        programIndicator.humanReadableExpression = result.description;
+      }
+    }
+    if (programIndicator.filter) {
+      const result = await getHumanReadableExpression({
+        expression: programIndicator.filter
+      });
+      if (result !== null && result !== void 0 && result.description) {
+        programIndicator.humanReadableFilter = result.description;
+      }
+    }
+    setData({
+      programIndicator
+    });
+    setLoading(false);
+  }, [displayNameProp, engine, id, getHumanReadableExpression]);
+  (0, _react.useEffect)(() => {
+    fetchData();
+  }, [fetchData]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InfoTable.InfoTable, {
     data: data === null || data === void 0 ? void 0 : data.programIndicator,
     loading: loading,
@@ -54,9 +88,82 @@ const ProgramIndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Expression')), /*#__PURE__*/_react.default.createElement("td", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
-  }, data === null || data === void 0 ? void 0 : data.programIndicator.expression))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, _index.default.t('Program')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data === null || data === void 0 ? void 0 : data.programIndicator.program.displayName)), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Analytics type')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, (data === null || data === void 0 ? void 0 : data.programIndicator.analyticsType) === 'ENROLLMENT' ? _index.default.t('Enrollment') : _index.default.t('Event'))), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Analytics period boundaries')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("ul", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data === null || data === void 0 ? void 0 : data.programIndicator.analyticsPeriodBoundaries.map(_ref4 => {
+    let {
+      analyticsPeriodBoundaryType,
+      boundaryTarget,
+      id,
+      offsetPeriodType,
+      offsetPeriods
+    } = _ref4;
+    return /*#__PURE__*/_react.default.createElement("li", {
+      key: id,
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, /*#__PURE__*/_react.default.createElement("span", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, `${_index.default.t('Type')}: ${analyticsPeriodBoundaryType}`), /*#__PURE__*/_react.default.createElement("span", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, `${_index.default.t('Target')}: ${boundaryTarget}`), offsetPeriods && offsetPeriodType && /*#__PURE__*/_react.default.createElement("span", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, `${_index.default.t('Offset')}: ${offsetPeriodType} x ${offsetPeriods}`));
+  })))), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Expression in human readable format')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, (data === null || data === void 0 ? void 0 : data.programIndicator.humanReadableExpression) || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Filter expression in human readable format')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, (data === null || data === void 0 ? void 0 : data.programIndicator.humanReadableFilter) || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Aggregation type')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data === null || data === void 0 ? void 0 : data.programIndicator.aggregationType)), (data === null || data === void 0 ? void 0 : data.programIndicator.decimals) && /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Decimals in output')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.programIndicator.decimals)), Boolean(data === null || data === void 0 ? void 0 : data.programIndicator.legendSets.length) && /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Legend set(s)')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.programIndicator.legendSets.length === 1 ? data.programIndicator.legendSets[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.programIndicator.legendSets.map(_ref5 => {
+    let {
+      id,
+      displayName
+    } = _ref5;
+    return /*#__PURE__*/_react.default.createElement("li", {
+      key: id,
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, displayName);
+  }))))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };

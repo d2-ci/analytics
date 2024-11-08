@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import i18n from '../../../locales/index.js';
 import styles from './styles/InfoPopover.style.js';
-export const getCommonFields = displayNameProp => `id,code,created,lastUpdated,createdBy,${displayNameProp}~rename(displayName),displayDescription`;
+export const getCommonFields = displayNameProp => `attributeValues[id,displayName],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
 export const InfoTable = _ref => {
   let {
     data,
@@ -31,7 +31,13 @@ export const InfoTable = _ref => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Name')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.displayName)), /*#__PURE__*/React.createElement("tr", {
+  }, data.displayName)), children, /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Description')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, data.displayDescription || i18n.t('None'))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
@@ -41,21 +47,55 @@ export const InfoTable = _ref => {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
-  }, i18n.t('Description')), /*#__PURE__*/React.createElement("td", {
+  }, i18n.t('ID')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.displayDescription)), /*#__PURE__*/React.createElement("tr", {
+  }, data.id)), /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Last updated date')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, `${moment(fromServerDate(data.lastUpdated)).fromNow()} (${moment(fromServerDate(data.lastUpdated)).format('YYYY-MM-DD')})`)), /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Created date')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, `${moment(fromServerDate(data.created)).fromNow()} (${moment(fromServerDate(data.created)).format('YYYY-MM-DD')})`)), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Created by')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.createdBy.displayName)), /*#__PURE__*/React.createElement("tr", {
+  }, `${data.createdBy.displayName}, ${data.createdBy.username}`)), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
-  }, i18n.t('Last updated')), /*#__PURE__*/React.createElement("td", {
+  }, i18n.t('API link')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, `${moment(fromServerDate(data.lastUpdated)).fromNow()} (${moment(fromServerDate(data.lastUpdated)).format('YYYY-MM-DD')})`)), children))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, /*#__PURE__*/React.createElement("a", {
+    href: data.href,
+    target: "_blank",
+    rel: "noreferrer",
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Open in API')))), Boolean(data.attributeValues.length) && /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Custom attributes')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("ul", {
+    className: `jsx-${styles.__hash}`
+  }, data.attributeValues.map(_ref2 => {
+    let {
+      id,
+      displayName
+    } = _ref2;
+    return /*#__PURE__*/React.createElement("li", {
+      key: id,
+      className: `jsx-${styles.__hash}`
+    }, displayName);
+  }))))))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

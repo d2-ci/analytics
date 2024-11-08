@@ -7,10 +7,13 @@ exports.CalculationInfo = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _appRuntime = require("@dhis2/app-runtime");
 var _propTypes = _interopRequireDefault(require("prop-types"));
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
+var _expression = require("../../../api/expression.js");
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _InfoTable = require("./InfoTable.js");
 var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const calculationQuery = {
   calculation: {
@@ -36,16 +39,39 @@ const CalculationInfo = _ref3 => {
     id,
     displayNameProp
   } = _ref3;
-  const {
-    loading,
-    error,
-    data
-  } = (0, _appRuntime.useDataQuery)(calculationQuery, {
-    variables: {
-      id,
-      displayNameProp
-    }
+  const [data, setData] = (0, _react.useState)();
+  const [error, setError] = (0, _react.useState)();
+  const [loading, setLoading] = (0, _react.useState)(true);
+  const engine = (0, _appRuntime.useDataEngine)();
+  const [getHumanReadableExpression] = (0, _appRuntime.useDataMutation)(_expression.validateExpressionMutation, {
+    onError: setError
   });
+  const fetchData = (0, _react.useCallback)(async () => {
+    const {
+      calculation
+    } = await engine.query(calculationQuery, {
+      variables: {
+        id,
+        displayNameProp
+      },
+      onError: setError
+    });
+    if (calculation.expression) {
+      const result = await getHumanReadableExpression({
+        expression: calculation.expression
+      });
+      if (result !== null && result !== void 0 && result.description) {
+        calculation.humanReadableExpression = result.description;
+      }
+    }
+    setData({
+      calculation
+    });
+    setLoading(false);
+  }, [displayNameProp, engine, getHumanReadableExpression, id]);
+  (0, _react.useEffect)(() => {
+    fetchData();
+  }, [fetchData]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InfoTable.InfoTable, {
     data: data === null || data === void 0 ? void 0 : data.calculation,
     loading: loading,
@@ -54,9 +80,9 @@ const CalculationInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Expression')), /*#__PURE__*/_react.default.createElement("td", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
-  }, data === null || data === void 0 ? void 0 : data.calculation.expression))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, _index.default.t('Expression description in human readable format')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, (data === null || data === void 0 ? void 0 : data.calculation.humanReadableExpression) || _index.default.t('None')))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };

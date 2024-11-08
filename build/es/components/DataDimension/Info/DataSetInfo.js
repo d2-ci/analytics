@@ -19,7 +19,7 @@ const dataSetQuery = {
         displayNameProp
       } = _ref2;
       return {
-        fields: `${getCommonFields(displayNameProp)},periodType,dataSetElements[dataElement[id,displayName]]`
+        fields: `${getCommonFields(displayNameProp)},dataSetElements[dataElement[id,displayName]],expiryDays,indicators[id,displayName],periodType,`
       };
     }
   }
@@ -53,9 +53,9 @@ export const DataSetInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
-  }, i18n.t('Data set elements')), /*#__PURE__*/React.createElement("td", {
+  }, i18n.t('Data elements')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, /*#__PURE__*/React.createElement("ul", {
+  }, (data === null || data === void 0 ? void 0 : data.dataSet.dataElements.length) === 1 ? data.dataSet.dataElements[0].displayName : /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
   }, data === null || data === void 0 ? void 0 : data.dataSet.dataSetElements.map(_ref4 => {
     let {
@@ -65,7 +65,30 @@ export const DataSetInfo = _ref3 => {
       key: dataElement.id,
       className: `jsx-${styles.__hash}`
     }, dataElement.displayName);
-  }))))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  })))), /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Indicators')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, (data === null || data === void 0 ? void 0 : data.dataSet.indicators.length) === 1 ? data.dataSet.indicators[0].displayName : /*#__PURE__*/React.createElement("ul", {
+    className: `jsx-${styles.__hash}`
+  }, data === null || data === void 0 ? void 0 : data.dataSet.indicators.map(_ref5 => {
+    let {
+      id,
+      displayName
+    } = _ref5;
+    return /*#__PURE__*/React.createElement("li", {
+      key: id,
+      className: `jsx-${styles.__hash}`
+    }, displayName);
+  })))), /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Expiry days')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, data === null || data === void 0 ? void 0 : data.dataSet.expiryDays))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

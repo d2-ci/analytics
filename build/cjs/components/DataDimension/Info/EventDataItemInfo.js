@@ -27,7 +27,7 @@ const programDataElementQuery = {
         displayNameProp
       } = _ref2;
       return {
-        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},valueType,aggregationType,zeroIsSignificant,legendSets[id,displayName]`
+        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},aggregationType,dimensionItemType,legendSets[id,displayName],optionsSet[displayName],valueType,zeroIsSignificant`
       };
     }
   }
@@ -46,7 +46,7 @@ const programAttributeQuery = {
         displayNameProp
       } = _ref4;
       return {
-        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)}`
+        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},aggregationType,dimensionItemType,legendSets[id,displayName],optionsSet[displayName],valueType,zeroIsSignificant`
       };
     }
   }
@@ -68,31 +68,37 @@ const EventDataItemInfo = _ref5 => {
       displayNameProp
     }
   });
-  const renderProgramDataElementInfo = () => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InfoTable.InfoTable, {
-    data: data === null || data === void 0 ? void 0 : data.programDataElement,
+  const renderInfoTable = data => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InfoTable.InfoTable, {
+    data: data,
     loading: loading,
     error: error
   }, /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Type')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, (data === null || data === void 0 ? void 0 : data.type) === _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? _index.default.t('Data element') : _index.default.t('Tracked entity attribute'))), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Value type')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.programDataElement.valueType)), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data === null || data === void 0 ? void 0 : data.valueType)), (data === null || data === void 0 ? void 0 : data.optionSet) && /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Option set')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.optionSet.displayName)), Boolean(data === null || data === void 0 ? void 0 : data.legendSets.length) && /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Aggregation type')), /*#__PURE__*/_react.default.createElement("td", {
+  }, _index.default.t('Legend set(s)')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.programDataElement.aggregationType)), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data.legendSets.length === 1 ? data.legendSets[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, /*#__PURE__*/_react.default.createElement("th", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Legend sets')), /*#__PURE__*/_react.default.createElement("td", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, /*#__PURE__*/_react.default.createElement("ul", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.programDataElement.legendSets.map(_ref6 => {
+  }, data.legendSets.map(_ref6 => {
     let {
       id,
       displayName
@@ -101,23 +107,10 @@ const EventDataItemInfo = _ref5 => {
       key: id,
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
     }, displayName);
-  })))), /*#__PURE__*/_react.default.createElement("tr", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, /*#__PURE__*/_react.default.createElement("th", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Zero is significant')), /*#__PURE__*/_react.default.createElement("td", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data !== null && data !== void 0 && data.programDataElement.zeroIsSignificant ? _index.default.t('True') : _index.default.t('False')))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }))))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
-  const renderProgramAttributeInfo = () => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InfoTable.InfoTable, {
-    data: data === null || data === void 0 ? void 0 : data.programAttribute,
-    loading: loading,
-    error: error
-  }), /*#__PURE__*/_react.default.createElement(_style.default, {
-    id: _InfoPopoverStyle.default.__hash
-  }, _InfoPopoverStyle.default));
-  return type === _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? renderProgramDataElementInfo() : renderProgramAttributeInfo();
+  return type === _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? renderInfoTable(data === null || data === void 0 ? void 0 : data.programDataElement) : renderInfoTable(data === null || data === void 0 ? void 0 : data.programAttribute);
 };
 exports.EventDataItemInfo = EventDataItemInfo;
 EventDataItemInfo.propTypes = {

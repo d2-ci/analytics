@@ -20,7 +20,7 @@ const programDataElementQuery = {
         displayNameProp
       } = _ref2;
       return {
-        fields: `${getCommonFields(displayNameProp)},valueType,aggregationType,zeroIsSignificant,legendSets[id,displayName]`
+        fields: `${getCommonFields(displayNameProp)},aggregationType,dimensionItemType,legendSets[id,displayName],optionsSet[displayName],valueType,zeroIsSignificant`
       };
     }
   }
@@ -39,7 +39,7 @@ const programAttributeQuery = {
         displayNameProp
       } = _ref4;
       return {
-        fields: `${getCommonFields(displayNameProp)}`
+        fields: `${getCommonFields(displayNameProp)},aggregationType,dimensionItemType,legendSets[id,displayName],optionsSet[displayName],valueType,zeroIsSignificant`
       };
     }
   }
@@ -61,31 +61,37 @@ export const EventDataItemInfo = _ref5 => {
       displayNameProp
     }
   });
-  const renderProgramDataElementInfo = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InfoTable, {
-    data: data === null || data === void 0 ? void 0 : data.programDataElement,
+  const renderInfoTable = data => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InfoTable, {
+    data: data,
     loading: loading,
     error: error
   }, /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
+  }, i18n.t('Type')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, (data === null || data === void 0 ? void 0 : data.type) === DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? i18n.t('Data element') : i18n.t('Tracked entity attribute'))), /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
   }, i18n.t('Value type')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.programDataElement.valueType)), /*#__PURE__*/React.createElement("tr", {
+  }, data === null || data === void 0 ? void 0 : data.valueType)), (data === null || data === void 0 ? void 0 : data.optionSet) && /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Option set')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, data.optionSet.displayName)), Boolean(data === null || data === void 0 ? void 0 : data.legendSets.length) && /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
-  }, i18n.t('Aggregation type')), /*#__PURE__*/React.createElement("td", {
+  }, i18n.t('Legend set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.programDataElement.aggregationType)), /*#__PURE__*/React.createElement("tr", {
+  }, data.legendSets.length === 1 ? data.legendSets[0].displayName : /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
-  }, /*#__PURE__*/React.createElement("th", {
-    className: `jsx-${styles.__hash}`
-  }, i18n.t('Legend sets')), /*#__PURE__*/React.createElement("td", {
-    className: `jsx-${styles.__hash}`
-  }, /*#__PURE__*/React.createElement("ul", {
-    className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.programDataElement.legendSets.map(_ref6 => {
+  }, data.legendSets.map(_ref6 => {
     let {
       id,
       displayName
@@ -94,23 +100,10 @@ export const EventDataItemInfo = _ref5 => {
       key: id,
       className: `jsx-${styles.__hash}`
     }, displayName);
-  })))), /*#__PURE__*/React.createElement("tr", {
-    className: `jsx-${styles.__hash}`
-  }, /*#__PURE__*/React.createElement("th", {
-    className: `jsx-${styles.__hash}`
-  }, i18n.t('Zero is significant')), /*#__PURE__*/React.createElement("td", {
-    className: `jsx-${styles.__hash}`
-  }, data !== null && data !== void 0 && data.programDataElement.zeroIsSignificant ? i18n.t('True') : i18n.t('False')))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }))))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
-  const renderProgramAttributeInfo = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InfoTable, {
-    data: data === null || data === void 0 ? void 0 : data.programAttribute,
-    loading: loading,
-    error: error
-  }), /*#__PURE__*/React.createElement(_JSXStyle, {
-    id: styles.__hash
-  }, styles));
-  return type === DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? renderProgramDataElementInfo() : renderProgramAttributeInfo();
+  return type === DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? renderInfoTable(data === null || data === void 0 ? void 0 : data.programDataElement) : renderInfoTable(data === null || data === void 0 ? void 0 : data.programAttribute);
 };
 EventDataItemInfo.propTypes = {
   displayNameProp: PropTypes.string,
