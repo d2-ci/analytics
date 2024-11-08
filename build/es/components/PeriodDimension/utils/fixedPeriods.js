@@ -37,7 +37,6 @@ const PERIOD_TYPE_REGEX = {
   // YYYY"July"
   [FYAPR]: /^([0-9]{4})April$/ // YYYY"April"
 };
-
 const getPeriods = _ref => {
   let {
     periodType,

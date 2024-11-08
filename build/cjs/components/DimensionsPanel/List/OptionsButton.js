@@ -8,7 +8,7 @@ var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const OptionsButton = _ref => {
   let {
     onClick
@@ -23,5 +23,4 @@ const OptionsButton = _ref => {
 OptionsButton.propTypes = {
   onClick: _propTypes.default.func
 };
-var _default = OptionsButton;
-exports.default = _default;
+var _default = exports.default = OptionsButton;

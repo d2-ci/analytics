@@ -9,7 +9,7 @@ var _dimensionGetItems = require("./layout/dimensionGetItems.js");
 var _dimensionIs = require("./layout/dimensionIs.js");
 var _index2 = require("./ouIdHelper/index.js");
 var _predefinedDimensions = require("./predefinedDimensions.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getOuLevelAndGroupText = (filter, metaData) => {
   if (!(0, _dimensionIs.dimensionIs)(_predefinedDimensions.DIMENSION_ID_ORGUNIT)) {
     return '';

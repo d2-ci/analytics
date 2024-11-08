@@ -10,7 +10,7 @@ var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _TransferOptionStyle = _interopRequireDefault(require("./styles/TransferOption.style.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const TransferOption = _ref => {
   let {
     disabled,

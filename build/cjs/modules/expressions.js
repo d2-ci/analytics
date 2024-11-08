@@ -5,17 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.validateExpression = exports.parseExpressionToArray = exports.parseExpression = exports.parseArrayToExpression = exports.getOperators = exports.getItemIdsFromExpression = exports.VALID_EXPRESSION = exports.INVALID_EXPRESSION = exports.EXPRESSION_TYPE_OPERATOR = exports.EXPRESSION_TYPE_NUMBER = exports.EXPRESSION_TYPE_DATA = void 0;
 var _index = _interopRequireDefault(require("../locales/index.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const EXPRESSION_TYPE_NUMBER = 'EXPRESSION_TYPE_NUMBER';
-exports.EXPRESSION_TYPE_NUMBER = EXPRESSION_TYPE_NUMBER;
-const EXPRESSION_TYPE_OPERATOR = 'EXPRESSION_TYPE_OPERATOR';
-exports.EXPRESSION_TYPE_OPERATOR = EXPRESSION_TYPE_OPERATOR;
-const EXPRESSION_TYPE_DATA = 'EXPRESSION_TYPE_DATA';
-exports.EXPRESSION_TYPE_DATA = EXPRESSION_TYPE_DATA;
-const VALID_EXPRESSION = 'OK';
-exports.VALID_EXPRESSION = VALID_EXPRESSION;
-const INVALID_EXPRESSION = 'ERROR';
-exports.INVALID_EXPRESSION = INVALID_EXPRESSION;
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const EXPRESSION_TYPE_NUMBER = exports.EXPRESSION_TYPE_NUMBER = 'EXPRESSION_TYPE_NUMBER';
+const EXPRESSION_TYPE_OPERATOR = exports.EXPRESSION_TYPE_OPERATOR = 'EXPRESSION_TYPE_OPERATOR';
+const EXPRESSION_TYPE_DATA = exports.EXPRESSION_TYPE_DATA = 'EXPRESSION_TYPE_DATA';
+const VALID_EXPRESSION = exports.VALID_EXPRESSION = 'OK';
+const INVALID_EXPRESSION = exports.INVALID_EXPRESSION = 'ERROR';
 const getOperators = () => [{
   value: '+',
   label: '+',

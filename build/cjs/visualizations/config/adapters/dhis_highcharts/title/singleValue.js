@@ -12,7 +12,7 @@ Object.defineProperty(exports, "getSingleValueTitleColor", {
 exports.getSingleValueTitleText = getSingleValueTitleText;
 var _getFilterText = _interopRequireDefault(require("../../../../util/getFilterText.js"));
 var _getSingleValueTitleColor = require("../customSVGOptions/singleValue/getSingleValueTitleColor.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function getSingleValueTitleText(layout, metaData) {
   if (layout.hideTitle) {
     return '';

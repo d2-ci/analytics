@@ -1,4 +1,3 @@
-import { storiesOf } from '@storybook/react';
 import React, { useState } from 'react';
 import Filter from '../components/Filter/Filter.js';
 function FilterWithState() {
@@ -14,6 +13,12 @@ function FilterWithState() {
     type: "search"
   });
 }
-storiesOf('Filter', module).add('default', () => {
+export default {
+  title: 'Filter'
+};
+export const Default = () => {
   return /*#__PURE__*/React.createElement(FilterWithState, null);
-});
+};
+Default.story = {
+  name: 'default'
+};

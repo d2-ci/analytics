@@ -1,52 +1,93 @@
 "use strict";
 
-var _react = require("@storybook/react");
-var _react2 = _interopRequireDefault(require("react"));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.WeeklyExcluded = exports.UsingRightFooter = exports.OneSelected = exports.NoneSelected = exports.MonthlyExcluded = exports.AllBelowQuarterlyExcluded = void 0;
+var _appRuntime = require("@dhis2/app-runtime");
+var _appServiceConfig = require("@dhis2/app-service-config");
+var _react = _interopRequireDefault(require("react"));
 var _PeriodDimension = _interopRequireDefault(require("../components/PeriodDimension/PeriodDimension.js"));
 var _index = require("../components/PeriodDimension/utils/index.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const Wrapper = story => /*#__PURE__*/_react.default.createElement(_appServiceConfig.ConfigProvider, {
+  config: {
+    systemInfo: {}
+  }
+}, /*#__PURE__*/_react.default.createElement(_appRuntime.DataProvider, {
+  baseUrl: "https://test.e2e.dhis2.org/analytics-41dev/",
+  apiVersion: "41"
+}, story()));
 const selectedPeriods = [{
   id: 'LAST_12_MONTHS',
   name: 'Last 12 months'
 }];
-(0, _react.storiesOf)('PeriodDimension', module).add('None selected', () => {
-  return /*#__PURE__*/_react2.default.createElement(_PeriodDimension.default, {
+var _default = exports.default = {
+  title: 'PeriodDimension',
+  decorators: [Wrapper]
+};
+const NoneSelected = () => {
+  return /*#__PURE__*/_react.default.createElement(_PeriodDimension.default, {
     onSelect: selected => console.log(selected)
   });
-});
-(0, _react.storiesOf)('PeriodDimension', module).add('One selected', () => {
-  return /*#__PURE__*/_react2.default.createElement(_PeriodDimension.default, {
+};
+exports.NoneSelected = NoneSelected;
+NoneSelected.story = {
+  name: 'None selected'
+};
+const OneSelected = () => {
+  return /*#__PURE__*/_react.default.createElement(_PeriodDimension.default, {
     selectedPeriods: selectedPeriods,
     onSelect: selected => console.log(selected)
   });
-});
-(0, _react.storiesOf)('PeriodDimension', module).add('Monthly excluded', () => {
-  return /*#__PURE__*/_react2.default.createElement(_PeriodDimension.default, {
+};
+exports.OneSelected = OneSelected;
+OneSelected.story = {
+  name: 'One selected'
+};
+const MonthlyExcluded = () => {
+  return /*#__PURE__*/_react.default.createElement(_PeriodDimension.default, {
     excludedPeriodTypes: [_index.MONTHLY],
     onSelect: selected => console.log(selected)
   });
-});
-(0, _react.storiesOf)('PeriodDimension', module).add('Weekly excluded', () => {
-  return /*#__PURE__*/_react2.default.createElement(_PeriodDimension.default, {
+};
+exports.MonthlyExcluded = MonthlyExcluded;
+MonthlyExcluded.story = {
+  name: 'Monthly excluded'
+};
+const WeeklyExcluded = () => {
+  return /*#__PURE__*/_react.default.createElement(_PeriodDimension.default, {
     excludedPeriodTypes: [_index.WEEKLY, _index.WEEKLYWED, _index.WEEKLYTHU, _index.WEEKLYSAT, _index.WEEKLYSUN],
     onSelect: selected => console.log(selected)
   });
-});
-(0, _react.storiesOf)('PeriodDimension', module).add('All below Quarterly excluded', () => {
-  return /*#__PURE__*/_react2.default.createElement(_PeriodDimension.default, {
+};
+exports.WeeklyExcluded = WeeklyExcluded;
+WeeklyExcluded.story = {
+  name: 'Weekly excluded'
+};
+const AllBelowQuarterlyExcluded = () => {
+  return /*#__PURE__*/_react.default.createElement(_PeriodDimension.default, {
     excludedPeriodTypes: [_index.DAILY, _index.WEEKLY, _index.WEEKLYWED, _index.WEEKLYTHU, _index.WEEKLYSAT, _index.WEEKLYSUN, _index.BIWEEKLY, _index.MONTHLY, _index.BIMONTHLY],
     onSelect: selected => console.log(selected)
   });
-});
-(0, _react.storiesOf)('PeriodDimension', module).add('Using right footer', () => {
-  return /*#__PURE__*/_react2.default.createElement(_PeriodDimension.default, {
-    rightFooter: /*#__PURE__*/_react2.default.createElement("div", {
+};
+exports.AllBelowQuarterlyExcluded = AllBelowQuarterlyExcluded;
+AllBelowQuarterlyExcluded.story = {
+  name: 'All below Quarterly excluded'
+};
+const UsingRightFooter = () => {
+  return /*#__PURE__*/_react.default.createElement(_PeriodDimension.default, {
+    rightFooter: /*#__PURE__*/_react.default.createElement("div", {
       style: {
         padding: '8px',
         margin: '8px 0',
         border: '1px solid #f79533'
       }
-    }, /*#__PURE__*/_react2.default.createElement("p", null, "Right footer goes here")),
+    }, /*#__PURE__*/_react.default.createElement("p", null, "Right footer goes here")),
     onSelect: selected => console.log(selected)
   });
-});
+};
+exports.UsingRightFooter = UsingRightFooter;
+UsingRightFooter.story = {
+  name: 'Using right footer'
+};

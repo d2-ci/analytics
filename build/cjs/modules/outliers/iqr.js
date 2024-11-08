@@ -6,15 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.getQuartileValue = exports.getQuartilePosition = exports.getIQRHelper = exports.Q3 = exports.Q2 = exports.Q1 = exports.IQR = void 0;
 var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _index2 = require("./index.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const IQR = 'IQR';
-exports.IQR = IQR;
-const Q1 = 0.25;
-exports.Q1 = Q1;
-const Q2 = 0.5;
-exports.Q2 = Q2;
-const Q3 = 0.75;
-exports.Q3 = Q3;
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const IQR = exports.IQR = 'IQR';
+const Q1 = exports.Q1 = 0.25;
+const Q2 = exports.Q2 = 0.5;
+const Q3 = exports.Q3 = 0.75;
 const getQuartilePosition = (data, quartile) => {
   const pos = (data.length + 1) / 4;
   switch (quartile) {

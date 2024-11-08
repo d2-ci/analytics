@@ -11,7 +11,7 @@ var _GenericIcon = _interopRequireDefault(require("../assets/DimensionItemIcons/
 var _CalculationIcon = _interopRequireDefault(require("./../assets/DimensionItemIcons/CalculationIcon.js"));
 var _dataSets = require("./dataSets.js");
 var _dataTypes = require("./dataTypes.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getDimensionType = _ref => {
   var _dataTypes$type;
   let {

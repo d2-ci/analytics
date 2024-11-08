@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.validateExpressionMutation = exports.updateCalculationMutation = exports.deleteCalculationMutation = exports.createCalculationMutation = void 0;
-const validateExpressionMutation = {
+const validateExpressionMutation = exports.validateExpressionMutation = {
   type: 'create',
   resource: 'indicators/expression/description',
   data: _ref => {
@@ -14,8 +14,7 @@ const validateExpressionMutation = {
     return expression;
   }
 };
-exports.validateExpressionMutation = validateExpressionMutation;
-const createCalculationMutation = {
+const createCalculationMutation = exports.createCalculationMutation = {
   type: 'create',
   resource: 'expressionDimensionItems',
   data: _ref2 => {
@@ -30,8 +29,7 @@ const createCalculationMutation = {
     };
   }
 };
-exports.createCalculationMutation = createCalculationMutation;
-const updateCalculationMutation = {
+const updateCalculationMutation = exports.updateCalculationMutation = {
   type: 'json-patch',
   resource: 'expressionDimensionItems',
   id: _ref3 => {
@@ -60,8 +58,7 @@ const updateCalculationMutation = {
     }];
   }
 };
-exports.updateCalculationMutation = updateCalculationMutation;
-const deleteCalculationMutation = {
+const deleteCalculationMutation = exports.deleteCalculationMutation = {
   type: 'delete',
   resource: 'expressionDimensionItems',
   id: _ref5 => {
@@ -71,4 +68,3 @@ const deleteCalculationMutation = {
     return id;
   }
 };
-exports.deleteCalculationMutation = deleteCalculationMutation;

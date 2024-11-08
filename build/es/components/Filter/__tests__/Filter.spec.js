@@ -7,7 +7,7 @@ describe('The Filter component ', () => {
   let props;
   const filterComp = () => {
     if (!shallowFilter) {
-      shallowFilter = shallow( /*#__PURE__*/React.createElement(Filter, props));
+      shallowFilter = shallow(/*#__PURE__*/React.createElement(Filter, props));
     }
     return shallowFilter;
   };

@@ -12,7 +12,7 @@ var _pie = _interopRequireDefault(require("./pie.js"));
 var _singleValue = _interopRequireDefault(require("./singleValue.js"));
 var _twoCategory = _interopRequireDefault(require("./twoCategory.js"));
 var _yearOnYear = _interopRequireDefault(require("./yearOnYear.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const VALUE_ID = 'value';
 function arrayNullsOnly(array) {
   return (0, _arrayContains.default)(array, null) && (0, _arrayUnique.default)(array).length === 1;

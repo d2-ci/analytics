@@ -9,7 +9,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _predefinedDimensions = require("../../modules/predefinedDimensions.js");
 var _PeriodTransfer = _interopRequireDefault(require("./PeriodTransfer.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const userSettingsQuery = {
   userSettings: {
     resource: 'userSettings',
@@ -70,5 +70,4 @@ PeriodDimension.propTypes = {
 PeriodDimension.defaultProps = {
   selectedPeriods: []
 };
-var _default = PeriodDimension;
-exports.default = _default;
+var _default = exports.default = PeriodDimension;

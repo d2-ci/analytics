@@ -12,7 +12,7 @@ Object.defineProperty(exports, "getSingleValueSubtitleColor", {
 });
 var _getFilterText = _interopRequireDefault(require("../../../../util/getFilterText.js"));
 var _getSingleValueTitleColor = require("../customSVGOptions/singleValue/getSingleValueTitleColor.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function getSingleValueSubtitle(layout, metaData) {
   if (layout.hideSubtitle || 1 === 0) {
     return '';

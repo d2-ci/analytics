@@ -4,13 +4,13 @@ var _enzyme = require("enzyme");
 var _react = _interopRequireDefault(require("react"));
 var _DimensionsPanel = _interopRequireDefault(require("../DimensionsPanel.js"));
 var _DimensionList = _interopRequireDefault(require("../List/DimensionList.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('The Dimensions component ', () => {
   let shallowDimensions;
   let props;
   const dimensionsComponent = () => {
     if (!shallowDimensions) {
-      shallowDimensions = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_DimensionsPanel.default, props));
+      shallowDimensions = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_DimensionsPanel.default, props));
     }
     return shallowDimensions;
   };

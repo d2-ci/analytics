@@ -14,7 +14,7 @@ var _index2 = require("../modules/layoutUiRules/index.js");
 var _predefinedDimensions = require("../modules/predefinedDimensions.js");
 var _visTypes = require("../modules/visTypes.js");
 var _visTypeToLayoutType = require("../modules/visTypeToLayoutType.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getAxisItemLabel = (axisName, isDimensionInLayout) => isDimensionInLayout ? _index.default.t('Move to {{axisName}}', {
   axisName
 }) : _index.default.t('Add to {{axisName}}', {
@@ -60,7 +60,7 @@ const DimensionMenu = _ref => {
   if (dimensionId === _predefinedDimensions.DIMENSION_ID_DATA && assignedCategoriesItemHandler) {
     if (assignedCategoriesAvailableDestinations.length) {
       if (!isAssignedCategoriesInLayout) {
-        menuItems.push( /*#__PURE__*/_react.default.createElement(_ui.MenuItem, {
+        menuItems.push(/*#__PURE__*/_react.default.createElement(_ui.MenuItem, {
           label: assignedCategoriesItemLabel,
           key: `assigned-categories-item-${dimensionId}`,
           dataTest: `${dataTest}-item-co-menu`
@@ -74,7 +74,7 @@ const DimensionMenu = _ref => {
           dataTest: `${dataTest}-item-action-co-to-${destination}`
         }))));
       } else {
-        menuItems.push( /*#__PURE__*/_react.default.createElement(_ui.MenuItem, {
+        menuItems.push(/*#__PURE__*/_react.default.createElement(_ui.MenuItem, {
           key: `assigned-categories-item-${dimensionId}`,
           onClick: () => {
             assignedCategoriesItemHandler();
@@ -85,7 +85,7 @@ const DimensionMenu = _ref => {
         }));
       }
     } else {
-      menuItems.push( /*#__PURE__*/_react.default.createElement(_ui.Tooltip, {
+      menuItems.push(/*#__PURE__*/_react.default.createElement(_ui.Tooltip, {
         key: `assigned-categories-item-${dimensionId}`,
         content: getUnavailableLabel(visType),
         "aria-label": "disabled",
@@ -146,5 +146,4 @@ DimensionMenu.propTypes = {
   isAssignedCategoriesInLayout: _propTypes.default.bool,
   visType: _propTypes.default.string
 };
-var _default = DimensionMenu;
-exports.default = _default;
+var _default = exports.default = DimensionMenu;

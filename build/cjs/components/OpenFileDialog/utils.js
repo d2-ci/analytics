@@ -5,14 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getTranslatedString = exports.AO_TYPE_VISUALIZATION = exports.AO_TYPE_MAP = exports.AO_TYPE_EVENT_VISUALIZATION = exports.AOTypeMap = void 0;
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const AO_TYPE_VISUALIZATION = 'visualization';
-exports.AO_TYPE_VISUALIZATION = AO_TYPE_VISUALIZATION;
-const AO_TYPE_MAP = 'map';
-exports.AO_TYPE_MAP = AO_TYPE_MAP;
-const AO_TYPE_EVENT_VISUALIZATION = 'eventVisualization';
-exports.AO_TYPE_EVENT_VISUALIZATION = AO_TYPE_EVENT_VISUALIZATION;
-const AOTypeMap = {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const AO_TYPE_VISUALIZATION = exports.AO_TYPE_VISUALIZATION = 'visualization';
+const AO_TYPE_MAP = exports.AO_TYPE_MAP = 'map';
+const AO_TYPE_EVENT_VISUALIZATION = exports.AO_TYPE_EVENT_VISUALIZATION = 'eventVisualization';
+const AOTypeMap = exports.AOTypeMap = {
   [AO_TYPE_VISUALIZATION]: {
     apiEndpoint: 'visualizations'
   },
@@ -23,7 +20,6 @@ const AOTypeMap = {
     apiEndpoint: 'eventVisualizations'
   }
 };
-exports.AOTypeMap = AOTypeMap;
 const NO_TYPE = 'NO_TYPE';
 const texts = {
   [NO_TYPE]: {

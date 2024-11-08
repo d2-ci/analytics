@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _AnalyticsBase = _interopRequireDefault(require("./AnalyticsBase.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /**
  * @extends module:analytics.AnalyticsBase
  *
@@ -27,5 +27,4 @@ class AnalyticsTrackedEntities extends _AnalyticsBase.default {
     return this.fetch(req.withPath('trackedEntities/query'));
   }
 }
-var _default = AnalyticsTrackedEntities;
-exports.default = _default;
+var _default = exports.default = AnalyticsTrackedEntities;

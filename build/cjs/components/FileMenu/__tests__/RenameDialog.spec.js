@@ -4,14 +4,14 @@ var _ui = require("@dhis2/ui");
 var _enzyme = require("enzyme");
 var _react = _interopRequireDefault(require("react"));
 var _RenameDialog = require("../RenameDialog.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('The FileMenu - RenameDialog component', () => {
   let shallowRenameDialog;
   let props;
   const onClose = jest.fn();
   const getRenameDialogComponent = props => {
     if (!shallowRenameDialog) {
-      shallowRenameDialog = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_RenameDialog.RenameDialog, props));
+      shallowRenameDialog = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_RenameDialog.RenameDialog, props));
     }
     return shallowRenameDialog;
   };

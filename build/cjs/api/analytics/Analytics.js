@@ -10,7 +10,7 @@ var _AnalyticsEvents = _interopRequireDefault(require("./AnalyticsEvents.js"));
 var _AnalyticsRequest = _interopRequireDefault(require("./AnalyticsRequest.js"));
 var _AnalyticsResponse = _interopRequireDefault(require("./AnalyticsResponse.js"));
 var _AnalyticsTrackedEntities = _interopRequireDefault(require("./AnalyticsTrackedEntities.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /**
  * @module analytics
  */
@@ -90,5 +90,4 @@ class Analytics {
     return Analytics.getAnalytics.analytics;
   }
 }
-var _default = Analytics;
-exports.default = _default;
+var _default = exports.default = Analytics;

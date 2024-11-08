@@ -7,9 +7,8 @@ exports.getModZScoreThresholds = exports.getModZScoreMAD0Thresholds = exports.ge
 var _isNumber = _interopRequireDefault(require("d2-utilizr/lib/isNumber"));
 var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _index2 = require("./index.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const MODIFIED_Z_SCORE = 'MODIFIED_Z_SCORE';
-exports.MODIFIED_Z_SCORE = MODIFIED_Z_SCORE;
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const MODIFIED_Z_SCORE = exports.MODIFIED_Z_SCORE = 'MODIFIED_Z_SCORE';
 const MEDIAN_AD_CORRECTION = 0.6745;
 const MEAN_AD_CORRECTION = 1.253314;
 const getMean = values => values.reduce((total, value) => total + value, 0) / values.length;

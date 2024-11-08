@@ -11,7 +11,7 @@ var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _expressions = require("../../../modules/expressions.js");
 var _Operator = _interopRequireDefault(require("./Operator.js"));
 var _MathOperatorSelectorStyle = _interopRequireDefault(require("./styles/MathOperatorSelector.style.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const MathOperatorSelector = _ref => {
   let {
     onDoubleClick
@@ -44,5 +44,4 @@ const MathOperatorSelector = _ref => {
 MathOperatorSelector.propTypes = {
   onDoubleClick: _propTypes.default.func.isRequired
 };
-var _default = MathOperatorSelector;
-exports.default = _default;
+var _default = exports.default = MathOperatorSelector;

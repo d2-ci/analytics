@@ -4,7 +4,7 @@ var _fixtures = _interopRequireDefault(require("../../../__fixtures__/fixtures.j
 var _DataEngine = _interopRequireDefault(require("../__mocks__/DataEngine.js"));
 var _AnalyticsEvents = _interopRequireDefault(require("../AnalyticsEvents.js"));
 var _AnalyticsRequest = _interopRequireDefault(require("../AnalyticsRequest.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('analytics.events', () => {
   let events;
   let request;

@@ -1,5 +1,4 @@
 import { CustomDataProvider } from '@dhis2/app-runtime';
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import CalculationModal from '../components/DataDimension/Calculation/CalculationModal.js';
 const DATA_ELEMENTS = {
@@ -359,7 +358,10 @@ const calculationWithOperand = {
   name: 'Calculation with operand',
   expression: '#{cYeuwXTCPkU}*10-#{fbfJHSPpUQD.pq2XI5kz2BY}'
 };
-storiesOf('CalculationModal', module).add('Default', () => {
+export default {
+  title: 'CalculationModal'
+};
+export const Default = () => {
   return /*#__PURE__*/React.createElement(CustomDataProvider, {
     data: {
       dataElements: DATA_ELEMENTS,
@@ -372,7 +374,8 @@ storiesOf('CalculationModal', module).add('Default', () => {
     onDelete: Function.prototype,
     onSave: Function.prototype
   }));
-}).add('With calculation', () => {
+};
+export const WithCalculation = () => {
   return /*#__PURE__*/React.createElement(CustomDataProvider, {
     data: {
       dataElements: DATA_ELEMENTS,
@@ -386,7 +389,11 @@ storiesOf('CalculationModal', module).add('Default', () => {
     onDelete: Function.prototype,
     onSave: Function.prototype
   }));
-}).add('With calculation containing operand', () => {
+};
+WithCalculation.story = {
+  name: 'With calculation'
+};
+export const WithCalculationContainingOperand = () => {
   return /*#__PURE__*/React.createElement(CustomDataProvider, {
     data: {
       dataElements: DATA_ELEMENTS,
@@ -400,7 +407,11 @@ storiesOf('CalculationModal', module).add('Default', () => {
     onDelete: Function.prototype,
     onSave: Function.prototype
   }));
-}).add('No available data', () => {
+};
+WithCalculationContainingOperand.story = {
+  name: 'With calculation containing operand'
+};
+export const NoAvailableData = () => {
   return /*#__PURE__*/React.createElement(CustomDataProvider, {
     data: {
       dataElements: {
@@ -437,4 +448,7 @@ storiesOf('CalculationModal', module).add('Default', () => {
     onDelete: Function.prototype,
     onSave: Function.prototype
   }));
-});
+};
+NoAvailableData.story = {
+  name: 'No available data'
+};

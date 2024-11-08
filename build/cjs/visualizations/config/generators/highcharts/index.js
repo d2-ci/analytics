@@ -13,7 +13,7 @@ var _offlineExporting = _interopRequireDefault(require("highcharts/modules/offli
 var _patternFill = _interopRequireDefault(require("highcharts/modules/pattern-fill"));
 var _solidGauge = _interopRequireDefault(require("highcharts/modules/solid-gauge"));
 var _index = _interopRequireDefault(require("./pdfExportBugFixPlugin/index.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // apply
 (0, _highchartsMore.default)(_highcharts.default);
 (0, _solidGauge.default)(_highcharts.default);

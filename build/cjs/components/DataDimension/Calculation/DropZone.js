@@ -10,7 +10,7 @@ var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _DropZoneStyle = _interopRequireDefault(require("./styles/DropZone.style.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DropZone = _ref => {
   let {
     firstElementId,
@@ -43,5 +43,4 @@ DropZone.propTypes = {
   firstElementId: _propTypes.default.string,
   overLastDropZone: _propTypes.default.bool
 };
-var _default = DropZone;
-exports.default = _default;
+var _default = exports.default = DropZone;

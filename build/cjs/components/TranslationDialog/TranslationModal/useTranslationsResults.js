@@ -7,7 +7,7 @@ exports.useTranslationsResults = void 0;
 var _appRuntime = require("@dhis2/app-runtime");
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _react = require("react");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const useTranslationsResults = _ref => {
   let {
     resource

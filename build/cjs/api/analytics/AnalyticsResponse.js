@@ -6,13 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _valueTypes = require("../../modules/valueTypes.js");
 var _AnalyticsResponseHeader = _interopRequireDefault(require("./AnalyticsResponseHeader.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const booleanMap = {
   0: 'No',
   // XXX i18n.no || 'No',
   1: 'Yes' // i18n.yes || 'Yes',
 };
-
 const OUNAME = 'ouname';
 const OU = 'ou';
 const DEFAULT_COLLECT_IGNORE_HEADERS = ['psi', 'ps', 'eventdate', 'longitude', 'latitude', 'ouname', 'oucode', 'eventdate', 'eventdate'];
@@ -204,5 +203,4 @@ class AnalyticsResponse {
     this.metaData.dimensions.ou = organisationUnits.map(ou => ou.id);
   }
 }
-var _default = AnalyticsResponse;
-exports.default = _default;
+var _default = exports.default = AnalyticsResponse;

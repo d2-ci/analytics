@@ -2,7 +2,7 @@
 
 var _valueTypes = require("../../../modules/valueTypes.js");
 var _AnalyticsResponseHeader = _interopRequireDefault(require("../AnalyticsResponseHeader.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 let responseHeader;
 let expectedResponseHeader;
 describe('AnalyticsResponseHeader', () => {

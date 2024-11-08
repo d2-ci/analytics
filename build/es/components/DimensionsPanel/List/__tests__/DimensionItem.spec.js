@@ -6,7 +6,7 @@ describe('DimensionItem', () => {
   let shallowItem;
   const dimensionItem = () => {
     if (!shallowItem) {
-      shallowItem = shallow( /*#__PURE__*/React.createElement(DimensionItem, props));
+      shallowItem = shallow(/*#__PURE__*/React.createElement(DimensionItem, props));
     }
     return shallowItem;
   };

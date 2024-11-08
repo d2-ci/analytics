@@ -8,15 +8,12 @@ var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // TODO change the "Created by" prefix to "Creator" or something that does not require a context for the translators
 
-const CREATED_BY_ALL = 'all';
-exports.CREATED_BY_ALL = CREATED_BY_ALL;
-const CREATED_BY_ALL_BUT_CURRENT_USER = 'allButCurrentUser';
-exports.CREATED_BY_ALL_BUT_CURRENT_USER = CREATED_BY_ALL_BUT_CURRENT_USER;
-const CREATED_BY_CURRENT_USER = 'currentUser';
-exports.CREATED_BY_CURRENT_USER = CREATED_BY_CURRENT_USER;
+const CREATED_BY_ALL = exports.CREATED_BY_ALL = 'all';
+const CREATED_BY_ALL_BUT_CURRENT_USER = exports.CREATED_BY_ALL_BUT_CURRENT_USER = 'allButCurrentUser';
+const CREATED_BY_CURRENT_USER = exports.CREATED_BY_CURRENT_USER = 'currentUser';
 const CreatedByFilter = _ref => {
   let {
     selected,
@@ -48,5 +45,4 @@ CreatedByFilter.propTypes = {
   onChange: _propTypes.default.func.isRequired,
   selected: _propTypes.default.string
 };
-var _default = CreatedByFilter;
-exports.default = _default;
+var _default = exports.default = CreatedByFilter;

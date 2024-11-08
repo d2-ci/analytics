@@ -7,7 +7,7 @@ exports.default = getChart;
 var _visTypes = require("../../../../../modules/visTypes.js");
 var _default = _interopRequireDefault(require("./default.js"));
 var _singleValue = _interopRequireDefault(require("./singleValue.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function getChart(layout, el, extraOptions, series) {
   switch (layout.type) {
     case _visTypes.VIS_TYPE_SINGLE_VALUE:

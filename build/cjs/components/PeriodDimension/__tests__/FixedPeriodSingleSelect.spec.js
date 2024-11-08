@@ -3,13 +3,13 @@
 var _enzyme = require("enzyme");
 var _react = _interopRequireDefault(require("react"));
 var _FixedPeriodSelect = _interopRequireDefault(require("../FixedPeriodSelect.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('The Fixed Period Single Select component', () => {
   let props;
   let shallowFixedPeriodSelect;
   const getWrapper = () => {
     if (!shallowFixedPeriodSelect) {
-      shallowFixedPeriodSelect = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_FixedPeriodSelect.default, props));
+      shallowFixedPeriodSelect = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_FixedPeriodSelect.default, props));
     }
     return shallowFixedPeriodSelect;
   };

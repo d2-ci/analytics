@@ -12,7 +12,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getCommonFields = displayNameProp => `attributeValues[id,displayName],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
 exports.getCommonFields = getCommonFields;
 const InfoTable = _ref => {

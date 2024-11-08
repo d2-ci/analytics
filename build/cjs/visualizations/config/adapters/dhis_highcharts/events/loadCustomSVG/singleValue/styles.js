@@ -73,8 +73,7 @@ const spacings = [{
   iconGap: 2,
   iconSize: 20
 }];
-const MIN_SIDE_WHITESPACE = 4;
-exports.MIN_SIDE_WHITESPACE = MIN_SIDE_WHITESPACE;
+const MIN_SIDE_WHITESPACE = exports.MIN_SIDE_WHITESPACE = 4;
 class DynamicStyles {
   constructor(isPdfExport) {
     this.currentIndex = 0;

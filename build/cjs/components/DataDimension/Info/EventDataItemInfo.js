@@ -12,7 +12,7 @@ var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _dataTypes = require("../../../modules/dataTypes.js");
 var _InfoTable = require("./InfoTable.js");
 var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const programDataElementQuery = {
   programDataElement: {
     resource: 'dataElements',

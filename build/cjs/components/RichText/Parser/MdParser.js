@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.MdParser = void 0;
 var _markdownIt = _interopRequireDefault(require("markdown-it"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const emojiDb = {
   ':-)': '\u{1F642}',
   ':)': '\u{1F642}',

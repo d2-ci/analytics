@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = getDefaultChart;
 var _index = require("../events/index.js");
 var _type = _interopRequireDefault(require("../type.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DEFAULT_CHART = {
   spacingTop: 20,
   style: {

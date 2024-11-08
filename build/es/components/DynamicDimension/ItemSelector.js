@@ -1,5 +1,5 @@
 import _JSXStyle from "styled-jsx/style";
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 import { Transfer, InputField } from '@dhis2/ui';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useCallback } from 'react';
@@ -91,7 +91,6 @@ const ItemSelector = _ref4 => {
     nextPage: null // FIXME: Selecting all 50 items from a page prevents the loading of more items.
     // Implement the solution found in the DataDimension/ItemSelector.js
   });
-
   const setFilter = filter => setState(state => ({
     ...state,
     filter

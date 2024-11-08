@@ -1,12 +1,11 @@
-import { Provider } from '@dhis2/app-runtime';
-import { storiesOf } from '@storybook/react';
+import { DataProvider } from '@dhis2/app-runtime';
 import React from 'react';
 import { OpenFileDialog } from '../components/OpenFileDialog/OpenFileDialog.js';
 import { VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS, VIS_TYPE_PIVOT_TABLE, VIS_TYPE_COLUMN, VIS_TYPE_BAR, VIS_TYPE_LINE_LIST } from '../modules/visTypes.js';
-const configMock = {
-  baseUrl: 'https://debug.dhis2.org/dev',
-  apiVersion: 37
-};
+const Wrapper = story => /*#__PURE__*/React.createElement(DataProvider, {
+  baseUrl: "https://test.e2e.dhis2.org/analytics-41dev/",
+  apiVersion: "41"
+}, story());
 const user = {
   displayName: 'John Traore',
   id: 'xE7jOejl9FI',
@@ -25,9 +24,11 @@ const filterVisTypesWithGroupsAndDivider = [{
 }, {
   type: VIS_TYPE_BAR
 }];
-storiesOf('OpenFileDialog', module).add('List of visualizations with vis type filter and divider (no default vis type)', () => /*#__PURE__*/React.createElement(Provider, {
-  config: configMock
-}, /*#__PURE__*/React.createElement(OpenFileDialog, {
+export default {
+  title: 'OpenFileDialog',
+  decorators: [Wrapper]
+};
+export const ListOfVisualizationsWithVisTypeFilterAndDividerNoDefaultVisType = () => /*#__PURE__*/React.createElement(OpenFileDialog, {
   type: "visualization",
   filterVisTypes: filterVisTypesWithGroupsAndDivider,
   onClose: Function.prototype,
@@ -35,26 +36,28 @@ storiesOf('OpenFileDialog', module).add('List of visualizations with vis type fi
   onNew: Function.prototype,
   open: true,
   currentUser: user
-})));
-storiesOf('OpenFileDialog', module).add('List of maps (no vis type filter)', () => /*#__PURE__*/React.createElement(Provider, {
-  config: configMock
-}, /*#__PURE__*/React.createElement(OpenFileDialog, {
+});
+ListOfVisualizationsWithVisTypeFilterAndDividerNoDefaultVisType.story = {
+  name: 'List of visualizations with vis type filter and divider (no default vis type)'
+};
+export const ListOfMapsNoVisTypeFilter = () => /*#__PURE__*/React.createElement(OpenFileDialog, {
   type: "map",
   onClose: Function.prototype,
   onFileSelect: onFileSelect,
   onNew: Function.prototype,
   open: true,
   currentUser: user
-})));
+});
+ListOfMapsNoVisTypeFilter.story = {
+  name: 'List of maps (no vis type filter)'
+};
 const filterVisTypesWithDisabled = [{
   type: VIS_TYPE_PIVOT_TABLE,
   disabled: true
 }, {
   type: VIS_TYPE_LINE_LIST
 }];
-storiesOf('OpenFileDialog', module).add('List of event visualizations with vis type filter, disabled type and default vis type', () => /*#__PURE__*/React.createElement(Provider, {
-  config: configMock
-}, /*#__PURE__*/React.createElement(OpenFileDialog, {
+export const ListOfEventVisualizationsWithVisTypeFilterDisabledTypeAndDefaultVisType = () => /*#__PURE__*/React.createElement(OpenFileDialog, {
   type: "eventVisualization",
   filterVisTypes: filterVisTypesWithDisabled,
   defaultFilterVisType: VIS_TYPE_LINE_LIST,
@@ -63,7 +66,10 @@ storiesOf('OpenFileDialog', module).add('List of event visualizations with vis t
   onNew: Function.prototype,
   open: true,
   currentUser: user
-})));
+});
+ListOfEventVisualizationsWithVisTypeFilterDisabledTypeAndDefaultVisType.story = {
+  name: 'List of event visualizations with vis type filter, disabled type and default vis type'
+};
 const filterVisTypesWithGroupDividerAndDisabled = [{
   type: VIS_TYPE_GROUP_ALL
 }, {
@@ -73,9 +79,7 @@ const filterVisTypesWithGroupDividerAndDisabled = [{
   type: VIS_TYPE_COLUMN,
   disabled: true
 }];
-storiesOf('OpenFileDialog', module).add('List of visualizations with vis type filter with group type, divider and disabled option (no default vis type)', () => /*#__PURE__*/React.createElement(Provider, {
-  config: configMock
-}, /*#__PURE__*/React.createElement(OpenFileDialog, {
+export const ListOfVisualizationsWithVisTypeFilterWithGroupTypeDividerAndDisabledOptionNoDefaultVisType = () => /*#__PURE__*/React.createElement(OpenFileDialog, {
   type: "visualization",
   filterVisTypes: filterVisTypesWithGroupDividerAndDisabled,
   onClose: Function.prototype,
@@ -83,14 +87,18 @@ storiesOf('OpenFileDialog', module).add('List of visualizations with vis type fi
   onNew: Function.prototype,
   open: true,
   currentUser: user
-})));
-storiesOf('OpenFileDialog', module).add('No connection', () => /*#__PURE__*/React.createElement(Provider, {
-  config: configMock
-}, /*#__PURE__*/React.createElement(OpenFileDialog, {
+});
+ListOfVisualizationsWithVisTypeFilterWithGroupTypeDividerAndDisabledOptionNoDefaultVisType.story = {
+  name: 'List of visualizations with vis type filter with group type, divider and disabled option (no default vis type)'
+};
+export const NoConnection = () => /*#__PURE__*/React.createElement(OpenFileDialog, {
   type: "map",
   onClose: Function.prototype,
   onFileSelect: onFileSelect,
   onNew: Function.prototype,
   open: true,
   currentUser: user
-})));
+});
+NoConnection.story = {
+  name: 'No connection'
+};

@@ -15,7 +15,7 @@ describe('The FileMenu - GetLinkDialog component', () => {
   const onClose = jest.fn();
   const getGetLinkDialogComponent = props => {
     if (!shallowGetLinkDialog) {
-      shallowGetLinkDialog = shallow( /*#__PURE__*/React.createElement(GetLinkDialog, props));
+      shallowGetLinkDialog = shallow(/*#__PURE__*/React.createElement(GetLinkDialog, props));
     }
     return shallowGetLinkDialog;
   };

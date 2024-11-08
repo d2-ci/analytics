@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 var _getFilterText = _interopRequireDefault(require("../../../../util/getFilterText.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _default(layout, metaData, dashboard) {
   var _layout$rows, _layout$columns;
   if ((_layout$rows = layout.rows) !== null && _layout$rows !== void 0 && _layout$rows.length && (_layout$columns = layout.columns) !== null && _layout$columns !== void 0 && _layout$columns.length && !dashboard) {

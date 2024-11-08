@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = getSingleValueChart;
 var _getSingleValueBackgroundColor = require("../customSVGOptions/singleValue/getSingleValueBackgroundColor.js");
 var _default = _interopRequireDefault(require("./default.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function getSingleValueChart(layout, el, extraOptions, series) {
   const chart = {
     ...(0, _default.default)(layout, el, extraOptions),

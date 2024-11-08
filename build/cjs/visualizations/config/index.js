@@ -9,7 +9,7 @@ var _index2 = require("../util/colors/index.js");
 var _index3 = _interopRequireDefault(require("./adapters/index.js"));
 var _index4 = _interopRequireDefault(require("./generators/index.js"));
 var _index5 = _interopRequireDefault(require("./validators/index.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _default(_ref) {
   let {
     store,

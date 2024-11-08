@@ -7,9 +7,8 @@ exports.getZScoreHelper = exports.getStdDev = exports.getMean = exports.STANDARD
 var _mathjs = require("mathjs");
 var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _index2 = require("./index.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const STANDARD_Z_SCORE = 'STANDARD_Z_SCORE';
-exports.STANDARD_Z_SCORE = STANDARD_Z_SCORE;
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const STANDARD_Z_SCORE = exports.STANDARD_Z_SCORE = 'STANDARD_Z_SCORE';
 const getStdDev = data => (0, _mathjs.std)(data, 'unbiased');
 exports.getStdDev = getStdDev;
 const getMean = data => (0, _mathjs.mean)(data);

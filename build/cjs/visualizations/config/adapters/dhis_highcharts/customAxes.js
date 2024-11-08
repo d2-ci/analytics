@@ -7,16 +7,14 @@ exports.CUSTOM_AXES_DIMENSION_ITEM = exports.CUSTOM_AXES_AXIS = void 0;
 exports.getAxisIdsMap = getAxisIdsMap;
 exports.getFullIdAxisMap = getFullIdAxisMap;
 exports.getIdAxisMap = getIdAxisMap;
-const CUSTOM_AXES_DIMENSION_ITEM = 'dimensionItem';
-exports.CUSTOM_AXES_DIMENSION_ITEM = CUSTOM_AXES_DIMENSION_ITEM;
-const CUSTOM_AXES_AXIS = 'axis';
+const CUSTOM_AXES_DIMENSION_ITEM = exports.CUSTOM_AXES_DIMENSION_ITEM = 'dimensionItem';
+const CUSTOM_AXES_AXIS = exports.CUSTOM_AXES_AXIS = 'axis';
 
 // returns:
 // {
 //     a: 1,
 //     b: 1,
 // }
-exports.CUSTOM_AXES_AXIS = CUSTOM_AXES_AXIS;
 function getIdAxisMap(customAxes) {
   return customAxes.reduce((map, item) => {
     map[item[CUSTOM_AXES_DIMENSION_ITEM]] = item[CUSTOM_AXES_AXIS];

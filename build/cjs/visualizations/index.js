@@ -20,7 +20,7 @@ exports.default = void 0;
 var _isArray = _interopRequireDefault(require("d2-utilizr/lib/isArray"));
 var _index = _interopRequireDefault(require("./config/index.js"));
 var _index2 = _interopRequireDefault(require("./store/index.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const defaultError = error => {
   throw new Error(error);
 };
@@ -53,5 +53,4 @@ function createVisualization(data, layout, el, extraOptions) {
     visualization: config.createVisualization()
   };
 }
-var _default = createVisualization;
-exports.default = _default;
+var _default = exports.default = createVisualization;

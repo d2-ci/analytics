@@ -15,11 +15,9 @@ var _FormulaIcon = _interopRequireDefault(require("../../../assets/FormulaIcon.j
 var _DropZone = _interopRequireDefault(require("./DropZone.js"));
 var _FormulaItem = _interopRequireDefault(require("./FormulaItem.js"));
 var _FormulaFieldStyle = _interopRequireDefault(require("./styles/FormulaField.style.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const LAST_DROPZONE_ID = 'lastdropzone';
-exports.LAST_DROPZONE_ID = LAST_DROPZONE_ID;
-const FORMULA_BOX_ID = 'formulabox';
-exports.FORMULA_BOX_ID = FORMULA_BOX_ID;
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const LAST_DROPZONE_ID = exports.LAST_DROPZONE_ID = 'lastdropzone';
+const FORMULA_BOX_ID = exports.FORMULA_BOX_ID = 'formulabox';
 const Placeholder = () => /*#__PURE__*/_react.default.createElement("div", {
   "data-test": "placeholder",
   className: `jsx-${_FormulaFieldStyle.default.__hash}` + " " + "placeholder"
@@ -101,5 +99,4 @@ FormulaField.propTypes = {
   loading: _propTypes.default.bool,
   selectedItemId: _propTypes.default.string
 };
-var _default = FormulaField;
-exports.default = _default;
+var _default = exports.default = FormulaField;

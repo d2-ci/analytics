@@ -7,7 +7,7 @@ exports.default = _default;
 var _isArray = _interopRequireDefault(require("d2-utilizr/lib/isArray"));
 var _isObject = _interopRequireDefault(require("d2-utilizr/lib/isObject"));
 var _isString = _interopRequireDefault(require("d2-utilizr/lib/isString"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const MODULE = 'Data validator: ';
 function getMessage(text) {
   return MODULE + text;

@@ -3,7 +3,7 @@
 var _enzyme = require("enzyme");
 var _react = _interopRequireDefault(require("react"));
 var _index = require("../index.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('<HoverMenuListItem/>', () => {
   /* Some of the props for this component are included
    * in the mouse interaction tests for the HoverMenuBar.
@@ -12,20 +12,20 @@ describe('<HoverMenuListItem/>', () => {
 
   it('accepts a `className` prop', () => {
     const className = 'className';
-    const wrapper = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_index.HoverMenuListItem, {
+    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.HoverMenuListItem, {
       className: className
     }));
     expect(wrapper.find('li')).toHaveClassName(className);
   });
   it('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_index.HoverMenuListItem, {
+    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.HoverMenuListItem, {
       dataTest: dataTest
     }));
     expect(wrapper.find('li').prop('data-test')).toBe(dataTest);
   });
   it('accepts a `destructive` prop', () => {
-    const wrapper = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_index.HoverMenuListItem, {
+    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.HoverMenuListItem, {
       destructive: true
     }));
     expect(wrapper.find('li')).toHaveClassName('destructive');
@@ -35,7 +35,7 @@ describe('<HoverMenuListItem/>', () => {
     const icon = /*#__PURE__*/_react.default.createElement("span", {
       id: "testicon"
     }, iconText);
-    const wrapper = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_index.HoverMenuListItem, {
+    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.HoverMenuListItem, {
       icon: icon
     }));
     expect(wrapper.find('span.icon')).toExist();

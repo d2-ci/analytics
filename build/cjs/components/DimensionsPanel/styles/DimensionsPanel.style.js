@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.styles = void 0;
 var _ui = require("@dhis2/ui");
-const styles = {
+const styles = exports.styles = {
   divContainer: {
     height: '100%',
     display: 'flex',
@@ -21,4 +21,3 @@ const styles = {
     borderRadius: '5px'
   }
 };
-exports.styles = styles;

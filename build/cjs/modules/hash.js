@@ -7,7 +7,7 @@ exports.getHash = exports.getExpressionHashFromVisualization = void 0;
 var _sha = _interopRequireDefault(require("crypto-js/sha1"));
 var _dataTypes = require("./dataTypes.js");
 var _layoutGetAllItems2 = require("./layout/layoutGetAllItems.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const isValidValue = value => typeof value === 'string' && value.length;
 const getHash = value => isValidValue(value) ? (0, _sha.default)(value).toString() : undefined;
 exports.getHash = getHash;

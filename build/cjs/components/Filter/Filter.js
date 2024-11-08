@@ -9,7 +9,7 @@ var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _FilterStyle = _interopRequireDefault(require("./styles/Filter.style.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const Filter = _ref => {
   let {
     text,
@@ -43,5 +43,4 @@ Filter.propTypes = {
 Filter.defaultProps = {
   type: 'text'
 };
-var _default = Filter;
-exports.default = _default;
+var _default = exports.default = Filter;

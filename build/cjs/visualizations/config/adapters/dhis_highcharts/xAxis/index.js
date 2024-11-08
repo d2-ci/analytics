@@ -16,7 +16,7 @@ var _radar = _interopRequireDefault(require("./radar.js"));
 var _scatter = _interopRequireDefault(require("./scatter.js"));
 var _twoCategory = _interopRequireDefault(require("./twoCategory.js"));
 var _yearOnYear = _interopRequireDefault(require("./yearOnYear.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const AXIS_TYPE = 'DOMAIN';
 const AXIS_INDEX = 0;
 function noAxis() {

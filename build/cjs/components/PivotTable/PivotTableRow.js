@@ -12,7 +12,7 @@ var _PivotTableEmptyCell = require("./PivotTableEmptyCell.js");
 var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 var _PivotTableRowHeaderCell = require("./PivotTableRowHeaderCell.js");
 var _PivotTableValueCell = require("./PivotTableValueCell.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const PivotTableRow = _ref => {
   let {
     clippingResult,
