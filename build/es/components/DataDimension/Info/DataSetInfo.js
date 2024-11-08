@@ -55,7 +55,7 @@ export const DataSetInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Data elements')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataSet.dataElements.length) === 1 ? data.dataSet.dataElements[0].displayName : /*#__PURE__*/React.createElement("ul", {
+  }, (data === null || data === void 0 ? void 0 : data.dataSet.dataSetElements.length) === 1 ? data.dataSet.dataSetElements[0].dataElement.displayName : /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
   }, data === null || data === void 0 ? void 0 : data.dataSet.dataSetElements.map(_ref4 => {
     let {

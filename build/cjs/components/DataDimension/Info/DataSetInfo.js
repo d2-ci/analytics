@@ -62,7 +62,7 @@ const DataSetInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Data elements')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataSet.dataElements.length) === 1 ? data.dataSet.dataElements[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
+  }, (data === null || data === void 0 ? void 0 : data.dataSet.dataSetElements.length) === 1 ? data.dataSet.dataSetElements[0].dataElement.displayName : /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, data === null || data === void 0 ? void 0 : data.dataSet.dataSetElements.map(_ref4 => {
     let {
