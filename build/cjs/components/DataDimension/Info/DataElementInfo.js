@@ -56,9 +56,9 @@ const DataElementInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Data set(s)')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.dataElement.dataSetElements.length === 1 ? data.dataElement.dataSetElements[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
+  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.length) === 1 ? data.dataElement.dataSetElements[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.dataElement.dataSetElements.map(_ref4 => {
+  }, data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.map(_ref4 => {
     let {
       id,
       displayName

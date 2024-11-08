@@ -49,9 +49,9 @@ export const DataElementInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Data set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.dataElement.dataSetElements.length === 1 ? data.dataElement.dataSetElements[0].displayName : /*#__PURE__*/React.createElement("ul", {
+  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.length) === 1 ? data.dataElement.dataSetElements[0].displayName : /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
-  }, data.dataElement.dataSetElements.map(_ref4 => {
+  }, data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.map(_ref4 => {
     let {
       id,
       displayName
