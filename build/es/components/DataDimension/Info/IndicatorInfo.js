@@ -85,7 +85,7 @@ export const IndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
-  }, i18n.t('Numerator expression in human readable format')), /*#__PURE__*/React.createElement("td", {
+  }, i18n.t('Numerator expression')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
   }, (data === null || data === void 0 ? void 0 : data.indicator.humanReadableNumeratorExpression) || i18n.t('None'))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
@@ -97,7 +97,7 @@ export const IndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
-  }, i18n.t('Denominator expression in human readable format')), /*#__PURE__*/React.createElement("td", {
+  }, i18n.t('Denominator expression')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
   }, (data === null || data === void 0 ? void 0 : data.indicator.humanReadableDenominatorExpression) || i18n.t('None'))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
@@ -111,7 +111,7 @@ export const IndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Indicator type')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, `${data === null || data === void 0 ? void 0 : data.indicator.displayName}, ${data === null || data === void 0 ? void 0 : data.indicator.factor}`)), (data === null || data === void 0 ? void 0 : data.indicator.decimals) && /*#__PURE__*/React.createElement("tr", {
+  }, `${data === null || data === void 0 ? void 0 : data.indicator.indicatorType.displayName}, ${data === null || data === void 0 ? void 0 : data.indicator.indicatorType.factor}`)), (data === null || data === void 0 ? void 0 : data.indicator.decimals) && /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`

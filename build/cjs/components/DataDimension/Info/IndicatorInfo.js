@@ -94,7 +94,7 @@ const IndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Numerator expression in human readable format')), /*#__PURE__*/_react.default.createElement("td", {
+  }, _index.default.t('Numerator expression')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, (data === null || data === void 0 ? void 0 : data.indicator.humanReadableNumeratorExpression) || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
@@ -106,7 +106,7 @@ const IndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Denominator expression in human readable format')), /*#__PURE__*/_react.default.createElement("td", {
+  }, _index.default.t('Denominator expression')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, (data === null || data === void 0 ? void 0 : data.indicator.humanReadableDenominatorExpression) || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
@@ -120,7 +120,7 @@ const IndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Indicator type')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, `${data === null || data === void 0 ? void 0 : data.indicator.displayName}, ${data === null || data === void 0 ? void 0 : data.indicator.factor}`)), (data === null || data === void 0 ? void 0 : data.indicator.decimals) && /*#__PURE__*/_react.default.createElement("tr", {
+  }, `${data === null || data === void 0 ? void 0 : data.indicator.indicatorType.displayName}, ${data === null || data === void 0 ? void 0 : data.indicator.indicatorType.factor}`)), (data === null || data === void 0 ? void 0 : data.indicator.decimals) && /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`

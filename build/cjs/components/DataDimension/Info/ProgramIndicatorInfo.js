@@ -126,13 +126,13 @@ const ProgramIndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Expression in human readable format')), /*#__PURE__*/_react.default.createElement("td", {
+  }, _index.default.t('Expression')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, (data === null || data === void 0 ? void 0 : data.programIndicator.humanReadableExpression) || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Filter expression in human readable format')), /*#__PURE__*/_react.default.createElement("td", {
+  }, _index.default.t('Filter expression')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, (data === null || data === void 0 ? void 0 : data.programIndicator.humanReadableFilter) || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`

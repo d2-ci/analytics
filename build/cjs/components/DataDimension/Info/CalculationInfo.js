@@ -80,7 +80,7 @@ const CalculationInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Expression description in human readable format')), /*#__PURE__*/_react.default.createElement("td", {
+  }, _index.default.t('Expression description')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, (data === null || data === void 0 ? void 0 : data.calculation.humanReadableExpression) || _index.default.t('None')))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash

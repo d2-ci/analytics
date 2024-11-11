@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getCommonFields = exports.InfoTable = void 0;
+exports.getCommonFields = exports.capitalizeWord = exports.InfoTable = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _appRuntime = require("@dhis2/app-runtime");
 var _ui = require("@dhis2/ui");
@@ -15,6 +15,8 @@ var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.sty
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getCommonFields = displayNameProp => `attributeValues[id,displayName],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
 exports.getCommonFields = getCommonFields;
+const capitalizeWord = word => word && word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+exports.capitalizeWord = capitalizeWord;
 const InfoTable = _ref => {
   let {
     data,

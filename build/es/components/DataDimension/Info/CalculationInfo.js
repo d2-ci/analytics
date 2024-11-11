@@ -71,7 +71,7 @@ export const CalculationInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
-  }, i18n.t('Expression description in human readable format')), /*#__PURE__*/React.createElement("td", {
+  }, i18n.t('Expression description')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
   }, (data === null || data === void 0 ? void 0 : data.calculation.humanReadableExpression) || i18n.t('None')))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash

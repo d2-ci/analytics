@@ -117,13 +117,13 @@ export const ProgramIndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
-  }, i18n.t('Expression in human readable format')), /*#__PURE__*/React.createElement("td", {
+  }, i18n.t('Expression')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
   }, (data === null || data === void 0 ? void 0 : data.programIndicator.humanReadableExpression) || i18n.t('None'))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
-  }, i18n.t('Filter expression in human readable format')), /*#__PURE__*/React.createElement("td", {
+  }, i18n.t('Filter expression')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
   }, (data === null || data === void 0 ? void 0 : data.programIndicator.humanReadableFilter) || i18n.t('None'))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`

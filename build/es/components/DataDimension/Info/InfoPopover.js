@@ -25,7 +25,6 @@ export const InfoPopover = _ref => {
     onClose,
     ...props
   } = _ref;
-  console.log('type', props.item.type, 'id', props.item.id);
   const type = props.item.type;
   const infoProps = {
     type,
