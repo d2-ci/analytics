@@ -5,8 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.HoverMenuDropdown = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
-var _popper = require("@dhis2-ui/popper");
-var _portal = require("@dhis2-ui/portal");
+var _ui = require("@dhis2/ui");
 var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
@@ -41,7 +40,7 @@ const HoverMenuDropdown = _ref => {
     }) || "")
   }, label, /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _MenuButtonStyles.default.__hash
-  }, _MenuButtonStyles.default)), isOpen && /*#__PURE__*/_react.default.createElement(_portal.Portal, null, /*#__PURE__*/_react.default.createElement(_popper.Popper, {
+  }, _MenuButtonStyles.default)), isOpen && /*#__PURE__*/_react.default.createElement(_ui.Portal, null, /*#__PURE__*/_react.default.createElement(_ui.Popper, {
     placement: "bottom-start",
     reference: buttonRef
   }, children)));

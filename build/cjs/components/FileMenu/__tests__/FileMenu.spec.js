@@ -74,7 +74,7 @@ describe('The FileMenu component ', () => {
         }
       }
     };
-    return (0, _react.render)( /*#__PURE__*/_react2.default.createElement(_appRuntime.CustomDataProvider, {
+    return (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_appRuntime.CustomDataProvider, {
       data: providerData
     }, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, null, /*#__PURE__*/_react2.default.createElement(_FileMenu.FileMenu, props))));
   };

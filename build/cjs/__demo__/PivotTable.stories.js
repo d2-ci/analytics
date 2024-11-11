@@ -1,10 +1,13 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.TruncatedHeaderCell = exports.SmallEmptyRowsShown = exports.SmallEmptyRowsHidden = exports.SimpleTitleSubtitleFilter = exports.SimpleNoRowsSmall = exports.SimpleNoRowsLarge = exports.SimpleNoColumnsSingleCell = exports.SimpleNoColumnsLabel = exports.SimpleNoColumnsDeep = exports.SimpleNoColumns = exports.SimpleDataAsFilter = exports.SimpleCommaDgs = exports.SimpleColumn = exports.SimpleAvgTotalAggregationTypeRows = exports.SimpleAvgTotalAggregationTypeColumns = exports.Simple = exports.NarrativeDataAsFilter = exports.Narrative = exports.LegendFixedText = exports.LegendFixedRow = exports.LegendFixedLightFill = exports.LegendFixedDarkFill = exports.LegendByDataItem = exports.HierarchyRows = exports.HierarchyNone = exports.HierarchyColumns = exports.EmptyRowsShown = exports.EmptyRowsHidden = exports.EmptyColumnsWeeklyShown = exports.EmptyColumnsWeeklyHidden = exports.EmptyColumnsShown = exports.EmptyColumnsHidden = exports.EmptyColumnsAssignedCatsShown = exports.EmptyColumnsAssignedCatsHidden = exports.Degs = exports.DeepTotals = exports.DeepTitleSubtitleFilter = exports.DeepSubtotals = exports.DeepSmallCompact = exports.DeepRow = exports.DeepResize = exports.DeepLargeComfortable = exports.DeepFilter = exports.DeepDimensionLabels = exports.DeepColumn = exports.DeepAllTotals = exports.Deep = exports.CumulativeEmptyColumnsWeeklyShown = exports.CumulativeEmptyColumnsWeeklyHidden = void 0;
 var _ui = require("@dhis2/ui");
-var _react = require("@storybook/react");
 var _cloneDeep = _interopRequireDefault(require("lodash/cloneDeep"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
-var _react2 = _interopRequireWildcard(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 var _index = require("../index.js");
 var _pivotTableConstants = require("../modules/pivotTable/pivotTableConstants.js");
 var _avgTotalAggregationTypeData = _interopRequireDefault(require("./data/avgTotalAggregationType.data.json"));
@@ -70,11 +73,11 @@ const diseaseWeeksData = combineDataWithMetadata(_diseaseWeeksData.default, _dis
 const lastFiveYearsData = combineDataWithMetadata(_lastFiveYearsData.default, _lastFiveYearsMetadata.default);
 const weeklyColumnsData = combineDataWithMetadata(_weeklyColumnsData.default, _weeklyColumnsMetadata.default);
 const PivotTableOptionsWrapper = story => {
-  const [pivotTableOptions, setPivotTableOptions] = (0, _react2.useState)({
+  const [pivotTableOptions, setPivotTableOptions] = (0, _react.useState)({
     fixColumnHeaders: false,
     fixRowHeaders: false
   });
-  return /*#__PURE__*/_react2.default.createElement("div", null, /*#__PURE__*/_react2.default.createElement("div", null, /*#__PURE__*/_react2.default.createElement(_ui.Checkbox, {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_ui.Checkbox, {
     label: "Use fixed column headers",
     checked: pivotTableOptions.fixColumnHeaders,
     onChange: _ref => {
@@ -87,7 +90,7 @@ const PivotTableOptionsWrapper = story => {
       });
     },
     dense: true
-  }), /*#__PURE__*/_react2.default.createElement(_ui.Checkbox, {
+  }), /*#__PURE__*/_react.default.createElement(_ui.Checkbox, {
     label: "Use fixed row headers",
     checked: pivotTableOptions.fixRowHeaders,
     onChange: _ref2 => {
@@ -100,11 +103,15 @@ const PivotTableOptionsWrapper = story => {
       });
     },
     dense: true
-  }), /*#__PURE__*/_react2.default.createElement(_ui.Divider, null)), story({
+  }), /*#__PURE__*/_react.default.createElement(_ui.Divider, null)), story({
     pivotTableOptions
   }));
 };
-(0, _react.storiesOf)('PivotTable', module).addDecorator(PivotTableOptionsWrapper).add('simple', (_, _ref3) => {
+var _default = exports.default = {
+  title: 'PivotTable',
+  decorators: [PivotTableOptionsWrapper]
+};
+const Simple = (_, _ref3) => {
   let {
     pivotTableOptions
   } = _ref3;
@@ -113,17 +120,21 @@ const PivotTableOptionsWrapper = story => {
     ...visualizationReset,
     ...pivotTableOptions
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: simpleData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('simple - comma DGS', (_, _ref4) => {
+};
+exports.Simple = Simple;
+Simple.story = {
+  name: 'simple'
+};
+const SimpleCommaDgs = (_, _ref4) => {
   let {
     pivotTableOptions
   } = _ref4;
@@ -133,17 +144,21 @@ const PivotTableOptionsWrapper = story => {
     ...pivotTableOptions,
     digitGroupSeparator: 'COMMA'
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: simpleData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('simple - title / subtitle / filter', (_, _ref5) => {
+};
+exports.SimpleCommaDgs = SimpleCommaDgs;
+SimpleCommaDgs.story = {
+  name: 'simple - comma DGS'
+};
+const SimpleTitleSubtitleFilter = (_, _ref5) => {
   let {
     pivotTableOptions
   } = _ref5;
@@ -154,17 +169,21 @@ const PivotTableOptionsWrapper = story => {
     title: 'This is a Table',
     subtitle: "It's not a very big table"
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: simpleData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('simple - column %', (_, _ref6) => {
+};
+exports.SimpleTitleSubtitleFilter = SimpleTitleSubtitleFilter;
+SimpleTitleSubtitleFilter.story = {
+  name: 'simple - title / subtitle / filter'
+};
+const SimpleColumn = (_, _ref6) => {
   let {
     pivotTableOptions
   } = _ref6;
@@ -175,17 +194,21 @@ const PivotTableOptionsWrapper = story => {
     colTotals: true,
     numberType: _pivotTableConstants.NUMBER_TYPE_COLUMN_PERCENTAGE
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: simpleData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('simple - data as filter', (_, _ref7) => {
+};
+exports.SimpleColumn = SimpleColumn;
+SimpleColumn.story = {
+  name: 'simple - column %'
+};
+const SimpleDataAsFilter = (_, _ref7) => {
   let {
     pivotTableOptions
   } = _ref7;
@@ -196,17 +219,21 @@ const PivotTableOptionsWrapper = story => {
     columns: _simpleVisualization.default.filters,
     filters: _simpleVisualization.default.columns
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: simpleData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('simple - no columns', (_, _ref8) => {
+};
+exports.SimpleDataAsFilter = SimpleDataAsFilter;
+SimpleDataAsFilter.story = {
+  name: 'simple - data as filter'
+};
+const SimpleNoColumns = (_, _ref8) => {
   let {
     pivotTableOptions
   } = _ref8;
@@ -221,17 +248,21 @@ const PivotTableOptionsWrapper = story => {
     columns: [],
     filters: _simpleVisualization.default.columns
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: simpleData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('simple - no columns (single cell)', (_, _ref9) => {
+};
+exports.SimpleNoColumns = SimpleNoColumns;
+SimpleNoColumns.story = {
+  name: 'simple - no columns'
+};
+const SimpleNoColumnsSingleCell = (_, _ref9) => {
   let {
     pivotTableOptions
   } = _ref9;
@@ -244,17 +275,21 @@ const PivotTableOptionsWrapper = story => {
     rows: _simpleVisualization.default.columns,
     filters: []
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: simpleData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('simple - no columns (deep)', (_, _ref10) => {
+};
+exports.SimpleNoColumnsSingleCell = SimpleNoColumnsSingleCell;
+SimpleNoColumnsSingleCell.story = {
+  name: 'simple - no columns (single cell)'
+};
+const SimpleNoColumnsDeep = (_, _ref10) => {
   let {
     pivotTableOptions
   } = _ref10;
@@ -268,17 +303,21 @@ const PivotTableOptionsWrapper = story => {
     rows: [_simpleVisualization.default.columns[0], _simpleVisualization.default.rows[0]],
     filters: []
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: simpleData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('simple - no columns (label)', (_, _ref11) => {
+};
+exports.SimpleNoColumnsDeep = SimpleNoColumnsDeep;
+SimpleNoColumnsDeep.story = {
+  name: 'simple - no columns (deep)'
+};
+const SimpleNoColumnsLabel = (_, _ref11) => {
   let {
     pivotTableOptions
   } = _ref11;
@@ -294,17 +333,21 @@ const PivotTableOptionsWrapper = story => {
     columns: [],
     filters: _simpleVisualization.default.columns
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: simpleData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('simple - no rows (small)', (_, _ref12) => {
+};
+exports.SimpleNoColumnsLabel = SimpleNoColumnsLabel;
+SimpleNoColumnsLabel.story = {
+  name: 'simple - no columns (label)'
+};
+const SimpleNoRowsSmall = (_, _ref12) => {
   let {
     pivotTableOptions
   } = _ref12;
@@ -320,17 +363,21 @@ const PivotTableOptionsWrapper = story => {
     rows: [],
     filters: _simpleVisualization.default.rows
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: simpleData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('simple - no rows (large)', (_, _ref13) => {
+};
+exports.SimpleNoRowsSmall = SimpleNoRowsSmall;
+SimpleNoRowsSmall.story = {
+  name: 'simple - no rows (small)'
+};
+const SimpleNoRowsLarge = (_, _ref13) => {
   let {
     pivotTableOptions
   } = _ref13;
@@ -346,17 +393,21 @@ const PivotTableOptionsWrapper = story => {
     columns: _simpleVisualization.default.rows,
     filters: _simpleVisualization.default.columns
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: simpleData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('simple - avg totalAggregationType columns', (_, _ref14) => {
+};
+exports.SimpleNoRowsLarge = SimpleNoRowsLarge;
+SimpleNoRowsLarge.story = {
+  name: 'simple - no rows (large)'
+};
+const SimpleAvgTotalAggregationTypeColumns = (_, _ref14) => {
   let {
     pivotTableOptions
   } = _ref14;
@@ -367,17 +418,21 @@ const PivotTableOptionsWrapper = story => {
     colTotals: true,
     hideEmptyRows: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: avgData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('simple - avg totalAggregationType rows', (_, _ref15) => {
+};
+exports.SimpleAvgTotalAggregationTypeColumns = SimpleAvgTotalAggregationTypeColumns;
+SimpleAvgTotalAggregationTypeColumns.story = {
+  name: 'simple - avg totalAggregationType columns'
+};
+const SimpleAvgTotalAggregationTypeRows = (_, _ref15) => {
   let {
     pivotTableOptions
   } = _ref15;
@@ -390,17 +445,21 @@ const PivotTableOptionsWrapper = story => {
     rowTotals: true,
     hideEmptyColumns: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: avgData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('deep', (_, _ref16) => {
+};
+exports.SimpleAvgTotalAggregationTypeRows = SimpleAvgTotalAggregationTypeRows;
+SimpleAvgTotalAggregationTypeRows.story = {
+  name: 'simple - avg totalAggregationType rows'
+};
+const Deep = (_, _ref16) => {
   let {
     pivotTableOptions
   } = _ref16;
@@ -410,17 +469,21 @@ const PivotTableOptionsWrapper = story => {
     ...pivotTableOptions,
     showDimensionLabels: false
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _deepData.default,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('deep - filter', (_, _ref17) => {
+};
+exports.Deep = Deep;
+Deep.story = {
+  name: 'deep'
+};
+const DeepFilter = (_, _ref17) => {
   let {
     pivotTableOptions
   } = _ref17;
@@ -430,17 +493,21 @@ const PivotTableOptionsWrapper = story => {
     ...pivotTableOptions,
     showDimensionLabels: false
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _deepWithFiltersData.default,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('deep - title / subtitle / filter', (_, _ref18) => {
+};
+exports.DeepFilter = DeepFilter;
+DeepFilter.story = {
+  name: 'deep - filter'
+};
+const DeepTitleSubtitleFilter = (_, _ref18) => {
   let {
     pivotTableOptions
   } = _ref18;
@@ -452,17 +519,21 @@ const PivotTableOptionsWrapper = story => {
     title: 'This is a Table',
     subtitle: "It's a rather big table"
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _deepData.default,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('deep - dimension labels', (_, _ref19) => {
+};
+exports.DeepTitleSubtitleFilter = DeepTitleSubtitleFilter;
+DeepTitleSubtitleFilter.story = {
+  name: 'deep - title / subtitle / filter'
+};
+const DeepDimensionLabels = (_, _ref19) => {
   let {
     pivotTableOptions
   } = _ref19;
@@ -471,17 +542,21 @@ const PivotTableOptionsWrapper = story => {
     ...visualizationReset,
     ...pivotTableOptions
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _deepData.default,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('deep - small / compact', (_, _ref20) => {
+};
+exports.DeepDimensionLabels = DeepDimensionLabels;
+DeepDimensionLabels.story = {
+  name: 'deep - dimension labels'
+};
+const DeepSmallCompact = (_, _ref20) => {
   let {
     pivotTableOptions
   } = _ref20;
@@ -492,17 +567,21 @@ const PivotTableOptionsWrapper = story => {
     displayDensity: 'COMPACT',
     fontSize: 'SMALL'
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _deepData.default,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('deep - large / comfortable', (_, _ref21) => {
+};
+exports.DeepSmallCompact = DeepSmallCompact;
+DeepSmallCompact.story = {
+  name: 'deep - small / compact'
+};
+const DeepLargeComfortable = (_, _ref21) => {
   let {
     pivotTableOptions
   } = _ref21;
@@ -513,17 +592,21 @@ const PivotTableOptionsWrapper = story => {
     displayDensity: 'COMFORTABLE',
     fontSize: 'LARGE'
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _deepData.default,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('deep - row %', (_, _ref22) => {
+};
+exports.DeepLargeComfortable = DeepLargeComfortable;
+DeepLargeComfortable.story = {
+  name: 'deep - large / comfortable'
+};
+const DeepRow = (_, _ref22) => {
   let {
     pivotTableOptions
   } = _ref22;
@@ -537,17 +620,21 @@ const PivotTableOptionsWrapper = story => {
     rowTotals: true,
     colTotals: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _deepData.default,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('deep - column %', (_, _ref23) => {
+};
+exports.DeepRow = DeepRow;
+DeepRow.story = {
+  name: 'deep - row %'
+};
+const DeepColumn = (_, _ref23) => {
   let {
     pivotTableOptions
   } = _ref23;
@@ -561,25 +648,29 @@ const PivotTableOptionsWrapper = story => {
     rowTotals: true,
     colTotals: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _deepData.default,
     visualization: visualization
   }));
-});
+};
+exports.DeepColumn = DeepColumn;
+DeepColumn.story = {
+  name: 'deep - column %'
+};
 const ResizingPivotTable = _ref24 => {
   let {
     visualization
   } = _ref24;
-  const [size, setSize] = (0, _react2.useState)(() => ({
+  const [size, setSize] = (0, _react.useState)(() => ({
     width: 400,
     height: 300
   }));
-  (0, _react2.useEffect)(() => {
+  (0, _react.useEffect)(() => {
     const bound = 150;
     let step = 1;
     let delta = 0;
@@ -595,9 +686,9 @@ const ResizingPivotTable = _ref24 => {
     }, 10);
     return () => clearInterval(interval);
   }, []);
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: size
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _deepData.default,
     visualization: visualization
   }));
@@ -605,7 +696,7 @@ const ResizingPivotTable = _ref24 => {
 ResizingPivotTable.propTypes = {
   visualization: _propTypes.default.object.isRequired
 };
-(0, _react.storiesOf)('PivotTable', module).add('deep - resize', (_, _ref25) => {
+const DeepResize = (_, _ref25) => {
   let {
     pivotTableOptions
   } = _ref25;
@@ -614,11 +705,15 @@ ResizingPivotTable.propTypes = {
     ...visualizationReset,
     ...pivotTableOptions
   };
-  return /*#__PURE__*/_react2.default.createElement(ResizingPivotTable, {
+  return /*#__PURE__*/_react.default.createElement(ResizingPivotTable, {
     visualization: visualization
   });
-});
-(0, _react.storiesOf)('PivotTable', module).add('deep - totals', (_, _ref26) => {
+};
+exports.DeepResize = DeepResize;
+DeepResize.story = {
+  name: 'deep - resize'
+};
+const DeepTotals = (_, _ref26) => {
   let {
     pivotTableOptions
   } = _ref26;
@@ -629,17 +724,21 @@ ResizingPivotTable.propTypes = {
     rowTotals: true,
     colTotals: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _deepData.default,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('deep - subtotals', (_, _ref27) => {
+};
+exports.DeepTotals = DeepTotals;
+DeepTotals.story = {
+  name: 'deep - totals'
+};
+const DeepSubtotals = (_, _ref27) => {
   let {
     pivotTableOptions
   } = _ref27;
@@ -650,17 +749,21 @@ ResizingPivotTable.propTypes = {
     rowSubTotals: true,
     colSubTotals: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _deepData.default,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('deep - all totals', (_, _ref28) => {
+};
+exports.DeepSubtotals = DeepSubtotals;
+DeepSubtotals.story = {
+  name: 'deep - subtotals'
+};
+const DeepAllTotals = (_, _ref28) => {
   let {
     pivotTableOptions
   } = _ref28;
@@ -673,17 +776,21 @@ ResizingPivotTable.propTypes = {
     rowTotals: true,
     colTotals: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _deepData.default,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('small empty rows - shown', (_, _ref29) => {
+};
+exports.DeepAllTotals = DeepAllTotals;
+DeepAllTotals.story = {
+  name: 'deep - all totals'
+};
+const SmallEmptyRowsShown = (_, _ref29) => {
   let {
     pivotTableOptions
   } = _ref29;
@@ -696,17 +803,21 @@ ResizingPivotTable.propTypes = {
     colSubTotals: true,
     rowSubTotals: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: diseaseWeeksData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('small empty rows - hidden', (_, _ref30) => {
+};
+exports.SmallEmptyRowsShown = SmallEmptyRowsShown;
+SmallEmptyRowsShown.story = {
+  name: 'small empty rows - shown'
+};
+const SmallEmptyRowsHidden = (_, _ref30) => {
   let {
     pivotTableOptions
   } = _ref30;
@@ -720,17 +831,21 @@ ResizingPivotTable.propTypes = {
     rowSubTotals: true,
     hideEmptyRows: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: diseaseWeeksData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('empty rows - shown', (_, _ref31) => {
+};
+exports.SmallEmptyRowsHidden = SmallEmptyRowsHidden;
+SmallEmptyRowsHidden.story = {
+  name: 'small empty rows - hidden'
+};
+const EmptyRowsShown = (_, _ref31) => {
   let {
     pivotTableOptions
   } = _ref31;
@@ -743,17 +858,21 @@ ResizingPivotTable.propTypes = {
     rowTotals: true,
     colTotals: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _emptyRowsData.default,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('empty rows - hidden', (_, _ref32) => {
+};
+exports.EmptyRowsShown = EmptyRowsShown;
+EmptyRowsShown.story = {
+  name: 'empty rows - shown'
+};
+const EmptyRowsHidden = (_, _ref32) => {
   let {
     pivotTableOptions
   } = _ref32;
@@ -763,17 +882,21 @@ ResizingPivotTable.propTypes = {
     ...pivotTableOptions,
     hideEmptyRows: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: _emptyRowsData.default,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('empty columns - shown', (_, _ref33) => {
+};
+exports.EmptyRowsHidden = EmptyRowsHidden;
+EmptyRowsHidden.story = {
+  name: 'empty rows - hidden'
+};
+const EmptyColumnsShown = (_, _ref33) => {
   let {
     pivotTableOptions
   } = _ref33;
@@ -782,17 +905,21 @@ ResizingPivotTable.propTypes = {
     ...pivotTableOptions,
     hideEmptyColumns: false
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: lastFiveYearsData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('empty columns - hidden', (_, _ref34) => {
+};
+exports.EmptyColumnsShown = EmptyColumnsShown;
+EmptyColumnsShown.story = {
+  name: 'empty columns - shown'
+};
+const EmptyColumnsHidden = (_, _ref34) => {
   let {
     pivotTableOptions
   } = _ref34;
@@ -801,17 +928,21 @@ ResizingPivotTable.propTypes = {
     ...pivotTableOptions,
     hideEmptyColumns: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: lastFiveYearsData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('empty columns (weekly) - shown', (_, _ref35) => {
+};
+exports.EmptyColumnsHidden = EmptyColumnsHidden;
+EmptyColumnsHidden.story = {
+  name: 'empty columns - hidden'
+};
+const EmptyColumnsWeeklyShown = (_, _ref35) => {
   let {
     pivotTableOptions
   } = _ref35;
@@ -820,17 +951,21 @@ ResizingPivotTable.propTypes = {
     ...pivotTableOptions,
     hideEmptyColumns: false
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: weeklyColumnsData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('cumulative + empty columns (weekly) - shown', (_, _ref36) => {
+};
+exports.EmptyColumnsWeeklyShown = EmptyColumnsWeeklyShown;
+EmptyColumnsWeeklyShown.story = {
+  name: 'empty columns (weekly) - shown'
+};
+const CumulativeEmptyColumnsWeeklyShown = (_, _ref36) => {
   let {
     pivotTableOptions
   } = _ref36;
@@ -840,17 +975,21 @@ ResizingPivotTable.propTypes = {
     hideEmptyColumns: false,
     cumulativeValues: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: weeklyColumnsData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('empty columns (weekly) - hidden', (_, _ref37) => {
+};
+exports.CumulativeEmptyColumnsWeeklyShown = CumulativeEmptyColumnsWeeklyShown;
+CumulativeEmptyColumnsWeeklyShown.story = {
+  name: 'cumulative + empty columns (weekly) - shown'
+};
+const EmptyColumnsWeeklyHidden = (_, _ref37) => {
   let {
     pivotTableOptions
   } = _ref37;
@@ -859,17 +998,21 @@ ResizingPivotTable.propTypes = {
     ...pivotTableOptions,
     hideEmptyColumns: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: weeklyColumnsData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('cumulative + empty columns (weekly) - hidden', (_, _ref38) => {
+};
+exports.EmptyColumnsWeeklyHidden = EmptyColumnsWeeklyHidden;
+EmptyColumnsWeeklyHidden.story = {
+  name: 'empty columns (weekly) - hidden'
+};
+const CumulativeEmptyColumnsWeeklyHidden = (_, _ref38) => {
   let {
     pivotTableOptions
   } = _ref38;
@@ -879,17 +1022,21 @@ ResizingPivotTable.propTypes = {
     hideEmptyColumns: true,
     cumulativeValues: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: weeklyColumnsData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('empty columns + assigned cats (shown)', (_, _ref39) => {
+};
+exports.CumulativeEmptyColumnsWeeklyHidden = CumulativeEmptyColumnsWeeklyHidden;
+CumulativeEmptyColumnsWeeklyHidden.story = {
+  name: 'cumulative + empty columns (weekly) - hidden'
+};
+const EmptyColumnsAssignedCatsShown = (_, _ref39) => {
   let {
     pivotTableOptions
   } = _ref39;
@@ -899,17 +1046,21 @@ ResizingPivotTable.propTypes = {
     ...pivotTableOptions,
     hideEmptyColumns: false
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: emptyColumnsData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('empty columns + assigned cats (hidden)', (_, _ref40) => {
+};
+exports.EmptyColumnsAssignedCatsShown = EmptyColumnsAssignedCatsShown;
+EmptyColumnsAssignedCatsShown.story = {
+  name: 'empty columns + assigned cats (shown)'
+};
+const EmptyColumnsAssignedCatsHidden = (_, _ref40) => {
   let {
     pivotTableOptions
   } = _ref40;
@@ -919,17 +1070,21 @@ ResizingPivotTable.propTypes = {
     ...pivotTableOptions,
     hideEmptyColumns: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: emptyColumnsData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('legend - fixed (light fill)', (_, _ref41) => {
+};
+exports.EmptyColumnsAssignedCatsHidden = EmptyColumnsAssignedCatsHidden;
+EmptyColumnsAssignedCatsHidden.story = {
+  name: 'empty columns + assigned cats (hidden)'
+};
+const LegendFixedLightFill = (_, _ref41) => {
   let {
     pivotTableOptions
   } = _ref41;
@@ -946,18 +1101,22 @@ ResizingPivotTable.propTypes = {
       id: _underAbove100LegendSet.default.id
     }
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: targetData,
     visualization: visualization,
     legendSets: [_underAbove100LegendSet.default]
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('legend - fixed (dark fill)', (_, _ref42) => {
+};
+exports.LegendFixedLightFill = LegendFixedLightFill;
+LegendFixedLightFill.story = {
+  name: 'legend - fixed (light fill)'
+};
+const LegendFixedDarkFill = (_, _ref42) => {
   let {
     pivotTableOptions
   } = _ref42;
@@ -975,18 +1134,22 @@ ResizingPivotTable.propTypes = {
   const legendSet = (0, _cloneDeep.default)(_underAbove100LegendSet.default);
   legendSet.legends[0].color = '#000000';
   legendSet.legends[1].color = '#666666';
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: targetData,
     visualization: visualization,
     legendSets: [legendSet]
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('legend - fixed (text)', (_, _ref43) => {
+};
+exports.LegendFixedDarkFill = LegendFixedDarkFill;
+LegendFixedDarkFill.story = {
+  name: 'legend - fixed (dark fill)'
+};
+const LegendFixedText = (_, _ref43) => {
   let {
     pivotTableOptions
   } = _ref43;
@@ -999,18 +1162,22 @@ ResizingPivotTable.propTypes = {
       id: _underAbove100LegendSet.default.id
     }
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: targetData,
     visualization: visualization,
     legendSets: [_underAbove100LegendSet.default]
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('legend - fixed (% row)', (_, _ref44) => {
+};
+exports.LegendFixedText = LegendFixedText;
+LegendFixedText.story = {
+  name: 'legend - fixed (text)'
+};
+const LegendFixedRow = (_, _ref44) => {
   let {
     pivotTableOptions
   } = _ref44;
@@ -1026,18 +1193,22 @@ ResizingPivotTable.propTypes = {
       id: _underAbove100LegendSet.default.id
     }
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: targetData,
     visualization: visualization,
     legendSets: [_underAbove100LegendSet.default]
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('legend - by data item', (_, _ref45) => {
+};
+exports.LegendFixedRow = LegendFixedRow;
+LegendFixedRow.story = {
+  name: 'legend - fixed (% row)'
+};
+const LegendByDataItem = (_, _ref45) => {
   let {
     pivotTableOptions
   } = _ref45;
@@ -1057,18 +1228,22 @@ ResizingPivotTable.propTypes = {
   customLegendSet.legends[1].color = '#666666';
   data.metaData.items[visualization.columns[0].items[1].id].legendSet = _underAbove100LegendSet.default.id;
   data.metaData.items[visualization.columns[0].items[3].id].legendSet = customLegendSet.id;
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: data,
     visualization: visualization,
     legendSets: [_underAbove100LegendSet.default, customLegendSet]
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('hierarchy - none', (_, _ref46) => {
+};
+exports.LegendByDataItem = LegendByDataItem;
+LegendByDataItem.story = {
+  name: 'legend - by data item'
+};
+const HierarchyNone = (_, _ref46) => {
   let {
     pivotTableOptions
   } = _ref46;
@@ -1082,17 +1257,21 @@ ResizingPivotTable.propTypes = {
     colSubTotals: true,
     rowSubTotals: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: hierarchyData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('hierarchy - rows', (_, _ref47) => {
+};
+exports.HierarchyNone = HierarchyNone;
+HierarchyNone.story = {
+  name: 'hierarchy - none'
+};
+const HierarchyRows = (_, _ref47) => {
   let {
     pivotTableOptions
   } = _ref47;
@@ -1105,17 +1284,21 @@ ResizingPivotTable.propTypes = {
     colSubTotals: true,
     rowSubTotals: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: hierarchyData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('hierarchy - columns', (_, _ref48) => {
+};
+exports.HierarchyRows = HierarchyRows;
+HierarchyRows.story = {
+  name: 'hierarchy - rows'
+};
+const HierarchyColumns = (_, _ref48) => {
   let {
     pivotTableOptions
   } = _ref48;
@@ -1130,17 +1313,21 @@ ResizingPivotTable.propTypes = {
     colSubTotals: true,
     rowSubTotals: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: hierarchyData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('narrative', (_, _ref49) => {
+};
+exports.HierarchyColumns = HierarchyColumns;
+HierarchyColumns.story = {
+  name: 'hierarchy - columns'
+};
+const Narrative = (_, _ref49) => {
   let {
     pivotTableOptions
   } = _ref49;
@@ -1151,17 +1338,21 @@ ResizingPivotTable.propTypes = {
     rowTotals: true,
     colTotals: true
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: narrativeData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('narrative - data as filter', (_, _ref50) => {
+};
+exports.Narrative = Narrative;
+Narrative.story = {
+  name: 'narrative'
+};
+const NarrativeDataAsFilter = (_, _ref50) => {
   let {
     pivotTableOptions
   } = _ref50;
@@ -1178,17 +1369,21 @@ ResizingPivotTable.propTypes = {
     ...narrativeData,
     rows: [narrativeData.rows[0]]
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: data,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('DEGS', (_, _ref51) => {
+};
+exports.NarrativeDataAsFilter = NarrativeDataAsFilter;
+NarrativeDataAsFilter.story = {
+  name: 'narrative - data as filter'
+};
+const Degs = (_, _ref51) => {
   let {
     pivotTableOptions
   } = _ref51;
@@ -1197,22 +1392,26 @@ ResizingPivotTable.propTypes = {
     ...visualizationReset,
     ...pivotTableOptions
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: 800,
       height: 600
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: degsData,
     visualization: visualization
   }));
-});
-(0, _react.storiesOf)('PivotTable', module).add('Truncated header cell', (_, _ref52) => {
+};
+exports.Degs = Degs;
+Degs.story = {
+  name: 'DEGS'
+};
+const TruncatedHeaderCell = (_, _ref52) => {
   let {
     pivotTableOptions
   } = _ref52;
   const widths = [250, 200, 500];
-  const [width, setWidth] = (0, _react2.useState)(250);
+  const [width, setWidth] = (0, _react.useState)(250);
   const toggleWidth = () => setWidth(currentWidth => {
     var _widths;
     return (_widths = widths[widths.indexOf(currentWidth) + 1]) !== null && _widths !== void 0 ? _widths : widths[0];
@@ -1230,17 +1429,21 @@ ResizingPivotTable.propTypes = {
     ...narrativeData,
     rows: [narrativeData.rows[0]]
   };
-  return /*#__PURE__*/_react2.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width,
       height: 600,
       marginTop: 50,
       transition: 'width 1s'
     }
-  }, /*#__PURE__*/_react2.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("button", {
     onClick: toggleWidth
-  }, "Toggle width"), /*#__PURE__*/_react2.default.createElement(_index.PivotTable, {
+  }, "Toggle width"), /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
     data: data,
     visualization: visualization
   }));
-});
+};
+exports.TruncatedHeaderCell = TruncatedHeaderCell;
+TruncatedHeaderCell.story = {
+  name: 'Truncated header cell'
+};

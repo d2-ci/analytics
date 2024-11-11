@@ -12,7 +12,7 @@ describe('The FileMenu - SaveAsDialog component', () => {
   const onSaveAs = jest.fn();
   const getSaveAsDialogComponent = props => {
     if (!shallowSaveAsDialog) {
-      shallowSaveAsDialog = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_SaveAsDialog.SaveAsDialog, props));
+      shallowSaveAsDialog = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_SaveAsDialog.SaveAsDialog, props));
     }
     return shallowSaveAsDialog;
   };

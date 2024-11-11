@@ -9,7 +9,7 @@ describe('The Fixed Period Single Select component', () => {
   let shallowFixedPeriodSelect;
   const getWrapper = () => {
     if (!shallowFixedPeriodSelect) {
-      shallowFixedPeriodSelect = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_FixedPeriodSelect.default, props));
+      shallowFixedPeriodSelect = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_FixedPeriodSelect.default, props));
     }
     return shallowFixedPeriodSelect;
   };

@@ -19,7 +19,7 @@ describe('The Period Dimension component', () => {
   let shallowPeriodDimension;
   const getWrapper = () => {
     if (!shallowPeriodDimension) {
-      shallowPeriodDimension = shallow( /*#__PURE__*/React.createElement(PeriodDimension, props));
+      shallowPeriodDimension = shallow(/*#__PURE__*/React.createElement(PeriodDimension, props));
     }
     return shallowPeriodDimension;
   };

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = _default;
+exports.default = yAxis;
 var _arrayClean = _interopRequireDefault(require("d2-utilizr/lib/arrayClean"));
 var _objectClean = _interopRequireDefault(require("d2-utilizr/lib/objectClean"));
 var _index = _interopRequireDefault(require("../../../../../locales/index.js"));
@@ -106,7 +106,7 @@ function getDefault(layout, series, extraOptions) {
   });
   return axes;
 }
-function _default(layout, series, extraOptions) {
+function yAxis(layout, series, extraOptions) {
   switch (layout.type) {
     case _visTypes.VIS_TYPE_SINGLE_VALUE:
       return null;

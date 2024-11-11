@@ -11,7 +11,7 @@ describe('<HoverMenuDropdown/>', () => {
 
   it('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_index.HoverMenuDropdown, {
+    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.HoverMenuDropdown, {
       label: "test dropdown",
       dataTest: dataTest
     }, "children"));
@@ -19,7 +19,7 @@ describe('<HoverMenuDropdown/>', () => {
   });
   it('accepts a `className` prop', () => {
     const className = 'test';
-    const wrapper = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_index.HoverMenuDropdown, {
+    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.HoverMenuDropdown, {
       label: "test dropdown",
       className: className
     }, "children"));

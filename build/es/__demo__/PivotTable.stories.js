@@ -1,5 +1,4 @@
 import { Checkbox, Divider } from '@dhis2/ui';
-import { storiesOf } from '@storybook/react';
 import cloneDeep from 'lodash/cloneDeep';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
@@ -99,7 +98,11 @@ const PivotTableOptionsWrapper = story => {
     pivotTableOptions
   }));
 };
-storiesOf('PivotTable', module).addDecorator(PivotTableOptionsWrapper).add('simple', (_, _ref3) => {
+export default {
+  title: 'PivotTable',
+  decorators: [PivotTableOptionsWrapper]
+};
+export const Simple = (_, _ref3) => {
   let {
     pivotTableOptions
   } = _ref3;
@@ -117,8 +120,11 @@ storiesOf('PivotTable', module).addDecorator(PivotTableOptionsWrapper).add('simp
     data: simpleData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('simple - comma DGS', (_, _ref4) => {
+};
+Simple.story = {
+  name: 'simple'
+};
+export const SimpleCommaDgs = (_, _ref4) => {
   let {
     pivotTableOptions
   } = _ref4;
@@ -137,8 +143,11 @@ storiesOf('PivotTable', module).add('simple - comma DGS', (_, _ref4) => {
     data: simpleData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('simple - title / subtitle / filter', (_, _ref5) => {
+};
+SimpleCommaDgs.story = {
+  name: 'simple - comma DGS'
+};
+export const SimpleTitleSubtitleFilter = (_, _ref5) => {
   let {
     pivotTableOptions
   } = _ref5;
@@ -158,8 +167,11 @@ storiesOf('PivotTable', module).add('simple - title / subtitle / filter', (_, _r
     data: simpleData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('simple - column %', (_, _ref6) => {
+};
+SimpleTitleSubtitleFilter.story = {
+  name: 'simple - title / subtitle / filter'
+};
+export const SimpleColumn = (_, _ref6) => {
   let {
     pivotTableOptions
   } = _ref6;
@@ -179,8 +191,11 @@ storiesOf('PivotTable', module).add('simple - column %', (_, _ref6) => {
     data: simpleData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('simple - data as filter', (_, _ref7) => {
+};
+SimpleColumn.story = {
+  name: 'simple - column %'
+};
+export const SimpleDataAsFilter = (_, _ref7) => {
   let {
     pivotTableOptions
   } = _ref7;
@@ -200,8 +215,11 @@ storiesOf('PivotTable', module).add('simple - data as filter', (_, _ref7) => {
     data: simpleData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('simple - no columns', (_, _ref8) => {
+};
+SimpleDataAsFilter.story = {
+  name: 'simple - data as filter'
+};
+export const SimpleNoColumns = (_, _ref8) => {
   let {
     pivotTableOptions
   } = _ref8;
@@ -225,8 +243,11 @@ storiesOf('PivotTable', module).add('simple - no columns', (_, _ref8) => {
     data: simpleData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('simple - no columns (single cell)', (_, _ref9) => {
+};
+SimpleNoColumns.story = {
+  name: 'simple - no columns'
+};
+export const SimpleNoColumnsSingleCell = (_, _ref9) => {
   let {
     pivotTableOptions
   } = _ref9;
@@ -248,8 +269,11 @@ storiesOf('PivotTable', module).add('simple - no columns (single cell)', (_, _re
     data: simpleData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('simple - no columns (deep)', (_, _ref10) => {
+};
+SimpleNoColumnsSingleCell.story = {
+  name: 'simple - no columns (single cell)'
+};
+export const SimpleNoColumnsDeep = (_, _ref10) => {
   let {
     pivotTableOptions
   } = _ref10;
@@ -272,8 +296,11 @@ storiesOf('PivotTable', module).add('simple - no columns (deep)', (_, _ref10) =>
     data: simpleData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('simple - no columns (label)', (_, _ref11) => {
+};
+SimpleNoColumnsDeep.story = {
+  name: 'simple - no columns (deep)'
+};
+export const SimpleNoColumnsLabel = (_, _ref11) => {
   let {
     pivotTableOptions
   } = _ref11;
@@ -298,8 +325,11 @@ storiesOf('PivotTable', module).add('simple - no columns (label)', (_, _ref11) =
     data: simpleData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('simple - no rows (small)', (_, _ref12) => {
+};
+SimpleNoColumnsLabel.story = {
+  name: 'simple - no columns (label)'
+};
+export const SimpleNoRowsSmall = (_, _ref12) => {
   let {
     pivotTableOptions
   } = _ref12;
@@ -324,8 +354,11 @@ storiesOf('PivotTable', module).add('simple - no rows (small)', (_, _ref12) => {
     data: simpleData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('simple - no rows (large)', (_, _ref13) => {
+};
+SimpleNoRowsSmall.story = {
+  name: 'simple - no rows (small)'
+};
+export const SimpleNoRowsLarge = (_, _ref13) => {
   let {
     pivotTableOptions
   } = _ref13;
@@ -350,8 +383,11 @@ storiesOf('PivotTable', module).add('simple - no rows (large)', (_, _ref13) => {
     data: simpleData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('simple - avg totalAggregationType columns', (_, _ref14) => {
+};
+SimpleNoRowsLarge.story = {
+  name: 'simple - no rows (large)'
+};
+export const SimpleAvgTotalAggregationTypeColumns = (_, _ref14) => {
   let {
     pivotTableOptions
   } = _ref14;
@@ -371,8 +407,11 @@ storiesOf('PivotTable', module).add('simple - avg totalAggregationType columns',
     data: avgData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('simple - avg totalAggregationType rows', (_, _ref15) => {
+};
+SimpleAvgTotalAggregationTypeColumns.story = {
+  name: 'simple - avg totalAggregationType columns'
+};
+export const SimpleAvgTotalAggregationTypeRows = (_, _ref15) => {
   let {
     pivotTableOptions
   } = _ref15;
@@ -394,8 +433,11 @@ storiesOf('PivotTable', module).add('simple - avg totalAggregationType rows', (_
     data: avgData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('deep', (_, _ref16) => {
+};
+SimpleAvgTotalAggregationTypeRows.story = {
+  name: 'simple - avg totalAggregationType rows'
+};
+export const Deep = (_, _ref16) => {
   let {
     pivotTableOptions
   } = _ref16;
@@ -414,8 +456,11 @@ storiesOf('PivotTable', module).add('deep', (_, _ref16) => {
     data: deepData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('deep - filter', (_, _ref17) => {
+};
+Deep.story = {
+  name: 'deep'
+};
+export const DeepFilter = (_, _ref17) => {
   let {
     pivotTableOptions
   } = _ref17;
@@ -434,8 +479,11 @@ storiesOf('PivotTable', module).add('deep - filter', (_, _ref17) => {
     data: deepWithFiltersData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('deep - title / subtitle / filter', (_, _ref18) => {
+};
+DeepFilter.story = {
+  name: 'deep - filter'
+};
+export const DeepTitleSubtitleFilter = (_, _ref18) => {
   let {
     pivotTableOptions
   } = _ref18;
@@ -456,8 +504,11 @@ storiesOf('PivotTable', module).add('deep - title / subtitle / filter', (_, _ref
     data: deepData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('deep - dimension labels', (_, _ref19) => {
+};
+DeepTitleSubtitleFilter.story = {
+  name: 'deep - title / subtitle / filter'
+};
+export const DeepDimensionLabels = (_, _ref19) => {
   let {
     pivotTableOptions
   } = _ref19;
@@ -475,8 +526,11 @@ storiesOf('PivotTable', module).add('deep - dimension labels', (_, _ref19) => {
     data: deepData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('deep - small / compact', (_, _ref20) => {
+};
+DeepDimensionLabels.story = {
+  name: 'deep - dimension labels'
+};
+export const DeepSmallCompact = (_, _ref20) => {
   let {
     pivotTableOptions
   } = _ref20;
@@ -496,8 +550,11 @@ storiesOf('PivotTable', module).add('deep - small / compact', (_, _ref20) => {
     data: deepData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('deep - large / comfortable', (_, _ref21) => {
+};
+DeepSmallCompact.story = {
+  name: 'deep - small / compact'
+};
+export const DeepLargeComfortable = (_, _ref21) => {
   let {
     pivotTableOptions
   } = _ref21;
@@ -517,8 +574,11 @@ storiesOf('PivotTable', module).add('deep - large / comfortable', (_, _ref21) =>
     data: deepData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('deep - row %', (_, _ref22) => {
+};
+DeepLargeComfortable.story = {
+  name: 'deep - large / comfortable'
+};
+export const DeepRow = (_, _ref22) => {
   let {
     pivotTableOptions
   } = _ref22;
@@ -541,8 +601,11 @@ storiesOf('PivotTable', module).add('deep - row %', (_, _ref22) => {
     data: deepData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('deep - column %', (_, _ref23) => {
+};
+DeepRow.story = {
+  name: 'deep - row %'
+};
+export const DeepColumn = (_, _ref23) => {
   let {
     pivotTableOptions
   } = _ref23;
@@ -565,7 +628,10 @@ storiesOf('PivotTable', module).add('deep - column %', (_, _ref23) => {
     data: deepData,
     visualization: visualization
   }));
-});
+};
+DeepColumn.story = {
+  name: 'deep - column %'
+};
 const ResizingPivotTable = _ref24 => {
   let {
     visualization
@@ -600,7 +666,7 @@ const ResizingPivotTable = _ref24 => {
 ResizingPivotTable.propTypes = {
   visualization: PropTypes.object.isRequired
 };
-storiesOf('PivotTable', module).add('deep - resize', (_, _ref25) => {
+export const DeepResize = (_, _ref25) => {
   let {
     pivotTableOptions
   } = _ref25;
@@ -612,8 +678,11 @@ storiesOf('PivotTable', module).add('deep - resize', (_, _ref25) => {
   return /*#__PURE__*/React.createElement(ResizingPivotTable, {
     visualization: visualization
   });
-});
-storiesOf('PivotTable', module).add('deep - totals', (_, _ref26) => {
+};
+DeepResize.story = {
+  name: 'deep - resize'
+};
+export const DeepTotals = (_, _ref26) => {
   let {
     pivotTableOptions
   } = _ref26;
@@ -633,8 +702,11 @@ storiesOf('PivotTable', module).add('deep - totals', (_, _ref26) => {
     data: deepData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('deep - subtotals', (_, _ref27) => {
+};
+DeepTotals.story = {
+  name: 'deep - totals'
+};
+export const DeepSubtotals = (_, _ref27) => {
   let {
     pivotTableOptions
   } = _ref27;
@@ -654,8 +726,11 @@ storiesOf('PivotTable', module).add('deep - subtotals', (_, _ref27) => {
     data: deepData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('deep - all totals', (_, _ref28) => {
+};
+DeepSubtotals.story = {
+  name: 'deep - subtotals'
+};
+export const DeepAllTotals = (_, _ref28) => {
   let {
     pivotTableOptions
   } = _ref28;
@@ -677,8 +752,11 @@ storiesOf('PivotTable', module).add('deep - all totals', (_, _ref28) => {
     data: deepData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('small empty rows - shown', (_, _ref29) => {
+};
+DeepAllTotals.story = {
+  name: 'deep - all totals'
+};
+export const SmallEmptyRowsShown = (_, _ref29) => {
   let {
     pivotTableOptions
   } = _ref29;
@@ -700,8 +778,11 @@ storiesOf('PivotTable', module).add('small empty rows - shown', (_, _ref29) => {
     data: diseaseWeeksData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('small empty rows - hidden', (_, _ref30) => {
+};
+SmallEmptyRowsShown.story = {
+  name: 'small empty rows - shown'
+};
+export const SmallEmptyRowsHidden = (_, _ref30) => {
   let {
     pivotTableOptions
   } = _ref30;
@@ -724,8 +805,11 @@ storiesOf('PivotTable', module).add('small empty rows - hidden', (_, _ref30) => 
     data: diseaseWeeksData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('empty rows - shown', (_, _ref31) => {
+};
+SmallEmptyRowsHidden.story = {
+  name: 'small empty rows - hidden'
+};
+export const EmptyRowsShown = (_, _ref31) => {
   let {
     pivotTableOptions
   } = _ref31;
@@ -747,8 +831,11 @@ storiesOf('PivotTable', module).add('empty rows - shown', (_, _ref31) => {
     data: emptyRowsData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('empty rows - hidden', (_, _ref32) => {
+};
+EmptyRowsShown.story = {
+  name: 'empty rows - shown'
+};
+export const EmptyRowsHidden = (_, _ref32) => {
   let {
     pivotTableOptions
   } = _ref32;
@@ -767,8 +854,11 @@ storiesOf('PivotTable', module).add('empty rows - hidden', (_, _ref32) => {
     data: emptyRowsData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('empty columns - shown', (_, _ref33) => {
+};
+EmptyRowsHidden.story = {
+  name: 'empty rows - hidden'
+};
+export const EmptyColumnsShown = (_, _ref33) => {
   let {
     pivotTableOptions
   } = _ref33;
@@ -786,8 +876,11 @@ storiesOf('PivotTable', module).add('empty columns - shown', (_, _ref33) => {
     data: lastFiveYearsData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('empty columns - hidden', (_, _ref34) => {
+};
+EmptyColumnsShown.story = {
+  name: 'empty columns - shown'
+};
+export const EmptyColumnsHidden = (_, _ref34) => {
   let {
     pivotTableOptions
   } = _ref34;
@@ -805,8 +898,11 @@ storiesOf('PivotTable', module).add('empty columns - hidden', (_, _ref34) => {
     data: lastFiveYearsData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('empty columns (weekly) - shown', (_, _ref35) => {
+};
+EmptyColumnsHidden.story = {
+  name: 'empty columns - hidden'
+};
+export const EmptyColumnsWeeklyShown = (_, _ref35) => {
   let {
     pivotTableOptions
   } = _ref35;
@@ -824,8 +920,11 @@ storiesOf('PivotTable', module).add('empty columns (weekly) - shown', (_, _ref35
     data: weeklyColumnsData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('cumulative + empty columns (weekly) - shown', (_, _ref36) => {
+};
+EmptyColumnsWeeklyShown.story = {
+  name: 'empty columns (weekly) - shown'
+};
+export const CumulativeEmptyColumnsWeeklyShown = (_, _ref36) => {
   let {
     pivotTableOptions
   } = _ref36;
@@ -844,8 +943,11 @@ storiesOf('PivotTable', module).add('cumulative + empty columns (weekly) - shown
     data: weeklyColumnsData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('empty columns (weekly) - hidden', (_, _ref37) => {
+};
+CumulativeEmptyColumnsWeeklyShown.story = {
+  name: 'cumulative + empty columns (weekly) - shown'
+};
+export const EmptyColumnsWeeklyHidden = (_, _ref37) => {
   let {
     pivotTableOptions
   } = _ref37;
@@ -863,8 +965,11 @@ storiesOf('PivotTable', module).add('empty columns (weekly) - hidden', (_, _ref3
     data: weeklyColumnsData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('cumulative + empty columns (weekly) - hidden', (_, _ref38) => {
+};
+EmptyColumnsWeeklyHidden.story = {
+  name: 'empty columns (weekly) - hidden'
+};
+export const CumulativeEmptyColumnsWeeklyHidden = (_, _ref38) => {
   let {
     pivotTableOptions
   } = _ref38;
@@ -883,8 +988,11 @@ storiesOf('PivotTable', module).add('cumulative + empty columns (weekly) - hidde
     data: weeklyColumnsData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('empty columns + assigned cats (shown)', (_, _ref39) => {
+};
+CumulativeEmptyColumnsWeeklyHidden.story = {
+  name: 'cumulative + empty columns (weekly) - hidden'
+};
+export const EmptyColumnsAssignedCatsShown = (_, _ref39) => {
   let {
     pivotTableOptions
   } = _ref39;
@@ -903,8 +1011,11 @@ storiesOf('PivotTable', module).add('empty columns + assigned cats (shown)', (_,
     data: emptyColumnsData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('empty columns + assigned cats (hidden)', (_, _ref40) => {
+};
+EmptyColumnsAssignedCatsShown.story = {
+  name: 'empty columns + assigned cats (shown)'
+};
+export const EmptyColumnsAssignedCatsHidden = (_, _ref40) => {
   let {
     pivotTableOptions
   } = _ref40;
@@ -923,8 +1034,11 @@ storiesOf('PivotTable', module).add('empty columns + assigned cats (hidden)', (_
     data: emptyColumnsData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('legend - fixed (light fill)', (_, _ref41) => {
+};
+EmptyColumnsAssignedCatsHidden.story = {
+  name: 'empty columns + assigned cats (hidden)'
+};
+export const LegendFixedLightFill = (_, _ref41) => {
   let {
     pivotTableOptions
   } = _ref41;
@@ -951,8 +1065,11 @@ storiesOf('PivotTable', module).add('legend - fixed (light fill)', (_, _ref41) =
     visualization: visualization,
     legendSets: [underAbove100LegendSet]
   }));
-});
-storiesOf('PivotTable', module).add('legend - fixed (dark fill)', (_, _ref42) => {
+};
+LegendFixedLightFill.story = {
+  name: 'legend - fixed (light fill)'
+};
+export const LegendFixedDarkFill = (_, _ref42) => {
   let {
     pivotTableOptions
   } = _ref42;
@@ -980,8 +1097,11 @@ storiesOf('PivotTable', module).add('legend - fixed (dark fill)', (_, _ref42) =>
     visualization: visualization,
     legendSets: [legendSet]
   }));
-});
-storiesOf('PivotTable', module).add('legend - fixed (text)', (_, _ref43) => {
+};
+LegendFixedDarkFill.story = {
+  name: 'legend - fixed (dark fill)'
+};
+export const LegendFixedText = (_, _ref43) => {
   let {
     pivotTableOptions
   } = _ref43;
@@ -1004,8 +1124,11 @@ storiesOf('PivotTable', module).add('legend - fixed (text)', (_, _ref43) => {
     visualization: visualization,
     legendSets: [underAbove100LegendSet]
   }));
-});
-storiesOf('PivotTable', module).add('legend - fixed (% row)', (_, _ref44) => {
+};
+LegendFixedText.story = {
+  name: 'legend - fixed (text)'
+};
+export const LegendFixedRow = (_, _ref44) => {
   let {
     pivotTableOptions
   } = _ref44;
@@ -1031,8 +1154,11 @@ storiesOf('PivotTable', module).add('legend - fixed (% row)', (_, _ref44) => {
     visualization: visualization,
     legendSets: [underAbove100LegendSet]
   }));
-});
-storiesOf('PivotTable', module).add('legend - by data item', (_, _ref45) => {
+};
+LegendFixedRow.story = {
+  name: 'legend - fixed (% row)'
+};
+export const LegendByDataItem = (_, _ref45) => {
   let {
     pivotTableOptions
   } = _ref45;
@@ -1062,8 +1188,11 @@ storiesOf('PivotTable', module).add('legend - by data item', (_, _ref45) => {
     visualization: visualization,
     legendSets: [underAbove100LegendSet, customLegendSet]
   }));
-});
-storiesOf('PivotTable', module).add('hierarchy - none', (_, _ref46) => {
+};
+LegendByDataItem.story = {
+  name: 'legend - by data item'
+};
+export const HierarchyNone = (_, _ref46) => {
   let {
     pivotTableOptions
   } = _ref46;
@@ -1086,8 +1215,11 @@ storiesOf('PivotTable', module).add('hierarchy - none', (_, _ref46) => {
     data: hierarchyData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('hierarchy - rows', (_, _ref47) => {
+};
+HierarchyNone.story = {
+  name: 'hierarchy - none'
+};
+export const HierarchyRows = (_, _ref47) => {
   let {
     pivotTableOptions
   } = _ref47;
@@ -1109,8 +1241,11 @@ storiesOf('PivotTable', module).add('hierarchy - rows', (_, _ref47) => {
     data: hierarchyData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('hierarchy - columns', (_, _ref48) => {
+};
+HierarchyRows.story = {
+  name: 'hierarchy - rows'
+};
+export const HierarchyColumns = (_, _ref48) => {
   let {
     pivotTableOptions
   } = _ref48;
@@ -1134,8 +1269,11 @@ storiesOf('PivotTable', module).add('hierarchy - columns', (_, _ref48) => {
     data: hierarchyData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('narrative', (_, _ref49) => {
+};
+HierarchyColumns.story = {
+  name: 'hierarchy - columns'
+};
+export const Narrative = (_, _ref49) => {
   let {
     pivotTableOptions
   } = _ref49;
@@ -1155,8 +1293,11 @@ storiesOf('PivotTable', module).add('narrative', (_, _ref49) => {
     data: narrativeData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('narrative - data as filter', (_, _ref50) => {
+};
+Narrative.story = {
+  name: 'narrative'
+};
+export const NarrativeDataAsFilter = (_, _ref50) => {
   let {
     pivotTableOptions
   } = _ref50;
@@ -1182,8 +1323,11 @@ storiesOf('PivotTable', module).add('narrative - data as filter', (_, _ref50) =>
     data: data,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('DEGS', (_, _ref51) => {
+};
+NarrativeDataAsFilter.story = {
+  name: 'narrative - data as filter'
+};
+export const Degs = (_, _ref51) => {
   let {
     pivotTableOptions
   } = _ref51;
@@ -1201,8 +1345,11 @@ storiesOf('PivotTable', module).add('DEGS', (_, _ref51) => {
     data: degsData,
     visualization: visualization
   }));
-});
-storiesOf('PivotTable', module).add('Truncated header cell', (_, _ref52) => {
+};
+Degs.story = {
+  name: 'DEGS'
+};
+export const TruncatedHeaderCell = (_, _ref52) => {
   let {
     pivotTableOptions
   } = _ref52;
@@ -1238,4 +1385,7 @@ storiesOf('PivotTable', module).add('Truncated header cell', (_, _ref52) => {
     data: data,
     visualization: visualization
   }));
-});
+};
+TruncatedHeaderCell.story = {
+  name: 'Truncated header cell'
+};

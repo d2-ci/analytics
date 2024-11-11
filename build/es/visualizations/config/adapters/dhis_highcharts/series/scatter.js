@@ -2,7 +2,7 @@ import i18n from '../../../../../locales/index.js';
 const DEFAULT_COLOR = '#a8bf24';
 const OUTLIER_COLOR = 'red';
 const POINT_MARKER_SYMBOL = 'circle';
-export default (extraOptions => {
+export default extraOptions => {
   const series = [];
   if (extraOptions.outlierHelper) {
     var _helper$vars$normaliz;
@@ -78,4 +78,4 @@ export default (extraOptions => {
     });
   }
   return series;
-});
+};

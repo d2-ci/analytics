@@ -8,7 +8,7 @@ describe('The FileMenu - DeleteDialog component', () => {
   const onClose = jest.fn();
   const getDeleteDialogComponent = props => {
     if (!shallowDeleteDialog) {
-      shallowDeleteDialog = shallow( /*#__PURE__*/React.createElement(DeleteDialog, props));
+      shallowDeleteDialog = shallow(/*#__PURE__*/React.createElement(DeleteDialog, props));
     }
     return shallowDeleteDialog;
   };

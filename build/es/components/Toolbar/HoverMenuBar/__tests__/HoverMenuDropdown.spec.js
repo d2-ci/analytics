@@ -8,7 +8,7 @@ describe('<HoverMenuDropdown/>', () => {
 
   it('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = shallow( /*#__PURE__*/React.createElement(HoverMenuDropdown, {
+    const wrapper = shallow(/*#__PURE__*/React.createElement(HoverMenuDropdown, {
       label: "test dropdown",
       dataTest: dataTest
     }, "children"));
@@ -16,7 +16,7 @@ describe('<HoverMenuDropdown/>', () => {
   });
   it('accepts a `className` prop', () => {
     const className = 'test';
-    const wrapper = shallow( /*#__PURE__*/React.createElement(HoverMenuDropdown, {
+    const wrapper = shallow(/*#__PURE__*/React.createElement(HoverMenuDropdown, {
       label: "test dropdown",
       className: className
     }, "children"));

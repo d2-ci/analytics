@@ -9,7 +9,7 @@ describe('The Period Selector component', () => {
   let shallowPeriodTransfer;
   const getWrapper = () => {
     if (!shallowPeriodTransfer) {
-      shallowPeriodTransfer = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_PeriodTransfer.default, props));
+      shallowPeriodTransfer = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_PeriodTransfer.default, props));
     }
     return shallowPeriodTransfer;
   };

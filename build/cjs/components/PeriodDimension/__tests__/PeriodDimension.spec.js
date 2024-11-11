@@ -22,7 +22,7 @@ describe('The Period Dimension component', () => {
   let shallowPeriodDimension;
   const getWrapper = () => {
     if (!shallowPeriodDimension) {
-      shallowPeriodDimension = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_PeriodDimension.default, props));
+      shallowPeriodDimension = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_PeriodDimension.default, props));
     }
     return shallowPeriodDimension;
   };

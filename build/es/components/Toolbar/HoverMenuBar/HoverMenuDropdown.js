@@ -1,6 +1,5 @@
 import _JSXStyle from "styled-jsx/style";
-import { Popper } from '@dhis2-ui/popper';
-import { Portal } from '@dhis2-ui/portal';
+import { Popper, Portal } from '@dhis2/ui';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';

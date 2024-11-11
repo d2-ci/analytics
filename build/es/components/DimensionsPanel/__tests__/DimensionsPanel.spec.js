@@ -7,7 +7,7 @@ describe('The Dimensions component ', () => {
   let props;
   const dimensionsComponent = () => {
     if (!shallowDimensions) {
-      shallowDimensions = shallow( /*#__PURE__*/React.createElement(DimensionsPanel, props));
+      shallowDimensions = shallow(/*#__PURE__*/React.createElement(DimensionsPanel, props));
     }
     return shallowDimensions;
   };

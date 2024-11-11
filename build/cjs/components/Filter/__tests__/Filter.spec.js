@@ -10,7 +10,7 @@ describe('The Filter component ', () => {
   let props;
   const filterComp = () => {
     if (!shallowFilter) {
-      shallowFilter = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_Filter.default, props));
+      shallowFilter = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_Filter.default, props));
     }
     return shallowFilter;
   };

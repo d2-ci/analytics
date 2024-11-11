@@ -1,8 +1,11 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.WithReadonlyAo = exports.WithAo = exports.Simple = void 0;
 var _appRuntime = require("@dhis2/app-runtime");
-var _react = require("@storybook/react");
-var _react2 = _interopRequireDefault(require("react"));
+var _react = _interopRequireDefault(require("react"));
 var _FileMenu = require("../components/FileMenu/FileMenu.js");
 var _index = require("../components/Toolbar/index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -55,21 +58,35 @@ const visReadonlyObject = {
     manage: false
   }
 };
-(0, _react.storiesOf)('FileMenu', module).add('Simple', () => /*#__PURE__*/_react2.default.createElement(_appRuntime.Provider, {
+var _default = exports.default = {
+  title: 'FileMenu'
+};
+const Simple = () => /*#__PURE__*/_react.default.createElement(_appRuntime.Provider, {
   config: configMock
-}, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, null, /*#__PURE__*/_react2.default.createElement(_FileMenu.FileMenu, {
+}, /*#__PURE__*/_react.default.createElement(_index.HoverMenuBar, null, /*#__PURE__*/_react.default.createElement(_FileMenu.FileMenu, {
   currentUser: user,
   fileType: "visualization"
-})))).add('With AO', () => /*#__PURE__*/_react2.default.createElement(_appRuntime.Provider, {
+})));
+exports.Simple = Simple;
+const WithAo = () => /*#__PURE__*/_react.default.createElement(_appRuntime.Provider, {
   config: configMock
-}, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, null, /*#__PURE__*/_react2.default.createElement(_FileMenu.FileMenu, {
+}, /*#__PURE__*/_react.default.createElement(_index.HoverMenuBar, null, /*#__PURE__*/_react.default.createElement(_FileMenu.FileMenu, {
   currentUser: user,
   fileType: "visualization",
   fileObject: visObject
-})))).add('With readonly AO', () => /*#__PURE__*/_react2.default.createElement(_appRuntime.Provider, {
+})));
+exports.WithAo = WithAo;
+WithAo.story = {
+  name: 'With AO'
+};
+const WithReadonlyAo = () => /*#__PURE__*/_react.default.createElement(_appRuntime.Provider, {
   config: configMock
-}, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, null, /*#__PURE__*/_react2.default.createElement(_FileMenu.FileMenu, {
+}, /*#__PURE__*/_react.default.createElement(_index.HoverMenuBar, null, /*#__PURE__*/_react.default.createElement(_FileMenu.FileMenu, {
   currentUser: user,
   fileType: "visualization",
   fileObject: visReadonlyObject
-}))));
+})));
+exports.WithReadonlyAo = WithReadonlyAo;
+WithReadonlyAo.story = {
+  name: 'With readonly AO'
+};

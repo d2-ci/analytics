@@ -9,12 +9,12 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 describe('<HoverMenuBar/>', () => {
   it('renders children', () => {
     const childNode = 'text node';
-    const wrapper = (0, _enzyme.shallow)( /*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, null, childNode));
+    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, null, childNode));
     expect(wrapper.containsMatchingElement(childNode)).toBe(true);
   });
   it('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = (0, _enzyme.shallow)( /*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, {
+    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, {
       dataTest: dataTest
     }, "children"));
     expect(wrapper.find('div').prop('data-test')).toBe(dataTest);
@@ -110,7 +110,7 @@ function createFullMenuBarWrapper() {
     menuItemOnClickSpy,
     subMenuItemOnClickSpy
   } = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0, _react.render)( /*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, null, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuDropdown, {
+  return (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, null, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuDropdown, {
     label: "Menu A"
   }, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuList, null, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuListItem, {
     label: "Menu item A.1",

@@ -10,7 +10,7 @@ describe('The Dimensions component ', () => {
   let props;
   const dimensionsComponent = () => {
     if (!shallowDimensions) {
-      shallowDimensions = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_DimensionsPanel.default, props));
+      shallowDimensions = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_DimensionsPanel.default, props));
     }
     return shallowDimensions;
   };

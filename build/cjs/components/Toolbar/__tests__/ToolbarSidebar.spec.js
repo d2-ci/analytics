@@ -7,18 +7,18 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 describe('<ToolbarSidebar/>', () => {
   it('renders children', () => {
     const childNode = 'text node';
-    const wrapper = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_index.ToolbarSidebar, null, childNode));
+    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.ToolbarSidebar, null, childNode));
     expect(wrapper.containsMatchingElement(childNode)).toBe(true);
   });
   it('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_index.ToolbarSidebar, {
+    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.ToolbarSidebar, {
       dataTest: dataTest
     }));
     expect(wrapper.prop('data-test')).toBe(dataTest);
   });
   it('accepts a `isHidden` prop', () => {
-    const wrapper = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_index.ToolbarSidebar, {
+    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.ToolbarSidebar, {
       isHidden: true
     }));
     expect(wrapper.find('div').hasClass('isHidden')).toEqual(true);

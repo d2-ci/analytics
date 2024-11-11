@@ -9,7 +9,7 @@ describe('DimensionItem', () => {
   let shallowItem;
   const dimensionItem = () => {
     if (!shallowItem) {
-      shallowItem = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_DimensionItem.default, props));
+      shallowItem = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_DimensionItem.default, props));
     }
     return shallowItem;
   };
