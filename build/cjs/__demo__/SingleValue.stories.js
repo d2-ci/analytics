@@ -593,7 +593,6 @@ const Default = () => {
   const [dashboard, setDashboard] = (0, _react.useState)(false);
   const [showIcon, setShowIcon] = (0, _react.useState)(true);
   const [indicatorType, setIndicatorType] = (0, _react.useState)('plain');
-  const [exportAsPdf, setExportAsPdf] = (0, _react.useState)(true);
   const [width, setWidth] = (0, _react.useState)(constainerStyleBase.width);
   const [height, setHeight] = (0, _react.useState)(constainerStyleBase.height);
   const containerStyle = (0, _react.useMemo)(() => ({
@@ -626,31 +625,6 @@ const Default = () => {
       });
     }
   }, [containerStyle, dashboard, showIcon, indicatorType]);
-  const downloadOffline = (0, _react.useCallback)(() => {
-    if (newChartRef.current) {
-      const currentBackgroundColor = newChartRef.current.userOptions.chart.backgroundColor;
-      newChartRef.current.update({
-        exporting: {
-          chartOptions: {
-            isPdfExport: exportAsPdf
-          }
-        }
-      });
-      newChartRef.current.exportChartLocal({
-        sourceHeight: 768,
-        sourceWidth: 1024,
-        scale: 1,
-        fallbackToExportServer: false,
-        filename: 'testOfflineDownload',
-        showExportInProgress: true,
-        type: exportAsPdf ? 'application/pdf' : 'image/png'
-      }, {
-        chart: {
-          backgroundColor: currentBackgroundColor === 'transparent' ? '#ffffff' : currentBackgroundColor
-        }
-      });
-    }
-  }, [exportAsPdf]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     style: {
       display: 'flex',
@@ -692,13 +666,7 @@ const Default = () => {
     return /*#__PURE__*/_react.default.createElement("option", {
       key: index
     }, type);
-  }))), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
-    checked: exportAsPdf,
-    onChange: () => setExportAsPdf(!exportAsPdf),
-    type: "checkbox"
-  }), "\xA0Export as PDF"), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: downloadOffline
-  }, "Download offline")), /*#__PURE__*/_react.default.createElement("div", {
+  })))), /*#__PURE__*/_react.default.createElement("div", {
     style: {
       display: 'flex',
       gap: 12
