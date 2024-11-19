@@ -42,8 +42,12 @@ const CalculationInfo = _ref3 => {
   const [data, setData] = (0, _react.useState)();
   const [error, setError] = (0, _react.useState)();
   const [loading, setLoading] = (0, _react.useState)(true);
+  const {
+    baseUrl,
+    apiVersion
+  } = (0, _appRuntime.useConfig)();
   const engine = (0, _appRuntime.useDataEngine)();
-  const [getHumanReadableExpression] = (0, _appRuntime.useDataMutation)(_expression.validateExpressionMutation, {
+  const [getHumanReadableExpression] = (0, _appRuntime.useDataMutation)(_expression.validateIndicatorExpressionMutation, {
     onError: setError
   });
   const fetchData = (0, _react.useCallback)(async () => {
@@ -64,6 +68,9 @@ const CalculationInfo = _ref3 => {
         calculation.humanReadableExpression = result.description;
       }
     }
+
+    // inject href as it is not returned from the API
+    calculation.href = new URL(`${calculationQuery.calculation.resource}/${id}`, new URL(`api/${apiVersion}/`, `${baseUrl}/`)).href;
     setData({
       calculation
     });

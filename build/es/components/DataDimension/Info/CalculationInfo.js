@@ -1,8 +1,8 @@
 import _JSXStyle from "styled-jsx/style";
-import { useDataMutation, useDataEngine } from '@dhis2/app-runtime';
+import { useConfig, useDataMutation, useDataEngine } from '@dhis2/app-runtime';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
-import { validateExpressionMutation } from '../../../api/expression.js';
+import { validateIndicatorExpressionMutation } from '../../../api/expression.js';
 import i18n from '../../../locales/index.js';
 import { getCommonFields, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
@@ -33,8 +33,12 @@ export const CalculationInfo = _ref3 => {
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
+  const {
+    baseUrl,
+    apiVersion
+  } = useConfig();
   const engine = useDataEngine();
-  const [getHumanReadableExpression] = useDataMutation(validateExpressionMutation, {
+  const [getHumanReadableExpression] = useDataMutation(validateIndicatorExpressionMutation, {
     onError: setError
   });
   const fetchData = useCallback(async () => {
@@ -55,6 +59,9 @@ export const CalculationInfo = _ref3 => {
         calculation.humanReadableExpression = result.description;
       }
     }
+
+    // inject href as it is not returned from the API
+    calculation.href = new URL(`${calculationQuery.calculation.resource}/${id}`, new URL(`api/${apiVersion}/`, `${baseUrl}/`)).href;
     setData({
       calculation
     });

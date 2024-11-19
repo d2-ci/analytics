@@ -19,7 +19,7 @@ const dataElementQuery = {
         displayNameProp
       } = _ref2;
       return {
-        fields: `${getCommonFields(displayNameProp)},aggregationType,categoryCombo[displayName,categories[id,displayName]],dataElementGroups[id,displayName],dataSetElements[id,displayName],legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
+        fields: `${getCommonFields(displayNameProp)},aggregationType,categoryCombo[displayName,categories[id,displayName]],dataElementGroups[id,displayName],dataSetElements[dataSet[id,displayName]],legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
       };
     }
   }
@@ -49,17 +49,16 @@ export const DataElementInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Data set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.length) === 1 ? data.dataElement.dataSetElements[0].displayName : /*#__PURE__*/React.createElement("ul", {
+  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.length) === 1 ? data.dataElement.dataSetElements[0].dataSet.displayName : /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
   }, data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.map(_ref4 => {
     let {
-      id,
-      displayName
+      dataSet
     } = _ref4;
     return /*#__PURE__*/React.createElement("li", {
-      key: id,
+      key: dataSet.id,
       className: `jsx-${styles.__hash}`
-    }, displayName);
+    }, dataSet.displayName);
   })))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {

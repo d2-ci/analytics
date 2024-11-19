@@ -26,7 +26,7 @@ const dataElementQuery = {
         displayNameProp
       } = _ref2;
       return {
-        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},aggregationType,categoryCombo[displayName,categories[id,displayName]],dataElementGroups[id,displayName],dataSetElements[id,displayName],legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
+        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},aggregationType,categoryCombo[displayName,categories[id,displayName]],dataElementGroups[id,displayName],dataSetElements[dataSet[id,displayName]],legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
       };
     }
   }
@@ -56,17 +56,16 @@ const DataElementInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Data set(s)')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.length) === 1 ? data.dataElement.dataSetElements[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
+  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.length) === 1 ? data.dataElement.dataSetElements[0].dataSet.displayName : /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.map(_ref4 => {
     let {
-      id,
-      displayName
+      dataSet
     } = _ref4;
     return /*#__PURE__*/_react.default.createElement("li", {
-      key: id,
+      key: dataSet.id,
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, displayName);
+    }, dataSet.displayName);
   })))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {

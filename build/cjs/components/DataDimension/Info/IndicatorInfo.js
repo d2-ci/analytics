@@ -43,7 +43,7 @@ const IndicatorInfo = _ref3 => {
   const [error, setError] = (0, _react.useState)();
   const [loading, setLoading] = (0, _react.useState)(true);
   const engine = (0, _appRuntime.useDataEngine)();
-  const [getHumanReadableExpression] = (0, _appRuntime.useDataMutation)(_expression.validateExpressionMutation, {
+  const [getHumanReadableExpression] = (0, _appRuntime.useDataMutation)(_expression.validateIndicatorExpressionMutation, {
     onError: setError
   });
   const fetchData = (0, _react.useCallback)(async () => {
