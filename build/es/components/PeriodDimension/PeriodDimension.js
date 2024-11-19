@@ -17,7 +17,8 @@ const PeriodDimension = _ref => {
     selectedPeriods,
     rightFooter,
     excludedPeriodTypes,
-    infoBoxMessage
+    infoBoxMessage,
+    height
   } = _ref;
   const {
     systemInfo
@@ -50,7 +51,8 @@ const PeriodDimension = _ref => {
     rightFooter: rightFooter,
     dataTest: 'period-dimension',
     excludedPeriodTypes: excludedPeriodTypes,
-    periodsSettings: periodsSettings
+    periodsSettings: periodsSettings,
+    height: height
   });
 };
 PeriodDimension.propTypes = {
@@ -58,7 +60,8 @@ PeriodDimension.propTypes = {
   excludedPeriodTypes: PropTypes.arrayOf(PropTypes.string),
   infoBoxMessage: PropTypes.string,
   rightFooter: PropTypes.node,
-  selectedPeriods: PropTypes.array
+  selectedPeriods: PropTypes.array,
+  height: PropTypes.string
 };
 PeriodDimension.defaultProps = {
   selectedPeriods: []
