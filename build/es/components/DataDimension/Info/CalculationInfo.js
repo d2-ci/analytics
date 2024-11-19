@@ -73,7 +73,11 @@ export const CalculationInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Expression description')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.calculation.humanReadableExpression) || i18n.t('None')))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, data !== null && data !== void 0 && data.calculation.humanReadableExpression ? /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "code"
+  }, data.calculation.humanReadableExpression) : /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "none"
+  }, i18n.t('None'))))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

@@ -82,7 +82,11 @@ const CalculationInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Expression description')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.calculation.humanReadableExpression) || _index.default.t('None')))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, data !== null && data !== void 0 && data.calculation.humanReadableExpression ? /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
+  }, data.calculation.humanReadableExpression) : /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+  }, _index.default.t('None'))))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };

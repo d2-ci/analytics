@@ -38,19 +38,27 @@ export const InfoTable = _ref => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Description')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.displayDescription || i18n.t('None'))), /*#__PURE__*/React.createElement("tr", {
+  }, data.displayDescription ? /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "content-wrap"
+  }, data.displayDescription) : /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "none"
+  }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Code')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.code)), /*#__PURE__*/React.createElement("tr", {
+  }, data.code ? data.code : /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "none"
+  }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
   }, i18n.t('ID')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.id)), /*#__PURE__*/React.createElement("tr", {
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "code"
+  }, data.id))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`

@@ -47,19 +47,27 @@ const InfoTable = _ref => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Description')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.displayDescription || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data.displayDescription ? /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
+  }, data.displayDescription) : /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+  }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Code')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.code)), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data.code ? data.code : /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+  }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('ID')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.id)), /*#__PURE__*/_react.default.createElement("tr", {
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
+  }, data.id))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`

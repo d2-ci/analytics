@@ -55,7 +55,9 @@ export const DataSetInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Data elements')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataSet.dataSetElements.length) === 1 ? data.dataSet.dataSetElements[0].dataElement.displayName : /*#__PURE__*/React.createElement("ul", {
+  }, (data === null || data === void 0 ? void 0 : data.dataSet.dataSetElements.length) === 1 ? data.dataSet.dataSetElements[0].dataElement.displayName : /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
   }, data === null || data === void 0 ? void 0 : data.dataSet.dataSetElements.map(_ref4 => {
     let {
@@ -65,15 +67,17 @@ export const DataSetInfo = _ref3 => {
       key: dataElement.id,
       className: `jsx-${styles.__hash}`
     }, dataElement.displayName);
-  })))), /*#__PURE__*/React.createElement("tr", {
+  }))))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Indicators')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataSet.indicators.length) === 1 ? data.dataSet.indicators[0].displayName : /*#__PURE__*/React.createElement("ul", {
+  }, (data === null || data === void 0 ? void 0 : data.dataSet.indicators.length) === 1 ? data.dataSet.indicators[0].displayName : (data === null || data === void 0 ? void 0 : data.dataSet.indicators.length) > 1 ? /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.dataSet.indicators.map(_ref5 => {
+  }, data.dataSet.indicators.map(_ref5 => {
     let {
       id,
       displayName
@@ -82,7 +86,9 @@ export const DataSetInfo = _ref3 => {
       key: id,
       className: `jsx-${styles.__hash}`
     }, displayName);
-  })))), /*#__PURE__*/React.createElement("tr", {
+  }))) : /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "none"
+  }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`

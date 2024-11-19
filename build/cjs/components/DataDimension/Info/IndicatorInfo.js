@@ -96,7 +96,11 @@ const IndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Numerator expression')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.indicator.humanReadableNumeratorExpression) || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data !== null && data !== void 0 && data.indicator.humanReadableNumeratorExpression ? /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
+  }, data.indicator.humanReadableNumeratorExpression) : /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+  }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
@@ -108,7 +112,11 @@ const IndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Denominator expression')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.indicator.humanReadableDenominatorExpression) || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data !== null && data !== void 0 && data.indicator.humanReadableDenominatorExpression ? /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
+  }, data.indicator.humanReadableDenominatorExpression) : /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+  }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
@@ -132,7 +140,9 @@ const IndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Data set(s)')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.indicator.dataSets.length === 1 ? data.indicator.dataSets[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
+  }, data.indicator.dataSets.length === 1 ? data.indicator.dataSets[0].displayName : /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, data.indicator.dataSets.map(_ref4 => {
     let {
@@ -143,13 +153,15 @@ const IndicatorInfo = _ref3 => {
       key: id,
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
     }, displayName);
-  })))), /*#__PURE__*/_react.default.createElement("tr", {
+  }))))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Group membership')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups.length) === 1 ? data.indicator.indicatorGroups[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
+  }, (data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups.length) === 1 ? data.indicator.indicatorGroups[0].displayName : /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups.map(_ref5 => {
     let {
@@ -160,13 +172,15 @@ const IndicatorInfo = _ref3 => {
       key: id,
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
     }, displayName);
-  })))), Boolean(data === null || data === void 0 ? void 0 : data.indicator.legendSets.length) && /*#__PURE__*/_react.default.createElement("tr", {
+  }))))), Boolean(data === null || data === void 0 ? void 0 : data.indicator.legendSets.length) && /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Legend set(s)')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.indicator.legendSets.length === 1 ? data.indicator.legendSets[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
+  }, data.indicator.legendSets.length === 1 ? data.indicator.legendSets[0].displayName : /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, data.indicator.legendSets.map(_ref6 => {
     let {
@@ -177,7 +191,7 @@ const IndicatorInfo = _ref3 => {
       key: id,
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
     }, displayName);
-  }))))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  })))))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };

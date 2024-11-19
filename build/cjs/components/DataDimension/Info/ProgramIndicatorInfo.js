@@ -102,6 +102,8 @@ const ProgramIndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Analytics period boundaries')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
   }, /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, data === null || data === void 0 ? void 0 : data.programIndicator.analyticsPeriodBoundaries.map(_ref4 => {
@@ -122,19 +124,27 @@ const ProgramIndicatorInfo = _ref3 => {
     }, `${_index.default.t('Target')}: ${boundaryTarget}`), offsetPeriods && offsetPeriodType && /*#__PURE__*/_react.default.createElement("span", {
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
     }, `${_index.default.t('Offset')}: ${offsetPeriodType} x ${offsetPeriods}`));
-  })))), /*#__PURE__*/_react.default.createElement("tr", {
+  }))))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Expression')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.programIndicator.humanReadableExpression) || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data !== null && data !== void 0 && data.programIndicator.humanReadableExpression ? /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
+  }, data.programIndicator.humanReadableExpression) : /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+  }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Filter expression')), /*#__PURE__*/_react.default.createElement("td", {
+  }, _index.default.t('Filter')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.programIndicator.humanReadableFilter) || _index.default.t('None'))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data !== null && data !== void 0 && data.programIndicator.humanReadableFilter ? /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
+  }, data.programIndicator.humanReadableFilter) : /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+  }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
@@ -152,7 +162,9 @@ const ProgramIndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Legend set(s)')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.programIndicator.legendSets.length === 1 ? data.programIndicator.legendSets[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
+  }, data.programIndicator.legendSets.length === 1 ? data.programIndicator.legendSets[0].displayName : /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, data.programIndicator.legendSets.map(_ref5 => {
     let {
@@ -163,7 +175,7 @@ const ProgramIndicatorInfo = _ref3 => {
       key: id,
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
     }, displayName);
-  }))))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  })))))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };

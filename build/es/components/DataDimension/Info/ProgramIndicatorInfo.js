@@ -93,6 +93,8 @@ export const ProgramIndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Analytics period boundaries')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "content-wrap"
   }, /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
   }, data === null || data === void 0 ? void 0 : data.programIndicator.analyticsPeriodBoundaries.map(_ref4 => {
@@ -113,19 +115,27 @@ export const ProgramIndicatorInfo = _ref3 => {
     }, `${i18n.t('Target')}: ${boundaryTarget}`), offsetPeriods && offsetPeriodType && /*#__PURE__*/React.createElement("span", {
       className: `jsx-${styles.__hash}`
     }, `${i18n.t('Offset')}: ${offsetPeriodType} x ${offsetPeriods}`));
-  })))), /*#__PURE__*/React.createElement("tr", {
+  }))))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Expression')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.programIndicator.humanReadableExpression) || i18n.t('None'))), /*#__PURE__*/React.createElement("tr", {
+  }, data !== null && data !== void 0 && data.programIndicator.humanReadableExpression ? /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "code"
+  }, data.programIndicator.humanReadableExpression) : /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "none"
+  }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
-  }, i18n.t('Filter expression')), /*#__PURE__*/React.createElement("td", {
+  }, i18n.t('Filter')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.programIndicator.humanReadableFilter) || i18n.t('None'))), /*#__PURE__*/React.createElement("tr", {
+  }, data !== null && data !== void 0 && data.programIndicator.humanReadableFilter ? /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "code"
+  }, data.programIndicator.humanReadableFilter) : /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "none"
+  }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
@@ -143,7 +153,9 @@ export const ProgramIndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Legend set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.programIndicator.legendSets.length === 1 ? data.programIndicator.legendSets[0].displayName : /*#__PURE__*/React.createElement("ul", {
+  }, data.programIndicator.legendSets.length === 1 ? data.programIndicator.legendSets[0].displayName : /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
   }, data.programIndicator.legendSets.map(_ref5 => {
     let {
@@ -154,7 +166,7 @@ export const ProgramIndicatorInfo = _ref3 => {
       key: id,
       className: `jsx-${styles.__hash}`
     }, displayName);
-  }))))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  })))))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

@@ -62,7 +62,9 @@ const DataSetInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Data elements')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataSet.dataSetElements.length) === 1 ? data.dataSet.dataSetElements[0].dataElement.displayName : /*#__PURE__*/_react.default.createElement("ul", {
+  }, (data === null || data === void 0 ? void 0 : data.dataSet.dataSetElements.length) === 1 ? data.dataSet.dataSetElements[0].dataElement.displayName : /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, data === null || data === void 0 ? void 0 : data.dataSet.dataSetElements.map(_ref4 => {
     let {
@@ -72,15 +74,17 @@ const DataSetInfo = _ref3 => {
       key: dataElement.id,
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
     }, dataElement.displayName);
-  })))), /*#__PURE__*/_react.default.createElement("tr", {
+  }))))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Indicators')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataSet.indicators.length) === 1 ? data.dataSet.indicators[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
+  }, (data === null || data === void 0 ? void 0 : data.dataSet.indicators.length) === 1 ? data.dataSet.indicators[0].displayName : (data === null || data === void 0 ? void 0 : data.dataSet.indicators.length) > 1 ? /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.dataSet.indicators.map(_ref5 => {
+  }, data.dataSet.indicators.map(_ref5 => {
     let {
       id,
       displayName
@@ -89,7 +93,9 @@ const DataSetInfo = _ref3 => {
       key: id,
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
     }, displayName);
-  })))), /*#__PURE__*/_react.default.createElement("tr", {
+  }))) : /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+  }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`

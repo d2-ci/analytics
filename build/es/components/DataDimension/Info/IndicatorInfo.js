@@ -87,7 +87,11 @@ export const IndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Numerator expression')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.indicator.humanReadableNumeratorExpression) || i18n.t('None'))), /*#__PURE__*/React.createElement("tr", {
+  }, data !== null && data !== void 0 && data.indicator.humanReadableNumeratorExpression ? /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "code"
+  }, data.indicator.humanReadableNumeratorExpression) : /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "none"
+  }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
@@ -99,7 +103,11 @@ export const IndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Denominator expression')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.indicator.humanReadableDenominatorExpression) || i18n.t('None'))), /*#__PURE__*/React.createElement("tr", {
+  }, data !== null && data !== void 0 && data.indicator.humanReadableDenominatorExpression ? /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "code"
+  }, data.indicator.humanReadableDenominatorExpression) : /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "none"
+  }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
@@ -123,7 +131,9 @@ export const IndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Data set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.indicator.dataSets.length === 1 ? data.indicator.dataSets[0].displayName : /*#__PURE__*/React.createElement("ul", {
+  }, data.indicator.dataSets.length === 1 ? data.indicator.dataSets[0].displayName : /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
   }, data.indicator.dataSets.map(_ref4 => {
     let {
@@ -134,13 +144,15 @@ export const IndicatorInfo = _ref3 => {
       key: id,
       className: `jsx-${styles.__hash}`
     }, displayName);
-  })))), /*#__PURE__*/React.createElement("tr", {
+  }))))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Group membership')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups.length) === 1 ? data.indicator.indicatorGroups[0].displayName : /*#__PURE__*/React.createElement("ul", {
+  }, (data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups.length) === 1 ? data.indicator.indicatorGroups[0].displayName : /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
   }, data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups.map(_ref5 => {
     let {
@@ -151,13 +163,15 @@ export const IndicatorInfo = _ref3 => {
       key: id,
       className: `jsx-${styles.__hash}`
     }, displayName);
-  })))), Boolean(data === null || data === void 0 ? void 0 : data.indicator.legendSets.length) && /*#__PURE__*/React.createElement("tr", {
+  }))))), Boolean(data === null || data === void 0 ? void 0 : data.indicator.legendSets.length) && /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Legend set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.indicator.legendSets.length === 1 ? data.indicator.legendSets[0].displayName : /*#__PURE__*/React.createElement("ul", {
+  }, data.indicator.legendSets.length === 1 ? data.indicator.legendSets[0].displayName : /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
   }, data.indicator.legendSets.map(_ref6 => {
     let {
@@ -168,7 +182,7 @@ export const IndicatorInfo = _ref3 => {
       key: id,
       className: `jsx-${styles.__hash}`
     }, displayName);
-  }))))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  })))))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };
