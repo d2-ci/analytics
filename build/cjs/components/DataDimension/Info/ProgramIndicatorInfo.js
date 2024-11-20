@@ -43,9 +43,7 @@ const ProgramIndicatorInfo = _ref3 => {
   const [error, setError] = (0, _react.useState)();
   const [loading, setLoading] = (0, _react.useState)(true);
   const engine = (0, _appRuntime.useDataEngine)();
-  const [getHumanReadableExpression] = (0, _appRuntime.useDataMutation)(
-  // TODO switch to validateProgramIndicatorExpressionMutation
-  _expression.validateIndicatorExpressionMutation, {
+  const [getHumanReadableExpression] = (0, _appRuntime.useDataMutation)(_expression.validateProgramIndicatorExpressionMutation, {
     onError: setError
   });
   const fetchData = (0, _react.useCallback)(async () => {
