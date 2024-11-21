@@ -448,6 +448,7 @@ const ItemSelector = _ref5 => {
       return /*#__PURE__*/React.createElement(TransferOption
       /* eslint-disable react/prop-types */, _extends({}, props, {
         active: isActive(props.value),
+        showingInfo: (currentDataItem === null || currentDataItem === void 0 ? void 0 : currentDataItem.id) === props.value,
         icon: getIcon(getItemType(props.value)),
         dimensionType: getDimensionType({
           type: getItemType(props.value),

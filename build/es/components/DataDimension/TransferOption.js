@@ -18,6 +18,7 @@ export const TransferOption = _ref => {
     dimensionType,
     dataTest,
     itemsRef,
+    showingInfo,
     onEditClick,
     onInfoClick
   } = _ref;
@@ -79,7 +80,9 @@ export const TransferOption = _ref => {
       onInfoClick();
     },
     "data-test": `${dataTest}-info-button`,
-    className: `jsx-${styles.__hash}` + " " + "info"
+    className: `jsx-${styles.__hash}` + " " + (cx('info', {
+      active: showingInfo
+    }) || "")
   }, /*#__PURE__*/React.createElement(IconInfo16, null))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));

@@ -25,6 +25,7 @@ const TransferOption = _ref => {
     dimensionType,
     dataTest,
     itemsRef,
+    showingInfo,
     onEditClick,
     onInfoClick
   } = _ref;
@@ -86,7 +87,9 @@ const TransferOption = _ref => {
       onInfoClick();
     },
     "data-test": `${dataTest}-info-button`,
-    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "info"
+    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + ((0, _classnames.default)('info', {
+      active: showingInfo
+    }) || "")
   }, /*#__PURE__*/_react.default.createElement(_ui.IconInfo16, null))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _TransferOptionStyle.default.__hash
   }, _TransferOptionStyle.default));
