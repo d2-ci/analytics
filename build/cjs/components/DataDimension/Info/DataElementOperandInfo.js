@@ -102,7 +102,7 @@ const DataElementOperandInfo = _ref2 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Value type')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (0, _InfoTable.capitalizeWord)(data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.valueType))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, (0, _InfoTable.capitalizeText)(data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.valueType))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`

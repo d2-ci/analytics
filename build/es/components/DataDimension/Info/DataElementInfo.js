@@ -3,7 +3,7 @@ import { useDataQuery } from '@dhis2/app-runtime';
 import PropTypes from 'prop-types';
 import React from 'react';
 import i18n from '../../../locales/index.js';
-import { capitalizeWord, getCommonFields, InfoTable } from './InfoTable.js';
+import { capitalizeText, getCommonFields, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
 const dataElementQuery = {
   dataElement: {
@@ -71,7 +71,7 @@ export const DataElementInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Value type')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, capitalizeWord(data === null || data === void 0 ? void 0 : data.dataElement.valueType))), /*#__PURE__*/React.createElement("tr", {
+  }, capitalizeText(data === null || data === void 0 ? void 0 : data.dataElement.valueType))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`

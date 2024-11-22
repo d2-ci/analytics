@@ -53,4 +53,13 @@ describe('getOuLevelAndGroupText', () => {
     }];
     expect((0, _getOuLevelAndGroupText.getOuLevelAndGroupText)(filter, metaData)).toEqual('Fruit and Veggies groups - Second floor levels');
   });
+  it('grabs name for user orgunits from items when not present in metaData', () => {
+    filter.items = [{
+      id: 'USER_ORGUNIT',
+      name: 'User organisation unit'
+    }, {
+      id: 'LEVEL-2nd-floor'
+    }];
+    expect((0, _getOuLevelAndGroupText.getOuLevelAndGroupText)(filter, metaData)).toEqual('Second floor levels in User organisation unit');
+  });
 });

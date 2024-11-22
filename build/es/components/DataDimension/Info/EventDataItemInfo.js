@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import i18n from '../../../locales/index.js';
 import { DIMENSION_TYPE_PROGRAM_DATA_ELEMENT } from '../../../modules/dataTypes.js';
-import { capitalizeWord, getCommonFields, InfoTable } from './InfoTable.js';
+import { capitalizeText, getCommonFields, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
 const programDataElementQuery = {
   programDataElement: {
@@ -77,7 +77,7 @@ export const EventDataItemInfo = _ref5 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Value type')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, capitalizeWord(data === null || data === void 0 ? void 0 : data.valueType))), (data === null || data === void 0 ? void 0 : data.optionSet) && /*#__PURE__*/React.createElement("tr", {
+  }, capitalizeText(data === null || data === void 0 ? void 0 : data.valueType))), (data === null || data === void 0 ? void 0 : data.optionSet) && /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`

@@ -80,6 +80,12 @@ const ProgramIndicatorInfo = _ref3 => {
   (0, _react.useEffect)(() => {
     fetchData();
   }, [fetchData]);
+  const formatBoundaryTarget = target => {
+    if (['ENROLLMENT_DATE', 'EVENT_DATE', 'INCIDENT_DATE'].includes(target)) {
+      return (0, _InfoTable.sentenceCaseText)(target);
+    }
+    return target;
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InfoTable.InfoTable, {
     data: data === null || data === void 0 ? void 0 : data.programIndicator,
     loading: loading,
@@ -119,11 +125,24 @@ const ProgramIndicatorInfo = _ref3 => {
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
     }, /*#__PURE__*/_react.default.createElement("span", {
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, `${_index.default.t('Type')}: ${analyticsPeriodBoundaryType}`), /*#__PURE__*/_react.default.createElement("span", {
+    }, /*#__PURE__*/_react.default.createElement("span", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "label"
+    }, _index.default.t('Type:'), "\xA0"), (0, _InfoTable.sentenceCaseText)(analyticsPeriodBoundaryType)), /*#__PURE__*/_react.default.createElement("br", {
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, `${_index.default.t('Target')}: ${boundaryTarget}`), offsetPeriods && offsetPeriodType && /*#__PURE__*/_react.default.createElement("span", {
+    }), /*#__PURE__*/_react.default.createElement("span", {
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, `${_index.default.t('Offset')}: ${offsetPeriodType} x ${offsetPeriods}`));
+    }, /*#__PURE__*/_react.default.createElement("span", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "label"
+    }, _index.default.t('Target:'), "\xA0"), formatBoundaryTarget(boundaryTarget)), offsetPeriods && offsetPeriodType && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("br", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }), /*#__PURE__*/_react.default.createElement("span", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, /*#__PURE__*/_react.default.createElement("span", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "label"
+    }, _index.default.t('Offset:'), "\xA0"), _index.default.t('{{ offsetPeriodType }} × {{ offsetPeriods }}', {
+      offsetPeriodType,
+      offsetPeriods
+    }))));
   }))))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {

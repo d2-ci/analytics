@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import { validateProgramIndicatorExpressionMutation } from '../../../api/expression.js';
 import i18n from '../../../locales/index.js';
-import { getCommonFields, InfoTable } from './InfoTable.js';
+import { getCommonFields, sentenceCaseText, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
 const programIndicatorQuery = {
   programIndicator: {
@@ -71,6 +71,12 @@ export const ProgramIndicatorInfo = _ref3 => {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+  const formatBoundaryTarget = target => {
+    if (['ENROLLMENT_DATE', 'EVENT_DATE', 'INCIDENT_DATE'].includes(target)) {
+      return sentenceCaseText(target);
+    }
+    return target;
+  };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InfoTable, {
     data: data === null || data === void 0 ? void 0 : data.programIndicator,
     loading: loading,
@@ -110,11 +116,24 @@ export const ProgramIndicatorInfo = _ref3 => {
       className: `jsx-${styles.__hash}`
     }, /*#__PURE__*/React.createElement("span", {
       className: `jsx-${styles.__hash}`
-    }, `${i18n.t('Type')}: ${analyticsPeriodBoundaryType}`), /*#__PURE__*/React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("span", {
+      className: `jsx-${styles.__hash}` + " " + "label"
+    }, i18n.t('Type:'), "\xA0"), sentenceCaseText(analyticsPeriodBoundaryType)), /*#__PURE__*/React.createElement("br", {
       className: `jsx-${styles.__hash}`
-    }, `${i18n.t('Target')}: ${boundaryTarget}`), offsetPeriods && offsetPeriodType && /*#__PURE__*/React.createElement("span", {
+    }), /*#__PURE__*/React.createElement("span", {
       className: `jsx-${styles.__hash}`
-    }, `${i18n.t('Offset')}: ${offsetPeriodType} x ${offsetPeriods}`));
+    }, /*#__PURE__*/React.createElement("span", {
+      className: `jsx-${styles.__hash}` + " " + "label"
+    }, i18n.t('Target:'), "\xA0"), formatBoundaryTarget(boundaryTarget)), offsetPeriods && offsetPeriodType && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("br", {
+      className: `jsx-${styles.__hash}`
+    }), /*#__PURE__*/React.createElement("span", {
+      className: `jsx-${styles.__hash}`
+    }, /*#__PURE__*/React.createElement("span", {
+      className: `jsx-${styles.__hash}` + " " + "label"
+    }, i18n.t('Offset:'), "\xA0"), i18n.t('{{ offsetPeriodType }} × {{ offsetPeriods }}', {
+      offsetPeriodType,
+      offsetPeriods
+    }))));
   }))))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
