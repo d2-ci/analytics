@@ -7,17 +7,12 @@ exports.getPredefinedDimensions = exports.getPredefinedDimensionProp = exports.g
 var _ui = require("@dhis2/ui");
 var _AssignedCategoriesIcon = _interopRequireDefault(require("../assets/AssignedCategoriesIcon.js"));
 var _index = _interopRequireDefault(require("../locales/index.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const DIMENSION_ID_DATA = 'dx';
-exports.DIMENSION_ID_DATA = DIMENSION_ID_DATA;
-const DIMENSION_ID_PERIOD = 'pe';
-exports.DIMENSION_ID_PERIOD = DIMENSION_ID_PERIOD;
-const DIMENSION_ID_ORGUNIT = 'ou';
-exports.DIMENSION_ID_ORGUNIT = DIMENSION_ID_ORGUNIT;
-const DIMENSION_ID_ASSIGNED_CATEGORIES = 'co';
-exports.DIMENSION_ID_ASSIGNED_CATEGORIES = DIMENSION_ID_ASSIGNED_CATEGORIES;
-const DIMENSION_PROP_NO_ITEMS = 'noItems';
-exports.DIMENSION_PROP_NO_ITEMS = DIMENSION_PROP_NO_ITEMS;
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const DIMENSION_ID_DATA = exports.DIMENSION_ID_DATA = 'dx';
+const DIMENSION_ID_PERIOD = exports.DIMENSION_ID_PERIOD = 'pe';
+const DIMENSION_ID_ORGUNIT = exports.DIMENSION_ID_ORGUNIT = 'ou';
+const DIMENSION_ID_ASSIGNED_CATEGORIES = exports.DIMENSION_ID_ASSIGNED_CATEGORIES = 'co';
+const DIMENSION_PROP_NO_ITEMS = exports.DIMENSION_PROP_NO_ITEMS = 'noItems';
 const getFixedDimensions = () => ({
   [DIMENSION_ID_DATA]: {
     id: DIMENSION_ID_DATA,

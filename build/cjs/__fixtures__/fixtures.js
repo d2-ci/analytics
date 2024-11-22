@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _default = function x() {
+var _default = exports.default = function x() {
   const fixtures = {};
   function getFixture(fixtureName) {
     if (fixtures && fixtures[fixtureName]) {
@@ -99,4 +99,3 @@ var _default = function x() {
     add: addFixture
   };
 }();
-exports.default = _default;

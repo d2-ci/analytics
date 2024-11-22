@@ -5,7 +5,6 @@ const booleanMap = {
   // XXX i18n.no || 'No',
   1: 'Yes' // i18n.yes || 'Yes',
 };
-
 const OUNAME = 'ouname';
 const OU = 'ou';
 const DEFAULT_COLLECT_IGNORE_HEADERS = ['psi', 'ps', 'eventdate', 'longitude', 'latitude', 'ouname', 'oucode', 'eventdate', 'eventdate'];

@@ -1,4 +1,3 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import DimensionsPanel from '../components/DimensionsPanel/DimensionsPanel.js';
 import { DIMENSION_ID_DATA, DIMENSION_ID_ORGUNIT, DIMENSION_ID_PERIOD } from '../modules/predefinedDimensions.js';
@@ -23,60 +22,87 @@ const dynamicDimensions = [{
   name: 'Three'
 }];
 const onDimensionClick = () => alert('click');
-storiesOf('DimensionsPanel', module).add('fixed and dynamic dimensions', () => {
+export default {
+  title: 'DimensionsPanel'
+};
+export const FixedAndDynamicDimensions = () => {
   return /*#__PURE__*/React.createElement(DimensionsPanel, {
     dimensions: [...fixedDimensions, ...dynamicDimensions],
     onDimensionClick: onDimensionClick,
     selectedIds: []
   });
-});
-storiesOf('DimensionsPanel', module).add('fixed dimensions only', () => {
+};
+FixedAndDynamicDimensions.story = {
+  name: 'fixed and dynamic dimensions'
+};
+export const FixedDimensionsOnly = () => {
   return /*#__PURE__*/React.createElement(DimensionsPanel, {
     dimensions: fixedDimensions,
     onDimensionClick: onDimensionClick,
     selectedIds: []
   });
-});
-storiesOf('DimensionsPanel', module).add('dynamic dimensions only', () => {
+};
+FixedDimensionsOnly.story = {
+  name: 'fixed dimensions only'
+};
+export const DynamicDimensionsOnly = () => {
   return /*#__PURE__*/React.createElement(DimensionsPanel, {
     dimensions: dynamicDimensions,
     onDimensionClick: onDimensionClick,
     selectedIds: []
   });
-});
-storiesOf('DimensionsPanel', module).add('selected dimension', () => {
+};
+DynamicDimensionsOnly.story = {
+  name: 'dynamic dimensions only'
+};
+export const SelectedDimension = () => {
   return /*#__PURE__*/React.createElement(DimensionsPanel, {
     dimensions: [...fixedDimensions, ...dynamicDimensions],
     onDimensionClick: onDimensionClick,
     selectedIds: [DIMENSION_ID_DATA]
   });
-});
-storiesOf('DimensionsPanel', module).add('disabled dimension', () => {
+};
+SelectedDimension.story = {
+  name: 'selected dimension'
+};
+export const DisabledDimension = () => {
   return /*#__PURE__*/React.createElement(DimensionsPanel, {
     dimensions: [...fixedDimensions, ...dynamicDimensions],
     onDimensionClick: onDimensionClick,
     disabledDimension: dimension => dimension === DIMENSION_ID_DATA
   });
-});
-storiesOf('DimensionsPanel', module).add('locked dimension', () => {
+};
+DisabledDimension.story = {
+  name: 'disabled dimension'
+};
+export const LockedDimension = () => {
   return /*#__PURE__*/React.createElement(DimensionsPanel, {
     dimensions: [...fixedDimensions, ...dynamicDimensions],
     onDimensionClick: onDimensionClick,
     selectedIds: [DIMENSION_ID_DATA],
     lockedDimension: dimension => dimension === DIMENSION_ID_DATA
   });
-});
-storiesOf('DimensionsPanel', module).add('recommended dimension', () => {
+};
+LockedDimension.story = {
+  name: 'locked dimension'
+};
+export const RecommendedDimension = () => {
   return /*#__PURE__*/React.createElement(DimensionsPanel, {
     dimensions: [...fixedDimensions, ...dynamicDimensions],
     onDimensionClick: onDimensionClick,
     recommendedDimension: dimension => dimension === DIMENSION_ID_DATA
   });
-});
-storiesOf('DimensionsPanel', module).add('with menu', () => {
+};
+RecommendedDimension.story = {
+  name: 'recommended dimension'
+};
+export const WithMenu = () => {
   return /*#__PURE__*/React.createElement(DimensionsPanel, {
     dimensions: [...fixedDimensions, ...dynamicDimensions],
     onDimensionClick: onDimensionClick,
     onDimensionOptionsClick: () => alert('options click')
   });
-});
+};
+WithMenu.story = {
+  name: 'with menu'
+};

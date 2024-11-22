@@ -5,7 +5,7 @@ describe('<InterpretationsAndDetailsToggler/>', () => {
   const noop = () => {};
   it('accepts an `onClick` prop', () => {
     const onClick = jest.fn();
-    const wrapper = shallow( /*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
+    const wrapper = shallow(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
       onClick: onClick
     }));
     wrapper.simulate('click');
@@ -13,24 +13,24 @@ describe('<InterpretationsAndDetailsToggler/>', () => {
   });
   it('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = shallow( /*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
+    const wrapper = shallow(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
       onClick: noop,
       dataTest: dataTest
     }));
     expect(wrapper.prop('data-test')).toBe(dataTest);
   });
   it('accepts a `disabled` prop', () => {
-    const wrapper = shallow( /*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
+    const wrapper = shallow(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
       disabled: true,
       onClick: noop
     }));
     expect(wrapper.find('button').prop('disabled')).toEqual(true);
   });
   it('accepts an `isShowing` prop', () => {
-    const wrapper = shallow( /*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
+    const wrapper = shallow(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
       onClick: noop
     }));
-    const wrapperWithIsShowing = shallow( /*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
+    const wrapperWithIsShowing = shallow(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
       isShowing: true,
       onClick: noop
     }));

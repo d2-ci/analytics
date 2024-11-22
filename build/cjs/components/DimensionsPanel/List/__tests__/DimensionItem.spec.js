@@ -3,13 +3,13 @@
 var _enzyme = require("enzyme");
 var _react = _interopRequireDefault(require("react"));
 var _DimensionItem = _interopRequireDefault(require("../DimensionItem.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('DimensionItem', () => {
   let props;
   let shallowItem;
   const dimensionItem = () => {
     if (!shallowItem) {
-      shallowItem = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_DimensionItem.default, props));
+      shallowItem = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_DimensionItem.default, props));
     }
     return shallowItem;
   };

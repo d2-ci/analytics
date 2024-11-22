@@ -8,7 +8,7 @@ var _isString = _interopRequireDefault(require("d2-utilizr/lib/isString"));
 var _fontStyle = require("../../../../modules/fontStyle.js");
 var _visTypes = require("../../../../modules/visTypes.js");
 var _getTextAlignOption = require("./getTextAlignOption.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getTitleStyle = (fontStyle, titleType, visType) => fontStyle ? {
   align: (0, _getTextAlignOption.getTextAlignOption)(fontStyle[_fontStyle.FONT_STYLE_OPTION_TEXT_ALIGN], titleType, (0, _visTypes.isVerticalType)(visType)),
   margin: 15,

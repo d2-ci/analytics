@@ -12,7 +12,7 @@ var _index = _interopRequireDefault(require("../../../../locales/index.js"));
 var _visTypes = require("../../../../modules/visTypes.js");
 var _colorSets = require("../../../util/colors/colorSets.js");
 var _getStackedData = _interopRequireDefault(require("./getStackedData.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DEFAULT_TRENDLINE = {
   type: 'spline',
   name: 'Trend',

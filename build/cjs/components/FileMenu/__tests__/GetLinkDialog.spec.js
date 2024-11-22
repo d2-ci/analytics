@@ -5,7 +5,7 @@ var _enzyme = require("enzyme");
 var _react = _interopRequireDefault(require("react"));
 var _GetLinkDialog = require("../GetLinkDialog.js");
 var _utils = require("../utils.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const testBaseUrl = 'http://test.tld/test';
 jest.mock('@dhis2/app-runtime', () => ({
   useConfig: () => ({
@@ -18,7 +18,7 @@ describe('The FileMenu - GetLinkDialog component', () => {
   const onClose = jest.fn();
   const getGetLinkDialogComponent = props => {
     if (!shallowGetLinkDialog) {
-      shallowGetLinkDialog = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_GetLinkDialog.GetLinkDialog, props));
+      shallowGetLinkDialog = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_GetLinkDialog.GetLinkDialog, props));
     }
     return shallowGetLinkDialog;
   };

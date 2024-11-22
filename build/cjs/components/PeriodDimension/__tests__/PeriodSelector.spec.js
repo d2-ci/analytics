@@ -3,13 +3,13 @@
 var _enzyme = require("enzyme");
 var _react = _interopRequireDefault(require("react"));
 var _PeriodTransfer = _interopRequireDefault(require("../PeriodTransfer.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('The Period Selector component', () => {
   let props;
   let shallowPeriodTransfer;
   const getWrapper = () => {
     if (!shallowPeriodTransfer) {
-      shallowPeriodTransfer = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_PeriodTransfer.default, props));
+      shallowPeriodTransfer = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_PeriodTransfer.default, props));
     }
     return shallowPeriodTransfer;
   };

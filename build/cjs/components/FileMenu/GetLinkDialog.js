@@ -12,7 +12,7 @@ var _react = _interopRequireDefault(require("react"));
 var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _GetLinkDialogStyles = require("./GetLinkDialog.styles.js");
 var _utils = require("./utils.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const GetLinkDialog = _ref => {
   let {
     type,

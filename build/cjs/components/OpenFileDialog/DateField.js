@@ -7,7 +7,7 @@ exports.default = exports.DateField = void 0;
 var _moment = _interopRequireDefault(require("moment"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DateField = _ref => {
   let {
     date
@@ -21,5 +21,4 @@ exports.DateField = DateField;
 DateField.propTypes = {
   date: _propTypes.default.string.isRequired
 };
-var _default = DateField;
-exports.default = _default;
+var _default = exports.default = DateField;

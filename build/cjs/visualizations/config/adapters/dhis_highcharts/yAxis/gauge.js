@@ -13,7 +13,7 @@ var _legends = require("../../../../../modules/legends.js");
 var _visTypes = require("../../../../../modules/visTypes.js");
 var _axes = require("../../../../util/axes.js");
 var _getTextAlignOption = require("../getTextAlignOption.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DEFAULT_MAX_VALUE = 100;
 const DEFAULT_TARGET_LINE_LABEL = _index.default.t('Target');
 const DEFAULT_BASE_LINE_LABEL = _index.default.t('Base');

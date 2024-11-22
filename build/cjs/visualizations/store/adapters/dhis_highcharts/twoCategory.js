@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 var _getTwoCategorySplitSerieData = _interopRequireDefault(require("../../../config/adapters/dhis_highcharts/getTwoCategorySplitSerieData.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // 1 series, 2 categories
 function _default(acc, series, categories, idValueMap, metaData) {
   series[0].forEach(seriesItemId => {

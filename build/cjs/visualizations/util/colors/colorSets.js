@@ -6,25 +6,17 @@ Object.defineProperty(exports, "__esModule", {
 exports.colorSets = exports.COLOR_SET_PATTERNS = exports.COLOR_SET_GRAY = exports.COLOR_SET_EXTENDED = exports.COLOR_SET_DEFAULT = exports.COLOR_SET_DARK = exports.COLOR_SET_COLOR_BLIND = exports.COLOR_SET_BRIGHT = exports.COLOR_SET_BASIC = void 0;
 var _highcharts = _interopRequireDefault(require("highcharts"));
 var _patternFill = _interopRequireDefault(require("highcharts/modules/pattern-fill"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 (0, _patternFill.default)(_highcharts.default);
-const COLOR_SET_DEFAULT = 'DEFAULT';
-exports.COLOR_SET_DEFAULT = COLOR_SET_DEFAULT;
-const COLOR_SET_BASIC = 'BASIC';
-exports.COLOR_SET_BASIC = COLOR_SET_BASIC;
-const COLOR_SET_EXTENDED = 'EXTENDED';
-exports.COLOR_SET_EXTENDED = COLOR_SET_EXTENDED;
-const COLOR_SET_BRIGHT = 'BRIGHT';
-exports.COLOR_SET_BRIGHT = COLOR_SET_BRIGHT;
-const COLOR_SET_DARK = 'DARK';
-exports.COLOR_SET_DARK = COLOR_SET_DARK;
-const COLOR_SET_GRAY = 'GRAY';
-exports.COLOR_SET_GRAY = COLOR_SET_GRAY;
-const COLOR_SET_COLOR_BLIND = 'COLOR_BLIND';
-exports.COLOR_SET_COLOR_BLIND = COLOR_SET_COLOR_BLIND;
-const COLOR_SET_PATTERNS = 'PATTERNS';
-exports.COLOR_SET_PATTERNS = COLOR_SET_PATTERNS;
-const colorSets = {
+const COLOR_SET_DEFAULT = exports.COLOR_SET_DEFAULT = 'DEFAULT';
+const COLOR_SET_BASIC = exports.COLOR_SET_BASIC = 'BASIC';
+const COLOR_SET_EXTENDED = exports.COLOR_SET_EXTENDED = 'EXTENDED';
+const COLOR_SET_BRIGHT = exports.COLOR_SET_BRIGHT = 'BRIGHT';
+const COLOR_SET_DARK = exports.COLOR_SET_DARK = 'DARK';
+const COLOR_SET_GRAY = exports.COLOR_SET_GRAY = 'GRAY';
+const COLOR_SET_COLOR_BLIND = exports.COLOR_SET_COLOR_BLIND = 'COLOR_BLIND';
+const COLOR_SET_PATTERNS = exports.COLOR_SET_PATTERNS = 'PATTERNS';
+const colorSets = exports.colorSets = {
   [COLOR_SET_DEFAULT]: {
     colors: ['#a8bf24', '#518cc3', '#d74554', '#ff9e21', '#968f8f', '#ba3ba1', '#ffda54', '#45beae', '#b98037', '#676767', '#6b2dd4', '#47792c', '#fcbdbd', '#830000', '#a5ffc0', '#000078', '#817c00', '#bdf023', '#fffac4']
   },
@@ -50,4 +42,3 @@ const colorSets = {
     patterns: _highcharts.default.patterns
   }
 };
-exports.colorSets = colorSets;

@@ -1,30 +1,48 @@
 "use strict";
 
-var _react = require("@storybook/react");
-var _react2 = _interopRequireWildcard(require("react"));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.WithValue = exports.NoValue = exports.AllowedPeriodTypes = void 0;
+var _react = _interopRequireWildcard(require("react"));
 var _FixedPeriodSelect = _interopRequireDefault(require("../components/PeriodDimension/FixedPeriodSelect.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-(0, _react.storiesOf)('FixedPeriodSelect', module).add('No value', () => {
-  const [value, setValue] = (0, _react2.useState)();
-  return /*#__PURE__*/_react2.default.createElement(_FixedPeriodSelect.default, {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+var _default = exports.default = {
+  title: 'FixedPeriodSelect'
+};
+const NoValue = () => {
+  const [value, setValue] = (0, _react.useState)();
+  return /*#__PURE__*/_react.default.createElement(_FixedPeriodSelect.default, {
     onChange: period => setValue(period === null || period === void 0 ? void 0 : period.id),
     value: value
   });
-});
-(0, _react.storiesOf)('FixedPeriodSelect', module).add('With value', () => {
-  const [value, setValue] = (0, _react2.useState)('20140304');
-  return /*#__PURE__*/_react2.default.createElement(_FixedPeriodSelect.default, {
+};
+exports.NoValue = NoValue;
+NoValue.story = {
+  name: 'No value'
+};
+const WithValue = () => {
+  const [value, setValue] = (0, _react.useState)('20140304');
+  return /*#__PURE__*/_react.default.createElement(_FixedPeriodSelect.default, {
     onChange: period => setValue(period === null || period === void 0 ? void 0 : period.id),
     value: value
   });
-});
-(0, _react.storiesOf)('FixedPeriodSelect', module).add('Allowed period types', () => {
-  const [value, setValue] = (0, _react2.useState)('20140304');
-  return /*#__PURE__*/_react2.default.createElement(_FixedPeriodSelect.default, {
+};
+exports.WithValue = WithValue;
+WithValue.story = {
+  name: 'With value'
+};
+const AllowedPeriodTypes = () => {
+  const [value, setValue] = (0, _react.useState)('20140304');
+  return /*#__PURE__*/_react.default.createElement(_FixedPeriodSelect.default, {
     onChange: period => setValue(period === null || period === void 0 ? void 0 : period.id),
     value: value,
     allowedPeriodTypes: ['MONTHLY', 'DAILY', 'YEARLY']
   });
-});
+};
+exports.AllowedPeriodTypes = AllowedPeriodTypes;
+AllowedPeriodTypes.story = {
+  name: 'Allowed period types'
+};

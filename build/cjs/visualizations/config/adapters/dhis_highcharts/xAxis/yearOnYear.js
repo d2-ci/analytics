@@ -9,7 +9,7 @@ var _fontStyle = require("../../../../../modules/fontStyle.js");
 var _axes = require("../../../../util/axes.js");
 var _getAxisTitle = _interopRequireDefault(require("../getAxisTitle.js"));
 var _index = require("./index.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _default(store, layout, extraOptions) {
   var _axis$title, _axis$title2;
   let categories;

@@ -24,5 +24,4 @@ class AnalyticsResponseHeader {
     }
   }
 }
-var _default = AnalyticsResponseHeader;
-exports.default = _default;
+var _default = exports.default = AnalyticsResponseHeader;

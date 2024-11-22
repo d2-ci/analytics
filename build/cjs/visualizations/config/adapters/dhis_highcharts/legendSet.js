@@ -7,7 +7,7 @@ exports.getLegendSetTooltip = exports.applyLegendSet = void 0;
 var _isNumeric = _interopRequireDefault(require("d2-utilizr/lib/isNumeric"));
 var _index = _interopRequireDefault(require("../../../../locales/index.js"));
 var _legends = require("../../../../modules/legends.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const OUT_OF_BOUNDS_COLOR = '#CCCCCC';
 const getLegend = (value, legendSet) => value && legendSet ? (0, _legends.getLegendByValueFromLegendSet)(legendSet, value) : {};
 const applyLegendSet = function () {

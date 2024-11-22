@@ -4,7 +4,7 @@ var _ui = require("@dhis2/ui");
 var _enzyme = require("enzyme");
 var _react = _interopRequireDefault(require("react"));
 var _SaveAsDialog = require("../SaveAsDialog.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('The FileMenu - SaveAsDialog component', () => {
   let shallowSaveAsDialog;
   let props;
@@ -12,7 +12,7 @@ describe('The FileMenu - SaveAsDialog component', () => {
   const onSaveAs = jest.fn();
   const getSaveAsDialogComponent = props => {
     if (!shallowSaveAsDialog) {
-      shallowSaveAsDialog = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_SaveAsDialog.SaveAsDialog, props));
+      shallowSaveAsDialog = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_SaveAsDialog.SaveAsDialog, props));
     }
     return shallowSaveAsDialog;
   };

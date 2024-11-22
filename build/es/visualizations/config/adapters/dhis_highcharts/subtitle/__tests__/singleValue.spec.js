@@ -48,7 +48,6 @@ describe('getSingleValueSubtitle', () => {
     //     })
     // })
   });
-
   describe('dashboard', () => {
     it('returns filter title as subtitle', () => {
       expect(getSingleValueSubtitle({

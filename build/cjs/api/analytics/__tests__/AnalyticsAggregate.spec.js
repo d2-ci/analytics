@@ -4,7 +4,7 @@ var _fixtures = _interopRequireDefault(require("../../../__fixtures__/fixtures.j
 var _DataEngine = _interopRequireDefault(require("../__mocks__/DataEngine.js"));
 var _AnalyticsAggregate = _interopRequireDefault(require("../AnalyticsAggregate.js"));
 var _AnalyticsRequest = _interopRequireDefault(require("../AnalyticsRequest.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const debugSqlFixture = `select de.name as de_name, de.uid as de_uid, de.dataelementid as de_id, pe.startdate as
 start_date, pe.enddate as end_date, pt.name as pt_name, ou.name as ou_name, ou.uid as ou_uid, ou.organisationunitid as
 ou_id, coc.name as coc_name, coc.uid as coc_uid, coc.categoryoptioncomboid as coc_id, aoc.name as aoc_name, aoc.uid as

@@ -149,11 +149,9 @@ const getLockedDimsByVisType = visType => getRulesByVisType(visType)[RULE_PROP_L
 
 // Test exports
 exports.getLockedDimsByVisType = getLockedDimsByVisType;
-const testResourceRequiredProps = [RULE_PROP_AVAILABLE_AXES];
-exports.testResourceRequiredProps = testResourceRequiredProps;
-const testResourceRules = [...new Set(Object.values(visTypeToRules))];
-exports.testResourceRules = testResourceRules;
-const testResourceAllRuleProps = {
+const testResourceRequiredProps = exports.testResourceRequiredProps = [RULE_PROP_AVAILABLE_AXES];
+const testResourceRules = exports.testResourceRules = [...new Set(Object.values(visTypeToRules))];
+const testResourceAllRuleProps = exports.testResourceAllRuleProps = {
   AVAILABLE_AXES: RULE_PROP_AVAILABLE_AXES,
   MAX_DIMS_PER_AXIS: RULE_PROP_MAX_DIMS_PER_AXIS,
   MIN_DIMS_PER_AXIS: RULE_PROP_MIN_DIMS_PER_AXIS,
@@ -162,4 +160,3 @@ const testResourceAllRuleProps = {
   DISALLOWED_DIMS: RULE_PROP_DISALLOWED_DIMS,
   LOCKED_DIMS: RULE_PROP_LOCKED_DIMS
 };
-exports.testResourceAllRuleProps = testResourceAllRuleProps;

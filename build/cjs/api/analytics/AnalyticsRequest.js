@@ -11,7 +11,7 @@ var _AnalyticsRequestDimensionsMixin = _interopRequireDefault(require("./Analyti
 var _AnalyticsRequestFiltersMixin = _interopRequireDefault(require("./AnalyticsRequestFiltersMixin.js"));
 var _AnalyticsRequestPropertiesMixin = _interopRequireDefault(require("./AnalyticsRequestPropertiesMixin.js"));
 var _utils = require("./utils.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /**
  * @description
  * Class for constructing a request object to use for communicating with the analytics API endpoint.
@@ -132,5 +132,4 @@ class AnalyticsRequest extends (0, _AnalyticsRequestDimensionsMixin.default)((0,
     return request;
   }
 }
-var _default = AnalyticsRequest;
-exports.default = _default;
+var _default = exports.default = AnalyticsRequest;

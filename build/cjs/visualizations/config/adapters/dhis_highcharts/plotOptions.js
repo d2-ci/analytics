@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _index = _interopRequireDefault(require("../../../../locales/index.js"));
 var _visTypes = require("../../../../modules/visTypes.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const MAX_LABELS = 10;
 var _default = _ref => {
   let {

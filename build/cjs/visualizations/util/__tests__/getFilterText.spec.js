@@ -1,7 +1,7 @@
 "use strict";
 
 var _getFilterText = _interopRequireDefault(require("../getFilterText.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 let filters;
 let metaData;
 describe('getFilterText', () => {

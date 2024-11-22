@@ -13,9 +13,8 @@ var _dimensions = require("../../api/dimensions.js");
 var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _ItemSelector = _interopRequireDefault(require("./ItemSelector.js"));
 var _DynamicDimensionStyle = _interopRequireDefault(require("./styles/DynamicDimension.style.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const ALL_DYNAMIC_DIMENSION_ITEMS = 'ALL_ITEMS';
-exports.ALL_DYNAMIC_DIMENSION_ITEMS = ALL_DYNAMIC_DIMENSION_ITEMS;
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const ALL_DYNAMIC_DIMENSION_ITEMS = exports.ALL_DYNAMIC_DIMENSION_ITEMS = 'ALL_ITEMS';
 const DynamicDimension = _ref => {
   let {
     dimensionId,
@@ -109,5 +108,4 @@ DynamicDimension.defaultProps = {
   selectedItems: [],
   onSelect: Function.prototype
 };
-var _default = DynamicDimension;
-exports.default = _default;
+var _default = exports.default = DynamicDimension;

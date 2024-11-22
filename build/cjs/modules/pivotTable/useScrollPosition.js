@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.useScrollPosition = void 0;
 var _debounce = _interopRequireDefault(require("lodash/debounce"));
 var _react = require("react");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const useScrollPosition = function (containerRef) {
   let debounceWait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
   const [scrollPosition, setScrollPosition] = (0, _react.useState)({

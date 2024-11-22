@@ -4,13 +4,13 @@ var _ui = require("@dhis2/ui");
 var _enzyme = require("enzyme");
 var _react = _interopRequireDefault(require("react"));
 var _Filter = _interopRequireDefault(require("../Filter.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('The Filter component ', () => {
   let shallowFilter;
   let props;
   const filterComp = () => {
     if (!shallowFilter) {
-      shallowFilter = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_Filter.default, props));
+      shallowFilter = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_Filter.default, props));
     }
     return shallowFilter;
   };

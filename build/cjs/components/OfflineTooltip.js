@@ -12,7 +12,7 @@ var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _OfflineTooltipStyle = require("./styles/OfflineTooltip.style.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const OfflineTooltip = _ref => {
   let {
     disabledWhenOffline,

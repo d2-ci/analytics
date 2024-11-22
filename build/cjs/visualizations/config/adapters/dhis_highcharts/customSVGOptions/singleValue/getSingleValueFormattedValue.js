@@ -7,8 +7,7 @@ exports.INDICATOR_FACTOR_100 = void 0;
 exports.getSingleValueFormattedValue = getSingleValueFormattedValue;
 var _renderValue = require("../../../../../../modules/renderValue.js");
 var _valueTypes = require("../../../../../../modules/valueTypes.js");
-const INDICATOR_FACTOR_100 = 100;
-exports.INDICATOR_FACTOR_100 = INDICATOR_FACTOR_100;
+const INDICATOR_FACTOR_100 = exports.INDICATOR_FACTOR_100 = 100;
 function getSingleValueFormattedValue(value, layout, metaData) {
   const valueType = metaData.items[metaData.dimensions.dx[0]].valueType;
   const indicatorType = metaData.items[metaData.dimensions.dx[0]].indicatorType;

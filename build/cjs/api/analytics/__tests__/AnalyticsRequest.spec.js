@@ -2,7 +2,7 @@
 
 var _fixtures = _interopRequireDefault(require("../../../__fixtures__/fixtures.js"));
 var _AnalyticsRequest = _interopRequireDefault(require("../AnalyticsRequest.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 let request;
 let expectedParameters;
 const getFuncName = parameter => `with${parameter.charAt(0).toUpperCase()}${parameter.slice(1)}`;

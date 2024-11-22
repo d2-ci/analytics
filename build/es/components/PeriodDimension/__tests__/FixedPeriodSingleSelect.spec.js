@@ -6,7 +6,7 @@ describe('The Fixed Period Single Select component', () => {
   let shallowFixedPeriodSelect;
   const getWrapper = () => {
     if (!shallowFixedPeriodSelect) {
-      shallowFixedPeriodSelect = shallow( /*#__PURE__*/React.createElement(FixedPeriodSelect, props));
+      shallowFixedPeriodSelect = shallow(/*#__PURE__*/React.createElement(FixedPeriodSelect, props));
     }
     return shallowFixedPeriodSelect;
   };

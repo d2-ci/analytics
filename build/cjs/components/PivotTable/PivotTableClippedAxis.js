@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.PivotTableClippedAxis = void 0;
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const PivotTableClippedAxis = _ref => {
   let {
     axisClippingResult,

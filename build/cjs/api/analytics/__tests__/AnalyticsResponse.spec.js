@@ -2,7 +2,7 @@
 
 var _fixtures = _interopRequireDefault(require("../../../__fixtures__/fixtures.js"));
 var _AnalyticsResponse = _interopRequireDefault(require("../AnalyticsResponse.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const fixture = _fixtures.default.get('/api/analytics/response');
 let response;
 describe('AnalyticsResponse', () => {

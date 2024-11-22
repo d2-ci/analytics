@@ -3,26 +3,13 @@
 var _enzyme = require("enzyme");
 var _react = _interopRequireDefault(require("react"));
 var _OrgUnitDimension = _interopRequireDefault(require("../OrgUnitDimension.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-jest.mock('@dhis2/app-runtime', () => ({
-  useDataEngine: () => ({
-    query: jest.fn()
-  })
-}));
-jest.mock('../../../api/organisationUnits.js', () => ({
-  apiFetchOrganisationUnitGroups: jest.fn().mockResolvedValue([]),
-  apiFetchOrganisationUnitLevels: jest.fn().mockResolvedValue([])
-}));
-jest.mock('../../../locales/index.js', () => ({
-  t: key => key
-}));
-afterEach(jest.clearAllMocks);
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('The OrgUnitDimension component', () => {
   let props;
   let shallowOrgUnitDimension;
   const getWrapper = () => {
     if (!shallowOrgUnitDimension) {
-      shallowOrgUnitDimension = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_OrgUnitDimension.default, props));
+      shallowOrgUnitDimension = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_OrgUnitDimension.default, props));
     }
     return shallowOrgUnitDimension;
   };

@@ -1,22 +1,28 @@
 import { DataProvider } from '@dhis2/app-runtime';
-import { storiesOf } from '@storybook/react';
 import React, { useState } from 'react';
 import OrgUnitDimension from '../components/OrgUnitDimension/OrgUnitDimension.js';
 const Wrapper = story => /*#__PURE__*/React.createElement(DataProvider, {
-  baseUrl: "https://debug.dhis2.org/analytics-dev/",
-  apiVersion: ""
+  baseUrl: "https://test.e2e.dhis2.org/analytics-41dev/",
+  apiVersion: "41"
 }, story());
 const defaultRootOrgUnits = ['ImspTQPwCqd']; // Sierra Leone
 
-storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('None selected', () => {
+export default {
+  title: 'OrgUnitDimension',
+  decorators: [Wrapper]
+};
+export const NoneSelected = () => {
   const [selected, setSelected] = useState([]);
   return /*#__PURE__*/React.createElement(OrgUnitDimension, {
     selected: selected,
     onSelect: response => setSelected(response.items),
     roots: defaultRootOrgUnits
   });
-});
-storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Root selected', () => {
+};
+NoneSelected.story = {
+  name: 'None selected'
+};
+export const RootSelected = () => {
   const [selected, setSelected] = useState([{
     id: 'ImspTQPwCqd',
     path: '/ImspTQPwCqd',
@@ -27,8 +33,11 @@ storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Root selected',
     onSelect: response => setSelected(response.items),
     roots: defaultRootOrgUnits
   });
-});
-storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Single level 2 child selected', () => {
+};
+RootSelected.story = {
+  name: 'Root selected'
+};
+export const SingleLevel2ChildSelected = () => {
   const [selected, setSelected] = useState([{
     id: 'fdc6uOvgoji',
     path: '/ImspTQPwCqd/fdc6uOvgoji',
@@ -39,8 +48,11 @@ storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Single level 2 
     onSelect: response => setSelected(response.items),
     roots: defaultRootOrgUnits
   });
-});
-storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Multiple level 2 children selected', () => {
+};
+SingleLevel2ChildSelected.story = {
+  name: 'Single level 2 child selected'
+};
+export const MultipleLevel2ChildrenSelected = () => {
   const [selected, setSelected] = useState([{
     id: 'O6uvpzGd5pu',
     path: '/ImspTQPwCqd/O6uvpzGd5pu',
@@ -59,8 +71,11 @@ storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Multiple level 
     onSelect: response => setSelected(response.items),
     roots: defaultRootOrgUnits
   });
-});
-storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Multiple selected across different levels', () => {
+};
+MultipleLevel2ChildrenSelected.story = {
+  name: 'Multiple level 2 children selected'
+};
+export const MultipleSelectedAcrossDifferentLevels = () => {
   const [selected, setSelected] = useState([{
     id: 'fdc6uOvgoji',
     path: '/ImspTQPwCqd/fdc6uOvgoji',
@@ -79,17 +94,22 @@ storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Multiple select
     onSelect: response => setSelected(response.items),
     roots: defaultRootOrgUnits
   });
-});
-storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Multiple roots', () => {
+};
+MultipleSelectedAcrossDifferentLevels.story = {
+  name: 'Multiple selected across different levels'
+};
+export const MultipleRoots = () => {
   const [selected, setSelected] = useState([]);
   return /*#__PURE__*/React.createElement(OrgUnitDimension, {
     selected: selected,
     onSelect: response => setSelected(response.items),
     roots: ['O6uvpzGd5pu', 'fdc6uOvgoji'] // Bo + Bombali
   });
-});
-
-storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Without user org units selection', () => {
+};
+MultipleRoots.story = {
+  name: 'Multiple roots'
+};
+export const WithoutUserOrgUnitsSelection = () => {
   const [selected, setSelected] = useState([]);
   return /*#__PURE__*/React.createElement(OrgUnitDimension, {
     hideUserOrgUnits: true,
@@ -97,8 +117,11 @@ storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Without user or
     onSelect: response => setSelected(response.items),
     roots: defaultRootOrgUnits
   });
-});
-storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Without level selector', () => {
+};
+WithoutUserOrgUnitsSelection.story = {
+  name: 'Without user org units selection'
+};
+export const WithoutLevelSelector = () => {
   const [selected, setSelected] = useState([]);
   return /*#__PURE__*/React.createElement(OrgUnitDimension, {
     hideLevelSelect: true,
@@ -106,8 +129,11 @@ storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Without level s
     onSelect: response => setSelected(response.items),
     roots: defaultRootOrgUnits
   });
-});
-storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Without group selector', () => {
+};
+WithoutLevelSelector.story = {
+  name: 'Without level selector'
+};
+export const WithoutGroupSelector = () => {
   const [selected, setSelected] = useState([]);
   return /*#__PURE__*/React.createElement(OrgUnitDimension, {
     hideGroupSelect: true,
@@ -115,8 +141,11 @@ storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Without group s
     onSelect: response => setSelected(response.items),
     roots: defaultRootOrgUnits
   });
-});
-storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Without level and group selector', () => {
+};
+WithoutGroupSelector.story = {
+  name: 'Without group selector'
+};
+export const WithoutLevelAndGroupSelector = () => {
   const [selected, setSelected] = useState([]);
   return /*#__PURE__*/React.createElement(OrgUnitDimension, {
     hideLevelSelect: true,
@@ -125,8 +154,11 @@ storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Without level a
     onSelect: response => setSelected(response.items),
     roots: defaultRootOrgUnits
   });
-});
-storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Without level and group selector, with warning text', () => {
+};
+WithoutLevelAndGroupSelector.story = {
+  name: 'Without level and group selector'
+};
+export const WithoutLevelAndGroupSelectorWithWarningText = () => {
   const [selected, setSelected] = useState([]);
   return /*#__PURE__*/React.createElement(OrgUnitDimension, {
     hideLevelSelect: true,
@@ -136,4 +168,7 @@ storiesOf('OrgUnitDimension', module).addDecorator(Wrapper).add('Without level a
     roots: defaultRootOrgUnits,
     warning: 'No org. units selected'
   });
-});
+};
+WithoutLevelAndGroupSelectorWithWarningText.story = {
+  name: 'Without level and group selector, with warning text'
+};

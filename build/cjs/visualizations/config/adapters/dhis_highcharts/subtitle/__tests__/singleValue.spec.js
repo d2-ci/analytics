@@ -1,7 +1,7 @@
 "use strict";
 
 var _singleValue = _interopRequireDefault(require("../singleValue.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 jest.mock('../../../../../util/getFilterText', () => () => 'The default filter text');
 describe('getSingleValueSubtitle', () => {
   it('returns empty subtitle when flag hideSubtitle exists', () => {
@@ -51,7 +51,6 @@ describe('getSingleValueSubtitle', () => {
     //     })
     // })
   });
-
   describe('dashboard', () => {
     it('returns filter title as subtitle', () => {
       expect((0, _singleValue.default)({

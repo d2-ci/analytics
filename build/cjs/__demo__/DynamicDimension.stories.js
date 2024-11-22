@@ -1,9 +1,12 @@
 "use strict";
 
-var _react = require("@storybook/react");
-var _react2 = _interopRequireDefault(require("react"));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.ItemSelectorOneItemSelected = exports.ItemSelectorNoItemsSelected = exports.ItemSelectorDisabledItemSelected = void 0;
+var _react = _interopRequireDefault(require("react"));
 var _ItemSelector = _interopRequireDefault(require("../components/DynamicDimension/ItemSelector.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const items = [{
   id: '1',
   name: 'One'
@@ -24,16 +27,23 @@ const items = [{
   name: 'Six - disabled',
   disabled: true
 }];
-(0, _react.storiesOf)('DynamicDimension', module).add('ItemSelector no items selected', () => {
-  return /*#__PURE__*/_react2.default.createElement(_ItemSelector.default, {
+var _default = exports.default = {
+  title: 'DynamicDimension'
+};
+const ItemSelectorNoItemsSelected = () => {
+  return /*#__PURE__*/_react.default.createElement(_ItemSelector.default, {
     onSelect: selected => console.log(selected),
     onFetch: () => ({
       dimensionItems: items
     })
   });
-});
-(0, _react.storiesOf)('DynamicDimension', module).add('ItemSelector one item selected', () => {
-  return /*#__PURE__*/_react2.default.createElement(_ItemSelector.default, {
+};
+exports.ItemSelectorNoItemsSelected = ItemSelectorNoItemsSelected;
+ItemSelectorNoItemsSelected.story = {
+  name: 'ItemSelector no items selected'
+};
+const ItemSelectorOneItemSelected = () => {
+  return /*#__PURE__*/_react.default.createElement(_ItemSelector.default, {
     onSelect: selected => console.log(selected),
     onFetch: () => ({
       dimensionItems: items
@@ -43,9 +53,13 @@ const items = [{
       label: item.name
     }))
   });
-});
-(0, _react.storiesOf)('DynamicDimension', module).add('ItemSelector disabled item selected', () => {
-  return /*#__PURE__*/_react2.default.createElement(_ItemSelector.default, {
+};
+exports.ItemSelectorOneItemSelected = ItemSelectorOneItemSelected;
+ItemSelectorOneItemSelected.story = {
+  name: 'ItemSelector one item selected'
+};
+const ItemSelectorDisabledItemSelected = () => {
+  return /*#__PURE__*/_react.default.createElement(_ItemSelector.default, {
     onSelect: selected => console.log(selected),
     onFetch: () => ({
       dimensionItems: items
@@ -55,4 +69,8 @@ const items = [{
       label: item.name
     }))
   });
-});
+};
+exports.ItemSelectorDisabledItemSelected = ItemSelectorDisabledItemSelected;
+ItemSelectorDisabledItemSelected.story = {
+  name: 'ItemSelector disabled item selected'
+};

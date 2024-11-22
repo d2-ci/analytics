@@ -17,7 +17,7 @@ describe('RichText: Parser component', () => {
     }
   };
   const renderComponent = (props, text) => {
-    return shallow( /*#__PURE__*/React.createElement(Parser, props, text));
+    return shallow(/*#__PURE__*/React.createElement(Parser, props, text));
   };
   it('should have rendered a result', () => {
     richTextParser = renderComponent({}, 'test');

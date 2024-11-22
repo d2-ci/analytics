@@ -5,14 +5,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.UpdateButton = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
-var _loader = require("@dhis2-ui/loader");
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _uiConstants = require("@dhis2/ui-constants");
 var _uiIcons = require("@dhis2/ui-icons");
+var _loader = require("@dhis2-ui/loader");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _MenuButtonStyles = _interopRequireDefault(require("./MenuButton.styles.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const UpdateButton = _ref => {
   let {
     onClick,

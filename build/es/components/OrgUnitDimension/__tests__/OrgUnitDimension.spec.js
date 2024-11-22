@@ -1,25 +1,12 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import OrgUnitDimension from '../OrgUnitDimension.js';
-jest.mock('@dhis2/app-runtime', () => ({
-  useDataEngine: () => ({
-    query: jest.fn()
-  })
-}));
-jest.mock('../../../api/organisationUnits.js', () => ({
-  apiFetchOrganisationUnitGroups: jest.fn().mockResolvedValue([]),
-  apiFetchOrganisationUnitLevels: jest.fn().mockResolvedValue([])
-}));
-jest.mock('../../../locales/index.js', () => ({
-  t: key => key
-}));
-afterEach(jest.clearAllMocks);
 describe('The OrgUnitDimension component', () => {
   let props;
   let shallowOrgUnitDimension;
   const getWrapper = () => {
     if (!shallowOrgUnitDimension) {
-      shallowOrgUnitDimension = shallow( /*#__PURE__*/React.createElement(OrgUnitDimension, props));
+      shallowOrgUnitDimension = shallow(/*#__PURE__*/React.createElement(OrgUnitDimension, props));
     }
     return shallowOrgUnitDimension;
   };

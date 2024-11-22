@@ -7,7 +7,7 @@ exports.generateDimensionStrings = exports.default = void 0;
 var _sortBy = _interopRequireDefault(require("lodash/sortBy"));
 var _AnalyticsRequest = _interopRequireDefault(require("./AnalyticsRequest.js"));
 var _utils = require("./utils.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const analyticsQuery = {
   resource: 'analytics',
   id: _ref => {
@@ -223,5 +223,4 @@ class AnalyticsBase {
     return response.data;
   }
 }
-var _default = AnalyticsBase;
-exports.default = _default;
+var _default = exports.default = AnalyticsBase;

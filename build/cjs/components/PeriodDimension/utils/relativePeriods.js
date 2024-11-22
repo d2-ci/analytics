@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getRelativePeriodsOptionsById = exports.getRelativePeriodsOptions = exports.getRelativePeriodIds = void 0;
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _index2 = require("./index.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getDaysPeriodType = () => [{
   id: 'TODAY',
   name: _index.default.t('Today')

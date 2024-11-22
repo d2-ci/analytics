@@ -126,7 +126,6 @@ export const UserMentionWrapper = _ref => {
       }
     }
   };
-
   const onSelect = user => {
     const originalValue = inputReference.current.value;
     const newValue = `${originalValue.slice(0, captureStartPosition - 1)}${originalValue.slice(captureStartPosition - 1).replace(/^@\w*/, `@${user.username} `)}`;

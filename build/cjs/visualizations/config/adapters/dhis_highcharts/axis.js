@@ -11,7 +11,7 @@ var _fontStyle = require("../../../../modules/fontStyle.js");
 var _visTypes = require("../../../../modules/visTypes.js");
 var _getFormatter = _interopRequireDefault(require("./getFormatter.js"));
 var _getTextAlignOption = require("./getTextAlignOption.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DEFAULT_MIN_VALUE = 0;
 const DEFAULT_GRIDLINE_COLOR = '#F1F1F1';
 const getPlotLineStyle = fontStyle => ({

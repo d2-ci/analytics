@@ -10,14 +10,13 @@ var _getAvailableSpace = require("./getAvailableSpace.js");
 var _positionElements = require("./positionElements.js");
 var _styles = require("./styles.js");
 function loadSingleValueSVG() {
-  var _this$userOptions;
   const {
     formattedValue,
     icon,
     subText,
     fontColor
   } = this.userOptions.customSVGOptions;
-  const dynamicStyles = new _styles.DynamicStyles((_this$userOptions = this.userOptions) === null || _this$userOptions === void 0 ? void 0 : _this$userOptions.isPdfExport);
+  const dynamicStyles = new _styles.DynamicStyles();
   const valueElement = this.renderer.text(formattedValue).attr('data-test', 'visualization-primary-value').css({
     color: fontColor,
     visibility: 'hidden'

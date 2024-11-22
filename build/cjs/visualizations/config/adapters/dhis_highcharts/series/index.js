@@ -18,7 +18,7 @@ var _type = _interopRequireDefault(require("../type.js"));
 var _gauge = _interopRequireDefault(require("./gauge.js"));
 var _pie = _interopRequireDefault(require("./pie.js"));
 var _scatter = _interopRequireDefault(require("./scatter.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DEFAULT_ANIMATION_DURATION = 200;
 const HIGHCHARTS_TYPE_COLUMN = 'column';
 const HIGHCHARTS_TYPE_BAR = 'bar';

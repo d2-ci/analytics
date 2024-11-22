@@ -6,12 +6,12 @@ import { HoverMenuBar, HoverMenuDropdown, HoverMenuList, HoverMenuListItem } fro
 describe('<HoverMenuBar/>', () => {
   it('renders children', () => {
     const childNode = 'text node';
-    const wrapper = shallow( /*#__PURE__*/React.createElement(HoverMenuBar, null, childNode));
+    const wrapper = shallow(/*#__PURE__*/React.createElement(HoverMenuBar, null, childNode));
     expect(wrapper.containsMatchingElement(childNode)).toBe(true);
   });
   it('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = shallow( /*#__PURE__*/React.createElement(HoverMenuBar, {
+    const wrapper = shallow(/*#__PURE__*/React.createElement(HoverMenuBar, {
       dataTest: dataTest
     }, "children"));
     expect(wrapper.find('div').prop('data-test')).toBe(dataTest);
@@ -107,7 +107,7 @@ function createFullMenuBarWrapper() {
     menuItemOnClickSpy,
     subMenuItemOnClickSpy
   } = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return render( /*#__PURE__*/React.createElement(HoverMenuBar, null, /*#__PURE__*/React.createElement(HoverMenuDropdown, {
+  return render(/*#__PURE__*/React.createElement(HoverMenuBar, null, /*#__PURE__*/React.createElement(HoverMenuDropdown, {
     label: "Menu A"
   }, /*#__PURE__*/React.createElement(HoverMenuList, null, /*#__PURE__*/React.createElement(HoverMenuListItem, {
     label: "Menu item A.1",

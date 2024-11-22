@@ -1,18 +1,24 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.WithNoTimeDimensionsWarning = exports.Default = void 0;
 var _appRuntime = require("@dhis2/app-runtime");
-var _react = require("@storybook/react");
-var _react2 = _interopRequireDefault(require("react"));
+var _react = _interopRequireDefault(require("react"));
 var _index = require("../components/Interpretations/InterpretationsUnit/index.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-(0, _react.storiesOf)('IntepretationsUnit', module).add('Default', () => {
-  return /*#__PURE__*/_react2.default.createElement(_appRuntime.CustomDataProvider, {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+var _default = exports.default = {
+  title: 'IntepretationsUnit'
+};
+const Default = () => {
+  return /*#__PURE__*/_react.default.createElement(_appRuntime.CustomDataProvider, {
     data: {
       interpretations: {
         interpretations: []
       }
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.InterpretationsUnit, {
+  }, /*#__PURE__*/_react.default.createElement(_index.InterpretationsUnit, {
     currentUser: {
       name: 'Tom Wakiki'
     },
@@ -21,15 +27,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     type: "eventVisualization",
     visualizationHasTimeDimension: true
   }));
-});
-(0, _react.storiesOf)('IntepretationsUnit', module).add('With no time dimensions warning', () => {
-  return /*#__PURE__*/_react2.default.createElement(_appRuntime.CustomDataProvider, {
+};
+exports.Default = Default;
+const WithNoTimeDimensionsWarning = () => {
+  return /*#__PURE__*/_react.default.createElement(_appRuntime.CustomDataProvider, {
     data: {
       interpretations: {
         interpretations: []
       }
     }
-  }, /*#__PURE__*/_react2.default.createElement(_index.InterpretationsUnit, {
+  }, /*#__PURE__*/_react.default.createElement(_index.InterpretationsUnit, {
     currentUser: {
       name: 'Tom Wakiki'
     },
@@ -38,4 +45,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     type: "eventVisualization",
     visualizationHasTimeDimension: false
   }));
-});
+};
+exports.WithNoTimeDimensionsWarning = WithNoTimeDimensionsWarning;
+WithNoTimeDimensionsWarning.story = {
+  name: 'With no time dimensions warning'
+};

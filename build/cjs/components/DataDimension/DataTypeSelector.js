@@ -13,7 +13,7 @@ var _dataTypes = require("../../modules/dataTypes.js");
 var _visTypes = require("../../modules/visTypes.js");
 var _DataDimension = require("./DataDimension.js");
 var _DataTypeSelectorStyle = _interopRequireDefault(require("./styles/DataTypeSelector.style.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DataTypeSelector = _ref => {
   let {
     currentDataType,
@@ -69,5 +69,4 @@ DataTypeSelector.propTypes = {
   dataTest: _propTypes.default.string,
   dataTypes: _propTypes.default.array
 };
-var _default = DataTypeSelector;
-exports.default = _default;
+var _default = exports.default = DataTypeSelector;

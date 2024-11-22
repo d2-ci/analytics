@@ -5,10 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getNormalizationHelper = exports.Y_RESIDUALS_LINEAR = void 0;
 var _addTrendLines = require("../../visualizations/config/adapters/dhis_highcharts/addTrendLines.js");
-const Y_RESIDUALS_LINEAR = 'Y_RESIDUALS_LINEAR';
+const Y_RESIDUALS_LINEAR = exports.Y_RESIDUALS_LINEAR = 'Y_RESIDUALS_LINEAR';
 
 // Y residuals
-exports.Y_RESIDUALS_LINEAR = Y_RESIDUALS_LINEAR;
+
 const getYResidualsHelper = sortedData => {
   const regression = (0, _addTrendLines.linear)(sortedData);
   const sortedRegPoints = regression.points;

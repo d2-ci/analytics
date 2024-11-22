@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = getExporting;
 var _visTypes = require("../../../../modules/visTypes.js");
 var _index = _interopRequireDefault(require("./events/loadCustomSVG/singleValue/index.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function getExporting(visType) {
   const exporting = {
     // disable exporting context menu

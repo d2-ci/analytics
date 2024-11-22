@@ -10,8 +10,8 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 var _PivotTableStyle = require("./styles/PivotTable.style.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const PivotTableContainer = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const PivotTableContainer = exports.PivotTableContainer = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   let {
     width,
     height,
@@ -36,7 +36,6 @@ const PivotTableContainer = /*#__PURE__*/_react.default.forwardRef((_ref, ref) =
     }) || "")
   }, children));
 });
-exports.PivotTableContainer = PivotTableContainer;
 PivotTableContainer.displayName = 'PivotTableContainer';
 PivotTableContainer.propTypes = {
   children: _propTypes.default.node.isRequired,

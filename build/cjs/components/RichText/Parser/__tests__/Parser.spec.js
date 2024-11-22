@@ -3,7 +3,7 @@
 var _enzyme = require("enzyme");
 var _react = _interopRequireDefault(require("react"));
 var _Parser = require("../Parser.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 jest.mock('../MdParser.js', () => ({
   MdParser: jest.fn().mockImplementation(() => {
     return {
@@ -20,7 +20,7 @@ describe('RichText: Parser component', () => {
     }
   };
   const renderComponent = (props, text) => {
-    return (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_Parser.Parser, props, text));
+    return (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_Parser.Parser, props, text));
   };
   it('should have rendered a result', () => {
     richTextParser = renderComponent({}, 'test');

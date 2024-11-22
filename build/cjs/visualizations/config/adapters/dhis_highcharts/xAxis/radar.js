@@ -9,7 +9,7 @@ var _fontStyle = require("../../../../../modules/fontStyle.js");
 var _visTypes = require("../../../../../modules/visTypes.js");
 var _getTextAlignOption = require("../getTextAlignOption.js");
 var _index = require("./index.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var _default = (store, layout) => {
   var _config$title;
   const config = (0, _index.getDefault)(store, layout);
