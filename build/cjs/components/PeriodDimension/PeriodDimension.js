@@ -65,10 +65,10 @@ const PeriodDimension = _ref => {
 PeriodDimension.propTypes = {
   onSelect: _propTypes.default.func.isRequired,
   excludedPeriodTypes: _propTypes.default.arrayOf(_propTypes.default.string),
+  height: _propTypes.default.string,
   infoBoxMessage: _propTypes.default.string,
   rightFooter: _propTypes.default.node,
-  selectedPeriods: _propTypes.default.array,
-  height: _propTypes.default.string
+  selectedPeriods: _propTypes.default.array
 };
 PeriodDimension.defaultProps = {
   selectedPeriods: []

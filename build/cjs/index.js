@@ -234,6 +234,7 @@ var _exportNames = {
   FYJUL: true,
   FYAPR: true,
   getRelativePeriodsOptionsById: true,
+  getRelativePeriodIds: true,
   getFixedPeriodsOptionsById: true,
   VisualizationOptions: true,
   DIMENSION_TYPE_INDICATOR: true,
@@ -1513,6 +1514,12 @@ Object.defineProperty(exports, "getPredefinedDimensions", {
   enumerable: true,
   get: function () {
     return _predefinedDimensions.getPredefinedDimensions;
+  }
+});
+Object.defineProperty(exports, "getRelativePeriodIds", {
+  enumerable: true,
+  get: function () {
+    return _relativePeriods.getRelativePeriodIds;
   }
 });
 Object.defineProperty(exports, "getRelativePeriodsOptionsById", {

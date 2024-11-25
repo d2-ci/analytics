@@ -197,6 +197,7 @@ PeriodTransfer.propTypes = {
   onSelect: _propTypes.default.func.isRequired,
   dataTest: _propTypes.default.string,
   excludedPeriodTypes: _propTypes.default.arrayOf(_propTypes.default.string),
+  height: _propTypes.default.string,
   infoBoxMessage: _propTypes.default.string,
   periodsSettings: _propTypes.default.shape({
     calendar: _propTypes.default.string,
@@ -207,7 +208,6 @@ PeriodTransfer.propTypes = {
     id: _propTypes.default.string,
     isActive: _propTypes.default.bool,
     name: _propTypes.default.string
-  })),
-  height: _propTypes.default.string
+  }))
 };
 var _default = exports.default = PeriodTransfer;
