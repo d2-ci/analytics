@@ -394,7 +394,9 @@ const ItemSelector = _ref5 => {
       subGroup: dataType === DIMENSION_TYPE_DATA_ELEMENT ? TOTALS : null
     }
   }));
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Transfer, {
+  return /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "transfer-container"
+  }, /*#__PURE__*/React.createElement(Transfer, {
     onChange: _ref9 => {
       let {
         selected

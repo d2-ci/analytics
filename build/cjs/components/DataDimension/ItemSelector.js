@@ -403,7 +403,9 @@ const ItemSelector = _ref5 => {
       subGroup: dataType === _dataTypes.DIMENSION_TYPE_DATA_ELEMENT ? _dataTypes.TOTALS : null
     }
   }));
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ui.Transfer, {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "transfer-container"
+  }, /*#__PURE__*/_react.default.createElement(_ui.Transfer, {
     onChange: _ref9 => {
       let {
         selected
