@@ -175,3 +175,7 @@ const getOptions = () => [{
 export const getRelativePeriodsOptionsById = id => getOptions().find(option => option.id === id);
 export const getRelativePeriodsOptions = () => getOptions();
 export const getRelativePeriodIds = () => Object.values(getOptions()).map(option => option.getPeriods().map(period => period.id)).flat();
+export const getRelativePeriodsMap = () => Object.values(getOptions()).map(option => option.getPeriods()).flat().reduce((acc, period) => {
+  acc[period.id] = period.name;
+  return acc;
+}, {});
