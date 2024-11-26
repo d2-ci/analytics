@@ -90,6 +90,7 @@
     "API link": "API link",
     "Open in API": "Open in API",
     "Custom attributes": "Custom attributes",
+    "Event in {{ stageName }}": "Event in {{ stageName }}",
     "Program": "Program",
     "Analytics type": "Analytics type",
     "Enrollment": "Enrollment",
