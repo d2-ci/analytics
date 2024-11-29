@@ -10,6 +10,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _dataTypes = require("../../../modules/dataTypes.js");
+var _valueTypes = require("../../../modules/valueTypes.js");
 var _InfoTable = require("./InfoTable.js");
 var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -84,7 +85,7 @@ const EventDataItemInfo = _ref5 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Value type')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (0, _InfoTable.capitalizeText)(data === null || data === void 0 ? void 0 : data.valueType))), (data === null || data === void 0 ? void 0 : data.optionSet) && /*#__PURE__*/_react.default.createElement("tr", {
+  }, _valueTypes.valueTypeDisplayNames[data === null || data === void 0 ? void 0 : data.valueType])), (data === null || data === void 0 ? void 0 : data.optionSet) && /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`

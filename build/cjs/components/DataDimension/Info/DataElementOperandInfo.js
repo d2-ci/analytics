@@ -9,6 +9,7 @@ var _appRuntime = require("@dhis2/app-runtime");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
+var _valueTypes = require("../../../modules/valueTypes.js");
 var _InfoTable = require("./InfoTable.js");
 var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
@@ -102,7 +103,7 @@ const DataElementOperandInfo = _ref2 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Value type')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (0, _InfoTable.capitalizeText)(data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.valueType))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, _valueTypes.valueTypeDisplayNames[data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.valueType])), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`

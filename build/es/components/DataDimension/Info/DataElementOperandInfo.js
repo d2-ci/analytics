@@ -3,7 +3,8 @@ import { useConfig, useDataEngine } from '@dhis2/app-runtime';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import i18n from '../../../locales/index.js';
-import { capitalizeText, getCommonFields, InfoTable } from './InfoTable.js';
+import { valueTypeDisplayNames } from '../../../modules/valueTypes.js';
+import { getCommonFields, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
 const dataElementOperandsQuery = {
   dataElementOperands: {
@@ -93,7 +94,7 @@ export const DataElementOperandInfo = _ref2 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Value type')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, capitalizeText(data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.valueType))), /*#__PURE__*/React.createElement("tr", {
+  }, valueTypeDisplayNames[data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.valueType])), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
