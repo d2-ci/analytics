@@ -6,9 +6,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import i18n from '../../../locales/index.js';
 import styles from './styles/InfoPopover.style.js';
-export const getCommonFields = displayNameProp => `attributeValues[id,displayName],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
+export const getCommonFields = displayNameProp => `attributeValues[attribute[id,displayName]],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
 export const capitalizeText = text => text && text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 export const sentenceCaseText = text => text && capitalizeText(text.replaceAll('_', ' ').toLowerCase());
+export const renderHumanReadableExpression = expressionData => /*#__PURE__*/React.createElement(React.Fragment, null, expressionData.status === 'ERROR' ? /*#__PURE__*/React.createElement("span", {
+  className: `jsx-${styles.__hash}` + " " + "none"
+}, expressionData.message) : /*#__PURE__*/React.createElement("span", {
+  className: `jsx-${styles.__hash}` + " " + "code"
+}, expressionData.description), /*#__PURE__*/React.createElement(_JSXStyle, {
+  id: styles.__hash
+}, styles));
 export const InfoTable = _ref => {
   let {
     data,
@@ -98,13 +105,12 @@ export const InfoTable = _ref => {
     className: `jsx-${styles.__hash}`
   }, data.attributeValues.map(_ref2 => {
     let {
-      id,
-      displayName
+      attribute
     } = _ref2;
     return /*#__PURE__*/React.createElement("li", {
-      key: id,
+      key: attribute.id,
       className: `jsx-${styles.__hash}`
-    }, displayName);
+    }, attribute.displayName);
   }))))))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));

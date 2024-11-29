@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import { validateIndicatorExpressionMutation } from '../../../api/expression.js';
 import i18n from '../../../locales/index.js';
-import { getCommonFields, InfoTable } from './InfoTable.js';
+import { getCommonFields, renderHumanReadableExpression, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
 const indicatorQuery = {
   indicator: {
@@ -51,16 +51,16 @@ export const IndicatorInfo = _ref3 => {
       const result = await getHumanReadableExpression({
         expression: indicator.denominator
       });
-      if (result !== null && result !== void 0 && result.description) {
-        indicator.humanReadableDenominatorExpression = result.description;
+      if (result) {
+        indicator.humanReadableDenominatorExpression = result;
       }
     }
     if (indicator.numerator) {
       const result = await getHumanReadableExpression({
         expression: indicator.numerator
       });
-      if (result !== null && result !== void 0 && result.description) {
-        indicator.humanReadableNumeratorExpression = result.description;
+      if (result) {
+        indicator.humanReadableNumeratorExpression = result;
       }
     }
     setData({
@@ -81,15 +81,15 @@ export const IndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Numerator description')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.indicator.displayNumeratorDescription)), /*#__PURE__*/React.createElement("tr", {
+  }, data !== null && data !== void 0 && data.indicator.displayNumeratorDescription ? data.indicator.displayNumeratorDescription : /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "none"
+  }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Numerator expression')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data !== null && data !== void 0 && data.indicator.humanReadableNumeratorExpression ? /*#__PURE__*/React.createElement("span", {
-    className: `jsx-${styles.__hash}` + " " + "code"
-  }, data.indicator.humanReadableNumeratorExpression) : /*#__PURE__*/React.createElement("span", {
+  }, data !== null && data !== void 0 && data.indicator.humanReadableNumeratorExpression ? renderHumanReadableExpression(data.indicator.humanReadableNumeratorExpression) : /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "none"
   }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
@@ -97,15 +97,15 @@ export const IndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Denominator description')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.indicator.displayDenominatorDescription)), /*#__PURE__*/React.createElement("tr", {
+  }, data !== null && data !== void 0 && data.indicator.displayDenominatorDescription ? data.indicator.displayDenominatorDescription : /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "none"
+  }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Denominator expression')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data !== null && data !== void 0 && data.indicator.humanReadableDenominatorExpression ? /*#__PURE__*/React.createElement("span", {
-    className: `jsx-${styles.__hash}` + " " + "code"
-  }, data.indicator.humanReadableDenominatorExpression) : /*#__PURE__*/React.createElement("span", {
+  }, data !== null && data !== void 0 && data.indicator.humanReadableDenominatorExpression ? renderHumanReadableExpression(data.indicator.humanReadableDenominatorExpression) : /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "none"
   }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`

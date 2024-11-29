@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import { validateIndicatorExpressionMutation } from '../../../api/expression.js';
 import i18n from '../../../locales/index.js';
-import { getCommonFields, InfoTable } from './InfoTable.js';
+import { getCommonFields, renderHumanReadableExpression, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
 const calculationQuery = {
   calculation: {
@@ -55,8 +55,8 @@ export const CalculationInfo = _ref3 => {
       const result = await getHumanReadableExpression({
         expression: calculation.expression
       });
-      if (result !== null && result !== void 0 && result.description) {
-        calculation.humanReadableExpression = result.description;
+      if (result) {
+        calculation.humanReadableExpression = result;
       }
     }
 
@@ -80,9 +80,7 @@ export const CalculationInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Expression description')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data !== null && data !== void 0 && data.calculation.humanReadableExpression ? /*#__PURE__*/React.createElement("span", {
-    className: `jsx-${styles.__hash}` + " " + "code"
-  }, data.calculation.humanReadableExpression) : /*#__PURE__*/React.createElement("span", {
+  }, data !== null && data !== void 0 && data.calculation.humanReadableExpression ? renderHumanReadableExpression(data.calculation.humanReadableExpression) : /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "none"
   }, i18n.t('None'))))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash

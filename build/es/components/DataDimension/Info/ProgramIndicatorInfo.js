@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import { validateProgramIndicatorExpressionMutation } from '../../../api/expression.js';
 import i18n from '../../../locales/index.js';
-import { getCommonFields, sentenceCaseText, InfoTable } from './InfoTable.js';
+import { getCommonFields, renderHumanReadableExpression, sentenceCaseText, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
 const dataElementQuery = {
   dataElement: {
@@ -89,16 +89,16 @@ export const ProgramIndicatorInfo = _ref7 => {
       const result = await getHumanReadableExpression({
         expression: programIndicator.expression
       });
-      if (result !== null && result !== void 0 && result.description) {
-        programIndicator.humanReadableExpression = result.description;
+      if (result) {
+        programIndicator.humanReadableExpression = result;
       }
     }
     if (programIndicator.filter) {
       const result = await getHumanReadableExpression({
         expression: programIndicator.filter
       });
-      if (result !== null && result !== void 0 && result.description) {
-        programIndicator.humanReadableFilter = result.description;
+      if (result) {
+        programIndicator.humanReadableFilter = result;
       }
     }
 
@@ -225,9 +225,7 @@ export const ProgramIndicatorInfo = _ref7 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Expression')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data !== null && data !== void 0 && data.programIndicator.humanReadableExpression ? /*#__PURE__*/React.createElement("span", {
-    className: `jsx-${styles.__hash}` + " " + "code"
-  }, data.programIndicator.humanReadableExpression) : /*#__PURE__*/React.createElement("span", {
+  }, data !== null && data !== void 0 && data.programIndicator.humanReadableExpression ? renderHumanReadableExpression(data.programIndicator.humanReadableExpression) : /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "none"
   }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
@@ -235,9 +233,7 @@ export const ProgramIndicatorInfo = _ref7 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Filter')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data !== null && data !== void 0 && data.programIndicator.humanReadableFilter ? /*#__PURE__*/React.createElement("span", {
-    className: `jsx-${styles.__hash}` + " " + "code"
-  }, data.programIndicator.humanReadableFilter) : /*#__PURE__*/React.createElement("span", {
+  }, data !== null && data !== void 0 && data.programIndicator.humanReadableFilter ? renderHumanReadableExpression(data.programIndicator.humanReadableFilter) : /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "none"
   }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`

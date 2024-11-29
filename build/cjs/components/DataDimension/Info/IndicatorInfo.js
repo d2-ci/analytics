@@ -60,16 +60,16 @@ const IndicatorInfo = _ref3 => {
       const result = await getHumanReadableExpression({
         expression: indicator.denominator
       });
-      if (result !== null && result !== void 0 && result.description) {
-        indicator.humanReadableDenominatorExpression = result.description;
+      if (result) {
+        indicator.humanReadableDenominatorExpression = result;
       }
     }
     if (indicator.numerator) {
       const result = await getHumanReadableExpression({
         expression: indicator.numerator
       });
-      if (result !== null && result !== void 0 && result.description) {
-        indicator.humanReadableNumeratorExpression = result.description;
+      if (result) {
+        indicator.humanReadableNumeratorExpression = result;
       }
     }
     setData({
@@ -90,15 +90,15 @@ const IndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Numerator description')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.indicator.displayNumeratorDescription)), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data !== null && data !== void 0 && data.indicator.displayNumeratorDescription ? data.indicator.displayNumeratorDescription : /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+  }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Numerator expression')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data !== null && data !== void 0 && data.indicator.humanReadableNumeratorExpression ? /*#__PURE__*/_react.default.createElement("span", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
-  }, data.indicator.humanReadableNumeratorExpression) : /*#__PURE__*/_react.default.createElement("span", {
+  }, data !== null && data !== void 0 && data.indicator.humanReadableNumeratorExpression ? (0, _InfoTable.renderHumanReadableExpression)(data.indicator.humanReadableNumeratorExpression) : /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
   }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
@@ -106,15 +106,15 @@ const IndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Denominator description')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.indicator.displayDenominatorDescription)), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data !== null && data !== void 0 && data.indicator.displayDenominatorDescription ? data.indicator.displayDenominatorDescription : /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+  }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Denominator expression')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data !== null && data !== void 0 && data.indicator.humanReadableDenominatorExpression ? /*#__PURE__*/_react.default.createElement("span", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
-  }, data.indicator.humanReadableDenominatorExpression) : /*#__PURE__*/_react.default.createElement("span", {
+  }, data !== null && data !== void 0 && data.indicator.humanReadableDenominatorExpression ? (0, _InfoTable.renderHumanReadableExpression)(data.indicator.humanReadableDenominatorExpression) : /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
   }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`

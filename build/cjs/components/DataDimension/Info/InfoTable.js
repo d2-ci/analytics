@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sentenceCaseText = exports.getCommonFields = exports.capitalizeText = exports.InfoTable = void 0;
+exports.sentenceCaseText = exports.renderHumanReadableExpression = exports.getCommonFields = exports.capitalizeText = exports.InfoTable = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _appRuntime = require("@dhis2/app-runtime");
 var _ui = require("@dhis2/ui");
@@ -13,12 +13,20 @@ var _react = _interopRequireDefault(require("react"));
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const getCommonFields = displayNameProp => `attributeValues[id,displayName],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
+const getCommonFields = displayNameProp => `attributeValues[attribute[id,displayName]],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
 exports.getCommonFields = getCommonFields;
 const capitalizeText = text => text && text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 exports.capitalizeText = capitalizeText;
 const sentenceCaseText = text => text && capitalizeText(text.replaceAll('_', ' ').toLowerCase());
 exports.sentenceCaseText = sentenceCaseText;
+const renderHumanReadableExpression = expressionData => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, expressionData.status === 'ERROR' ? /*#__PURE__*/_react.default.createElement("span", {
+  className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+}, expressionData.message) : /*#__PURE__*/_react.default.createElement("span", {
+  className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
+}, expressionData.description), /*#__PURE__*/_react.default.createElement(_style.default, {
+  id: _InfoPopoverStyle.default.__hash
+}, _InfoPopoverStyle.default));
+exports.renderHumanReadableExpression = renderHumanReadableExpression;
 const InfoTable = _ref => {
   let {
     data,
@@ -108,13 +116,12 @@ const InfoTable = _ref => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, data.attributeValues.map(_ref2 => {
     let {
-      id,
-      displayName
+      attribute
     } = _ref2;
     return /*#__PURE__*/_react.default.createElement("li", {
-      key: id,
+      key: attribute.id,
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, displayName);
+    }, attribute.displayName);
   }))))))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));

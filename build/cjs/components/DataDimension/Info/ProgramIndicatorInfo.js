@@ -98,16 +98,16 @@ const ProgramIndicatorInfo = _ref7 => {
       const result = await getHumanReadableExpression({
         expression: programIndicator.expression
       });
-      if (result !== null && result !== void 0 && result.description) {
-        programIndicator.humanReadableExpression = result.description;
+      if (result) {
+        programIndicator.humanReadableExpression = result;
       }
     }
     if (programIndicator.filter) {
       const result = await getHumanReadableExpression({
         expression: programIndicator.filter
       });
-      if (result !== null && result !== void 0 && result.description) {
-        programIndicator.humanReadableFilter = result.description;
+      if (result) {
+        programIndicator.humanReadableFilter = result;
       }
     }
 
@@ -234,9 +234,7 @@ const ProgramIndicatorInfo = _ref7 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Expression')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data !== null && data !== void 0 && data.programIndicator.humanReadableExpression ? /*#__PURE__*/_react.default.createElement("span", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
-  }, data.programIndicator.humanReadableExpression) : /*#__PURE__*/_react.default.createElement("span", {
+  }, data !== null && data !== void 0 && data.programIndicator.humanReadableExpression ? (0, _InfoTable.renderHumanReadableExpression)(data.programIndicator.humanReadableExpression) : /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
   }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
@@ -244,9 +242,7 @@ const ProgramIndicatorInfo = _ref7 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Filter')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data !== null && data !== void 0 && data.programIndicator.humanReadableFilter ? /*#__PURE__*/_react.default.createElement("span", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
-  }, data.programIndicator.humanReadableFilter) : /*#__PURE__*/_react.default.createElement("span", {
+  }, data !== null && data !== void 0 && data.programIndicator.humanReadableFilter ? (0, _InfoTable.renderHumanReadableExpression)(data.programIndicator.humanReadableFilter) : /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
   }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
