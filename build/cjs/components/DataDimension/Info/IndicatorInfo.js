@@ -159,39 +159,13 @@ const IndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Group membership')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups.length) === 1 ? data.indicator.indicatorGroups[0].displayName : /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
-  }, /*#__PURE__*/_react.default.createElement("ul", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups.map(_ref5 => {
-    let {
-      id,
-      displayName
-    } = _ref5;
-    return /*#__PURE__*/_react.default.createElement("li", {
-      key: id,
-      className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, displayName);
-  }))))), Boolean(data === null || data === void 0 ? void 0 : data.indicator.legendSets.length) && /*#__PURE__*/_react.default.createElement("tr", {
+  }, (data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups) && (0, _InfoTable.renderGroupMemberships)(data.indicator.indicatorGroups))), Boolean(data === null || data === void 0 ? void 0 : data.indicator.legendSets.length) && /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Legend set(s)')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.indicator.legendSets.length === 1 ? data.indicator.legendSets[0].displayName : /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
-  }, /*#__PURE__*/_react.default.createElement("ul", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.indicator.legendSets.map(_ref6 => {
-    let {
-      id,
-      displayName
-    } = _ref6;
-    return /*#__PURE__*/_react.default.createElement("li", {
-      key: id,
-      className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, displayName);
-  })))))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, (0, _InfoTable.renderLegendSets)(data.indicator.legendSets)))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };

@@ -5,7 +5,7 @@ import React from 'react';
 import i18n from '../../../locales/index.js';
 import { DIMENSION_TYPE_PROGRAM_DATA_ELEMENT } from '../../../modules/dataTypes.js';
 import { valueTypeDisplayNames } from '../../../modules/valueTypes.js';
-import { getCommonFields, InfoTable } from './InfoTable.js';
+import { getCommonFields, renderLegendSets, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
 const programDataElementQuery = {
   programDataElement: {
@@ -90,18 +90,7 @@ export const EventDataItemInfo = _ref5 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Legend set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.legendSets.length === 1 ? data.legendSets[0].displayName : /*#__PURE__*/React.createElement("ul", {
-    className: `jsx-${styles.__hash}`
-  }, data.legendSets.map(_ref6 => {
-    let {
-      id,
-      displayName
-    } = _ref6;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, displayName);
-  }))))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, renderLegendSets(data.legendSets)))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
   return type === DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? renderInfoTable(data === null || data === void 0 ? void 0 : data.programDataElement) : renderInfoTable(data === null || data === void 0 ? void 0 : data.programAttribute);

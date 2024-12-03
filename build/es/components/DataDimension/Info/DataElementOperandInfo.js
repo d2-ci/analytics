@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import i18n from '../../../locales/index.js';
 import { valueTypeDisplayNames } from '../../../modules/valueTypes.js';
-import { getCommonFields, InfoTable } from './InfoTable.js';
+import { getCommonFields, renderDataSets, renderGroupMemberships, renderLegendSets, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
 const dataElementOperandsQuery = {
   dataElementOperands: {
@@ -72,16 +72,11 @@ export const DataElementOperandInfo = _ref2 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Data set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.dataSetElements.length) === 1 ? data.dataElementOperand.dataElement.dataSetElements[0].dataSet.displayName : /*#__PURE__*/React.createElement("ul", {
-    className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.dataSetElements.map(_ref3 => {
+  }, (data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.dataSetElements) && renderDataSets(data.dataElementOperand.dataElement.dataSetElements.map(_ref3 => {
     let {
       dataSet
     } = _ref3;
-    return /*#__PURE__*/React.createElement("li", {
-      key: dataSet.id,
-      className: `jsx-${styles.__hash}`
-    }, dataSet.displayName);
+    return dataSet;
   })))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
@@ -106,7 +101,9 @@ export const DataElementOperandInfo = _ref2 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Category combo')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, /*#__PURE__*/React.createElement("details", {
+  }, (data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.categoryCombo.displayName) === 'default' ? /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "none"
+  }, i18n.t('None')) : /*#__PURE__*/React.createElement("details", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("summary", {
     className: `jsx-${styles.__hash}`
@@ -133,35 +130,13 @@ export const DataElementOperandInfo = _ref2 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Group membership')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.dataElementGroups.length) === 1 ? data.dataElementOperand.dataElement.dataElementGroups[0].displayName : /*#__PURE__*/React.createElement("ul", {
-    className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.dataElementGroups.map(_ref5 => {
-    let {
-      id,
-      displayName
-    } = _ref5;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, displayName);
-  })))), Boolean(data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.legendSets.length) && /*#__PURE__*/React.createElement("tr", {
+  }, (data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.dataElementGroups) && renderGroupMemberships(data.dataElementOperand.dataElement.dataElementGroups))), Boolean(data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.legendSets.length) && /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Legend set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.dataElementOperand.dataElement.legendSets.length === 1 ? data.dataElementOperand.dataElement.legendSets[0].displayName : /*#__PURE__*/React.createElement("ul", {
-    className: `jsx-${styles.__hash}`
-  }, data.dataElementOperand.dataElement.legendSets.map(_ref6 => {
-    let {
-      id,
-      displayName
-    } = _ref6;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, displayName);
-  })))), /*#__PURE__*/React.createElement("tr", {
+  }, renderLegendSets(data.dataElementOperand.dataElement.legendSets))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
@@ -181,11 +156,11 @@ export const DataElementOperandInfo = _ref2 => {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.dataElementOperand.categoryOptionCombo.categoryCombo.categories.map(_ref7 => {
+  }, data === null || data === void 0 ? void 0 : data.dataElementOperand.categoryOptionCombo.categoryCombo.categories.map(_ref5 => {
     let {
       id,
       displayName
-    } = _ref7;
+    } = _ref5;
     return /*#__PURE__*/React.createElement("li", {
       key: id,
       className: `jsx-${styles.__hash}`

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import i18n from '../../../locales/index.js';
 import { valueTypeDisplayNames } from '../../../modules/valueTypes.js';
-import { getCommonFields, InfoTable } from './InfoTable.js';
+import { getCommonFields, renderDataSets, renderLegendSets, renderGroupMemberships, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
 const dataElementQuery = {
   dataElement: {
@@ -50,16 +50,11 @@ export const DataElementInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Data set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.length) === 1 ? data.dataElement.dataSetElements[0].dataSet.displayName : /*#__PURE__*/React.createElement("ul", {
-    className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.map(_ref4 => {
+  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements) && renderDataSets(data.dataElement.dataSetElements.map(_ref4 => {
     let {
       dataSet
     } = _ref4;
-    return /*#__PURE__*/React.createElement("li", {
-      key: dataSet.id,
-      className: `jsx-${styles.__hash}`
-    }, dataSet.displayName);
+    return dataSet;
   })))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
@@ -84,7 +79,9 @@ export const DataElementInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Category combo')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, /*#__PURE__*/React.createElement("details", {
+  }, (data === null || data === void 0 ? void 0 : data.dataElement.categoryCombo.displayName) === 'default' ? /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "none"
+  }, i18n.t('None')) : /*#__PURE__*/React.createElement("details", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("summary", {
     className: `jsx-${styles.__hash}`
@@ -111,35 +108,13 @@ export const DataElementInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Group membership')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataElementGroups.length) === 1 ? data.dataElement.dataElementGroups[0].displayName : /*#__PURE__*/React.createElement("ul", {
-    className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.dataElement.dataElementGroups.map(_ref6 => {
-    let {
-      id,
-      displayName
-    } = _ref6;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, displayName);
-  })))), Boolean(data === null || data === void 0 ? void 0 : data.dataElement.legendSets.length) && /*#__PURE__*/React.createElement("tr", {
+  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataElementGroups) && renderGroupMemberships(data.dataElement.dataElementGroups))), Boolean(data === null || data === void 0 ? void 0 : data.dataElement.legendSets.length) && /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Legend set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.dataElement.legendSets.length === 1 ? data.dataElement.legendSets[0].displayName : /*#__PURE__*/React.createElement("ul", {
-    className: `jsx-${styles.__hash}`
-  }, data.dataElement.legendSets.map(_ref7 => {
-    let {
-      id,
-      displayName
-    } = _ref7;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, displayName);
-  }))))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, renderLegendSets(data.dataElement.legendSets)))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

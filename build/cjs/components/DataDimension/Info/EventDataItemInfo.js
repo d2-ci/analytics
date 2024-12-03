@@ -97,18 +97,7 @@ const EventDataItemInfo = _ref5 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Legend set(s)')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.legendSets.length === 1 ? data.legendSets[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.legendSets.map(_ref6 => {
-    let {
-      id,
-      displayName
-    } = _ref6;
-    return /*#__PURE__*/_react.default.createElement("li", {
-      key: id,
-      className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, displayName);
-  }))))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, (0, _InfoTable.renderLegendSets)(data.legendSets)))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
   return type === _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? renderInfoTable(data === null || data === void 0 ? void 0 : data.programDataElement) : renderInfoTable(data === null || data === void 0 ? void 0 : data.programAttribute);

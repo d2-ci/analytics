@@ -57,16 +57,11 @@ const DataElementInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Data set(s)')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.length) === 1 ? data.dataElement.dataSetElements[0].dataSet.displayName : /*#__PURE__*/_react.default.createElement("ul", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements.map(_ref4 => {
+  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements) && (0, _InfoTable.renderDataSets)(data.dataElement.dataSetElements.map(_ref4 => {
     let {
       dataSet
     } = _ref4;
-    return /*#__PURE__*/_react.default.createElement("li", {
-      key: dataSet.id,
-      className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, dataSet.displayName);
+    return dataSet;
   })))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
@@ -91,7 +86,9 @@ const DataElementInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Category combo')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, /*#__PURE__*/_react.default.createElement("details", {
+  }, (data === null || data === void 0 ? void 0 : data.dataElement.categoryCombo.displayName) === 'default' ? /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+  }, _index.default.t('None')) : /*#__PURE__*/_react.default.createElement("details", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("summary", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
@@ -118,35 +115,13 @@ const DataElementInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Group membership')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataElementGroups.length) === 1 ? data.dataElement.dataElementGroups[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.dataElement.dataElementGroups.map(_ref6 => {
-    let {
-      id,
-      displayName
-    } = _ref6;
-    return /*#__PURE__*/_react.default.createElement("li", {
-      key: id,
-      className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, displayName);
-  })))), Boolean(data === null || data === void 0 ? void 0 : data.dataElement.legendSets.length) && /*#__PURE__*/_react.default.createElement("tr", {
+  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataElementGroups) && (0, _InfoTable.renderGroupMemberships)(data.dataElement.dataElementGroups))), Boolean(data === null || data === void 0 ? void 0 : data.dataElement.legendSets.length) && /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Legend set(s)')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.dataElement.legendSets.length === 1 ? data.dataElement.legendSets[0].displayName : /*#__PURE__*/_react.default.createElement("ul", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.dataElement.legendSets.map(_ref7 => {
-    let {
-      id,
-      displayName
-    } = _ref7;
-    return /*#__PURE__*/_react.default.createElement("li", {
-      key: id,
-      className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, displayName);
-  }))))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, (0, _InfoTable.renderLegendSets)(data.dataElement.legendSets)))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };

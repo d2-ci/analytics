@@ -9,6 +9,62 @@ import styles from './styles/InfoPopover.style.js';
 export const getCommonFields = displayNameProp => `attributeValues[attribute[id,displayName]],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
 export const capitalizeText = text => text && text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 export const sentenceCaseText = text => text && capitalizeText(text.replaceAll('_', ' ').toLowerCase());
+export const renderDataSets = dataSets => {
+  if (dataSets.length === 0) {
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+      className: `jsx-${styles.__hash}` + " " + "none"
+    }, i18n.t('None')), /*#__PURE__*/React.createElement(_JSXStyle, {
+      id: styles.__hash
+    }, styles));
+  } else if (dataSets.length === 1) {
+    return dataSets[0].displayName;
+  } else {
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: `jsx-${styles.__hash}` + " " + "content-wrap"
+    }, /*#__PURE__*/React.createElement("ul", {
+      className: `jsx-${styles.__hash}`
+    }, dataSets.map(_ref => {
+      let {
+        id,
+        displayName
+      } = _ref;
+      return /*#__PURE__*/React.createElement("li", {
+        key: id,
+        className: `jsx-${styles.__hash}`
+      }, displayName);
+    }))), /*#__PURE__*/React.createElement(_JSXStyle, {
+      id: styles.__hash
+    }, styles));
+  }
+};
+export const renderGroupMemberships = groups => {
+  if (groups.length === 0) {
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+      className: `jsx-${styles.__hash}` + " " + "none"
+    }, i18n.t('None')), /*#__PURE__*/React.createElement(_JSXStyle, {
+      id: styles.__hash
+    }, styles));
+  } else if (groups.length === 1) {
+    return groups[0].displayName;
+  } else {
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: `jsx-${styles.__hash}` + " " + "content-wrap"
+    }, /*#__PURE__*/React.createElement("ul", {
+      className: `jsx-${styles.__hash}`
+    }, groups.map(_ref2 => {
+      let {
+        id,
+        displayName
+      } = _ref2;
+      return /*#__PURE__*/React.createElement("li", {
+        key: id,
+        className: `jsx-${styles.__hash}`
+      }, displayName);
+    }))), /*#__PURE__*/React.createElement(_JSXStyle, {
+      id: styles.__hash
+    }, styles));
+  }
+};
 export const renderHumanReadableExpression = expressionData => /*#__PURE__*/React.createElement(React.Fragment, null, expressionData.status === 'ERROR' ? /*#__PURE__*/React.createElement("span", {
   className: `jsx-${styles.__hash}` + " " + "none"
 }, expressionData.message) : /*#__PURE__*/React.createElement("span", {
@@ -16,13 +72,31 @@ export const renderHumanReadableExpression = expressionData => /*#__PURE__*/Reac
 }, expressionData.description), /*#__PURE__*/React.createElement(_JSXStyle, {
   id: styles.__hash
 }, styles));
-export const InfoTable = _ref => {
+export const renderLegendSets = legendSets => {
+  return legendSets.length === 1 ? legendSets[0].displayName : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/React.createElement("ul", {
+    className: `jsx-${styles.__hash}`
+  }, legendSets.map(_ref3 => {
+    let {
+      id,
+      displayName
+    } = _ref3;
+    return /*#__PURE__*/React.createElement("li", {
+      key: id,
+      className: `jsx-${styles.__hash}`
+    }, displayName);
+  }))), /*#__PURE__*/React.createElement(_JSXStyle, {
+    id: styles.__hash
+  }, styles));
+};
+export const InfoTable = _ref4 => {
   let {
     data,
     error,
     loading,
     children
-  } = _ref;
+  } = _ref4;
   const {
     fromServerDate
   } = useTimeZoneConversion();
@@ -103,10 +177,10 @@ export const InfoTable = _ref => {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
-  }, data.attributeValues.map(_ref2 => {
+  }, data.attributeValues.map(_ref5 => {
     let {
       attribute
-    } = _ref2;
+    } = _ref5;
     return /*#__PURE__*/React.createElement("li", {
       key: attribute.id,
       className: `jsx-${styles.__hash}`

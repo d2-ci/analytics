@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import { validateProgramIndicatorExpressionMutation } from '../../../api/expression.js';
 import i18n from '../../../locales/index.js';
-import { getCommonFields, renderHumanReadableExpression, sentenceCaseText, InfoTable } from './InfoTable.js';
+import { getCommonFields, renderHumanReadableExpression, renderLegendSets, sentenceCaseText, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
 const programIndicatorQuery = {
   programIndicator: {
@@ -168,20 +168,7 @@ export const ProgramIndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Legend set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.programIndicator.legendSets.length === 1 ? data.programIndicator.legendSets[0].displayName : /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + "content-wrap"
-  }, /*#__PURE__*/React.createElement("ul", {
-    className: `jsx-${styles.__hash}`
-  }, data.programIndicator.legendSets.map(_ref6 => {
-    let {
-      id,
-      displayName
-    } = _ref6;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, displayName);
-  })))))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, renderLegendSets(data.programIndicator.legendSets)))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

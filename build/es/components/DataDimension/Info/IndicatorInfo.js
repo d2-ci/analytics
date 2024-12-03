@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import { validateIndicatorExpressionMutation } from '../../../api/expression.js';
 import i18n from '../../../locales/index.js';
-import { getCommonFields, renderHumanReadableExpression, InfoTable } from './InfoTable.js';
+import { getCommonFields, renderGroupMemberships, renderHumanReadableExpression, renderLegendSets, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
 const indicatorQuery = {
   indicator: {
@@ -150,39 +150,13 @@ export const IndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Group membership')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups.length) === 1 ? data.indicator.indicatorGroups[0].displayName : /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + "content-wrap"
-  }, /*#__PURE__*/React.createElement("ul", {
-    className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups.map(_ref5 => {
-    let {
-      id,
-      displayName
-    } = _ref5;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, displayName);
-  }))))), Boolean(data === null || data === void 0 ? void 0 : data.indicator.legendSets.length) && /*#__PURE__*/React.createElement("tr", {
+  }, (data === null || data === void 0 ? void 0 : data.indicator.indicatorGroups) && renderGroupMemberships(data.indicator.indicatorGroups))), Boolean(data === null || data === void 0 ? void 0 : data.indicator.legendSets.length) && /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Legend set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.indicator.legendSets.length === 1 ? data.indicator.legendSets[0].displayName : /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + "content-wrap"
-  }, /*#__PURE__*/React.createElement("ul", {
-    className: `jsx-${styles.__hash}`
-  }, data.indicator.legendSets.map(_ref6 => {
-    let {
-      id,
-      displayName
-    } = _ref6;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, displayName);
-  })))))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, renderLegendSets(data.indicator.legendSets)))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };
