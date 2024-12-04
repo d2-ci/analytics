@@ -43,7 +43,7 @@ const OrgUnitDimension = _ref => {
     } = selectedItem;
     let result = [...selected];
     if (checked && DYNAMIC_ORG_UNITS.includes(id)) {
-      result = [...result.filter(item => DYNAMIC_ORG_UNITS.includes(item.id)), {
+      result = [...result, {
         id,
         displayName
       }];
@@ -187,9 +187,7 @@ const OrgUnitDimension = _ref => {
     },
     dense: true
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_OrgUnitDimensionStyle.default.__hash}` + " " + ((0, _classnames.default)('orgUnitTreeWrapper', {
-      disabled: selected.some(item => DYNAMIC_ORG_UNITS.includes(item.id))
-    }) || "")
+    className: `jsx-${_OrgUnitDimensionStyle.default.__hash}` + " " + "orgUnitTreeWrapper"
   }, /*#__PURE__*/_react.default.createElement(_ui.OrganisationUnitTree, {
     roots: roots,
     initiallyExpanded: [...(roots.length === 1 ? [`/${roots[0]}`] : []), ...selected.filter(item => !DYNAMIC_ORG_UNITS.includes(item.id) && !_index2.ouIdHelper.hasLevelPrefix(item.id) && !_index2.ouIdHelper.hasGroupPrefix(item.id)).map(item => item.path.substring(0, item.path.lastIndexOf('/'))).filter(path => path)],
@@ -198,7 +196,6 @@ const OrgUnitDimension = _ref => {
     dataTest: 'org-unit-tree'
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_OrgUnitDimensionStyle.default.__hash}` + " " + ((0, _classnames.default)('selectsWrapper', {
-      disabled: selected.some(item => DYNAMIC_ORG_UNITS.includes(item.id)),
       hidden: hideLevelSelect && hideGroupSelect
     }) || "")
   }, !hideLevelSelect && /*#__PURE__*/_react.default.createElement(_ui.MultiSelect, {

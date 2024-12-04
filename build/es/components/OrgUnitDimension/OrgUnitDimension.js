@@ -34,7 +34,7 @@ const OrgUnitDimension = _ref => {
     } = selectedItem;
     let result = [...selected];
     if (checked && DYNAMIC_ORG_UNITS.includes(id)) {
-      result = [...result.filter(item => DYNAMIC_ORG_UNITS.includes(item.id)), {
+      result = [...result, {
         id,
         displayName
       }];
@@ -178,9 +178,7 @@ const OrgUnitDimension = _ref => {
     },
     dense: true
   })), /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + (cx('orgUnitTreeWrapper', {
-      disabled: selected.some(item => DYNAMIC_ORG_UNITS.includes(item.id))
-    }) || "")
+    className: `jsx-${styles.__hash}` + " " + "orgUnitTreeWrapper"
   }, /*#__PURE__*/React.createElement(OrganisationUnitTree, {
     roots: roots,
     initiallyExpanded: [...(roots.length === 1 ? [`/${roots[0]}`] : []), ...selected.filter(item => !DYNAMIC_ORG_UNITS.includes(item.id) && !ouIdHelper.hasLevelPrefix(item.id) && !ouIdHelper.hasGroupPrefix(item.id)).map(item => item.path.substring(0, item.path.lastIndexOf('/'))).filter(path => path)],
@@ -189,7 +187,6 @@ const OrgUnitDimension = _ref => {
     dataTest: 'org-unit-tree'
   })), /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + (cx('selectsWrapper', {
-      disabled: selected.some(item => DYNAMIC_ORG_UNITS.includes(item.id)),
       hidden: hideLevelSelect && hideGroupSelect
     }) || "")
   }, !hideLevelSelect && /*#__PURE__*/React.createElement(MultiSelect, {
