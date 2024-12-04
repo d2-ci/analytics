@@ -234,7 +234,8 @@ var _exportNames = {
   FYJUL: true,
   FYAPR: true,
   getRelativePeriodsOptionsById: true,
-  getRelativePeriodsMap: true,
+  getRelativePeriodsName: true,
+  getRelativePeriodsItemsCount: true,
   getFixedPeriodsOptionsById: true,
   VisualizationOptions: true,
   DIMENSION_TYPE_INDICATOR: true,
@@ -1516,10 +1517,16 @@ Object.defineProperty(exports, "getPredefinedDimensions", {
     return _predefinedDimensions.getPredefinedDimensions;
   }
 });
-Object.defineProperty(exports, "getRelativePeriodsMap", {
+Object.defineProperty(exports, "getRelativePeriodsItemsCount", {
   enumerable: true,
   get: function () {
-    return _relativePeriods.getRelativePeriodsMap;
+    return _relativePeriods.getRelativePeriodsItemsCount;
+  }
+});
+Object.defineProperty(exports, "getRelativePeriodsName", {
+  enumerable: true,
+  get: function () {
+    return _relativePeriods.getRelativePeriodsName;
   }
 });
 Object.defineProperty(exports, "getRelativePeriodsOptionsById", {
