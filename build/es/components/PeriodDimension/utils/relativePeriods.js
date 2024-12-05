@@ -261,11 +261,12 @@ export const getRelativePeriodsOptions = () => getOptions();
 export const getRelativePeriodIds = () => Object.values(getOptions()).map(option => option.getPeriods().map(period => period.id)).flat();
 export const getRelativePeriodsDetails = () => Object.values(getOptions()).map(option => option.getPeriods().map(period => ({
   id: period.id,
+  name: period.name,
   offset: period.offset,
   duration: period.duration,
   type: option.id
 }))).flat().reduce((acc, period) => {
-  acc[period.id] = period.name;
+  acc[period.id] = period;
   return acc;
 }, {});
 export const getRelativePeriodsName = () => Object.values(getOptions()).map(option => option.getPeriods()).flat().reduce((acc, period) => {
