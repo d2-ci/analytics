@@ -11,7 +11,7 @@ var _react = _interopRequireDefault(require("react"));
 var _visTypes = require("../../modules/visTypes.js");
 var _VisTypeIcon = require("../VisTypeIcon.js");
 var _CustomSelectOption = require("./CustomSelectOption.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const VisTypeFilter = _ref => {
   let {
     visTypes,
@@ -59,5 +59,4 @@ VisTypeFilter.propTypes = {
   })),
   onChange: _propTypes.default.func
 };
-var _default = VisTypeFilter;
-exports.default = _default;
+var _default = exports.default = VisTypeFilter;

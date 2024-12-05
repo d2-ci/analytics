@@ -18,7 +18,7 @@ describe('RichText: Editor component', () => {
     mockConvertCtrlKey.mockClear();
   });
   const renderComponent = props => {
-    return render( /*#__PURE__*/React.createElement(Editor, props));
+    return render(/*#__PURE__*/React.createElement(Editor, props));
   };
   it('renders a result', () => {
     renderComponent(componentProps);

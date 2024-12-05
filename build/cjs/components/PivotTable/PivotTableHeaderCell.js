@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.PivotTableHeaderCell = void 0;
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _getHeaderForDisplay = require("../../modules/pivotTable/getHeaderForDisplay.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const PivotTableHeaderCell = _ref => {
   let {
     axisClippingResult,

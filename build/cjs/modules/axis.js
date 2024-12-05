@@ -7,7 +7,7 @@ exports.hasCustomAxes = exports.getAxisNameByLayoutType = exports.getAxisName = 
 var _index = _interopRequireDefault(require("../locales/index.js"));
 var _axis = require("./layout/axis.js");
 var _layoutTypes = require("./layoutTypes.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getAxisNamesByLayoutType = layoutType => {
   switch (layoutType) {
     case _layoutTypes.LAYOUT_TYPE_DEFAULT:

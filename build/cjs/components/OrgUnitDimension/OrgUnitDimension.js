@@ -16,9 +16,9 @@ var _list = require("../../modules/list.js");
 var _index2 = require("../../modules/ouIdHelper/index.js");
 var _predefinedDimensions = require("../../modules/predefinedDimensions.js");
 var _OrgUnitDimensionStyle = _interopRequireDefault(require("./styles/OrgUnitDimension.style.js"));
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DYNAMIC_ORG_UNITS = [_index2.USER_ORG_UNIT, _index2.USER_ORG_UNIT_CHILDREN, _index2.USER_ORG_UNIT_GRANDCHILDREN];
 const OrgUnitDimension = _ref => {
   let {
@@ -43,7 +43,7 @@ const OrgUnitDimension = _ref => {
     } = selectedItem;
     let result = [...selected];
     if (checked && DYNAMIC_ORG_UNITS.includes(id)) {
-      result = [...result.filter(item => DYNAMIC_ORG_UNITS.includes(item.id)), {
+      result = [...result, {
         id,
         displayName
       }];
@@ -187,9 +187,7 @@ const OrgUnitDimension = _ref => {
     },
     dense: true
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_OrgUnitDimensionStyle.default.__hash}` + " " + ((0, _classnames.default)('orgUnitTreeWrapper', {
-      disabled: selected.some(item => DYNAMIC_ORG_UNITS.includes(item.id))
-    }) || "")
+    className: `jsx-${_OrgUnitDimensionStyle.default.__hash}` + " " + "orgUnitTreeWrapper"
   }, /*#__PURE__*/_react.default.createElement(_ui.OrganisationUnitTree, {
     roots: roots,
     initiallyExpanded: [...(roots.length === 1 ? [`/${roots[0]}`] : []), ...selected.filter(item => !DYNAMIC_ORG_UNITS.includes(item.id) && !_index2.ouIdHelper.hasLevelPrefix(item.id) && !_index2.ouIdHelper.hasGroupPrefix(item.id)).map(item => item.path.substring(0, item.path.lastIndexOf('/'))).filter(path => path)],
@@ -198,7 +196,6 @@ const OrgUnitDimension = _ref => {
     dataTest: 'org-unit-tree'
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_OrgUnitDimensionStyle.default.__hash}` + " " + ((0, _classnames.default)('selectsWrapper', {
-      disabled: selected.some(item => DYNAMIC_ORG_UNITS.includes(item.id)),
       hidden: hideLevelSelect && hideGroupSelect
     }) || "")
   }, !hideLevelSelect && /*#__PURE__*/_react.default.createElement(_ui.MultiSelect, {
@@ -275,5 +272,4 @@ OrgUnitDimension.propTypes = {
   warning: _propTypes.default.string,
   onSelect: _propTypes.default.func
 };
-var _default = OrgUnitDimension;
-exports.default = _default;
+var _default = exports.default = OrgUnitDimension;

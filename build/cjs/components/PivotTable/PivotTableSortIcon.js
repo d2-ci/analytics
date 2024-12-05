@@ -13,7 +13,7 @@ var _SortIconDescending = require("./icons/SortIconDescending.js");
 var _SortIconIdle = require("./icons/SortIconIdle.js");
 var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 var _PivotTableStyle = require("./styles/PivotTable.style.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const PivotTableSortIcon = _ref => {
   let {
     index,

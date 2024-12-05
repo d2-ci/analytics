@@ -7,9 +7,9 @@ exports.programsQuery = exports.itemsByDimensionQuery = exports.indicatorsQuery 
 var _objectClean = _interopRequireDefault(require("d2-utilizr/lib/objectClean"));
 var _dataTypes = require("../modules/dataTypes.js");
 var _index = require("./index.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // Query definitions
-const dimensionsQuery = {
+const dimensionsQuery = exports.dimensionsQuery = {
   resource: 'dimensions',
   params: _ref => {
     let {
@@ -22,7 +22,6 @@ const dimensionsQuery = {
     };
   }
 };
-exports.dimensionsQuery = dimensionsQuery;
 const recommendedDimensionsQuery = {
   resource: 'dimensions/recommendations',
   params: _ref2 => {
@@ -43,7 +42,7 @@ const recommendedDimensionsQuery = {
     };
   }
 };
-const dataItemsQuery = {
+const dataItemsQuery = exports.dataItemsQuery = {
   resource: 'dataItems',
   params: _ref3 => {
     let {
@@ -75,8 +74,7 @@ const dataItemsQuery = {
     });
   }
 };
-exports.dataItemsQuery = dataItemsQuery;
-const indicatorsQuery = {
+const indicatorsQuery = exports.indicatorsQuery = {
   resource: 'indicators',
   params: _ref4 => {
     let {
@@ -101,8 +99,7 @@ const indicatorsQuery = {
     };
   }
 };
-exports.indicatorsQuery = indicatorsQuery;
-const indicatorGroupsQuery = {
+const indicatorGroupsQuery = exports.indicatorGroupsQuery = {
   resource: 'indicatorGroups',
   params: _ref5 => {
     let {
@@ -115,8 +112,7 @@ const indicatorGroupsQuery = {
     };
   }
 };
-exports.indicatorGroupsQuery = indicatorGroupsQuery;
-const dataElementsQuery = {
+const dataElementsQuery = exports.dataElementsQuery = {
   resource: 'dataElements',
   params: _ref6 => {
     let {
@@ -142,8 +138,7 @@ const dataElementsQuery = {
     };
   }
 };
-exports.dataElementsQuery = dataElementsQuery;
-const dataElementGroupsQuery = {
+const dataElementGroupsQuery = exports.dataElementGroupsQuery = {
   resource: 'dataElementGroups',
   params: _ref7 => {
     let {
@@ -156,8 +151,7 @@ const dataElementGroupsQuery = {
     };
   }
 };
-exports.dataElementGroupsQuery = dataElementGroupsQuery;
-const itemsByDimensionQuery = {
+const itemsByDimensionQuery = exports.itemsByDimensionQuery = {
   resource: `dimensions`,
   id: _ref8 => {
     let {
@@ -184,8 +178,7 @@ const itemsByDimensionQuery = {
     };
   }
 };
-exports.itemsByDimensionQuery = itemsByDimensionQuery;
-const dataElementOperandsQuery = {
+const dataElementOperandsQuery = exports.dataElementOperandsQuery = {
   resource: 'dataElementOperands',
   params: _ref10 => {
     let {
@@ -211,8 +204,7 @@ const dataElementOperandsQuery = {
     };
   }
 };
-exports.dataElementOperandsQuery = dataElementOperandsQuery;
-const dataSetsQuery = {
+const dataSetsQuery = exports.dataSetsQuery = {
   resource: 'dataSets',
   params: _ref11 => {
     let {
@@ -241,8 +233,7 @@ const dataSetsQuery = {
     return query;
   }
 };
-exports.dataSetsQuery = dataSetsQuery;
-const programsQuery = {
+const programsQuery = exports.programsQuery = {
   resource: 'programs',
   params: _ref12 => {
     let {
@@ -257,7 +248,6 @@ const programsQuery = {
 };
 
 // Fetch functions
-exports.programsQuery = programsQuery;
 const apiFetchDimensions = async (dataEngine, nameProp) => {
   const dimensionsData = await dataEngine.query({
     dimensions: dimensionsQuery

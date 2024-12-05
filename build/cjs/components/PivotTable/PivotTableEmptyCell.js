@@ -8,9 +8,9 @@ var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _react = _interopRequireDefault(require("react"));
 var _PivotTableCell = require("./PivotTableCell.js");
 var _PivotTableStyle = require("./styles/PivotTable.style.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-const PivotTableEmptyCell = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+const PivotTableEmptyCell = exports.PivotTableEmptyCell = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   let {
     ...props
   } = _ref;
@@ -20,5 +20,4 @@ const PivotTableEmptyCell = /*#__PURE__*/_react.default.forwardRef((_ref, ref) =
     id: _PivotTableStyle.cell.__hash
   }, _PivotTableStyle.cell));
 });
-exports.PivotTableEmptyCell = PivotTableEmptyCell;
 PivotTableEmptyCell.displayName = 'PivotTableEmptyCell';

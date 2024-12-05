@@ -9,7 +9,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _VisTypeIcon = require("../VisTypeIcon.js");
 var _DateField = require("./DateField.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const FileList = _ref => {
   let {
     data,
@@ -44,5 +44,4 @@ FileList.propTypes = {
   onSelect: _propTypes.default.func.isRequired,
   showVisTypeColumn: _propTypes.default.bool
 };
-var _default = FileList;
-exports.default = _default;
+var _default = exports.default = FileList;

@@ -13,7 +13,7 @@ var _dimensionListItem = require("../../../modules/dimensionListItem.js");
 var _expressions = require("../../../modules/expressions.js");
 var _DraggingItemStyle = _interopRequireDefault(require("./styles/DraggingItem.style.js"));
 var _FormulaItemStyle = _interopRequireDefault(require("./styles/FormulaItem.style.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DraggingItem = _ref => {
   let {
     label,
@@ -42,5 +42,4 @@ DraggingItem.propTypes = {
   type: _propTypes.default.string,
   value: _propTypes.default.string
 };
-var _default = DraggingItem;
-exports.default = _default;
+var _default = exports.default = DraggingItem;

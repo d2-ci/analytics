@@ -12,30 +12,19 @@ var _modZScore = require("./modZScore.js");
 var _normalization = require("./normalization.js");
 var _xyStats = require("./xyStats.js");
 var _zScore = require("./zScore.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const PROP_ENABLED = 'enabled';
-exports.PROP_ENABLED = PROP_ENABLED;
-const PROP_THRESHOLD_FACTOR = 'thresholdFactor';
-exports.PROP_THRESHOLD_FACTOR = PROP_THRESHOLD_FACTOR;
-const PROP_NORMALIZATION_METHOD = 'normalizationMethod';
-exports.PROP_NORMALIZATION_METHOD = PROP_NORMALIZATION_METHOD;
-const PROP_OUTLIER_METHOD = 'outlierMethod';
-exports.PROP_OUTLIER_METHOD = PROP_OUTLIER_METHOD;
-const PROP_EXTREME_LINES = 'extremeLines';
-exports.PROP_EXTREME_LINES = PROP_EXTREME_LINES;
-const PROP_EXTREME_LINES_VALUE = 'value';
-exports.PROP_EXTREME_LINES_VALUE = PROP_EXTREME_LINES_VALUE;
-const DEFAULT_ENABLED = false;
-exports.DEFAULT_ENABLED = DEFAULT_ENABLED;
-const DEFAULT_THRESHOLD_FACTOR = 1.5;
-exports.DEFAULT_THRESHOLD_FACTOR = DEFAULT_THRESHOLD_FACTOR;
-const DEFAULT_NORMALIZATION_METHOD = _normalization.Y_RESIDUALS_LINEAR;
-exports.DEFAULT_NORMALIZATION_METHOD = DEFAULT_NORMALIZATION_METHOD;
-const DEFAULT_OUTLIER_METHOD = _iqr.IQR;
-exports.DEFAULT_OUTLIER_METHOD = DEFAULT_OUTLIER_METHOD;
-const DEFAULT_EXTREME_LINES_VALUE = 1;
-exports.DEFAULT_EXTREME_LINES_VALUE = DEFAULT_EXTREME_LINES_VALUE;
-const defaultConfig = {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const PROP_ENABLED = exports.PROP_ENABLED = 'enabled';
+const PROP_THRESHOLD_FACTOR = exports.PROP_THRESHOLD_FACTOR = 'thresholdFactor';
+const PROP_NORMALIZATION_METHOD = exports.PROP_NORMALIZATION_METHOD = 'normalizationMethod';
+const PROP_OUTLIER_METHOD = exports.PROP_OUTLIER_METHOD = 'outlierMethod';
+const PROP_EXTREME_LINES = exports.PROP_EXTREME_LINES = 'extremeLines';
+const PROP_EXTREME_LINES_VALUE = exports.PROP_EXTREME_LINES_VALUE = 'value';
+const DEFAULT_ENABLED = exports.DEFAULT_ENABLED = false;
+const DEFAULT_THRESHOLD_FACTOR = exports.DEFAULT_THRESHOLD_FACTOR = 1.5;
+const DEFAULT_NORMALIZATION_METHOD = exports.DEFAULT_NORMALIZATION_METHOD = _normalization.Y_RESIDUALS_LINEAR;
+const DEFAULT_OUTLIER_METHOD = exports.DEFAULT_OUTLIER_METHOD = _iqr.IQR;
+const DEFAULT_EXTREME_LINES_VALUE = exports.DEFAULT_EXTREME_LINES_VALUE = 1;
+const defaultConfig = exports.defaultConfig = {
   [PROP_ENABLED]: DEFAULT_ENABLED,
   [PROP_THRESHOLD_FACTOR]: DEFAULT_THRESHOLD_FACTOR,
   [PROP_NORMALIZATION_METHOD]: DEFAULT_NORMALIZATION_METHOD,
@@ -45,7 +34,6 @@ const defaultConfig = {
     [PROP_EXTREME_LINES_VALUE]: DEFAULT_EXTREME_LINES_VALUE
   }
 };
-exports.defaultConfig = defaultConfig;
 const getExtremeLines = (percentage, xyStats) => {
   const lines = [];
   if (!(0, _isNumeric.default)(percentage)) {

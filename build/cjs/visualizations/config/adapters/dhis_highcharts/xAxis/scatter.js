@@ -12,7 +12,7 @@ var _axisId = require("../../../../util/axisId.js");
 var _axis = require("../axis.js");
 var _getAxisTitle = _interopRequireDefault(require("../getAxisTitle.js"));
 var _getSteps = _interopRequireDefault(require("../getSteps.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const AXIS_TYPE = 'RANGE';
 const AXIS_INDEX = 1;
 function _default(layout, series, extraOptions) {

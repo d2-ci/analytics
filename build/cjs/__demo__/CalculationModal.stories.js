@@ -1,10 +1,13 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.WithCalculationContainingOperand = exports.WithCalculation = exports.NoAvailableData = exports.Default = void 0;
 var _appRuntime = require("@dhis2/app-runtime");
-var _react = require("@storybook/react");
-var _react2 = _interopRequireDefault(require("react"));
+var _react = _interopRequireDefault(require("react"));
 var _CalculationModal = _interopRequireDefault(require("../components/DataDimension/Calculation/CalculationModal.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DATA_ELEMENTS = {
   pager: {
     page: 1,
@@ -362,49 +365,64 @@ const calculationWithOperand = {
   name: 'Calculation with operand',
   expression: '#{cYeuwXTCPkU}*10-#{fbfJHSPpUQD.pq2XI5kz2BY}'
 };
-(0, _react.storiesOf)('CalculationModal', module).add('Default', () => {
-  return /*#__PURE__*/_react2.default.createElement(_appRuntime.CustomDataProvider, {
+var _default = exports.default = {
+  title: 'CalculationModal'
+};
+const Default = () => {
+  return /*#__PURE__*/_react.default.createElement(_appRuntime.CustomDataProvider, {
     data: {
       dataElements: DATA_ELEMENTS,
       dataElementGroups: DATA_ELEMENT_GROUPS,
       dataElementOperands: DATA_ELEMENT_OPERANDS
     }
-  }, /*#__PURE__*/_react2.default.createElement(_CalculationModal.default, {
+  }, /*#__PURE__*/_react.default.createElement(_CalculationModal.default, {
     displayNameProp: "name",
     onClose: Function.prototype,
     onDelete: Function.prototype,
     onSave: Function.prototype
   }));
-}).add('With calculation', () => {
-  return /*#__PURE__*/_react2.default.createElement(_appRuntime.CustomDataProvider, {
+};
+exports.Default = Default;
+const WithCalculation = () => {
+  return /*#__PURE__*/_react.default.createElement(_appRuntime.CustomDataProvider, {
     data: {
       dataElements: DATA_ELEMENTS,
       dataElementGroups: DATA_ELEMENT_GROUPS,
       dataElementOperands: DATA_ELEMENT_OPERANDS
     }
-  }, /*#__PURE__*/_react2.default.createElement(_CalculationModal.default, {
+  }, /*#__PURE__*/_react.default.createElement(_CalculationModal.default, {
     calculation: calculation,
     displayNameProp: "name",
     onClose: Function.prototype,
     onDelete: Function.prototype,
     onSave: Function.prototype
   }));
-}).add('With calculation containing operand', () => {
-  return /*#__PURE__*/_react2.default.createElement(_appRuntime.CustomDataProvider, {
+};
+exports.WithCalculation = WithCalculation;
+WithCalculation.story = {
+  name: 'With calculation'
+};
+const WithCalculationContainingOperand = () => {
+  return /*#__PURE__*/_react.default.createElement(_appRuntime.CustomDataProvider, {
     data: {
       dataElements: DATA_ELEMENTS,
       dataElementGroups: DATA_ELEMENT_GROUPS,
       dataElementOperands: DATA_ELEMENT_OPERANDS
     }
-  }, /*#__PURE__*/_react2.default.createElement(_CalculationModal.default, {
+  }, /*#__PURE__*/_react.default.createElement(_CalculationModal.default, {
     calculation: calculationWithOperand,
     displayNameProp: "name",
     onClose: Function.prototype,
     onDelete: Function.prototype,
     onSave: Function.prototype
   }));
-}).add('No available data', () => {
-  return /*#__PURE__*/_react2.default.createElement(_appRuntime.CustomDataProvider, {
+};
+exports.WithCalculationContainingOperand = WithCalculationContainingOperand;
+WithCalculationContainingOperand.story = {
+  name: 'With calculation containing operand'
+};
+const NoAvailableData = () => {
+  return /*#__PURE__*/_react.default.createElement(_appRuntime.CustomDataProvider, {
     data: {
       dataElements: {
         pager: {
@@ -434,10 +452,14 @@ const calculationWithOperand = {
         dataElementOperands: []
       }
     }
-  }, /*#__PURE__*/_react2.default.createElement(_CalculationModal.default, {
+  }, /*#__PURE__*/_react.default.createElement(_CalculationModal.default, {
     displayNameProp: "name",
     onClose: Function.prototype,
     onDelete: Function.prototype,
     onSave: Function.prototype
   }));
-});
+};
+exports.NoAvailableData = NoAvailableData;
+NoAvailableData.story = {
+  name: 'No available data'
+};

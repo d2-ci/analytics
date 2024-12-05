@@ -4,29 +4,20 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.insertMarkdown = exports.emojis = exports.convertCtrlKey = exports.MENTION = exports.LINK = exports.ITALIC = exports.EMOJI_THUMBS_UP = exports.EMOJI_THUMBS_DOWN = exports.EMOJI_SMILEY_FACE = exports.EMOJI_SAD_FACE = exports.BOLD = void 0;
-const BOLD = 'bold';
-exports.BOLD = BOLD;
-const ITALIC = 'italic';
-exports.ITALIC = ITALIC;
-const LINK = 'link';
-exports.LINK = LINK;
-const MENTION = 'mention';
-exports.MENTION = MENTION;
-const EMOJI_SMILEY_FACE = 'smileyFace';
-exports.EMOJI_SMILEY_FACE = EMOJI_SMILEY_FACE;
-const EMOJI_SAD_FACE = 'sadFace';
-exports.EMOJI_SAD_FACE = EMOJI_SAD_FACE;
-const EMOJI_THUMBS_UP = 'thumbsUp';
-exports.EMOJI_THUMBS_UP = EMOJI_THUMBS_UP;
-const EMOJI_THUMBS_DOWN = 'thumsDown';
-exports.EMOJI_THUMBS_DOWN = EMOJI_THUMBS_DOWN;
-const emojis = {
+const BOLD = exports.BOLD = 'bold';
+const ITALIC = exports.ITALIC = 'italic';
+const LINK = exports.LINK = 'link';
+const MENTION = exports.MENTION = 'mention';
+const EMOJI_SMILEY_FACE = exports.EMOJI_SMILEY_FACE = 'smileyFace';
+const EMOJI_SAD_FACE = exports.EMOJI_SAD_FACE = 'sadFace';
+const EMOJI_THUMBS_UP = exports.EMOJI_THUMBS_UP = 'thumbsUp';
+const EMOJI_THUMBS_DOWN = exports.EMOJI_THUMBS_DOWN = 'thumsDown';
+const emojis = exports.emojis = {
   [EMOJI_SMILEY_FACE]: ':-)',
   [EMOJI_SAD_FACE]: ':-(',
   [EMOJI_THUMBS_UP]: ':+1',
   [EMOJI_THUMBS_DOWN]: ':-1'
 };
-exports.emojis = emojis;
 const markdownMap = {
   [ITALIC]: {
     prefix: '_',

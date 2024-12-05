@@ -4,9 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.theme1 = exports.defaultMultiAxisTheme1 = void 0;
-const theme1 = '#a9be3b|#558cc0|#d34957|#ff9f3a|#968f8f|#b7409f|#ffda64|#4fbdae|#b78040|#676767|#6a33cf|#4a7833|#454545'.split('|');
-exports.theme1 = theme1;
-const defaultMultiAxisTheme1 = {
+const theme1 = exports.theme1 = '#a9be3b|#558cc0|#d34957|#ff9f3a|#968f8f|#b7409f|#ffda64|#4fbdae|#b78040|#676767|#6a33cf|#4a7833|#454545'.split('|');
+const defaultMultiAxisTheme1 = exports.defaultMultiAxisTheme1 = {
   0: {
     startColor: '#08306b',
     endColor: '#c6dbef',
@@ -28,4 +27,3 @@ const defaultMultiAxisTheme1 = {
     mainColor: '#6c66b8'
   }
 };
-exports.defaultMultiAxisTheme1 = defaultMultiAxisTheme1;

@@ -12,7 +12,7 @@ var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _PeriodFilterStyle = _interopRequireDefault(require("./styles/PeriodFilter.style.js"));
 var _fixedPeriods = require("./utils/fixedPeriods.js");
 var _index2 = require("./utils/index.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const FixedPeriodFilter = _ref => {
   let {
     allowedPeriodTypes,
@@ -76,5 +76,4 @@ FixedPeriodFilter.propTypes = {
   dataTest: _propTypes.default.string,
   excludedPeriodTypes: _propTypes.default.arrayOf(_propTypes.default.string)
 };
-var _default = FixedPeriodFilter;
-exports.default = _default;
+var _default = exports.default = FixedPeriodFilter;

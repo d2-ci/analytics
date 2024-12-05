@@ -5,17 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.supportedFileTypes = exports.preparePayloadForSaveAs = exports.labelForFileType = exports.endpointFromFileType = exports.appPathFor = exports.FILE_TYPE_VISUALIZATION = exports.FILE_TYPE_MAP = exports.FILE_TYPE_EVENT_VISUALIZATION = exports.FILE_TYPE_EVENT_REPORT = void 0;
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const FILE_TYPE_EVENT_REPORT = 'eventReport';
-exports.FILE_TYPE_EVENT_REPORT = FILE_TYPE_EVENT_REPORT;
-const FILE_TYPE_VISUALIZATION = 'visualization';
-exports.FILE_TYPE_VISUALIZATION = FILE_TYPE_VISUALIZATION;
-const FILE_TYPE_MAP = 'map';
-exports.FILE_TYPE_MAP = FILE_TYPE_MAP;
-const FILE_TYPE_EVENT_VISUALIZATION = 'eventVisualization';
-exports.FILE_TYPE_EVENT_VISUALIZATION = FILE_TYPE_EVENT_VISUALIZATION;
-const supportedFileTypes = [FILE_TYPE_EVENT_REPORT, FILE_TYPE_VISUALIZATION, FILE_TYPE_MAP, FILE_TYPE_EVENT_VISUALIZATION];
-exports.supportedFileTypes = supportedFileTypes;
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const FILE_TYPE_EVENT_REPORT = exports.FILE_TYPE_EVENT_REPORT = 'eventReport';
+const FILE_TYPE_VISUALIZATION = exports.FILE_TYPE_VISUALIZATION = 'visualization';
+const FILE_TYPE_MAP = exports.FILE_TYPE_MAP = 'map';
+const FILE_TYPE_EVENT_VISUALIZATION = exports.FILE_TYPE_EVENT_VISUALIZATION = 'eventVisualization';
+const supportedFileTypes = exports.supportedFileTypes = [FILE_TYPE_EVENT_REPORT, FILE_TYPE_VISUALIZATION, FILE_TYPE_MAP, FILE_TYPE_EVENT_VISUALIZATION];
 const endpointFromFileType = fileType => `${fileType}s`;
 exports.endpointFromFileType = endpointFromFileType;
 const labelForFileType = fileType => {

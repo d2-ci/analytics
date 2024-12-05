@@ -25,7 +25,6 @@ const useSortableColumns = engine => {
       order
     }); // Force a re-render
   };
-
   return {
     sortBy,
     onSortByColumn

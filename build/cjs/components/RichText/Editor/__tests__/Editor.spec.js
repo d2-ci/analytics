@@ -4,7 +4,7 @@ require("@testing-library/jest-dom");
 var _react = require("@testing-library/react");
 var _react2 = _interopRequireDefault(require("react"));
 var _Editor = require("../Editor.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const mockConvertCtrlKey = jest.fn();
 jest.mock('../markdownHandler.js', () => ({
   convertCtrlKey: () => mockConvertCtrlKey()
@@ -21,7 +21,7 @@ describe('RichText: Editor component', () => {
     mockConvertCtrlKey.mockClear();
   });
   const renderComponent = props => {
-    return (0, _react.render)( /*#__PURE__*/_react2.default.createElement(_Editor.Editor, props));
+    return (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_Editor.Editor, props));
   };
   it('renders a result', () => {
     renderComponent(componentProps);

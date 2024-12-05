@@ -7,7 +7,7 @@ exports.parsePeriodCode = exports.getYearOffsetFromNow = exports.getFixedPeriods
 var _multiCalendarDates = require("@dhis2/multi-calendar-dates");
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _index2 = require("./index.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const PERIOD_TYPE_REGEX = {
   [_index2.DAILY]: /^([0-9]{4})([0-9]{2})([0-9]{2})$/,
   // YYYYMMDD
@@ -44,7 +44,6 @@ const PERIOD_TYPE_REGEX = {
   // YYYY"July"
   [_index2.FYAPR]: /^([0-9]{4})April$/ // YYYY"April"
 };
-
 const getPeriods = _ref => {
   let {
     periodType,

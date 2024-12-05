@@ -1,5 +1,4 @@
 import { Provider } from '@dhis2/app-runtime';
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import { FileMenu } from '../components/FileMenu/FileMenu.js';
 import { HoverMenuBar } from '../components/Toolbar/index.js';
@@ -52,21 +51,32 @@ const visReadonlyObject = {
     manage: false
   }
 };
-storiesOf('FileMenu', module).add('Simple', () => /*#__PURE__*/React.createElement(Provider, {
+export default {
+  title: 'FileMenu'
+};
+export const Simple = () => /*#__PURE__*/React.createElement(Provider, {
   config: configMock
 }, /*#__PURE__*/React.createElement(HoverMenuBar, null, /*#__PURE__*/React.createElement(FileMenu, {
   currentUser: user,
   fileType: "visualization"
-})))).add('With AO', () => /*#__PURE__*/React.createElement(Provider, {
+})));
+export const WithAo = () => /*#__PURE__*/React.createElement(Provider, {
   config: configMock
 }, /*#__PURE__*/React.createElement(HoverMenuBar, null, /*#__PURE__*/React.createElement(FileMenu, {
   currentUser: user,
   fileType: "visualization",
   fileObject: visObject
-})))).add('With readonly AO', () => /*#__PURE__*/React.createElement(Provider, {
+})));
+WithAo.story = {
+  name: 'With AO'
+};
+export const WithReadonlyAo = () => /*#__PURE__*/React.createElement(Provider, {
   config: configMock
 }, /*#__PURE__*/React.createElement(HoverMenuBar, null, /*#__PURE__*/React.createElement(FileMenu, {
   currentUser: user,
   fileType: "visualization",
   fileObject: visReadonlyObject
-}))));
+})));
+WithReadonlyAo.story = {
+  name: 'With readonly AO'
+};

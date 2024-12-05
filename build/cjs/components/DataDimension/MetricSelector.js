@@ -12,7 +12,7 @@ var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _dataSets = require("../../modules/dataSets.js");
 var _dataTypes = require("../../modules/dataTypes.js");
 var _MetricSelectorStyle = _interopRequireDefault(require("./styles/MetricSelector.style.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const MetricSelector = _ref => {
   let {
     currentValue,
@@ -47,5 +47,4 @@ MetricSelector.propTypes = {
   currentValue: _propTypes.default.string,
   dataTest: _propTypes.default.string
 };
-var _default = MetricSelector;
-exports.default = _default;
+var _default = exports.default = MetricSelector;

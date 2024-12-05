@@ -9,7 +9,7 @@ var _axes = require("../../../../util/axes.js");
 var _getAxisTitle = _interopRequireDefault(require("../getAxisTitle.js"));
 var _getCategories = _interopRequireDefault(require("../getCategories.js"));
 var _index = require("./index.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const AXIS_TYPE = 'DOMAIN';
 const AXIS_INDEX = 0;
 function _default(store, layout) {

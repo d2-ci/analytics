@@ -9,7 +9,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _RecommendedIconStyle = require("./styles/RecommendedIcon.style.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const RecommendedIcon = _ref => {
   let {
     isRecommended,
@@ -27,5 +27,4 @@ RecommendedIcon.propTypes = {
   isRecommended: _propTypes.default.bool.isRequired,
   dataTest: _propTypes.default.string
 };
-var _default = RecommendedIcon;
-exports.default = _default;
+var _default = exports.default = RecommendedIcon;

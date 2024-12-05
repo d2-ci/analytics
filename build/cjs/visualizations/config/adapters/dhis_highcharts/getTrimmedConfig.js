@@ -8,7 +8,7 @@ var _arrayContains = _interopRequireDefault(require("d2-utilizr/lib/arrayContain
 var _arrayUnique = _interopRequireDefault(require("d2-utilizr/lib/arrayUnique"));
 var _visTypes = require("../../../../modules/visTypes.js");
 var _getTwoCategorySplitSerieData = _interopRequireDefault(require("./getTwoCategorySplitSerieData.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function arrayCleanUndefined(array) {
   return array.filter(item => item !== undefined);
 }

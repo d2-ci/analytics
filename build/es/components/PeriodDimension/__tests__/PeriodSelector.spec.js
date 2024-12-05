@@ -6,7 +6,7 @@ describe('The Period Selector component', () => {
   let shallowPeriodTransfer;
   const getWrapper = () => {
     if (!shallowPeriodTransfer) {
-      shallowPeriodTransfer = shallow( /*#__PURE__*/React.createElement(PeriodTransfer, props));
+      shallowPeriodTransfer = shallow(/*#__PURE__*/React.createElement(PeriodTransfer, props));
     }
     return shallowPeriodTransfer;
   };

@@ -71,7 +71,7 @@ describe('The FileMenu component ', () => {
         }
       }
     };
-    return render( /*#__PURE__*/React.createElement(CustomDataProvider, {
+    return render(/*#__PURE__*/React.createElement(CustomDataProvider, {
       data: providerData
     }, /*#__PURE__*/React.createElement(HoverMenuBar, null, /*#__PURE__*/React.createElement(FileMenu, props))));
   };

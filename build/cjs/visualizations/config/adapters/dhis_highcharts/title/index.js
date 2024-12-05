@@ -12,7 +12,7 @@ var _getTextAlignOption = require("../getTextAlignOption.js");
 var _scatter = _interopRequireDefault(require("./scatter.js"));
 var _singleValue = require("./singleValue.js");
 var _yearOverYear = _interopRequireDefault(require("./yearOverYear.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DASHBOARD_TITLE_STYLE = {
   margin: 15,
   y: 12,

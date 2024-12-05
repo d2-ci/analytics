@@ -7,7 +7,7 @@ exports.useUserSearchResults = void 0;
 var _appRuntime = require("@dhis2/app-runtime");
 var _debounce = _interopRequireDefault(require("lodash/debounce"));
 var _react = require("react");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const usersQuery = {
   users: {
     resource: 'users/gist',

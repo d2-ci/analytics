@@ -6,48 +6,28 @@ Object.defineProperty(exports, "__esModule", {
 exports.visTypeIcons = exports.visTypeDisplayNames = exports.isYearOverYear = exports.isVerticalType = exports.isTwoCategoryChartType = exports.isStacked = exports.isSingleValue = exports.isOutlierTable = exports.isMultiType = exports.isLegendSetType = exports.isDualAxisType = exports.isColumnBasedType = exports.getDisplayNameByVisType = exports.defaultVisType = exports.VIS_TYPE_YEAR_OVER_YEAR_LINE = exports.VIS_TYPE_YEAR_OVER_YEAR_COLUMN = exports.VIS_TYPE_STACKED_COLUMN = exports.VIS_TYPE_STACKED_BAR = exports.VIS_TYPE_STACKED_AREA = exports.VIS_TYPE_SINGLE_VALUE = exports.VIS_TYPE_SCATTER = exports.VIS_TYPE_RADAR = exports.VIS_TYPE_PIVOT_TABLE = exports.VIS_TYPE_PIE = exports.VIS_TYPE_OUTLIER_TABLE = exports.VIS_TYPE_LINE_LIST = exports.VIS_TYPE_LINE = exports.VIS_TYPE_GROUP_CHARTS = exports.VIS_TYPE_GROUP_ALL = exports.VIS_TYPE_GAUGE = exports.VIS_TYPE_COLUMN = exports.VIS_TYPE_BUBBLE = exports.VIS_TYPE_BAR = exports.VIS_TYPE_AREA = void 0;
 var _ui = require("@dhis2/ui");
 var _index = _interopRequireDefault(require("../locales/index.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const VIS_TYPE_PIVOT_TABLE = 'PIVOT_TABLE';
-exports.VIS_TYPE_PIVOT_TABLE = VIS_TYPE_PIVOT_TABLE;
-const VIS_TYPE_AREA = 'AREA';
-exports.VIS_TYPE_AREA = VIS_TYPE_AREA;
-const VIS_TYPE_STACKED_AREA = 'STACKED_AREA';
-exports.VIS_TYPE_STACKED_AREA = VIS_TYPE_STACKED_AREA;
-const VIS_TYPE_BAR = 'BAR';
-exports.VIS_TYPE_BAR = VIS_TYPE_BAR;
-const VIS_TYPE_STACKED_BAR = 'STACKED_BAR';
-exports.VIS_TYPE_STACKED_BAR = VIS_TYPE_STACKED_BAR;
-const VIS_TYPE_COLUMN = 'COLUMN';
-exports.VIS_TYPE_COLUMN = VIS_TYPE_COLUMN;
-const VIS_TYPE_YEAR_OVER_YEAR_COLUMN = 'YEAR_OVER_YEAR_COLUMN';
-exports.VIS_TYPE_YEAR_OVER_YEAR_COLUMN = VIS_TYPE_YEAR_OVER_YEAR_COLUMN;
-const VIS_TYPE_STACKED_COLUMN = 'STACKED_COLUMN';
-exports.VIS_TYPE_STACKED_COLUMN = VIS_TYPE_STACKED_COLUMN;
-const VIS_TYPE_GAUGE = 'GAUGE';
-exports.VIS_TYPE_GAUGE = VIS_TYPE_GAUGE;
-const VIS_TYPE_LINE = 'LINE';
-exports.VIS_TYPE_LINE = VIS_TYPE_LINE;
-const VIS_TYPE_LINE_LIST = 'LINE_LIST';
-exports.VIS_TYPE_LINE_LIST = VIS_TYPE_LINE_LIST;
-const VIS_TYPE_YEAR_OVER_YEAR_LINE = 'YEAR_OVER_YEAR_LINE';
-exports.VIS_TYPE_YEAR_OVER_YEAR_LINE = VIS_TYPE_YEAR_OVER_YEAR_LINE;
-const VIS_TYPE_PIE = 'PIE';
-exports.VIS_TYPE_PIE = VIS_TYPE_PIE;
-const VIS_TYPE_RADAR = 'RADAR';
-exports.VIS_TYPE_RADAR = VIS_TYPE_RADAR;
-const VIS_TYPE_SCATTER = 'SCATTER';
-exports.VIS_TYPE_SCATTER = VIS_TYPE_SCATTER;
-const VIS_TYPE_SINGLE_VALUE = 'SINGLE_VALUE';
-exports.VIS_TYPE_SINGLE_VALUE = VIS_TYPE_SINGLE_VALUE;
-const VIS_TYPE_BUBBLE = 'BUBBLE';
-exports.VIS_TYPE_BUBBLE = VIS_TYPE_BUBBLE;
-const VIS_TYPE_GROUP_ALL = 'ALL';
-exports.VIS_TYPE_GROUP_ALL = VIS_TYPE_GROUP_ALL;
-const VIS_TYPE_GROUP_CHARTS = 'CHARTS';
-exports.VIS_TYPE_GROUP_CHARTS = VIS_TYPE_GROUP_CHARTS;
-const VIS_TYPE_OUTLIER_TABLE = 'OUTLIER_TABLE';
-exports.VIS_TYPE_OUTLIER_TABLE = VIS_TYPE_OUTLIER_TABLE;
-const visTypeDisplayNames = {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const VIS_TYPE_PIVOT_TABLE = exports.VIS_TYPE_PIVOT_TABLE = 'PIVOT_TABLE';
+const VIS_TYPE_AREA = exports.VIS_TYPE_AREA = 'AREA';
+const VIS_TYPE_STACKED_AREA = exports.VIS_TYPE_STACKED_AREA = 'STACKED_AREA';
+const VIS_TYPE_BAR = exports.VIS_TYPE_BAR = 'BAR';
+const VIS_TYPE_STACKED_BAR = exports.VIS_TYPE_STACKED_BAR = 'STACKED_BAR';
+const VIS_TYPE_COLUMN = exports.VIS_TYPE_COLUMN = 'COLUMN';
+const VIS_TYPE_YEAR_OVER_YEAR_COLUMN = exports.VIS_TYPE_YEAR_OVER_YEAR_COLUMN = 'YEAR_OVER_YEAR_COLUMN';
+const VIS_TYPE_STACKED_COLUMN = exports.VIS_TYPE_STACKED_COLUMN = 'STACKED_COLUMN';
+const VIS_TYPE_GAUGE = exports.VIS_TYPE_GAUGE = 'GAUGE';
+const VIS_TYPE_LINE = exports.VIS_TYPE_LINE = 'LINE';
+const VIS_TYPE_LINE_LIST = exports.VIS_TYPE_LINE_LIST = 'LINE_LIST';
+const VIS_TYPE_YEAR_OVER_YEAR_LINE = exports.VIS_TYPE_YEAR_OVER_YEAR_LINE = 'YEAR_OVER_YEAR_LINE';
+const VIS_TYPE_PIE = exports.VIS_TYPE_PIE = 'PIE';
+const VIS_TYPE_RADAR = exports.VIS_TYPE_RADAR = 'RADAR';
+const VIS_TYPE_SCATTER = exports.VIS_TYPE_SCATTER = 'SCATTER';
+const VIS_TYPE_SINGLE_VALUE = exports.VIS_TYPE_SINGLE_VALUE = 'SINGLE_VALUE';
+const VIS_TYPE_BUBBLE = exports.VIS_TYPE_BUBBLE = 'BUBBLE';
+const VIS_TYPE_GROUP_ALL = exports.VIS_TYPE_GROUP_ALL = 'ALL';
+const VIS_TYPE_GROUP_CHARTS = exports.VIS_TYPE_GROUP_CHARTS = 'CHARTS';
+const VIS_TYPE_OUTLIER_TABLE = exports.VIS_TYPE_OUTLIER_TABLE = 'OUTLIER_TABLE';
+const visTypeDisplayNames = exports.visTypeDisplayNames = {
   [VIS_TYPE_PIVOT_TABLE]: _index.default.t('Pivot table'),
   [VIS_TYPE_AREA]: _index.default.t('Area'),
   [VIS_TYPE_STACKED_AREA]: _index.default.t('Stacked area'),
@@ -68,8 +48,7 @@ const visTypeDisplayNames = {
   [VIS_TYPE_GROUP_ALL]: _index.default.t('All types'),
   [VIS_TYPE_GROUP_CHARTS]: _index.default.t('All charts')
 };
-exports.visTypeDisplayNames = visTypeDisplayNames;
-const visTypeIcons = {
+const visTypeIcons = exports.visTypeIcons = {
   [VIS_TYPE_PIVOT_TABLE]: _ui.IconVisualizationPivotTable24,
   [VIS_TYPE_AREA]: _ui.IconVisualizationArea24,
   [VIS_TYPE_STACKED_AREA]: _ui.IconVisualizationAreaStacked24,
@@ -88,7 +67,6 @@ const visTypeIcons = {
   [VIS_TYPE_SINGLE_VALUE]: _ui.IconVisualizationSingleValue24,
   [VIS_TYPE_OUTLIER_TABLE]: _ui.IconVisualizationOutlierTable24
 };
-exports.visTypeIcons = visTypeIcons;
 const getDisplayNameByVisType = visType => {
   const displayName = visTypeDisplayNames[visType];
   if (!displayName) {
@@ -105,8 +83,7 @@ const twoCategoryChartTypes = [VIS_TYPE_COLUMN, VIS_TYPE_STACKED_COLUMN, VIS_TYP
 const columnBasedTypes = [VIS_TYPE_COLUMN, VIS_TYPE_BAR, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, VIS_TYPE_STACKED_COLUMN, VIS_TYPE_STACKED_BAR];
 const verticalTypes = [VIS_TYPE_BAR, VIS_TYPE_STACKED_BAR, VIS_TYPE_GAUGE];
 const legendSetTypes = [VIS_TYPE_COLUMN, VIS_TYPE_BAR, VIS_TYPE_GAUGE, VIS_TYPE_SINGLE_VALUE, VIS_TYPE_PIVOT_TABLE, VIS_TYPE_STACKED_COLUMN, VIS_TYPE_STACKED_BAR];
-const defaultVisType = VIS_TYPE_PIVOT_TABLE;
-exports.defaultVisType = defaultVisType;
+const defaultVisType = exports.defaultVisType = VIS_TYPE_PIVOT_TABLE;
 const isStacked = type => stackedTypes.includes(type);
 exports.isStacked = isStacked;
 const isYearOverYear = type => yearOverYearTypes.includes(type);

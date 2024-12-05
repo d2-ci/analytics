@@ -7,7 +7,7 @@ exports.default = _default;
 var _numberDecimals = _interopRequireDefault(require("d2-utilizr/lib/numberDecimals"));
 var _visTypes = require("../../../../modules/visTypes.js");
 var _getTwoCategorySplitSerieData = _interopRequireDefault(require("./getTwoCategorySplitSerieData.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function getDefaultCumulativeData(series) {
   let decimals = 0;
   let cumulativeValues = [];

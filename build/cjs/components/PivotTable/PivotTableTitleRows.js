@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 var _getFilterText = _interopRequireDefault(require("../../visualizations/util/getFilterText.js"));
 var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 var _PivotTableTitleRow = require("./PivotTableTitleRow.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const PivotTableTitleRows = _ref => {
   var _engine$visualization;
   let {

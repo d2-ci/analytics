@@ -9,7 +9,7 @@ var _arraySort = _interopRequireDefault(require("d2-utilizr/lib/arraySort"));
 var _visTypes = require("../../../../modules/visTypes.js");
 var _getStackedData = _interopRequireDefault(require("./getStackedData.js"));
 var _getTwoCategorySplitSerieData = _interopRequireDefault(require("./getTwoCategorySplitSerieData.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const sortOrderMap = new Map([[-1, 'ASC'], [1, 'DESC']]);
 function getIndexOrder(dataToBeSorted, layout) {
   const dataObjectsToBeSorted = dataToBeSorted.map((value, index) => ({

@@ -5,8 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var _default = /*#__PURE__*/_react.default.createElement("svg", {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+var _default = exports.default = /*#__PURE__*/_react.default.createElement("svg", {
   height: "16",
   viewBox: "0 0 16 16",
   width: "16",
@@ -16,4 +16,3 @@ var _default = /*#__PURE__*/_react.default.createElement("svg", {
   fill: "#A0ADBA",
   fillRule: "evenodd"
 }));
-exports.default = _default;

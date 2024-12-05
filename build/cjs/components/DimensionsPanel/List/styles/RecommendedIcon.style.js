@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.styles = void 0;
 var _ui = require("@dhis2/ui");
-const styles = {
+const styles = exports.styles = {
   recommendedIcon: {
     backgroundColor: _ui.theme.secondary400,
     height: '6px',
@@ -16,4 +16,3 @@ const styles = {
     cursor: 'pointer'
   }
 };
-exports.styles = styles;

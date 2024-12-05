@@ -4,14 +4,14 @@ var _ui = require("@dhis2/ui");
 var _enzyme = require("enzyme");
 var _react = _interopRequireDefault(require("react"));
 var _DeleteDialog = require("../DeleteDialog.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('The FileMenu - DeleteDialog component', () => {
   let shallowDeleteDialog;
   let props;
   const onClose = jest.fn();
   const getDeleteDialogComponent = props => {
     if (!shallowDeleteDialog) {
-      shallowDeleteDialog = (0, _enzyme.shallow)( /*#__PURE__*/_react.default.createElement(_DeleteDialog.DeleteDialog, props));
+      shallowDeleteDialog = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_DeleteDialog.DeleteDialog, props));
     }
     return shallowDeleteDialog;
   };

@@ -1,4 +1,3 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import ItemSelector from '../components/DynamicDimension/ItemSelector.js';
 const items = [{
@@ -21,15 +20,21 @@ const items = [{
   name: 'Six - disabled',
   disabled: true
 }];
-storiesOf('DynamicDimension', module).add('ItemSelector no items selected', () => {
+export default {
+  title: 'DynamicDimension'
+};
+export const ItemSelectorNoItemsSelected = () => {
   return /*#__PURE__*/React.createElement(ItemSelector, {
     onSelect: selected => console.log(selected),
     onFetch: () => ({
       dimensionItems: items
     })
   });
-});
-storiesOf('DynamicDimension', module).add('ItemSelector one item selected', () => {
+};
+ItemSelectorNoItemsSelected.story = {
+  name: 'ItemSelector no items selected'
+};
+export const ItemSelectorOneItemSelected = () => {
   return /*#__PURE__*/React.createElement(ItemSelector, {
     onSelect: selected => console.log(selected),
     onFetch: () => ({
@@ -40,8 +45,11 @@ storiesOf('DynamicDimension', module).add('ItemSelector one item selected', () =
       label: item.name
     }))
   });
-});
-storiesOf('DynamicDimension', module).add('ItemSelector disabled item selected', () => {
+};
+ItemSelectorOneItemSelected.story = {
+  name: 'ItemSelector one item selected'
+};
+export const ItemSelectorDisabledItemSelected = () => {
   return /*#__PURE__*/React.createElement(ItemSelector, {
     onSelect: selected => console.log(selected),
     onFetch: () => ({
@@ -52,4 +60,7 @@ storiesOf('DynamicDimension', module).add('ItemSelector disabled item selected',
       label: item.name
     }))
   });
-});
+};
+ItemSelectorDisabledItemSelected.story = {
+  name: 'ItemSelector disabled item selected'
+};

@@ -1,5 +1,4 @@
-import { storiesOf } from '@storybook/react';
-import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { createVisualization } from '../index.js';
 const constainerStyleBase = {
   width: 800,
@@ -577,13 +576,15 @@ const baseExtraOptions = {
   icon
 };
 const indicatorTypes = ['plain', 'percent', 'subtext'];
-storiesOf('SingleValue', module).add('default', () => {
+export default {
+  title: 'SingleValue'
+};
+export const Default = () => {
   const newChartRef = useRef(null);
   const newContainerRef = useRef(null);
   const [dashboard, setDashboard] = useState(false);
   const [showIcon, setShowIcon] = useState(true);
   const [indicatorType, setIndicatorType] = useState('plain');
-  const [exportAsPdf, setExportAsPdf] = useState(true);
   const [width, setWidth] = useState(constainerStyleBase.width);
   const [height, setHeight] = useState(constainerStyleBase.height);
   const containerStyle = useMemo(() => ({
@@ -616,31 +617,6 @@ storiesOf('SingleValue', module).add('default', () => {
       });
     }
   }, [containerStyle, dashboard, showIcon, indicatorType]);
-  const downloadOffline = useCallback(() => {
-    if (newChartRef.current) {
-      const currentBackgroundColor = newChartRef.current.userOptions.chart.backgroundColor;
-      newChartRef.current.update({
-        exporting: {
-          chartOptions: {
-            isPdfExport: exportAsPdf
-          }
-        }
-      });
-      newChartRef.current.exportChartLocal({
-        sourceHeight: 768,
-        sourceWidth: 1024,
-        scale: 1,
-        fallbackToExportServer: false,
-        filename: 'testOfflineDownload',
-        showExportInProgress: true,
-        type: exportAsPdf ? 'application/pdf' : 'image/png'
-      }, {
-        chart: {
-          backgroundColor: currentBackgroundColor === 'transparent' ? '#ffffff' : currentBackgroundColor
-        }
-      });
-    }
-  }, [exportAsPdf]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
@@ -682,13 +658,7 @@ storiesOf('SingleValue', module).add('default', () => {
     return /*#__PURE__*/React.createElement("option", {
       key: index
     }, type);
-  }))), /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
-    checked: exportAsPdf,
-    onChange: () => setExportAsPdf(!exportAsPdf),
-    type: "checkbox"
-  }), "\xA0Export as PDF"), /*#__PURE__*/React.createElement("button", {
-    onClick: downloadOffline
-  }, "Download offline")), /*#__PURE__*/React.createElement("div", {
+  })))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: 12
@@ -699,4 +669,7 @@ storiesOf('SingleValue', module).add('default', () => {
     ref: newContainerRef,
     style: innerContainerStyle
   }))));
-});
+};
+Default.story = {
+  name: 'default'
+};

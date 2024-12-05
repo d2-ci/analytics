@@ -5,7 +5,7 @@ var _AnalyticsAggregate = _interopRequireDefault(require("../AnalyticsAggregate.
 var _AnalyticsEnrollments = _interopRequireDefault(require("../AnalyticsEnrollments.js"));
 var _AnalyticsEvents = _interopRequireDefault(require("../AnalyticsEvents.js"));
 var _AnalyticsRequest = _interopRequireDefault(require("../AnalyticsRequest.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('Analytics', () => {
   let analytics;
   beforeEach(() => {

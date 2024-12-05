@@ -12,7 +12,7 @@ var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _PeriodFilterStyle = _interopRequireDefault(require("./styles/PeriodFilter.style.js"));
 var _index2 = require("./utils/index.js");
 var _relativePeriods = require("./utils/relativePeriods.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const RelativePeriodFilter = _ref => {
   let {
     currentFilter,
@@ -49,5 +49,4 @@ RelativePeriodFilter.propTypes = {
   dataTest: _propTypes.default.string,
   excludedPeriodTypes: _propTypes.default.arrayOf(_propTypes.default.string)
 };
-var _default = RelativePeriodFilter;
-exports.default = _default;
+var _default = exports.default = RelativePeriodFilter;

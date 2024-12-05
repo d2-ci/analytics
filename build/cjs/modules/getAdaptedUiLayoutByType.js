@@ -8,7 +8,7 @@ var _isObject = _interopRequireDefault(require("lodash/isObject"));
 var _axis = require("./layout/axis.js");
 var _predefinedDimensions = require("./predefinedDimensions.js");
 var _visTypes = require("./visTypes.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getAdaptedUiLayoutByType = (layout, type) => {
   var _layout$rows;
   if ((0, _visTypes.isTwoCategoryChartType)(type) && ((_layout$rows = layout.rows) === null || _layout$rows === void 0 ? void 0 : _layout$rows.length) > 1) {

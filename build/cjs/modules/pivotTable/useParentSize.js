@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.useParentSize = void 0;
 var _react = require("react");
 var _resizeObserverPolyfill = _interopRequireDefault(require("resize-observer-polyfill"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const initialState = {
   width: 0,
   height: 0

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _AnalyticsRequest = _interopRequireDefault(require("./AnalyticsRequest.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /* eslint no-console: 0 */
 
 /**
@@ -915,5 +915,4 @@ class extends base {
     return new _AnalyticsRequest.default(this);
   }
 };
-var _default = AnalyticsRequestPropertiesMixin;
-exports.default = _default;
+var _default = exports.default = AnalyticsRequestPropertiesMixin;

@@ -11,7 +11,7 @@ var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _CustomSelectOptionStyle = _interopRequireDefault(require("./styles/CustomSelectOption.style.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const CustomSelectOptionItem = _ref => {
   let {
     value,
@@ -53,5 +53,4 @@ CustomSelectOption.propTypes = {
   onClick: _propTypes.default.func
 };
 CustomSelectOptionItem.propTypes = CustomSelectOption.propTypes;
-var _default = CustomSelectOption;
-exports.default = _default;
+var _default = exports.default = CustomSelectOption;

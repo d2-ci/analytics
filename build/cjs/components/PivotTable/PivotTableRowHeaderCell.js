@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 var _PivotTableCell = require("./PivotTableCell.js");
 var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 var _PivotTableHeaderCell = require("./PivotTableHeaderCell.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const PivotTableRowHeaderCell = _ref => {
   var _engine$adaptiveClipp;
   let {

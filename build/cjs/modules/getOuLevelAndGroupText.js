@@ -9,7 +9,7 @@ var _dimensionGetItems = require("./layout/dimensionGetItems.js");
 var _dimensionIs = require("./layout/dimensionIs.js");
 var _index2 = require("./ouIdHelper/index.js");
 var _predefinedDimensions = require("./predefinedDimensions.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getOuLevelAndGroupText = (filter, metaData) => {
   if (!(0, _dimensionIs.dimensionIs)(_predefinedDimensions.DIMENSION_ID_ORGUNIT)) {
     return '';
@@ -28,7 +28,10 @@ const getOuLevelAndGroupText = (filter, metaData) => {
 };
 exports.getOuLevelAndGroupText = getOuLevelAndGroupText;
 const getLevelAndGroupText = (items, metaData, isLevel) => {
-  const getNameFromMetadata = id => metaData.items[id] ? metaData.items[id].name : id;
+  const getNameFromMetadata = id => {
+    var _items$find;
+    return metaData.items[id] ? metaData.items[id].name : ((_items$find = items.find(item => item.id === id)) === null || _items$find === void 0 ? void 0 : _items$find.name) || id;
+  };
   const dynamicOuItems = items.filter(item => isLevel ? _index2.ouIdHelper.hasLevelPrefix(item.id) : _index2.ouIdHelper.hasGroupPrefix(item.id));
   const lastItem = dynamicOuItems.length > 1 ? dynamicOuItems.pop() : null;
   const dynamicOuNames = dynamicOuItems.map(item => getNameFromMetadata(_index2.ouIdHelper.removePrefix(item.id))).join(', ');

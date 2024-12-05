@@ -53,7 +53,7 @@ const DimensionMenu = _ref => {
   if (dimensionId === DIMENSION_ID_DATA && assignedCategoriesItemHandler) {
     if (assignedCategoriesAvailableDestinations.length) {
       if (!isAssignedCategoriesInLayout) {
-        menuItems.push( /*#__PURE__*/React.createElement(MenuItem, {
+        menuItems.push(/*#__PURE__*/React.createElement(MenuItem, {
           label: assignedCategoriesItemLabel,
           key: `assigned-categories-item-${dimensionId}`,
           dataTest: `${dataTest}-item-co-menu`
@@ -67,7 +67,7 @@ const DimensionMenu = _ref => {
           dataTest: `${dataTest}-item-action-co-to-${destination}`
         }))));
       } else {
-        menuItems.push( /*#__PURE__*/React.createElement(MenuItem, {
+        menuItems.push(/*#__PURE__*/React.createElement(MenuItem, {
           key: `assigned-categories-item-${dimensionId}`,
           onClick: () => {
             assignedCategoriesItemHandler();
@@ -78,7 +78,7 @@ const DimensionMenu = _ref => {
         }));
       }
     } else {
-      menuItems.push( /*#__PURE__*/React.createElement(Tooltip, {
+      menuItems.push(/*#__PURE__*/React.createElement(Tooltip, {
         key: `assigned-categories-item-${dimensionId}`,
         content: getUnavailableLabel(visType),
         "aria-label": "disabled",

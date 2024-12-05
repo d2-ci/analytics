@@ -6,7 +6,7 @@ require("@testing-library/jest-dom");
 var _react2 = _interopRequireDefault(require("react"));
 var _index = require("../../Toolbar/index.js");
 var _FileMenu = require("../FileMenu.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 jest.mock('../../TranslationDialog/TranslationModal/useTranslationsResults.js', () => ({
   /* This will keep the translation dialog in
    * a loading state, which prevents it from
@@ -74,7 +74,7 @@ describe('The FileMenu component ', () => {
         }
       }
     };
-    return (0, _react.render)( /*#__PURE__*/_react2.default.createElement(_appRuntime.CustomDataProvider, {
+    return (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_appRuntime.CustomDataProvider, {
       data: providerData
     }, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, null, /*#__PURE__*/_react2.default.createElement(_FileMenu.FileMenu, props))));
   };

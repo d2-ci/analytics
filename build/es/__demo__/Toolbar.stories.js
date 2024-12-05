@@ -1,4 +1,3 @@
-import { storiesOf } from '@storybook/react';
 import React, { useState } from 'react';
 import { HoverMenuBar, HoverMenuDropdown, HoverMenuList, HoverMenuListItem, InterpretationsAndDetailsToggler, Toolbar, ToolbarSidebar, UpdateButton } from '../components/Toolbar/index.js';
 function ToolbarWithState() {
@@ -64,6 +63,12 @@ function ToolbarWithState() {
     onClick: () => setIsSidebarShowing(current => !current)
   }));
 }
-storiesOf('Toolbar', module).add('default', () => {
+export default {
+  title: 'Toolbar'
+};
+export const Default = () => {
   return /*#__PURE__*/React.createElement(ToolbarWithState, null);
-});
+};
+Default.story = {
+  name: 'default'
+};

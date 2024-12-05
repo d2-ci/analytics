@@ -8,7 +8,7 @@ describe('The FileMenu - RenameDialog component', () => {
   const onClose = jest.fn();
   const getRenameDialogComponent = props => {
     if (!shallowRenameDialog) {
-      shallowRenameDialog = shallow( /*#__PURE__*/React.createElement(RenameDialog, props));
+      shallowRenameDialog = shallow(/*#__PURE__*/React.createElement(RenameDialog, props));
     }
     return shallowRenameDialog;
   };
