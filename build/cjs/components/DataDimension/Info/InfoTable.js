@@ -118,7 +118,11 @@ const InfoTable = _ref4 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "loader"
   }, /*#__PURE__*/_react.default.createElement(_ui.Center, null, /*#__PURE__*/_react.default.createElement(_ui.CircularLoader, {
     small: true
-  }))), error && 'some error occured', data && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("table", {
+  }))), error && /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "error"
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('There was a problem loading information for this data item.'))), data && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("table", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "data-table"
   }, /*#__PURE__*/_react.default.createElement("tbody", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`

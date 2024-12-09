@@ -32,6 +32,7 @@ export const CalculationInfo = _ref3 => {
   } = _ref3;
   const [data, setData] = useState();
   const [error, setError] = useState();
+  const [expressionError, setExpressionError] = useState();
   const [loading, setLoading] = useState(true);
   const {
     baseUrl,
@@ -39,7 +40,7 @@ export const CalculationInfo = _ref3 => {
   } = useConfig();
   const engine = useDataEngine();
   const [getHumanReadableExpression] = useDataMutation(validateIndicatorExpressionMutation, {
-    onError: setError
+    onError: setExpressionError
   });
   const fetchData = useCallback(async () => {
     const {
@@ -82,7 +83,7 @@ export const CalculationInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, data !== null && data !== void 0 && data.calculation.humanReadableExpression ? renderHumanReadableExpression(data.calculation.humanReadableExpression) : /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "none"
-  }, i18n.t('None'))))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, expressionError ? i18n.t('Error loading value') : i18n.t('None'))))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

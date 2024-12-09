@@ -104,7 +104,11 @@ export const InfoTable = _ref4 => {
     className: `jsx-${styles.__hash}` + " " + "loader"
   }, /*#__PURE__*/React.createElement(Center, null, /*#__PURE__*/React.createElement(CircularLoader, {
     small: true
-  }))), error && 'some error occured', data && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("table", {
+  }))), error && /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "error"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('There was a problem loading information for this data item.'))), data && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("table", {
     className: `jsx-${styles.__hash}` + " " + "data-table"
   }, /*#__PURE__*/React.createElement("tbody", {
     className: `jsx-${styles.__hash}`

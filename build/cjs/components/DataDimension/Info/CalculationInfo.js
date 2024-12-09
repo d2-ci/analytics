@@ -41,6 +41,7 @@ const CalculationInfo = _ref3 => {
   } = _ref3;
   const [data, setData] = (0, _react.useState)();
   const [error, setError] = (0, _react.useState)();
+  const [expressionError, setExpressionError] = (0, _react.useState)();
   const [loading, setLoading] = (0, _react.useState)(true);
   const {
     baseUrl,
@@ -48,7 +49,7 @@ const CalculationInfo = _ref3 => {
   } = (0, _appRuntime.useConfig)();
   const engine = (0, _appRuntime.useDataEngine)();
   const [getHumanReadableExpression] = (0, _appRuntime.useDataMutation)(_expression.validateIndicatorExpressionMutation, {
-    onError: setError
+    onError: setExpressionError
   });
   const fetchData = (0, _react.useCallback)(async () => {
     const {
@@ -91,7 +92,7 @@ const CalculationInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, data !== null && data !== void 0 && data.calculation.humanReadableExpression ? (0, _InfoTable.renderHumanReadableExpression)(data.calculation.humanReadableExpression) : /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
-  }, _index.default.t('None'))))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, expressionError ? _index.default.t('Error loading value') : _index.default.t('None'))))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };
