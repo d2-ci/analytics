@@ -53,7 +53,7 @@ export const DataElementOperandInfo = _ref2 => {
     // inject href as it is not returned from the API
     dataElementOperand.href = new URL(`${dataElementOperandsQuery.dataElementOperands.resource}?${new URLSearchParams({
       filter: `id:eq:${id}`
-    })}`, new URL(`api/${apiVersion}/`, `${baseUrl}/`)).href;
+    })}`, new URL(`api/${apiVersion}/`, baseUrl === '..' ? window.location.href.split('dhis-web-data-visualizer/')[0] : `${baseUrl}/`)).href;
     setData({
       dataElementOperand
     });

@@ -62,7 +62,7 @@ export const CalculationInfo = _ref3 => {
     }
 
     // inject href as it is not returned from the API
-    calculation.href = new URL(`${calculationQuery.calculation.resource}/${id}`, new URL(`api/${apiVersion}/`, `${baseUrl}/`)).href;
+    calculation.href = new URL(`${calculationQuery.calculation.resource}/${id}`, new URL(`api/${apiVersion}/`, baseUrl === '..' ? window.location.href.split('dhis-web-data-visualizer/')[0] : `${baseUrl}/`)).href;
     setData({
       calculation
     });
