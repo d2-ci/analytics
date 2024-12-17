@@ -72,7 +72,7 @@ export const EventDataItemInfo = _ref5 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Type')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.type) === DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? i18n.t('Data element') : i18n.t('Tracked entity attribute'))), /*#__PURE__*/React.createElement("tr", {
+  }, type === DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? i18n.t('Data element') : i18n.t('Tracked entity attribute'))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`

@@ -79,7 +79,7 @@ const EventDataItemInfo = _ref5 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Type')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.type) === _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? _index.default.t('Data element') : _index.default.t('Tracked entity attribute'))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, type === _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? _index.default.t('Data element') : _index.default.t('Tracked entity attribute'))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
