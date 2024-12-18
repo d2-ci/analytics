@@ -28,7 +28,8 @@ const dataElementQuery = {
 export const DataElementInfo = _ref3 => {
   let {
     id,
-    displayNameProp
+    displayNameProp,
+    type
   } = _ref3;
   const {
     loading,
@@ -41,6 +42,7 @@ export const DataElementInfo = _ref3 => {
     }
   });
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InfoTable, {
+    type: type,
     data: data === null || data === void 0 ? void 0 : data.dataElement,
     loading: loading,
     error: error
@@ -120,5 +122,6 @@ export const DataElementInfo = _ref3 => {
 };
 DataElementInfo.propTypes = {
   displayNameProp: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  type: PropTypes.string
 };

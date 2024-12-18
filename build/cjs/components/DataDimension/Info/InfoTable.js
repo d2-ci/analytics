@@ -11,9 +11,14 @@ var _moment = _interopRequireDefault(require("moment"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
+var _dataSets = require("../../../modules/dataSets.js");
+var _dataTypes = require("../../../modules/dataTypes.js");
+var _DataDimension = require("../DataDimension.js");
 var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const getCommonFields = displayNameProp => `attributeValues[attribute[id,displayName]],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
+// data sets
+
+const getCommonFields = displayNameProp => `attributeValues[attribute[id,displayName],value],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
 exports.getCommonFields = getCommonFields;
 const capitalizeText = text => text && text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 exports.capitalizeText = capitalizeText;
@@ -104,16 +109,63 @@ const renderLegendSets = legendSets => {
   }, _InfoPopoverStyle.default));
 };
 exports.renderLegendSets = renderLegendSets;
-const InfoTable = _ref4 => {
+const renderMaintenanceLink = _ref4 => {
   let {
+    baseUrl,
+    authorities,
+    type,
+    id
+  } = _ref4;
+  const maintenanceAppAuthority = 'M_dhis-web-maintenance';
+  const canOpenMaintenanceApp = Array.isArray(authorities) ? authorities.includes(maintenanceAppAuthority) : authorities.has(maintenanceAppAuthority);
+  const maintenanceUrlMap = {
+    [_dataTypes.DIMENSION_TYPE_INDICATOR]: '/edit/indicatorSection/indicator/',
+    [_dataTypes.DIMENSION_TYPE_DATA_ELEMENT]: '/edit/dataElementSection/dataElement/',
+    [_dataTypes.DIMENSION_TYPE_DATA_ELEMENT_OPERAND]: '/edit/dataElementSection/dataElement/',
+    [_dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE]: '/edit/programSection/trackedEntityAttribute/',
+    [_dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT]: '/edit/dataElementSection/dataElement/',
+    [_dataTypes.DIMENSION_TYPE_PROGRAM_INDICATOR]: '/edit/indicatorSection/programIndicator/',
+    [_dataSets.REPORTING_RATE]: '/edit/dataSetSection/dataSet/'
+  };
+
+  // not everyone has access to Maintenance app
+  // calculations don't have a page in Maintenance
+  if (!canOpenMaintenanceApp || !maintenanceUrlMap[type]) {
+    return null;
+  }
+  const maintenanceUrl = new URL(`dhis-web-maintenance/index.html#${maintenanceUrlMap[type]}${id}`, baseUrl === '..' ? window.location.href.split('dhis-web-data-visualizer/')[0] : `${baseUrl}/`).href;
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Maintenance link')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("a", {
+    href: maintenanceUrl,
+    target: "_blank",
+    rel: "noreferrer",
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Open in Maintenance app')))), /*#__PURE__*/_react.default.createElement(_style.default, {
+    id: _InfoPopoverStyle.default.__hash
+  }, _InfoPopoverStyle.default));
+};
+const InfoTable = _ref5 => {
+  let {
+    type,
     data,
     error,
     loading,
     children
-  } = _ref4;
+  } = _ref5;
   const {
     fromServerDate
   } = (0, _appRuntime.useTimeZoneConversion)();
+  const {
+    baseUrl
+  } = (0, _appRuntime.useConfig)();
+  const {
+    currentUser
+  } = (0, _DataDimension.useDataDimensionContext)();
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, loading && /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "loader"
   }, /*#__PURE__*/_react.default.createElement(_ui.Center, null, /*#__PURE__*/_react.default.createElement(_ui.CircularLoader, {
@@ -187,23 +239,25 @@ const InfoTable = _ref4 => {
     target: "_blank",
     rel: "noreferrer",
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Open in API')))), Boolean(data.attributeValues.length) && /*#__PURE__*/_react.default.createElement("tr", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, /*#__PURE__*/_react.default.createElement("th", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, _index.default.t('Custom attributes')), /*#__PURE__*/_react.default.createElement("td", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, /*#__PURE__*/_react.default.createElement("ul", {
-    className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.attributeValues.map(_ref5 => {
+  }, _index.default.t('Open in API')))), renderMaintenanceLink({
+    baseUrl,
+    authorities: currentUser === null || currentUser === void 0 ? void 0 : currentUser.authorities,
+    type,
+    id: data.id
+  }), data.attributeValues.map(_ref6 => {
     let {
-      attribute
-    } = _ref5;
-    return /*#__PURE__*/_react.default.createElement("li", {
+      attribute,
+      value
+    } = _ref6;
+    return /*#__PURE__*/_react.default.createElement("tr", {
       key: attribute.id,
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, attribute.displayName);
-  }))))))), /*#__PURE__*/_react.default.createElement(_style.default, {
+    }, /*#__PURE__*/_react.default.createElement("th", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, attribute.displayName), /*#__PURE__*/_react.default.createElement("td", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, value));
+  })))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };
@@ -212,5 +266,6 @@ InfoTable.propTypes = {
   children: _propTypes.default.node,
   data: _propTypes.default.object,
   error: _propTypes.default.string,
-  loading: _propTypes.default.bool
+  loading: _propTypes.default.bool,
+  type: _propTypes.default.string
 };

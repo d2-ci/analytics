@@ -28,7 +28,8 @@ const calculationQuery = {
 export const CalculationInfo = _ref3 => {
   let {
     id,
-    displayNameProp
+    displayNameProp,
+    type
   } = _ref3;
   const [data, setData] = useState();
   const [error, setError] = useState();
@@ -72,6 +73,7 @@ export const CalculationInfo = _ref3 => {
     fetchData();
   }, [fetchData]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InfoTable, {
+    type: type,
     data: data === null || data === void 0 ? void 0 : data.calculation,
     loading: loading,
     error: error
@@ -89,5 +91,6 @@ export const CalculationInfo = _ref3 => {
 };
 CalculationInfo.propTypes = {
   displayNameProp: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  type: PropTypes.string
 };

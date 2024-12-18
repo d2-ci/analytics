@@ -70,6 +70,7 @@ const EventDataItemInfo = _ref5 => {
     }
   });
   const renderInfoTable = data => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InfoTable.InfoTable, {
+    type: type,
     data: data,
     loading: loading,
     error: error
