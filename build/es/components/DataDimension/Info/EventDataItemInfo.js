@@ -63,7 +63,6 @@ export const EventDataItemInfo = _ref5 => {
     }
   });
   const renderInfoTable = data => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InfoTable, {
-    type: type,
     data: data,
     loading: loading,
     error: error

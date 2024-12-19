@@ -1,21 +1,10 @@
 import _JSXStyle from "styled-jsx/style";
-import { useConfig, useTimeZoneConversion } from '@dhis2/app-runtime';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { Center, CircularLoader } from '@dhis2/ui';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 import i18n from '../../../locales/index.js';
-import { REPORTING_RATE } from '../../../modules/dataSets.js'; // data sets
-import { DIMENSION_TYPE_DATA_ELEMENT,
-// data element totals
-DIMENSION_TYPE_DATA_ELEMENT_OPERAND,
-// data element details
-DIMENSION_TYPE_INDICATOR, DIMENSION_TYPE_PROGRAM_ATTRIBUTE,
-// event data items
-DIMENSION_TYPE_PROGRAM_DATA_ELEMENT,
-// event data items
-DIMENSION_TYPE_PROGRAM_INDICATOR } from '../../../modules/dataTypes.js';
-import { useDataDimensionContext } from '../DataDimension.js';
 import styles from './styles/InfoPopover.style.js';
 export const getCommonFields = displayNameProp => `attributeValues[attribute[id,displayName],value],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
 export const capitalizeText = text => text && text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
@@ -101,63 +90,16 @@ export const renderLegendSets = legendSets => {
     id: styles.__hash
   }, styles));
 };
-const renderMaintenanceLink = _ref4 => {
+export const InfoTable = _ref4 => {
   let {
-    baseUrl,
-    authorities,
-    type,
-    id
-  } = _ref4;
-  const maintenanceAppAuthority = 'M_dhis-web-maintenance';
-  const canOpenMaintenanceApp = Array.isArray(authorities) ? authorities.includes(maintenanceAppAuthority) : authorities.has(maintenanceAppAuthority);
-  const maintenanceUrlMap = {
-    [DIMENSION_TYPE_INDICATOR]: '/edit/indicatorSection/indicator/',
-    [DIMENSION_TYPE_DATA_ELEMENT]: '/edit/dataElementSection/dataElement/',
-    [DIMENSION_TYPE_DATA_ELEMENT_OPERAND]: '/edit/dataElementSection/dataElement/',
-    [DIMENSION_TYPE_PROGRAM_ATTRIBUTE]: '/edit/programSection/trackedEntityAttribute/',
-    [DIMENSION_TYPE_PROGRAM_DATA_ELEMENT]: '/edit/dataElementSection/dataElement/',
-    [DIMENSION_TYPE_PROGRAM_INDICATOR]: '/edit/indicatorSection/programIndicator/',
-    [REPORTING_RATE]: '/edit/dataSetSection/dataSet/'
-  };
-
-  // not everyone has access to Maintenance app
-  // calculations don't have a page in Maintenance
-  if (!canOpenMaintenanceApp || !maintenanceUrlMap[type]) {
-    return null;
-  }
-  const maintenanceUrl = new URL(`dhis-web-maintenance/index.html#${maintenanceUrlMap[type]}${id}`, baseUrl === '..' ? window.location.href.split('dhis-web-data-visualizer/')[0] : `${baseUrl}/`).href;
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("tr", {
-    className: `jsx-${styles.__hash}`
-  }, /*#__PURE__*/React.createElement("th", {
-    className: `jsx-${styles.__hash}`
-  }, i18n.t('Maintenance link')), /*#__PURE__*/React.createElement("td", {
-    className: `jsx-${styles.__hash}`
-  }, /*#__PURE__*/React.createElement("a", {
-    href: maintenanceUrl,
-    target: "_blank",
-    rel: "noreferrer",
-    className: `jsx-${styles.__hash}`
-  }, i18n.t('Open in Maintenance app')))), /*#__PURE__*/React.createElement(_JSXStyle, {
-    id: styles.__hash
-  }, styles));
-};
-export const InfoTable = _ref5 => {
-  let {
-    type,
     data,
     error,
     loading,
     children
-  } = _ref5;
+  } = _ref4;
   const {
     fromServerDate
   } = useTimeZoneConversion();
-  const {
-    baseUrl
-  } = useConfig();
-  const {
-    currentUser
-  } = useDataDimensionContext();
   return /*#__PURE__*/React.createElement(React.Fragment, null, loading && /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "loader"
   }, /*#__PURE__*/React.createElement(Center, null, /*#__PURE__*/React.createElement(CircularLoader, {
@@ -220,27 +162,11 @@ export const InfoTable = _ref5 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Created by')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, `${data.createdBy.displayName}, ${data.createdBy.username}`)), /*#__PURE__*/React.createElement("tr", {
-    className: `jsx-${styles.__hash}`
-  }, /*#__PURE__*/React.createElement("th", {
-    className: `jsx-${styles.__hash}`
-  }, i18n.t('API link')), /*#__PURE__*/React.createElement("td", {
-    className: `jsx-${styles.__hash}`
-  }, /*#__PURE__*/React.createElement("a", {
-    href: data.href,
-    target: "_blank",
-    rel: "noreferrer",
-    className: `jsx-${styles.__hash}`
-  }, i18n.t('Open in API')))), renderMaintenanceLink({
-    baseUrl,
-    authorities: currentUser === null || currentUser === void 0 ? void 0 : currentUser.authorities,
-    type,
-    id: data.id
-  }), data.attributeValues.map(_ref6 => {
+  }, `${data.createdBy.displayName}, ${data.createdBy.username}`)), data.attributeValues.map(_ref5 => {
     let {
       attribute,
       value
-    } = _ref6;
+    } = _ref5;
     return /*#__PURE__*/React.createElement("tr", {
       key: attribute.id,
       className: `jsx-${styles.__hash}`
@@ -257,6 +183,5 @@ InfoTable.propTypes = {
   children: PropTypes.node,
   data: PropTypes.object,
   error: PropTypes.string,
-  loading: PropTypes.bool,
-  type: PropTypes.string
+  loading: PropTypes.bool
 };
