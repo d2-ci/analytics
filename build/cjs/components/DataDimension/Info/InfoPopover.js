@@ -25,6 +25,7 @@ const InfoPopover = _ref => {
   let {
     reference,
     onClose,
+    dataTest,
     ...props
   } = _ref;
   const type = props.item.type;
@@ -41,6 +42,7 @@ const InfoPopover = _ref => {
     arrow: false,
     elevation: "rgba(0, 0, 0, 0.1) 0px 1px 5px, rgba(0, 0, 0, 0.07) 0px 3.6px 13px, rgba(0, 0, 0, 0.06) 0px 8.4px 23px, rgba(0, 0, 0, 0.05) 0px 23px 35px"
   }, /*#__PURE__*/_react.default.createElement("div", {
+    "data-test": `${dataTest}-table`,
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "popover"
   }, type === _dataTypes.DIMENSION_TYPE_DATA_ELEMENT && /*#__PURE__*/_react.default.createElement(_DataElementInfo.DataElementInfo, infoProps), type === _dataTypes.DIMENSION_TYPE_DATA_ELEMENT_OPERAND && /*#__PURE__*/_react.default.createElement(_DataElementOperandInfo.DataElementOperandInfo, infoProps), type === _dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM && /*#__PURE__*/_react.default.createElement(_CalculationInfo.CalculationInfo, infoProps), type === _dataSets.REPORTING_RATE /* TODO: verify this! */ && /*#__PURE__*/_react.default.createElement(_DataSetInfo.DataSetInfo, infoProps), type === _dataTypes.DIMENSION_TYPE_INDICATOR && /*#__PURE__*/_react.default.createElement(_IndicatorInfo.IndicatorInfo, infoProps), [_dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE, _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT].includes(type) && /*#__PURE__*/_react.default.createElement(_EventDataItemInfo.EventDataItemInfo, infoProps), type === _dataTypes.DIMENSION_TYPE_PROGRAM_INDICATOR && /*#__PURE__*/_react.default.createElement(_ProgramIndicatorInfo.ProgramIndicatorInfo, infoProps))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
@@ -48,6 +50,7 @@ const InfoPopover = _ref => {
 };
 exports.InfoPopover = InfoPopover;
 InfoPopover.propTypes = {
+  dataTest: _propTypes.default.string,
   displayNameProp: _propTypes.default.string,
   item: _propTypes.default.object,
   reference: _propTypes.default.object,

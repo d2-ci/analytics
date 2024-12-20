@@ -478,6 +478,7 @@ const ItemSelector = _ref5 => {
     onDelete: onDeleteCalculation,
     displayNameProp: displayNameProp
   }), currentDataItem && /*#__PURE__*/React.createElement(InfoPopover, {
+    dataTest: `${dataTest}-info`,
     item: currentDataItem,
     reference: itemsRef.current.get(currentDataItem.id),
     onClose: () => setCurrentDataItem(),
