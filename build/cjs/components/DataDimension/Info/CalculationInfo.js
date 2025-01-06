@@ -36,6 +36,7 @@ const calculationQuery = {
 };
 const CalculationInfo = _ref3 => {
   let {
+    type,
     id,
     displayNameProp
   } = _ref3;
@@ -76,11 +77,12 @@ const CalculationInfo = _ref3 => {
       calculation
     });
     setLoading(false);
-  }, [displayNameProp, engine, getHumanReadableExpression, id]);
+  }, [displayNameProp, engine, getHumanReadableExpression, id, apiVersion, baseUrl]);
   (0, _react.useEffect)(() => {
     fetchData();
   }, [fetchData]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InfoTable.InfoTable, {
+    dataType: type,
     data: data === null || data === void 0 ? void 0 : data.calculation,
     loading: loading,
     error: error
@@ -99,5 +101,6 @@ const CalculationInfo = _ref3 => {
 exports.CalculationInfo = CalculationInfo;
 CalculationInfo.propTypes = {
   displayNameProp: _propTypes.default.string,
-  id: _propTypes.default.string
+  id: _propTypes.default.string,
+  type: _propTypes.default.string
 };

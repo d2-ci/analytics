@@ -36,6 +36,7 @@ const indicatorQuery = {
 };
 const IndicatorInfo = _ref3 => {
   let {
+    type,
     id,
     displayNameProp
   } = _ref3;
@@ -81,6 +82,7 @@ const IndicatorInfo = _ref3 => {
     fetchData();
   }, [fetchData]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InfoTable.InfoTable, {
+    dataType: type,
     data: data === null || data === void 0 ? void 0 : data.indicator,
     loading: loading,
     error: error
@@ -172,5 +174,6 @@ const IndicatorInfo = _ref3 => {
 exports.IndicatorInfo = IndicatorInfo;
 IndicatorInfo.propTypes = {
   displayNameProp: _propTypes.default.string,
-  id: _propTypes.default.string
+  id: _propTypes.default.string,
+  type: _propTypes.default.string
 };

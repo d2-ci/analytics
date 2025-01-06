@@ -26,6 +26,7 @@ const dataSetQuery = {
 };
 export const DataSetInfo = _ref3 => {
   let {
+    type,
     id,
     displayNameProp
   } = _ref3;
@@ -40,6 +41,7 @@ export const DataSetInfo = _ref3 => {
     }
   });
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InfoTable, {
+    dataType: type,
     data: data === null || data === void 0 ? void 0 : data.dataSet,
     loading: loading,
     error: error
@@ -100,5 +102,6 @@ export const DataSetInfo = _ref3 => {
 };
 DataSetInfo.propTypes = {
   displayNameProp: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  type: PropTypes.string
 };

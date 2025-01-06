@@ -27,6 +27,7 @@ const programIndicatorQuery = {
 };
 export const ProgramIndicatorInfo = _ref3 => {
   let {
+    type,
     id,
     displayNameProp
   } = _ref3;
@@ -78,6 +79,7 @@ export const ProgramIndicatorInfo = _ref3 => {
     fetchData();
   }, [fetchData]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InfoTable, {
+    dataType: type,
     data: data === null || data === void 0 ? void 0 : data.programIndicator,
     loading: loading,
     error: error
@@ -174,5 +176,6 @@ export const ProgramIndicatorInfo = _ref3 => {
 };
 ProgramIndicatorInfo.propTypes = {
   displayNameProp: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  type: PropTypes.string
 };

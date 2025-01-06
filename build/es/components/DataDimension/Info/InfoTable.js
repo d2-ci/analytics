@@ -5,6 +5,8 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 import i18n from '../../../locales/index.js';
+import { DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM // calculation
+} from '../../../modules/dataTypes.js';
 import styles from './styles/InfoPopover.style.js';
 export const getCommonFields = displayNameProp => `attributeValues[attribute[id,displayName],value],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
 export const capitalizeText = text => text && text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
@@ -92,6 +94,7 @@ export const renderLegendSets = legendSets => {
 };
 export const InfoTable = _ref4 => {
   let {
+    dataType,
     data,
     error,
     loading,
@@ -118,7 +121,7 @@ export const InfoTable = _ref4 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Name')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, data.displayName)), children, /*#__PURE__*/React.createElement("tr", {
+  }, data.displayName)), children, dataType !== DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM ? /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
@@ -128,7 +131,15 @@ export const InfoTable = _ref4 => {
     className: `jsx-${styles.__hash}` + " " + "content-wrap"
   }, data.displayDescription) : /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "none"
-  }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
+  }, i18n.t('None')))) : data.displayDescription && /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Description')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "content-wrap"
+  }, data.displayDescription))), dataType !== DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM ? /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
@@ -136,7 +147,13 @@ export const InfoTable = _ref4 => {
     className: `jsx-${styles.__hash}`
   }, data.code ? data.code : /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "none"
-  }, i18n.t('None')))), /*#__PURE__*/React.createElement("tr", {
+  }, i18n.t('None')))) : data.code && /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Code')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, data.code)), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
@@ -182,6 +199,7 @@ export const InfoTable = _ref4 => {
 InfoTable.propTypes = {
   children: PropTypes.node,
   data: PropTypes.object,
+  dataType: PropTypes.string,
   error: PropTypes.string,
   loading: PropTypes.bool
 };

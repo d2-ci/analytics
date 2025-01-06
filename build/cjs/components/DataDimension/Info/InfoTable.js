@@ -11,6 +11,7 @@ var _moment = _interopRequireDefault(require("moment"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
+var _dataTypes = require("../../../modules/dataTypes.js");
 var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getCommonFields = displayNameProp => `attributeValues[attribute[id,displayName],value],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
@@ -106,6 +107,7 @@ const renderLegendSets = legendSets => {
 exports.renderLegendSets = renderLegendSets;
 const InfoTable = _ref4 => {
   let {
+    dataType,
     data,
     error,
     loading,
@@ -132,7 +134,7 @@ const InfoTable = _ref4 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Name')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.displayName)), children, /*#__PURE__*/_react.default.createElement("tr", {
+  }, data.displayName)), children, dataType !== _dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM ? /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
@@ -142,7 +144,15 @@ const InfoTable = _ref4 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
   }, data.displayDescription) : /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
-  }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, _index.default.t('None')))) : data.displayDescription && /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Description')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
+  }, data.displayDescription))), dataType !== _dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM ? /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
@@ -150,7 +160,13 @@ const InfoTable = _ref4 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, data.code ? data.code : /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
-  }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, _index.default.t('None')))) : data.code && /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Code')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.code)), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
@@ -197,6 +213,7 @@ exports.InfoTable = InfoTable;
 InfoTable.propTypes = {
   children: _propTypes.default.node,
   data: _propTypes.default.object,
+  dataType: _propTypes.default.string,
   error: _propTypes.default.string,
   loading: _propTypes.default.bool
 };

@@ -32,6 +32,7 @@ const dataElementOperandsQuery = {
 };
 const DataElementOperandInfo = _ref2 => {
   let {
+    type,
     id,
     displayNameProp
   } = _ref2;
@@ -72,6 +73,7 @@ const DataElementOperandInfo = _ref2 => {
     fetchData();
   }, [fetchData]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InfoTable.InfoTable, {
+    dataType: type,
     data: data === null || data === void 0 ? void 0 : data.dataElementOperand,
     loading: loading,
     error: error
@@ -181,5 +183,6 @@ const DataElementOperandInfo = _ref2 => {
 exports.DataElementOperandInfo = DataElementOperandInfo;
 DataElementOperandInfo.propTypes = {
   displayNameProp: _propTypes.default.string,
-  id: _propTypes.default.string
+  id: _propTypes.default.string,
+  type: _propTypes.default.string
 };
