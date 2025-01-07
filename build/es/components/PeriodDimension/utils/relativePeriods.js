@@ -1,5 +1,20 @@
 import i18n from '../../../locales/index.js';
 import { DAILY, WEEKLY, BIWEEKLY, WEEKS_THIS_YEAR, MONTHLY, BIMONTHLY, QUARTERLY, SIXMONTHLY, FINANCIAL, YEARLY } from './index.js';
+
+/* 
+In getDaysPeriodType, getWeeksPeriodType, getBiWeeksPeriodType,
+getBiWeeksPeriodType, getMonthsPeriodType, getBiMonthsPeriodType,
+getQuartersPeriodType, getSixMonthsPeriodType,
+getFinancialYearsPeriodType, and getYearsPeriodType:
+-   duration: The number of individual periods in the preset
+    (the maximum when the duration is variable).
+    eg: LAST_14_DAYS duration is 14
+-   offset: The position of the most recent individual period
+    relative to THIS period in the preset, earlier periods are
+    negative (the maximum when the offset is variable).
+    eg: LAST_BIMONTH offset is -1
+*/
+
 const getDaysPeriodType = () => [{
   id: 'TODAY',
   name: i18n.t('Today'),

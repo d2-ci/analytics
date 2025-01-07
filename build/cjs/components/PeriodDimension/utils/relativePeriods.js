@@ -7,6 +7,20 @@ exports.getRelativePeriodsOptionsById = exports.getRelativePeriodsOptions = expo
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _index2 = require("./index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+/* 
+In getDaysPeriodType, getWeeksPeriodType, getBiWeeksPeriodType,
+getBiWeeksPeriodType, getMonthsPeriodType, getBiMonthsPeriodType,
+getQuartersPeriodType, getSixMonthsPeriodType,
+getFinancialYearsPeriodType, and getYearsPeriodType:
+-   duration: The number of individual periods in the preset
+    (the maximum when the duration is variable).
+    eg: LAST_14_DAYS duration is 14
+-   offset: The position of the most recent individual period
+    relative to THIS period in the preset, earlier periods are
+    negative (the maximum when the offset is variable).
+    eg: LAST_BIMONTH offset is -1
+*/
+
 const getDaysPeriodType = () => [{
   id: 'TODAY',
   name: _index.default.t('Today'),
