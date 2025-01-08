@@ -32,7 +32,6 @@ const TransferOption = _ref => {
   const renderContent = () => /*#__PURE__*/_react.default.createElement("div", {
     "data-test": `${dataTest}-content`,
     onClick: event => {
-      console.log('transfer option click');
       if (disabled) {
         return;
       }
@@ -42,7 +41,6 @@ const TransferOption = _ref => {
       }, event);
     },
     onDoubleClick: event => {
-      console.log('transfer option double click');
       if (disabled) {
         return;
       }
