@@ -188,7 +188,7 @@ const dataElementOperandsQuery = exports.dataElementOperandsQuery = {
       page
     } = _ref10;
     const idField = (filter === null || filter === void 0 ? void 0 : filter.group) === _dataTypes.DIMENSION_TYPE_ALL ? 'id' : 'dimensionItem~rename(id)';
-    const filters = [];
+    const filters = ['categoryOptionCombo.name:ne:default'];
     if (filter !== null && filter !== void 0 && filter.group && filter.group !== _dataTypes.DIMENSION_TYPE_ALL) {
       filters.push(`dataElement.dataElementGroups.id:eq:${filter.group}`);
     }

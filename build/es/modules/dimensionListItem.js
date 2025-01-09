@@ -5,7 +5,7 @@ import GenericIcon from '../assets/DimensionItemIcons/GenericIcon.js';
 import CalculationIcon from './../assets/DimensionItemIcons/CalculationIcon.js';
 import { REPORTING_RATE } from './dataSets.js';
 import { DIMENSION_TYPE_DATA_ELEMENT, DIMENSION_TYPE_DATA_ELEMENT_OPERAND, DIMENSION_TYPE_DATA_SET, DIMENSION_TYPE_EVENT_DATA_ITEM, DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT, dataTypeMap as dataTypes, DIMENSION_TYPE_INDICATOR, DIMENSION_TYPE_PROGRAM_INDICATOR } from './dataTypes.js';
-export const getTooltipText = _ref => {
+export const getDimensionType = _ref => {
   var _dataTypes$type;
   let {
     type,

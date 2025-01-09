@@ -3,19 +3,20 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 import { useDataEngine } from '@dhis2/app-runtime';
 import { Transfer, InputField, IconInfo16, Button, IconAdd24 } from '@dhis2/ui';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { apiFetchOptions } from '../../api/dimensions.js';
 import i18n from '../../locales/index.js';
 import { DATA_SETS_CONSTANTS, REPORTING_RATE } from '../../modules/dataSets.js';
 import { DIMENSION_TYPE_ALL, DIMENSION_TYPE_DATA_ELEMENT, DIMENSION_TYPE_DATA_SET, DIMENSION_TYPE_EVENT_DATA_ITEM, DIMENSION_TYPE_PROGRAM_INDICATOR, DIMENSION_TYPE_INDICATOR, TOTALS, DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM } from '../../modules/dataTypes.js';
-import { getIcon, getTooltipText } from '../../modules/dimensionListItem.js';
+import { getIcon, getDimensionType } from '../../modules/dimensionListItem.js';
 import { TRANSFER_HEIGHT, TRANSFER_OPTIONS_WIDTH, TRANSFER_SELECTED_WIDTH } from '../../modules/dimensionSelectorHelper.js';
 import { useDebounce, useDidUpdateEffect } from '../../modules/utils.js';
 import styles from '../styles/DimensionSelector.style.js';
-import { TransferOption } from '../TransferOption.js';
 import CalculationModal from './Calculation/CalculationModal.js';
 import DataTypeSelector from './DataTypeSelector.js';
 import GroupSelector from './GroupSelector.js';
+import { InfoPopover } from './Info/InfoPopover.js';
+import { TransferOption } from './TransferOption.js';
 const LeftHeader = _ref => {
   let {
     searchTerm,
@@ -203,6 +204,7 @@ const ItemSelector = _ref5 => {
     dataTest,
     onEDISave
   } = _ref5;
+  const itemsRef = useRef(new Map());
   const [state, setState] = useState({
     searchTerm: '',
     dataTypes,
@@ -222,12 +224,13 @@ const ItemSelector = _ref5 => {
     }).includes(DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM)
   });
   const [currentCalculation, setCurrentCalculation] = useState();
+  const [currentDataItem, setCurrentDataItem] = useState();
+  const debouncedSearchTerm = useDebounce(state.searchTerm, 500);
   const dataEngine = useDataEngine();
   const setSearchTerm = searchTerm => setState(state => ({
     ...state,
     searchTerm
   }));
-  const debouncedSearchTerm = useDebounce(state.searchTerm, 500);
   const fetchItems = async page => {
     var _result$dimensionItem;
     setState(state => ({
@@ -391,7 +394,9 @@ const ItemSelector = _ref5 => {
       subGroup: dataType === DIMENSION_TYPE_DATA_ELEMENT ? TOTALS : null
     }
   }));
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Transfer, {
+  return /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "transfer-container"
+  }, /*#__PURE__*/React.createElement(Transfer, {
     onChange: _ref9 => {
       let {
         selected
@@ -445,17 +450,23 @@ const ItemSelector = _ref5 => {
       return /*#__PURE__*/React.createElement(TransferOption
       /* eslint-disable react/prop-types */, _extends({}, props, {
         active: isActive(props.value),
+        showingInfo: (currentDataItem === null || currentDataItem === void 0 ? void 0 : currentDataItem.id) === props.value,
         icon: getIcon(getItemType(props.value)),
-        tooltipText: getTooltipText({
+        dimensionType: getDimensionType({
           type: getItemType(props.value),
           expression: props.expression
         }),
         dataTest: `${dataTest}-transfer-option`,
+        itemsRef: itemsRef,
         onEditClick: getItemType(props.value) === DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM && !(((_props$access = props.access) === null || _props$access === void 0 ? void 0 : _props$access.write) === false) && state.supportsEDI ? () => setCurrentCalculation({
           id: props.value,
           name: props.label,
           expression: props.expression
-        }) : undefined
+        }) : undefined,
+        onInfoClick: () => setCurrentDataItem({
+          id: props.value,
+          type: getItemType(props.value)
+        })
         /* eslint-enable react/prop-types */
       }));
     },
@@ -465,6 +476,12 @@ const ItemSelector = _ref5 => {
     onSave: onSaveCalculation,
     onClose: () => setCurrentCalculation(),
     onDelete: onDeleteCalculation,
+    displayNameProp: displayNameProp
+  }), currentDataItem && /*#__PURE__*/React.createElement(InfoPopover, {
+    dataTest: `${dataTest}-info`,
+    item: currentDataItem,
+    reference: itemsRef.current.get(currentDataItem.id),
+    onClose: () => setCurrentDataItem(),
     displayNameProp: displayNameProp
   }), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
