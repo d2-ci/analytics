@@ -17,10 +17,11 @@ var _dimensionListItem = require("../../modules/dimensionListItem.js");
 var _dimensionSelectorHelper = require("../../modules/dimensionSelectorHelper.js");
 var _utils = require("../../modules/utils.js");
 var _DimensionSelectorStyle = _interopRequireDefault(require("../styles/DimensionSelector.style.js"));
-var _TransferOption = require("../TransferOption.js");
 var _CalculationModal = _interopRequireDefault(require("./Calculation/CalculationModal.js"));
 var _DataTypeSelector = _interopRequireDefault(require("./DataTypeSelector.js"));
 var _GroupSelector = _interopRequireDefault(require("./GroupSelector.js"));
+var _InfoPopover = require("./Info/InfoPopover.js");
+var _TransferOption = require("./TransferOption.js");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -212,6 +213,7 @@ const ItemSelector = _ref5 => {
     dataTest,
     onEDISave
   } = _ref5;
+  const itemsRef = (0, _react.useRef)(new Map());
   const [state, setState] = (0, _react.useState)({
     searchTerm: '',
     dataTypes,
@@ -231,12 +233,13 @@ const ItemSelector = _ref5 => {
     }).includes(_dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM)
   });
   const [currentCalculation, setCurrentCalculation] = (0, _react.useState)();
+  const [currentDataItem, setCurrentDataItem] = (0, _react.useState)();
+  const debouncedSearchTerm = (0, _utils.useDebounce)(state.searchTerm, 500);
   const dataEngine = (0, _appRuntime.useDataEngine)();
   const setSearchTerm = searchTerm => setState(state => ({
     ...state,
     searchTerm
   }));
-  const debouncedSearchTerm = (0, _utils.useDebounce)(state.searchTerm, 500);
   const fetchItems = async page => {
     var _result$dimensionItem;
     setState(state => ({
@@ -400,7 +403,9 @@ const ItemSelector = _ref5 => {
       subGroup: dataType === _dataTypes.DIMENSION_TYPE_DATA_ELEMENT ? _dataTypes.TOTALS : null
     }
   }));
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ui.Transfer, {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "transfer-container"
+  }, /*#__PURE__*/_react.default.createElement(_ui.Transfer, {
     onChange: _ref9 => {
       let {
         selected
@@ -454,17 +459,23 @@ const ItemSelector = _ref5 => {
       return /*#__PURE__*/_react.default.createElement(_TransferOption.TransferOption
       /* eslint-disable react/prop-types */, _extends({}, props, {
         active: isActive(props.value),
+        showingInfo: (currentDataItem === null || currentDataItem === void 0 ? void 0 : currentDataItem.id) === props.value,
         icon: (0, _dimensionListItem.getIcon)(getItemType(props.value)),
-        tooltipText: (0, _dimensionListItem.getTooltipText)({
+        dimensionType: (0, _dimensionListItem.getDimensionType)({
           type: getItemType(props.value),
           expression: props.expression
         }),
         dataTest: `${dataTest}-transfer-option`,
+        itemsRef: itemsRef,
         onEditClick: getItemType(props.value) === _dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM && !(((_props$access = props.access) === null || _props$access === void 0 ? void 0 : _props$access.write) === false) && state.supportsEDI ? () => setCurrentCalculation({
           id: props.value,
           name: props.label,
           expression: props.expression
-        }) : undefined
+        }) : undefined,
+        onInfoClick: () => setCurrentDataItem({
+          id: props.value,
+          type: getItemType(props.value)
+        })
         /* eslint-enable react/prop-types */
       }));
     },
@@ -474,6 +485,12 @@ const ItemSelector = _ref5 => {
     onSave: onSaveCalculation,
     onClose: () => setCurrentCalculation(),
     onDelete: onDeleteCalculation,
+    displayNameProp: displayNameProp
+  }), currentDataItem && /*#__PURE__*/_react.default.createElement(_InfoPopover.InfoPopover, {
+    dataTest: `${dataTest}-info`,
+    item: currentDataItem,
+    reference: itemsRef.current.get(currentDataItem.id),
+    onClose: () => setCurrentDataItem(),
     displayNameProp: displayNameProp
   }), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _DimensionSelectorStyle.default.__hash

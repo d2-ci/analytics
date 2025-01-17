@@ -16,6 +16,7 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 const DataDimensionCtx = /*#__PURE__*/(0, _react.createContext)({});
 const DataDimension = _ref => {
   let {
+    currentUser,
     onSelect,
     selectedDimensions,
     displayNameProp,
@@ -49,7 +50,8 @@ const DataDimension = _ref => {
   (0, _react.useEffect)(() => enabledDataTypes && setDataTypes(filterDataTypesByVersion(enabledDataTypes)), [enabledDataTypes, filterDataTypesByVersion]);
   return /*#__PURE__*/_react.default.createElement(DataDimensionCtx.Provider, {
     value: {
-      visType
+      visType,
+      currentUser
     }
   }, /*#__PURE__*/_react.default.createElement(_ItemSelector.default, {
     selectedItems: selectedDimensions.map(item => ({
@@ -78,6 +80,7 @@ DataDimension.propTypes = {
     type: _propTypes.default.string
   })).isRequired,
   onSelect: _propTypes.default.func.isRequired,
+  currentUser: _propTypes.default.object,
   enabledDataTypes: _propTypes.default.array,
   infoBoxMessage: _propTypes.default.string,
   visType: _propTypes.default.string,

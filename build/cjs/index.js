@@ -71,6 +71,17 @@ var _exportNames = {
   layoutHasDimension: true,
   layoutHasDynamicDimension: true,
   layoutHasPeriodDimension: true,
+  VALUE_TYPE_TEXT: true,
+  VALUE_TYPE_LONG_TEXT: true,
+  VALUE_TYPE_MULTI_TEXT: true,
+  VALUE_TYPE_LETTER: true,
+  VALUE_TYPE_PHONE_NUMBER: true,
+  VALUE_TYPE_EMAIL: true,
+  VALUE_TYPE_BOOLEAN: true,
+  VALUE_TYPE_TRUE_ONLY: true,
+  VALUE_TYPE_DATE: true,
+  VALUE_TYPE_DATETIME: true,
+  VALUE_TYPE_TIME: true,
   VALUE_TYPE_NUMBER: true,
   VALUE_TYPE_UNIT_INTERVAL: true,
   VALUE_TYPE_PERCENTAGE: true,
@@ -78,20 +89,17 @@ var _exportNames = {
   VALUE_TYPE_INTEGER_POSITIVE: true,
   VALUE_TYPE_INTEGER_NEGATIVE: true,
   VALUE_TYPE_INTEGER_ZERO_OR_POSITIVE: true,
-  VALUE_TYPE_TEXT: true,
-  VALUE_TYPE_LONG_TEXT: true,
-  VALUE_TYPE_LETTER: true,
-  VALUE_TYPE_PHONE_NUMBER: true,
-  VALUE_TYPE_EMAIL: true,
+  VALUE_TYPE_TRACKER_ASSOCIATE: true,
   VALUE_TYPE_USERNAME: true,
-  VALUE_TYPE_URL: true,
-  VALUE_TYPE_BOOLEAN: true,
-  VALUE_TYPE_TRUE_ONLY: true,
-  VALUE_TYPE_DATE: true,
-  VALUE_TYPE_TIME: true,
-  VALUE_TYPE_DATETIME: true,
+  VALUE_TYPE_COORDINATE: true,
   VALUE_TYPE_ORGANISATION_UNIT: true,
+  VALUE_TYPE_REFERENCE: true,
   VALUE_TYPE_AGE: true,
+  VALUE_TYPE_URL: true,
+  VALUE_TYPE_FILE_RESOURCE: true,
+  VALUE_TYPE_IMAGE: true,
+  VALUE_TYPE_GEOJSON: true,
+  valueTypeDisplayNames: true,
   AXIS: true,
   AXIS_ID_COLUMNS: true,
   AXIS_ID_ROWS: true,
@@ -922,6 +930,12 @@ Object.defineProperty(exports, "VALUE_TYPE_BOOLEAN", {
     return _valueTypes.VALUE_TYPE_BOOLEAN;
   }
 });
+Object.defineProperty(exports, "VALUE_TYPE_COORDINATE", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_COORDINATE;
+  }
+});
 Object.defineProperty(exports, "VALUE_TYPE_DATE", {
   enumerable: true,
   get: function () {
@@ -938,6 +952,24 @@ Object.defineProperty(exports, "VALUE_TYPE_EMAIL", {
   enumerable: true,
   get: function () {
     return _valueTypes.VALUE_TYPE_EMAIL;
+  }
+});
+Object.defineProperty(exports, "VALUE_TYPE_FILE_RESOURCE", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_FILE_RESOURCE;
+  }
+});
+Object.defineProperty(exports, "VALUE_TYPE_GEOJSON", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_GEOJSON;
+  }
+});
+Object.defineProperty(exports, "VALUE_TYPE_IMAGE", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_IMAGE;
   }
 });
 Object.defineProperty(exports, "VALUE_TYPE_INTEGER", {
@@ -976,6 +1008,12 @@ Object.defineProperty(exports, "VALUE_TYPE_LONG_TEXT", {
     return _valueTypes.VALUE_TYPE_LONG_TEXT;
   }
 });
+Object.defineProperty(exports, "VALUE_TYPE_MULTI_TEXT", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_MULTI_TEXT;
+  }
+});
 Object.defineProperty(exports, "VALUE_TYPE_NUMBER", {
   enumerable: true,
   get: function () {
@@ -1000,6 +1038,12 @@ Object.defineProperty(exports, "VALUE_TYPE_PHONE_NUMBER", {
     return _valueTypes.VALUE_TYPE_PHONE_NUMBER;
   }
 });
+Object.defineProperty(exports, "VALUE_TYPE_REFERENCE", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_REFERENCE;
+  }
+});
 Object.defineProperty(exports, "VALUE_TYPE_TEXT", {
   enumerable: true,
   get: function () {
@@ -1010,6 +1054,12 @@ Object.defineProperty(exports, "VALUE_TYPE_TIME", {
   enumerable: true,
   get: function () {
     return _valueTypes.VALUE_TYPE_TIME;
+  }
+});
+Object.defineProperty(exports, "VALUE_TYPE_TRACKER_ASSOCIATE", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_TRACKER_ASSOCIATE;
   }
 });
 Object.defineProperty(exports, "VALUE_TYPE_TRUE_ONLY", {
@@ -1748,6 +1798,12 @@ Object.defineProperty(exports, "useCachedDataQuery", {
   enumerable: true,
   get: function () {
     return _CachedDataQueryProvider.useCachedDataQuery;
+  }
+});
+Object.defineProperty(exports, "valueTypeDisplayNames", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.valueTypeDisplayNames;
   }
 });
 Object.defineProperty(exports, "visTypeDisplayNames", {

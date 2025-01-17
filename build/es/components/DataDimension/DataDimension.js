@@ -7,6 +7,7 @@ import ItemSelector from './ItemSelector.js';
 const DataDimensionCtx = /*#__PURE__*/createContext({});
 const DataDimension = _ref => {
   let {
+    currentUser,
     onSelect,
     selectedDimensions,
     displayNameProp,
@@ -40,7 +41,8 @@ const DataDimension = _ref => {
   useEffect(() => enabledDataTypes && setDataTypes(filterDataTypesByVersion(enabledDataTypes)), [enabledDataTypes, filterDataTypesByVersion]);
   return /*#__PURE__*/React.createElement(DataDimensionCtx.Provider, {
     value: {
-      visType
+      visType,
+      currentUser
     }
   }, /*#__PURE__*/React.createElement(ItemSelector, {
     selectedItems: selectedDimensions.map(item => ({
@@ -69,6 +71,7 @@ DataDimension.propTypes = {
     type: PropTypes.string
   })).isRequired,
   onSelect: PropTypes.func.isRequired,
+  currentUser: PropTypes.object,
   enabledDataTypes: PropTypes.array,
   infoBoxMessage: PropTypes.string,
   visType: PropTypes.string,
