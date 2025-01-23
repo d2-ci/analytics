@@ -432,6 +432,7 @@ class PivotTableEngine {
     return !this.rowMap.some(row => {
       var _this$data$row;
       console.log('jj columnIsEmpty', {
+        rowMap: this.rowMap,
         row,
         column,
         data: this.data,
