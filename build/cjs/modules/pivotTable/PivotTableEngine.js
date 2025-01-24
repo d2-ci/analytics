@@ -429,19 +429,7 @@ class PivotTableEngine {
     return !this.data[row] || this.data[row].length === 0;
   }
   columnIsEmpty(column) {
-    return !this.rowMap.some((row, i) => {
-      var _this$data$row;
-      console.log('jj columnIsEmpty', {
-        colData: (_this$data$row = this.data[row]) === null || _this$data$row === void 0 ? void 0 : _this$data$row[column],
-        column,
-        data: this.data,
-        i,
-        row,
-        rowMap: this.rowMap,
-        rowdata: this.data[row]
-      });
-      return this.data[row] ? !!this.data[row][column] : false;
-    });
+    return !this.rowMap.some(row => this.data[row] && this.data[row][column]);
   }
   getRawColumnHeader(column) {
     if (this.doRowTotals && column === this.dataWidth - 1) {
