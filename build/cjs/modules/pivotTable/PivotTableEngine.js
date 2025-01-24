@@ -429,17 +429,18 @@ class PivotTableEngine {
     return !this.data[row] || this.data[row].length === 0;
   }
   columnIsEmpty(column) {
-    return !this.rowMap.some(row => {
+    return !this.rowMap.some((row, i) => {
       var _this$data$row;
       console.log('jj columnIsEmpty', {
-        rowMap: this.rowMap,
-        row,
+        colData: (_this$data$row = this.data[row]) === null || _this$data$row === void 0 ? void 0 : _this$data$row[column],
         column,
         data: this.data,
-        rowdata: this.data[row],
-        colData: (_this$data$row = this.data[row]) === null || _this$data$row === void 0 ? void 0 : _this$data$row[column]
+        i,
+        row,
+        rowMap: this.rowMap,
+        rowdata: this.data[row]
       });
-      return this.data[row][column];
+      return this.data[row] ? !!this.data[row][column] : false;
     });
   }
   getRawColumnHeader(column) {
