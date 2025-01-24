@@ -90,7 +90,7 @@ const OptionSetModal = _ref => {
     onClick: onSaveClick,
     disabled: selectionMode === _SelectionMode.SELECTION_MODE_MANUAL && !selectedOptions.length,
     dataTest: "save-button"
-  }, _index.default.t('Save'))))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, _index.default.t('Save options'))))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _OptionSetModalStyle.default.__hash
   }, _OptionSetModalStyle.default));
 };

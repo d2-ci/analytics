@@ -331,29 +331,7 @@ const ItemSelector = _ref5 => {
         } : {})
       };
     });
-    const newTransferredItems = newSelectedItems.filter(_ref7 => {
-      let {
-        value: transferredId
-      } = _ref7;
-      return !selectedItems.find(_ref8 => {
-        let {
-          value: selectedId
-        } = _ref8;
-        return selectedId === transferredId;
-      });
-    });
     onSelect(newSelectedItems);
-
-    // open option set modal if 1 data item with option set is transferred
-    if (newTransferredItems.length === 1 && newTransferredItems[0].optionSetId) {
-      setCurrentOptionSet({
-        ...newTransferredItems[0].optionSet,
-        dataItem: {
-          id: newTransferredItems[0].value,
-          name: newTransferredItems[0].label
-        }
-      });
-    }
   };
   const onEndReached = () => {
     if (state.nextPage) {
@@ -398,13 +376,13 @@ const ItemSelector = _ref5 => {
       }
     }
   };
-  const onSaveCalculation = async _ref9 => {
+  const onSaveCalculation = async _ref7 => {
     let {
       id,
       name,
       expression,
       isNew
-    } = _ref9;
+    } = _ref7;
     onEDISave({
       id,
       name,
@@ -427,10 +405,10 @@ const ItemSelector = _ref5 => {
       }]);
     }
   };
-  const onDeleteCalculation = _ref10 => {
+  const onDeleteCalculation = _ref8 => {
     let {
       id
-    } = _ref10;
+    } = _ref8;
     // close the modal
     setCurrentCalculation();
 
@@ -440,11 +418,11 @@ const ItemSelector = _ref5 => {
     // unselect the deleted calculation
     onSelect([...selectedItems.filter(item => item.value !== id)]);
   };
-  const onSaveOptionSet = _ref11 => {
+  const onSaveOptionSet = _ref9 => {
     let {
       dataItemId,
       ...optionSet
-    } = _ref11;
+    } = _ref9;
     const selectedItemIndex = selectedItems.findIndex(dataItem => dataItem.value === dataItemId);
     const updatedDataItem = {
       ...selectedItems[selectedItemIndex],
@@ -485,10 +463,10 @@ const ItemSelector = _ref5 => {
   return /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "transfer-container"
   }, /*#__PURE__*/React.createElement(Transfer, {
-    onChange: _ref12 => {
+    onChange: _ref10 => {
       let {
         selected
-      } = _ref12;
+      } = _ref10;
       return onChange(selected);
     },
     selected: selectedItems.map(item => item.value),
