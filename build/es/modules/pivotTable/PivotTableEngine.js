@@ -422,7 +422,10 @@ export class PivotTableEngine {
     return !this.data[row] || this.data[row].length === 0;
   }
   columnIsEmpty(column) {
-    return !this.rowMap.some(row => this.data[row] && this.data[row][column]);
+    return !this.rowMap.some(row => {
+      var _this$data$row;
+      return !!((_this$data$row = this.data[row]) !== null && _this$data$row !== void 0 && _this$data$row[column]);
+    });
   }
   getRawColumnHeader(column) {
     if (this.doRowTotals && column === this.dataWidth - 1) {
