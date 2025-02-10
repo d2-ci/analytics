@@ -1,7 +1,7 @@
 import { generateFixedPeriods, getNowInCalendar } from '@dhis2/multi-calendar-dates';
 import i18n from '../../../locales/index.js';
 import { DAILY, WEEKLY, WEEKLYWED, WEEKLYTHU, WEEKLYSAT, WEEKLYSUN, BIWEEKLY, MONTHLY, BIMONTHLY, QUARTERLY, SIXMONTHLY, SIXMONTHLYAPR, YEARLY, FYNOV, FYOCT, FYJUL, FYAPR } from './index.js';
-const PERIOD_TYPE_REGEX = {
+export const PERIOD_TYPE_REGEX = {
   [DAILY]: /^([0-9]{4})([0-9]{2})([0-9]{2})$/,
   // YYYYMMDD
   [WEEKLY]: /^([0-9]{4})()W([0-9]{1,2})$/,

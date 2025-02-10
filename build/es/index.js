@@ -130,7 +130,7 @@ export { COLOR_SET_DEFAULT, COLOR_SET_BASIC, COLOR_SET_EXTENDED, COLOR_SET_BRIGH
 
 // Utils: periods
 export { DAILY, WEEKLY, WEEKLYWED, WEEKLYTHU, WEEKLYSAT, WEEKLYSUN, WEEKS_THIS_YEAR, BIWEEKLY, MONTHLY, BIMONTHLY, QUARTERLY, SIXMONTHLY, SIXMONTHLYAPR, YEARLY, FINANCIAL, FYNOV, FYOCT, FYJUL, FYAPR } from './components/PeriodDimension/utils/index.js';
-export { getRelativePeriodsOptionsById } from './components/PeriodDimension/utils/relativePeriods.js';
-export { getFixedPeriodsOptionsById } from './components/PeriodDimension/utils/fixedPeriods.js';
+export { getRelativePeriodsOptionsById, getRelativePeriodsName, getRelativePeriodsDetails } from './components/PeriodDimension/utils/relativePeriods.js';
+export { getFixedPeriodsOptionsById, PERIOD_TYPE_REGEX } from './components/PeriodDimension/utils/fixedPeriods.js';
 export { default as VisualizationOptions } from './components/Options/VisualizationOptions.js';
 export { DIMENSION_TYPE_INDICATOR, DIMENSION_TYPE_DATA_ELEMENT, DIMENSION_TYPE_DATA_SET, DIMENSION_TYPE_EVENT_DATA_ITEM, DIMENSION_TYPE_PROGRAM_INDICATOR, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_DATA_ELEMENT_OPERAND, DIMENSION_TYPE_CATEGORY, DIMENSION_TYPE_CATEGORY_OPTION_GROUP_SET, DIMENSION_TYPE_ALL, DIMENSION_TYPE_DATA, DIMENSION_TYPE_DATA_ELEMENT_GROUP_SET, DIMENSION_TYPE_ORGANISATION_UNIT, DIMENSION_TYPE_PERIOD, DIMENSION_TYPE_ORGANISATION_UNIT_GROUP_SET, DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, dataTypeMap } from './modules/dataTypes.js';
