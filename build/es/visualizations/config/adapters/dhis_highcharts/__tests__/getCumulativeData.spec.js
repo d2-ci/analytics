@@ -1,4 +1,4 @@
-import { getDefaultCumulativeData } from "../getCumulativeData.js";
+import { getDefaultCumulativeData, getTwoCategoryCumulativeData } from "../getCumulativeData.js";
 const testData = [{
   data: [1, 1, 1],
   expectedAcc: [1, 2, 3]
@@ -21,15 +21,27 @@ const testData = [{
   data: [1, null, 2],
   expectedAcc: [1, null, 3]
 }];
-const getSeries = (test, prop) => {
-  return [{
+describe('getDefaultCumulativeData', () => {
+  const getDefaultSeries = (test, prop) => [{
     data: test[prop]
   }];
-};
-describe('getDefaultCumulativeData', () => {
-  test('series gets correct cumulative values', () => {
+  test('series get correct cumulative values', () => {
     testData.forEach(test => {
-      expect(getDefaultCumulativeData(getSeries(test, 'data'))).toEqual(getSeries(test, 'expectedAcc'));
+      expect(getDefaultCumulativeData(getDefaultSeries(test, 'data'))).toEqual(getDefaultSeries(test, 'expectedAcc'));
+    });
+  });
+});
+describe('getTwoCategoryCumulativeData', () => {
+  q;
+  const getTwoCategorySeries = (test, prop) => [{
+    data: test[prop].map((value, index) => [index, value]),
+    custom: {
+      data: [test[prop]]
+    }
+  }];
+  test('series get correct cumulative values', () => {
+    testData.forEach(test => {
+      expect(getTwoCategoryCumulativeData(getTwoCategorySeries(test, 'data'))).toEqual(getTwoCategorySeries(test, 'expectedAcc'));
     });
   });
 });
