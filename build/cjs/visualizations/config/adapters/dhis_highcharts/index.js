@@ -194,6 +194,5 @@ function _default(_ref) {
 
   // force apply extra config
   Object.assign(config, extraConfig);
-  console.log((0, _objectClean.default)(config));
   return (0, _objectClean.default)(config);
 }

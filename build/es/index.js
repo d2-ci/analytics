@@ -23,6 +23,7 @@ export { TranslationDialog } from './components/TranslationDialog/index.js';
 export { OfflineTooltip } from './components/OfflineTooltip.js';
 export { CachedDataQueryProvider, useCachedDataQuery } from './components/CachedDataQueryProvider.js';
 export * from './components/RichText/index.js';
+export { DashboardPluginWrapper } from './components/DashboardPluginWrapper/DashboardPluginWrapper.js';
 
 // Api
 

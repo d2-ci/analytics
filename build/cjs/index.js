@@ -27,6 +27,7 @@ var _exportNames = {
   OfflineTooltip: true,
   CachedDataQueryProvider: true,
   useCachedDataQuery: true,
+  DashboardPluginWrapper: true,
   Analytics: true,
   apiFetchDimensions: true,
   apiFetchRecommendedIds: true,
@@ -540,6 +541,12 @@ Object.defineProperty(exports, "DIMENSION_TYPE_PROGRAM_INDICATOR", {
   enumerable: true,
   get: function () {
     return _dataTypes.DIMENSION_TYPE_PROGRAM_INDICATOR;
+  }
+});
+Object.defineProperty(exports, "DashboardPluginWrapper", {
+  enumerable: true,
+  get: function () {
+    return _DashboardPluginWrapper.DashboardPluginWrapper;
   }
 });
 Object.defineProperty(exports, "DataDimension", {
@@ -1877,6 +1884,7 @@ Object.keys(_index6).forEach(function (key) {
     }
   });
 });
+var _DashboardPluginWrapper = require("./components/DashboardPluginWrapper/DashboardPluginWrapper.js");
 var _Analytics = _interopRequireDefault(require("./api/analytics/Analytics.js"));
 var _dimensions = require("./api/dimensions.js");
 var _organisationUnits = require("./api/organisationUnits.js");
