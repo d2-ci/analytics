@@ -1,4 +1,4 @@
-import { getDefaultCumulativeData, getTwoCategoryCumulativeData } from "../getCumulativeData.js";
+import { getDefaultCumulativeData, getTwoCategoryCumulativeData } from '../getCumulativeData.js';
 const testData = [{
   data: [1, 1, 1],
   accData: [1, 2, 3]
