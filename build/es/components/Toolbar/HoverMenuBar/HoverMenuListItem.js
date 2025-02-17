@@ -1,7 +1,5 @@
 import _JSXStyle from "styled-jsx/style";
-import { IconChevronRight24 } from '@dhis2/ui-icons';
-import { Popper } from '@dhis2-ui/popper';
-import { Portal } from '@dhis2-ui/portal';
+import { IconChevronRight24, Popper, Portal } from '@dhis2/ui';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';

@@ -27,6 +27,7 @@ var _exportNames = {
   OfflineTooltip: true,
   CachedDataQueryProvider: true,
   useCachedDataQuery: true,
+  DashboardPluginWrapper: true,
   Analytics: true,
   apiFetchDimensions: true,
   apiFetchRecommendedIds: true,
@@ -242,7 +243,10 @@ var _exportNames = {
   FYJUL: true,
   FYAPR: true,
   getRelativePeriodsOptionsById: true,
+  getRelativePeriodsName: true,
+  getRelativePeriodsDetails: true,
   getFixedPeriodsOptionsById: true,
+  PERIOD_TYPE_REGEX: true,
   VisualizationOptions: true,
   DIMENSION_TYPE_INDICATOR: true,
   DIMENSION_TYPE_DATA_ELEMENT: true,
@@ -537,6 +541,12 @@ Object.defineProperty(exports, "DIMENSION_TYPE_PROGRAM_INDICATOR", {
   enumerable: true,
   get: function () {
     return _dataTypes.DIMENSION_TYPE_PROGRAM_INDICATOR;
+  }
+});
+Object.defineProperty(exports, "DashboardPluginWrapper", {
+  enumerable: true,
+  get: function () {
+    return _DashboardPluginWrapper.DashboardPluginWrapper;
   }
 });
 Object.defineProperty(exports, "DataDimension", {
@@ -837,6 +847,12 @@ Object.defineProperty(exports, "OrgUnitDimension", {
   enumerable: true,
   get: function () {
     return _OrgUnitDimension.default;
+  }
+});
+Object.defineProperty(exports, "PERIOD_TYPE_REGEX", {
+  enumerable: true,
+  get: function () {
+    return _fixedPeriods.PERIOD_TYPE_REGEX;
   }
 });
 Object.defineProperty(exports, "PeriodDimension", {
@@ -1565,6 +1581,18 @@ Object.defineProperty(exports, "getPredefinedDimensions", {
     return _predefinedDimensions.getPredefinedDimensions;
   }
 });
+Object.defineProperty(exports, "getRelativePeriodsDetails", {
+  enumerable: true,
+  get: function () {
+    return _relativePeriods.getRelativePeriodsDetails;
+  }
+});
+Object.defineProperty(exports, "getRelativePeriodsName", {
+  enumerable: true,
+  get: function () {
+    return _relativePeriods.getRelativePeriodsName;
+  }
+});
 Object.defineProperty(exports, "getRelativePeriodsOptionsById", {
   enumerable: true,
   get: function () {
@@ -1856,6 +1884,7 @@ Object.keys(_index6).forEach(function (key) {
     }
   });
 });
+var _DashboardPluginWrapper = require("./components/DashboardPluginWrapper/DashboardPluginWrapper.js");
 var _Analytics = _interopRequireDefault(require("./api/analytics/Analytics.js"));
 var _dimensions = require("./api/dimensions.js");
 var _organisationUnits = require("./api/organisationUnits.js");
