@@ -9,7 +9,6 @@ var _ui = require("@dhis2/ui");
 var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
-var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _dataTypes = require("../../modules/dataTypes.js");
 var _TransferOptionStyle = _interopRequireDefault(require("./styles/TransferOption.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -27,93 +26,83 @@ const TransferOption = _ref => {
     dataItemType,
     dimensionType,
     dataTest,
-    optionSet,
     optionSetId,
     itemsRef,
     showingInfo,
     onEditClick,
     onInfoClick
   } = _ref;
-  const renderContent = () => {
-    var _optionSet$options;
-    return /*#__PURE__*/_react.default.createElement("div", {
-      "data-test": `${dataTest}-content`,
-      onClick: event => {
-        if (disabled) {
-          return;
-        }
-        onClick({
-          label,
-          value
-        }, event);
-      },
-      onDoubleClick: event => {
-        if (disabled) {
-          return;
-        }
-        onDoubleClick({
-          label,
-          value
-        }, event);
-      },
-      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + ((0, _classnames.default)('item', {
-        highlighted,
-        disabled,
-        selected,
-        inactive: active !== undefined && !active
-      }) || "")
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "labelGroup"
-    }, /*#__PURE__*/_react.default.createElement("span", {
-      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "icon"
-    }, icon), /*#__PURE__*/_react.default.createElement("span", {
-      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "label"
-    }, label), dataItemType === _dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM && onEditClick && /*#__PURE__*/_react.default.createElement("div", {
-      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "tag"
-    }, /*#__PURE__*/_react.default.createElement("span", {
-      onClick: e => {
-        e.stopPropagation();
-        onEditClick();
-      },
-      "data-test": `${dataTest}-edit-calculation-button`,
-      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "edit"
-    }, /*#__PURE__*/_react.default.createElement(_ui.IconEdit16, null), _index.default.t('Edit'))), optionSetId && /*#__PURE__*/_react.default.createElement("div", {
-      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "tag"
-    }, /*#__PURE__*/_react.default.createElement("span", {
-      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "type"
-    }, _index.default.t('Option set'), selected && (optionSet !== null && optionSet !== void 0 && (_optionSet$options = optionSet.options) !== null && _optionSet$options !== void 0 && _optionSet$options.length ? `: ${optionSet.options.length}` : _index.default.t(': ALL', {
-      nsSeparator: '^^'
-    }))), selected && onEditClick && /*#__PURE__*/_react.default.createElement("span", {
-      onClick: e => {
-        e.stopPropagation();
-        onEditClick();
-      },
-      "data-test": `${dataTest}-edit-option-set-button`,
-      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "edit option-set"
-    }, /*#__PURE__*/_react.default.createElement(_ui.IconEdit16, null), _index.default.t('Edit')))), /*#__PURE__*/_react.default.createElement("div", {
-      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + ((0, _classnames.default)('group', 'nowrap', 'typeGroup') || "")
-    }, /*#__PURE__*/_react.default.createElement("span", {
-      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "type"
-    }, dimensionType), /*#__PURE__*/_react.default.createElement("span", {
-      ref: node => {
-        node ? itemsRef.current.set(value, node) : itemsRef.current.delete(value);
+  const renderContent = () => /*#__PURE__*/_react.default.createElement("div", {
+    "data-test": `${dataTest}-content`,
+    onClick: event => {
+      if (disabled) {
+        return;
       }
-      // avoid moving items when toggling the info popover
-      // sometimes a double click event is fired
-      ,
-      onDoubleClick: e => e.stopPropagation(),
-      onClick: e => {
-        e.stopPropagation();
-        onInfoClick();
-      },
-      "data-test": `${dataTest}-info-button`,
-      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + ((0, _classnames.default)('info', {
-        active: showingInfo
-      }) || "")
-    }, /*#__PURE__*/_react.default.createElement(_ui.IconInfo16, null))), /*#__PURE__*/_react.default.createElement(_style.default, {
-      id: _TransferOptionStyle.default.__hash
-    }, _TransferOptionStyle.default));
-  };
+      onClick({
+        label,
+        value
+      }, event);
+    },
+    onDoubleClick: event => {
+      if (disabled) {
+        return;
+      }
+      onDoubleClick({
+        label,
+        value
+      }, event);
+    },
+    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + ((0, _classnames.default)('item', {
+      highlighted,
+      disabled,
+      selected,
+      inactive: active !== undefined && !active
+    }) || "")
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "labelGroup"
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "icon"
+  }, icon), /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "label"
+  }, label), dataItemType === _dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM &&
+  // XXX check needed?!
+  onEditClick && /*#__PURE__*/_react.default.createElement("span", {
+    onClick: e => {
+      e.stopPropagation();
+      onEditClick();
+    },
+    "data-test": `${dataTest}-edit-calculation-button`,
+    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "edit"
+  }, /*#__PURE__*/_react.default.createElement(_ui.IconEdit16, null)), optionSetId && /*#__PURE__*/_react.default.createElement("span", {
+    onClick: e => {
+      e.stopPropagation();
+      onEditClick();
+    },
+    "data-test": `${dataTest}-option-set-button`,
+    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "option-set-button"
+  }, /*#__PURE__*/_react.default.createElement(_ui.IconList16, null))), /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + ((0, _classnames.default)('group', 'nowrap', 'typeGroup') || "")
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "type"
+  }, dimensionType), ![_dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION, _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION].includes(dataItemType) && /*#__PURE__*/_react.default.createElement("span", {
+    ref: node => {
+      node ? itemsRef.current.set(value, node) : itemsRef.current.delete(value);
+    }
+    // avoid moving items when toggling the info popover
+    // sometimes a double click event is fired
+    ,
+    onDoubleClick: e => e.stopPropagation(),
+    onClick: e => {
+      e.stopPropagation();
+      onInfoClick();
+    },
+    "data-test": `${dataTest}-info-button`,
+    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + ((0, _classnames.default)('info', {
+      active: showingInfo
+    }) || "")
+  }, /*#__PURE__*/_react.default.createElement(_ui.IconInfo16, null))), /*#__PURE__*/_react.default.createElement(_style.default, {
+    id: _TransferOptionStyle.default.__hash
+  }, _TransferOptionStyle.default));
   return /*#__PURE__*/_react.default.createElement("div", {
     "data-value": value,
     "data-test": dataTest,
@@ -132,7 +121,6 @@ TransferOption.propTypes = {
   highlighted: _propTypes.default.bool,
   icon: _propTypes.default.node,
   itemsRef: _propTypes.default.object,
-  optionSet: _propTypes.default.object,
   optionSetId: _propTypes.default.string,
   selected: _propTypes.default.bool,
   showingInfo: _propTypes.default.bool,

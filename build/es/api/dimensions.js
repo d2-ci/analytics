@@ -1,5 +1,5 @@
 import objectClean from 'd2-utilizr/lib/objectClean';
-import { DIMENSION_TYPE_ALL, DIMENSION_TYPE_INDICATOR, DIMENSION_TYPE_DATA_ELEMENT, DIMENSION_TYPE_DATA_SET, DIMENSION_TYPE_PROGRAM_INDICATOR, DIMENSION_TYPE_EVENT_DATA_ITEM, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, TOTALS } from '../modules/dataTypes.js';
+import { DIMENSION_TYPE_ALL, DIMENSION_TYPE_INDICATOR, DIMENSION_TYPE_DATA_ELEMENT, DIMENSION_TYPE_DATA_SET, DIMENSION_TYPE_PROGRAM_INDICATOR, DIMENSION_TYPE_EVENT_DATA_ITEM, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION, TOTALS } from '../modules/dataTypes.js';
 import { onError } from './index.js';
 
 // Query definitions
@@ -45,6 +45,7 @@ export const dataItemsQuery = {
       searchTerm,
       page
     } = _ref3;
+    let fields = `id,${nameProp}~rename(name),dimensionItemType,expression,optionSetId`;
     const filters = [];
 
     // TODO: Extract all of this logic out of the query?
@@ -56,11 +57,26 @@ export const dataItemsQuery = {
     if (filter !== null && filter !== void 0 && filter.group && filter.group !== DIMENSION_TYPE_ALL && [DIMENSION_TYPE_EVENT_DATA_ITEM, DIMENSION_TYPE_PROGRAM_INDICATOR].includes(filter.dataType)) {
       filters.push(`programId:eq:${filter.group}`);
     }
+    if (filter !== null && filter !== void 0 && filter.dataItemId) {
+      // remove unnecessary fields
+      fields = `id,${nameProp}~rename(name),dimensionItemType`;
+      if (filter.dataType === DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION) {
+        // TODO enable when backend is ready
+        //filters.push(
+        //    `programDataElementId:eq:${filter.dataItemId}`
+        //)
+      } else if (filter.dataType === DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION) {
+        // TODO enable when backend is ready
+        //filters.push(
+        //    `programAttributeId:eq:${filter.dataItemId}`
+        //)
+      }
+    }
     if (searchTerm) {
       filters.push(`${nameProp}:ilike:${searchTerm}`);
     }
     return objectClean({
-      fields: `id,${nameProp}~rename(name),dimensionItemType,expression,optionSetId`,
+      fields,
       order: `${nameProp}:asc`,
       filter: filters,
       paging: true,

@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getIcon = exports.getDimensionType = void 0;
+var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _ui = require("@dhis2/ui");
 var _react = _interopRequireDefault(require("react"));
 var _DataElementIcon = _interopRequireDefault(require("../assets/DimensionItemIcons/DataElementIcon.js"));
@@ -29,6 +30,9 @@ const getDimensionType = _ref => {
     case _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT:
     case _dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE:
       return _dataTypes.dataTypeMap[_dataTypes.DIMENSION_TYPE_EVENT_DATA_ITEM].getItemName();
+    case _dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION:
+    case _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION:
+      return _d2I18n.default.t('Option');
     default:
       return (_dataTypes$type = _dataTypes.dataTypeMap[type]) === null || _dataTypes$type === void 0 ? void 0 : _dataTypes$type.getItemName();
   }
