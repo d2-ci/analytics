@@ -3,7 +3,7 @@ import { IconEdit16, IconInfo16, IconList16 } from '@dhis2/ui';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION } from '../../modules/dataTypes.js';
+import { DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT, DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION } from '../../modules/dataTypes.js';
 import styles from './styles/TransferOption.style.js';
 export const TransferOption = _ref => {
   let {
@@ -66,7 +66,7 @@ export const TransferOption = _ref => {
     },
     "data-test": `${dataTest}-edit-calculation-button`,
     className: `jsx-${styles.__hash}` + " " + "edit"
-  }, /*#__PURE__*/React.createElement(IconEdit16, null)), optionSetId && /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(IconEdit16, null)), [DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT].includes(dataItemType) && optionSetId && /*#__PURE__*/React.createElement("span", {
     onClick: e => {
       e.stopPropagation();
       onEditClick();

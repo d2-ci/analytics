@@ -73,7 +73,7 @@ const TransferOption = _ref => {
     },
     "data-test": `${dataTest}-edit-calculation-button`,
     className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "edit"
-  }, /*#__PURE__*/_react.default.createElement(_ui.IconEdit16, null)), optionSetId && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement(_ui.IconEdit16, null)), [_dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE, _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT].includes(dataItemType) && optionSetId && /*#__PURE__*/_react.default.createElement("span", {
     onClick: e => {
       e.stopPropagation();
       onEditClick();
