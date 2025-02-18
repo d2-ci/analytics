@@ -145,8 +145,6 @@ const ItemOptionsSelector = _ref => {
     const item = selectedItems.find(item => item.value === value);
     return !item || item.isActive;
   };
-
-  // TODO duplicated code in ItemSelector (move to DataDimension)
   return /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_DimensionSelectorStyle.default.__hash} jsx-${_ItemOptionSelectorStyle.default.__hash}` + " " + "transfer-container"
   }, /*#__PURE__*/_react.default.createElement(_ui.Transfer, {
@@ -187,14 +185,7 @@ const ItemOptionsSelector = _ref => {
       small: true
     }, _index.default.t('Back to all items'))), /*#__PURE__*/_react.default.createElement("div", {
       className: `jsx-${_DimensionSelectorStyle.default.__hash} jsx-${_ItemOptionSelectorStyle.default.__hash}` + " " + "option-set-name"
-    }, dataItemName, ": ", _index.default.t('Options')))
-    //                    <LeftHeader
-    //                        searchTerm={state.searchTerm}
-    //                        setSearchTerm={setSearchTerm}
-    //                        displayNameProp={displayNameProp}
-    //                        dataTest={`${dataTest}-left-header`}
-    //                    />
-    ,
+    }, dataItemName, ": ", _index.default.t('Options'))),
     rightHeader: /*#__PURE__*/_react.default.createElement("p", {
       className: `jsx-${_DimensionSelectorStyle.default.__hash} jsx-${_ItemOptionSelectorStyle.default.__hash}` + " " + "rightHeader"
     }, _index.default.t('Selected items')),
@@ -245,6 +236,7 @@ ItemOptionsSelector.propTypes = {
   selectedItems: _propTypes.default.arrayOf(_propTypes.default.exact({
     label: _propTypes.default.string.isRequired,
     value: _propTypes.default.string.isRequired,
+    access: _propTypes.default.object,
     isActive: _propTypes.default.bool,
     type: _propTypes.default.string,
     expression: _propTypes.default.string,

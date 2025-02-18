@@ -70,7 +70,7 @@ export const DynamicDimension = _ref => {
     checked: !allIsSelected,
     dataTest: 'dynamic-dimension-selection-type-manual'
   }))), !allIsSelected && /*#__PURE__*/React.createElement(ItemSelector, {
-    initialSelected: selectedItems.map(item => ({
+    selectedItems: selectedItems.map(item => ({
       value: item.id,
       label: item.name
     })),

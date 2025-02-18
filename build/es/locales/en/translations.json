@@ -137,7 +137,6 @@
     "Manually select items...": "Manually select items...",
     "Nothing found in {{- dimensionTitle}}": "Nothing found in {{- dimensionTitle}}",
     "Search": "Search",
-    "Nothing found for {{- searchTerm}}": "Nothing found for {{- searchTerm}}",
     "Delete {{fileType}}": "Delete {{fileType}}",
     "This {{fileType}} and related interpretations will be deleted. Continue?": "This {{fileType}} and related interpretations will be deleted. Continue?",
     "Delete": "Delete",

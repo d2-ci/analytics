@@ -408,6 +408,7 @@ ItemSelector.propTypes = {
   selectedItems: _propTypes.default.arrayOf(_propTypes.default.exact({
     label: _propTypes.default.string.isRequired,
     value: _propTypes.default.string.isRequired,
+    access: _propTypes.default.object,
     isActive: _propTypes.default.bool,
     type: _propTypes.default.string,
     expression: _propTypes.default.string,

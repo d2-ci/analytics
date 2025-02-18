@@ -136,8 +136,6 @@ export const ItemOptionsSelector = _ref => {
     const item = selectedItems.find(item => item.value === value);
     return !item || item.isActive;
   };
-
-  // TODO duplicated code in ItemSelector (move to DataDimension)
   return /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash} jsx-${itemOptionSelectorStyles.__hash}` + " " + "transfer-container"
   }, /*#__PURE__*/React.createElement(Transfer, {
@@ -178,14 +176,7 @@ export const ItemOptionsSelector = _ref => {
       small: true
     }, i18n.t('Back to all items'))), /*#__PURE__*/React.createElement("div", {
       className: `jsx-${styles.__hash} jsx-${itemOptionSelectorStyles.__hash}` + " " + "option-set-name"
-    }, dataItemName, ": ", i18n.t('Options')))
-    //                    <LeftHeader
-    //                        searchTerm={state.searchTerm}
-    //                        setSearchTerm={setSearchTerm}
-    //                        displayNameProp={displayNameProp}
-    //                        dataTest={`${dataTest}-left-header`}
-    //                    />
-    ,
+    }, dataItemName, ": ", i18n.t('Options'))),
     rightHeader: /*#__PURE__*/React.createElement("p", {
       className: `jsx-${styles.__hash} jsx-${itemOptionSelectorStyles.__hash}` + " " + "rightHeader"
     }, i18n.t('Selected items')),
@@ -235,6 +226,7 @@ ItemOptionsSelector.propTypes = {
   selectedItems: PropTypes.arrayOf(PropTypes.exact({
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
+    access: PropTypes.object,
     isActive: PropTypes.bool,
     type: PropTypes.string,
     expression: PropTypes.string,
