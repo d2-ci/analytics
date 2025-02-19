@@ -119,7 +119,7 @@ const DataDimension = _ref => {
     onClose: () => setCurrentDataItem(),
     onEditClick: onEditClick
   })), infoDataItem && /*#__PURE__*/React.createElement(InfoPopover, {
-    dataTest: 'data-dimension-item-info',
+    dataTest: 'data-dimension-info',
     item: infoDataItem,
     reference: itemsRef.current.get(infoDataItem.id),
     onClose: () => setInfoDataItem(),
