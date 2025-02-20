@@ -249,6 +249,7 @@ const ItemSelector = _ref5 => {
       filter: state.filter,
       searchTerm: state.searchTerm
     });
+    console.log('jj fetchItems result', result);
     const newOptions = [];
     (_result$dimensionItem = result.dimensionItems) === null || _result$dimensionItem === void 0 ? void 0 : _result$dimensionItem.forEach(item => {
       if (item.dimensionItemType === REPORTING_RATE) {
@@ -282,6 +283,10 @@ const ItemSelector = _ref5 => {
         });
       }
     });
+    console.log('jj now setState with newOptions', {
+      newOptions,
+      np: result.nextPage
+    });
     setState(state => ({
       ...state,
       loading: false,
@@ -298,6 +303,7 @@ const ItemSelector = _ref5 => {
         selected items than fetched items AND all fetched items are already selected -> fetch more!
     */
     if (result.nextPage && newOptions.length && selectedItems.length >= newOptions.length && newOptions.every(newOption => selectedItems.find(selectedItem => selectedItem.value === newOption.value))) {
+      console.log('jj fetchItems in very special case with page', result.nextPage);
       fetchItems(result.nextPage);
     }
   };
@@ -350,6 +356,7 @@ const ItemSelector = _ref5 => {
     setCurrentCalculation();
 
     // reload the list of options
+    console.log('jj onSaveCalc');
     fetchItems(1);
     if (isNew) {
       // select the new calculation
@@ -369,6 +376,7 @@ const ItemSelector = _ref5 => {
     setCurrentCalculation();
 
     // reload the list of options
+    console.log('jj onDeleteCalc');
     fetchItems(1);
 
     // unselect the deleted calculation
@@ -400,6 +408,7 @@ const ItemSelector = _ref5 => {
       subGroup: dataType === DIMENSION_TYPE_DATA_ELEMENT ? TOTALS : null
     }
   }));
+  console.log('jj render transfer component with state', state);
   return /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "transfer-container"
   }, /*#__PURE__*/React.createElement(Transfer, {
