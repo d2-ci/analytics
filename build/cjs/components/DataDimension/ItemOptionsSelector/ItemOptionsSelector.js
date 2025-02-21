@@ -215,7 +215,7 @@ const ItemOptionsSelector = _ref => {
         /* eslint-enable react/prop-types */
       }));
     },
-    dataTest: `${dataTest}-transfer`
+    dataTest: `${dataTest}-option-view-mode-transfer`
   }), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _DimensionSelectorStyle.default.__hash
   }, _DimensionSelectorStyle.default), /*#__PURE__*/_react.default.createElement(_style.default, {

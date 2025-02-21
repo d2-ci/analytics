@@ -206,7 +206,7 @@ export const ItemOptionsSelector = _ref => {
         /* eslint-enable react/prop-types */
       }));
     },
-    dataTest: `${dataTest}-transfer`
+    dataTest: `${dataTest}-option-view-mode-transfer`
   }), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles), /*#__PURE__*/React.createElement(_JSXStyle, {
