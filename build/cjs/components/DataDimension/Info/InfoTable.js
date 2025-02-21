@@ -186,7 +186,7 @@ const InfoTable = _ref4 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Created date')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, `${(0, _moment.default)(fromServerDate(data.created)).fromNow()} (${(0, _moment.default)(fromServerDate(data.created)).format('YYYY-MM-DD')})`)), /*#__PURE__*/_react.default.createElement("tr", {
+  }, `${(0, _moment.default)(fromServerDate(data.created)).fromNow()} (${(0, _moment.default)(fromServerDate(data.created)).format('YYYY-MM-DD')})`)), data.createdBy && /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`

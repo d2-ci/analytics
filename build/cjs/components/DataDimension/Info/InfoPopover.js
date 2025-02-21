@@ -16,6 +16,7 @@ var _DataElementOperandInfo = require("./DataElementOperandInfo.js");
 var _DataSetInfo = require("./DataSetInfo.js");
 var _EventDataItemInfo = require("./EventDataItemInfo.js");
 var _IndicatorInfo = require("./IndicatorInfo.js");
+var _OptionInfo = require("./OptionInfo.js");
 var _ProgramIndicatorInfo = require("./ProgramIndicatorInfo.js");
 var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -44,7 +45,7 @@ const InfoPopover = _ref => {
   }, /*#__PURE__*/_react.default.createElement("div", {
     "data-test": `${dataTest}-table`,
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "popover"
-  }, type === _dataTypes.DIMENSION_TYPE_DATA_ELEMENT && /*#__PURE__*/_react.default.createElement(_DataElementInfo.DataElementInfo, infoProps), type === _dataTypes.DIMENSION_TYPE_DATA_ELEMENT_OPERAND && /*#__PURE__*/_react.default.createElement(_DataElementOperandInfo.DataElementOperandInfo, infoProps), type === _dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM && /*#__PURE__*/_react.default.createElement(_CalculationInfo.CalculationInfo, infoProps), type === _dataSets.REPORTING_RATE /* TODO: verify this! */ && /*#__PURE__*/_react.default.createElement(_DataSetInfo.DataSetInfo, infoProps), type === _dataTypes.DIMENSION_TYPE_INDICATOR && /*#__PURE__*/_react.default.createElement(_IndicatorInfo.IndicatorInfo, infoProps), [_dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE, _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT].includes(type) && /*#__PURE__*/_react.default.createElement(_EventDataItemInfo.EventDataItemInfo, infoProps), type === _dataTypes.DIMENSION_TYPE_PROGRAM_INDICATOR && /*#__PURE__*/_react.default.createElement(_ProgramIndicatorInfo.ProgramIndicatorInfo, infoProps))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, type === _dataTypes.DIMENSION_TYPE_DATA_ELEMENT && /*#__PURE__*/_react.default.createElement(_DataElementInfo.DataElementInfo, infoProps), type === _dataTypes.DIMENSION_TYPE_DATA_ELEMENT_OPERAND && /*#__PURE__*/_react.default.createElement(_DataElementOperandInfo.DataElementOperandInfo, infoProps), type === _dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM && /*#__PURE__*/_react.default.createElement(_CalculationInfo.CalculationInfo, infoProps), type === _dataSets.REPORTING_RATE /* TODO: verify this! */ && /*#__PURE__*/_react.default.createElement(_DataSetInfo.DataSetInfo, infoProps), type === _dataTypes.DIMENSION_TYPE_INDICATOR && /*#__PURE__*/_react.default.createElement(_IndicatorInfo.IndicatorInfo, infoProps), [_dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE, _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT].includes(type) && /*#__PURE__*/_react.default.createElement(_EventDataItemInfo.EventDataItemInfo, infoProps), type === _dataTypes.DIMENSION_TYPE_PROGRAM_INDICATOR && /*#__PURE__*/_react.default.createElement(_ProgramIndicatorInfo.ProgramIndicatorInfo, infoProps), [_dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION, _dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION].includes(type) && /*#__PURE__*/_react.default.createElement(_OptionInfo.OptionInfo, infoProps))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };

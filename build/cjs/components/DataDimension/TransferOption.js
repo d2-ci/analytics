@@ -84,7 +84,7 @@ const TransferOption = _ref => {
     className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + ((0, _classnames.default)('group', 'nowrap', 'typeGroup') || "")
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "type"
-  }, dimensionType), ![_dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION, _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION].includes(dataItemType) && /*#__PURE__*/_react.default.createElement("span", {
+  }, dimensionType), /*#__PURE__*/_react.default.createElement("span", {
     ref: node => {
       node ? itemsRef.current.set(value, node) : itemsRef.current.delete(value);
     }

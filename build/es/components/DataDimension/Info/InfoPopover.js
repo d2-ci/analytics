@@ -7,15 +7,16 @@ import { DIMENSION_TYPE_DATA_ELEMENT, DIMENSION_TYPE_DATA_ELEMENT_OPERAND, DIMEN
 // calculation
 DIMENSION_TYPE_INDICATOR, DIMENSION_TYPE_PROGRAM_ATTRIBUTE,
 // event data items
-DIMENSION_TYPE_PROGRAM_DATA_ELEMENT,
+DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT,
 // event data items
-DIMENSION_TYPE_PROGRAM_INDICATOR } from '../../../modules/dataTypes.js';
+DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION, DIMENSION_TYPE_PROGRAM_INDICATOR } from '../../../modules/dataTypes.js';
 import { CalculationInfo } from './CalculationInfo.js';
 import { DataElementInfo } from './DataElementInfo.js';
 import { DataElementOperandInfo } from './DataElementOperandInfo.js';
 import { DataSetInfo } from './DataSetInfo.js';
 import { EventDataItemInfo } from './EventDataItemInfo.js';
 import { IndicatorInfo } from './IndicatorInfo.js';
+import { OptionInfo } from './OptionInfo.js';
 import { ProgramIndicatorInfo } from './ProgramIndicatorInfo.js';
 import styles from './styles/InfoPopover.style.js';
 export const InfoPopover = _ref => {
@@ -41,7 +42,7 @@ export const InfoPopover = _ref => {
   }, /*#__PURE__*/React.createElement("div", {
     "data-test": `${dataTest}-table`,
     className: `jsx-${styles.__hash}` + " " + "popover"
-  }, type === DIMENSION_TYPE_DATA_ELEMENT && /*#__PURE__*/React.createElement(DataElementInfo, infoProps), type === DIMENSION_TYPE_DATA_ELEMENT_OPERAND && /*#__PURE__*/React.createElement(DataElementOperandInfo, infoProps), type === DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM && /*#__PURE__*/React.createElement(CalculationInfo, infoProps), type === REPORTING_RATE /* TODO: verify this! */ && /*#__PURE__*/React.createElement(DataSetInfo, infoProps), type === DIMENSION_TYPE_INDICATOR && /*#__PURE__*/React.createElement(IndicatorInfo, infoProps), [DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT].includes(type) && /*#__PURE__*/React.createElement(EventDataItemInfo, infoProps), type === DIMENSION_TYPE_PROGRAM_INDICATOR && /*#__PURE__*/React.createElement(ProgramIndicatorInfo, infoProps))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, type === DIMENSION_TYPE_DATA_ELEMENT && /*#__PURE__*/React.createElement(DataElementInfo, infoProps), type === DIMENSION_TYPE_DATA_ELEMENT_OPERAND && /*#__PURE__*/React.createElement(DataElementOperandInfo, infoProps), type === DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM && /*#__PURE__*/React.createElement(CalculationInfo, infoProps), type === REPORTING_RATE /* TODO: verify this! */ && /*#__PURE__*/React.createElement(DataSetInfo, infoProps), type === DIMENSION_TYPE_INDICATOR && /*#__PURE__*/React.createElement(IndicatorInfo, infoProps), [DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT].includes(type) && /*#__PURE__*/React.createElement(EventDataItemInfo, infoProps), type === DIMENSION_TYPE_PROGRAM_INDICATOR && /*#__PURE__*/React.createElement(ProgramIndicatorInfo, infoProps), [DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION, DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION].includes(type) && /*#__PURE__*/React.createElement(OptionInfo, infoProps))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

@@ -3,7 +3,7 @@ import { IconEdit16, IconInfo16, IconList16 } from '@dhis2/ui';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT, DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION } from '../../modules/dataTypes.js';
+import { DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT } from '../../modules/dataTypes.js';
 import styles from './styles/TransferOption.style.js';
 export const TransferOption = _ref => {
   let {
@@ -77,7 +77,7 @@ export const TransferOption = _ref => {
     className: `jsx-${styles.__hash}` + " " + (cx('group', 'nowrap', 'typeGroup') || "")
   }, /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "type"
-  }, dimensionType), ![DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION].includes(dataItemType) && /*#__PURE__*/React.createElement("span", {
+  }, dimensionType), /*#__PURE__*/React.createElement("span", {
     ref: node => {
       node ? itemsRef.current.set(value, node) : itemsRef.current.delete(value);
     }

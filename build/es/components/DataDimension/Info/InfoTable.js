@@ -173,7 +173,7 @@ export const InfoTable = _ref4 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Created date')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, `${moment(fromServerDate(data.created)).fromNow()} (${moment(fromServerDate(data.created)).format('YYYY-MM-DD')})`)), /*#__PURE__*/React.createElement("tr", {
+  }, `${moment(fromServerDate(data.created)).fromNow()} (${moment(fromServerDate(data.created)).format('YYYY-MM-DD')})`)), data.createdBy && /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
