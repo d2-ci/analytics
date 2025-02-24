@@ -182,7 +182,8 @@ const ItemOptionsSelector = _ref => {
     }, /*#__PURE__*/_react.default.createElement(_ui.Button, {
       onClick: onClose,
       icon: /*#__PURE__*/_react.default.createElement(_ui.IconArrowLeft16, null),
-      small: true
+      small: true,
+      dataTest: `${dataTest}-option-set-back-button`
     }, _index.default.t('Back to all items'))), /*#__PURE__*/_react.default.createElement("div", {
       className: `jsx-${_DimensionSelectorStyle.default.__hash} jsx-${_ItemOptionSelectorStyle.default.__hash}` + " " + "option-set-name"
     }, dataItemName, ": ", _index.default.t('Options'))),

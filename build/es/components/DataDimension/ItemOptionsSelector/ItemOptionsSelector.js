@@ -173,7 +173,8 @@ export const ItemOptionsSelector = _ref => {
     }, /*#__PURE__*/React.createElement(Button, {
       onClick: onClose,
       icon: /*#__PURE__*/React.createElement(IconArrowLeft16, null),
-      small: true
+      small: true,
+      dataTest: `${dataTest}-option-set-back-button`
     }, i18n.t('Back to all items'))), /*#__PURE__*/React.createElement("div", {
       className: `jsx-${styles.__hash} jsx-${itemOptionSelectorStyles.__hash}` + " " + "option-set-name"
     }, dataItemName, ": ", i18n.t('Options'))),
