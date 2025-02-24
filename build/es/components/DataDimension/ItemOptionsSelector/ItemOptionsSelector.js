@@ -153,7 +153,8 @@ export const ItemOptionsSelector = _ref => {
       loading: state.loading,
       searchTerm: debouncedSearchTerm,
       options: state.options,
-      noItemsMessage: state.options.length ? i18n.t('All available options are already selected') : i18n.t('No available options for this item'),
+      allItemsSelectedMessage: i18n.t('All available options are already selected'),
+      noItemsMessage: i18n.t('No available options for this item'),
       dataType: state.filter.dataType,
       dataTest: `${dataTest}-empty-source`
     }),

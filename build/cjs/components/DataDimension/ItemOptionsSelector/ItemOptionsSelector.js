@@ -162,7 +162,8 @@ const ItemOptionsSelector = _ref => {
       loading: state.loading,
       searchTerm: debouncedSearchTerm,
       options: state.options,
-      noItemsMessage: state.options.length ? _index.default.t('All available options are already selected') : _index.default.t('No available options for this item'),
+      allItemsSelectedMessage: _index.default.t('All available options are already selected'),
+      noItemsMessage: _index.default.t('No available options for this item'),
       dataType: state.filter.dataType,
       dataTest: `${dataTest}-empty-source`
     }),

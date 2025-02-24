@@ -16,12 +16,15 @@ const SourceEmptyPlaceholder = _ref => {
     loading,
     searchTerm,
     options,
+    allItemsSelectedMessage,
     noItemsMessage,
     dataType,
     dataTest
   } = _ref;
   let message = '';
-  if (!loading && !options.length && !searchTerm) {
+  if (!loading && options.length && !searchTerm) {
+    message = allItemsSelectedMessage || _d2I18n.default.t('All available items are already selected');
+  } else if (!loading && !options.length && !searchTerm) {
     if (noItemsMessage) {
       message = noItemsMessage;
     } else {
@@ -97,6 +100,7 @@ const SourceEmptyPlaceholder = _ref => {
 };
 exports.SourceEmptyPlaceholder = SourceEmptyPlaceholder;
 SourceEmptyPlaceholder.propTypes = {
+  allItemsSelectedMessage: _propTypes.default.string,
   dataTest: _propTypes.default.string,
   dataType: _propTypes.default.string,
   loading: _propTypes.default.bool,

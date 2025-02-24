@@ -9,12 +9,15 @@ export const SourceEmptyPlaceholder = _ref => {
     loading,
     searchTerm,
     options,
+    allItemsSelectedMessage,
     noItemsMessage,
     dataType,
     dataTest
   } = _ref;
   let message = '';
-  if (!loading && !options.length && !searchTerm) {
+  if (!loading && options.length && !searchTerm) {
+    message = allItemsSelectedMessage || i18n.t('All available items are already selected');
+  } else if (!loading && !options.length && !searchTerm) {
     if (noItemsMessage) {
       message = noItemsMessage;
     } else {
@@ -89,6 +92,7 @@ export const SourceEmptyPlaceholder = _ref => {
   }, styles));
 };
 SourceEmptyPlaceholder.propTypes = {
+  allItemsSelectedMessage: PropTypes.string,
   dataTest: PropTypes.string,
   dataType: PropTypes.string,
   loading: PropTypes.bool,
