@@ -1,7 +1,7 @@
 import numberDecimals from 'd2-utilizr/lib/numberDecimals';
 import { isTwoCategoryChartType } from '../../../../modules/visTypes.js';
 import getTwoCategorySplitSerieData from './getTwoCategorySplitSerieData.js';
-export function getDefaultCumulativeData(series) {
+function getDefaultCumulativeData(series) {
   let decimals;
   let accValue;
   let accData;
@@ -26,7 +26,7 @@ export function getDefaultCumulativeData(series) {
   });
   return series;
 }
-export function getTwoCategoryCumulativeData(series) {
+function getTwoCategoryCumulativeData(series) {
   let decimals;
   let accValue;
   let accSeriesData;

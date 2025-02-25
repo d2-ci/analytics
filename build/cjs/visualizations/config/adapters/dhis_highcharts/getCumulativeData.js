@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = _default;
-exports.getDefaultCumulativeData = getDefaultCumulativeData;
-exports.getTwoCategoryCumulativeData = getTwoCategoryCumulativeData;
 var _numberDecimals = _interopRequireDefault(require("d2-utilizr/lib/numberDecimals"));
 var _visTypes = require("../../../../modules/visTypes.js");
 var _getTwoCategorySplitSerieData = _interopRequireDefault(require("./getTwoCategorySplitSerieData.js"));

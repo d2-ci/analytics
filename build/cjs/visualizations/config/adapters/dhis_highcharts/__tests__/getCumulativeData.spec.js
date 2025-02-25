@@ -1,6 +1,8 @@
 "use strict";
 
-var _getCumulativeData = require("../getCumulativeData.js");
+var _visTypes = require("../../../../../modules/visTypes.js");
+var _getCumulativeData = _interopRequireDefault(require("../getCumulativeData.js"));
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const testData = [{
   data: [1, 1, 1],
   accData: [1, 2, 3]
@@ -29,7 +31,7 @@ describe('getDefaultCumulativeData', () => {
   }];
   test('series get correct cumulative values', () => {
     testData.forEach(test => {
-      expect((0, _getCumulativeData.getDefaultCumulativeData)(getDefaultSeries(test, 'data'))).toEqual(getDefaultSeries(test, 'accData'));
+      expect((0, _getCumulativeData.default)(getDefaultSeries(test, 'data'), {})).toEqual(getDefaultSeries(test, 'accData'));
     });
   });
 });
@@ -40,9 +42,13 @@ describe('getTwoCategoryCumulativeData', () => {
       data: [test[prop]]
     }
   }];
+  const layout = {
+    type: _visTypes.VIS_TYPE_COLUMN,
+    rows: [{}, {}]
+  };
   test('series get correct cumulative values', () => {
     testData.forEach(test => {
-      expect((0, _getCumulativeData.getTwoCategoryCumulativeData)(getTwoCategorySeries(test, 'data'))).toEqual(getTwoCategorySeries(test, 'accData'));
+      expect((0, _getCumulativeData.default)(getTwoCategorySeries(test, 'data'), layout)).toEqual(getTwoCategorySeries(test, 'accData'));
     });
   });
 });
