@@ -2,6 +2,7 @@ import _JSXStyle from "styled-jsx/style";
 import { useDataQuery } from '@dhis2/app-runtime';
 import PropTypes from 'prop-types';
 import React from 'react';
+import i18n from '../../../locales/index.js';
 import { getCommonFields, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
 const optionQuery = {
@@ -18,7 +19,7 @@ const optionQuery = {
         displayNameProp
       } = _ref2;
       return {
-        fields: getCommonFields(displayNameProp)
+        fields: `${getCommonFields(displayNameProp)},optionSet[displayName]`
       };
     }
   }
@@ -44,7 +45,13 @@ export const OptionInfo = _ref3 => {
     data: data === null || data === void 0 ? void 0 : data.option,
     loading: loading,
     error: error
-  }), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, (data === null || data === void 0 ? void 0 : data.option.optionSet) && /*#__PURE__*/React.createElement("tr", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, i18n.t('Option set')), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, data.option.optionSet.displayName))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };
