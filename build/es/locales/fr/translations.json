@@ -2,7 +2,7 @@
     "view only": "",
     "view and edit": "",
     "all users ({{accessLevel}})": "",
-    "{{userOrGroup}} ({{accessLevel}})": "",
+    "{{userOrGroup}} ({{accessLevel}})": "{{userOrGroup}} ({{accessLevel}})",
     "Shared with {{commaSeparatedListOfUsersAndGroups}}": "",
     "Not shared with any users or groups": "",
     "No description": "Aucune description",
