@@ -310,13 +310,19 @@ const ItemSelector = _ref4 => {
       return onChange(selected);
     },
     selected: selectedItems.map(item => item.value),
-    options: [...state.options, ...selectedItems],
+    options: [...state.options,
+    // remove items already in the options list
+    ...selectedItems.filter(selectedItem => {
+      var _state$options;
+      return !((_state$options = state.options) !== null && _state$options !== void 0 && _state$options.find(option => option.value === selectedItem.value));
+    })],
     loading: state.loading,
     loadingPicked: state.loading,
     sourceEmptyPlaceholder: /*#__PURE__*/React.createElement(SourceEmptyPlaceholder, {
       loading: state.loading,
       searchTerm: debouncedSearchTerm,
       options: state.options,
+      allItemsSelectedMessage: state.options.length === selectedItems.length && !state.nextPage ? i18n.t('All available items are already selected') : '',
       noItemsMessage: noItemsMessage,
       dataType: state.filter.dataType,
       dataTest: `${dataTest}-empty-source`

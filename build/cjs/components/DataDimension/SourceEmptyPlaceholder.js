@@ -22,8 +22,8 @@ const SourceEmptyPlaceholder = _ref => {
     dataTest
   } = _ref;
   let message = '';
-  if (!loading && options.length && !searchTerm) {
-    message = allItemsSelectedMessage || _d2I18n.default.t('All available items are already selected');
+  if (allItemsSelectedMessage && !loading && options.length && !searchTerm) {
+    message = allItemsSelectedMessage;
   } else if (!loading && !options.length && !searchTerm) {
     if (noItemsMessage) {
       message = noItemsMessage;
