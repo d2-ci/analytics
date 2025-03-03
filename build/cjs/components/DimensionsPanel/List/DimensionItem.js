@@ -70,9 +70,11 @@ class DimensionItem extends _react.Component {
       className,
       ...rest
     } = this.props;
-    if (id === 'l22lYYsT2pP') {
-      console.log('DimensionItem render with props', this.props);
-    }
+
+    // if (id === 'l22lYYsT2pP') {
+    console.log('DimensionItem render with props', this.props);
+    // }
+
     const Icon = this.getDimensionIcon();
     const Label = this.getDimensionType();
     const optionsRef = /*#__PURE__*/(0, _react.createRef)();
