@@ -67,14 +67,11 @@ class DimensionItem extends _react.Component {
       onOptionsClick,
       innerRef,
       dataTest,
-      className,
       ...rest
     } = this.props;
-
-    // if (id === 'l22lYYsT2pP') {
-    console.log('DimensionItem render with props', this.props);
-    // }
-
+    if (id === 'l22lYYsT2pP') {
+      console.log('jj DimensionItem render with props', this.props);
+    }
     const Icon = this.getDimensionIcon();
     const Label = this.getDimensionType();
     const optionsRef = /*#__PURE__*/(0, _react.createRef)();
@@ -112,7 +109,7 @@ class DimensionItem extends _react.Component {
       className: `jsx-${_DimensionItemStyle.default.__hash}` + " " + (rest && rest.className != null && rest.className || (0, _classnames.default)('item', {
         deactivated: isDeactivated,
         selected: isSelected && !isDeactivated
-      }, className) || "")
+      }) || "")
     }), /*#__PURE__*/_react.default.createElement("div", {
       tabIndex: 0,
       "data-test": `${dataTest}-button-${id}`,
@@ -142,7 +139,6 @@ DimensionItem.propTypes = {
   isSelected: _propTypes.default.bool.isRequired,
   // XXX
   name: _propTypes.default.string.isRequired,
-  className: _propTypes.default.string,
   dataTest: _propTypes.default.string,
   innerRef: _propTypes.default.func,
   isDeactivated: _propTypes.default.bool,
