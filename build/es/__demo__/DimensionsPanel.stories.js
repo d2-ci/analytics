@@ -13,13 +13,16 @@ const fixedDimensions = [{
 }];
 const dynamicDimensions = [{
   id: '0000001',
-  name: 'One'
+  name: 'Dietary diversity score based on variety of consumed food groups over a weekly period'
 }, {
   id: '0000002',
-  name: 'Two'
+  name: 'Healthcare services access and utilization frequency including preventive check-ups and specialist care'
 }, {
   id: '0000003',
-  name: 'Three'
+  name: 'Sleep quality index incorporating duration, time to sleep, frequency of awakenings, and restfulness'
+}, {
+  id: '0000004',
+  name: 'Malaria incidence rate'
 }];
 const onDimensionClick = () => alert('click');
 export default {
@@ -105,4 +108,25 @@ export const WithMenu = () => {
 };
 WithMenu.story = {
   name: 'with menu'
+};
+export const TextWrapping = () => {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: '260px',
+      height: '400px',
+      borderInlineEnd: '1px dotted #CCC',
+      resize: 'both',
+      overflow: 'auto'
+    }
+  }, /*#__PURE__*/React.createElement(DimensionsPanel, {
+    dimensions: [...fixedDimensions, ...dynamicDimensions],
+    onDimensionClick: onDimensionClick,
+    onDimensionOptionsClick: () => alert('options click'),
+    recommendedDimension: dimension => dimension === '0000002',
+    lockedDimension: dimension => dimension === '0000003',
+    selectedIds: ['0000003', '0000002']
+  }));
+};
+TextWrapping.story = {
+  name: 'text wrapping'
 };
