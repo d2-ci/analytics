@@ -47,6 +47,9 @@ const ProgramIndicatorInfo = _ref3 => {
   const [getHumanReadableExpression] = (0, _appRuntime.useDataMutation)(_expression.validateProgramIndicatorExpressionMutation, {
     onError: setError
   });
+  const [getHumanReadableFilter] = (0, _appRuntime.useDataMutation)(_expression.validateProgramIndicatorFilterMutation, {
+    onError: setError
+  });
   const fetchData = (0, _react.useCallback)(async () => {
     const {
       programIndicator
@@ -66,8 +69,8 @@ const ProgramIndicatorInfo = _ref3 => {
       }
     }
     if (programIndicator.filter) {
-      const result = await getHumanReadableExpression({
-        expression: programIndicator.filter
+      const result = await getHumanReadableFilter({
+        filter: programIndicator.filter
       });
       if (result) {
         programIndicator.humanReadableFilter = result;
@@ -83,7 +86,7 @@ const ProgramIndicatorInfo = _ref3 => {
       programIndicator
     });
     setLoading(false);
-  }, [displayNameProp, engine, id, getHumanReadableExpression]);
+  }, [displayNameProp, engine, id, getHumanReadableExpression, getHumanReadableFilter]);
   (0, _react.useEffect)(() => {
     fetchData();
   }, [fetchData]);

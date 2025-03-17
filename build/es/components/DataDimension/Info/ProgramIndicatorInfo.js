@@ -2,7 +2,7 @@ import _JSXStyle from "styled-jsx/style";
 import { useDataMutation, useDataEngine } from '@dhis2/app-runtime';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
-import { validateProgramIndicatorExpressionMutation } from '../../../api/expression.js';
+import { validateProgramIndicatorExpressionMutation, validateProgramIndicatorFilterMutation } from '../../../api/expression.js';
 import i18n from '../../../locales/index.js';
 import { getCommonFields, renderHumanReadableExpression, renderLegendSets, sentenceCaseText, InfoTable } from './InfoTable.js';
 import styles from './styles/InfoPopover.style.js';
@@ -38,6 +38,9 @@ export const ProgramIndicatorInfo = _ref3 => {
   const [getHumanReadableExpression] = useDataMutation(validateProgramIndicatorExpressionMutation, {
     onError: setError
   });
+  const [getHumanReadableFilter] = useDataMutation(validateProgramIndicatorFilterMutation, {
+    onError: setError
+  });
   const fetchData = useCallback(async () => {
     const {
       programIndicator
@@ -57,8 +60,8 @@ export const ProgramIndicatorInfo = _ref3 => {
       }
     }
     if (programIndicator.filter) {
-      const result = await getHumanReadableExpression({
-        expression: programIndicator.filter
+      const result = await getHumanReadableFilter({
+        filter: programIndicator.filter
       });
       if (result) {
         programIndicator.humanReadableFilter = result;
@@ -74,7 +77,7 @@ export const ProgramIndicatorInfo = _ref3 => {
       programIndicator
     });
     setLoading(false);
-  }, [displayNameProp, engine, id, getHumanReadableExpression]);
+  }, [displayNameProp, engine, id, getHumanReadableExpression, getHumanReadableFilter]);
   useEffect(() => {
     fetchData();
   }, [fetchData]);
