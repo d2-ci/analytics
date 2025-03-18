@@ -122,6 +122,7 @@
     "No program indicators found for \"{{- searchTerm}}\"": "No program indicators found for \"{{- searchTerm}}\"",
     "No calculations found for \"{{- searchTerm}}\"": "No calculations found for \"{{- searchTerm}}\"",
     "Nothing found for \"{{- searchTerm}}\"": "Nothing found for \"{{- searchTerm}}\"",
+    "Click to choose from available options": "Click to choose from available options",
     "Move to {{axisName}}": "Move to {{axisName}}",
     "Add to {{axisName}}": "Add to {{axisName}}",
     "Not available for {{visualizationType}}": "Not available for {{visualizationType}}",

@@ -90,7 +90,7 @@ export const CalculationInfo = _ref3 => {
   }, styles));
 };
 CalculationInfo.propTypes = {
-  displayNameProp: PropTypes.string,
-  id: PropTypes.string,
-  type: PropTypes.string
+  displayNameProp: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 };

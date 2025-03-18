@@ -129,7 +129,7 @@ const DataElementInfo = _ref3 => {
 };
 exports.DataElementInfo = DataElementInfo;
 DataElementInfo.propTypes = {
-  displayNameProp: _propTypes.default.string,
-  id: _propTypes.default.string,
-  type: _propTypes.default.string
+  displayNameProp: _propTypes.default.string.isRequired,
+  id: _propTypes.default.string.isRequired,
+  type: _propTypes.default.string.isRequired
 };

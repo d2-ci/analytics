@@ -1,7 +1,7 @@
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 import { useConfig } from '@dhis2/app-runtime';
 import PropTypes from 'prop-types';
-import React, { createContext, useContext, useCallback, useEffect, useRef, useState } from 'react';
+import React, { createContext, useContext, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { dataTypeMap, DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM } from '../../modules/dataTypes.js';
 import { DIMENSION_ID_DATA } from '../../modules/predefinedDimensions.js';
 import { InfoPopover } from './Info/InfoPopover.js';
@@ -42,6 +42,15 @@ const DataDimension = _ref => {
   const [currentCalculation, setCurrentCalculation] = useState();
   const [currentDataItem, setCurrentDataItem] = useState();
   const [infoDataItem, setInfoDataItem] = useState();
+  const selectedItems = useMemo(() => selectedDimensions.map(item => ({
+    value: item.id,
+    label: item.name,
+    isActive: item.isActive,
+    type: item.type,
+    optionSetId: item.optionSetId,
+    expression: item.expression,
+    access: item.access
+  })), [selectedDimensions]);
   const onSelectItems = selectedItem => onSelect({
     dimensionId: DIMENSION_ID_DATA,
     items: selectedItem.map(item => ({
@@ -77,15 +86,7 @@ const DataDimension = _ref => {
       currentUser
     }
   }, /*#__PURE__*/React.createElement(ItemSelector, {
-    selectedItems: selectedDimensions.map(item => ({
-      value: item.id,
-      label: item.name,
-      isActive: item.isActive,
-      type: item.type,
-      optionSetId: item.optionSetId,
-      expression: item.expression,
-      access: item.access
-    })),
+    selectedItems: selectedItems,
     onSelect: onSelectItems,
     displayNameProp: displayNameProp,
     infoBoxMessage: infoBoxMessage,
@@ -101,15 +102,7 @@ const DataDimension = _ref => {
     setInfoDataItem: setInfoDataItem,
     onEditClick: onEditClick
   }), currentDataItem && /*#__PURE__*/React.createElement(ItemOptionsSelector, _extends({}, currentDataItem, {
-    selectedItems: selectedDimensions.map(item => ({
-      value: item.id,
-      label: item.name,
-      isActive: item.isActive,
-      type: item.type,
-      optionSetId: item.optionSetId,
-      expression: item.expression,
-      access: item.access
-    })),
+    selectedItems: selectedItems,
     onSelect: onSelectItems,
     displayNameProp: displayNameProp,
     dataTest: 'data-dimension',

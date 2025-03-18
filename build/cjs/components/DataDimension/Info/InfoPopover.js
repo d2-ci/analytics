@@ -51,9 +51,12 @@ const InfoPopover = _ref => {
 };
 exports.InfoPopover = InfoPopover;
 InfoPopover.propTypes = {
+  displayNameProp: _propTypes.default.string.isRequired,
+  item: _propTypes.default.shape({
+    id: _propTypes.default.string.isRequired,
+    type: _propTypes.default.string.isRequired
+  }).isRequired,
   dataTest: _propTypes.default.string,
-  displayNameProp: _propTypes.default.string,
-  item: _propTypes.default.object,
   reference: _propTypes.default.object,
   onClose: _propTypes.default.func
 };

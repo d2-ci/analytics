@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.TransferOption = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
+var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _ui = require("@dhis2/ui");
 var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -73,14 +74,30 @@ const TransferOption = _ref => {
     },
     "data-test": `${dataTest}-edit-calculation-button`,
     className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "edit"
-  }, /*#__PURE__*/_react.default.createElement(_ui.IconEdit16, null)), [_dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE, _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT].includes(dataItemType) && optionSetId && /*#__PURE__*/_react.default.createElement("span", {
-    onClick: e => {
-      e.stopPropagation();
-      onEditClick();
-    },
-    "data-test": `${dataTest}-option-set-button`,
-    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "option-set-button"
-  }, /*#__PURE__*/_react.default.createElement(_ui.IconList16, null))), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement(_ui.IconEdit16, null)), [_dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE, _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT].includes(dataItemType) && optionSetId && /*#__PURE__*/_react.default.createElement(_ui.Tooltip, {
+    "aria-label": "disabled",
+    content: _d2I18n.default.t('Click to choose from available options'),
+    openDelay: 500,
+    closeDelay: 0
+  }, _ref2 => {
+    let {
+      ref,
+      onMouseOver,
+      onMouseOut
+    } = _ref2;
+    return /*#__PURE__*/_react.default.createElement("span", {
+      ref: ref,
+      onMouseOver: onMouseOver,
+      onMouseOut: onMouseOut,
+      onClick: e => {
+        e.stopPropagation();
+        onMouseOut();
+        onEditClick();
+      },
+      "data-test": `${dataTest}-option-set-button`,
+      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "option-set-button"
+    }, /*#__PURE__*/_react.default.createElement(_ui.IconList16, null));
+  })), /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + ((0, _classnames.default)('group', 'nowrap', 'typeGroup') || "")
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "type"

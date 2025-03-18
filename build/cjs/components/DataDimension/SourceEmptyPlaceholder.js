@@ -99,6 +99,9 @@ const SourceEmptyPlaceholder = _ref => {
   }, _EmptyPlaceholderStyle.default));
 };
 exports.SourceEmptyPlaceholder = SourceEmptyPlaceholder;
+SourceEmptyPlaceholder.defaultProps = {
+  options: []
+};
 SourceEmptyPlaceholder.propTypes = {
   allItemsSelectedMessage: _propTypes.default.string,
   dataTest: _propTypes.default.string,

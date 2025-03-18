@@ -1,5 +1,6 @@
 import _JSXStyle from "styled-jsx/style";
-import { IconEdit16, IconInfo16, IconList16 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
+import { IconEdit16, IconInfo16, IconList16, Tooltip } from '@dhis2/ui';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -66,14 +67,30 @@ export const TransferOption = _ref => {
     },
     "data-test": `${dataTest}-edit-calculation-button`,
     className: `jsx-${styles.__hash}` + " " + "edit"
-  }, /*#__PURE__*/React.createElement(IconEdit16, null)), [DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT].includes(dataItemType) && optionSetId && /*#__PURE__*/React.createElement("span", {
-    onClick: e => {
-      e.stopPropagation();
-      onEditClick();
-    },
-    "data-test": `${dataTest}-option-set-button`,
-    className: `jsx-${styles.__hash}` + " " + "option-set-button"
-  }, /*#__PURE__*/React.createElement(IconList16, null))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(IconEdit16, null)), [DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT].includes(dataItemType) && optionSetId && /*#__PURE__*/React.createElement(Tooltip, {
+    "aria-label": "disabled",
+    content: i18n.t('Click to choose from available options'),
+    openDelay: 500,
+    closeDelay: 0
+  }, _ref2 => {
+    let {
+      ref,
+      onMouseOver,
+      onMouseOut
+    } = _ref2;
+    return /*#__PURE__*/React.createElement("span", {
+      ref: ref,
+      onMouseOver: onMouseOver,
+      onMouseOut: onMouseOut,
+      onClick: e => {
+        e.stopPropagation();
+        onMouseOut();
+        onEditClick();
+      },
+      "data-test": `${dataTest}-option-set-button`,
+      className: `jsx-${styles.__hash}` + " " + "option-set-button"
+    }, /*#__PURE__*/React.createElement(IconList16, null));
+  })), /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + (cx('group', 'nowrap', 'typeGroup') || "")
   }, /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "type"

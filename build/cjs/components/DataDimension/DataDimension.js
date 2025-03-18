@@ -51,6 +51,15 @@ const DataDimension = _ref => {
   const [currentCalculation, setCurrentCalculation] = (0, _react.useState)();
   const [currentDataItem, setCurrentDataItem] = (0, _react.useState)();
   const [infoDataItem, setInfoDataItem] = (0, _react.useState)();
+  const selectedItems = (0, _react.useMemo)(() => selectedDimensions.map(item => ({
+    value: item.id,
+    label: item.name,
+    isActive: item.isActive,
+    type: item.type,
+    optionSetId: item.optionSetId,
+    expression: item.expression,
+    access: item.access
+  })), [selectedDimensions]);
   const onSelectItems = selectedItem => onSelect({
     dimensionId: _predefinedDimensions.DIMENSION_ID_DATA,
     items: selectedItem.map(item => ({
@@ -86,15 +95,7 @@ const DataDimension = _ref => {
       currentUser
     }
   }, /*#__PURE__*/_react.default.createElement(_ItemSelector.default, {
-    selectedItems: selectedDimensions.map(item => ({
-      value: item.id,
-      label: item.name,
-      isActive: item.isActive,
-      type: item.type,
-      optionSetId: item.optionSetId,
-      expression: item.expression,
-      access: item.access
-    })),
+    selectedItems: selectedItems,
     onSelect: onSelectItems,
     displayNameProp: displayNameProp,
     infoBoxMessage: infoBoxMessage,
@@ -110,15 +111,7 @@ const DataDimension = _ref => {
     setInfoDataItem: setInfoDataItem,
     onEditClick: onEditClick
   }), currentDataItem && /*#__PURE__*/_react.default.createElement(_ItemOptionsSelector.ItemOptionsSelector, _extends({}, currentDataItem, {
-    selectedItems: selectedDimensions.map(item => ({
-      value: item.id,
-      label: item.name,
-      isActive: item.isActive,
-      type: item.type,
-      optionSetId: item.optionSetId,
-      expression: item.expression,
-      access: item.access
-    })),
+    selectedItems: selectedItems,
     onSelect: onSelectItems,
     displayNameProp: displayNameProp,
     dataTest: 'data-dimension',

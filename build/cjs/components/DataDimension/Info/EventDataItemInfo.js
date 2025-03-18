@@ -105,7 +105,7 @@ const EventDataItemInfo = _ref5 => {
 };
 exports.EventDataItemInfo = EventDataItemInfo;
 EventDataItemInfo.propTypes = {
-  displayNameProp: _propTypes.default.string,
-  id: _propTypes.default.string,
-  type: _propTypes.default.string
+  displayNameProp: _propTypes.default.string.isRequired,
+  id: _propTypes.default.string.isRequired,
+  type: _propTypes.default.string.isRequired
 };

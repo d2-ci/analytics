@@ -97,7 +97,7 @@ export const EventDataItemInfo = _ref5 => {
   return type === DIMENSION_TYPE_PROGRAM_DATA_ELEMENT ? renderInfoTable(data === null || data === void 0 ? void 0 : data.programDataElement) : renderInfoTable(data === null || data === void 0 ? void 0 : data.programAttribute);
 };
 EventDataItemInfo.propTypes = {
-  displayNameProp: PropTypes.string,
-  id: PropTypes.string,
-  type: PropTypes.string
+  displayNameProp: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 };
