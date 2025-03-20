@@ -9,12 +9,23 @@ require("highcharts/highcharts-more");
 require("highcharts/modules/boost");
 require("highcharts/modules/exporting");
 require("highcharts/modules/no-data-to-display");
+require("highcharts/modules/offline-exporting");
 require("highcharts/modules/pattern-fill");
 require("highcharts/modules/solid-gauge");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /* Whitelist some additional SVG attributes here. Without this,
  * the PDF export for the SingleValue visualization breaks. */
 _highcharts.default.AST.allowedAttributes.push('fill-rule', 'clip-rule');
+
+/* This is a workaround for https://github.com/highcharts/highcharts/issues/22008
+ * We add some transparent text in a non-ASCII script to the chart to prevent
+ * the chart from being exported in a serif font */
+console.log('ADDING THE FIX', typeof _highcharts.default.addEvent);
+_highcharts.default.addEvent(_highcharts.default.Chart, 'load', function () {
+  this.renderer.text('모', 20, 20).attr({
+    opacity: 0
+  }).add();
+});
 function drawLegendSymbolWrap() {
   const pick = _highcharts.default.pick;
   _highcharts.default.wrap(_highcharts.default.seriesTypes.column.prototype, 'drawLegendSymbol', function (proceed, legend, item) {
