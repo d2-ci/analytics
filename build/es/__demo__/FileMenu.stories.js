@@ -17,11 +17,9 @@ const visObject = {
   id: 'a8LrqsBQlHP',
   created: '2012-11-05T09:17:23.388',
   name: 'ANC: 1-3 dropout rate Yearly',
-  publicAccess: '--------',
   displayDescription: 'some _italic (10%)_ and some *bold (10%)*',
   displayName: 'ANC: 1-3 dropout rate Yearly',
   description: 'some _italic (10%)_ and some *bold (10%)*',
-  externalAccess: false,
   access: {
     read: true,
     update: true,
@@ -32,13 +30,7 @@ const visObject = {
   },
   lastUpdatedBy: user,
   user,
-  translations: [],
-  userAccesses: [{
-    access: 'rw------',
-    displayName: 'John Barnes',
-    id: 'DXyJmlo9rge',
-    userUid: 'DXyJmlo9rge'
-  }]
+  translations: []
 };
 const visReadonlyObject = {
   ...visObject,

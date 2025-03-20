@@ -1,11 +1,12 @@
+import i18n from '@dhis2/d2-i18n';
 import { IconDimensionDataSet16, IconDimensionIndicator16, IconDimensionEventDataItem16, IconDimensionProgramIndicator16 } from '@dhis2/ui';
 import React from 'react';
 import DataElementIcon from '../assets/DimensionItemIcons/DataElementIcon.js';
 import GenericIcon from '../assets/DimensionItemIcons/GenericIcon.js';
 import CalculationIcon from './../assets/DimensionItemIcons/CalculationIcon.js';
 import { REPORTING_RATE } from './dataSets.js';
-import { DIMENSION_TYPE_DATA_ELEMENT, DIMENSION_TYPE_DATA_ELEMENT_OPERAND, DIMENSION_TYPE_DATA_SET, DIMENSION_TYPE_EVENT_DATA_ITEM, DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT, dataTypeMap as dataTypes, DIMENSION_TYPE_INDICATOR, DIMENSION_TYPE_PROGRAM_INDICATOR } from './dataTypes.js';
-export const getTooltipText = _ref => {
+import { DIMENSION_TYPE_DATA_ELEMENT, DIMENSION_TYPE_DATA_ELEMENT_OPERAND, DIMENSION_TYPE_DATA_SET, DIMENSION_TYPE_EVENT_DATA_ITEM, DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT, dataTypeMap as dataTypes, DIMENSION_TYPE_INDICATOR, DIMENSION_TYPE_PROGRAM_INDICATOR, DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION } from './dataTypes.js';
+export const getDimensionType = _ref => {
   var _dataTypes$type;
   let {
     type,
@@ -22,6 +23,9 @@ export const getTooltipText = _ref => {
     case DIMENSION_TYPE_PROGRAM_DATA_ELEMENT:
     case DIMENSION_TYPE_PROGRAM_ATTRIBUTE:
       return dataTypes[DIMENSION_TYPE_EVENT_DATA_ITEM].getItemName();
+    case DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION:
+    case DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION:
+      return i18n.t('Option');
     default:
       return (_dataTypes$type = dataTypes[type]) === null || _dataTypes$type === void 0 ? void 0 : _dataTypes$type.getItemName();
   }

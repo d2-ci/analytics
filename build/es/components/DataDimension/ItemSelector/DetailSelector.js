@@ -2,8 +2,8 @@ import _JSXStyle from "styled-jsx/style";
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui';
 import PropTypes from 'prop-types';
 import React from 'react';
-import i18n from '../../locales/index.js';
-import { TOTALS, DETAIL } from '../../modules/dataTypes.js';
+import i18n from '../../../locales/index.js';
+import { TOTALS, DETAIL } from '../../../modules/dataTypes.js';
 import styles from './styles/DetailSelector.style.js';
 const getOptions = () => ({
   [TOTALS]: i18n.t('Totals only'),

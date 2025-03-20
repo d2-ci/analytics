@@ -2,9 +2,9 @@ import _JSXStyle from "styled-jsx/style";
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui';
 import PropTypes from 'prop-types';
 import React from 'react';
-import i18n from '../../locales/index.js';
-import { DATA_SETS_CONSTANTS } from '../../modules/dataSets.js';
-import { DIMENSION_TYPE_ALL } from '../../modules/dataTypes.js';
+import i18n from '../../../locales/index.js';
+import { DATA_SETS_CONSTANTS } from '../../../modules/dataSets.js';
+import { DIMENSION_TYPE_ALL } from '../../../modules/dataTypes.js';
 import styles from './styles/MetricSelector.style.js';
 export const MetricSelector = _ref => {
   let {

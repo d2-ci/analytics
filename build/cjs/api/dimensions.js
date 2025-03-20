@@ -51,6 +51,7 @@ const dataItemsQuery = exports.dataItemsQuery = {
       searchTerm,
       page
     } = _ref3;
+    let fields = `id,${nameProp}~rename(name),dimensionItemType,expression,optionSetId`;
     const filters = [];
 
     // TODO: Extract all of this logic out of the query?
@@ -62,11 +63,20 @@ const dataItemsQuery = exports.dataItemsQuery = {
     if (filter !== null && filter !== void 0 && filter.group && filter.group !== _dataTypes.DIMENSION_TYPE_ALL && [_dataTypes.DIMENSION_TYPE_EVENT_DATA_ITEM, _dataTypes.DIMENSION_TYPE_PROGRAM_INDICATOR].includes(filter.dataType)) {
       filters.push(`programId:eq:${filter.group}`);
     }
+    if (filter !== null && filter !== void 0 && filter.dataItemId) {
+      // remove unnecessary fields
+      fields = `id,${nameProp}~rename(name),dimensionItemType`;
+      if (filter.dataType === _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION) {
+        filters.push(`programDataElementId:eq:${filter.dataItemId}`);
+      } else if (filter.dataType === _dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION) {
+        filters.push(`programAttributeId:eq:${filter.dataItemId}`);
+      }
+    }
     if (searchTerm) {
       filters.push(`${nameProp}:ilike:${searchTerm}`);
     }
     return (0, _objectClean.default)({
-      fields: `id,${nameProp}~rename(name),dimensionItemType,expression`,
+      fields,
       order: `${nameProp}:asc`,
       filter: filters,
       paging: true,
@@ -188,7 +198,7 @@ const dataElementOperandsQuery = exports.dataElementOperandsQuery = {
       page
     } = _ref10;
     const idField = (filter === null || filter === void 0 ? void 0 : filter.group) === _dataTypes.DIMENSION_TYPE_ALL ? 'id' : 'dimensionItem~rename(id)';
-    const filters = [];
+    const filters = ['categoryOptionCombo.name:ne:default'];
     if (filter !== null && filter !== void 0 && filter.group && filter.group !== _dataTypes.DIMENSION_TYPE_ALL) {
       filters.push(`dataElement.dataElementGroups.id:eq:${filter.group}`);
     }

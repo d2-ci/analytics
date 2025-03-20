@@ -50,7 +50,8 @@ const PeriodTransfer = _ref2 => {
     rightFooter,
     excludedPeriodTypes,
     periodsSettings,
-    infoBoxMessage
+    infoBoxMessage,
+    height = _dimensionSelectorHelper.TRANSFER_HEIGHT
   } = _ref2;
   const defaultRelativePeriodType = excludedPeriodTypes.includes(_index2.MONTHLY) ? (0, _relativePeriods.getRelativePeriodsOptionsById)(_index2.QUARTERLY) : (0, _relativePeriods.getRelativePeriodsOptionsById)(_index2.MONTHLY);
   const defaultFixedPeriodType = excludedPeriodTypes.includes(_index2.MONTHLY) ? (0, _fixedPeriods.getFixedPeriodsOptionsById)(_index2.QUARTERLY, periodsSettings) : (0, _fixedPeriods.getFixedPeriodsOptionsById)(_index2.MONTHLY, periodsSettings);
@@ -151,7 +152,7 @@ const PeriodTransfer = _ref2 => {
     selected: selectedItems.map(period => period.id),
     leftHeader: renderLeftHeader(),
     enableOrderChange: true,
-    height: _dimensionSelectorHelper.TRANSFER_HEIGHT,
+    height: height,
     optionsWidth: _dimensionSelectorHelper.TRANSFER_OPTIONS_WIDTH,
     selectedWidth: _dimensionSelectorHelper.TRANSFER_SELECTED_WIDTH,
     selectedEmptyComponent: renderEmptySelection(),
@@ -196,6 +197,7 @@ PeriodTransfer.propTypes = {
   onSelect: _propTypes.default.func.isRequired,
   dataTest: _propTypes.default.string,
   excludedPeriodTypes: _propTypes.default.arrayOf(_propTypes.default.string),
+  height: _propTypes.default.string,
   infoBoxMessage: _propTypes.default.string,
   periodsSettings: _propTypes.default.shape({
     calendar: _propTypes.default.string,

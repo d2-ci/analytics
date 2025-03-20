@@ -51,7 +51,7 @@ const CalculationModal = _ref => {
   }] = (0, _appRuntime.useDataMutation)(_expression.deleteCalculationMutation, mutationParams);
   const [doBackendValidation, {
     loading: isValidating
-  }] = (0, _appRuntime.useDataMutation)(_expression.validateExpressionMutation, {
+  }] = (0, _appRuntime.useDataMutation)(_expression.validateIndicatorExpressionMutation, {
     onError: error => showError(error)
   });
   const query = {

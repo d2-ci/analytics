@@ -3,8 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.validateExpressionMutation = exports.updateCalculationMutation = exports.deleteCalculationMutation = exports.createCalculationMutation = void 0;
-const validateExpressionMutation = exports.validateExpressionMutation = {
+exports.validateProgramIndicatorFilterMutation = exports.validateProgramIndicatorExpressionMutation = exports.validateIndicatorExpressionMutation = exports.updateCalculationMutation = exports.deleteCalculationMutation = exports.createCalculationMutation = void 0;
+const validateIndicatorExpressionMutation = exports.validateIndicatorExpressionMutation = {
   type: 'create',
   resource: 'indicators/expression/description',
   data: _ref => {
@@ -14,14 +14,34 @@ const validateExpressionMutation = exports.validateExpressionMutation = {
     return expression;
   }
 };
+const validateProgramIndicatorExpressionMutation = exports.validateProgramIndicatorExpressionMutation = {
+  type: 'create',
+  resource: 'programIndicators/expression/description',
+  data: _ref2 => {
+    let {
+      expression
+    } = _ref2;
+    return expression;
+  }
+};
+const validateProgramIndicatorFilterMutation = exports.validateProgramIndicatorFilterMutation = {
+  type: 'create',
+  resource: 'programIndicators/filter/description',
+  data: _ref3 => {
+    let {
+      filter
+    } = _ref3;
+    return filter;
+  }
+};
 const createCalculationMutation = exports.createCalculationMutation = {
   type: 'create',
   resource: 'expressionDimensionItems',
-  data: _ref2 => {
+  data: _ref4 => {
     let {
       name,
       expression
-    } = _ref2;
+    } = _ref4;
     return {
       name,
       shortName: name,
@@ -32,17 +52,17 @@ const createCalculationMutation = exports.createCalculationMutation = {
 const updateCalculationMutation = exports.updateCalculationMutation = {
   type: 'json-patch',
   resource: 'expressionDimensionItems',
-  id: _ref3 => {
+  id: _ref5 => {
     let {
       id
-    } = _ref3;
+    } = _ref5;
     return id;
   },
-  data: _ref4 => {
+  data: _ref6 => {
     let {
       name,
       expression
-    } = _ref4;
+    } = _ref6;
     return [{
       op: 'add',
       path: '/name',
@@ -61,10 +81,10 @@ const updateCalculationMutation = exports.updateCalculationMutation = {
 const deleteCalculationMutation = exports.deleteCalculationMutation = {
   type: 'delete',
   resource: 'expressionDimensionItems',
-  id: _ref5 => {
+  id: _ref7 => {
     let {
       id
-    } = _ref5;
+    } = _ref7;
     return id;
   }
 };

@@ -3,7 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getTooltipText = exports.getIcon = void 0;
+exports.getIcon = exports.getDimensionType = void 0;
+var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _ui = require("@dhis2/ui");
 var _react = _interopRequireDefault(require("react"));
 var _DataElementIcon = _interopRequireDefault(require("../assets/DimensionItemIcons/DataElementIcon.js"));
@@ -12,7 +13,7 @@ var _CalculationIcon = _interopRequireDefault(require("./../assets/DimensionItem
 var _dataSets = require("./dataSets.js");
 var _dataTypes = require("./dataTypes.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const getTooltipText = _ref => {
+const getDimensionType = _ref => {
   var _dataTypes$type;
   let {
     type,
@@ -29,11 +30,14 @@ const getTooltipText = _ref => {
     case _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT:
     case _dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE:
       return _dataTypes.dataTypeMap[_dataTypes.DIMENSION_TYPE_EVENT_DATA_ITEM].getItemName();
+    case _dataTypes.DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION:
+    case _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION:
+      return _d2I18n.default.t('Option');
     default:
       return (_dataTypes$type = _dataTypes.dataTypeMap[type]) === null || _dataTypes$type === void 0 ? void 0 : _dataTypes$type.getItemName();
   }
 };
-exports.getTooltipText = getTooltipText;
+exports.getDimensionType = getDimensionType;
 const getIcon = type => {
   switch (type) {
     case _dataTypes.DIMENSION_TYPE_INDICATOR:

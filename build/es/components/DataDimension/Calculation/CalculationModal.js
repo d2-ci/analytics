@@ -4,7 +4,7 @@ import { Button, Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Inp
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { createCalculationMutation, deleteCalculationMutation, updateCalculationMutation, validateExpressionMutation } from '../../../api/expression.js';
+import { createCalculationMutation, deleteCalculationMutation, updateCalculationMutation, validateIndicatorExpressionMutation } from '../../../api/expression.js';
 import i18n from '../../../locales/index.js';
 import { parseExpressionToArray, parseArrayToExpression, validateExpression, EXPRESSION_TYPE_DATA, EXPRESSION_TYPE_NUMBER, INVALID_EXPRESSION, VALID_EXPRESSION, getItemIdsFromExpression } from '../../../modules/expressions.js';
 import { OfflineTooltip as Tooltip } from '../../OfflineTooltip.js';
@@ -42,7 +42,7 @@ const CalculationModal = _ref => {
   }] = useDataMutation(deleteCalculationMutation, mutationParams);
   const [doBackendValidation, {
     loading: isValidating
-  }] = useDataMutation(validateExpressionMutation, {
+  }] = useDataMutation(validateIndicatorExpressionMutation, {
     onError: error => showError(error)
   });
   const query = {

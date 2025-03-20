@@ -8,10 +8,10 @@ var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
-var _index = _interopRequireDefault(require("../../locales/index.js"));
-var _dataTypes = require("../../modules/dataTypes.js");
-var _visTypes = require("../../modules/visTypes.js");
-var _DataDimension = require("./DataDimension.js");
+var _index = _interopRequireDefault(require("../../../locales/index.js"));
+var _dataTypes = require("../../../modules/dataTypes.js");
+var _visTypes = require("../../../modules/visTypes.js");
+var _DataDimension = require("../DataDimension.js");
 var _DataTypeSelectorStyle = _interopRequireDefault(require("./styles/DataTypeSelector.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DataTypeSelector = _ref => {
