@@ -5,9 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.colorSets = exports.COLOR_SET_PATTERNS = exports.COLOR_SET_GRAY = exports.COLOR_SET_EXTENDED = exports.COLOR_SET_DEFAULT = exports.COLOR_SET_DARK = exports.COLOR_SET_COLOR_BLIND = exports.COLOR_SET_BRIGHT = exports.COLOR_SET_BASIC = void 0;
 var _highcharts = _interopRequireDefault(require("highcharts"));
-var _patternFill = _interopRequireDefault(require("highcharts/modules/pattern-fill"));
+require("highcharts/modules/pattern-fill");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-(0, _patternFill.default)(_highcharts.default);
 const COLOR_SET_DEFAULT = exports.COLOR_SET_DEFAULT = 'DEFAULT';
 const COLOR_SET_BASIC = exports.COLOR_SET_BASIC = 'BASIC';
 const COLOR_SET_EXTENDED = exports.COLOR_SET_EXTENDED = 'EXTENDED';

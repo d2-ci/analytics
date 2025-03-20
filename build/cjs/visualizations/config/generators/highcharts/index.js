@@ -5,21 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 var _highcharts = _interopRequireDefault(require("highcharts"));
-var _highchartsMore = _interopRequireDefault(require("highcharts/highcharts-more"));
-var _boost = _interopRequireDefault(require("highcharts/modules/boost"));
-var _exporting = _interopRequireDefault(require("highcharts/modules/exporting"));
-var _noDataToDisplay = _interopRequireDefault(require("highcharts/modules/no-data-to-display"));
-var _patternFill = _interopRequireDefault(require("highcharts/modules/pattern-fill"));
-var _solidGauge = _interopRequireDefault(require("highcharts/modules/solid-gauge"));
+require("highcharts/highcharts-more");
+require("highcharts/modules/boost");
+require("highcharts/modules/exporting");
+require("highcharts/modules/no-data-to-display");
+require("highcharts/modules/pattern-fill");
+require("highcharts/modules/solid-gauge");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-// apply
-(0, _highchartsMore.default)(_highcharts.default);
-(0, _solidGauge.default)(_highcharts.default);
-(0, _noDataToDisplay.default)(_highcharts.default);
-(0, _exporting.default)(_highcharts.default);
-(0, _patternFill.default)(_highcharts.default);
-(0, _boost.default)(_highcharts.default);
-
 /* Whitelist some additional SVG attributes here. Without this,
  * the PDF export for the SingleValue visualization breaks. */
 _highcharts.default.AST.allowedAttributes.push('fill-rule', 'clip-rule');
