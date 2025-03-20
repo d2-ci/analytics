@@ -8,9 +8,9 @@ var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
-var _index = _interopRequireDefault(require("../../locales/index.js"));
-var _dataSets = require("../../modules/dataSets.js");
-var _dataTypes = require("../../modules/dataTypes.js");
+var _index = _interopRequireDefault(require("../../../locales/index.js"));
+var _dataSets = require("../../../modules/dataSets.js");
+var _dataTypes = require("../../../modules/dataTypes.js");
 var _MetricSelectorStyle = _interopRequireDefault(require("./styles/MetricSelector.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const MetricSelector = _ref => {

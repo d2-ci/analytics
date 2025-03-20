@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.useHoverMenuListContext = exports.HoverMenuList = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
-var _uiConstants = require("@dhis2/ui-constants");
+var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _HoverMenuBar = require("./HoverMenuBar.js");
@@ -55,11 +55,11 @@ const HoverMenuList = _ref => {
     }
   }, /*#__PURE__*/_react.default.createElement("ul", {
     "data-test": dataTest,
-    className: _style.default.dynamic([["3026610659", [_uiConstants.colors.white, _uiConstants.colors.grey200, _uiConstants.elevations.e300, dense ? '128' : '180', maxWidth, maxHeight, _uiConstants.spacers.dp4]]]) + " " + (className || "")
+    className: _style.default.dynamic([["3026610659", [_ui.colors.white, _ui.colors.grey200, _ui.elevations.e300, dense ? '128' : '180', maxWidth, maxHeight, _ui.spacers.dp4]]]) + " " + (className || "")
   }, children, /*#__PURE__*/_react.default.createElement(_style.default, {
     id: "3026610659",
-    dynamic: [_uiConstants.colors.white, _uiConstants.colors.grey200, _uiConstants.elevations.e300, dense ? '128' : '180', maxWidth, maxHeight, _uiConstants.spacers.dp4]
-  }, [`ul.__jsx-style-dynamic-selector{position:relative;margin:0;padding:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background:${_uiConstants.colors.white};border:1px solid ${_uiConstants.colors.grey200};border-radius:3px;box-shadow:${_uiConstants.elevations.e300};display:inline-block;min-width:${dense ? '128' : '180'}px;max-width:${maxWidth};max-height:${maxHeight};padding:${_uiConstants.spacers.dp4} 0;overflow:auto;list-style:none;}`])));
+    dynamic: [_ui.colors.white, _ui.colors.grey200, _ui.elevations.e300, dense ? '128' : '180', maxWidth, maxHeight, _ui.spacers.dp4]
+  }, [`ul.__jsx-style-dynamic-selector{position:relative;margin:0;padding:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background:${_ui.colors.white};border:1px solid ${_ui.colors.grey200};border-radius:3px;box-shadow:${_ui.elevations.e300};display:inline-block;min-width:${dense ? '128' : '180'}px;max-width:${maxWidth};max-height:${maxHeight};padding:${_ui.spacers.dp4} 0;overflow:auto;list-style:none;}`])));
 };
 exports.HoverMenuList = HoverMenuList;
 HoverMenuList.defaultProps = {

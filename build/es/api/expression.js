@@ -1,4 +1,4 @@
-export const validateExpressionMutation = {
+export const validateIndicatorExpressionMutation = {
   type: 'create',
   resource: 'indicators/expression/description',
   data: _ref => {
@@ -8,14 +8,34 @@ export const validateExpressionMutation = {
     return expression;
   }
 };
+export const validateProgramIndicatorExpressionMutation = {
+  type: 'create',
+  resource: 'programIndicators/expression/description',
+  data: _ref2 => {
+    let {
+      expression
+    } = _ref2;
+    return expression;
+  }
+};
+export const validateProgramIndicatorFilterMutation = {
+  type: 'create',
+  resource: 'programIndicators/filter/description',
+  data: _ref3 => {
+    let {
+      filter
+    } = _ref3;
+    return filter;
+  }
+};
 export const createCalculationMutation = {
   type: 'create',
   resource: 'expressionDimensionItems',
-  data: _ref2 => {
+  data: _ref4 => {
     let {
       name,
       expression
-    } = _ref2;
+    } = _ref4;
     return {
       name,
       shortName: name,
@@ -26,17 +46,17 @@ export const createCalculationMutation = {
 export const updateCalculationMutation = {
   type: 'json-patch',
   resource: 'expressionDimensionItems',
-  id: _ref3 => {
+  id: _ref5 => {
     let {
       id
-    } = _ref3;
+    } = _ref5;
     return id;
   },
-  data: _ref4 => {
+  data: _ref6 => {
     let {
       name,
       expression
-    } = _ref4;
+    } = _ref6;
     return [{
       op: 'add',
       path: '/name',
@@ -55,10 +75,10 @@ export const updateCalculationMutation = {
 export const deleteCalculationMutation = {
   type: 'delete',
   resource: 'expressionDimensionItems',
-  id: _ref5 => {
+  id: _ref7 => {
     let {
       id
-    } = _ref5;
+    } = _ref7;
     return id;
   }
 };

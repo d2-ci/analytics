@@ -23,6 +23,7 @@ export { TranslationDialog } from './components/TranslationDialog/index.js';
 export { OfflineTooltip } from './components/OfflineTooltip.js';
 export { CachedDataQueryProvider, useCachedDataQuery } from './components/CachedDataQueryProvider.js';
 export * from './components/RichText/index.js';
+export { DashboardPluginWrapper } from './components/DashboardPluginWrapper/DashboardPluginWrapper.js';
 
 // Api
 
@@ -70,7 +71,7 @@ export { layoutHasDynamicDimension } from './modules/layout/layoutHasDynamicDime
 export { layoutHasPeriodDimension } from './modules/layout/layoutHasPeriodDimension.js';
 
 // Modules: valueTypes
-export { VALUE_TYPE_NUMBER, VALUE_TYPE_UNIT_INTERVAL, VALUE_TYPE_PERCENTAGE, VALUE_TYPE_INTEGER, VALUE_TYPE_INTEGER_POSITIVE, VALUE_TYPE_INTEGER_NEGATIVE, VALUE_TYPE_INTEGER_ZERO_OR_POSITIVE, VALUE_TYPE_TEXT, VALUE_TYPE_LONG_TEXT, VALUE_TYPE_LETTER, VALUE_TYPE_PHONE_NUMBER, VALUE_TYPE_EMAIL, VALUE_TYPE_USERNAME, VALUE_TYPE_URL, VALUE_TYPE_BOOLEAN, VALUE_TYPE_TRUE_ONLY, VALUE_TYPE_DATE, VALUE_TYPE_TIME, VALUE_TYPE_DATETIME, VALUE_TYPE_ORGANISATION_UNIT, VALUE_TYPE_AGE } from './modules/valueTypes.js';
+export { VALUE_TYPE_TEXT, VALUE_TYPE_LONG_TEXT, VALUE_TYPE_MULTI_TEXT, VALUE_TYPE_LETTER, VALUE_TYPE_PHONE_NUMBER, VALUE_TYPE_EMAIL, VALUE_TYPE_BOOLEAN, VALUE_TYPE_TRUE_ONLY, VALUE_TYPE_DATE, VALUE_TYPE_DATETIME, VALUE_TYPE_TIME, VALUE_TYPE_NUMBER, VALUE_TYPE_UNIT_INTERVAL, VALUE_TYPE_PERCENTAGE, VALUE_TYPE_INTEGER, VALUE_TYPE_INTEGER_POSITIVE, VALUE_TYPE_INTEGER_NEGATIVE, VALUE_TYPE_INTEGER_ZERO_OR_POSITIVE, VALUE_TYPE_TRACKER_ASSOCIATE, VALUE_TYPE_USERNAME, VALUE_TYPE_COORDINATE, VALUE_TYPE_ORGANISATION_UNIT, VALUE_TYPE_REFERENCE, VALUE_TYPE_AGE, VALUE_TYPE_URL, VALUE_TYPE_FILE_RESOURCE, VALUE_TYPE_IMAGE, VALUE_TYPE_GEOJSON, valueTypeDisplayNames } from './modules/valueTypes.js';
 export { AXIS, AXIS_ID_COLUMNS, AXIS_ID_ROWS, AXIS_ID_FILTERS, DEFAULT_AXIS_IDS } from './modules/layout/axis.js';
 export { axisGetAllItems } from './modules/layout/axisGetAllItems.js';
 export { axisGetDimension } from './modules/layout/axisGetDimension.js';
@@ -129,7 +130,7 @@ export { COLOR_SET_DEFAULT, COLOR_SET_BASIC, COLOR_SET_EXTENDED, COLOR_SET_BRIGH
 
 // Utils: periods
 export { DAILY, WEEKLY, WEEKLYWED, WEEKLYTHU, WEEKLYSAT, WEEKLYSUN, WEEKS_THIS_YEAR, BIWEEKLY, MONTHLY, BIMONTHLY, QUARTERLY, SIXMONTHLY, SIXMONTHLYAPR, YEARLY, FINANCIAL, FYNOV, FYOCT, FYJUL, FYAPR } from './components/PeriodDimension/utils/index.js';
-export { getRelativePeriodsOptionsById } from './components/PeriodDimension/utils/relativePeriods.js';
-export { getFixedPeriodsOptionsById } from './components/PeriodDimension/utils/fixedPeriods.js';
+export { getRelativePeriodsOptionsById, getRelativePeriodsName, getRelativePeriodsDetails } from './components/PeriodDimension/utils/relativePeriods.js';
+export { getFixedPeriodsOptionsById, PERIOD_TYPE_REGEX } from './components/PeriodDimension/utils/fixedPeriods.js';
 export { default as VisualizationOptions } from './components/Options/VisualizationOptions.js';
 export { DIMENSION_TYPE_INDICATOR, DIMENSION_TYPE_DATA_ELEMENT, DIMENSION_TYPE_DATA_SET, DIMENSION_TYPE_EVENT_DATA_ITEM, DIMENSION_TYPE_PROGRAM_INDICATOR, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_DATA_ELEMENT_OPERAND, DIMENSION_TYPE_CATEGORY, DIMENSION_TYPE_CATEGORY_OPTION_GROUP_SET, DIMENSION_TYPE_ALL, DIMENSION_TYPE_DATA, DIMENSION_TYPE_DATA_ELEMENT_GROUP_SET, DIMENSION_TYPE_ORGANISATION_UNIT, DIMENSION_TYPE_PERIOD, DIMENSION_TYPE_ORGANISATION_UNIT_GROUP_SET, DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, dataTypeMap } from './modules/dataTypes.js';
