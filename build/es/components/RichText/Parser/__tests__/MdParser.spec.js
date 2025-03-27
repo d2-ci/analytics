@@ -14,7 +14,7 @@ describe('MdParser class', () => {
     // nested italic/bold combinations not allowed
     ['_italic with *bold* inside_', '<em>italic with *bold* inside</em>'], ['*bold with _italic_ inside*', '<strong>bold with _italic_ inside</strong>'], ['text with : and :)', 'text with : and <span>\u{1F642}</span>'], ['(parenthesis and :))', '(parenthesis and <span>\u{1F642}</span>)'], [':((parenthesis:))', '<span>\u{1F641}</span>(parenthesis<span>\u{1F642}</span>)'], [':+1+1', '<span>\u{1F44D}</span>+1'], ['-1:-1', '-1<span>\u{1F44E}</span>'],
     // links
-    ['example.com/path', '<a href="http://example.com/path" target="_blank" rel="noopener">example.com/path</a>'],
+    ['[Test link](https://host.tld/path/link)', '<a href="https://host.tld/path/link" target="_blank" rel="noopener">Test link</a>'], ['example.com/path', '<a href="http://example.com/path" target="_blank" rel="noopener">example.com/path</a>'],
     // not recognized links with italic marker inside not converted
     ['example_with_underscore.com/path', 'example_with_underscore.com/path'], ['example_with_underscore.com/path_with_underscore', 'example_with_underscore.com/path_with_underscore'],
     // markers around non-recognized links
