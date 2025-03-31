@@ -63,19 +63,24 @@ describe('The FileMenu - GetLinkDialog component', () => {
       id: tests[0].id
     }).find(_ui.Modal)).toHaveLength(1);
   });
-  tests.forEach(test => {
-    it('renders a <a> tag containing the correct app path and id', () => {
-      mockUseConfig.mockReturnValueOnce({
-        apiVersion: test.apiVersion || 42,
-        baseUrl: test.baseUrl
-      });
-      const href = getGetLinkDialogComponent({
-        type: test.type,
-        id: test.id,
-        onClose
-      }).find('a').prop('href');
-      expect(href).toMatch(test.expected);
+  test.each(tests)('renders a <a> tag containing the correct app path and id', _ref => {
+    let {
+      apiVersion,
+      baseUrl,
+      type,
+      id,
+      expected
+    } = _ref;
+    mockUseConfig.mockReturnValueOnce({
+      apiVersion: apiVersion || 42,
+      baseUrl
     });
+    const href = getGetLinkDialogComponent({
+      type,
+      id,
+      onClose
+    }).find('a').prop('href');
+    expect(href).toMatch(expected);
   });
   it('calls the onClose callback when the Close button is clicked', () => {
     getGetLinkDialogComponent({
