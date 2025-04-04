@@ -4,17 +4,49 @@ var _ui = require("@dhis2/ui");
 var _enzyme = require("enzyme");
 var _react = _interopRequireDefault(require("react"));
 var _GetLinkDialog = require("../GetLinkDialog.js");
-var _utils = require("../utils.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const testBaseUrl = 'http://test.tld/test';
-jest.mock('@dhis2/app-runtime', () => ({
-  useConfig: () => ({
-    baseUrl: testBaseUrl
-  })
+const testBaseUrl = 'http://host.tld/test/';
+const mockUseConfig = jest.fn(() => ({
+  apiVersion: 42,
+  baseUrl: testBaseUrl
 }));
+jest.mock('@dhis2/app-runtime', () => ({
+  useConfig: () => mockUseConfig()
+}));
+const tests = [{
+  type: 'visualization',
+  baseUrl: 'http://host.tld',
+  id: 'dv-id-1',
+  expected: 'http://host.tld/dhis-web-data-visualizer/#/dv-id-1'
+}, {
+  type: 'visualization',
+  baseUrl: testBaseUrl,
+  id: 'dv-id-2',
+  expected: 'http://host.tld/test/dhis-web-data-visualizer/#/dv-id-2'
+}, {
+  type: 'eventVisualization',
+  baseUrl: 'http://host.tld/other-path/',
+  id: 'll-id-1',
+  expected: 'http://host.tld/other-path/dhis-web-line-listing/#/ll-id-1'
+}, {
+  type: 'eventVisualization',
+  apiVersion: 41,
+  baseUrl: 'http://host.tld/other-path',
+  id: 'll-id-2',
+  expected: 'http://host.tld/other-path/api/apps/line-listing/#/ll-id-2'
+}, {
+  type: 'map',
+  baseUrl: testBaseUrl,
+  id: 'map-id-1',
+  expected: 'http://host.tld/test/dhis-web-maps/#/map-id-1'
+}, {
+  type: 'map',
+  baseUrl: '../',
+  id: 'map-id-2',
+  expected: 'http://localhost/dhis-web-maps/#/map-id-2'
+}];
 describe('The FileMenu - GetLinkDialog component', () => {
   let shallowGetLinkDialog;
-  let props;
   const onClose = jest.fn();
   const getGetLinkDialogComponent = props => {
     if (!shallowGetLinkDialog) {
@@ -24,21 +56,38 @@ describe('The FileMenu - GetLinkDialog component', () => {
   };
   beforeEach(() => {
     shallowGetLinkDialog = undefined;
-    props = {
-      type: 'visualization',
-      id: 'get-link-test-id',
-      onClose
-    };
   });
   it('renders a Modal component', () => {
-    expect(getGetLinkDialogComponent(props).find(_ui.Modal)).toHaveLength(1);
+    expect(getGetLinkDialogComponent({
+      type: tests[0].type,
+      id: tests[0].id
+    }).find(_ui.Modal)).toHaveLength(1);
   });
-  it('renders a <a> tag containing the type and id props', () => {
-    const href = getGetLinkDialogComponent(props).find('a').prop('href');
-    expect(href).toMatch(new URL((0, _utils.appPathFor)(props.type, props.id), testBaseUrl).href);
+  test.each(tests)('renders a <a> tag containing the correct app path and id', _ref => {
+    let {
+      apiVersion,
+      baseUrl,
+      type,
+      id,
+      expected
+    } = _ref;
+    mockUseConfig.mockReturnValueOnce({
+      apiVersion: apiVersion || 42,
+      baseUrl
+    });
+    const href = getGetLinkDialogComponent({
+      type,
+      id,
+      onClose
+    }).find('a').prop('href');
+    expect(href).toMatch(expected);
   });
   it('calls the onClose callback when the Close button is clicked', () => {
-    getGetLinkDialogComponent(props).find(_ui.Button).at(1).simulate('click');
+    getGetLinkDialogComponent({
+      type: tests[0].type,
+      id: tests[0].id,
+      onClose
+    }).find(_ui.Button).at(1).simulate('click');
     expect(onClose).toHaveBeenCalled();
   });
 });
