@@ -13,12 +13,11 @@ export const GetLinkDialog = _ref => {
     onClose
   } = _ref;
   const {
+    apiVersion,
     baseUrl
   } = useConfig();
-
-  // TODO simply use href from the visualization object?
-  const appBaseUrl = new URL(baseUrl, self.location.href);
-  const appUrl = new URL(appPathFor(type, id), appBaseUrl);
+  const appBaseUrl = new URL(baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`, self.location.href).href;
+  const appUrl = new URL(appPathFor(type, id, apiVersion), appBaseUrl).href;
   return /*#__PURE__*/React.createElement(Modal, {
     onClose: onClose
   }, /*#__PURE__*/React.createElement(_JSXStyle, {
@@ -28,12 +27,12 @@ export const GetLinkDialog = _ref => {
   }, i18n.t('Open in this app')), /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "link-container"
   }, /*#__PURE__*/React.createElement("a", {
-    href: appUrl.href,
+    href: appUrl,
     className: `jsx-${styles.__hash}`
-  }, appUrl.href), /*#__PURE__*/React.createElement(Button, {
+  }, appUrl), /*#__PURE__*/React.createElement(Button, {
     icon: /*#__PURE__*/React.createElement(IconCopy24, null),
     small: true,
-    onClick: () => navigator.clipboard.writeText(appUrl.href)
+    onClick: () => navigator.clipboard.writeText(appUrl)
   }))), /*#__PURE__*/React.createElement(ModalActions, null, /*#__PURE__*/React.createElement(ButtonStrip, null, /*#__PURE__*/React.createElement(Button, {
     onClick: onClose,
     secondary: true

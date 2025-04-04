@@ -1,3 +1,24 @@
+## [26.13.3](https://github.com/dhis2/analytics/compare/v26.13.2...v26.13.3) (2025-04-01)
+
+
+### Bug Fixes
+
+* fix hyperlinks to work in global shell (DHIS2-19274) ([#1770](https://github.com/dhis2/analytics/issues/1770)) ([5be010c](https://github.com/dhis2/analytics/commit/5be010c2c4339a451432251187c8a0e38ac6ccdd))
+
+## [26.13.2](https://github.com/dhis2/analytics/compare/v26.13.1...v26.13.2) (2025-03-30)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0c239d5](https://github.com/dhis2/analytics/commit/0c239d54397b7a2043136e1f15df5f321bec6d60))
+
+## [26.13.1](https://github.com/dhis2/analytics/compare/v26.13.0...v26.13.1) (2025-03-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([cd642c8](https://github.com/dhis2/analytics/commit/cd642c816c062ee21dbfcd29657560364ade0853))
+
 # [26.13.0](https://github.com/dhis2/analytics/compare/v26.12.3...v26.13.0) (2025-03-18)
 
 
