@@ -16,27 +16,6 @@ function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; 
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // import { useDataMutation } from '@dhis2/app-runtime'
 
-// const formatPayload = (name, description) => {
-//     const payload = [{ op: 'add', path: '/name', value: name }]
-
-//     if (description) {
-//         payload.push({
-//             op: 'add',
-//             path: '/description',
-//             value: description,
-//         })
-//     }
-
-//     return payload
-// }
-
-// const getMutation = (type) => ({
-//     resource: endpointFromFileType(type),
-//     id: ({ id }) => id,
-//     type: 'json-patch',
-//     data: ({ name, description }) => formatPayload(name, description),
-// })
-
 const RenameDialog = _ref => {
   let {
     type,
@@ -46,30 +25,13 @@ const RenameDialog = _ref => {
   } = _ref;
   const [name, setName] = (0, _react.useState)(object.name);
   const [description, setDescription] = (0, _react.useState)(object.description);
-
-  // const mutation = useMemo(() => getMutation(type), [type])
-  // const [mutate, { loading }] = useDataMutation(mutation, {
-  //     onError: (error) => {
-  //         onError(error)
-  //         onClose()
-  //     },
-  //     onComplete: () => {
-  //         onRename({ name, description })
-  //         onClose()
-  //     },
-  // })
-
   const renameObject = () => {
     console.log('jj anly renameObject', name, description);
     onRename({
       name,
       description
     });
-    // mutate({
-    //     id: object.id,
-    //     name,
-    //     description,
-    // })
+    onClose();
   };
   return /*#__PURE__*/_react.default.createElement(_ui.Modal, {
     onClose: onClose,
