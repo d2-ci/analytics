@@ -26,7 +26,6 @@ const RenameDialog = _ref => {
   const [name, setName] = (0, _react.useState)(object.name);
   const [description, setDescription] = (0, _react.useState)(object.description);
   const renameObject = () => {
-    console.log('jj anly renameObject', name, description);
     onRename({
       name,
       description
@@ -43,9 +42,7 @@ const RenameDialog = _ref => {
   })), /*#__PURE__*/_react.default.createElement(_ui.ModalContent, null, /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_FileMenuStyles.modalStyles.__hash}` + " " + "modal-content"
   }, /*#__PURE__*/_react.default.createElement(_ui.InputField, {
-    label: _index.default.t('Name')
-    // disabled={loading}
-    ,
+    label: _index.default.t('Name'),
     required: true,
     value: name,
     onChange: _ref2 => {
@@ -56,9 +53,7 @@ const RenameDialog = _ref => {
     },
     dataTest: "file-menu-rename-modal-name"
   }), /*#__PURE__*/_react.default.createElement(_ui.TextAreaField, {
-    label: _index.default.t('Description')
-    // disabled={loading}
-    ,
+    label: _index.default.t('Description'),
     value: description,
     rows: 3,
     onChange: _ref3 => {
@@ -69,15 +64,11 @@ const RenameDialog = _ref => {
     },
     dataTest: "file-menu-rename-modal-description"
   }))), /*#__PURE__*/_react.default.createElement(_ui.ModalActions, null, /*#__PURE__*/_react.default.createElement(_ui.ButtonStrip, null, /*#__PURE__*/_react.default.createElement(_ui.Button, {
-    onClick: onClose
-    // disabled={loading}
-    ,
+    onClick: onClose,
     secondary: true,
     dataTest: "file-menu-rename-modal-cancel"
   }, _index.default.t('Cancel')), /*#__PURE__*/_react.default.createElement(_ui.Button, {
-    onClick: renameObject
-    // disabled={loading}
-    ,
+    onClick: renameObject,
     primary: true,
     dataTest: "file-menu-rename-modal-rename"
   }, _index.default.t('Rename')))));
@@ -85,7 +76,6 @@ const RenameDialog = _ref => {
 exports.RenameDialog = RenameDialog;
 RenameDialog.propTypes = {
   object: _propTypes.default.shape({
-    id: _propTypes.default.string.isRequired,
     description: _propTypes.default.string,
     name: _propTypes.default.string
   }),
