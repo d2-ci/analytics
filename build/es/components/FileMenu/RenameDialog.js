@@ -43,7 +43,7 @@ export const RenameDialog = _ref => {
       return setName(value);
     },
     dataTest: "file-menu-rename-modal-name",
-    placeholder: defaultVisName
+    placeholder: "Jennifer chart"
   }), /*#__PURE__*/React.createElement(TextAreaField, {
     label: i18n.t('Description'),
     value: description,
