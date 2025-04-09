@@ -20,6 +20,7 @@ const RenameDialog = _ref => {
   let {
     type,
     object,
+    defaultVisName,
     onClose,
     onRename
   } = _ref;
@@ -27,7 +28,7 @@ const RenameDialog = _ref => {
   const [description, setDescription] = (0, _react.useState)(object.description);
   const renameObject = () => {
     onRename({
-      name,
+      name: name || defaultVisName,
       description
     });
     onClose();
@@ -51,7 +52,8 @@ const RenameDialog = _ref => {
       } = _ref2;
       return setName(value);
     },
-    dataTest: "file-menu-rename-modal-name"
+    dataTest: "file-menu-rename-modal-name",
+    placeholder: defaultVisName
   }), /*#__PURE__*/_react.default.createElement(_ui.TextAreaField, {
     label: _index.default.t('Description'),
     value: description,
@@ -75,6 +77,7 @@ const RenameDialog = _ref => {
 };
 exports.RenameDialog = RenameDialog;
 RenameDialog.propTypes = {
+  defaultVisName: _propTypes.default.string,
   object: _propTypes.default.shape({
     description: _propTypes.default.string,
     name: _propTypes.default.string
