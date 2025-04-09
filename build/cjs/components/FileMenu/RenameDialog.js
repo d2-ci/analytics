@@ -24,6 +24,7 @@ const RenameDialog = _ref => {
     onClose,
     onRename
   } = _ref;
+  console.log('jj defaultVisName', defaultVisName);
   const [name, setName] = (0, _react.useState)(object.name);
   const [description, setDescription] = (0, _react.useState)(object.description);
   const renameObject = () => {
