@@ -12,7 +12,6 @@ var _dimensionIs = require("../../modules/layout/dimensionIs.js");
 var _index = require("../../modules/ouIdHelper/index.js");
 var _predefinedDimensions = require("../../modules/predefinedDimensions.js");
 function _default(filters, metaData) {
-  let extraOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   if (!Array.isArray(filters) || !filters.length) {
     return '';
   }

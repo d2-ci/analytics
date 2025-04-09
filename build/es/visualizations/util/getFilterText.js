@@ -6,7 +6,6 @@ import { dimensionIs } from '../../modules/layout/dimensionIs.js';
 import { ouIdHelper } from '../../modules/ouIdHelper/index.js';
 import { DIMENSION_ID_ORGUNIT, DIMENSION_ID_PERIOD } from '../../modules/predefinedDimensions.js';
 export default function (filters, metaData) {
-  let extraOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   if (!Array.isArray(filters) || !filters.length) {
     return '';
   }
