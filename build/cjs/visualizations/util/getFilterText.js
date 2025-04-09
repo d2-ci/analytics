@@ -28,7 +28,7 @@ function _default(filters, metaData) {
       return _index.ouIdHelper.hasGroupPrefix(id) || _index.ouIdHelper.hasLevelPrefix(id);
     })) {
       titleFragments.push((0, _getOuLevelAndGroupText.getOuLevelAndGroupText)(filter, metaData));
-    } else if ((0, _dimensionIs.dimensionIs)(filter, _predefinedDimensions.DIMENSION_ID_PERIOD) && extraOptions.dashboard) {
+    } else if ((0, _dimensionIs.dimensionIs)(filter, _predefinedDimensions.DIMENSION_ID_PERIOD)) {
       titleFragments.push((0, _dimensionGetItemIds.dimensionGetItemIds)(filter).map(id => {
         var _metaData$items$id;
         return (0, _relativePeriods.getRelativePeriodsName)()[id] || ((_metaData$items$id = metaData.items[id]) === null || _metaData$items$id === void 0 ? void 0 : _metaData$items$id.name) || id;

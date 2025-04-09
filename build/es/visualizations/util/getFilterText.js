@@ -22,7 +22,7 @@ export default function (filters, metaData) {
       return ouIdHelper.hasGroupPrefix(id) || ouIdHelper.hasLevelPrefix(id);
     })) {
       titleFragments.push(getOuLevelAndGroupText(filter, metaData));
-    } else if (dimensionIs(filter, DIMENSION_ID_PERIOD) && extraOptions.dashboard) {
+    } else if (dimensionIs(filter, DIMENSION_ID_PERIOD)) {
       titleFragments.push(dimensionGetItemIds(filter).map(id => {
         var _metaData$items$id;
         return getRelativePeriodsName()[id] || ((_metaData$items$id = metaData.items[id]) === null || _metaData$items$id === void 0 ? void 0 : _metaData$items$id.name) || id;
