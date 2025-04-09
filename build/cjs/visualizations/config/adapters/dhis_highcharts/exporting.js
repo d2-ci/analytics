@@ -16,7 +16,12 @@ const BASE_EXPORTING_CONFIG = {
   showExportInProgress: true,
   sourceHeight: 768,
   sourceWidth: 1024,
-  scale: 1
+  scale: 1,
+  chartOptions: {
+    chart: {
+      backgroundColor: '#ffffff'
+    }
+  }
 };
 function getExporting(visType) {
   switch (visType) {
@@ -24,7 +29,9 @@ function getExporting(visType) {
       return {
         ...BASE_EXPORTING_CONFIG,
         chartOptions: {
+          ...BASE_EXPORTING_CONFIG.chartOptions,
           chart: {
+            ...BASE_EXPORTING_CONFIG.chartOptions.chart,
             events: {
               load: _index.default
             }
@@ -36,6 +43,7 @@ function getExporting(visType) {
       return {
         ...BASE_EXPORTING_CONFIG,
         chartOptions: {
+          ...BASE_EXPORTING_CONFIG.chartOptions,
           boost: {
             enabled: false
           }
