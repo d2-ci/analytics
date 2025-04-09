@@ -22,9 +22,10 @@ export default function (filters, metaData) {
     })) {
       titleFragments.push(getOuLevelAndGroupText(filter, metaData));
     } else if (dimensionIs(filter, DIMENSION_ID_PERIOD)) {
+      const relativePeriodNames = getRelativePeriodsName();
       titleFragments.push(dimensionGetItemIds(filter).map(id => {
         var _metaData$items$id;
-        return getRelativePeriodsName()[id] || ((_metaData$items$id = metaData.items[id]) === null || _metaData$items$id === void 0 ? void 0 : _metaData$items$id.name) || id;
+        return relativePeriodNames[id] || ((_metaData$items$id = metaData.items[id]) === null || _metaData$items$id === void 0 ? void 0 : _metaData$items$id.name) || id;
       }).join(', '));
     } else {
       const filterItems = metaData.dimensions[filter.dimension];
