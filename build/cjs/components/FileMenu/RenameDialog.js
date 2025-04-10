@@ -9,7 +9,6 @@ var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _index = _interopRequireDefault(require("../../locales/index.js"));
-var _visTypes = require("../../modules/visTypes.js");
 var _FileMenuStyles = require("./FileMenu.styles.js");
 var _utils = require("./utils.js");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
@@ -17,23 +16,6 @@ function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; 
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // import { useDataMutation } from '@dhis2/app-runtime'
 
-const getDefaultVisName = visualization => {
-  console.log('jj visualization', visualization);
-  if (!visualization) {
-    return _index.default.t('Untitled visualization');
-  }
-  const visualizationType = (0, _visTypes.getDisplayNameByVisType)(visualization.type);
-  const dateFormat = {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit'
-  };
-  const date = visualization.created ? new Date(visualization.created).toLocaleDateString(undefined, dateFormat) : new Date().toLocaleDateString(undefined, dateFormat);
-  return _index.default.t('Untitled {{visualizationType}} visualization, {{date}}', {
-    visualizationType,
-    date
-  });
-};
 const RenameDialog = _ref => {
   let {
     type,
@@ -41,13 +23,11 @@ const RenameDialog = _ref => {
     onClose,
     onRename
   } = _ref;
-  const defaultVisName = getDefaultVisName(object);
-  console.log('jj defaultVisName', defaultVisName);
   const [name, setName] = (0, _react.useState)(object.name);
   const [description, setDescription] = (0, _react.useState)(object.description);
   const renameObject = () => {
     onRename({
-      name: name || defaultVisName,
+      name,
       description
     });
     onClose();
@@ -71,8 +51,7 @@ const RenameDialog = _ref => {
       } = _ref2;
       return setName(value);
     },
-    dataTest: "file-menu-rename-modal-name",
-    placeholder: defaultVisName
+    dataTest: "file-menu-rename-modal-name"
   }), /*#__PURE__*/_react.default.createElement(_ui.TextAreaField, {
     label: _index.default.t('Description'),
     value: description,
