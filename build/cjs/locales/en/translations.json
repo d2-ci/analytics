@@ -154,6 +154,8 @@
     "Get link…": "Get link…",
     "Open in this app": "Open in this app",
     "Close": "Close",
+    "Untitled visualization": "Untitled visualization",
+    "Untitled {{visualizationType}} visualization, {{date}}": "Untitled {{visualizationType}} visualization, {{date}}",
     "Rename {{fileType}}": "Rename {{fileType}}",
     "Rename": "Rename",
     "{{- objectName}} (copy)": "{{- objectName}} (copy)",

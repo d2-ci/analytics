@@ -4,16 +4,34 @@ import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button, Inp
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import i18n from '../../locales/index.js';
+import { getDisplayNameByVisType } from '../../modules/visTypes.js';
 import { modalStyles } from './FileMenu.styles.js';
 import { supportedFileTypes, labelForFileType } from './utils.js';
+const getDefaultVisName = visualization => {
+  console.log('jj visualization', visualization);
+  if (!visualization) {
+    return i18n.t('Untitled visualization');
+  }
+  const visualizationType = getDisplayNameByVisType(visualization.type);
+  const dateFormat = {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit'
+  };
+  const date = visualization.created ? new Date(visualization.created).toLocaleDateString(undefined, dateFormat) : new Date().toLocaleDateString(undefined, dateFormat);
+  return i18n.t('Untitled {{visualizationType}} visualization, {{date}}', {
+    visualizationType,
+    date
+  });
+};
 export const RenameDialog = _ref => {
   let {
     type,
     object,
-    defaultVisName,
     onClose,
     onRename
   } = _ref;
+  const defaultVisName = getDefaultVisName(object);
   console.log('jj defaultVisName', defaultVisName);
   const [name, setName] = useState(object.name);
   const [description, setDescription] = useState(object.description);
@@ -44,7 +62,7 @@ export const RenameDialog = _ref => {
       return setName(value);
     },
     dataTest: "file-menu-rename-modal-name",
-    placeholder: "Jennifer chart"
+    placeholder: defaultVisName
   }), /*#__PURE__*/React.createElement(TextAreaField, {
     label: i18n.t('Description'),
     value: description,
@@ -67,7 +85,6 @@ export const RenameDialog = _ref => {
   }, i18n.t('Rename')))));
 };
 RenameDialog.propTypes = {
-  defaultVisName: PropTypes.string,
   object: PropTypes.shape({
     description: PropTypes.string,
     name: PropTypes.string
