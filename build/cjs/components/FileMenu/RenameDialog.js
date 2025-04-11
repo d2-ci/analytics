@@ -75,6 +75,7 @@ exports.RenameDialog = RenameDialog;
 RenameDialog.propTypes = {
   object: _propTypes.default.shape({
     description: _propTypes.default.string,
+    id: _propTypes.default.string,
     name: _propTypes.default.string
   }),
   type: _propTypes.default.oneOf(_utils.supportedFileTypes),
