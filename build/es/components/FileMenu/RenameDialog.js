@@ -1,5 +1,4 @@
 import _JSXStyle from "styled-jsx/style";
-// import { useDataMutation } from '@dhis2/app-runtime'
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button, InputField, TextAreaField } from '@dhis2/ui';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
