@@ -94,17 +94,18 @@ const preparePayloadForSave = async _ref3 => {
     description,
     engine
   } = _ref3;
+  console.log('jj preparePayloadForSave', {
+    visualization,
+    type: visualization.type,
+    id: visualization.id,
+    lltype: _visTypes.VIS_TYPE_LINE_LIST,
+    typeMatches: visualization.type === _visTypes.VIS_TYPE_LINE_LIST
+  });
   const {
     visualization: vis
   } = await apiFetchAOSubscribers(engine, visualization.id, visualization.type);
   visualization.subscribers = vis.subscribers;
   visualization.subscribed = vis.subscribed;
-  console.log('jj preparePayloadForSave', {
-    visualization,
-    type: visualization.type,
-    lltype: _visTypes.VIS_TYPE_LINE_LIST,
-    typeMatches: visualization.type === _visTypes.VIS_TYPE_LINE_LIST
-  });
   visualization.name = name || visualization.name || _d2I18n.default.t('Untitled {{visualizationType}}, {{date}}', {
     visualizationType: (0, _visTypes.getDisplayNameByVisType)(visualization.type),
     date: new Date().toLocaleDateString(undefined, {
