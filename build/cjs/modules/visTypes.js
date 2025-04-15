@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.visTypeIcons = exports.visTypeDisplayNames = exports.isYearOverYear = exports.isVerticalType = exports.isTwoCategoryChartType = exports.isStacked = exports.isSingleValue = exports.isOutlierTable = exports.isMultiType = exports.isLegendSetType = exports.isDualAxisType = exports.isColumnBasedType = exports.getDisplayNameByVisType = exports.defaultVisType = exports.VIS_TYPE_YEAR_OVER_YEAR_LINE = exports.VIS_TYPE_YEAR_OVER_YEAR_COLUMN = exports.VIS_TYPE_STACKED_COLUMN = exports.VIS_TYPE_STACKED_BAR = exports.VIS_TYPE_STACKED_AREA = exports.VIS_TYPE_SINGLE_VALUE = exports.VIS_TYPE_SCATTER = exports.VIS_TYPE_RADAR = exports.VIS_TYPE_PIVOT_TABLE = exports.VIS_TYPE_PIE = exports.VIS_TYPE_OUTLIER_TABLE = exports.VIS_TYPE_LINE_LIST = exports.VIS_TYPE_LINE = exports.VIS_TYPE_GROUP_CHARTS = exports.VIS_TYPE_GROUP_ALL = exports.VIS_TYPE_GAUGE = exports.VIS_TYPE_COLUMN = exports.VIS_TYPE_BUBBLE = exports.VIS_TYPE_BAR = exports.VIS_TYPE_AREA = void 0;
+exports.visTypeIcons = exports.visTypeDisplayNames = exports.isYearOverYear = exports.isVerticalType = exports.isTwoCategoryChartType = exports.isStacked = exports.isSingleValue = exports.isOutlierTable = exports.isMultiType = exports.isLegendSetType = exports.isDualAxisType = exports.isColumnBasedType = exports.getDisplayNameByVisType = exports.getApiEndpointByVisType = exports.defaultVisType = exports.VIS_TYPE_YEAR_OVER_YEAR_LINE = exports.VIS_TYPE_YEAR_OVER_YEAR_COLUMN = exports.VIS_TYPE_STACKED_COLUMN = exports.VIS_TYPE_STACKED_BAR = exports.VIS_TYPE_STACKED_AREA = exports.VIS_TYPE_SINGLE_VALUE = exports.VIS_TYPE_SCATTER = exports.VIS_TYPE_RADAR = exports.VIS_TYPE_PIVOT_TABLE = exports.VIS_TYPE_PIE = exports.VIS_TYPE_OUTLIER_TABLE = exports.VIS_TYPE_MAP = exports.VIS_TYPE_LINE_LIST = exports.VIS_TYPE_LINE = exports.VIS_TYPE_GROUP_CHARTS = exports.VIS_TYPE_GROUP_ALL = exports.VIS_TYPE_GAUGE = exports.VIS_TYPE_COLUMN = exports.VIS_TYPE_BUBBLE = exports.VIS_TYPE_BAR = exports.VIS_TYPE_AREA = void 0;
 var _ui = require("@dhis2/ui");
 var _index = _interopRequireDefault(require("../locales/index.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -27,6 +27,7 @@ const VIS_TYPE_BUBBLE = exports.VIS_TYPE_BUBBLE = 'BUBBLE';
 const VIS_TYPE_GROUP_ALL = exports.VIS_TYPE_GROUP_ALL = 'ALL';
 const VIS_TYPE_GROUP_CHARTS = exports.VIS_TYPE_GROUP_CHARTS = 'CHARTS';
 const VIS_TYPE_OUTLIER_TABLE = exports.VIS_TYPE_OUTLIER_TABLE = 'OUTLIER_TABLE';
+const VIS_TYPE_MAP = exports.VIS_TYPE_MAP = 'MAP';
 const visTypeDisplayNames = exports.visTypeDisplayNames = {
   [VIS_TYPE_PIVOT_TABLE]: _index.default.t('Pivot table'),
   [VIS_TYPE_AREA]: _index.default.t('Area'),
@@ -67,6 +68,26 @@ const visTypeIcons = exports.visTypeIcons = {
   [VIS_TYPE_SINGLE_VALUE]: _ui.IconVisualizationSingleValue24,
   [VIS_TYPE_OUTLIER_TABLE]: _ui.IconVisualizationOutlierTable24
 };
+const visTypeApiEndpoints = {
+  [VIS_TYPE_PIVOT_TABLE]: 'visualizations',
+  [VIS_TYPE_AREA]: 'visualizations',
+  [VIS_TYPE_STACKED_AREA]: 'visualizations',
+  [VIS_TYPE_BAR]: 'visualizations',
+  [VIS_TYPE_STACKED_BAR]: 'visualizations',
+  [VIS_TYPE_COLUMN]: 'visualizations',
+  [VIS_TYPE_YEAR_OVER_YEAR_COLUMN]: 'visualizations',
+  [VIS_TYPE_STACKED_COLUMN]: 'visualizations',
+  [VIS_TYPE_GAUGE]: 'visualizations',
+  [VIS_TYPE_LINE]: 'visualizations',
+  [VIS_TYPE_YEAR_OVER_YEAR_LINE]: 'visualizations',
+  [VIS_TYPE_PIE]: 'visualizations',
+  [VIS_TYPE_RADAR]: 'visualizations',
+  [VIS_TYPE_SCATTER]: 'visualizations',
+  [VIS_TYPE_SINGLE_VALUE]: 'visualizations',
+  [VIS_TYPE_OUTLIER_TABLE]: 'visualizations',
+  [VIS_TYPE_LINE_LIST]: 'eventVisualizations',
+  [VIS_TYPE_MAP]: 'maps'
+};
 const getDisplayNameByVisType = visType => {
   const displayName = visTypeDisplayNames[visType];
   if (!displayName) {
@@ -75,6 +96,14 @@ const getDisplayNameByVisType = visType => {
   return displayName;
 };
 exports.getDisplayNameByVisType = getDisplayNameByVisType;
+const getApiEndpointByVisType = visType => {
+  const apiEndpoint = visTypeApiEndpoints[visType];
+  if (!apiEndpoint) {
+    throw new Error(`${visType} is not a valid visualization type`);
+  }
+  return apiEndpoint;
+};
+exports.getApiEndpointByVisType = getApiEndpointByVisType;
 const stackedTypes = [VIS_TYPE_STACKED_COLUMN, VIS_TYPE_STACKED_BAR, VIS_TYPE_STACKED_AREA];
 const yearOverYearTypes = [VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN];
 const dualAxisTypes = [VIS_TYPE_COLUMN, VIS_TYPE_BAR, VIS_TYPE_LINE, VIS_TYPE_AREA];

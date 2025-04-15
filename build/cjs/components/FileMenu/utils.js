@@ -68,7 +68,7 @@ const preparePayloadForSaveAs = _ref => {
 exports.preparePayloadForSaveAs = preparePayloadForSaveAs;
 const getSubscriberQuery = type => ({
   ao: {
-    resource: _utils.AOTypeMap[type].apiEndpoint,
+    resource: (0, _visTypes.getApiEndpointByVisType)(type),
     id: _ref2 => {
       let {
         id
@@ -94,13 +94,6 @@ const preparePayloadForSave = async _ref3 => {
     description,
     engine
   } = _ref3;
-  console.log('jj preparePayloadForSave', {
-    visualization,
-    type: visualization.type,
-    id: visualization.id,
-    lltype: _visTypes.VIS_TYPE_LINE_LIST,
-    typeMatches: visualization.type === _visTypes.VIS_TYPE_LINE_LIST
-  });
   const {
     visualization: vis
   } = await apiFetchAOSubscribers(engine, visualization.id, visualization.type);
