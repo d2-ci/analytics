@@ -96,11 +96,11 @@ const preparePayloadForSave = async _ref3 => {
   } = _ref3;
   console.log('jj AA');
   const {
-    visualization: vis
+    ao
   } = await apiFetchAOSubscribers(engine, visualization.id, visualization.type);
-  console.log('jj BB', vis);
-  visualization.subscribers = vis.subscribers;
-  visualization.subscribed = vis.subscribed;
+  console.log('jj BB', ao);
+  visualization.subscribers = ao.subscribers;
+  visualization.subscribed = ao.subscribed;
   console.log('jj CC');
   visualization.name = name || visualization.name || _d2I18n.default.t('Untitled {{visualizationType}}, {{date}}', {
     visualizationType: (0, _visTypes.getDisplayNameByVisType)(visualization.type),
