@@ -17,6 +17,7 @@ var _exportNames = {
   PivotTable: true,
   FileMenu: true,
   preparePayloadForSaveAs: true,
+  preparePayloadForSave: true,
   VisTypeIcon: true,
   LegendKey: true,
   AboutAOUnit: true,
@@ -1807,6 +1808,12 @@ Object.defineProperty(exports, "ouIdHelper", {
   enumerable: true,
   get: function () {
     return _index7.ouIdHelper;
+  }
+});
+Object.defineProperty(exports, "preparePayloadForSave", {
+  enumerable: true,
+  get: function () {
+    return _utils.preparePayloadForSave;
   }
 });
 Object.defineProperty(exports, "preparePayloadForSaveAs", {

@@ -12,7 +12,7 @@ export { default as DimensionFilter } from './components/Filter/Filter.js';
 export { default as DimensionMenu } from './components/DimensionMenu.js';
 export { default as PivotTable } from './components/PivotTable/PivotTable.js';
 export { default as FileMenu } from './components/FileMenu/FileMenu.js';
-export { preparePayloadForSaveAs } from './components/FileMenu/utils.js';
+export { preparePayloadForSaveAs, preparePayloadForSave } from './components/FileMenu/utils.js';
 export { default as VisTypeIcon } from './components/VisTypeIcon.js';
 export { default as LegendKey } from './components/LegendKey/LegendKey.js';
 export { default as AboutAOUnit } from './components/AboutAOUnit/AboutAOUnit.js';
