@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n';
-import { getDisplayNameByVisType } from '../../modules/visTypes.js';
+import { getDisplayNameByVisType, VIS_TYPE_LINE_LIST } from '../../modules/visTypes.js';
 import { AOTypeMap } from '../AboutAOUnit/utils.js';
 export const FILE_TYPE_EVENT_REPORT = 'eventReport';
 export const FILE_TYPE_VISUALIZATION = 'visualization';
@@ -88,7 +88,13 @@ export const preparePayloadForSave = async _ref3 => {
   } = await apiFetchAOSubscribers(engine, visualization.id, visualization.type);
   visualization.subscribers = vis.subscribers;
   visualization.subscribed = vis.subscribed;
-  visualization.name = name || visualization.name || i18n.t('Untitled {{visualizationType}} visualization, {{date}}', {
+  console.log('jj preparePayloadForSave', {
+    visualization,
+    type: visualization.type,
+    lltype: VIS_TYPE_LINE_LIST,
+    typeMatches: visualization.type === VIS_TYPE_LINE_LIST
+  });
+  visualization.name = name || visualization.name || i18n.t('Untitled {{visualizationType}}, {{date}}', {
     visualizationType: getDisplayNameByVisType(visualization.type),
     date: new Date().toLocaleDateString(undefined, {
       year: 'numeric',
