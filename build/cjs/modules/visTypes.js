@@ -47,7 +47,8 @@ const visTypeDisplayNames = exports.visTypeDisplayNames = {
   [VIS_TYPE_SINGLE_VALUE]: _index.default.t('Single value'),
   [VIS_TYPE_OUTLIER_TABLE]: _index.default.t('Outlier table'),
   [VIS_TYPE_GROUP_ALL]: _index.default.t('All types'),
-  [VIS_TYPE_GROUP_CHARTS]: _index.default.t('All charts')
+  [VIS_TYPE_GROUP_CHARTS]: _index.default.t('All charts'),
+  [VIS_TYPE_MAP]: _index.default.t('Map')
 };
 const visTypeIcons = exports.visTypeIcons = {
   [VIS_TYPE_PIVOT_TABLE]: _ui.IconVisualizationPivotTable24,

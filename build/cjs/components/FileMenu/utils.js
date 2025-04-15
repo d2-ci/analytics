@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.supportedFileTypes = exports.preparePayloadForSaveAs = exports.preparePayloadForSave = exports.labelForFileType = exports.endpointFromFileType = exports.appPathFor = exports.FILE_TYPE_VISUALIZATION = exports.FILE_TYPE_MAP = exports.FILE_TYPE_EVENT_VISUALIZATION = exports.FILE_TYPE_EVENT_REPORT = void 0;
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _visTypes = require("../../modules/visTypes.js");
-var _utils = require("../AboutAOUnit/utils.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const FILE_TYPE_EVENT_REPORT = exports.FILE_TYPE_EVENT_REPORT = 'eventReport';
 const FILE_TYPE_VISUALIZATION = exports.FILE_TYPE_VISUALIZATION = 'visualization';
@@ -54,7 +53,7 @@ const preparePayloadForSaveAs = _ref => {
   delete visualization.created;
   delete visualization.createdBy;
   delete visualization.user;
-  visualization.name = name || visualization.name || _d2I18n.default.t('Untitled {{visualizationType}} visualization, {{date}}', {
+  visualization.name = name || visualization.name || _d2I18n.default.t('Untitled {{visualizationType}}, {{date}}', {
     visualizationType: (0, _visTypes.getDisplayNameByVisType)(visualization.type),
     date: new Date().toLocaleDateString(undefined, {
       year: 'numeric',

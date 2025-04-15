@@ -1,6 +1,5 @@
 import i18n from '@dhis2/d2-i18n';
 import { getDisplayNameByVisType, getApiEndpointByVisType } from '../../modules/visTypes.js';
-import { AOTypeMap } from '../AboutAOUnit/utils.js';
 export const FILE_TYPE_EVENT_REPORT = 'eventReport';
 export const FILE_TYPE_VISUALIZATION = 'visualization';
 export const FILE_TYPE_MAP = 'map';
@@ -44,7 +43,7 @@ export const preparePayloadForSaveAs = _ref => {
   delete visualization.created;
   delete visualization.createdBy;
   delete visualization.user;
-  visualization.name = name || visualization.name || i18n.t('Untitled {{visualizationType}} visualization, {{date}}', {
+  visualization.name = name || visualization.name || i18n.t('Untitled {{visualizationType}}, {{date}}', {
     visualizationType: getDisplayNameByVisType(visualization.type),
     date: new Date().toLocaleDateString(undefined, {
       year: 'numeric',
