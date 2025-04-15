@@ -151,6 +151,7 @@ var _exportNames = {
   VIS_TYPE_SCATTER: true,
   VIS_TYPE_LINE_LIST: true,
   VIS_TYPE_OUTLIER_TABLE: true,
+  VIS_TYPE_MAP: true,
   visTypeDisplayNames: true,
   visTypeIcons: true,
   getDisplayNameByVisType: true,
@@ -1148,6 +1149,12 @@ Object.defineProperty(exports, "VIS_TYPE_LINE_LIST", {
   enumerable: true,
   get: function () {
     return _visTypes.VIS_TYPE_LINE_LIST;
+  }
+});
+Object.defineProperty(exports, "VIS_TYPE_MAP", {
+  enumerable: true,
+  get: function () {
+    return _visTypes.VIS_TYPE_MAP;
   }
 });
 Object.defineProperty(exports, "VIS_TYPE_OUTLIER_TABLE", {
