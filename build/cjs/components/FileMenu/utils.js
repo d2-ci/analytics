@@ -94,11 +94,14 @@ const preparePayloadForSave = async _ref3 => {
     description,
     engine
   } = _ref3;
+  console.log('jj AA');
   const {
     visualization: vis
   } = await apiFetchAOSubscribers(engine, visualization.id, visualization.type);
+  console.log('jj BB', vis);
   visualization.subscribers = vis.subscribers;
   visualization.subscribed = vis.subscribed;
+  console.log('jj CC');
   visualization.name = name || visualization.name || _d2I18n.default.t('Untitled {{visualizationType}}, {{date}}', {
     visualizationType: (0, _visTypes.getDisplayNameByVisType)(visualization.type),
     date: new Date().toLocaleDateString(undefined, {
@@ -107,7 +110,9 @@ const preparePayloadForSave = async _ref3 => {
       day: '2-digit'
     })
   });
+  console.log('jj DD');
   visualization.description = description !== undefined ? description : visualization.description;
+  console.log('jj EE');
   return visualization;
 };
 exports.preparePayloadForSave = preparePayloadForSave;
