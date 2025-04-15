@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.supportedFileTypes = exports.preparePayloadForSaveAs = exports.preparePayloadForSave = exports.labelForFileType = exports.endpointFromFileType = exports.appPathFor = exports.FILE_TYPE_VISUALIZATION = exports.FILE_TYPE_MAP = exports.FILE_TYPE_EVENT_VISUALIZATION = exports.FILE_TYPE_EVENT_REPORT = void 0;
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _visTypes = require("../../modules/visTypes.js");
+var _utils = require("../AboutAOUnit/utils.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const FILE_TYPE_EVENT_REPORT = exports.FILE_TYPE_EVENT_REPORT = 'eventReport';
 const FILE_TYPE_VISUALIZATION = exports.FILE_TYPE_VISUALIZATION = 'visualization';
@@ -65,9 +66,9 @@ const preparePayloadForSaveAs = _ref => {
   return visualization;
 };
 exports.preparePayloadForSaveAs = preparePayloadForSaveAs;
-const visualizationSubscribersQuery = {
-  visualization: {
-    resource: 'visualizations',
+const getSubscriberQuery = type => ({
+  ao: {
+    resource: _utils.AOTypeMap[type].apiEndpoint,
     id: _ref2 => {
       let {
         id
@@ -75,12 +76,12 @@ const visualizationSubscribersQuery = {
       return id;
     },
     params: {
-      fields: ['subscribers', 'subscribed']
+      fields: 'subscribed,subscribers'
     }
   }
-};
-const apiFetchVisualizationSubscribers = (dataEngine, id) => {
-  return dataEngine.query(visualizationSubscribersQuery, {
+});
+const apiFetchAOSubscribers = (dataEngine, id, type) => {
+  return dataEngine.query(getSubscriberQuery(type), {
     variables: {
       id
     }
@@ -95,8 +96,7 @@ const preparePayloadForSave = async _ref3 => {
   } = _ref3;
   const {
     visualization: vis
-  } = await apiFetchVisualizationSubscribers(engine, visualization.id);
-  console.log('jj subscribers', vis);
+  } = await apiFetchAOSubscribers(engine, visualization.id, visualization.type);
   visualization.subscribers = vis.subscribers;
   visualization.subscribed = vis.subscribed;
   visualization.name = name || visualization.name || _d2I18n.default.t('Untitled {{visualizationType}} visualization, {{date}}', {

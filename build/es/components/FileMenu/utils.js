@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import { getDisplayNameByVisType } from '../../modules/visTypes.js';
+import { AOTypeMap } from '../AboutAOUnit/utils.js';
 export const FILE_TYPE_EVENT_REPORT = 'eventReport';
 export const FILE_TYPE_VISUALIZATION = 'visualization';
 export const FILE_TYPE_MAP = 'map';
@@ -54,9 +55,9 @@ export const preparePayloadForSaveAs = _ref => {
   visualization.description = description !== undefined ? description : visualization.description;
   return visualization;
 };
-const visualizationSubscribersQuery = {
-  visualization: {
-    resource: 'visualizations',
+const getSubscriberQuery = type => ({
+  ao: {
+    resource: AOTypeMap[type].apiEndpoint,
     id: _ref2 => {
       let {
         id
@@ -64,12 +65,12 @@ const visualizationSubscribersQuery = {
       return id;
     },
     params: {
-      fields: ['subscribers', 'subscribed']
+      fields: 'subscribed,subscribers'
     }
   }
-};
-const apiFetchVisualizationSubscribers = (dataEngine, id) => {
-  return dataEngine.query(visualizationSubscribersQuery, {
+});
+const apiFetchAOSubscribers = (dataEngine, id, type) => {
+  return dataEngine.query(getSubscriberQuery(type), {
     variables: {
       id
     }
@@ -84,8 +85,7 @@ export const preparePayloadForSave = async _ref3 => {
   } = _ref3;
   const {
     visualization: vis
-  } = await apiFetchVisualizationSubscribers(engine, visualization.id);
-  console.log('jj subscribers', vis);
+  } = await apiFetchAOSubscribers(engine, visualization.id, visualization.type);
   visualization.subscribers = vis.subscribers;
   visualization.subscribed = vis.subscribed;
   visualization.name = name || visualization.name || i18n.t('Untitled {{visualizationType}} visualization, {{date}}', {
