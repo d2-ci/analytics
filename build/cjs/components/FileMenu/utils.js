@@ -3,8 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.supportedFileTypes = exports.preparePayloadForSaveAs = exports.labelForFileType = exports.endpointFromFileType = exports.appPathFor = exports.FILE_TYPE_VISUALIZATION = exports.FILE_TYPE_MAP = exports.FILE_TYPE_EVENT_VISUALIZATION = exports.FILE_TYPE_EVENT_REPORT = void 0;
+exports.supportedFileTypes = exports.preparePayloadForSaveAs = exports.preparePayloadForSave = exports.labelForFileType = exports.endpointFromFileType = exports.appPathFor = exports.FILE_TYPE_VISUALIZATION = exports.FILE_TYPE_MAP = exports.FILE_TYPE_EVENT_VISUALIZATION = exports.FILE_TYPE_EVENT_REPORT = void 0;
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
+var _visTypes = require("../../modules/visTypes.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const FILE_TYPE_EVENT_REPORT = exports.FILE_TYPE_EVENT_REPORT = 'eventReport';
 const FILE_TYPE_VISUALIZATION = exports.FILE_TYPE_VISUALIZATION = 'visualization';
@@ -44,12 +45,69 @@ const appPathFor = (fileType, id, apiVersion) => {
 exports.appPathFor = appPathFor;
 const preparePayloadForSaveAs = _ref => {
   let {
-    ...visualization
+    visualization,
+    name,
+    description
   } = _ref;
   delete visualization.id;
   delete visualization.created;
   delete visualization.createdBy;
   delete visualization.user;
+  visualization.name = name || visualization.name || _d2I18n.default.t('Untitled {{visualizationType}} visualization, {{date}}', {
+    visualizationType: (0, _visTypes.getDisplayNameByVisType)(visualization.type),
+    date: new Date().toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit'
+    })
+  });
+  visualization.description = description !== undefined ? description : visualization.description;
   return visualization;
 };
 exports.preparePayloadForSaveAs = preparePayloadForSaveAs;
+const visualizationSubscribersQuery = {
+  visualization: {
+    resource: 'visualizations',
+    id: _ref2 => {
+      let {
+        id
+      } = _ref2;
+      return id;
+    },
+    params: {
+      fields: ['subscribers', 'subscribed']
+    }
+  }
+};
+const apiFetchVisualizationSubscribers = (dataEngine, id) => {
+  return dataEngine.query(visualizationSubscribersQuery, {
+    variables: {
+      id
+    }
+  });
+};
+const preparePayloadForSave = async _ref3 => {
+  let {
+    visualization,
+    name,
+    description,
+    engine
+  } = _ref3;
+  const {
+    visualization: vis
+  } = await apiFetchVisualizationSubscribers(engine, visualization.id);
+  console.log('jj subscribers', vis);
+  visualization.subscribers = vis.subscribers;
+  visualization.subscribed = vis.subscribed;
+  visualization.name = name || visualization.name || _d2I18n.default.t('Untitled {{visualizationType}} visualization, {{date}}', {
+    visualizationType: (0, _visTypes.getDisplayNameByVisType)(visualization.type),
+    date: new Date().toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit'
+    })
+  });
+  visualization.description = description !== undefined ? description : visualization.description;
+  return visualization;
+};
+exports.preparePayloadForSave = preparePayloadForSave;
