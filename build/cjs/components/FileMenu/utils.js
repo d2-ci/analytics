@@ -75,7 +75,7 @@ const getSubscriberQuery = type => ({
       return id;
     },
     params: {
-      fields: 'subscribed,subscribers'
+      fields: 'subscribers'
     }
   }
 });
@@ -97,7 +97,6 @@ const preparePayloadForSave = async _ref3 => {
     ao
   } = await apiFetchAOSubscribers(engine, visualization.id, visualization.type);
   visualization.subscribers = ao.subscribers;
-  visualization.subscribed = ao.subscribed;
   visualization.name = name || visualization.name || _d2I18n.default.t('Untitled {{visualizationType}}, {{date}}', {
     visualizationType: (0, _visTypes.getDisplayNameByVisType)(visualization.type),
     date: new Date().toLocaleDateString(undefined, {
