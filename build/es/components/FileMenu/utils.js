@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n';
+import { getDisplayNameByVisType, getApiEndpointByVisType } from '../../modules/visTypes.js';
 export const FILE_TYPE_EVENT_REPORT = 'eventReport';
 export const FILE_TYPE_VISUALIZATION = 'visualization';
 export const FILE_TYPE_MAP = 'map';
@@ -34,11 +35,65 @@ export const appPathFor = (fileType, id, apiVersion) => {
 };
 export const preparePayloadForSaveAs = _ref => {
   let {
-    ...visualization
+    visualization,
+    name,
+    description
   } = _ref;
   delete visualization.id;
   delete visualization.created;
   delete visualization.createdBy;
   delete visualization.user;
+  visualization.name = name || visualization.name || i18n.t('Untitled {{visualizationType}}, {{date}}', {
+    visualizationType: getDisplayNameByVisType(visualization.type),
+    date: new Date().toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit'
+    })
+  });
+  visualization.description = description !== undefined ? description : visualization.description;
+  return visualization;
+};
+const getSubscriberQuery = type => ({
+  ao: {
+    resource: getApiEndpointByVisType(type),
+    id: _ref2 => {
+      let {
+        id
+      } = _ref2;
+      return id;
+    },
+    params: {
+      fields: 'subscribers'
+    }
+  }
+});
+const apiFetchAOSubscribers = (dataEngine, id, type) => {
+  return dataEngine.query(getSubscriberQuery(type), {
+    variables: {
+      id
+    }
+  });
+};
+export const preparePayloadForSave = async _ref3 => {
+  let {
+    visualization,
+    name,
+    description,
+    engine
+  } = _ref3;
+  const {
+    ao
+  } = await apiFetchAOSubscribers(engine, visualization.id, visualization.type);
+  visualization.subscribers = ao.subscribers;
+  visualization.name = name || visualization.name || i18n.t('Untitled {{visualizationType}}, {{date}}', {
+    visualizationType: getDisplayNameByVisType(visualization.type),
+    date: new Date().toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit'
+    })
+  });
+  visualization.description = description !== undefined ? description : visualization.description;
   return visualization;
 };

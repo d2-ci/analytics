@@ -12,7 +12,7 @@ export { default as DimensionFilter } from './components/Filter/Filter.js';
 export { default as DimensionMenu } from './components/DimensionMenu.js';
 export { default as PivotTable } from './components/PivotTable/PivotTable.js';
 export { default as FileMenu } from './components/FileMenu/FileMenu.js';
-export { preparePayloadForSaveAs } from './components/FileMenu/utils.js';
+export { preparePayloadForSaveAs, preparePayloadForSave } from './components/FileMenu/utils.js';
 export { default as VisTypeIcon } from './components/VisTypeIcon.js';
 export { default as LegendKey } from './components/LegendKey/LegendKey.js';
 export { default as AboutAOUnit } from './components/AboutAOUnit/AboutAOUnit.js';
@@ -99,7 +99,7 @@ export { getLayoutTypeByVisType } from './modules/visTypeToLayoutType.js';
 
 // Modules: visTypes
 
-export { VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS, VIS_TYPE_COLUMN, VIS_TYPE_STACKED_COLUMN, VIS_TYPE_BAR, VIS_TYPE_STACKED_BAR, VIS_TYPE_LINE, VIS_TYPE_AREA, VIS_TYPE_STACKED_AREA, VIS_TYPE_PIE, VIS_TYPE_RADAR, VIS_TYPE_GAUGE, VIS_TYPE_BUBBLE, VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, VIS_TYPE_SINGLE_VALUE, VIS_TYPE_PIVOT_TABLE, VIS_TYPE_SCATTER, VIS_TYPE_LINE_LIST, VIS_TYPE_OUTLIER_TABLE, visTypeDisplayNames, visTypeIcons, getDisplayNameByVisType, defaultVisType, isStacked, isMultiType, isYearOverYear, isDualAxisType, isSingleValue, isOutlierTable, isTwoCategoryChartType, isLegendSetType, isColumnBasedType, isVerticalType } from './modules/visTypes.js';
+export { VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS, VIS_TYPE_COLUMN, VIS_TYPE_STACKED_COLUMN, VIS_TYPE_BAR, VIS_TYPE_STACKED_BAR, VIS_TYPE_LINE, VIS_TYPE_AREA, VIS_TYPE_STACKED_AREA, VIS_TYPE_PIE, VIS_TYPE_RADAR, VIS_TYPE_GAUGE, VIS_TYPE_BUBBLE, VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, VIS_TYPE_SINGLE_VALUE, VIS_TYPE_PIVOT_TABLE, VIS_TYPE_SCATTER, VIS_TYPE_LINE_LIST, VIS_TYPE_OUTLIER_TABLE, VIS_TYPE_MAP, visTypeDisplayNames, visTypeIcons, getDisplayNameByVisType, defaultVisType, isStacked, isMultiType, isYearOverYear, isDualAxisType, isSingleValue, isOutlierTable, isTwoCategoryChartType, isLegendSetType, isColumnBasedType, isVerticalType } from './modules/visTypes.js';
 
 // Modules: layoutTypes
 

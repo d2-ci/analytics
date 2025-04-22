@@ -17,6 +17,7 @@ var _exportNames = {
   PivotTable: true,
   FileMenu: true,
   preparePayloadForSaveAs: true,
+  preparePayloadForSave: true,
   VisTypeIcon: true,
   LegendKey: true,
   AboutAOUnit: true,
@@ -150,6 +151,7 @@ var _exportNames = {
   VIS_TYPE_SCATTER: true,
   VIS_TYPE_LINE_LIST: true,
   VIS_TYPE_OUTLIER_TABLE: true,
+  VIS_TYPE_MAP: true,
   visTypeDisplayNames: true,
   visTypeIcons: true,
   getDisplayNameByVisType: true,
@@ -1149,6 +1151,12 @@ Object.defineProperty(exports, "VIS_TYPE_LINE_LIST", {
     return _visTypes.VIS_TYPE_LINE_LIST;
   }
 });
+Object.defineProperty(exports, "VIS_TYPE_MAP", {
+  enumerable: true,
+  get: function () {
+    return _visTypes.VIS_TYPE_MAP;
+  }
+});
 Object.defineProperty(exports, "VIS_TYPE_OUTLIER_TABLE", {
   enumerable: true,
   get: function () {
@@ -1807,6 +1815,12 @@ Object.defineProperty(exports, "ouIdHelper", {
   enumerable: true,
   get: function () {
     return _index7.ouIdHelper;
+  }
+});
+Object.defineProperty(exports, "preparePayloadForSave", {
+  enumerable: true,
+  get: function () {
+    return _utils.preparePayloadForSave;
   }
 });
 Object.defineProperty(exports, "preparePayloadForSaveAs", {
