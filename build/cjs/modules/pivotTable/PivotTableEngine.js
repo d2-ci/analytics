@@ -250,10 +250,10 @@ class PivotTableEngine {
         rawValue = (0, _parseValue.parseValue)(rawValue);
         switch (this.visualization.numberType) {
           case _pivotTableConstants.NUMBER_TYPE_ROW_PERCENTAGE:
-            renderedValue = rawValue / this.percentageTotals[row].value;
+            rawCell.pctValue = renderedValue = rawValue / this.percentageTotals[row].value;
             break;
           case _pivotTableConstants.NUMBER_TYPE_COLUMN_PERCENTAGE:
-            renderedValue = rawValue / this.percentageTotals[column].value;
+            rawCell.pctValue = renderedValue = rawValue / this.percentageTotals[column].value;
             break;
           default:
             break;
@@ -971,9 +971,9 @@ class PivotTableEngine {
         return 1 * order;
       }
       if (
-      // for percentage strings, use the renderedValue (percentage) and parse it to extract the number part to use for the comparison
+      // for percentage strings, use the pctValue (percentage value) in the sort comparison
       [_pivotTableConstants.NUMBER_TYPE_ROW_PERCENTAGE, _pivotTableConstants.NUMBER_TYPE_COLUMN_PERCENTAGE].includes(this.visualization.numberType)) {
-        return (parseFloat(valueA.renderedValue) - parseFloat(valueB.renderedValue)) * order;
+        return (valueA.pctValue - valueB.pctValue) * order;
       } else if (valueA.valueType === _valueTypes.VALUE_TYPE_NUMBER && valueB.valueType === _valueTypes.VALUE_TYPE_NUMBER) {
         return (valueA.rawValue - valueB.rawValue) * order;
       }
