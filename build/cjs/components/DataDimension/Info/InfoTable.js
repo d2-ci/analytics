@@ -1,0 +1,219 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.sentenceCaseText = exports.renderLegendSets = exports.renderHumanReadableExpression = exports.renderGroupMemberships = exports.renderDataSets = exports.getCommonFields = exports.capitalizeText = exports.InfoTable = void 0;
+var _style = _interopRequireDefault(require("styled-jsx/style"));
+var _appRuntime = require("@dhis2/app-runtime");
+var _ui = require("@dhis2/ui");
+var _moment = _interopRequireDefault(require("moment"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
+var _react = _interopRequireDefault(require("react"));
+var _index = _interopRequireDefault(require("../../../locales/index.js"));
+var _dataTypes = require("../../../modules/dataTypes.js");
+var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const getCommonFields = displayNameProp => `attributeValues[attribute[id,displayName],value],code,created,createdBy,${displayNameProp}~rename(displayName),displayDescription,href,id,lastUpdated`;
+exports.getCommonFields = getCommonFields;
+const capitalizeText = text => text && text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+exports.capitalizeText = capitalizeText;
+const sentenceCaseText = text => text && capitalizeText(text.replaceAll('_', ' ').toLowerCase());
+exports.sentenceCaseText = sentenceCaseText;
+const renderDataSets = dataSets => {
+  if (dataSets.length === 0) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+    }, _index.default.t('None')), /*#__PURE__*/_react.default.createElement(_style.default, {
+      id: _InfoPopoverStyle.default.__hash
+    }, _InfoPopoverStyle.default));
+  } else if (dataSets.length === 1) {
+    return dataSets[0].displayName;
+  } else {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
+    }, /*#__PURE__*/_react.default.createElement("ul", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, dataSets.map(_ref => {
+      let {
+        id,
+        displayName
+      } = _ref;
+      return /*#__PURE__*/_react.default.createElement("li", {
+        key: id,
+        className: `jsx-${_InfoPopoverStyle.default.__hash}`
+      }, displayName);
+    }))), /*#__PURE__*/_react.default.createElement(_style.default, {
+      id: _InfoPopoverStyle.default.__hash
+    }, _InfoPopoverStyle.default));
+  }
+};
+exports.renderDataSets = renderDataSets;
+const renderGroupMemberships = groups => {
+  if (groups.length === 0) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+    }, _index.default.t('None')), /*#__PURE__*/_react.default.createElement(_style.default, {
+      id: _InfoPopoverStyle.default.__hash
+    }, _InfoPopoverStyle.default));
+  } else if (groups.length === 1) {
+    return groups[0].displayName;
+  } else {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
+    }, /*#__PURE__*/_react.default.createElement("ul", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, groups.map(_ref2 => {
+      let {
+        id,
+        displayName
+      } = _ref2;
+      return /*#__PURE__*/_react.default.createElement("li", {
+        key: id,
+        className: `jsx-${_InfoPopoverStyle.default.__hash}`
+      }, displayName);
+    }))), /*#__PURE__*/_react.default.createElement(_style.default, {
+      id: _InfoPopoverStyle.default.__hash
+    }, _InfoPopoverStyle.default));
+  }
+};
+exports.renderGroupMemberships = renderGroupMemberships;
+const renderHumanReadableExpression = expressionData => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, expressionData.status === 'ERROR' ? /*#__PURE__*/_react.default.createElement("span", {
+  className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+}, expressionData.message) : /*#__PURE__*/_react.default.createElement("span", {
+  className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
+}, expressionData.description), /*#__PURE__*/_react.default.createElement(_style.default, {
+  id: _InfoPopoverStyle.default.__hash
+}, _InfoPopoverStyle.default));
+exports.renderHumanReadableExpression = renderHumanReadableExpression;
+const renderLegendSets = legendSets => {
+  return legendSets.length === 1 ? legendSets[0].displayName : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
+  }, /*#__PURE__*/_react.default.createElement("ul", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, legendSets.map(_ref3 => {
+    let {
+      id,
+      displayName
+    } = _ref3;
+    return /*#__PURE__*/_react.default.createElement("li", {
+      key: id,
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, displayName);
+  }))), /*#__PURE__*/_react.default.createElement(_style.default, {
+    id: _InfoPopoverStyle.default.__hash
+  }, _InfoPopoverStyle.default));
+};
+exports.renderLegendSets = renderLegendSets;
+const InfoTable = _ref4 => {
+  let {
+    dataType,
+    data,
+    error,
+    loading,
+    children
+  } = _ref4;
+  const {
+    fromServerDate
+  } = (0, _appRuntime.useTimeZoneConversion)();
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, loading && /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "loader"
+  }, /*#__PURE__*/_react.default.createElement(_ui.Center, null, /*#__PURE__*/_react.default.createElement(_ui.CircularLoader, {
+    small: true
+  }))), error && /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "error"
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('There was a problem loading information for this data item.'))), data && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("table", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "data-table"
+  }, /*#__PURE__*/_react.default.createElement("tbody", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Name')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.displayName)), children, dataType !== _dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM ? /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Description')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.displayDescription ? /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
+  }, data.displayDescription) : /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+  }, _index.default.t('None')))) : data.displayDescription && /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Description')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
+  }, data.displayDescription))), dataType !== _dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM ? /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Code')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.code ? data.code : /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
+  }, _index.default.t('None')))) : data.code && /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Code')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, data.code)), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('ID')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "code"
+  }, data.id))), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Last updated date')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, `${(0, _moment.default)(fromServerDate(data.lastUpdated)).fromNow()} (${(0, _moment.default)(fromServerDate(data.lastUpdated)).format('YYYY-MM-DD')})`)), /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Created date')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, `${(0, _moment.default)(fromServerDate(data.created)).fromNow()} (${(0, _moment.default)(fromServerDate(data.created)).format('YYYY-MM-DD')})`)), data.createdBy && /*#__PURE__*/_react.default.createElement("tr", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, _index.default.t('Created by')), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, `${data.createdBy.displayName}, ${data.createdBy.username}`)), data.attributeValues.map(_ref5 => {
+    let {
+      attribute,
+      value
+    } = _ref5;
+    return /*#__PURE__*/_react.default.createElement("tr", {
+      key: attribute.id,
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, /*#__PURE__*/_react.default.createElement("th", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, attribute.displayName), /*#__PURE__*/_react.default.createElement("td", {
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, value));
+  })))), /*#__PURE__*/_react.default.createElement(_style.default, {
+    id: _InfoPopoverStyle.default.__hash
+  }, _InfoPopoverStyle.default));
+};
+exports.InfoTable = InfoTable;
+InfoTable.propTypes = {
+  children: _propTypes.default.node,
+  data: _propTypes.default.object,
+  dataType: _propTypes.default.string,
+  error: _propTypes.default.string,
+  loading: _propTypes.default.bool
+};
