@@ -48,8 +48,7 @@ export const FileMenu = _ref => {
           type: fileType,
           object: fileObject,
           onClose: onDialogClose,
-          onRename: onRename,
-          onError: onError
+          onRename: onRename
         });
       case 'translate':
         return /*#__PURE__*/React.createElement(TranslationDialog, {
