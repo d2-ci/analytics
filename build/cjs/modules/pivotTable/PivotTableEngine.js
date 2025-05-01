@@ -250,10 +250,10 @@ class PivotTableEngine {
         rawValue = (0, _parseValue.parseValue)(rawValue);
         switch (this.visualization.numberType) {
           case _pivotTableConstants.NUMBER_TYPE_ROW_PERCENTAGE:
-            renderedValue = rawValue / this.percentageTotals[row].value;
+            rawCell.pctValue = renderedValue = rawValue / this.percentageTotals[row].value;
             break;
           case _pivotTableConstants.NUMBER_TYPE_COLUMN_PERCENTAGE:
-            renderedValue = rawValue / this.percentageTotals[column].value;
+            rawCell.pctValue = renderedValue = rawValue / this.percentageTotals[column].value;
             break;
           default:
             break;
@@ -264,6 +264,19 @@ class PivotTableEngine {
       rawCell.empty = false;
       rawCell.rawValue = rawValue;
       rawCell.renderedValue = renderedValue;
+    }
+
+    // show the original value in the tooltip
+    if ([_pivotTableConstants.NUMBER_TYPE_COLUMN_PERCENTAGE, _pivotTableConstants.NUMBER_TYPE_ROW_PERCENTAGE].includes(this.visualization.numberType)) {
+      rawCell.titleValue = _d2I18n.default.t('Value: {{value}}', {
+        value: (0, _renderValue.renderValue)(rawCell.rawValue, valueType,
+        // force VALUE for formatting the original value
+        {
+          ...this.visualization,
+          numberType: _pivotTableConstants.NUMBER_TYPE_VALUE
+        }),
+        nsSeparator: '^^'
+      });
     }
     if ([_pivotTableConstants.CELL_TYPE_TOTAL, _pivotTableConstants.CELL_TYPE_SUBTOTAL].includes(rawCell.cellType) && rawCell.rawValue === _pivotTableConstants.AGGREGATE_TYPE_NA) {
       rawCell.titleValue = _d2I18n.default.t('Not applicable');
@@ -957,7 +970,11 @@ class PivotTableEngine {
       if (!valueB || valueB.empty) {
         return 1 * order;
       }
-      if (valueA.valueType === _valueTypes.VALUE_TYPE_NUMBER && valueB.valueType === _valueTypes.VALUE_TYPE_NUMBER) {
+      if (
+      // for percentage strings, use the pctValue (percentage value) in the sort comparison
+      [_pivotTableConstants.NUMBER_TYPE_ROW_PERCENTAGE, _pivotTableConstants.NUMBER_TYPE_COLUMN_PERCENTAGE].includes(this.visualization.numberType)) {
+        return (valueA.pctValue - valueB.pctValue) * order;
+      } else if (valueA.valueType === _valueTypes.VALUE_TYPE_NUMBER && valueB.valueType === _valueTypes.VALUE_TYPE_NUMBER) {
         return (valueA.rawValue - valueB.rawValue) * order;
       }
       return valueA.renderedValue.localeCompare(valueB.renderedValue) * order;
