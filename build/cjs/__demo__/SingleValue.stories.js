@@ -686,7 +686,7 @@ const Default = () => {
     checked: showIcon,
     onChange: () => setShowIcon(!showIcon),
     type: "checkbox"
-  }), "\xA0Show icon"), /*#__PURE__*/_react.default.createElement("label", null, "Indicator type\xA0", /*#__PURE__*/_react.default.createElement("select", {
+  }), "\xA0Show icon"), /*#__PURE__*/_react.default.createElement("label", null, "Indicator type", ' ', /*#__PURE__*/_react.default.createElement("select", {
     onChange: event => setIndicatorType(event.target.value)
   }, indicatorTypes.map((type, index) => {
     return /*#__PURE__*/_react.default.createElement("option", {
@@ -696,7 +696,7 @@ const Default = () => {
     checked: exportAsPdf,
     onChange: () => setExportAsPdf(!exportAsPdf),
     type: "checkbox"
-  }), "\xA0Export as PDF"), /*#__PURE__*/_react.default.createElement("button", {
+  }), ' ', "Export as PDF"), /*#__PURE__*/_react.default.createElement("button", {
     onClick: downloadOffline
   }, "Download offline")), /*#__PURE__*/_react.default.createElement("div", {
     style: {
