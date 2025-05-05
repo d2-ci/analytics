@@ -80,6 +80,8 @@ const preparePayloadForSave = _ref2 => {
     })
   });
   visualization.description = description !== undefined ? description : visualization.description;
+  delete visualization.displayName;
+  delete visualization.displayDescription;
   return visualization;
 };
 exports.preparePayloadForSave = preparePayloadForSave;
