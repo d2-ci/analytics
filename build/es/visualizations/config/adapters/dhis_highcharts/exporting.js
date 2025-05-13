@@ -1,4 +1,4 @@
-import { VIS_TYPE_SCATTER, VIS_TYPE_SINGLE_VALUE } from '../../../../modules/visTypes.js';
+import { VIS_TYPE_SINGLE_VALUE } from '../../../../modules/visTypes.js';
 import { getSingleValueBackgroundColor } from './customSVGOptions/singleValue/getSingleValueBackgroundColor.js';
 import loadSingleValueSVG from './events/loadCustomSVG/singleValue/index.js';
 const DEFAULT_EXPORT_BACKGROUND_COLOR = '#ffffff';
@@ -32,17 +32,6 @@ export default function getExporting(layout, legendSets, series) {
             events: {
               load: loadSingleValueSVG
             }
-          }
-        }
-      };
-    // This is a workaround for https://github.com/highcharts/highcharts/issues/8333
-    case VIS_TYPE_SCATTER:
-      return {
-        ...BASE_EXPORTING_CONFIG,
-        chartOptions: {
-          ...BASE_EXPORTING_CONFIG.chartOptions,
-          boost: {
-            enabled: false
           }
         }
       };

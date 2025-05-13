@@ -42,17 +42,6 @@ function getExporting(layout, legendSets, series) {
           }
         }
       };
-    // This is a workaround for https://github.com/highcharts/highcharts/issues/8333
-    case _visTypes.VIS_TYPE_SCATTER:
-      return {
-        ...BASE_EXPORTING_CONFIG,
-        chartOptions: {
-          ...BASE_EXPORTING_CONFIG.chartOptions,
-          boost: {
-            enabled: false
-          }
-        }
-      };
     default:
       return BASE_EXPORTING_CONFIG;
   }

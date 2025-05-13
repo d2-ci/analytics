@@ -13,9 +13,12 @@ require("highcharts/modules/offline-exporting");
 require("highcharts/modules/pattern-fill");
 require("highcharts/modules/solid-gauge");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-/* Whitelist some additional SVG attributes here. Without this,
- * the PDF export for the SingleValue visualization breaks. */
-_highcharts.default.AST.allowedAttributes.push('fill-rule', 'clip-rule');
+/* Whitelist some additional SVG attributes and tags here. Without this,
+ * the PDF export for the SingleValue visualization and charts in boost-mode
+ * breaks. For more info about the boost mode issue, see:
+ * https://github.com/highcharts/highcharts/issues/8333 */
+_highcharts.default.AST.allowedTags.push('fedropshadow', 'image');
+_highcharts.default.AST.allowedAttributes.push('transform-origin', 'preserveAspectRatio', 'fill-rule', 'clip-rule');
 
 /* This is a workaround for https://github.com/highcharts/highcharts/issues/22008
  * We add some transparent text in a non-ASCII script to the chart to prevent
