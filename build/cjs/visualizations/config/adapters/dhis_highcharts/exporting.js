@@ -27,22 +27,20 @@ const BASE_EXPORTING_CONFIG = {
   }
 };
 function getExporting(layout, legendSets, series) {
-  switch (layout.type) {
-    case _visTypes.VIS_TYPE_SINGLE_VALUE:
-      return {
-        ...BASE_EXPORTING_CONFIG,
-        chartOptions: {
-          ...BASE_EXPORTING_CONFIG.chartOptions,
-          chart: {
-            ...BASE_EXPORTING_CONFIG.chartOptions.chart,
-            backgroundColor: (0, _getSingleValueBackgroundColor.getSingleValueBackgroundColor)(layout.legend, legendSets, series[0], DEFAULT_EXPORT_BACKGROUND_COLOR),
-            events: {
-              load: _index.default
-            }
+  if (layout.type === _visTypes.VIS_TYPE_SINGLE_VALUE) {
+    return {
+      ...BASE_EXPORTING_CONFIG,
+      chartOptions: {
+        ...BASE_EXPORTING_CONFIG.chartOptions,
+        chart: {
+          ...BASE_EXPORTING_CONFIG.chartOptions.chart,
+          backgroundColor: (0, _getSingleValueBackgroundColor.getSingleValueBackgroundColor)(layout.legend, legendSets, series[0], DEFAULT_EXPORT_BACKGROUND_COLOR),
+          events: {
+            load: _index.default
           }
         }
-      };
-    default:
-      return BASE_EXPORTING_CONFIG;
+      }
+    };
   }
+  return BASE_EXPORTING_CONFIG;
 }
