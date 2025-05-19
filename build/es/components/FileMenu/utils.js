@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n';
-import { getDisplayNameByVisType, getApiEndpointByVisType } from '../../modules/visTypes.js';
+import { getDisplayNameByVisType } from '../../modules/visTypes.js';
 export const FILE_TYPE_EVENT_REPORT = 'eventReport';
 export const FILE_TYPE_VISUALIZATION = 'visualization';
 export const FILE_TYPE_MAP = 'map';
@@ -54,38 +54,12 @@ export const preparePayloadForSaveAs = _ref => {
   visualization.description = description !== undefined ? description : visualization.description;
   return visualization;
 };
-const getSubscriberQuery = type => ({
-  ao: {
-    resource: getApiEndpointByVisType(type),
-    id: _ref2 => {
-      let {
-        id
-      } = _ref2;
-      return id;
-    },
-    params: {
-      fields: 'subscribers'
-    }
-  }
-});
-const apiFetchAOSubscribers = (dataEngine, id, type) => {
-  return dataEngine.query(getSubscriberQuery(type), {
-    variables: {
-      id
-    }
-  });
-};
-export const preparePayloadForSave = async _ref3 => {
+export const preparePayloadForSave = _ref2 => {
   let {
     visualization,
     name,
-    description,
-    engine
-  } = _ref3;
-  const {
-    ao
-  } = await apiFetchAOSubscribers(engine, visualization.id, visualization.type);
-  visualization.subscribers = ao.subscribers;
+    description
+  } = _ref2;
   visualization.name = name || visualization.name || i18n.t('Untitled {{visualizationType}}, {{date}}', {
     visualizationType: getDisplayNameByVisType(visualization.type),
     date: new Date().toLocaleDateString(undefined, {
@@ -95,5 +69,7 @@ export const preparePayloadForSave = async _ref3 => {
     })
   });
   visualization.description = description !== undefined ? description : visualization.description;
+  delete visualization.displayName;
+  delete visualization.displayDescription;
   return visualization;
 };

@@ -65,38 +65,12 @@ const preparePayloadForSaveAs = _ref => {
   return visualization;
 };
 exports.preparePayloadForSaveAs = preparePayloadForSaveAs;
-const getSubscriberQuery = type => ({
-  ao: {
-    resource: (0, _visTypes.getApiEndpointByVisType)(type),
-    id: _ref2 => {
-      let {
-        id
-      } = _ref2;
-      return id;
-    },
-    params: {
-      fields: 'subscribers'
-    }
-  }
-});
-const apiFetchAOSubscribers = (dataEngine, id, type) => {
-  return dataEngine.query(getSubscriberQuery(type), {
-    variables: {
-      id
-    }
-  });
-};
-const preparePayloadForSave = async _ref3 => {
+const preparePayloadForSave = _ref2 => {
   let {
     visualization,
     name,
-    description,
-    engine
-  } = _ref3;
-  const {
-    ao
-  } = await apiFetchAOSubscribers(engine, visualization.id, visualization.type);
-  visualization.subscribers = ao.subscribers;
+    description
+  } = _ref2;
   visualization.name = name || visualization.name || _d2I18n.default.t('Untitled {{visualizationType}}, {{date}}', {
     visualizationType: (0, _visTypes.getDisplayNameByVisType)(visualization.type),
     date: new Date().toLocaleDateString(undefined, {
@@ -106,6 +80,8 @@ const preparePayloadForSave = async _ref3 => {
     })
   });
   visualization.description = description !== undefined ? description : visualization.description;
+  delete visualization.displayName;
+  delete visualization.displayDescription;
   return visualization;
 };
 exports.preparePayloadForSave = preparePayloadForSave;

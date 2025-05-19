@@ -28,6 +28,15 @@ _highcharts.default.addEvent(_highcharts.default.Chart, 'load', function () {
     opacity: 0
   }).add();
 });
+
+/* Workaround for https://github.com/highcharts/highcharts/issues/23049
+ * (there happen to be 10 colors and 10 patterns)*/
+const {
+  colors
+} = _highcharts.default.getOptions();
+_highcharts.default.patterns.forEach((pattern, i) => {
+  pattern.color = colors[i];
+});
 function drawLegendSymbolWrap() {
   const pick = _highcharts.default.pick;
   _highcharts.default.wrap(_highcharts.default.seriesTypes.column.prototype, 'drawLegendSymbol', function (proceed, legend, item) {
