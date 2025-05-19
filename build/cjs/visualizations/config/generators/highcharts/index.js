@@ -15,6 +15,15 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 /* Whitelist some additional SVG attributes here. Without this,
  * the PDF export for the SingleValue visualization breaks. */
 _highcharts.default.AST.allowedAttributes.push('fill-rule', 'clip-rule');
+
+/* Workaround for https://github.com/highcharts/highcharts/issues/23049
+ * (there happen to be 10 colors and 10 patterns)*/
+const {
+  colors
+} = _highcharts.default.getOptions();
+_highcharts.default.patterns.forEach((pattern, i) => {
+  pattern.color = colors[i];
+});
 function drawLegendSymbolWrap() {
   const pick = _highcharts.default.pick;
   _highcharts.default.wrap(_highcharts.default.seriesTypes.column.prototype, 'drawLegendSymbol', function (proceed, legend, item) {
