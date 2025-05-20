@@ -5,8 +5,8 @@ export function addIconElement(svgString, color) {
   const iconElWidth = svgIconDocument.documentElement.getAttribute('width');
   const iconGroup = this.renderer.g('icon').attr({
     color,
-    'data-test': 'visualization-icon'
-  }).css({
+    fill: color,
+    'data-test': 'visualization-icon',
     visibility: 'hidden'
   });
 

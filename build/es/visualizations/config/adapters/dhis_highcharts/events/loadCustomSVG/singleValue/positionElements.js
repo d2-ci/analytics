@@ -22,11 +22,8 @@ export function positionElements(valueElement, subTextElement, iconElement, spac
     const iconHeight = height * scale;
     const valueElementHeight = valueElementBox.height * ACTUAL_NUMBER_HEIGHT_FACTOR;
     const translateY = layoutRect.y + (valueElementHeight - iconHeight) / 2;
-
-    /* The icon is a <g> with <path> elements that contain coordinates.
-     * These path-coordinates only scale correctly when using CSS translate */
-    iconElement.css({
-      transform: `translate(${translateX}px, ${translateY}px) scale(${scale})`
+    iconElement.attr({
+      transform: `translate(${translateX} ${translateY}) scale(${scale})`
     });
   }
   if (subTextElement) {
