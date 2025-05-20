@@ -97,7 +97,7 @@ export default function (_ref) {
       enabled: false
     },
     // exporting
-    exporting: getExporting(_layout.type),
+    exporting: getExporting(_layout, _extraOptions.legendSets, series),
     /* The config object passed to the Highcharts Chart constructor
      * can contain arbitrary properties, which are made accessible
      * under the Chart instance's `userOptions` member. This means
