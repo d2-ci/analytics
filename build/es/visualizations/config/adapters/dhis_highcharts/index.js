@@ -135,7 +135,7 @@ export default function (_ref) {
   }
 
   // hide empty categories
-  if (_layout.hideEmptyRowItems !== 'NONE') {
+  if (_layout.hideEmptyRowItems && _layout.hideEmptyRowItems !== 'NONE') {
     config = getTrimmedConfig(config, _layout);
   }
 

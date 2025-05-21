@@ -16,10 +16,9 @@ function arrayNullsOnly(array) {
   return (0, _arrayContains.default)(array, null) && (0, _arrayUnique.default)(array).length === 1;
 }
 function getEmptySeriesIndexes(series) {
-  var _series$;
   const emptyIndexes = [];
   let seriesValues;
-  (_series$ = series[0]) === null || _series$ === void 0 ? void 0 : _series$.data.forEach((value, index) => {
+  series[0].data.forEach((value, index) => {
     seriesValues = [];
     series.forEach(_ref => {
       let {
@@ -86,9 +85,9 @@ function _default(config, layout) {
   }
 }
 function getEmptySeriesGroupIndexes(series) {
-  var _series$2;
+  var _series$;
   const emptyGroupIndexes = [];
-  (_series$2 = series[0]) === null || _series$2 === void 0 ? void 0 : _series$2.custom.data.forEach((groupObj, groupIndex) => {
+  (_series$ = series[0]) === null || _series$ === void 0 ? void 0 : _series$.custom.data.forEach((groupObj, groupIndex) => {
     const seriesGroupValues = [];
     groupObj.forEach((_, index) => series.forEach(seriesObj => seriesGroupValues.push(seriesObj.custom.data[groupIndex][index])));
     if (arrayNullsOnly(seriesGroupValues)) {
