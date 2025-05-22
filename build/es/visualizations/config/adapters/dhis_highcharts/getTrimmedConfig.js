@@ -78,9 +78,8 @@ export default function (config, layout) {
   }
 }
 function getEmptySeriesGroupIndexes(series) {
-  var _series$;
   const emptyGroupIndexes = [];
-  (_series$ = series[0]) === null || _series$ === void 0 ? void 0 : _series$.custom.data.forEach((groupObj, groupIndex) => {
+  series[0].custom.data.forEach((groupObj, groupIndex) => {
     const seriesGroupValues = [];
     groupObj.forEach((_, index) => series.forEach(seriesObj => seriesGroupValues.push(seriesObj.custom.data[groupIndex][index])));
     if (arrayNullsOnly(seriesGroupValues)) {
