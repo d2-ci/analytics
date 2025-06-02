@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = _default;
 var _isString = _interopRequireDefault(require("d2-utilizr/lib/isString"));
 var _objectClean = _interopRequireDefault(require("d2-utilizr/lib/objectClean"));
+var _hideEmptyRowItems = require("../../../../modules/hideEmptyRowItems.js");
 var _legends = require("../../../../modules/legends.js");
 var _index = require("../../../../modules/outliers/index.js");
 var _visTypes = require("../../../../modules/visTypes.js");
@@ -144,7 +145,7 @@ function _default(_ref) {
   }
 
   // hide empty categories
-  if (_layout.hideEmptyRowItems && _layout.hideEmptyRowItems !== 'NONE') {
+  if (_layout.hideEmptyRowItems && [_hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST, _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_AFTER_LAST, _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST, _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_ALL].includes(_layout.hideEmptyRowItems)) {
     config = (0, _getTrimmedConfig.default)(config, _layout);
   }
 

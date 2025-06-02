@@ -215,6 +215,10 @@ var _exportNames = {
   LEGEND_DISPLAY_STYLE_FILL: true,
   LEGEND_DISPLAY_STYLE_TEXT: true,
   getColorByValueFromLegendSet: true,
+  HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST: true,
+  HIDE_EMPTY_ROW_ITEMS_AFTER_LAST: true,
+  HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST: true,
+  HIDE_EMPTY_ROW_ITEMS_ALL: true,
   formatValue: true,
   COLOR_SET_DEFAULT: true,
   COLOR_SET_BASIC: true,
@@ -711,6 +715,30 @@ Object.defineProperty(exports, "FixedPeriodSelect", {
   enumerable: true,
   get: function () {
     return _FixedPeriodSelect.default;
+  }
+});
+Object.defineProperty(exports, "HIDE_EMPTY_ROW_ITEMS_AFTER_LAST", {
+  enumerable: true,
+  get: function () {
+    return _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_AFTER_LAST;
+  }
+});
+Object.defineProperty(exports, "HIDE_EMPTY_ROW_ITEMS_ALL", {
+  enumerable: true,
+  get: function () {
+    return _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_ALL;
+  }
+});
+Object.defineProperty(exports, "HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST", {
+  enumerable: true,
+  get: function () {
+    return _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST;
+  }
+});
+Object.defineProperty(exports, "HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST", {
+  enumerable: true,
+  get: function () {
+    return _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST;
   }
 });
 Object.defineProperty(exports, "ITEM", {
@@ -1951,6 +1979,7 @@ var _index10 = require("./modules/layoutUiRules/index.js");
 var _index11 = require("./visualizations/index.js");
 var _fontStyle = require("./modules/fontStyle.js");
 var _legends = require("./modules/legends.js");
+var _hideEmptyRowItems = require("./modules/hideEmptyRowItems.js");
 var _renderValue = require("./modules/renderValue.js");
 var _colorSets = require("./visualizations/util/colors/colorSets.js");
 var _index12 = require("./components/PeriodDimension/utils/index.js");

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = _default;
 var _arrayContains = _interopRequireDefault(require("d2-utilizr/lib/arrayContains"));
 var _arrayUnique = _interopRequireDefault(require("d2-utilizr/lib/arrayUnique"));
+var _hideEmptyRowItems = require("../../../../modules/hideEmptyRowItems.js");
 var _visTypes = require("../../../../modules/visTypes.js");
 var _getTwoCategorySplitSerieData = _interopRequireDefault(require("./getTwoCategorySplitSerieData.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -60,16 +61,16 @@ function getFirstLastValueIndexes(series) {
 function cleanData(data, emptySeriesIndexes, firstValueIndex, lastValueIndex, hideEmptyRowItems) {
   let cleanedData;
   switch (hideEmptyRowItems) {
-    case 'ALL':
+    case _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_ALL:
       cleanedData = arrayCleanUndefined(data.map((value, index) => (0, _arrayContains.default)(emptySeriesIndexes, index) ? undefined : value));
       break;
-    case 'BEFORE_FIRST':
+    case _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST:
       cleanedData = data.slice(firstValueIndex);
       break;
-    case 'AFTER_LAST':
+    case _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_AFTER_LAST:
       cleanedData = data.slice(0, lastValueIndex + 1);
       break;
-    case 'BEFORE_FIRST_AFTER_LAST':
+    case _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST:
       cleanedData = data.slice(firstValueIndex, lastValueIndex + 1);
       break;
     default:
