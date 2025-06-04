@@ -1,5 +1,6 @@
 import isString from 'd2-utilizr/lib/isString';
 import objectClean from 'd2-utilizr/lib/objectClean';
+import { HIDE_EMPTY_ROW_ITEMS_AFTER_LAST, HIDE_EMPTY_ROW_ITEMS_ALL, HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST, HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST } from '../../../../modules/hideEmptyRowItems.js';
 import { LEGEND_DISPLAY_STRATEGY_BY_DATA_ITEM, LEGEND_DISPLAY_STRATEGY_FIXED } from '../../../../modules/legends.js';
 import { getOutlierHelper } from '../../../../modules/outliers/index.js';
 import { isStacked, isLegendSetType, VIS_TYPE_SCATTER, VIS_TYPE_GAUGE, VIS_TYPE_LINE } from '../../../../modules/visTypes.js';
@@ -135,7 +136,7 @@ export default function (_ref) {
   }
 
   // hide empty categories
-  if (_layout.hideEmptyRowItems !== 'NONE') {
+  if (_layout.hideEmptyRowItems && [HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST, HIDE_EMPTY_ROW_ITEMS_AFTER_LAST, HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST, HIDE_EMPTY_ROW_ITEMS_ALL].includes(_layout.hideEmptyRowItems)) {
     config = getTrimmedConfig(config, _layout);
   }
 
