@@ -19,8 +19,8 @@ const Wrapper = story => /*#__PURE__*/_react.default.createElement(_appServiceCo
     }
   }
 }, /*#__PURE__*/_react.default.createElement(_appRuntime.DataProvider, {
-  baseUrl: "https://test.e2e.dhis2.org/analytics-41dev",
-  apiVersion: "41"
+  baseUrl: "https://test.e2e.dhis2.org/anly-42",
+  apiVersion: "42"
 }, story()));
 var _default = exports.default = {
   title: 'DataDimension',
