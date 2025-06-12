@@ -40,22 +40,14 @@ const CachedDataQueryProvider = _ref => {
         if (result instanceof Promise) {
           setTransformLoading(true);
           const awaitedResult = await result;
-          if (isMounted) {
-            setTransformedData(awaitedResult);
-          }
+          isMounted && setTransformedData(awaitedResult);
         } else {
-          if (isMounted) {
-            setTransformedData(result);
-          }
+          isMounted && setTransformedData(result);
         }
       } catch (err) {
-        if (isMounted) {
-          setTransformError(err);
-        }
+        isMounted && setTransformError(err);
       } finally {
-        if (isMounted) {
-          setTransformLoading(false);
-        }
+        isMounted && setTransformLoading(false);
       }
     };
     transform();
@@ -73,7 +65,7 @@ const CachedDataQueryProvider = _ref => {
     return /*#__PURE__*/_react.default.createElement(_ui.NoticeBox, {
       error: true,
       title: _d2I18n.default.t('Network error')
-    }, error && error.message || transformError && transformError.message || fallbackMsg);
+    }, (error === null || error === void 0 ? void 0 : error.message) || (transformError === null || transformError === void 0 ? void 0 : transformError.message) || fallbackMsg);
   }
   return /*#__PURE__*/_react.default.createElement(CachedDataQueryCtx.Provider, {
     value: transformedData
