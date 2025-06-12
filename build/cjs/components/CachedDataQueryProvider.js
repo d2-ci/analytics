@@ -26,7 +26,7 @@ const CachedDataQueryProvider = _ref => {
     loading
   } = (0, _appRuntime.useDataQuery)(query);
   const [transformedData, setTransformedData] = (0, _react.useState)(undefined);
-  const [transformLoading, setTransformLoading] = (0, _react.useState)(false);
+  const [transformLoading, setTransformLoading] = (0, _react.useState)(Boolean(dataTransformation));
   const [transformError, setTransformError] = (0, _react.useState)(null);
   (0, _react.useEffect)(() => {
     let isMounted = true;
