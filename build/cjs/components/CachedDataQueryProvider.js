@@ -30,27 +30,23 @@ const CachedDataQueryProvider = _ref => {
   const [transformError, setTransformError] = (0, _react.useState)(null);
   (0, _react.useEffect)(() => {
     let isMounted = true;
-    const transform = async () => {
+    const runTransformation = async () => {
       if (!rawData || !dataTransformation) {
-        setTransformedData(rawData);
+        isMounted && setTransformedData(rawData);
         return;
       }
       try {
-        const result = dataTransformation(rawData);
-        if (result instanceof Promise) {
-          setTransformLoading(true);
-          const awaitedResult = await result;
-          isMounted && setTransformedData(awaitedResult);
-        } else {
-          isMounted && setTransformedData(result);
-        }
+        setTransformLoading(true);
+        const result = await Promise.resolve(dataTransformation(rawData));
+        isMounted && setTransformedData(result);
+        setTransformError(null);
       } catch (err) {
         isMounted && setTransformError(err);
       } finally {
         isMounted && setTransformLoading(false);
       }
     };
-    transform();
+    runTransformation();
     return () => {
       isMounted = false;
     };
