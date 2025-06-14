@@ -23,7 +23,7 @@ const TranslationModal = _ref => {
   } = _ref;
   const [translations, setTranslations] = (0, _react.useState)([]);
   const endpointPath = new URL(objectToTranslate.href).pathname;
-  const endpointPathMatch = endpointPath.match(/api\/\d+\/(?<resource>.+)/);
+  const endpointPathMatch = endpointPath.match(/api\/(?:\d+\/)?(?<resource>.+)/);
   const resource = endpointPathMatch !== null && endpointPathMatch !== void 0 && endpointPathMatch.groups ? endpointPathMatch.groups.resource : null;
   const {
     translationsData,

@@ -121,6 +121,10 @@ export { FONT_STYLE_VISUALIZATION_TITLE, FONT_STYLE_VISUALIZATION_SUBTITLE, FONT
 
 export { LEGEND_DISPLAY_STRATEGY_BY_DATA_ITEM, LEGEND_DISPLAY_STRATEGY_FIXED, LEGEND_DISPLAY_STYLE_FILL, LEGEND_DISPLAY_STYLE_TEXT, getColorByValueFromLegendSet } from './modules/legends.js';
 
+// Modules: hideEmptyRowItems
+
+export { HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST, HIDE_EMPTY_ROW_ITEMS_AFTER_LAST, HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST, HIDE_EMPTY_ROW_ITEMS_ALL } from './modules/hideEmptyRowItems.js';
+
 // Modules: general
 
 export { renderValue as formatValue } from './modules/renderValue.js';

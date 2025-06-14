@@ -10,8 +10,8 @@ var _OpenFileDialog = require("../components/OpenFileDialog/OpenFileDialog.js");
 var _visTypes = require("../modules/visTypes.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const Wrapper = story => /*#__PURE__*/_react.default.createElement(_appRuntime.DataProvider, {
-  baseUrl: "https://test.e2e.dhis2.org/analytics-41dev/",
-  apiVersion: "41"
+  baseUrl: "https://test.e2e.dhis2.org/anly-42/",
+  apiVersion: "42"
 }, story());
 const user = {
   displayName: 'John Traore',

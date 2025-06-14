@@ -1,3 +1,17 @@
+## [28.0.3](https://github.com/dhis2/analytics/compare/v28.0.2...v28.0.3) (2025-06-06)
+
+
+### Bug Fixes
+
+* avoid crash in TranslationDialog component (DHIS2-19539) ([#1779](https://github.com/dhis2/analytics/issues/1779)) ([dd6ad13](https://github.com/dhis2/analytics/commit/dd6ad137aef47141373fd10cd39d6eefc71b6f11))
+
+## [28.0.2](https://github.com/dhis2/analytics/compare/v28.0.1...v28.0.2) (2025-06-04)
+
+
+### Bug Fixes
+
+* do not call getTrimmedConfig if hideEmptyRowItems is not available (DHIS2-19611) ([#1780](https://github.com/dhis2/analytics/issues/1780)) ([41e5bb4](https://github.com/dhis2/analytics/commit/41e5bb423edda39b81a7158958a7c058dfdf60fb))
+
 ## [28.0.1](https://github.com/dhis2/analytics/compare/v28.0.0...v28.0.1) (2025-05-20)
 
 
