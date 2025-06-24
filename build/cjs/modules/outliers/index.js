@@ -5,8 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getOutlierHelper = exports.defaultConfig = exports.PROP_THRESHOLD_FACTOR = exports.PROP_OUTLIER_METHOD = exports.PROP_NORMALIZATION_METHOD = exports.PROP_EXTREME_LINES_VALUE = exports.PROP_EXTREME_LINES = exports.PROP_ENABLED = exports.DEFAULT_THRESHOLD_FACTOR = exports.DEFAULT_OUTLIER_METHOD = exports.DEFAULT_NORMALIZATION_METHOD = exports.DEFAULT_EXTREME_LINES_VALUE = exports.DEFAULT_ENABLED = void 0;
 var _isNumber = _interopRequireDefault(require("d2-utilizr/lib/isNumber"));
-var _isNumeric = _interopRequireDefault(require("d2-utilizr/lib/isNumeric"));
 var _index = _interopRequireDefault(require("../../locales/index.js"));
+var _utils = require("../../modules/utils.js");
 var _iqr = require("./iqr.js");
 var _modZScore = require("./modZScore.js");
 var _normalization = require("./normalization.js");
@@ -36,7 +36,7 @@ const defaultConfig = exports.defaultConfig = {
 };
 const getExtremeLines = (percentage, xyStats) => {
   const lines = [];
-  if (!(0, _isNumeric.default)(percentage)) {
+  if (!(0, _utils.isNumeric)(percentage)) {
     return lines;
   }
   const xExtremeValue = xyStats.xSum * (percentage / 100);
@@ -60,7 +60,7 @@ const getMinMaxValue = (outlierHelper, isVertical, isMax) => {
   const prop = (isVertical ? 'y' : 'x') + (isMax ? 'Max' : 'Min');
   const extremeValue = outlierHelper.extremeLines && outlierHelper.extremeLines[isVertical ? 1 : 0].value;
   const extremeFactor = (0, _isNumber.default)(extremeValue) && isMax ? extremeValue + Math.abs(extremeValue) * 0.1 : extremeValue - Math.abs(extremeValue) * 0.1;
-  return [...outlierHelper.thresholds.map(t => (0, _xyStats.getXYStats)([t.line[0], t.line[t.line.length - 1]])[prop]), extremeFactor].filter(_isNumeric.default).sort(isMax ? (a, b) => b - a : (a, b) => a - b)[0];
+  return [...outlierHelper.thresholds.map(t => (0, _xyStats.getXYStats)([t.line[0], t.line[t.line.length - 1]])[prop]), extremeFactor].filter(_utils.isNumeric).sort(isMax ? (a, b) => b - a : (a, b) => a - b)[0];
 };
 const getOutlierHelper = (data, userConfig = {}) => {
   if (data.length < 3) {
@@ -93,7 +93,7 @@ const getOutlierHelper = (data, userConfig = {}) => {
     default:
       helper = (0, _iqr.getIQRHelper)(normalizationHelper, config, options);
   }
-  if (config[PROP_EXTREME_LINES][PROP_ENABLED] && (0, _isNumeric.default)(config[PROP_EXTREME_LINES][PROP_EXTREME_LINES_VALUE])) {
+  if (config[PROP_EXTREME_LINES][PROP_ENABLED] && (0, _utils.isNumeric)(config[PROP_EXTREME_LINES][PROP_EXTREME_LINES_VALUE])) {
     helper.extremeLines = getExtremeLines(config[PROP_EXTREME_LINES][PROP_EXTREME_LINES_VALUE], options.xyStats);
   }
 

@@ -1,7 +1,7 @@
-import isNumeric from 'd2-utilizr/lib/isNumeric';
 import isString from 'd2-utilizr/lib/isString';
 import objectClean from 'd2-utilizr/lib/objectClean';
 import { FONT_STYLE_AXIS_LABELS, FONT_STYLE_REGRESSION_LINE_LABEL, FONT_STYLE_OPTION_TEXT_COLOR, FONT_STYLE_OPTION_FONT_SIZE, FONT_STYLE_OPTION_BOLD, FONT_STYLE_OPTION_ITALIC, FONT_STYLE_OPTION_TEXT_ALIGN, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, TEXT_ALIGN_RIGHT, mergeFontStyleWithDefault } from '../../../../modules/fontStyle.js';
+import { isNumeric } from '../../../../modules/utils.js';
 import { isVerticalType } from '../../../../modules/visTypes.js';
 import getFormatter from './getFormatter.js';
 import { getTextAlignOption } from './getTextAlignOption.js';

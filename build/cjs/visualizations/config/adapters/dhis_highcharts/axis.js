@@ -4,10 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getRegressionLine = exports.getMinValue = exports.getMaxValue = exports.getLabels = exports.getGridLineColor = void 0;
-var _isNumeric = _interopRequireDefault(require("d2-utilizr/lib/isNumeric"));
 var _isString = _interopRequireDefault(require("d2-utilizr/lib/isString"));
 var _objectClean = _interopRequireDefault(require("d2-utilizr/lib/objectClean"));
 var _fontStyle = require("../../../../modules/fontStyle.js");
+var _utils = require("../../../../modules/utils.js");
 var _visTypes = require("../../../../modules/visTypes.js");
 var _getFormatter = _interopRequireDefault(require("./getFormatter.js"));
 var _getTextAlignOption = require("./getTextAlignOption.js");
@@ -56,10 +56,10 @@ const getLineLabelStyle = (textAlign, fontStyleType, isVertical) => {
 
 // outlierLineMin: if there are lines with smaller x or y than the data
 const getMinValue = (minValue, dataValues, outlierLineMin) => {
-  if ((0, _isNumeric.default)(minValue)) {
+  if ((0, _utils.isNumeric)(minValue)) {
     return minValue;
   }
-  if ((0, _isNumeric.default)(outlierLineMin)) {
+  if ((0, _utils.isNumeric)(outlierLineMin)) {
     return outlierLineMin;
   }
   return dataValues !== null && dataValues !== void 0 && dataValues.some(value => value < DEFAULT_MIN_VALUE) ? undefined : DEFAULT_MIN_VALUE;
@@ -68,10 +68,10 @@ const getMinValue = (minValue, dataValues, outlierLineMin) => {
 // outlierLineMax: if there are lines with larger x or y than the data
 exports.getMinValue = getMinValue;
 const getMaxValue = (maxValue, dataValues, outlierLineMax) => {
-  if ((0, _isNumeric.default)(maxValue)) {
+  if ((0, _utils.isNumeric)(maxValue)) {
     return maxValue;
   }
-  if ((0, _isNumeric.default)(outlierLineMax)) {
+  if ((0, _utils.isNumeric)(outlierLineMax)) {
     return outlierLineMax;
   }
   return dataValues !== null && dataValues !== void 0 && dataValues.every(value => value < DEFAULT_MIN_VALUE) ? DEFAULT_MIN_VALUE : undefined;
@@ -82,7 +82,7 @@ const getRegressionLine = (regressionLine = {}, visType, isVertical) => {
   const fontStyle = (0, _fontStyle.mergeFontStyleWithDefault)((_regressionLine$title = regressionLine.title) === null || _regressionLine$title === void 0 ? void 0 : _regressionLine$title.fontStyle, _fontStyle.FONT_STYLE_REGRESSION_LINE_LABEL);
   const plotLineStyle = getPlotLineStyle(fontStyle);
   const plotLineLabelStyle = getPlotLineLabelStyle(fontStyle);
-  return (0, _isNumeric.default)(regressionLine.value) ? Object.assign({}, plotLineStyle, (0, _objectClean.default)({
+  return (0, _utils.isNumeric)(regressionLine.value) ? Object.assign({}, plotLineStyle, (0, _objectClean.default)({
     value: regressionLine.value,
     color: regressionLine.color,
     width: regressionLine.width,

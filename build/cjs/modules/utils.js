@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.isNumeric = isNumeric;
 exports.useDidUpdateEffect = exports.useDebounce = void 0;
 var _react = require("react");
 const useDebounce = (value, delay) => {
@@ -28,4 +29,17 @@ const useDidUpdateEffect = (fn, inputs) => {
     }
   }, inputs);
 };
+
+/**
+ * Check if a value is numeric
+ *
+ * @param param Value to be checked
+ * @returns {boolean} Returns true when the `param` is a numeric value
+ */
 exports.useDidUpdateEffect = useDidUpdateEffect;
+function isNumeric(param) {
+  if (typeof param === 'symbol') {
+    return false;
+  }
+  return !isNaN(parseFloat(param)) && Number.isFinite(param);
+}

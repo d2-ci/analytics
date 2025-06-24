@@ -4,9 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getLegendSetTooltip = exports.applyLegendSet = void 0;
-var _isNumeric = _interopRequireDefault(require("d2-utilizr/lib/isNumeric"));
 var _index = _interopRequireDefault(require("../../../../locales/index.js"));
 var _legends = require("../../../../modules/legends.js");
+var _utils = require("../../../../modules/utils.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const OUT_OF_BOUNDS_COLOR = '#CCCCCC';
 const getLegend = (value, legendSet) => value && legendSet ? (0, _legends.getLegendByValueFromLegendSet)(legendSet, value) : {};
@@ -14,7 +14,7 @@ const applyLegendSet = (seriesObj = {}, legendSet) => !seriesObj.type ? {
   ...seriesObj,
   data: seriesObj.data.map(value => {
     var _getLegend, _getLegend2, _getLegend3, _getLegend4;
-    return (0, _isNumeric.default)(value) // Single category pass data as [value1, value2]
+    return (0, _utils.isNumeric)(value) // Single category pass data as [value1, value2]
     ? {
       y: value,
       color: ((_getLegend = getLegend(value, legendSet)) === null || _getLegend === void 0 ? void 0 : _getLegend.color) || OUT_OF_BOUNDS_COLOR,
