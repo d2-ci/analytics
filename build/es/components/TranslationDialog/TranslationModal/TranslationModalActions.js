@@ -16,8 +16,8 @@ const SaveButton = ({
 }, i18n.t('Save translations'));
 SaveButton.propTypes = {
   disabled: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  loading: PropTypes.bool
 };
 export const TranslationModalActions = ({
   onClose,

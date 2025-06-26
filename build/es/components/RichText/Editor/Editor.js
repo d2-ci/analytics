@@ -60,7 +60,8 @@ const IconButtonWithTooltip = ({
   small: true,
   disabled: disabled,
   icon: icon,
-  onClick: onClick
+  onClick: onClick,
+  "aria-label": tooltipContent
 }))), /*#__PURE__*/React.createElement(_JSXStyle, {
   id: tooltipAnchorClasses.__hash
 }, tooltipAnchorClasses));

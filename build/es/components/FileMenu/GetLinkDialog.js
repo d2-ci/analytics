@@ -31,7 +31,8 @@ export const GetLinkDialog = ({
   }, appUrl), /*#__PURE__*/React.createElement(Button, {
     icon: /*#__PURE__*/React.createElement(IconCopy24, null),
     small: true,
-    onClick: () => navigator.clipboard.writeText(appUrl)
+    onClick: () => navigator.clipboard.writeText(appUrl),
+    "aria-label": i18n.t('Copy to clipboard')
   }))), /*#__PURE__*/React.createElement(ModalActions, null, /*#__PURE__*/React.createElement(ButtonStrip, null, /*#__PURE__*/React.createElement(Button, {
     onClick: onClose,
     secondary: true

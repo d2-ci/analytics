@@ -71,6 +71,11 @@ describe('The FileMenu component ', () => {
           userAccesses: [],
           userGroupAccesses: []
         }
+      },
+      visualizations: {
+        pager: {
+          page: 1
+        }
       }
     };
     return (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_appRuntime.CustomDataProvider, {

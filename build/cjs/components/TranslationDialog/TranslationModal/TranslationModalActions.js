@@ -23,8 +23,8 @@ const SaveButton = ({
 }, _d2I18n.default.t('Save translations'));
 SaveButton.propTypes = {
   disabled: _propTypes.default.bool.isRequired,
-  loading: _propTypes.default.bool.isRequired,
-  onClick: _propTypes.default.func.isRequired
+  onClick: _propTypes.default.func.isRequired,
+  loading: _propTypes.default.bool
 };
 const TranslationModalActions = ({
   onClose,
