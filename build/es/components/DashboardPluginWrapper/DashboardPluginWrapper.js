@@ -17,11 +17,14 @@ const CacheableSectionWrapper = ({
     remove
   } = useCacheableSection(id);
   useEffect(() => {
-    if (isParentCached && !isCached) {
+    const shouldStartRecording = isParentCached && !isCached;
+    const shouldRemove = !isParentCached && isCached;
+    if (shouldStartRecording) {
       startRecording({
         onError: console.error
       });
-    } else if (!isParentCached && isCached) {
+    }
+    if (shouldRemove) {
       // Synchronize cache state on load or prop update
       // -- a back-up to imperative `removeCachedData`
       remove();
