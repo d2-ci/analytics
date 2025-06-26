@@ -28,9 +28,4 @@ export const useDidUpdateEffect = (fn, inputs) => {
  * @param param Value to be checked
  * @returns {boolean} Returns true when the `param` is a numeric value
  */
-export function isNumeric(param) {
-  if (typeof param === 'symbol') {
-    return false;
-  }
-  return !isNaN(parseFloat(param)) && Number.isFinite(param);
-}
+export const isNumeric = param => typeof param !== 'symbol' && !isNaN(parseFloat(param)) && isFinite(param);

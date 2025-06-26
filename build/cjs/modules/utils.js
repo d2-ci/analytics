@@ -3,8 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isNumeric = isNumeric;
-exports.useDidUpdateEffect = exports.useDebounce = void 0;
+exports.useDidUpdateEffect = exports.useDebounce = exports.isNumeric = void 0;
 var _react = require("react");
 const useDebounce = (value, delay) => {
   const [debouncedValue, setDebouncedValue] = (0, _react.useState)(value);
@@ -37,9 +36,5 @@ const useDidUpdateEffect = (fn, inputs) => {
  * @returns {boolean} Returns true when the `param` is a numeric value
  */
 exports.useDidUpdateEffect = useDidUpdateEffect;
-function isNumeric(param) {
-  if (typeof param === 'symbol') {
-    return false;
-  }
-  return !isNaN(parseFloat(param)) && Number.isFinite(param);
-}
+const isNumeric = param => typeof param !== 'symbol' && !isNaN(parseFloat(param)) && isFinite(param);
+exports.isNumeric = isNumeric;
