@@ -2,11 +2,18 @@ import fixtures from '../../../__fixtures__/fixtures.js';
 import AnalyticsRequest from '../AnalyticsRequest.js';
 let request;
 let expectedParameters;
+let warnMock;
 const getFuncName = parameter => `with${parameter.charAt(0).toUpperCase()}${parameter.slice(1)}`;
 describe('AnalyticsRequest', () => {
   beforeEach(() => {
     request = new AnalyticsRequest();
     expectedParameters = {};
+    // Prevent console warnings like below from cluttering the test output:
+    // "analytics.request.withAggregationType(): "new-constant" not listed as possible value"
+    warnMock = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+  afterEach(() => {
+    warnMock.mockReset();
   });
   describe('constructor', () => {
     it('should not be allowed to be called without new', () => {
