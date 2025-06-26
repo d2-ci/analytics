@@ -24,10 +24,10 @@ const Filter = ({
 }, styles));
 Filter.propTypes = {
   placeholder: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onClear: PropTypes.func.isRequired,
   dataTest: PropTypes.string,
-  text: PropTypes.string
+  text: PropTypes.string,
+  type: PropTypes.string
 };
 export default Filter;

@@ -31,10 +31,10 @@ const Filter = ({
 }, _FilterStyle.default));
 Filter.propTypes = {
   placeholder: _propTypes.default.string.isRequired,
-  type: _propTypes.default.string.isRequired,
   onChange: _propTypes.default.func.isRequired,
   onClear: _propTypes.default.func.isRequired,
   dataTest: _propTypes.default.string,
-  text: _propTypes.default.string
+  text: _propTypes.default.string,
+  type: _propTypes.default.string
 };
 var _default = exports.default = Filter;
