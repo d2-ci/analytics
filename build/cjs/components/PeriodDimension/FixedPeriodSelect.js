@@ -94,10 +94,10 @@ class FixedPeriodSelect extends _react.Component {
     }, _FixedPeriodSelectStyle.default));
   }
 }
-FixedPeriodSelect.defaultProps = {
+_defineProperty(FixedPeriodSelect, "defaultProps", {
   dataTest: 'dhis2-analytics-fixedperiodselect',
   value: ''
-};
+});
 FixedPeriodSelect.propTypes = {
   onChange: _propTypes.default.func.isRequired,
   allowedPeriodTypes: _propTypes.default.arrayOf(_propTypes.default.string),

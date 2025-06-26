@@ -88,8 +88,9 @@ const RightHeader = ({
 RightHeader.propTypes = {
   infoBoxMessage: PropTypes.string
 };
+const SELECTED_ITEMS_PROP_DEFAULT = [];
 const ItemSelector = ({
-  selectedItems,
+  selectedItems = SELECTED_ITEMS_PROP_DEFAULT,
   noItemsMessage,
   onSelect,
   rightFooter,
@@ -401,8 +402,5 @@ ItemSelector.propTypes = {
   supportsEDI: PropTypes.bool,
   onEDISave: PropTypes.func,
   onEditClick: PropTypes.func
-};
-ItemSelector.defaultProps = {
-  selectedItems: []
 };
 export default ItemSelector;

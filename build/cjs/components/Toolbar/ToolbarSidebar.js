@@ -12,7 +12,7 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const ToolbarSidebar = ({
   children,
-  dataTest,
+  dataTest = 'dhis2-analytics-toolbarsidebar',
   isHidden
 }) => /*#__PURE__*/_react.default.createElement("div", {
   "data-test": dataTest,
@@ -24,9 +24,6 @@ const ToolbarSidebar = ({
   dynamic: [_ui.colors.grey400]
 }, [`div.__jsx-style-dynamic-selector{width:260px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:stretch;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;border-right:1px solid ${_ui.colors.grey400};}`, "div.isHidden.__jsx-style-dynamic-selector{display:none;}"]));
 exports.ToolbarSidebar = ToolbarSidebar;
-ToolbarSidebar.defaultProps = {
-  dataTest: 'dhis2-analytics-toolbarsidebar'
-};
 ToolbarSidebar.propTypes = {
   children: _propTypes.default.node,
   dataTest: _propTypes.default.string,

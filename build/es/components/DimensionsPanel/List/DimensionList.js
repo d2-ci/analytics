@@ -53,6 +53,12 @@ class DimensionList extends Component {
     }, styles));
   }
 }
+_defineProperty(DimensionList, "defaultProps", {
+  selectedIds: [],
+  disabledDimension: Function.prototype,
+  lockedDimension: Function.prototype,
+  recommendedDimension: Function.prototype
+});
 DimensionList.propTypes = {
   dimensions: PropTypes.array.isRequired,
   filterText: PropTypes.string.isRequired,
@@ -63,11 +69,5 @@ DimensionList.propTypes = {
   onDimensionClick: PropTypes.func,
   onDimensionDragStart: PropTypes.func,
   onDimensionOptionsClick: PropTypes.func
-};
-DimensionList.defaultProps = {
-  selectedIds: [],
-  disabledDimension: Function.prototype,
-  lockedDimension: Function.prototype,
-  recommendedDimension: Function.prototype
 };
 export default DimensionList;

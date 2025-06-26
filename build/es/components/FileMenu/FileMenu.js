@@ -16,15 +16,15 @@ export const FileMenu = ({
   fileType,
   fileObject,
   filterVisTypes,
-  onNew,
-  onOpen,
+  onNew = Function.prototype,
+  onOpen = Function.prototype,
   onSave,
   onSaveAs,
-  onRename,
-  onShare,
-  onDelete,
-  onError,
-  onTranslate
+  onRename = Function.prototype,
+  onShare = Function.prototype,
+  onDelete = Function.prototype,
+  onError = Function.prototype,
+  onTranslate = Function.prototype
 }) => {
   var _fileObject$access, _fileObject$access2, _fileObject$access3, _fileObject$access4, _fileObject$access5, _fileObject$access6, _fileObject$access7, _fileObject$access8, _fileObject$access9, _fileObject$access0;
   const [currentDialog, setCurrentDialog] = useState(null);
@@ -187,15 +187,6 @@ export const FileMenu = ({
     onClick: onMenuItemClick('delete'),
     dataTest: "file-menu-delete"
   }))), renderDialog());
-};
-FileMenu.defaultProps = {
-  onDelete: Function.prototype,
-  onError: Function.prototype,
-  onNew: Function.prototype,
-  onOpen: Function.prototype,
-  onRename: Function.prototype,
-  onShare: Function.prototype,
-  onTranslate: Function.prototype
 };
 FileMenu.propTypes = {
   currentUser: PropTypes.object,

@@ -16,10 +16,11 @@ function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 const DataDimensionCtx = /*#__PURE__*/(0, _react.createContext)({});
+const SELECTED_DIMENSIONS_PROP_DEFAULT = [];
 const DataDimension = ({
   currentUser,
-  onSelect,
-  selectedDimensions,
+  onSelect = Function.prototype,
+  selectedDimensions = SELECTED_DIMENSIONS_PROP_DEFAULT,
   displayNameProp,
   enabledDataTypes,
   infoBoxMessage,
@@ -134,10 +135,6 @@ DataDimension.propTypes = {
   infoBoxMessage: _propTypes.default.string,
   visType: _propTypes.default.string,
   onCalculationSave: _propTypes.default.func
-};
-DataDimension.defaultProps = {
-  selectedDimensions: [],
-  onSelect: Function.prototype
 };
 const useDataDimensionContext = () => (0, _react.useContext)(DataDimensionCtx);
 exports.useDataDimensionContext = useDataDimensionContext;

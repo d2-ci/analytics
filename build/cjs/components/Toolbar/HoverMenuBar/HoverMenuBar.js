@@ -23,7 +23,7 @@ const useHoverMenubarContext = () => (0, _react.useContext)(HoverMenubarContext)
 exports.useHoverMenubarContext = useHoverMenubarContext;
 const HoverMenuBar = ({
   children,
-  dataTest
+  dataTest = 'dhis2-analytics-hovermenubar'
 }) => {
   const [openedDropdownEl, setOpenedDropdownEl] = (0, _react.useState)(null);
   const lastHoveredSubMenuElRef = (0, _react.useRef)(null);
@@ -92,9 +92,6 @@ const HoverMenuBar = ({
   }, [".jsx-3020154784{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;}"])));
 };
 exports.HoverMenuBar = HoverMenuBar;
-HoverMenuBar.defaultProps = {
-  dataTest: 'dhis2-analytics-hovermenubar'
-};
 HoverMenuBar.propTypes = {
   children: _propTypes.default.node.isRequired,
   dataTest: _propTypes.default.string

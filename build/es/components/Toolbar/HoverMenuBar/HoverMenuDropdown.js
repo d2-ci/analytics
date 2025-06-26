@@ -9,7 +9,7 @@ export const HoverMenuDropdown = ({
   children,
   className,
   label,
-  dataTest,
+  dataTest = 'dhis2-analytics-hovermenudropdown',
   disabled
 }) => {
   const buttonRef = useRef();
@@ -34,9 +34,6 @@ export const HoverMenuDropdown = ({
     placement: "bottom-start",
     reference: buttonRef
   }, children)));
-};
-HoverMenuDropdown.defaultProps = {
-  dataTest: 'dhis2-analytics-hovermenudropdown'
 };
 HoverMenuDropdown.propTypes = {
   children: PropTypes.node.isRequired,

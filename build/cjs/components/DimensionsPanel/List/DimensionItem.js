@@ -131,6 +131,15 @@ class DimensionItem extends _react.Component {
     }, _DimensionItemStyle.default));
   }
 }
+_defineProperty(DimensionItem, "defaultProps", {
+  isDeactivated: false,
+  isRecommended: false,
+  isSelected: false,
+  isLocked: false,
+  onClick: Function.prototype,
+  innerRef: Function.prototype,
+  style: {}
+});
 DimensionItem.propTypes = {
   id: _propTypes.default.string.isRequired,
   isSelected: _propTypes.default.bool.isRequired,
@@ -144,14 +153,5 @@ DimensionItem.propTypes = {
   isRecommended: _propTypes.default.bool,
   onClick: _propTypes.default.func,
   onOptionsClick: _propTypes.default.func
-};
-DimensionItem.defaultProps = {
-  isDeactivated: false,
-  isRecommended: false,
-  isSelected: false,
-  isLocked: false,
-  onClick: Function.prototype,
-  innerRef: Function.prototype,
-  style: {}
 };
 var _default = exports.default = DimensionItem;

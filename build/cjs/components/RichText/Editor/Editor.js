@@ -173,8 +173,8 @@ const Editor = exports.Editor = /*#__PURE__*/(0, _react.forwardRef)(({
   onChange,
   errorText,
   helpText,
-  initialFocus,
-  resizable
+  initialFocus = true,
+  resizable = true
 }, externalRef) => {
   const [previewMode, setPreviewMode] = (0, _react.useState)(false);
   const internalRef = (0, _react.useRef)();
@@ -239,10 +239,6 @@ const Editor = exports.Editor = /*#__PURE__*/(0, _react.forwardRef)(({
   }, _EditorStyle.mainClasses));
 });
 Editor.displayName = 'Editor';
-Editor.defaultProps = {
-  initialFocus: true,
-  resizable: true
-};
 Editor.propTypes = {
   value: _propTypes.default.string.isRequired,
   onChange: _propTypes.default.func.isRequired,

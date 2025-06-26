@@ -18,9 +18,10 @@ const userSettingsQuery = {
     }
   }
 };
+const SELECTED_PERIODS_PROP_DEFAULT = [];
 const PeriodDimension = ({
   onSelect,
-  selectedPeriods,
+  selectedPeriods = SELECTED_PERIODS_PROP_DEFAULT,
   rightFooter,
   excludedPeriodTypes,
   infoBoxMessage,
@@ -68,8 +69,5 @@ PeriodDimension.propTypes = {
   infoBoxMessage: _propTypes.default.string,
   rightFooter: _propTypes.default.node,
   selectedPeriods: _propTypes.default.array
-};
-PeriodDimension.defaultProps = {
-  selectedPeriods: []
 };
 var _default = exports.default = PeriodDimension;

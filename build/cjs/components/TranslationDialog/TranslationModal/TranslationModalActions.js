@@ -12,20 +12,15 @@ var _react = _interopRequireDefault(require("react"));
 var _OfflineTooltip = require("../../OfflineTooltip.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const SaveButton = ({
-  disabled,
-  loading,
-  onClick
+  disabled = false,
+  loading = false,
+  onClick = Function.prototype
 }) => /*#__PURE__*/_react.default.createElement(_ui.Button, {
   primary: true,
   onClick: onClick,
   loading: loading,
   disabled: disabled
 }, _d2I18n.default.t('Save translations'));
-SaveButton.defaultProps = {
-  disabled: false,
-  loading: false,
-  onClick: Function.prototype
-};
 SaveButton.propTypes = {
   disabled: _propTypes.default.bool.isRequired,
   loading: _propTypes.default.bool.isRequired,

@@ -14,8 +14,8 @@ var _react = _interopRequireDefault(require("react"));
 var _OfflineTooltipStyle = require("./styles/OfflineTooltip.style.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const OfflineTooltip = ({
-  disabledWhenOffline,
-  disabled,
+  disabledWhenOffline = true,
+  disabled = false,
   content,
   children
 }) => {
@@ -48,8 +48,4 @@ OfflineTooltip.propTypes = {
   content: _propTypes.default.string,
   disabled: _propTypes.default.bool,
   disabledWhenOffline: _propTypes.default.bool
-};
-OfflineTooltip.defaultProps = {
-  disabled: false,
-  disabledWhenOffline: true
 };

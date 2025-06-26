@@ -23,8 +23,9 @@ function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const FIRST_POSITION = 0;
 const LAST_POSITION = -1;
+const CALCULATION_PROP_DEFAULT = {};
 const CalculationModal = ({
-  calculation,
+  calculation = CALCULATION_PROP_DEFAULT,
   onSave,
   onClose,
   onDelete,
@@ -378,8 +379,5 @@ CalculationModal.propTypes = {
     id: _propTypes.default.string,
     name: _propTypes.default.string
   })
-};
-CalculationModal.defaultProps = {
-  calculation: {}
 };
 var _default = exports.default = CalculationModal;

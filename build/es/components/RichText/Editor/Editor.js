@@ -165,8 +165,8 @@ export const Editor = /*#__PURE__*/forwardRef(({
   onChange,
   errorText,
   helpText,
-  initialFocus,
-  resizable
+  initialFocus = true,
+  resizable = true
 }, externalRef) => {
   const [previewMode, setPreviewMode] = useState(false);
   const internalRef = useRef();
@@ -231,10 +231,6 @@ export const Editor = /*#__PURE__*/forwardRef(({
   }, mainClasses));
 });
 Editor.displayName = 'Editor';
-Editor.defaultProps = {
-  initialFocus: true,
-  resizable: true
-};
 Editor.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

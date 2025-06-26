@@ -31,8 +31,8 @@ const InterpretationsUnit = exports.InterpretationsUnit = /*#__PURE__*/(0, _reac
   currentUser,
   type,
   id,
-  visualizationHasTimeDimension,
-  onInterpretationClick,
+  visualizationHasTimeDimension = true,
+  onInterpretationClick = Function.prototype,
   onReplyIconClick,
   disabled,
   renderId,
@@ -117,10 +117,6 @@ const InterpretationsUnit = exports.InterpretationsUnit = /*#__PURE__*/(0, _reac
   }, [`.container.__jsx-style-dynamic-selector{position:relative;padding:${_ui.spacers.dp16};border-bottom:1px solid ${_ui.colors.grey400};background-color:${_ui.colors.white};}`, ".fetching-loader.__jsx-style-dynamic-selector{position:absolute;inset:0px;background-color:rgba(255,255,255,0.8);display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;z-index:1;}", `.expanded.__jsx-style-dynamic-selector{padding-bottom:${_ui.spacers.dp32};}`, ".loader.__jsx-style-dynamic-selector{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;}", ".header.__jsx-style-dynamic-selector{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;cursor:pointer;}", `.title.__jsx-style-dynamic-selector{font-size:16px;font-weight:500;line-height:21px;color:${_ui.colors.grey900};}`]));
 });
 InterpretationsUnit.displayName = 'InterpretationsUnit';
-InterpretationsUnit.defaultProps = {
-  onInterpretationClick: Function.prototype,
-  visualizationHasTimeDimension: true
-};
 InterpretationsUnit.propTypes = {
   currentUser: _propTypes.default.object.isRequired,
   id: _propTypes.default.string.isRequired,

@@ -15,8 +15,9 @@ import MathOperatorSelector from './MathOperatorSelector.js';
 import styles from './styles/CalculationModal.style.js';
 const FIRST_POSITION = 0;
 const LAST_POSITION = -1;
+const CALCULATION_PROP_DEFAULT = {};
 const CalculationModal = ({
-  calculation,
+  calculation = CALCULATION_PROP_DEFAULT,
   onSave,
   onClose,
   onDelete,
@@ -370,8 +371,5 @@ CalculationModal.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string
   })
-};
-CalculationModal.defaultProps = {
-  calculation: {}
 };
 export default CalculationModal;

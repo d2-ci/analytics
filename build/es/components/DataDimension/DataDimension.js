@@ -8,10 +8,11 @@ import { InfoPopover } from './Info/InfoPopover.js';
 import { ItemOptionsSelector } from './ItemOptionsSelector/ItemOptionsSelector.js';
 import ItemSelector from './ItemSelector/ItemSelector.js';
 const DataDimensionCtx = /*#__PURE__*/createContext({});
+const SELECTED_DIMENSIONS_PROP_DEFAULT = [];
 const DataDimension = ({
   currentUser,
-  onSelect,
-  selectedDimensions,
+  onSelect = Function.prototype,
+  selectedDimensions = SELECTED_DIMENSIONS_PROP_DEFAULT,
   displayNameProp,
   enabledDataTypes,
   infoBoxMessage,
@@ -126,10 +127,6 @@ DataDimension.propTypes = {
   infoBoxMessage: PropTypes.string,
   visType: PropTypes.string,
   onCalculationSave: PropTypes.func
-};
-DataDimension.defaultProps = {
-  selectedDimensions: [],
-  onSelect: Function.prototype
 };
 export const useDataDimensionContext = () => useContext(DataDimensionCtx);
 export default DataDimension;

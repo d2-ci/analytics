@@ -6,7 +6,7 @@ import React from 'react';
 import menuButtonStyles from './MenuButton.styles.js';
 export const InterpretationsAndDetailsToggler = ({
   onClick,
-  dataTest,
+  dataTest = 'dhis2-analytics-interpretationsanddetailstoggler',
   disabled,
   isShowing
 }) => /*#__PURE__*/React.createElement("button", {
@@ -19,9 +19,6 @@ export const InterpretationsAndDetailsToggler = ({
 }, menuButtonStyles), /*#__PURE__*/React.createElement(_JSXStyle, {
   id: "1238484262"
 }, ["button.jsx-1238484262{gap:8px;}"]));
-InterpretationsAndDetailsToggler.defaultProps = {
-  dataTest: 'dhis2-analytics-interpretationsanddetailstoggler'
-};
 InterpretationsAndDetailsToggler.propTypes = {
   onClick: PropTypes.func.isRequired,
   dataTest: PropTypes.string,

@@ -12,7 +12,7 @@ const HoverMenuListItem = ({
   className,
   destructive,
   disabled,
-  dataTest,
+  dataTest = 'dhis2-uicore-hovermenulistitem',
   label
 }) => {
   const ref = useRef();
@@ -49,9 +49,6 @@ const HoverMenuListItem = ({
   }, /*#__PURE__*/React.createElement(HoverMenuList, {
     dense: dense
   }, children))));
-};
-HoverMenuListItem.defaultProps = {
-  dataTest: 'dhis2-uicore-hovermenulistitem'
 };
 HoverMenuListItem.propTypes = {
   // Nested menu items become submenus

@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { MdParser } from './MdParser.js';
 export const Parser = ({
   children,
-  style
+  style = null
 }) => {
   const MdParserInstance = useMemo(() => new MdParser(), []);
   return children ? /*#__PURE__*/React.createElement("div", {
@@ -14,9 +14,6 @@ export const Parser = ({
       __html: MdParserInstance.render(children)
     }
   }) : null;
-};
-Parser.defaultProps = {
-  style: null
 };
 Parser.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),

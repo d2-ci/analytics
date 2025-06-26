@@ -11,7 +11,7 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const Toolbar = ({
   children,
-  dataTest
+  dataTest = 'dhis2-analytics-toolbar'
 }) => /*#__PURE__*/_react.default.createElement("div", {
   "data-test": dataTest,
   className: _style.default.dynamic([["2617706539", [_ui.colors.grey400, _ui.colors.white]]])
@@ -20,9 +20,6 @@ const Toolbar = ({
   dynamic: [_ui.colors.grey400, _ui.colors.white]
 }, [`div.__jsx-style-dynamic-selector{box-sizing:border-box;min-height:32px;max-height:32px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:stretch;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;border-bottom:1px solid ${_ui.colors.grey400};background-color:${_ui.colors.white};}`]));
 exports.Toolbar = Toolbar;
-Toolbar.defaultProps = {
-  dataTest: 'dhis2-analytics-toolbar'
-};
 Toolbar.propTypes = {
   children: _propTypes.default.node,
   dataTest: _propTypes.default.string

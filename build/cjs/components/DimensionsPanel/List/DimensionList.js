@@ -61,6 +61,12 @@ class DimensionList extends _react.Component {
     }, _DimensionListStyle.default));
   }
 }
+_defineProperty(DimensionList, "defaultProps", {
+  selectedIds: [],
+  disabledDimension: Function.prototype,
+  lockedDimension: Function.prototype,
+  recommendedDimension: Function.prototype
+});
 DimensionList.propTypes = {
   dimensions: _propTypes.default.array.isRequired,
   filterText: _propTypes.default.string.isRequired,
@@ -71,11 +77,5 @@ DimensionList.propTypes = {
   onDimensionClick: _propTypes.default.func,
   onDimensionDragStart: _propTypes.default.func,
   onDimensionOptionsClick: _propTypes.default.func
-};
-DimensionList.defaultProps = {
-  selectedIds: [],
-  disabledDimension: Function.prototype,
-  lockedDimension: Function.prototype,
-  recommendedDimension: Function.prototype
 };
 var _default = exports.default = DimensionList;

@@ -15,9 +15,9 @@ const OrgUnitDimension = ({
   roots,
   selected,
   onSelect,
-  hideGroupSelect,
-  hideLevelSelect,
-  hideUserOrgUnits,
+  hideGroupSelect = false,
+  hideLevelSelect = false,
+  hideUserOrgUnits = false,
   warning,
   displayNameProp
 }) => {
@@ -227,11 +227,6 @@ const OrgUnitDimension = ({
   }, i18n.t('Deselect all')))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
-};
-OrgUnitDimension.defaultProps = {
-  hideGroupSelect: false,
-  hideLevelSelect: false,
-  hideUserOrgUnits: false
 };
 OrgUnitDimension.propTypes = {
   displayNameProp: PropTypes.string,

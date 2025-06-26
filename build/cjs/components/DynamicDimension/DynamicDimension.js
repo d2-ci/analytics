@@ -15,10 +15,11 @@ var _ItemSelector = _interopRequireDefault(require("./ItemSelector.js"));
 var _DynamicDimensionStyle = _interopRequireDefault(require("./styles/DynamicDimension.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const ALL_DYNAMIC_DIMENSION_ITEMS = exports.ALL_DYNAMIC_DIMENSION_ITEMS = 'ALL_ITEMS';
+const SELECTED_ITEMS_PROP_DEFAULT = [];
 const DynamicDimension = ({
   dimensionId,
-  onSelect,
-  selectedItems,
+  onSelect = Function.prototype,
+  selectedItems = SELECTED_ITEMS_PROP_DEFAULT,
   rightFooter,
   dimensionTitle,
   displayNameProp
@@ -102,9 +103,5 @@ DynamicDimension.propTypes = {
   })).isRequired,
   onSelect: _propTypes.default.func.isRequired,
   rightFooter: _propTypes.default.node
-};
-DynamicDimension.defaultProps = {
-  selectedItems: [],
-  onSelect: Function.prototype
 };
 var _default = exports.default = DynamicDimension;

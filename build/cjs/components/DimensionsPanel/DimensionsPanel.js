@@ -68,6 +68,11 @@ class DimensionsPanel extends _react.Component {
     }));
   }
 }
+_defineProperty(DimensionsPanel, "defaultProps", {
+  selectedIds: [],
+  style: {},
+  onDimensionClick: Function.prototype
+});
 DimensionsPanel.propTypes = {
   dimensions: _propTypes.default.array.isRequired,
   disabledDimension: _propTypes.default.func,
@@ -78,10 +83,5 @@ DimensionsPanel.propTypes = {
   onDimensionClick: _propTypes.default.func,
   onDimensionDragStart: _propTypes.default.func,
   onDimensionOptionsClick: _propTypes.default.func
-};
-DimensionsPanel.defaultProps = {
-  selectedIds: [],
-  style: {},
-  onDimensionClick: Function.prototype
 };
 var _default = exports.default = DimensionsPanel;

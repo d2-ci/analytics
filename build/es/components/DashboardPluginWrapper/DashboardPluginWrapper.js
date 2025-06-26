@@ -9,7 +9,7 @@ const LoadingMask = () => {
 const CacheableSectionWrapper = ({
   id,
   children,
-  isParentCached
+  isParentCached = false
 }) => {
   const {
     startRecording,
@@ -38,10 +38,10 @@ CacheableSectionWrapper.propTypes = {
   isParentCached: PropTypes.bool
 };
 export const DashboardPluginWrapper = ({
-  onInstallationStatusChange,
+  onInstallationStatusChange = Function.prototype,
   children,
   cacheId,
-  isParentCached,
+  isParentCached = false,
   ...props
 }) => {
   const {
@@ -67,10 +67,6 @@ export const DashboardPluginWrapper = ({
     spacers: true,
     elevations: true
   })) : null;
-};
-DashboardPluginWrapper.defaultProps = {
-  isParentCached: false,
-  onInstallationStatusChange: Function.prototype
 };
 DashboardPluginWrapper.propTypes = {
   cacheId: PropTypes.string,

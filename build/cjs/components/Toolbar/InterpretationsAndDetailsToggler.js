@@ -13,7 +13,7 @@ var _MenuButtonStyles = _interopRequireDefault(require("./MenuButton.styles.js")
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const InterpretationsAndDetailsToggler = ({
   onClick,
-  dataTest,
+  dataTest = 'dhis2-analytics-interpretationsanddetailstoggler',
   disabled,
   isShowing
 }) => /*#__PURE__*/_react.default.createElement("button", {
@@ -27,9 +27,6 @@ const InterpretationsAndDetailsToggler = ({
   id: "1238484262"
 }, ["button.jsx-1238484262{gap:8px;}"]));
 exports.InterpretationsAndDetailsToggler = InterpretationsAndDetailsToggler;
-InterpretationsAndDetailsToggler.defaultProps = {
-  dataTest: 'dhis2-analytics-interpretationsanddetailstoggler'
-};
 InterpretationsAndDetailsToggler.propTypes = {
   onClick: _propTypes.default.func.isRequired,
   dataTest: _propTypes.default.string,

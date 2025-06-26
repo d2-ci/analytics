@@ -60,6 +60,11 @@ class DimensionsPanel extends Component {
     }));
   }
 }
+_defineProperty(DimensionsPanel, "defaultProps", {
+  selectedIds: [],
+  style: {},
+  onDimensionClick: Function.prototype
+});
 DimensionsPanel.propTypes = {
   dimensions: PropTypes.array.isRequired,
   disabledDimension: PropTypes.func,
@@ -70,10 +75,5 @@ DimensionsPanel.propTypes = {
   onDimensionClick: PropTypes.func,
   onDimensionDragStart: PropTypes.func,
   onDimensionOptionsClick: PropTypes.func
-};
-DimensionsPanel.defaultProps = {
-  selectedIds: [],
-  style: {},
-  onDimensionClick: Function.prototype
 };
 export default DimensionsPanel;

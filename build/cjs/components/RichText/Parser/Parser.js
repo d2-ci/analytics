@@ -11,7 +11,7 @@ function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const Parser = ({
   children,
-  style
+  style = null
 }) => {
   const MdParserInstance = (0, _react.useMemo)(() => new _MdParser.MdParser(), []);
   return children ? /*#__PURE__*/_react.default.createElement("div", {
@@ -24,9 +24,6 @@ const Parser = ({
   }) : null;
 };
 exports.Parser = Parser;
-Parser.defaultProps = {
-  style: null
-};
 Parser.propTypes = {
   children: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.node), _propTypes.default.node]),
   style: _propTypes.default.object

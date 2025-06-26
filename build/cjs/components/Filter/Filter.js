@@ -15,7 +15,7 @@ const Filter = ({
   onChange,
   onClear,
   placeholder,
-  type,
+  type = 'text',
   dataTest
 }) => /*#__PURE__*/_react.default.createElement("div", {
   className: `jsx-${_FilterStyle.default.__hash}` + " " + "container"
@@ -36,8 +36,5 @@ Filter.propTypes = {
   onClear: _propTypes.default.func.isRequired,
   dataTest: _propTypes.default.string,
   text: _propTypes.default.string
-};
-Filter.defaultProps = {
-  type: 'text'
 };
 var _default = exports.default = Filter;

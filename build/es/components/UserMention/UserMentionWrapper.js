@@ -26,7 +26,7 @@ const getVirtualPopperReference = ref => {
 export const UserMentionWrapper = ({
   children,
   inputReference,
-  onUserSelect
+  onUserSelect = Function.prototype
 }) => {
   const [listIsOpen, setListIsOpen] = useState(false);
   const [captureText, setCaptureText] = useState(false);
@@ -183,9 +183,6 @@ export const UserMentionWrapper = ({
   })))))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: userMentionWrapperClasses.__hash
   }, userMentionWrapperClasses), resolvedHeaderStyle.styles);
-};
-UserMentionWrapper.defaultProps = {
-  onUserSelect: Function.prototype
 };
 UserMentionWrapper.propTypes = {
   inputReference: PropTypes.object.isRequired,

@@ -5,20 +5,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { OfflineTooltip } from '../../OfflineTooltip.js';
 const SaveButton = ({
-  disabled,
-  loading,
-  onClick
+  disabled = false,
+  loading = false,
+  onClick = Function.prototype
 }) => /*#__PURE__*/React.createElement(Button, {
   primary: true,
   onClick: onClick,
   loading: loading,
   disabled: disabled
 }, i18n.t('Save translations'));
-SaveButton.defaultProps = {
-  disabled: false,
-  loading: false,
-  onClick: Function.prototype
-};
 SaveButton.propTypes = {
   disabled: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,

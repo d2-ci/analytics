@@ -42,9 +42,6 @@ const PivotTableCell = exports.PivotTableCell = /*#__PURE__*/_react.default.forw
   }, _PivotTableStyle.cell), children);
 });
 PivotTableCell.displayName = 'PivotTableCell';
-PivotTableCell.defaultProps = {
-  isHeader: false
-};
 PivotTableCell.propTypes = {
   children: _propTypes.default.node,
   classes: _propTypes.default.oneOfType([_propTypes.default.array, _propTypes.default.object, _propTypes.default.string]),

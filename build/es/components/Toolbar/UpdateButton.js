@@ -8,7 +8,7 @@ export const UpdateButton = ({
   onClick,
   disabled,
   loading,
-  dataTest
+  dataTest = 'dhis2-analytics-updatebutton'
 }) => /*#__PURE__*/React.createElement("button", {
   onClick: onClick,
   disabled: disabled,
@@ -22,9 +22,6 @@ export const UpdateButton = ({
   id: "2364287882",
   dynamic: [colors.blue700, colors.blue100, colors.blue200]
 }, [`button.__jsx-style-dynamic-selector{gap:8px;color:${colors.blue700};font-weight:500;}`, `button.__jsx-style-dynamic-selector:hover.__jsx-style-dynamic-selector:enabled{background:${colors.blue100};}`, `button.__jsx-style-dynamic-selector:active{background:${colors.blue200};}`]));
-UpdateButton.defaultProps = {
-  dataTest: 'dhis2-analytics-updatebutton'
-};
 UpdateButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   dataTest: PropTypes.string,

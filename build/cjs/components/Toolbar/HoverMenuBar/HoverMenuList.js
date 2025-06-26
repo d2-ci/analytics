@@ -25,10 +25,10 @@ exports.useHoverMenuListContext = useHoverMenuListContext;
 const HoverMenuList = ({
   children,
   className,
-  dataTest,
-  dense,
-  maxHeight,
-  maxWidth
+  dataTest = 'dhis2-analytics-hovermenulist',
+  dense = true,
+  maxHeight = 'auto',
+  maxWidth = '380px'
 }) => {
   const {
     setLastHoveredSubMenuEl
@@ -60,12 +60,6 @@ const HoverMenuList = ({
   }, [`ul.__jsx-style-dynamic-selector{position:relative;margin:0;padding:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background:${_ui.colors.white};border:1px solid ${_ui.colors.grey200};border-radius:3px;box-shadow:${_ui.elevations.e300};display:inline-block;min-width:${dense ? '128' : '180'}px;max-width:${maxWidth};max-height:${maxHeight};padding:${_ui.spacers.dp4} 0;overflow:auto;list-style:none;}`])));
 };
 exports.HoverMenuList = HoverMenuList;
-HoverMenuList.defaultProps = {
-  dataTest: 'dhis2-analytics-hovermenulist',
-  maxWidth: '380px',
-  maxHeight: 'auto',
-  dense: true
-};
 HoverMenuList.propTypes = {
   /** Typically `MenuItem`, `MenuDivider`, and `MenuSectionHeader` */
   children: _propTypes.default.node,

@@ -11,10 +11,11 @@ var _react = _interopRequireDefault(require("react"));
 var _dataTypes = require("../../modules/dataTypes.js");
 var _EmptyPlaceholderStyle = _interopRequireDefault(require("./styles/EmptyPlaceholder.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const OPTIONS_PROP_DEFAULT = [];
 const SourceEmptyPlaceholder = ({
   loading,
   searchTerm,
-  options,
+  options = OPTIONS_PROP_DEFAULT,
   allItemsSelectedMessage,
   noItemsMessage,
   dataType,
@@ -98,9 +99,6 @@ const SourceEmptyPlaceholder = ({
   }, _EmptyPlaceholderStyle.default));
 };
 exports.SourceEmptyPlaceholder = SourceEmptyPlaceholder;
-SourceEmptyPlaceholder.defaultProps = {
-  options: []
-};
 SourceEmptyPlaceholder.propTypes = {
   allItemsSelectedMessage: _propTypes.default.string,
   dataTest: _propTypes.default.string,

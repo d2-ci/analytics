@@ -17,7 +17,7 @@ const HoverMenuDropdown = ({
   children,
   className,
   label,
-  dataTest,
+  dataTest = 'dhis2-analytics-hovermenudropdown',
   disabled
 }) => {
   const buttonRef = (0, _react.useRef)();
@@ -44,9 +44,6 @@ const HoverMenuDropdown = ({
   }, children)));
 };
 exports.HoverMenuDropdown = HoverMenuDropdown;
-HoverMenuDropdown.defaultProps = {
-  dataTest: 'dhis2-analytics-hovermenudropdown'
-};
 HoverMenuDropdown.propTypes = {
   children: _propTypes.default.node.isRequired,
   label: _propTypes.default.node.isRequired,

@@ -14,7 +14,7 @@ const HoverMenubarContext = /*#__PURE__*/createContext({
 const useHoverMenubarContext = () => useContext(HoverMenubarContext);
 const HoverMenuBar = ({
   children,
-  dataTest
+  dataTest = 'dhis2-analytics-hovermenubar'
 }) => {
   const [openedDropdownEl, setOpenedDropdownEl] = useState(null);
   const lastHoveredSubMenuElRef = useRef(null);
@@ -81,9 +81,6 @@ const HoverMenuBar = ({
   }, children, /*#__PURE__*/React.createElement(_JSXStyle, {
     id: "3020154784"
   }, [".jsx-3020154784{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;}"])));
-};
-HoverMenuBar.defaultProps = {
-  dataTest: 'dhis2-analytics-hovermenubar'
 };
 HoverMenuBar.propTypes = {
   children: PropTypes.node.isRequired,

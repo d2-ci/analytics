@@ -6,9 +6,10 @@ import i18n from '../../locales/index.js';
 import styles from './styles/PeriodFilter.style.js';
 import { getFixedPeriodsOptions } from './utils/fixedPeriods.js';
 import { filterPeriodTypesById } from './utils/index.js';
+const EXCLUDED_PERIOD_TYPES_PROP_DEFAULT = [];
 const FixedPeriodFilter = ({
   allowedPeriodTypes,
-  excludedPeriodTypes,
+  excludedPeriodTypes = EXCLUDED_PERIOD_TYPES_PROP_DEFAULT,
   currentPeriodType,
   currentYear,
   onSelectPeriodType,
@@ -49,9 +50,6 @@ const FixedPeriodFilter = ({
   })), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
-};
-FixedPeriodFilter.defaultProps = {
-  excludedPeriodTypes: []
 };
 FixedPeriodFilter.propTypes = {
   currentPeriodType: PropTypes.string.isRequired,

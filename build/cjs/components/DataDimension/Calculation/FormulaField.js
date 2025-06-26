@@ -26,8 +26,9 @@ const Placeholder = () => /*#__PURE__*/_react.default.createElement("div", {
 }, _d2I18n.default.t('Drag items here, or double click in the list, to start building a calculation formula')), /*#__PURE__*/_react.default.createElement(_style.default, {
   id: _FormulaFieldStyle.default.__hash
 }, _FormulaFieldStyle.default));
+const ITEMS_PROP_DEFAULT = [];
 const FormulaField = ({
-  items = [],
+  items = ITEMS_PROP_DEFAULT,
   selectedItemId,
   focusItemId,
   onChange,

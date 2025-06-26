@@ -13,9 +13,10 @@ var _PeriodFilterStyle = _interopRequireDefault(require("./styles/PeriodFilter.s
 var _fixedPeriods = require("./utils/fixedPeriods.js");
 var _index2 = require("./utils/index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const EXCLUDED_PERIOD_TYPES_PROP_DEFAULT = [];
 const FixedPeriodFilter = ({
   allowedPeriodTypes,
-  excludedPeriodTypes,
+  excludedPeriodTypes = EXCLUDED_PERIOD_TYPES_PROP_DEFAULT,
   currentPeriodType,
   currentYear,
   onSelectPeriodType,
@@ -56,9 +57,6 @@ const FixedPeriodFilter = ({
   })), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _PeriodFilterStyle.default.__hash
   }, _PeriodFilterStyle.default));
-};
-FixedPeriodFilter.defaultProps = {
-  excludedPeriodTypes: []
 };
 FixedPeriodFilter.propTypes = {
   currentPeriodType: _propTypes.default.string.isRequired,
