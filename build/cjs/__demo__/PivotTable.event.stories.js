@@ -62,30 +62,6 @@ var _default = exports.default = {
   title: 'PivotTable (event enrollment)',
   decorators: [PivotTableOptionsWrapper]
 };
-const getNumericItems = (rows, index) => [...new Set(rows.map(r => r[index]))].sort((a, b) => Number(a) - Number(b));
-const getItemMetadata = items => items.reduce((md, item) => {
-  md[item] = {
-    name: item
-  };
-  return md;
-}, {});
-const collectAndAddMetadata = (data, index) => {
-  const modifiedData = {
-    ...data
-  };
-  const headerId = data.headers[index].name;
-
-  // collect values and use as items
-  const numericItems = getNumericItems(modifiedData.rows, index);
-  modifiedData.metaData.dimensions[headerId] = numericItems;
-
-  // add metadata for numeric items
-  modifiedData.metaData.items = {
-    ...modifiedData.metaData.items,
-    ...getItemMetadata(numericItems)
-  };
-  return modifiedData;
-};
 const NumericLegendset = (_, _ref3) => {
   let {
     pivotTableOptions
@@ -124,7 +100,7 @@ const Numeric = (_, _ref4) => {
       height: 600
     }
   }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
-    data: collectAndAddMetadata(_numericData.default, 0),
+    data: _numericData.default,
     visualization: visualization
   }));
 };
