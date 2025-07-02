@@ -64,10 +64,33 @@ var _default = exports.default = {
   title: 'PivotTable (event enrollment)',
   decorators: [PivotTableOptionsWrapper]
 };
-const NumericLegendset = (_, _ref3) => {
+const Numeric = (_, _ref3) => {
   let {
     pivotTableOptions
   } = _ref3;
+  const visualization = {
+    ..._numericVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _numericData.default,
+    visualization: visualization
+  }));
+};
+exports.Numeric = Numeric;
+Numeric.story = {
+  name: 'Numeric'
+};
+const NumericLegendset = (_, _ref4) => {
+  let {
+    pivotTableOptions
+  } = _ref4;
   const visualization = {
     ..._numericLegendsetVisualization.default,
     ...visualizationReset,
@@ -86,29 +109,6 @@ const NumericLegendset = (_, _ref3) => {
 exports.NumericLegendset = NumericLegendset;
 NumericLegendset.story = {
   name: 'Numeric with legendset'
-};
-const Numeric = (_, _ref4) => {
-  let {
-    pivotTableOptions
-  } = _ref4;
-  const visualization = {
-    ..._numericVisualization.default,
-    ...visualizationReset,
-    ...pivotTableOptions
-  };
-  return /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      width: 800,
-      height: 600
-    }
-  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
-    data: _numericData.default,
-    visualization: visualization
-  }));
-};
-exports.Numeric = Numeric;
-NumericLegendset.story = {
-  name: 'Numeric'
 };
 const Boolean = (_, _ref5) => {
   let {
