@@ -7,6 +7,8 @@ import numericLegendsetData from './data/event/numeric-legendset.data.json';
 import numericLegendsetVisualization from './data/event/numeric-legendset.visualization.json';
 import numericData from './data/event/numeric.data.json';
 import numericVisualization from './data/event/numeric.visualization.json';
+import yesonlyData from './data/event/yesonly.data.json';
+import yesonlyVisualization from './data/event/yesonly.visualization.json';
 const visualizationReset = {
   colTotals: false,
   rowTotals: false,
@@ -119,5 +121,27 @@ export const Boolean = (_, _ref5) => {
   }));
 };
 Boolean.story = {
+  name: 'Boolean'
+};
+export const Yesonly = (_, _ref6) => {
+  let {
+    pivotTableOptions
+  } = _ref6;
+  const visualization = {
+    ...yesonlyVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: yesonlyData,
+    visualization: visualization
+  }));
+};
+Yesonly.story = {
   name: 'Boolean'
 };
