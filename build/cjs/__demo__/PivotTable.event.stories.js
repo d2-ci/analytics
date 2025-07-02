@@ -3,10 +3,12 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.NumericLegendset = exports.Numeric = void 0;
+exports.default = exports.NumericLegendset = exports.Numeric = exports.Boolean = void 0;
 var _ui = require("@dhis2/ui");
 var _react = _interopRequireWildcard(require("react"));
 var _index = require("../index.js");
+var _booleanData = _interopRequireDefault(require("./data/event/boolean.data.json"));
+var _booleanVisualization = _interopRequireDefault(require("./data/event/boolean.visualization.json"));
 var _numericLegendsetData = _interopRequireDefault(require("./data/event/numeric-legendset.data.json"));
 var _numericLegendsetVisualization = _interopRequireDefault(require("./data/event/numeric-legendset.visualization.json"));
 var _numericData = _interopRequireDefault(require("./data/event/numeric.data.json"));
@@ -106,5 +108,28 @@ const Numeric = (_, _ref4) => {
 };
 exports.Numeric = Numeric;
 NumericLegendset.story = {
-  name: 'Numeric with legendset'
+  name: 'Numeric'
+};
+const Boolean = (_, _ref5) => {
+  let {
+    pivotTableOptions
+  } = _ref5;
+  const visualization = {
+    ..._booleanVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _booleanData.default,
+    visualization: visualization
+  }));
+};
+exports.Boolean = Boolean;
+Boolean.story = {
+  name: 'Boolean'
 };
