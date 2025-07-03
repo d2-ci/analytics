@@ -6,12 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.useLike = void 0;
 var _appRuntime = require("@dhis2/app-runtime");
 var _react = require("react");
-const useLike = _ref => {
-  let {
-    interpretation,
-    currentUser,
-    onComplete
-  } = _ref;
+const useLike = ({
+  interpretation,
+  currentUser,
+  onComplete
+}) => {
   const resource = `interpretations/${interpretation.id}/like`;
   const likeMutationRef = (0, _react.useRef)({
     resource,

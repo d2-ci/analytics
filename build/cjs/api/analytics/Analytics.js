@@ -47,15 +47,14 @@ class Analytics {
    * @param {!module:analytics.AnalyticsRequest} analyticsRequest The AnalyticsRequest class
    * @param {!module:analytics.AnalyticsResponse} analyticsResponse The AnalyticsResponse class
    */
-  constructor(_ref) {
-    let {
-      aggregate,
-      trackedEntities,
-      enrollments,
-      events,
-      request,
-      response
-    } = _ref;
+  constructor({
+    aggregate,
+    trackedEntities,
+    enrollments,
+    events,
+    request,
+    response
+  }) {
     this.aggregate = aggregate;
     this.trackedEntities = trackedEntities;
     this.enrollments = enrollments;

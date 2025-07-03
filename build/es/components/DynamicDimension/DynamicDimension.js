@@ -8,15 +8,15 @@ import i18n from '../../locales/index.js';
 import ItemSelector from './ItemSelector.js';
 import styles from './styles/DynamicDimension.style.js';
 export const ALL_DYNAMIC_DIMENSION_ITEMS = 'ALL_ITEMS';
-export const DynamicDimension = _ref => {
-  let {
-    dimensionId,
-    onSelect,
-    selectedItems,
-    rightFooter,
-    dimensionTitle,
-    displayNameProp
-  } = _ref;
+const SELECTED_ITEMS_PROP_DEFAULT = [];
+export const DynamicDimension = ({
+  dimensionId,
+  onSelect = Function.prototype,
+  selectedItems = SELECTED_ITEMS_PROP_DEFAULT,
+  rightFooter,
+  dimensionTitle,
+  displayNameProp
+}) => {
   const dataEngine = useDataEngine();
   const fetchItems = (page, searchTerm) => apiFetchItemsByDimension({
     dataEngine,
@@ -95,9 +95,5 @@ DynamicDimension.propTypes = {
   })).isRequired,
   onSelect: PropTypes.func.isRequired,
   rightFooter: PropTypes.node
-};
-DynamicDimension.defaultProps = {
-  selectedItems: [],
-  onSelect: Function.prototype
 };
 export default DynamicDimension;

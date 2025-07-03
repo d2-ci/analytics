@@ -17,15 +17,13 @@ class AdaptiveClippingController {
     this.engine = engine;
     this.reset();
   }
-  addSize(_ref, _ref2) {
-    let {
-      row,
-      column
-    } = _ref;
-    let {
-      width,
-      height
-    } = _ref2;
+  addSize({
+    row,
+    column
+  }, {
+    width,
+    height
+  }) {
     if (column >= 0) {
       const columnSize = this.columns.sizes[column] || {
         pre: 0,
@@ -49,18 +47,16 @@ class AdaptiveClippingController {
       this.rows.headerSizes[index] = Math.max(this.rows.headerSizes[index] || 0, height);
     }
   }
-  add(_ref3, renderedValue) {
-    let {
-      row,
-      column
-    } = _ref3;
+  add({
+    row,
+    column
+  }, renderedValue) {
     this.addSize({
       row,
       column
     }, this.measureText(renderedValue));
   }
-  measureText(renderedValue) {
-    let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  measureText(renderedValue, options = {}) {
     return (0, _measureText.measureTextWithWrapping)(renderedValue, {
       fontSize: this.engine.fontSize,
       ...options

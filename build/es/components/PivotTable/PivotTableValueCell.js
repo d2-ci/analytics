@@ -7,13 +7,12 @@ import { isNumericValueType, isBooleanValueType } from '../../modules/valueTypes
 import { PivotTableCell } from './PivotTableCell.js';
 import { PivotTableEmptyCell } from './PivotTableEmptyCell.js';
 import { usePivotTableEngine } from './PivotTableEngineContext.js';
-export const PivotTableValueCell = _ref => {
+export const PivotTableValueCell = ({
+  row,
+  column,
+  onToggleContextualMenu
+}) => {
   var _cellContent$titleVal, _cellContent$rendered;
-  let {
-    row,
-    column,
-    onToggleContextualMenu
-  } = _ref;
   const engine = usePivotTableEngine();
   const cellRef = useRef(undefined);
   const cellContent = engine.get({

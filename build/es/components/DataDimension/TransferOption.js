@@ -6,26 +6,25 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT } from '../../modules/dataTypes.js';
 import styles from './styles/TransferOption.style.js';
-export const TransferOption = _ref => {
-  let {
-    disabled,
-    label,
-    highlighted,
-    selected,
-    onClick,
-    onDoubleClick,
-    value,
-    icon,
-    active,
-    dataItemType,
-    dimensionType,
-    dataTest,
-    optionSetId,
-    itemsRef,
-    showingInfo,
-    onEditClick,
-    onInfoClick
-  } = _ref;
+export const TransferOption = ({
+  disabled,
+  label,
+  highlighted,
+  selected,
+  onClick,
+  onDoubleClick,
+  value,
+  icon,
+  active,
+  dataItemType,
+  dimensionType,
+  dataTest,
+  optionSetId,
+  itemsRef,
+  showingInfo,
+  onEditClick,
+  onInfoClick
+}) => {
   const renderContent = () => /*#__PURE__*/React.createElement("div", {
     "data-test": `${dataTest}-content`,
     onClick: event => {
@@ -72,25 +71,22 @@ export const TransferOption = _ref => {
     content: i18n.t('Click to choose from available options'),
     openDelay: 500,
     closeDelay: 0
-  }, _ref2 => {
-    let {
-      ref,
-      onMouseOver,
-      onMouseOut
-    } = _ref2;
-    return /*#__PURE__*/React.createElement("span", {
-      ref: ref,
-      onMouseOver: onMouseOver,
-      onMouseOut: onMouseOut,
-      onClick: e => {
-        e.stopPropagation();
-        onMouseOut();
-        onEditClick();
-      },
-      "data-test": `${dataTest}-option-set-button`,
-      className: `jsx-${styles.__hash}` + " " + "option-set-button"
-    }, /*#__PURE__*/React.createElement(IconList16, null));
-  })), /*#__PURE__*/React.createElement("div", {
+  }, ({
+    ref,
+    onMouseOver,
+    onMouseOut
+  }) => /*#__PURE__*/React.createElement("span", {
+    ref: ref,
+    onMouseOver: onMouseOver,
+    onMouseOut: onMouseOut,
+    onClick: e => {
+      e.stopPropagation();
+      onMouseOut();
+      onEditClick();
+    },
+    "data-test": `${dataTest}-option-set-button`,
+    className: `jsx-${styles.__hash}` + " " + "option-set-button"
+  }, /*#__PURE__*/React.createElement(IconList16, null)))), /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + (cx('group', 'nowrap', 'typeGroup') || "")
   }, /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "type"

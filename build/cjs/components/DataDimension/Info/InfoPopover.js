@@ -22,13 +22,12 @@ var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.sty
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // data sets
 
-const InfoPopover = _ref => {
-  let {
-    reference,
-    onClose,
-    dataTest,
-    ...props
-  } = _ref;
+const InfoPopover = ({
+  reference,
+  onClose,
+  dataTest,
+  ...props
+}) => {
   const type = props.item.type;
   const infoProps = {
     type,

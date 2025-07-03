@@ -1,11 +1,10 @@
 import { useDataMutation } from '@dhis2/app-runtime';
 import { useEffect, useRef, useState } from 'react';
-const useLike = _ref => {
-  let {
-    interpretation,
-    currentUser,
-    onComplete
-  } = _ref;
+const useLike = ({
+  interpretation,
+  currentUser,
+  onComplete
+}) => {
   const resource = `interpretations/${interpretation.id}/like`;
   const likeMutationRef = useRef({
     resource,

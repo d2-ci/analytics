@@ -15,28 +15,21 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 const dataSetQuery = {
   dataSet: {
     resource: 'dataSets',
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
-    params: _ref2 => {
-      let {
-        displayNameProp
-      } = _ref2;
-      return {
-        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},dataSetElements[dataElement[id,displayName]],expiryDays,indicators[id,displayName],periodType,`
-      };
-    }
+    id: ({
+      id
+    }) => id,
+    params: ({
+      displayNameProp
+    }) => ({
+      fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},dataSetElements[dataElement[id,displayName]],expiryDays,indicators[id,displayName],periodType,`
+    })
   }
 };
-const DataSetInfo = _ref3 => {
-  let {
-    type,
-    id,
-    displayNameProp
-  } = _ref3;
+const DataSetInfo = ({
+  type,
+  id,
+  displayNameProp
+}) => {
   const {
     loading,
     error,
@@ -68,15 +61,12 @@ const DataSetInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
   }, /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.dataSet.dataSetElements.map(_ref4 => {
-    let {
-      dataElement
-    } = _ref4;
-    return /*#__PURE__*/_react.default.createElement("li", {
-      key: dataElement.id,
-      className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, dataElement.displayName);
-  }))))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data === null || data === void 0 ? void 0 : data.dataSet.dataSetElements.map(({
+    dataElement
+  }) => /*#__PURE__*/_react.default.createElement("li", {
+    key: dataElement.id,
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, dataElement.displayName)))))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
@@ -86,16 +76,13 @@ const DataSetInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
   }, /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.dataSet.indicators.map(_ref5 => {
-    let {
-      id,
-      displayName
-    } = _ref5;
-    return /*#__PURE__*/_react.default.createElement("li", {
-      key: id,
-      className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, displayName);
-  }))) : /*#__PURE__*/_react.default.createElement("span", {
+  }, data.dataSet.indicators.map(({
+    id,
+    displayName
+  }) => /*#__PURE__*/_react.default.createElement("li", {
+    key: id,
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, displayName)))) : /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "none"
   }, _index.default.t('None')))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`

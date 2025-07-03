@@ -9,28 +9,21 @@ import styles from './styles/InfoPopover.style.js';
 const dataElementQuery = {
   dataElement: {
     resource: 'dataElements',
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
-    params: _ref2 => {
-      let {
-        displayNameProp
-      } = _ref2;
-      return {
-        fields: `${getCommonFields(displayNameProp)},aggregationType,categoryCombo[displayName,categories[id,displayName]],dataElementGroups[id,displayName],dataSetElements[dataSet[id,displayName]],legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
-      };
-    }
+    id: ({
+      id
+    }) => id,
+    params: ({
+      displayNameProp
+    }) => ({
+      fields: `${getCommonFields(displayNameProp)},aggregationType,categoryCombo[displayName,categories[id,displayName]],dataElementGroups[id,displayName],dataSetElements[dataSet[id,displayName]],legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
+    })
   }
 };
-export const DataElementInfo = _ref3 => {
-  let {
-    type,
-    id,
-    displayNameProp
-  } = _ref3;
+export const DataElementInfo = ({
+  type,
+  id,
+  displayNameProp
+}) => {
   const {
     loading,
     error,
@@ -52,12 +45,9 @@ export const DataElementInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Data set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements) && renderDataSets(data.dataElement.dataSetElements.map(_ref4 => {
-    let {
-      dataSet
-    } = _ref4;
-    return dataSet;
-  })))), /*#__PURE__*/React.createElement("tr", {
+  }, (data === null || data === void 0 ? void 0 : data.dataElement.dataSetElements) && renderDataSets(data.dataElement.dataSetElements.map(({
+    dataSet
+  }) => dataSet)))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
@@ -89,16 +79,13 @@ export const DataElementInfo = _ref3 => {
     className: `jsx-${styles.__hash}`
   }, data === null || data === void 0 ? void 0 : data.dataElement.categoryCombo.displayName), /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.dataElement.categoryCombo.categories.map(_ref5 => {
-    let {
-      id,
-      displayName
-    } = _ref5;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, displayName);
-  }))))), (data === null || data === void 0 ? void 0 : data.dataElement.optionSet) && /*#__PURE__*/React.createElement("tr", {
+  }, data === null || data === void 0 ? void 0 : data.dataElement.categoryCombo.categories.map(({
+    id,
+    displayName
+  }) => /*#__PURE__*/React.createElement("li", {
+    key: id,
+    className: `jsx-${styles.__hash}`
+  }, displayName)))))), (data === null || data === void 0 ? void 0 : data.dataElement.optionSet) && /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`

@@ -17,47 +17,34 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 const programDataElementQuery = {
   programDataElement: {
     resource: 'dataElements',
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
-    params: _ref2 => {
-      let {
-        displayNameProp
-      } = _ref2;
-      return {
-        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},aggregationType,dimensionItemType,legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
-      };
-    }
+    id: ({
+      id
+    }) => id,
+    params: ({
+      displayNameProp
+    }) => ({
+      fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},aggregationType,dimensionItemType,legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
+    })
   }
 };
 const programAttributeQuery = {
   programAttribute: {
     resource: 'trackedEntityAttributes',
-    id: _ref3 => {
-      let {
-        id
-      } = _ref3;
-      return id;
-    },
-    params: _ref4 => {
-      let {
-        displayNameProp
-      } = _ref4;
-      return {
-        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},aggregationType,dimensionItemType,legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
-      };
-    }
+    id: ({
+      id
+    }) => id,
+    params: ({
+      displayNameProp
+    }) => ({
+      fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},aggregationType,dimensionItemType,legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
+    })
   }
 };
-const EventDataItemInfo = _ref5 => {
-  let {
-    type,
-    id,
-    displayNameProp
-  } = _ref5;
+const EventDataItemInfo = ({
+  type,
+  id,
+  displayNameProp
+}) => {
   const {
     loading,
     error,

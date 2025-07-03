@@ -14,11 +14,10 @@ var _SortIconIdle = require("./icons/SortIconIdle.js");
 var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 var _PivotTableStyle = require("./styles/PivotTable.style.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PivotTableSortIcon = _ref => {
-  let {
-    index,
-    sortBy
-  } = _ref;
+const PivotTableSortIcon = ({
+  index,
+  sortBy
+}) => {
   const engine = (0, _PivotTableEngineContext.usePivotTableEngine)();
   const SortIcon = (sortBy === null || sortBy === void 0 ? void 0 : sortBy.column) === index ? sortBy.order === _pivotTableConstants.SORT_ORDER_ASCENDING ? _SortIconAscending.SortIconAscending : _SortIconDescending.SortIconDescending : _SortIconIdle.SortIconIdle;
   return /*#__PURE__*/_react.default.createElement("span", {

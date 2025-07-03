@@ -8,28 +8,21 @@ import styles from './styles/InfoPopover.style.js';
 const optionQuery = {
   option: {
     resource: 'options',
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
-    params: _ref2 => {
-      let {
-        displayNameProp
-      } = _ref2;
-      return {
-        fields: `${getCommonFields(displayNameProp)},optionSet[displayName]`
-      };
-    }
+    id: ({
+      id
+    }) => id,
+    params: ({
+      displayNameProp
+    }) => ({
+      fields: `${getCommonFields(displayNameProp)},optionSet[displayName]`
+    })
   }
 };
-export const OptionInfo = _ref3 => {
-  let {
-    type,
-    id,
-    displayNameProp
-  } = _ref3;
+export const OptionInfo = ({
+  type,
+  id,
+  displayNameProp
+}) => {
   const {
     loading,
     error,

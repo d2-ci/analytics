@@ -5,17 +5,16 @@ import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import { HoverMenuList, useHoverMenuListContext } from './HoverMenuList.js';
 import styles from './HoverMenuListItem.styles.js';
-const HoverMenuListItem = _ref => {
-  let {
-    onClick,
-    children,
-    icon,
-    className,
-    destructive,
-    disabled,
-    dataTest,
-    label
-  } = _ref;
+const HoverMenuListItem = ({
+  onClick,
+  children,
+  icon,
+  className,
+  destructive,
+  disabled,
+  dataTest = 'dhis2-uicore-hovermenulistitem',
+  label
+}) => {
   const ref = useRef();
   const {
     onSubmenuAnchorMouseEnter,
@@ -50,9 +49,6 @@ const HoverMenuListItem = _ref => {
   }, /*#__PURE__*/React.createElement(HoverMenuList, {
     dense: dense
   }, children))));
-};
-HoverMenuListItem.defaultProps = {
-  dataTest: 'dhis2-uicore-hovermenulistitem'
 };
 HoverMenuListItem.propTypes = {
   // Nested menu items become submenus

@@ -9,13 +9,12 @@ var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const UserList = _ref => {
-  let {
-    users,
-    selectedUserIndex,
-    onUserClick,
-    pager
-  } = _ref;
+const UserList = ({
+  users,
+  selectedUserIndex,
+  onUserClick,
+  pager
+}) => {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, users.map(u => {
     var _users$selectedUserIn;
     return /*#__PURE__*/_react.default.createElement(_ui.MenuItem, {

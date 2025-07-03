@@ -1,13 +1,12 @@
-export const clipPartitionedAxis = _ref => {
-  let {
-    partitionSize,
-    partitions,
-    axisMap,
-    widthMap,
-    viewportWidth,
-    viewportPosition,
-    totalWidth
-  } = _ref;
+export const clipPartitionedAxis = ({
+  partitionSize,
+  partitions,
+  axisMap,
+  widthMap,
+  viewportWidth,
+  viewportPosition,
+  totalWidth
+}) => {
   const partition = Math.floor(viewportPosition / partitionSize);
   if (partitions[partition] === undefined) {
     return {

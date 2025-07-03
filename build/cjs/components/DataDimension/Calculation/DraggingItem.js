@@ -14,12 +14,11 @@ var _expressions = require("../../../modules/expressions.js");
 var _DraggingItemStyle = _interopRequireDefault(require("./styles/DraggingItem.style.js"));
 var _FormulaItemStyle = _interopRequireDefault(require("./styles/FormulaItem.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const DraggingItem = _ref => {
-  let {
-    label,
-    type,
-    value
-  } = _ref;
+const DraggingItem = ({
+  label,
+  type,
+  value
+}) => {
   const displayLabel = type === _expressions.EXPRESSION_TYPE_NUMBER ? value || label : label;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_DraggingItemStyle.default.__hash} jsx-${_FormulaItemStyle.default.__hash}` + " " + ((0, _classnames.default)('dragging', 'content', {

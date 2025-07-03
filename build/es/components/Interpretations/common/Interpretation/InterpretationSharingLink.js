@@ -3,11 +3,10 @@ import i18n from '@dhis2/d2-i18n';
 import { SharingDialog, colors, spacers } from '@dhis2/ui';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-const InterpretationSharingLink = _ref => {
-  let {
-    type,
-    id
-  } = _ref;
+const InterpretationSharingLink = ({
+  type,
+  id
+}) => {
   const [showSharingDialog, setShowSharingDialog] = useState(false);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: _JSXStyle.dynamic([["3990725326", [spacers.dp4, spacers.dp8, colors.grey800]]]) + " " + "container"

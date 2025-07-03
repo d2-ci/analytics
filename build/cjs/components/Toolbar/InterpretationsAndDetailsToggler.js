@@ -11,28 +11,22 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _MenuButtonStyles = _interopRequireDefault(require("./MenuButton.styles.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const InterpretationsAndDetailsToggler = _ref => {
-  let {
-    onClick,
-    dataTest,
-    disabled,
-    isShowing
-  } = _ref;
-  return /*#__PURE__*/_react.default.createElement("button", {
-    onClick: onClick,
-    disabled: disabled,
-    "data-test": dataTest,
-    className: "jsx-1238484262 " + `jsx-${_MenuButtonStyles.default.__hash}`
-  }, isShowing ? /*#__PURE__*/_react.default.createElement(_ui.IconChevronRight24, null) : /*#__PURE__*/_react.default.createElement(_ui.IconChevronLeft24, null), _d2I18n.default.t('Interpretations and details'), /*#__PURE__*/_react.default.createElement(_style.default, {
-    id: _MenuButtonStyles.default.__hash
-  }, _MenuButtonStyles.default), /*#__PURE__*/_react.default.createElement(_style.default, {
-    id: "1238484262"
-  }, ["button.jsx-1238484262{gap:8px;}"]));
-};
+const InterpretationsAndDetailsToggler = ({
+  onClick,
+  dataTest = 'dhis2-analytics-interpretationsanddetailstoggler',
+  disabled,
+  isShowing
+}) => /*#__PURE__*/_react.default.createElement("button", {
+  onClick: onClick,
+  disabled: disabled,
+  "data-test": dataTest,
+  className: "jsx-1238484262 " + `jsx-${_MenuButtonStyles.default.__hash}`
+}, isShowing ? /*#__PURE__*/_react.default.createElement(_ui.IconChevronRight24, null) : /*#__PURE__*/_react.default.createElement(_ui.IconChevronLeft24, null), _d2I18n.default.t('Interpretations and details'), /*#__PURE__*/_react.default.createElement(_style.default, {
+  id: _MenuButtonStyles.default.__hash
+}, _MenuButtonStyles.default), /*#__PURE__*/_react.default.createElement(_style.default, {
+  id: "1238484262"
+}, ["button.jsx-1238484262{gap:8px;}"]));
 exports.InterpretationsAndDetailsToggler = InterpretationsAndDetailsToggler;
-InterpretationsAndDetailsToggler.defaultProps = {
-  dataTest: 'dhis2-analytics-interpretationsanddetailstoggler'
-};
 InterpretationsAndDetailsToggler.propTypes = {
   onClick: _propTypes.default.func.isRequired,
   dataTest: _propTypes.default.string,

@@ -10,47 +10,34 @@ import styles from './styles/InfoPopover.style.js';
 const programDataElementQuery = {
   programDataElement: {
     resource: 'dataElements',
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
-    params: _ref2 => {
-      let {
-        displayNameProp
-      } = _ref2;
-      return {
-        fields: `${getCommonFields(displayNameProp)},aggregationType,dimensionItemType,legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
-      };
-    }
+    id: ({
+      id
+    }) => id,
+    params: ({
+      displayNameProp
+    }) => ({
+      fields: `${getCommonFields(displayNameProp)},aggregationType,dimensionItemType,legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
+    })
   }
 };
 const programAttributeQuery = {
   programAttribute: {
     resource: 'trackedEntityAttributes',
-    id: _ref3 => {
-      let {
-        id
-      } = _ref3;
-      return id;
-    },
-    params: _ref4 => {
-      let {
-        displayNameProp
-      } = _ref4;
-      return {
-        fields: `${getCommonFields(displayNameProp)},aggregationType,dimensionItemType,legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
-      };
-    }
+    id: ({
+      id
+    }) => id,
+    params: ({
+      displayNameProp
+    }) => ({
+      fields: `${getCommonFields(displayNameProp)},aggregationType,dimensionItemType,legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant`
+    })
   }
 };
-export const EventDataItemInfo = _ref5 => {
-  let {
-    type,
-    id,
-    displayNameProp
-  } = _ref5;
+export const EventDataItemInfo = ({
+  type,
+  id,
+  displayNameProp
+}) => {
   const {
     loading,
     error,

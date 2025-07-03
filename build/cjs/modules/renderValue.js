@@ -7,8 +7,7 @@ exports.separateDigitGroups = exports.renderValue = void 0;
 var _pivotTableConstants = require("./pivotTable/pivotTableConstants.js");
 var _valueTypes = require("./valueTypes.js");
 const trimTrailingZeros = stringValue => stringValue.replace(/\.?0+$/, '');
-const separateDigitGroups = function (stringValue) {
-  let decimalSeparator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '.';
+const separateDigitGroups = (stringValue, decimalSeparator = '.') => {
   const isNegative = stringValue[0] === '-';
   const [integer, remainder] = stringValue.replace(/^-/, '').split('.');
   const groups = [];

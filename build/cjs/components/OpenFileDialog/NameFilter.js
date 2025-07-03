@@ -9,27 +9,21 @@ var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const NameFilter = _ref => {
-  let {
-    dataTest,
-    value,
-    onChange
-  } = _ref;
-  return /*#__PURE__*/_react.default.createElement(_ui.Input, {
-    type: "search",
-    placeholder: _d2I18n.default.t('Filter by name'),
-    onChange: _ref2 => {
-      let {
-        value
-      } = _ref2;
-      return onChange(value);
-    },
-    value: value,
-    initialFocus: true,
-    dense: true,
-    dataTest: dataTest
-  });
-};
+const NameFilter = ({
+  dataTest,
+  value,
+  onChange
+}) => /*#__PURE__*/_react.default.createElement(_ui.Input, {
+  type: "search",
+  placeholder: _d2I18n.default.t('Filter by name'),
+  onChange: ({
+    value
+  }) => onChange(value),
+  value: value,
+  initialFocus: true,
+  dense: true,
+  dataTest: dataTest
+});
 exports.NameFilter = NameFilter;
 NameFilter.propTypes = {
   onChange: _propTypes.default.func.isRequired,

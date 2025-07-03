@@ -8,10 +8,9 @@ var _appRuntime = require("@dhis2/app-runtime");
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _react = require("react");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const useTranslationsResults = _ref => {
-  let {
-    resource
-  } = _ref;
+const useTranslationsResults = ({
+  resource
+}) => {
   const translationsQueryRef = (0, _react.useRef)({
     translations: {
       resource: `${resource}/translations`

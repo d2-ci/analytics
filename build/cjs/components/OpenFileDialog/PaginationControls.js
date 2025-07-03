@@ -9,34 +9,28 @@ var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PaginationControls = _ref => {
-  let {
-    page,
-    pager,
-    onPageChange
-  } = _ref;
-  return /*#__PURE__*/_react.default.createElement(_ui.Pagination, {
-    page: page,
-    pageCount: pager.pageCount,
-    pageSize: pager.pageSize,
-    total: pager.total,
-    onPageChange: onPageChange,
-    onPageSizeChange: Function.prototype,
-    hidePageSizeSelect: true,
-    pageSummaryText: _ref2 => {
-      let {
-        firstItem: firstItemIndex,
-        lastItem: lastItemIndex,
-        total: totalNumberOfItems
-      } = _ref2;
-      return _d2I18n.default.t('{{firstItemIndex}}-{{lastItemIndex}} of {{totalNumberOfItems}}', {
-        firstItemIndex,
-        lastItemIndex,
-        totalNumberOfItems
-      });
-    }
-  });
-};
+const PaginationControls = ({
+  page,
+  pager,
+  onPageChange
+}) => /*#__PURE__*/_react.default.createElement(_ui.Pagination, {
+  page: page,
+  pageCount: pager.pageCount,
+  pageSize: pager.pageSize,
+  total: pager.total,
+  onPageChange: onPageChange,
+  onPageSizeChange: Function.prototype,
+  hidePageSizeSelect: true,
+  pageSummaryText: ({
+    firstItem: firstItemIndex,
+    lastItem: lastItemIndex,
+    total: totalNumberOfItems
+  }) => _d2I18n.default.t('{{firstItemIndex}}-{{lastItemIndex}} of {{totalNumberOfItems}}', {
+    firstItemIndex,
+    lastItemIndex,
+    totalNumberOfItems
+  })
+});
 exports.PaginationControls = PaginationControls;
 PaginationControls.propTypes = {
   page: _propTypes.default.number,

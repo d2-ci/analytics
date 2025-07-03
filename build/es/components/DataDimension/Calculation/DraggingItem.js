@@ -7,12 +7,11 @@ import { getIcon } from '../../../modules/dimensionListItem.js';
 import { EXPRESSION_TYPE_DATA, EXPRESSION_TYPE_NUMBER, EXPRESSION_TYPE_OPERATOR } from '../../../modules/expressions.js';
 import styles from './styles/DraggingItem.style.js';
 import formulaItemStyles from './styles/FormulaItem.style.js';
-const DraggingItem = _ref => {
-  let {
-    label,
-    type,
-    value
-  } = _ref;
+const DraggingItem = ({
+  label,
+  type,
+  value
+}) => {
   const displayLabel = type === EXPRESSION_TYPE_NUMBER ? value || label : label;
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash} jsx-${formulaItemStyles.__hash}` + " " + (cx('dragging', 'content', {

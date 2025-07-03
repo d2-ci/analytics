@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePivotTableEngine } from './PivotTableEngineContext.js';
 import { table as tableStyle } from './styles/PivotTable.style.js';
-export const PivotTableContainer = /*#__PURE__*/React.forwardRef((_ref, ref) => {
-  let {
-    width,
-    height,
-    children
-  } = _ref;
+export const PivotTableContainer = /*#__PURE__*/React.forwardRef(({
+  width,
+  height,
+  children
+}, ref) => {
   const engine = usePivotTableEngine();
   return /*#__PURE__*/React.createElement("div", {
     style: {

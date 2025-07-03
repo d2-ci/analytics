@@ -13,8 +13,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _InterpretationThread = require("./InterpretationThread.js");
 var _useModalContentWidth = require("./useModalContentWidth.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const modalCSS = {
   styles: /*#__PURE__*/_react.default.createElement(_style.default, {
@@ -34,31 +33,27 @@ function getModalContentCSS(width) {
 const query = {
   interpretation: {
     resource: 'interpretations',
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
+    id: ({
+      id
+    }) => id,
     params: {
       fields: ['access[write,manage]', 'id', 'text', 'created', 'createdBy[id,displayName]', 'likes', 'likedBy', 'comments[id,text,created,createdBy[id,displayName]]']
     }
   }
 };
-const InterpretationModal = _ref2 => {
+const InterpretationModal = ({
+  currentUser,
+  isVisualizationLoading,
+  visualization,
+  onResponsesReceived,
+  downloadMenuComponent,
+  onClose,
+  onInterpretationUpdate,
+  interpretationId,
+  initialFocus,
+  pluginComponent: VisualizationPlugin
+}) => {
   var _currentUser$settings;
-  let {
-    currentUser,
-    isVisualizationLoading,
-    visualization,
-    onResponsesReceived,
-    downloadMenuComponent,
-    onClose,
-    onInterpretationUpdate,
-    interpretationId,
-    initialFocus,
-    pluginComponent: VisualizationPlugin
-  } = _ref2;
   const modalContentWidth = (0, _useModalContentWidth.useModalContentWidth)();
   const modalContentCSS = getModalContentCSS(modalContentWidth);
   const [isDirty, setIsDirty] = (0, _react.useState)(false);
@@ -89,10 +84,9 @@ const InterpretationModal = _ref2 => {
       id: interpretationId
     });
   };
-  const onLikeToggled = _ref3 => {
-    let {
-      likedBy
-    } = _ref3;
+  const onLikeToggled = ({
+    likedBy
+  }) => {
     setIsDirty(true);
     interpretation.likedBy = likedBy;
     interpretation.likes = likedBy.length;

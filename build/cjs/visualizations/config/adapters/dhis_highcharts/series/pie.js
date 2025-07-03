@@ -6,10 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = _default;
 exports.formatDataLabel = void 0;
 var _renderValue = require("../../../../../modules/renderValue.js");
-const formatDataLabel = function () {
-  let name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  let y = arguments.length > 1 ? arguments[1] : undefined;
-  let percentage = arguments.length > 2 ? arguments[2] : undefined;
+const formatDataLabel = (name = '', y, percentage) => {
   const value = (0, _renderValue.separateDigitGroups)(y.toString()).join(' ');
   return '<span style="font-weight:normal">' + name + '</span><br/>' + value + '<span style="font-weight:normal"> (' + parseFloat(percentage.toFixed(1)) + '%)</span>';
 };

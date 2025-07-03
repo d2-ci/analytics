@@ -14,12 +14,9 @@ export default function (filters, metaData) {
   let l;
   filters.forEach(filter => {
     const items = dimensionGetItems(filter);
-    if (dimensionIs(filter, DIMENSION_ID_ORGUNIT) && items.some(_ref => {
-      let {
-        id
-      } = _ref;
-      return ouIdHelper.hasGroupPrefix(id) || ouIdHelper.hasLevelPrefix(id);
-    })) {
+    if (dimensionIs(filter, DIMENSION_ID_ORGUNIT) && items.some(({
+      id
+    }) => ouIdHelper.hasGroupPrefix(id) || ouIdHelper.hasLevelPrefix(id))) {
       titleFragments.push(getOuLevelAndGroupText(filter, metaData));
     } else if (dimensionIs(filter, DIMENSION_ID_PERIOD)) {
       const relativePeriodNames = getRelativePeriodsName();

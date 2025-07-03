@@ -25,16 +25,13 @@ export const renderDataSets = dataSets => {
       className: `jsx-${styles.__hash}` + " " + "content-wrap"
     }, /*#__PURE__*/React.createElement("ul", {
       className: `jsx-${styles.__hash}`
-    }, dataSets.map(_ref => {
-      let {
-        id,
-        displayName
-      } = _ref;
-      return /*#__PURE__*/React.createElement("li", {
-        key: id,
-        className: `jsx-${styles.__hash}`
-      }, displayName);
-    }))), /*#__PURE__*/React.createElement(_JSXStyle, {
+    }, dataSets.map(({
+      id,
+      displayName
+    }) => /*#__PURE__*/React.createElement("li", {
+      key: id,
+      className: `jsx-${styles.__hash}`
+    }, displayName)))), /*#__PURE__*/React.createElement(_JSXStyle, {
       id: styles.__hash
     }, styles));
   }
@@ -53,16 +50,13 @@ export const renderGroupMemberships = groups => {
       className: `jsx-${styles.__hash}` + " " + "content-wrap"
     }, /*#__PURE__*/React.createElement("ul", {
       className: `jsx-${styles.__hash}`
-    }, groups.map(_ref2 => {
-      let {
-        id,
-        displayName
-      } = _ref2;
-      return /*#__PURE__*/React.createElement("li", {
-        key: id,
-        className: `jsx-${styles.__hash}`
-      }, displayName);
-    }))), /*#__PURE__*/React.createElement(_JSXStyle, {
+    }, groups.map(({
+      id,
+      displayName
+    }) => /*#__PURE__*/React.createElement("li", {
+      key: id,
+      className: `jsx-${styles.__hash}`
+    }, displayName)))), /*#__PURE__*/React.createElement(_JSXStyle, {
       id: styles.__hash
     }, styles));
   }
@@ -79,27 +73,23 @@ export const renderLegendSets = legendSets => {
     className: `jsx-${styles.__hash}` + " " + "content-wrap"
   }, /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
-  }, legendSets.map(_ref3 => {
-    let {
-      id,
-      displayName
-    } = _ref3;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, displayName);
-  }))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, legendSets.map(({
+    id,
+    displayName
+  }) => /*#__PURE__*/React.createElement("li", {
+    key: id,
+    className: `jsx-${styles.__hash}`
+  }, displayName)))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };
-export const InfoTable = _ref4 => {
-  let {
-    dataType,
-    data,
-    error,
-    loading,
-    children
-  } = _ref4;
+export const InfoTable = ({
+  dataType,
+  data,
+  error,
+  loading,
+  children
+}) => {
   const {
     fromServerDate
   } = useTimeZoneConversion();
@@ -179,20 +169,17 @@ export const InfoTable = _ref4 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Created by')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, `${data.createdBy.displayName}, ${data.createdBy.username}`)), data.attributeValues.map(_ref5 => {
-    let {
-      attribute,
-      value
-    } = _ref5;
-    return /*#__PURE__*/React.createElement("tr", {
-      key: attribute.id,
-      className: `jsx-${styles.__hash}`
-    }, /*#__PURE__*/React.createElement("th", {
-      className: `jsx-${styles.__hash}`
-    }, attribute.displayName), /*#__PURE__*/React.createElement("td", {
-      className: `jsx-${styles.__hash}`
-    }, value));
-  })))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, `${data.createdBy.displayName}, ${data.createdBy.username}`)), data.attributeValues.map(({
+    attribute,
+    value
+  }) => /*#__PURE__*/React.createElement("tr", {
+    key: attribute.id,
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("th", {
+    className: `jsx-${styles.__hash}`
+  }, attribute.displayName), /*#__PURE__*/React.createElement("td", {
+    className: `jsx-${styles.__hash}`
+  }, value)))))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

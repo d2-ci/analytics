@@ -8,10 +8,9 @@ var _moment = _interopRequireDefault(require("moment"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const DateField = _ref => {
-  let {
-    date
-  } = _ref;
+const DateField = ({
+  date
+}) => {
   const d = new Date(date);
   return /*#__PURE__*/_react.default.createElement("time", {
     dateTime: d.toISOString()

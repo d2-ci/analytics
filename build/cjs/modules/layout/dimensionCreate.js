@@ -5,9 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.dimensionCreate = void 0;
 var _dimension = require("./dimension.js");
-const dimensionCreate = function (dimensionId) {
-  let itemIds = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-  let args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+const dimensionCreate = (dimensionId, itemIds = [], args = {}) => {
   const dimension = {
     [_dimension.DIMENSION_PROP_ID.name]: dimensionId,
     ...(itemIds.length && {

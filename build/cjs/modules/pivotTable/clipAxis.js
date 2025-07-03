@@ -6,14 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 exports.clipAxis = void 0;
 var _times = _interopRequireDefault(require("lodash/times"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const clipAxis = _ref => {
-  let {
-    position,
-    size,
-    step,
-    totalCount,
-    headerCount
-  } = _ref;
+const clipAxis = ({
+  position,
+  size,
+  step,
+  totalCount,
+  headerCount
+}) => {
   // position: scroll Y position
   // size: height of table container
   // step: height of cell in px

@@ -27,10 +27,7 @@ const defaultError = error => {
 const defaultWarning = warning => {
   console.log(warning);
 };
-function createVisualization(data, layout, el, extraOptions) {
-  let error = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultError;
-  let warning = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultWarning;
-  let outputFormat = arguments.length > 6 ? arguments[6] : undefined;
+function createVisualization(data, layout, el, extraOptions, error = defaultError, warning = defaultWarning, outputFormat) {
   const _data = (0, _isArray.default)(data) ? data : [data];
   const store = new _index2.default({
     data: _data,

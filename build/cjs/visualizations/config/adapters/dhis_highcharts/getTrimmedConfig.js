@@ -21,10 +21,9 @@ function getEmptySeriesIndexes(series) {
   let seriesValues;
   series[0].data.forEach((value, index) => {
     seriesValues = [];
-    series.forEach(_ref => {
-      let {
-        data
-      } = _ref;
+    series.forEach(({
+      data
+    }) => {
       // handle undefined values due to empty (or shorter) serie data
       // preserve 0 as valid value
       seriesValues.push(data[index] === undefined ? null : data[index]);

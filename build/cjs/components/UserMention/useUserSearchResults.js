@@ -11,24 +11,20 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 const usersQuery = {
   users: {
     resource: 'users/gist',
-    params: _ref => {
-      let {
-        searchText
-      } = _ref;
-      return {
-        fields: 'id,displayName,username',
-        order: 'firstName,surname',
-        total: true,
-        filter: `username:ilike:${searchText},firstName:ilike:${searchText},surname:ilike:${searchText},email:ilike:${searchText}`,
-        rootJunction: 'OR'
-      };
-    }
+    params: ({
+      searchText
+    }) => ({
+      fields: 'id,displayName,username',
+      order: 'firstName,surname',
+      total: true,
+      filter: `username:ilike:${searchText},firstName:ilike:${searchText},surname:ilike:${searchText},email:ilike:${searchText}`,
+      rootJunction: 'OR'
+    })
   }
 };
-const useUserSearchResults = _ref2 => {
-  let {
-    searchText
-  } = _ref2;
+const useUserSearchResults = ({
+  searchText
+}) => {
   const [{
     users,
     pager

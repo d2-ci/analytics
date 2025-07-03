@@ -16,19 +16,18 @@ var _SelectedEmptyPlaceholder = require("../DataDimension/SelectedEmptyPlacehold
 var _SourceEmptyPlaceholder = require("../DataDimension/SourceEmptyPlaceholder.js");
 var _DimensionSelectorStyle = _interopRequireDefault(require("../styles/DimensionSelector.style.js"));
 var _TransferOption = require("../TransferOption.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const ItemSelector = _ref => {
-  let {
-    selectedItems,
-    noItemsMessage,
-    onFetch,
-    onSelect,
-    rightFooter,
-    dataTest
-  } = _ref;
+const SELECTED_ITEMS_PROP_DEFAULT = [];
+const ItemSelector = ({
+  selectedItems = SELECTED_ITEMS_PROP_DEFAULT,
+  noItemsMessage,
+  onFetch,
+  onSelect,
+  rightFooter,
+  dataTest
+}) => {
   const [state, setState] = (0, _react.useState)({
     searchTerm: '',
     options: [],
@@ -48,18 +47,15 @@ const ItemSelector = _ref => {
       loading: true
     }));
     const result = await onFetch(page, state.searchTerm);
-    const newOptions = (_result$dimensionItem = result.dimensionItems) === null || _result$dimensionItem === void 0 ? void 0 : _result$dimensionItem.map(_ref2 => {
-      let {
-        id,
-        name,
-        disabled
-      } = _ref2;
-      return {
-        label: name,
-        value: id,
-        disabled
-      };
-    });
+    const newOptions = (_result$dimensionItem = result.dimensionItems) === null || _result$dimensionItem === void 0 ? void 0 : _result$dimensionItem.map(({
+      id,
+      name,
+      disabled
+    }) => ({
+      label: name,
+      value: id,
+      disabled
+    }));
     setState(state => ({
       ...state,
       loading: false,
@@ -95,12 +91,9 @@ const ItemSelector = _ref => {
     }
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ui.Transfer, {
-    onChange: _ref3 => {
-      let {
-        selected
-      } = _ref3;
-      return onChange(selected);
-    },
+    onChange: ({
+      selected
+    }) => onChange(selected),
     selected: selectedItems.map(item => item.value),
     options: [...state.options, ...selectedItems],
     loading: state.loading,
@@ -116,12 +109,9 @@ const ItemSelector = _ref => {
     filterPlaceholder: _index.default.t('Search'),
     filterablePicked: false,
     searchTerm: state.searchTerm,
-    onFilterChange: _ref4 => {
-      let {
-        value
-      } = _ref4;
-      return setSearchTerm(value);
-    },
+    onFilterChange: ({
+      value
+    }) => setSearchTerm(value),
     enableOrderChange: true,
     height: _dimensionSelectorHelper.TRANSFER_HEIGHT,
     optionsWidth: _dimensionSelectorHelper.TRANSFER_OPTIONS_WIDTH,
@@ -150,8 +140,5 @@ ItemSelector.propTypes = {
     label: _propTypes.default.string.isRequired,
     value: _propTypes.default.string.isRequired
   }))
-};
-ItemSelector.defaultProps = {
-  selectedItems: []
 };
 var _default = exports.default = ItemSelector;

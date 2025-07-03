@@ -6,12 +6,11 @@ import React from 'react';
 import i18n from '../../locales/index.js';
 import { styles } from './GetLinkDialog.styles.js';
 import { supportedFileTypes, appPathFor } from './utils.js';
-export const GetLinkDialog = _ref => {
-  let {
-    type,
-    id,
-    onClose
-  } = _ref;
+export const GetLinkDialog = ({
+  type,
+  id,
+  onClose
+}) => {
   const {
     apiVersion,
     baseUrl
@@ -32,7 +31,8 @@ export const GetLinkDialog = _ref => {
   }, appUrl), /*#__PURE__*/React.createElement(Button, {
     icon: /*#__PURE__*/React.createElement(IconCopy24, null),
     small: true,
-    onClick: () => navigator.clipboard.writeText(appUrl)
+    onClick: () => navigator.clipboard.writeText(appUrl),
+    "aria-label": i18n.t('Copy to clipboard')
   }))), /*#__PURE__*/React.createElement(ModalActions, null, /*#__PURE__*/React.createElement(ButtonStrip, null, /*#__PURE__*/React.createElement(Button, {
     onClick: onClose,
     secondary: true

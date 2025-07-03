@@ -23,24 +23,21 @@ const getIntersectionRatio = (entry, target) => {
 
   return 0;
 };
-const sortCollisionsDesc = (_ref, _ref2) => {
-  let {
-    data: {
-      value: a
-    }
-  } = _ref;
-  let {
-    data: {
-      value: b
-    }
-  } = _ref2;
+const sortCollisionsDesc = ({
+  data: {
+    value: a
+  }
+}, {
+  data: {
+    value: b
+  }
+}) => {
   return b - a;
 };
-const rectIntersectionCustom = _ref3 => {
-  let {
-    pointerCoordinates,
-    droppableContainers
-  } = _ref3;
+const rectIntersectionCustom = ({
+  pointerCoordinates,
+  droppableContainers
+}) => {
   // create a rect around the pointerCoords for calculating the intersection
 
   const pointerRectWidth = 40;
@@ -88,22 +85,20 @@ const isInteractiveElement = el => {
 class PointerSensor extends DndKitPointerSensor {}
 _defineProperty(PointerSensor, "activators", [{
   eventName: 'onPointerDown',
-  handler: _ref7 => {
-    let {
-      nativeEvent: event
-    } = _ref7;
+  handler: ({
+    nativeEvent: event
+  }) => {
     if (!event.isPrimary || event.button !== 0 || isInteractiveElement(event.target)) {
       return false;
     }
     return true;
   }
 }]);
-const OuterDndContext = _ref4 => {
-  let {
-    children,
-    onDragEnd,
-    onDragStart
-  } = _ref4;
+const OuterDndContext = ({
+  children,
+  onDragEnd,
+  onDragStart
+}) => {
   const [draggingItem, setDraggingItem] = useState(null);
   const sensor = useSensor(PointerSensor, {
     activationConstraint: {
@@ -111,22 +106,20 @@ const OuterDndContext = _ref4 => {
     }
   });
   const sensors = useSensors(sensor);
-  const handleDragStart = _ref5 => {
-    let {
-      active
-    } = _ref5;
+  const handleDragStart = ({
+    active
+  }) => {
     setDraggingItem(active.data.current);
     onDragStart && onDragStart();
   };
   const handleDragCancel = () => {
     setDraggingItem(null);
   };
-  const handleDragEnd = _ref6 => {
+  const handleDragEnd = ({
+    active,
+    over
+  }) => {
     var _over$data, _over$data$current, _over$data$current$so, _over$data$current2, _over$data$current3;
-    let {
-      active,
-      over
-    } = _ref6;
     if (!(over !== null && over !== void 0 && over.id) || (over === null || over === void 0 ? void 0 : (_over$data = over.data) === null || _over$data === void 0 ? void 0 : (_over$data$current = _over$data.current) === null || _over$data$current === void 0 ? void 0 : (_over$data$current$so = _over$data$current.sortable) === null || _over$data$current$so === void 0 ? void 0 : _over$data$current$so.containerId) === OPTIONS_PANEL || !active.data.current) {
       // dropped over non-droppable or over options panel
       handleDragCancel();

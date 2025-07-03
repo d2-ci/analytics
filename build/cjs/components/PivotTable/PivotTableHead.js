@@ -9,22 +9,19 @@ var _react = _interopRequireDefault(require("react"));
 var _PivotTableColumnHeaders = require("./PivotTableColumnHeaders.js");
 var _PivotTableTitleRows = require("./PivotTableTitleRows.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PivotTableHead = _ref => {
-  let {
-    clippingResult,
-    width,
-    sortBy,
-    onSortByColumn
-  } = _ref;
-  return /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement(_PivotTableTitleRows.PivotTableTitleRows, {
-    clippingResult: clippingResult,
-    width: width
-  }), /*#__PURE__*/_react.default.createElement(_PivotTableColumnHeaders.PivotTableColumnHeaders, {
-    clippingResult: clippingResult,
-    sortBy: sortBy,
-    onSortByColumn: onSortByColumn
-  }));
-};
+const PivotTableHead = ({
+  clippingResult,
+  width,
+  sortBy,
+  onSortByColumn
+}) => /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement(_PivotTableTitleRows.PivotTableTitleRows, {
+  clippingResult: clippingResult,
+  width: width
+}), /*#__PURE__*/_react.default.createElement(_PivotTableColumnHeaders.PivotTableColumnHeaders, {
+  clippingResult: clippingResult,
+  sortBy: sortBy,
+  onSortByColumn: onSortByColumn
+}));
 exports.PivotTableHead = PivotTableHead;
 PivotTableHead.propTypes = {
   clippingResult: _propTypes.default.object.isRequired,

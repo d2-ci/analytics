@@ -6,19 +6,18 @@ import { Message, MessageStatsBar, MessageIconButton, getInterpretationAccess } 
 import { InterpretationDeleteButton } from './InterpretationDeleteButton.js';
 import { InterpretationUpdateForm } from './InterpretationUpdateForm.js';
 import { useLike } from './useLike.js';
-export const Interpretation = _ref => {
-  let {
-    interpretation,
-    currentUser,
-    onClick,
-    onUpdated,
-    onDeleted,
-    disabled,
-    onReplyIconClick,
-    dashboardRedirectUrl,
-    isInThread,
-    onLikeToggled
-  } = _ref;
+export const Interpretation = ({
+  interpretation,
+  currentUser,
+  onClick,
+  onUpdated,
+  onDeleted,
+  disabled,
+  onReplyIconClick,
+  dashboardRedirectUrl,
+  isInThread,
+  onLikeToggled
+}) => {
   const [isUpdateMode, setIsUpdateMode] = useState(false);
   const [showSharingDialog, setShowSharingDialog] = useState(false);
   const {

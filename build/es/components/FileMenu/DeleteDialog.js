@@ -6,22 +6,18 @@ import i18n from '../../locales/index.js';
 import { supportedFileTypes, endpointFromFileType, labelForFileType } from './utils.js';
 const getMutation = type => ({
   resource: endpointFromFileType(type),
-  id: _ref => {
-    let {
-      id
-    } = _ref;
-    return id;
-  },
+  id: ({
+    id
+  }) => id,
   type: 'delete'
 });
-export const DeleteDialog = _ref2 => {
-  let {
-    type,
-    id,
-    onClose,
-    onDelete,
-    onError
-  } = _ref2;
+export const DeleteDialog = ({
+  type,
+  id,
+  onClose,
+  onDelete,
+  onError
+}) => {
   const mutation = useMemo(() => getMutation(type), []);
   const [mutate] = useDataMutation(mutation, {
     variables: {

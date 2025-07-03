@@ -13,12 +13,11 @@ var _dataSets = require("../../../modules/dataSets.js");
 var _dataTypes = require("../../../modules/dataTypes.js");
 var _MetricSelectorStyle = _interopRequireDefault(require("./styles/MetricSelector.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const MetricSelector = _ref => {
-  let {
-    currentValue,
-    onChange,
-    dataTest
-  } = _ref;
+const MetricSelector = ({
+  currentValue,
+  onChange,
+  dataTest
+}) => {
   return /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_MetricSelectorStyle.default.__hash}` + " " + "metric-container"
   }, /*#__PURE__*/_react.default.createElement(_ui.SingleSelectField, {

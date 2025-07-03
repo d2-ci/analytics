@@ -20,20 +20,19 @@ const getDividerItem = key => /*#__PURE__*/React.createElement(MenuDivider, {
 const getUnavailableLabel = visType => i18n.t('Not available for {{visualizationType}}', {
   visualizationType: getDisplayNameByVisType(visType)
 });
-const DimensionMenu = _ref => {
-  let {
-    dimensionId,
-    currentAxisId,
-    visType,
-    numberOfDimensionItems,
-    assignedCategoriesItemHandler,
-    isAssignedCategoriesInLayout,
-    axisItemHandler,
-    removeItemHandler,
-    classes,
-    onClose,
-    dataTest
-  } = _ref;
+const DimensionMenu = ({
+  dimensionId,
+  currentAxisId,
+  visType,
+  numberOfDimensionItems,
+  assignedCategoriesItemHandler,
+  isAssignedCategoriesInLayout,
+  axisItemHandler,
+  removeItemHandler,
+  classes,
+  onClose,
+  dataTest
+}) => {
   const menuItems = [];
   const isDimensionInLayout = !!currentAxisId;
 

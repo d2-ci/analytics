@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types';
 import { getHeaderForDisplay } from '../../modules/pivotTable/getHeaderForDisplay.js';
-export const PivotTableHeaderCell = _ref => {
-  let {
-    axisClippingResult,
-    index,
-    level,
-    getHeader,
-    render,
-    showHierarchy
-  } = _ref;
+export const PivotTableHeaderCell = ({
+  axisClippingResult,
+  index,
+  level,
+  getHeader,
+  render,
+  showHierarchy
+}) => {
   const header = getHeaderForDisplay({
     start: axisClippingResult.indices[0],
     count: axisClippingResult.indices.length,

@@ -13,12 +13,11 @@ var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _GetLinkDialogStyles = require("./GetLinkDialog.styles.js");
 var _utils = require("./utils.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const GetLinkDialog = _ref => {
-  let {
-    type,
-    id,
-    onClose
-  } = _ref;
+const GetLinkDialog = ({
+  type,
+  id,
+  onClose
+}) => {
   const {
     apiVersion,
     baseUrl
@@ -39,7 +38,8 @@ const GetLinkDialog = _ref => {
   }, appUrl), /*#__PURE__*/_react.default.createElement(_ui.Button, {
     icon: /*#__PURE__*/_react.default.createElement(_ui.IconCopy24, null),
     small: true,
-    onClick: () => navigator.clipboard.writeText(appUrl)
+    onClick: () => navigator.clipboard.writeText(appUrl),
+    "aria-label": _index.default.t('Copy to clipboard')
   }))), /*#__PURE__*/_react.default.createElement(_ui.ModalActions, null, /*#__PURE__*/_react.default.createElement(_ui.ButtonStrip, null, /*#__PURE__*/_react.default.createElement(_ui.Button, {
     onClick: onClose,
     secondary: true

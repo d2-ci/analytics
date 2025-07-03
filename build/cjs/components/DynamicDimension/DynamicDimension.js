@@ -15,15 +15,15 @@ var _ItemSelector = _interopRequireDefault(require("./ItemSelector.js"));
 var _DynamicDimensionStyle = _interopRequireDefault(require("./styles/DynamicDimension.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const ALL_DYNAMIC_DIMENSION_ITEMS = exports.ALL_DYNAMIC_DIMENSION_ITEMS = 'ALL_ITEMS';
-const DynamicDimension = _ref => {
-  let {
-    dimensionId,
-    onSelect,
-    selectedItems,
-    rightFooter,
-    dimensionTitle,
-    displayNameProp
-  } = _ref;
+const SELECTED_ITEMS_PROP_DEFAULT = [];
+const DynamicDimension = ({
+  dimensionId,
+  onSelect = Function.prototype,
+  selectedItems = SELECTED_ITEMS_PROP_DEFAULT,
+  rightFooter,
+  dimensionTitle,
+  displayNameProp
+}) => {
   const dataEngine = (0, _appRuntime.useDataEngine)();
   const fetchItems = (page, searchTerm) => (0, _dimensions.apiFetchItemsByDimension)({
     dataEngine,
@@ -103,9 +103,5 @@ DynamicDimension.propTypes = {
   })).isRequired,
   onSelect: _propTypes.default.func.isRequired,
   rightFooter: _propTypes.default.node
-};
-DynamicDimension.defaultProps = {
-  selectedItems: [],
-  onSelect: Function.prototype
 };
 var _default = exports.default = DynamicDimension;

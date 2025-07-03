@@ -9,8 +9,8 @@ import { getPredefinedDimensions, getFixedDimensions } from '../../../modules/pr
 import DimensionItem from './DimensionItem.js';
 import styles from './styles/DimensionList.style.js';
 class DimensionList extends Component {
-  constructor() {
-    super(...arguments);
+  constructor(...args) {
+    super(...args);
     _defineProperty(this, "nameContainsFilterText", dimension => dimension.name.toLowerCase().includes(this.props.filterText.toLowerCase()));
     _defineProperty(this, "isDisabled", dimensionId => this.props.disabledDimension(dimensionId) || false);
     _defineProperty(this, "isRecommended", dimensionId => this.props.recommendedDimension(dimensionId) || false);
@@ -53,6 +53,12 @@ class DimensionList extends Component {
     }, styles));
   }
 }
+_defineProperty(DimensionList, "defaultProps", {
+  selectedIds: [],
+  disabledDimension: Function.prototype,
+  lockedDimension: Function.prototype,
+  recommendedDimension: Function.prototype
+});
 DimensionList.propTypes = {
   dimensions: PropTypes.array.isRequired,
   filterText: PropTypes.string.isRequired,
@@ -63,11 +69,5 @@ DimensionList.propTypes = {
   onDimensionClick: PropTypes.func,
   onDimensionDragStart: PropTypes.func,
   onDimensionOptionsClick: PropTypes.func
-};
-DimensionList.defaultProps = {
-  selectedIds: [],
-  disabledDimension: Function.prototype,
-  lockedDimension: Function.prototype,
-  recommendedDimension: Function.prototype
 };
 export default DimensionList;

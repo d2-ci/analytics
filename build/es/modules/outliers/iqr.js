@@ -16,8 +16,7 @@ export const getQuartilePosition = (data, quartile) => {
       return pos;
   }
 };
-export const getQuartileValue = function (data) {
-  let quartile = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Q1;
+export const getQuartileValue = (data, quartile = Q1) => {
   if (data.length < 3) {
     return;
   }
@@ -30,10 +29,9 @@ export const getQuartileValue = function (data) {
   var diff = data[base] - data[base - 1];
   return data[base - 1] + diff * rest;
 };
-export const getIQRHelper = (normalizationHelper, config, _ref) => {
-  let {
-    xyStats
-  } = _ref;
+export const getIQRHelper = (normalizationHelper, config, {
+  xyStats
+}) => {
   const sortedNormalized = normalizationHelper.normalized.slice().sort((a, b) => a - b);
   const q1 = getQuartileValue(sortedNormalized, Q1);
   const q3 = getQuartileValue(sortedNormalized, Q3);

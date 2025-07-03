@@ -2,13 +2,12 @@ import { useMemo } from 'react';
 import { clipPartitionedAxis } from './clipPartitionedAxis.js';
 import { CLIPPED_AXIS_PARTITION_SIZE_PX } from './pivotTableConstants.js';
 import { useScrollPosition } from './useScrollPosition.js';
-export const useTableClipping = _ref => {
-  let {
-    containerRef,
-    width,
-    height,
-    engine
-  } = _ref;
+export const useTableClipping = ({
+  containerRef,
+  width,
+  height,
+  engine
+}) => {
   const scrollPosition = useScrollPosition(containerRef);
   const lineHeight = engine.fontSize + engine.cellPadding * 2 + 2;
   const rows = useMemo(() => {

@@ -12,42 +12,34 @@ var _predefinedDimensions = require("../../modules/predefinedDimensions.js");
 var _InfoPopover = require("./Info/InfoPopover.js");
 var _ItemOptionsSelector = require("./ItemOptionsSelector/ItemOptionsSelector.js");
 var _ItemSelector = _interopRequireDefault(require("./ItemSelector/ItemSelector.js"));
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 const DataDimensionCtx = /*#__PURE__*/(0, _react.createContext)({});
-const DataDimension = _ref => {
-  let {
-    currentUser,
-    onSelect,
-    selectedDimensions,
-    displayNameProp,
-    enabledDataTypes,
-    infoBoxMessage,
-    onCalculationSave,
-    visType
-  } = _ref;
+const SELECTED_DIMENSIONS_PROP_DEFAULT = [];
+const DataDimension = ({
+  currentUser,
+  onSelect = Function.prototype,
+  selectedDimensions = SELECTED_DIMENSIONS_PROP_DEFAULT,
+  displayNameProp,
+  enabledDataTypes,
+  infoBoxMessage,
+  onCalculationSave,
+  visType
+}) => {
   const {
     serverVersion
   } = (0, _appRuntime.useConfig)();
   const itemsRef = (0, _react.useRef)(new Map());
-  const filterDataTypesByVersion = (0, _react.useCallback)(dataTypes => dataTypes.filter(_ref2 => {
-    let {
-      id
-    } = _ref2;
-    return (
-      // Calculations only available from 2.40
-      id !== _dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM || serverVersion.minor >= 40
-    );
-  }), [serverVersion.minor]);
+  const filterDataTypesByVersion = (0, _react.useCallback)(dataTypes => dataTypes.filter(({
+    id
+  }) =>
+  // Calculations only available from 2.40
+  id !== _dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM || serverVersion.minor >= 40), [serverVersion.minor]);
   const [dataTypes, setDataTypes] = (0, _react.useState)(filterDataTypesByVersion(enabledDataTypes || Object.values(_dataTypes.dataTypeMap)));
-  const supportsEDI = dataTypes.map(_ref3 => {
-    let {
-      id
-    } = _ref3;
-    return id;
-  }).includes(_dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM);
+  const supportsEDI = dataTypes.map(({
+    id
+  }) => id).includes(_dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM);
   const [currentCalculation, setCurrentCalculation] = (0, _react.useState)();
   const [currentDataItem, setCurrentDataItem] = (0, _react.useState)();
   const [infoDataItem, setInfoDataItem] = (0, _react.useState)();
@@ -143,10 +135,6 @@ DataDimension.propTypes = {
   infoBoxMessage: _propTypes.default.string,
   visType: _propTypes.default.string,
   onCalculationSave: _propTypes.default.func
-};
-DataDimension.defaultProps = {
-  selectedDimensions: [],
-  onSelect: Function.prototype
 };
 const useDataDimensionContext = () => (0, _react.useContext)(DataDimensionCtx);
 exports.useDataDimensionContext = useDataDimensionContext;

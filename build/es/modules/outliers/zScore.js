@@ -4,10 +4,9 @@ import { PROP_THRESHOLD_FACTOR } from './index.js';
 export const STANDARD_Z_SCORE = 'STANDARD_Z_SCORE';
 export const getStdDev = data => std(data, 'unbiased');
 export const getMean = data => mean(data);
-export const getZScoreHelper = (normalizationHelper, config, _ref) => {
-  let {
-    xyStats
-  } = _ref;
+export const getZScoreHelper = (normalizationHelper, config, {
+  xyStats
+}) => {
   const sortedNormalized = normalizationHelper.normalized.slice().sort((a, b) => a - b);
   const stdDev = getStdDev(sortedNormalized);
   const zScoreThreshold = stdDev * config[PROP_THRESHOLD_FACTOR];

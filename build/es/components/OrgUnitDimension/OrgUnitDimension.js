@@ -11,17 +11,16 @@ import { ouIdHelper, USER_ORG_UNIT, USER_ORG_UNIT_CHILDREN, USER_ORG_UNIT_GRANDC
 import { DIMENSION_ID_ORGUNIT } from '../../modules/predefinedDimensions.js';
 import styles from './styles/OrgUnitDimension.style.js';
 const DYNAMIC_ORG_UNITS = [USER_ORG_UNIT, USER_ORG_UNIT_CHILDREN, USER_ORG_UNIT_GRANDCHILDREN];
-const OrgUnitDimension = _ref => {
-  let {
-    roots,
-    selected,
-    onSelect,
-    hideGroupSelect,
-    hideLevelSelect,
-    hideUserOrgUnits,
-    warning,
-    displayNameProp
-  } = _ref;
+const OrgUnitDimension = ({
+  roots,
+  selected,
+  onSelect,
+  hideGroupSelect = false,
+  hideLevelSelect = false,
+  hideUserOrgUnits = false,
+  warning,
+  displayNameProp
+}) => {
   const [ouLevels, setOuLevels] = useState([]);
   const [ouGroups, setOuGroups] = useState([]);
   const dataEngine = useDataEngine();
@@ -138,44 +137,35 @@ const OrgUnitDimension = _ref => {
   }, /*#__PURE__*/React.createElement(Checkbox, {
     label: i18n.t('User organisation unit'),
     checked: selected.some(item => item.id === USER_ORG_UNIT),
-    onChange: _ref2 => {
-      let {
-        checked
-      } = _ref2;
-      return onSelectItems({
-        id: USER_ORG_UNIT,
-        checked,
-        displayName: i18n.t('User organisation unit')
-      });
-    },
+    onChange: ({
+      checked
+    }) => onSelectItems({
+      id: USER_ORG_UNIT,
+      checked,
+      displayName: i18n.t('User organisation unit')
+    }),
     dense: true
   }), /*#__PURE__*/React.createElement(Checkbox, {
     label: i18n.t('User sub-units'),
     checked: selected.some(item => item.id === USER_ORG_UNIT_CHILDREN),
-    onChange: _ref3 => {
-      let {
-        checked
-      } = _ref3;
-      return onSelectItems({
-        id: USER_ORG_UNIT_CHILDREN,
-        checked,
-        displayName: i18n.t('User sub-units')
-      });
-    },
+    onChange: ({
+      checked
+    }) => onSelectItems({
+      id: USER_ORG_UNIT_CHILDREN,
+      checked,
+      displayName: i18n.t('User sub-units')
+    }),
     dense: true
   }), /*#__PURE__*/React.createElement(Checkbox, {
     label: i18n.t('User sub-x2-units'),
     checked: selected.some(item => item.id === USER_ORG_UNIT_GRANDCHILDREN),
-    onChange: _ref4 => {
-      let {
-        checked
-      } = _ref4;
-      return onSelectItems({
-        id: USER_ORG_UNIT_GRANDCHILDREN,
-        checked,
-        displayName: i18n.t('User sub-x2-units')
-      });
-    },
+    onChange: ({
+      checked
+    }) => onSelectItems({
+      id: USER_ORG_UNIT_GRANDCHILDREN,
+      checked,
+      displayName: i18n.t('User sub-x2-units')
+    }),
     dense: true
   })), /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "orgUnitTreeWrapper"
@@ -191,12 +181,9 @@ const OrgUnitDimension = _ref => {
     }) || "")
   }, !hideLevelSelect && /*#__PURE__*/React.createElement(MultiSelect, {
     selected: ouLevels.length ? selected.filter(item => ouIdHelper.hasLevelPrefix(item.id)).map(item => ouIdHelper.removePrefix(item.id)) : [],
-    onChange: _ref5 => {
-      let {
-        selected
-      } = _ref5;
-      return onLevelChange(selected);
-    },
+    onChange: ({
+      selected
+    }) => onLevelChange(selected),
     placeholder: i18n.t('Select a level'),
     loading: !ouLevels.length,
     dense: true,
@@ -208,12 +195,9 @@ const OrgUnitDimension = _ref => {
     dataTest: `org-unit-level-select-option-${level.id}`
   }))), !hideGroupSelect && /*#__PURE__*/React.createElement(MultiSelect, {
     selected: ouGroups.length ? selected.filter(item => ouIdHelper.hasGroupPrefix(item.id)).map(item => ouIdHelper.removePrefix(item.id)) : [],
-    onChange: _ref6 => {
-      let {
-        selected
-      } = _ref6;
-      return onGroupChange(selected);
-    },
+    onChange: ({
+      selected
+    }) => onGroupChange(selected),
     placeholder: i18n.t('Select a group'),
     loading: !ouGroups.length,
     dense: true,
@@ -243,11 +227,6 @@ const OrgUnitDimension = _ref => {
   }, i18n.t('Deselect all')))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
-};
-OrgUnitDimension.defaultProps = {
-  hideGroupSelect: false,
-  hideLevelSelect: false,
-  hideUserOrgUnits: false
 };
 OrgUnitDimension.propTypes = {
   displayNameProp: PropTypes.string,

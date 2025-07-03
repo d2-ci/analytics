@@ -4,36 +4,27 @@ import { Button, ButtonStrip, ModalActions } from '@dhis2/ui';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { OfflineTooltip } from '../../OfflineTooltip.js';
-const SaveButton = _ref => {
-  let {
-    disabled,
-    loading,
-    onClick
-  } = _ref;
-  return /*#__PURE__*/React.createElement(Button, {
-    primary: true,
-    onClick: onClick,
-    loading: loading,
-    disabled: disabled
-  }, i18n.t('Save translations'));
-};
-SaveButton.defaultProps = {
-  disabled: false,
-  loading: false,
-  onClick: Function.prototype
-};
+const SaveButton = ({
+  disabled = false,
+  loading = false,
+  onClick = Function.prototype
+}) => /*#__PURE__*/React.createElement(Button, {
+  primary: true,
+  onClick: onClick,
+  loading: loading,
+  disabled: disabled
+}, i18n.t('Save translations'));
 SaveButton.propTypes = {
   disabled: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  loading: PropTypes.bool
 };
-export const TranslationModalActions = _ref2 => {
-  let {
-    onClose,
-    onSave,
-    saveInProgress,
-    saveButtonDisabled
-  } = _ref2;
+export const TranslationModalActions = ({
+  onClose,
+  onSave = Function.prototype,
+  saveInProgress,
+  saveButtonDisabled
+}) => {
   const {
     isDisconnected: offline
   } = useDhis2ConnectionStatus();

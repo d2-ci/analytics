@@ -47,8 +47,7 @@ var _underAbove100LegendSet = _interopRequireDefault(require("./data/under-above
 var _weeklyColumnsData = _interopRequireDefault(require("./data/weeklyColumns.data.json"));
 var _weeklyColumnsMetadata = _interopRequireDefault(require("./data/weeklyColumns.metadata.json"));
 var _weeklyColumnsVisualization = _interopRequireDefault(require("./data/weeklyColumns.visualization.json"));
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const visualizationReset = {
   colTotals: false,
@@ -80,28 +79,22 @@ const PivotTableOptionsWrapper = story => {
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_ui.Checkbox, {
     label: "Use fixed column headers",
     checked: pivotTableOptions.fixColumnHeaders,
-    onChange: _ref => {
-      let {
-        checked
-      } = _ref;
-      return setPivotTableOptions({
-        ...pivotTableOptions,
-        fixColumnHeaders: checked
-      });
-    },
+    onChange: ({
+      checked
+    }) => setPivotTableOptions({
+      ...pivotTableOptions,
+      fixColumnHeaders: checked
+    }),
     dense: true
   }), /*#__PURE__*/_react.default.createElement(_ui.Checkbox, {
     label: "Use fixed row headers",
     checked: pivotTableOptions.fixRowHeaders,
-    onChange: _ref2 => {
-      let {
-        checked
-      } = _ref2;
-      return setPivotTableOptions({
-        ...pivotTableOptions,
-        fixRowHeaders: checked
-      });
-    },
+    onChange: ({
+      checked
+    }) => setPivotTableOptions({
+      ...pivotTableOptions,
+      fixRowHeaders: checked
+    }),
     dense: true
   }), /*#__PURE__*/_react.default.createElement(_ui.Divider, null)), story({
     pivotTableOptions
@@ -111,10 +104,9 @@ var _default = exports.default = {
   title: 'PivotTable',
   decorators: [PivotTableOptionsWrapper]
 };
-const Simple = (_, _ref3) => {
-  let {
-    pivotTableOptions
-  } = _ref3;
+const Simple = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._simpleVisualization.default,
     ...visualizationReset,
@@ -134,10 +126,9 @@ exports.Simple = Simple;
 Simple.story = {
   name: 'simple'
 };
-const SimpleCommaDgs = (_, _ref4) => {
-  let {
-    pivotTableOptions
-  } = _ref4;
+const SimpleCommaDgs = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._simpleVisualization.default,
     ...visualizationReset,
@@ -158,10 +149,9 @@ exports.SimpleCommaDgs = SimpleCommaDgs;
 SimpleCommaDgs.story = {
   name: 'simple - comma DGS'
 };
-const SimpleTitleSubtitleFilter = (_, _ref5) => {
-  let {
-    pivotTableOptions
-  } = _ref5;
+const SimpleTitleSubtitleFilter = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._simpleVisualization.default,
     ...visualizationReset,
@@ -183,10 +173,9 @@ exports.SimpleTitleSubtitleFilter = SimpleTitleSubtitleFilter;
 SimpleTitleSubtitleFilter.story = {
   name: 'simple - title / subtitle / filter'
 };
-const SimpleColumn = (_, _ref6) => {
-  let {
-    pivotTableOptions
-  } = _ref6;
+const SimpleColumn = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._simpleVisualization.default,
     ...visualizationReset,
@@ -208,10 +197,9 @@ exports.SimpleColumn = SimpleColumn;
 SimpleColumn.story = {
   name: 'simple - column %'
 };
-const SimpleRow = (_, _ref7) => {
-  let {
-    pivotTableOptions
-  } = _ref7;
+const SimpleRow = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._diseaseWeeksVisualization.default,
     ...visualizationReset,
@@ -232,10 +220,9 @@ exports.SimpleRow = SimpleRow;
 SimpleRow.story = {
   name: 'simple - row %'
 };
-const SimpleDataAsFilter = (_, _ref8) => {
-  let {
-    pivotTableOptions
-  } = _ref8;
+const SimpleDataAsFilter = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._simpleVisualization.default,
     ...visualizationReset,
@@ -257,10 +244,9 @@ exports.SimpleDataAsFilter = SimpleDataAsFilter;
 SimpleDataAsFilter.story = {
   name: 'simple - data as filter'
 };
-const SimpleNoColumns = (_, _ref9) => {
-  let {
-    pivotTableOptions
-  } = _ref9;
+const SimpleNoColumns = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._simpleVisualization.default,
     ...visualizationReset,
@@ -286,10 +272,9 @@ exports.SimpleNoColumns = SimpleNoColumns;
 SimpleNoColumns.story = {
   name: 'simple - no columns'
 };
-const SimpleNoColumnsSingleCell = (_, _ref10) => {
-  let {
-    pivotTableOptions
-  } = _ref10;
+const SimpleNoColumnsSingleCell = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._simpleVisualization.default,
     ...visualizationReset,
@@ -313,10 +298,9 @@ exports.SimpleNoColumnsSingleCell = SimpleNoColumnsSingleCell;
 SimpleNoColumnsSingleCell.story = {
   name: 'simple - no columns (single cell)'
 };
-const SimpleNoColumnsDeep = (_, _ref11) => {
-  let {
-    pivotTableOptions
-  } = _ref11;
+const SimpleNoColumnsDeep = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._simpleVisualization.default,
     ...visualizationReset,
@@ -341,10 +325,9 @@ exports.SimpleNoColumnsDeep = SimpleNoColumnsDeep;
 SimpleNoColumnsDeep.story = {
   name: 'simple - no columns (deep)'
 };
-const SimpleNoColumnsLabel = (_, _ref12) => {
-  let {
-    pivotTableOptions
-  } = _ref12;
+const SimpleNoColumnsLabel = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._simpleVisualization.default,
     ...visualizationReset,
@@ -371,10 +354,9 @@ exports.SimpleNoColumnsLabel = SimpleNoColumnsLabel;
 SimpleNoColumnsLabel.story = {
   name: 'simple - no columns (label)'
 };
-const SimpleNoRowsSmall = (_, _ref13) => {
-  let {
-    pivotTableOptions
-  } = _ref13;
+const SimpleNoRowsSmall = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._simpleVisualization.default,
     ...visualizationReset,
@@ -401,10 +383,9 @@ exports.SimpleNoRowsSmall = SimpleNoRowsSmall;
 SimpleNoRowsSmall.story = {
   name: 'simple - no rows (small)'
 };
-const SimpleNoRowsLarge = (_, _ref14) => {
-  let {
-    pivotTableOptions
-  } = _ref14;
+const SimpleNoRowsLarge = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._simpleVisualization.default,
     ...visualizationReset,
@@ -431,10 +412,9 @@ exports.SimpleNoRowsLarge = SimpleNoRowsLarge;
 SimpleNoRowsLarge.story = {
   name: 'simple - no rows (large)'
 };
-const SimpleAvgTotalAggregationTypeColumns = (_, _ref15) => {
-  let {
-    pivotTableOptions
-  } = _ref15;
+const SimpleAvgTotalAggregationTypeColumns = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._avgTotalAggregationTypeVisualization.default,
     ...visualizationReset,
@@ -456,10 +436,9 @@ exports.SimpleAvgTotalAggregationTypeColumns = SimpleAvgTotalAggregationTypeColu
 SimpleAvgTotalAggregationTypeColumns.story = {
   name: 'simple - avg totalAggregationType columns'
 };
-const SimpleAvgTotalAggregationTypeRows = (_, _ref16) => {
-  let {
-    pivotTableOptions
-  } = _ref16;
+const SimpleAvgTotalAggregationTypeRows = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._avgTotalAggregationTypeVisualization.default,
     ...visualizationReset,
@@ -483,10 +462,9 @@ exports.SimpleAvgTotalAggregationTypeRows = SimpleAvgTotalAggregationTypeRows;
 SimpleAvgTotalAggregationTypeRows.story = {
   name: 'simple - avg totalAggregationType rows'
 };
-const Deep = (_, _ref17) => {
-  let {
-    pivotTableOptions
-  } = _ref17;
+const Deep = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._deepVisualization.default,
     ...visualizationReset,
@@ -507,10 +485,9 @@ exports.Deep = Deep;
 Deep.story = {
   name: 'deep'
 };
-const DeepFilter = (_, _ref18) => {
-  let {
-    pivotTableOptions
-  } = _ref18;
+const DeepFilter = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._deepWithFiltersVisualization.default,
     ...visualizationReset,
@@ -531,10 +508,9 @@ exports.DeepFilter = DeepFilter;
 DeepFilter.story = {
   name: 'deep - filter'
 };
-const DeepTitleSubtitleFilter = (_, _ref19) => {
-  let {
-    pivotTableOptions
-  } = _ref19;
+const DeepTitleSubtitleFilter = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._deepVisualization.default,
     ...visualizationReset,
@@ -557,10 +533,9 @@ exports.DeepTitleSubtitleFilter = DeepTitleSubtitleFilter;
 DeepTitleSubtitleFilter.story = {
   name: 'deep - title / subtitle / filter'
 };
-const DeepDimensionLabels = (_, _ref20) => {
-  let {
-    pivotTableOptions
-  } = _ref20;
+const DeepDimensionLabels = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._deepVisualization.default,
     ...visualizationReset,
@@ -580,10 +555,9 @@ exports.DeepDimensionLabels = DeepDimensionLabels;
 DeepDimensionLabels.story = {
   name: 'deep - dimension labels'
 };
-const DeepSmallCompact = (_, _ref21) => {
-  let {
-    pivotTableOptions
-  } = _ref21;
+const DeepSmallCompact = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._deepVisualization.default,
     ...visualizationReset,
@@ -605,10 +579,9 @@ exports.DeepSmallCompact = DeepSmallCompact;
 DeepSmallCompact.story = {
   name: 'deep - small / compact'
 };
-const DeepLargeComfortable = (_, _ref22) => {
-  let {
-    pivotTableOptions
-  } = _ref22;
+const DeepLargeComfortable = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._deepVisualization.default,
     ...visualizationReset,
@@ -630,10 +603,9 @@ exports.DeepLargeComfortable = DeepLargeComfortable;
 DeepLargeComfortable.story = {
   name: 'deep - large / comfortable'
 };
-const DeepRow = (_, _ref23) => {
-  let {
-    pivotTableOptions
-  } = _ref23;
+const DeepRow = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._deepVisualization.default,
     ...visualizationReset,
@@ -658,10 +630,9 @@ exports.DeepRow = DeepRow;
 DeepRow.story = {
   name: 'deep - row %'
 };
-const DeepColumn = (_, _ref24) => {
-  let {
-    pivotTableOptions
-  } = _ref24;
+const DeepColumn = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._deepVisualization.default,
     ...visualizationReset,
@@ -686,10 +657,9 @@ exports.DeepColumn = DeepColumn;
 DeepColumn.story = {
   name: 'deep - column %'
 };
-const ResizingPivotTable = _ref25 => {
-  let {
-    visualization
-  } = _ref25;
+const ResizingPivotTable = ({
+  visualization
+}) => {
   const [size, setSize] = (0, _react.useState)(() => ({
     width: 400,
     height: 300
@@ -720,10 +690,9 @@ const ResizingPivotTable = _ref25 => {
 ResizingPivotTable.propTypes = {
   visualization: _propTypes.default.object.isRequired
 };
-const DeepResize = (_, _ref26) => {
-  let {
-    pivotTableOptions
-  } = _ref26;
+const DeepResize = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._deepVisualization.default,
     ...visualizationReset,
@@ -737,10 +706,9 @@ exports.DeepResize = DeepResize;
 DeepResize.story = {
   name: 'deep - resize'
 };
-const DeepTotals = (_, _ref27) => {
-  let {
-    pivotTableOptions
-  } = _ref27;
+const DeepTotals = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._deepVisualization.default,
     ...visualizationReset,
@@ -762,10 +730,9 @@ exports.DeepTotals = DeepTotals;
 DeepTotals.story = {
   name: 'deep - totals'
 };
-const DeepSubtotals = (_, _ref28) => {
-  let {
-    pivotTableOptions
-  } = _ref28;
+const DeepSubtotals = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._deepVisualization.default,
     ...visualizationReset,
@@ -787,10 +754,9 @@ exports.DeepSubtotals = DeepSubtotals;
 DeepSubtotals.story = {
   name: 'deep - subtotals'
 };
-const DeepAllTotals = (_, _ref29) => {
-  let {
-    pivotTableOptions
-  } = _ref29;
+const DeepAllTotals = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._deepVisualization.default,
     ...visualizationReset,
@@ -814,10 +780,9 @@ exports.DeepAllTotals = DeepAllTotals;
 DeepAllTotals.story = {
   name: 'deep - all totals'
 };
-const SmallEmptyRowsShown = (_, _ref30) => {
-  let {
-    pivotTableOptions
-  } = _ref30;
+const SmallEmptyRowsShown = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._diseaseWeeksVisualization.default,
     ...visualizationReset,
@@ -841,10 +806,9 @@ exports.SmallEmptyRowsShown = SmallEmptyRowsShown;
 SmallEmptyRowsShown.story = {
   name: 'small empty rows - shown'
 };
-const SmallEmptyRowsHidden = (_, _ref31) => {
-  let {
-    pivotTableOptions
-  } = _ref31;
+const SmallEmptyRowsHidden = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._diseaseWeeksVisualization.default,
     ...visualizationReset,
@@ -869,10 +833,9 @@ exports.SmallEmptyRowsHidden = SmallEmptyRowsHidden;
 SmallEmptyRowsHidden.story = {
   name: 'small empty rows - hidden'
 };
-const EmptyRowsShown = (_, _ref32) => {
-  let {
-    pivotTableOptions
-  } = _ref32;
+const EmptyRowsShown = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._emptyRowsVisualization.default,
     ...visualizationReset,
@@ -896,10 +859,9 @@ exports.EmptyRowsShown = EmptyRowsShown;
 EmptyRowsShown.story = {
   name: 'empty rows - shown'
 };
-const EmptyRowsHidden = (_, _ref33) => {
-  let {
-    pivotTableOptions
-  } = _ref33;
+const EmptyRowsHidden = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._emptyRowsVisualization.default,
     ...visualizationReset,
@@ -920,10 +882,9 @@ exports.EmptyRowsHidden = EmptyRowsHidden;
 EmptyRowsHidden.story = {
   name: 'empty rows - hidden'
 };
-const EmptyColumnsShown = (_, _ref34) => {
-  let {
-    pivotTableOptions
-  } = _ref34;
+const EmptyColumnsShown = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._lastFiveYearsVisualization.default,
     ...pivotTableOptions,
@@ -943,10 +904,9 @@ exports.EmptyColumnsShown = EmptyColumnsShown;
 EmptyColumnsShown.story = {
   name: 'empty columns - shown'
 };
-const EmptyColumnsHidden = (_, _ref35) => {
-  let {
-    pivotTableOptions
-  } = _ref35;
+const EmptyColumnsHidden = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._lastFiveYearsVisualization.default,
     ...pivotTableOptions,
@@ -966,10 +926,9 @@ exports.EmptyColumnsHidden = EmptyColumnsHidden;
 EmptyColumnsHidden.story = {
   name: 'empty columns - hidden'
 };
-const EmptyColumnsWeeklyShown = (_, _ref36) => {
-  let {
-    pivotTableOptions
-  } = _ref36;
+const EmptyColumnsWeeklyShown = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._weeklyColumnsVisualization.default,
     ...pivotTableOptions,
@@ -989,10 +948,9 @@ exports.EmptyColumnsWeeklyShown = EmptyColumnsWeeklyShown;
 EmptyColumnsWeeklyShown.story = {
   name: 'empty columns (weekly) - shown'
 };
-const CumulativeEmptyColumnsWeeklyShown = (_, _ref37) => {
-  let {
-    pivotTableOptions
-  } = _ref37;
+const CumulativeEmptyColumnsWeeklyShown = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._weeklyColumnsVisualization.default,
     ...pivotTableOptions,
@@ -1013,10 +971,9 @@ exports.CumulativeEmptyColumnsWeeklyShown = CumulativeEmptyColumnsWeeklyShown;
 CumulativeEmptyColumnsWeeklyShown.story = {
   name: 'cumulative + empty columns (weekly) - shown'
 };
-const EmptyColumnsWeeklyHidden = (_, _ref38) => {
-  let {
-    pivotTableOptions
-  } = _ref38;
+const EmptyColumnsWeeklyHidden = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._weeklyColumnsVisualization.default,
     ...pivotTableOptions,
@@ -1036,10 +993,9 @@ exports.EmptyColumnsWeeklyHidden = EmptyColumnsWeeklyHidden;
 EmptyColumnsWeeklyHidden.story = {
   name: 'empty columns (weekly) - hidden'
 };
-const CumulativeEmptyColumnsWeeklyHidden = (_, _ref39) => {
-  let {
-    pivotTableOptions
-  } = _ref39;
+const CumulativeEmptyColumnsWeeklyHidden = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._weeklyColumnsVisualization.default,
     ...pivotTableOptions,
@@ -1060,10 +1016,9 @@ exports.CumulativeEmptyColumnsWeeklyHidden = CumulativeEmptyColumnsWeeklyHidden;
 CumulativeEmptyColumnsWeeklyHidden.story = {
   name: 'cumulative + empty columns (weekly) - hidden'
 };
-const EmptyColumnsAssignedCatsShown = (_, _ref40) => {
-  let {
-    pivotTableOptions
-  } = _ref40;
+const EmptyColumnsAssignedCatsShown = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._emptyColumnsVisualization.default,
     ...visualizationReset,
@@ -1084,10 +1039,9 @@ exports.EmptyColumnsAssignedCatsShown = EmptyColumnsAssignedCatsShown;
 EmptyColumnsAssignedCatsShown.story = {
   name: 'empty columns + assigned cats (shown)'
 };
-const EmptyColumnsAssignedCatsHidden = (_, _ref41) => {
-  let {
-    pivotTableOptions
-  } = _ref41;
+const EmptyColumnsAssignedCatsHidden = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._emptyColumnsVisualization.default,
     ...visualizationReset,
@@ -1108,10 +1062,9 @@ exports.EmptyColumnsAssignedCatsHidden = EmptyColumnsAssignedCatsHidden;
 EmptyColumnsAssignedCatsHidden.story = {
   name: 'empty columns + assigned cats (hidden)'
 };
-const LegendFixedLightFill = (_, _ref42) => {
-  let {
-    pivotTableOptions
-  } = _ref42;
+const LegendFixedLightFill = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._targetWithLegendVisualization.default,
     ...visualizationReset,
@@ -1140,10 +1093,9 @@ exports.LegendFixedLightFill = LegendFixedLightFill;
 LegendFixedLightFill.story = {
   name: 'legend - fixed (light fill)'
 };
-const LegendFixedDarkFill = (_, _ref43) => {
-  let {
-    pivotTableOptions
-  } = _ref43;
+const LegendFixedDarkFill = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._targetWithLegendVisualization.default,
     ...visualizationReset,
@@ -1173,10 +1125,9 @@ exports.LegendFixedDarkFill = LegendFixedDarkFill;
 LegendFixedDarkFill.story = {
   name: 'legend - fixed (dark fill)'
 };
-const LegendFixedText = (_, _ref44) => {
-  let {
-    pivotTableOptions
-  } = _ref44;
+const LegendFixedText = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._targetWithLegendVisualization.default,
     ...visualizationReset,
@@ -1201,10 +1152,9 @@ exports.LegendFixedText = LegendFixedText;
 LegendFixedText.story = {
   name: 'legend - fixed (text)'
 };
-const LegendFixedRow = (_, _ref45) => {
-  let {
-    pivotTableOptions
-  } = _ref45;
+const LegendFixedRow = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._targetWithLegendVisualization.default,
     ...visualizationReset,
@@ -1232,10 +1182,9 @@ exports.LegendFixedRow = LegendFixedRow;
 LegendFixedRow.story = {
   name: 'legend - fixed (% row)'
 };
-const LegendByDataItem = (_, _ref46) => {
-  let {
-    pivotTableOptions
-  } = _ref46;
+const LegendByDataItem = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._targetWithLegendVisualization.default,
     ...visualizationReset,
@@ -1267,10 +1216,9 @@ exports.LegendByDataItem = LegendByDataItem;
 LegendByDataItem.story = {
   name: 'legend - by data item'
 };
-const HierarchyNone = (_, _ref47) => {
-  let {
-    pivotTableOptions
-  } = _ref47;
+const HierarchyNone = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._hierarchyVisualization.default,
     ...visualizationReset,
@@ -1295,10 +1243,9 @@ exports.HierarchyNone = HierarchyNone;
 HierarchyNone.story = {
   name: 'hierarchy - none'
 };
-const HierarchyRows = (_, _ref48) => {
-  let {
-    pivotTableOptions
-  } = _ref48;
+const HierarchyRows = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._hierarchyVisualization.default,
     ...visualizationReset,
@@ -1322,10 +1269,9 @@ exports.HierarchyRows = HierarchyRows;
 HierarchyRows.story = {
   name: 'hierarchy - rows'
 };
-const HierarchyColumns = (_, _ref49) => {
-  let {
-    pivotTableOptions
-  } = _ref49;
+const HierarchyColumns = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._hierarchyVisualization.default,
     ...visualizationReset,
@@ -1351,10 +1297,9 @@ exports.HierarchyColumns = HierarchyColumns;
 HierarchyColumns.story = {
   name: 'hierarchy - columns'
 };
-const Narrative = (_, _ref50) => {
-  let {
-    pivotTableOptions
-  } = _ref50;
+const Narrative = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._narrativeVisualization.default,
     ...visualizationReset,
@@ -1376,10 +1321,9 @@ exports.Narrative = Narrative;
 Narrative.story = {
   name: 'narrative'
 };
-const NarrativeDataAsFilter = (_, _ref51) => {
-  let {
-    pivotTableOptions
-  } = _ref51;
+const NarrativeDataAsFilter = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._narrativeVisualization.default,
     ...visualizationReset,
@@ -1407,10 +1351,9 @@ exports.NarrativeDataAsFilter = NarrativeDataAsFilter;
 NarrativeDataAsFilter.story = {
   name: 'narrative - data as filter'
 };
-const Degs = (_, _ref52) => {
-  let {
-    pivotTableOptions
-  } = _ref52;
+const Degs = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._degsVisualization.default,
     ...visualizationReset,
@@ -1430,10 +1373,9 @@ exports.Degs = Degs;
 Degs.story = {
   name: 'DEGS'
 };
-const TruncatedHeaderCell = (_, _ref53) => {
-  let {
-    pivotTableOptions
-  } = _ref53;
+const TruncatedHeaderCell = (_, {
+  pivotTableOptions
+}) => {
   const widths = [250, 200, 500];
   const [width, setWidth] = (0, _react.useState)(250);
   const toggleWidth = () => setWidth(currentWidth => {

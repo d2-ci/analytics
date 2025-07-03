@@ -7,21 +7,17 @@ import React, { useState } from 'react';
 import { MessageIconButton } from '../common/index.js';
 const mutation = {
   resource: 'interpretations',
-  id: _ref => {
-    let {
-      interpretationId,
-      commentId
-    } = _ref;
-    return `${interpretationId}/comments/${commentId}`;
-  },
+  id: ({
+    interpretationId,
+    commentId
+  }) => `${interpretationId}/comments/${commentId}`,
   type: 'delete'
 };
-const CommentDeleteButton = _ref2 => {
-  let {
-    commentId,
-    interpretationId,
-    onComplete
-  } = _ref2;
+const CommentDeleteButton = ({
+  commentId,
+  interpretationId,
+  onComplete
+}) => {
   const [deleteError, setDeleteError] = useState(null);
   const [remove, {
     loading

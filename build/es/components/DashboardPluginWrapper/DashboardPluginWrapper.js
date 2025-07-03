@@ -6,23 +6,25 @@ import { getPWAInstallationStatus } from '../../modules/getPWAInstallationStatus
 const LoadingMask = () => {
   return /*#__PURE__*/React.createElement(Layer, null, /*#__PURE__*/React.createElement(CenteredContent, null, /*#__PURE__*/React.createElement(CircularLoader, null)));
 };
-const CacheableSectionWrapper = _ref => {
-  let {
-    id,
-    children,
-    isParentCached
-  } = _ref;
+const CacheableSectionWrapper = ({
+  id,
+  children,
+  isParentCached = false
+}) => {
   const {
     startRecording,
     isCached,
     remove
   } = useCacheableSection(id);
   useEffect(() => {
-    if (isParentCached && !isCached) {
+    const shouldStartRecording = isParentCached && !isCached;
+    const shouldRemove = !isParentCached && isCached;
+    if (shouldStartRecording) {
       startRecording({
         onError: console.error
       });
-    } else if (!isParentCached && isCached) {
+    }
+    if (shouldRemove) {
       // Synchronize cache state on load or prop update
       // -- a back-up to imperative `removeCachedData`
       remove();
@@ -38,14 +40,13 @@ CacheableSectionWrapper.propTypes = {
   id: PropTypes.string,
   isParentCached: PropTypes.bool
 };
-export const DashboardPluginWrapper = _ref2 => {
-  let {
-    onInstallationStatusChange,
-    children,
-    cacheId,
-    isParentCached,
-    ...props
-  } = _ref2;
+export const DashboardPluginWrapper = ({
+  onInstallationStatusChange = Function.prototype,
+  children,
+  cacheId,
+  isParentCached = false,
+  ...props
+}) => {
   const {
     pwaEnabled
   } = useConfig();
@@ -69,10 +70,6 @@ export const DashboardPluginWrapper = _ref2 => {
     spacers: true,
     elevations: true
   })) : null;
-};
-DashboardPluginWrapper.defaultProps = {
-  isParentCached: false,
-  onInstallationStatusChange: Function.prototype
 };
 DashboardPluginWrapper.propTypes = {
   cacheId: PropTypes.string,

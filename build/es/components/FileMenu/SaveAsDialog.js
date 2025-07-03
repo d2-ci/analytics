@@ -6,13 +6,12 @@ import i18n from '../../locales/index.js';
 import { modalStyles } from './FileMenu.styles.js';
 import { supportedFileTypes, labelForFileType } from './utils.js';
 const NAME_MAXLENGTH = 230;
-export const SaveAsDialog = _ref => {
-  let {
-    type,
-    object,
-    onClose,
-    onSaveAs
-  } = _ref;
+export const SaveAsDialog = ({
+  type,
+  object,
+  onClose,
+  onSaveAs
+}) => {
   const [name, setName] = useState(object !== null && object !== void 0 && object.displayName || object !== null && object !== void 0 && object.name ? i18n.t('{{- objectName}} (copy)', {
     objectName: object.name
   }) : '');
@@ -38,23 +37,17 @@ export const SaveAsDialog = _ref => {
   }, /*#__PURE__*/React.createElement(InputField, {
     label: i18n.t('Name'),
     value: name,
-    onChange: _ref2 => {
-      let {
-        value
-      } = _ref2;
-      return setName(value.substring(0, NAME_MAXLENGTH));
-    },
+    onChange: ({
+      value
+    }) => setName(value.substring(0, NAME_MAXLENGTH)),
     dataTest: "file-menu-saveas-modal-name"
   }), /*#__PURE__*/React.createElement(TextAreaField, {
     label: i18n.t('Description'),
     value: description,
     rows: 3,
-    onChange: _ref3 => {
-      let {
-        value
-      } = _ref3;
-      return setDescription(value);
-    },
+    onChange: ({
+      value
+    }) => setDescription(value),
     dataTest: "file-menu-saveas-modal-description"
   }))), /*#__PURE__*/React.createElement(ModalActions, null, /*#__PURE__*/React.createElement(ButtonStrip, null, /*#__PURE__*/React.createElement(Button, {
     onClick: onClose,

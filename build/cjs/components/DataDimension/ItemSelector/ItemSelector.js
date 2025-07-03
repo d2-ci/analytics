@@ -24,56 +24,49 @@ var _SourceEmptyPlaceholder = require("../SourceEmptyPlaceholder.js");
 var _TransferOption = require("../TransferOption.js");
 var _DataTypeSelector = _interopRequireDefault(require("./DataTypeSelector.js"));
 var _GroupSelector = _interopRequireDefault(require("./GroupSelector.js"));
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const LeftHeader = _ref => {
-  let {
-    searchTerm,
-    setSearchTerm,
-    dataType,
-    dataTypes,
-    setDataType,
-    group,
-    setGroup,
-    subGroup,
-    setSubGroup,
-    displayNameProp,
-    dataTest
-  } = _ref;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "leftHeader"
-  }, /*#__PURE__*/_react.default.createElement(_ui.InputField, {
-    value: searchTerm,
-    onChange: _ref2 => {
-      let {
-        value
-      } = _ref2;
-      return setSearchTerm(value);
-    },
-    placeholder: _index.default.t('Search by data item name'),
-    dataTest: `${dataTest}-filter-input-field`,
-    dense: true,
-    initialFocus: true,
-    type: 'search'
-  }), /*#__PURE__*/_react.default.createElement(_DataTypeSelector.default, {
-    currentDataType: dataType,
-    onChange: setDataType,
-    dataTest: `${dataTest}-data-types-select-field`,
-    dataTypes: dataTypes
-  }), ![_dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, _dataTypes.DIMENSION_TYPE_ALL].includes(dataType) && /*#__PURE__*/_react.default.createElement(_GroupSelector.default, {
-    dataType: dataType,
-    displayNameProp: displayNameProp,
-    currentGroup: group,
-    onGroupChange: setGroup,
-    currentSubGroup: subGroup,
-    onSubGroupChange: setSubGroup,
-    dataTest: dataTest
-  })), /*#__PURE__*/_react.default.createElement(_style.default, {
-    id: _DimensionSelectorStyle.default.__hash
-  }, _DimensionSelectorStyle.default));
-};
+const LeftHeader = ({
+  searchTerm,
+  setSearchTerm,
+  dataType,
+  dataTypes,
+  setDataType,
+  group,
+  setGroup,
+  subGroup,
+  setSubGroup,
+  displayNameProp,
+  dataTest
+}) => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+  className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "leftHeader"
+}, /*#__PURE__*/_react.default.createElement(_ui.InputField, {
+  value: searchTerm,
+  onChange: ({
+    value
+  }) => setSearchTerm(value),
+  placeholder: _index.default.t('Search by data item name'),
+  dataTest: `${dataTest}-filter-input-field`,
+  dense: true,
+  initialFocus: true,
+  type: 'search'
+}), /*#__PURE__*/_react.default.createElement(_DataTypeSelector.default, {
+  currentDataType: dataType,
+  onChange: setDataType,
+  dataTest: `${dataTest}-data-types-select-field`,
+  dataTypes: dataTypes
+}), ![_dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, _dataTypes.DIMENSION_TYPE_ALL].includes(dataType) && /*#__PURE__*/_react.default.createElement(_GroupSelector.default, {
+  dataType: dataType,
+  displayNameProp: displayNameProp,
+  currentGroup: group,
+  onGroupChange: setGroup,
+  currentSubGroup: subGroup,
+  onSubGroupChange: setSubGroup,
+  dataTest: dataTest
+})), /*#__PURE__*/_react.default.createElement(_style.default, {
+  id: _DimensionSelectorStyle.default.__hash
+}, _DimensionSelectorStyle.default));
 LeftHeader.propTypes = {
   dataTest: _propTypes.default.string,
   dataType: _propTypes.default.string,
@@ -87,45 +80,42 @@ LeftHeader.propTypes = {
   setSubGroup: _propTypes.default.func,
   subGroup: _propTypes.default.string
 };
-const RightHeader = _ref3 => {
-  let {
-    infoBoxMessage
-  } = _ref3;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
-    className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "rightHeader"
-  }, _index.default.t('Selected Items')), infoBoxMessage && /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "info-container"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_DimensionSelectorStyle.default.__hash}`
-  }, /*#__PURE__*/_react.default.createElement(_ui.IconInfo16, null)), /*#__PURE__*/_react.default.createElement("span", {
-    className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "info-text"
-  }, infoBoxMessage)), /*#__PURE__*/_react.default.createElement(_style.default, {
-    id: _DimensionSelectorStyle.default.__hash
-  }, _DimensionSelectorStyle.default));
-};
+const RightHeader = ({
+  infoBoxMessage
+}) => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
+  className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "rightHeader"
+}, _index.default.t('Selected Items')), infoBoxMessage && /*#__PURE__*/_react.default.createElement("div", {
+  className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "info-container"
+}, /*#__PURE__*/_react.default.createElement("div", {
+  className: `jsx-${_DimensionSelectorStyle.default.__hash}`
+}, /*#__PURE__*/_react.default.createElement(_ui.IconInfo16, null)), /*#__PURE__*/_react.default.createElement("span", {
+  className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "info-text"
+}, infoBoxMessage)), /*#__PURE__*/_react.default.createElement(_style.default, {
+  id: _DimensionSelectorStyle.default.__hash
+}, _DimensionSelectorStyle.default));
 RightHeader.propTypes = {
   infoBoxMessage: _propTypes.default.string
 };
-const ItemSelector = _ref4 => {
-  let {
-    selectedItems,
-    noItemsMessage,
-    onSelect,
-    rightFooter,
-    displayNameProp,
-    infoBoxMessage,
-    itemsRef,
-    currentCalculation,
-    setCurrentCalculation,
-    infoDataItem,
-    setInfoDataItem,
-    dataTypes,
-    dataTest,
-    onEDISave,
-    onEditClick,
-    isOptionViewMode,
-    supportsEDI
-  } = _ref4;
+const SELECTED_ITEMS_PROP_DEFAULT = [];
+const ItemSelector = ({
+  selectedItems = SELECTED_ITEMS_PROP_DEFAULT,
+  noItemsMessage,
+  onSelect,
+  rightFooter,
+  displayNameProp,
+  infoBoxMessage,
+  itemsRef,
+  currentCalculation,
+  setCurrentCalculation,
+  infoDataItem,
+  setInfoDataItem,
+  dataTypes,
+  dataTest,
+  onEDISave,
+  onEditClick,
+  isOptionViewMode,
+  supportsEDI
+}) => {
   const [state, setState] = (0, _react.useState)({
     searchTerm: '',
     dataTypes,
@@ -239,13 +229,12 @@ const ItemSelector = _ref4 => {
     const item = selectedItems.find(item => item.value === value);
     return !item || item.isActive;
   };
-  const onSaveCalculation = async _ref5 => {
-    let {
-      id,
-      name,
-      expression,
-      isNew
-    } = _ref5;
+  const onSaveCalculation = async ({
+    id,
+    name,
+    expression,
+    isNew
+  }) => {
     onEDISave({
       id,
       name,
@@ -268,10 +257,9 @@ const ItemSelector = _ref4 => {
       }]);
     }
   };
-  const onDeleteCalculation = _ref6 => {
-    let {
-      id
-    } = _ref6;
+  const onDeleteCalculation = ({
+    id
+  }) => {
     // close the modal
     setCurrentCalculation();
 
@@ -312,12 +300,9 @@ const ItemSelector = _ref4 => {
       hidden: isOptionViewMode
     }) || "")
   }, /*#__PURE__*/_react.default.createElement(_ui.Transfer, {
-    onChange: _ref7 => {
-      let {
-        selected
-      } = _ref7;
-      return onChange(selected);
-    },
+    onChange: ({
+      selected
+    }) => onChange(selected),
     selected: selectedItems.map(item => item.value),
     options: [...state.options,
     // remove items already in the options list
@@ -425,8 +410,5 @@ ItemSelector.propTypes = {
   supportsEDI: _propTypes.default.bool,
   onEDISave: _propTypes.default.func,
   onEditClick: _propTypes.default.func
-};
-ItemSelector.defaultProps = {
-  selectedItems: []
 };
 var _default = exports.default = ItemSelector;

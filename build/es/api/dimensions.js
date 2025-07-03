@@ -5,24 +5,20 @@ import { onError } from './index.js';
 // Query definitions
 export const dimensionsQuery = {
   resource: 'dimensions',
-  params: _ref => {
-    let {
-      nameProp
-    } = _ref;
-    return {
-      fields: `id,${nameProp}~rename(name),dimensionType,dataDimensionType`,
-      order: `${nameProp}:asc`,
-      paging: false
-    };
-  }
+  params: ({
+    nameProp
+  }) => ({
+    fields: `id,${nameProp}~rename(name),dimensionType,dataDimensionType`,
+    order: `${nameProp}:asc`,
+    paging: false
+  })
 };
 const recommendedDimensionsQuery = {
   resource: 'dimensions/recommendations',
-  params: _ref2 => {
-    let {
-      dxIds,
-      ouIds
-    } = _ref2;
+  params: ({
+    dxIds,
+    ouIds
+  }) => {
     const dimensions = [];
     if (dxIds.length) {
       dimensions.push(`dx:${dxIds.join(';')}`);
@@ -38,13 +34,12 @@ const recommendedDimensionsQuery = {
 };
 export const dataItemsQuery = {
   resource: 'dataItems',
-  params: _ref3 => {
-    let {
-      nameProp,
-      filter,
-      searchTerm,
-      page
-    } = _ref3;
+  params: ({
+    nameProp,
+    filter,
+    searchTerm,
+    page
+  }) => {
     let fields = `id,${nameProp}~rename(name),dimensionItemType,expression,optionSetId`;
     const filters = [];
 
@@ -80,13 +75,12 @@ export const dataItemsQuery = {
 };
 export const indicatorsQuery = {
   resource: 'indicators',
-  params: _ref4 => {
-    let {
-      nameProp,
-      filter,
-      searchTerm,
-      page
-    } = _ref4;
+  params: ({
+    nameProp,
+    filter,
+    searchTerm,
+    page
+  }) => {
     const filters = [];
     if (filter !== null && filter !== void 0 && filter.group && filter.group !== DIMENSION_TYPE_ALL) {
       filters.push(`indicatorGroups.id:eq:${filter.group}`);
@@ -105,26 +99,22 @@ export const indicatorsQuery = {
 };
 export const indicatorGroupsQuery = {
   resource: 'indicatorGroups',
-  params: _ref5 => {
-    let {
-      nameProp
-    } = _ref5;
-    return {
-      fields: `id,${nameProp}~rename(name)`,
-      order: `${nameProp}:asc`,
-      paging: false
-    };
-  }
+  params: ({
+    nameProp
+  }) => ({
+    fields: `id,${nameProp}~rename(name)`,
+    order: `${nameProp}:asc`,
+    paging: false
+  })
 };
 export const dataElementsQuery = {
   resource: 'dataElements',
-  params: _ref6 => {
-    let {
-      nameProp,
-      filter,
-      searchTerm,
-      page
-    } = _ref6;
+  params: ({
+    nameProp,
+    filter,
+    searchTerm,
+    page
+  }) => {
     const idField = (filter === null || filter === void 0 ? void 0 : filter.group) === DIMENSION_TYPE_ALL ? 'id' : 'dimensionItem~rename(id)';
     const filters = ['domainType:eq:AGGREGATE'];
     if (filter !== null && filter !== void 0 && filter.group && filter.group !== DIMENSION_TYPE_ALL) {
@@ -144,31 +134,24 @@ export const dataElementsQuery = {
 };
 export const dataElementGroupsQuery = {
   resource: 'dataElementGroups',
-  params: _ref7 => {
-    let {
-      nameProp
-    } = _ref7;
-    return {
-      fields: `id,${nameProp}~rename(name)`,
-      order: `${nameProp}:asc`,
-      paging: false
-    };
-  }
+  params: ({
+    nameProp
+  }) => ({
+    fields: `id,${nameProp}~rename(name)`,
+    order: `${nameProp}:asc`,
+    paging: false
+  })
 };
 export const itemsByDimensionQuery = {
   resource: `dimensions`,
-  id: _ref8 => {
-    let {
-      id
-    } = _ref8;
-    return `${id}/items`;
-  },
-  params: _ref9 => {
-    let {
-      searchTerm,
-      page,
-      nameProp
-    } = _ref9;
+  id: ({
+    id
+  }) => `${id}/items`,
+  params: ({
+    searchTerm,
+    page,
+    nameProp
+  }) => {
     const filters = [];
     if (searchTerm) {
       filters.push(`${nameProp}:ilike:${searchTerm}`);
@@ -184,13 +167,12 @@ export const itemsByDimensionQuery = {
 };
 export const dataElementOperandsQuery = {
   resource: 'dataElementOperands',
-  params: _ref10 => {
-    let {
-      nameProp,
-      filter,
-      searchTerm,
-      page
-    } = _ref10;
+  params: ({
+    nameProp,
+    filter,
+    searchTerm,
+    page
+  }) => {
     const idField = (filter === null || filter === void 0 ? void 0 : filter.group) === DIMENSION_TYPE_ALL ? 'id' : 'dimensionItem~rename(id)';
     const filters = ['categoryOptionCombo.name:ne:default'];
     if (filter !== null && filter !== void 0 && filter.group && filter.group !== DIMENSION_TYPE_ALL) {
@@ -210,13 +192,12 @@ export const dataElementOperandsQuery = {
 };
 export const dataSetsQuery = {
   resource: 'dataSets',
-  params: _ref11 => {
-    let {
-      nameProp,
-      searchTerm,
-      filter,
-      page
-    } = _ref11;
+  params: ({
+    nameProp,
+    searchTerm,
+    filter,
+    page
+  }) => {
     const filters = [];
     if (searchTerm) {
       filters.push(`${nameProp}:ilike:${searchTerm}`);
@@ -239,16 +220,13 @@ export const dataSetsQuery = {
 };
 export const programsQuery = {
   resource: 'programs',
-  params: _ref12 => {
-    let {
-      nameProp
-    } = _ref12;
-    return {
-      fields: `id,${nameProp}~rename(name)`,
-      order: `${nameProp}:asc`,
-      paging: false
-    };
-  }
+  params: ({
+    nameProp
+  }) => ({
+    fields: `id,${nameProp}~rename(name)`,
+    order: `${nameProp}:asc`,
+    paging: false
+  })
 };
 
 // Fetch functions
@@ -275,14 +253,13 @@ export const apiFetchRecommendedIds = async (dataEngine, dxIds, ouIds) => {
   });
   return recommendedDimensionsData.recommendedDimensions.dimensions.map(item => item.id);
 };
-export const apiFetchOptions = _ref13 => {
-  let {
-    dataEngine,
-    nameProp,
-    filter,
-    searchTerm,
-    page
-  } = _ref13;
+export const apiFetchOptions = ({
+  dataEngine,
+  nameProp,
+  filter,
+  searchTerm,
+  page
+}) => {
   switch (filter === null || filter === void 0 ? void 0 : filter.dataType) {
     case DIMENSION_TYPE_INDICATOR:
       {
@@ -391,14 +368,13 @@ export const apiFetchGroups = async (dataEngine, dataType, nameProp) => {
       return null;
   }
 };
-const fetchIndicators = async _ref14 => {
-  let {
-    dataEngine,
-    nameProp,
-    filter,
-    searchTerm,
-    page
-  } = _ref14;
+const fetchIndicators = async ({
+  dataEngine,
+  nameProp,
+  filter,
+  searchTerm,
+  page
+}) => {
   const indicatorsData = await dataEngine.query({
     indicators: indicatorsQuery
   }, {
@@ -413,14 +389,13 @@ const fetchIndicators = async _ref14 => {
   const response = indicatorsData.indicators;
   return formatResponse(response.indicators, response.pager);
 };
-const fetchDataItems = async _ref15 => {
-  let {
-    dataEngine,
-    nameProp,
-    filter,
-    searchTerm,
-    page
-  } = _ref15;
+const fetchDataItems = async ({
+  dataEngine,
+  nameProp,
+  filter,
+  searchTerm,
+  page
+}) => {
   const dataItemsData = await dataEngine.query({
     dataItems: dataItemsQuery
   }, {
@@ -439,14 +414,13 @@ const formatResponse = (dimensionItems, pager) => ({
   dimensionItems,
   nextPage: pager.nextPage ? pager.page + 1 : null
 });
-const fetchDataElements = async _ref16 => {
-  let {
-    dataEngine,
-    nameProp,
-    filter,
-    searchTerm,
-    page
-  } = _ref16;
+const fetchDataElements = async ({
+  dataEngine,
+  nameProp,
+  filter,
+  searchTerm,
+  page
+}) => {
   const dataElementsData = await dataEngine.query({
     dataElements: dataElementsQuery
   }, {
@@ -461,14 +435,13 @@ const fetchDataElements = async _ref16 => {
   const response = dataElementsData.dataElements;
   return formatResponse(response.dataElements, response.pager);
 };
-export const apiFetchItemsByDimension = async _ref17 => {
-  let {
-    dataEngine,
-    dimensionId,
-    searchTerm,
-    page,
-    nameProp
-  } = _ref17;
+export const apiFetchItemsByDimension = async ({
+  dataEngine,
+  dimensionId,
+  searchTerm,
+  page,
+  nameProp
+}) => {
   const itemsByDimensionData = await dataEngine.query({
     itemsByDimensions: itemsByDimensionQuery
   }, {
@@ -483,14 +456,13 @@ export const apiFetchItemsByDimension = async _ref17 => {
   const response = itemsByDimensionData.itemsByDimensions;
   return formatResponse(response.items, response.pager);
 };
-const fetchDataElementOperands = async _ref18 => {
-  let {
-    dataEngine,
-    nameProp,
-    filter,
-    searchTerm,
-    page
-  } = _ref18;
+const fetchDataElementOperands = async ({
+  dataEngine,
+  nameProp,
+  filter,
+  searchTerm,
+  page
+}) => {
   const dataElementOperandsData = await dataEngine.query({
     dataElementOperands: dataElementOperandsQuery
   }, {
@@ -505,14 +477,13 @@ const fetchDataElementOperands = async _ref18 => {
   const response = dataElementOperandsData.dataElementOperands;
   return formatResponse(response.dataElementOperands, response.pager);
 };
-const fetchDataSets = async _ref19 => {
-  let {
-    dataEngine,
-    nameProp,
-    searchTerm,
-    filter,
-    page
-  } = _ref19;
+const fetchDataSets = async ({
+  dataEngine,
+  nameProp,
+  searchTerm,
+  filter,
+  page
+}) => {
   const dataSetsData = await dataEngine.query({
     dataSets: dataSetsQuery
   }, {

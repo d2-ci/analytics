@@ -11,21 +11,20 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _TransferOptionStyle = _interopRequireDefault(require("./styles/TransferOption.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const TransferOption = _ref => {
-  let {
-    disabled,
-    label,
-    highlighted,
-    selected,
-    onClick,
-    onDoubleClick,
-    value,
-    icon,
-    active,
-    tooltipText,
-    dataTest,
-    onEditClick
-  } = _ref;
+const TransferOption = ({
+  disabled,
+  label,
+  highlighted,
+  selected,
+  onClick,
+  onDoubleClick,
+  value,
+  icon,
+  active,
+  tooltipText,
+  dataTest,
+  onEditClick
+}) => {
   const renderContent = () => /*#__PURE__*/_react.default.createElement("div", {
     "data-test": `${dataTest}-content`,
     onClick: event => {

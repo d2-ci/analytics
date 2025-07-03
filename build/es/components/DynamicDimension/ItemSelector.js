@@ -11,15 +11,15 @@ import { SelectedEmptyPlaceholder } from '../DataDimension/SelectedEmptyPlacehol
 import { SourceEmptyPlaceholder } from '../DataDimension/SourceEmptyPlaceholder.js';
 import styles from '../styles/DimensionSelector.style.js';
 import { TransferOption } from '../TransferOption.js';
-const ItemSelector = _ref => {
-  let {
-    selectedItems,
-    noItemsMessage,
-    onFetch,
-    onSelect,
-    rightFooter,
-    dataTest
-  } = _ref;
+const SELECTED_ITEMS_PROP_DEFAULT = [];
+const ItemSelector = ({
+  selectedItems = SELECTED_ITEMS_PROP_DEFAULT,
+  noItemsMessage,
+  onFetch,
+  onSelect,
+  rightFooter,
+  dataTest
+}) => {
   const [state, setState] = useState({
     searchTerm: '',
     options: [],
@@ -39,18 +39,15 @@ const ItemSelector = _ref => {
       loading: true
     }));
     const result = await onFetch(page, state.searchTerm);
-    const newOptions = (_result$dimensionItem = result.dimensionItems) === null || _result$dimensionItem === void 0 ? void 0 : _result$dimensionItem.map(_ref2 => {
-      let {
-        id,
-        name,
-        disabled
-      } = _ref2;
-      return {
-        label: name,
-        value: id,
-        disabled
-      };
-    });
+    const newOptions = (_result$dimensionItem = result.dimensionItems) === null || _result$dimensionItem === void 0 ? void 0 : _result$dimensionItem.map(({
+      id,
+      name,
+      disabled
+    }) => ({
+      label: name,
+      value: id,
+      disabled
+    }));
     setState(state => ({
       ...state,
       loading: false,
@@ -86,12 +83,9 @@ const ItemSelector = _ref => {
     }
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Transfer, {
-    onChange: _ref3 => {
-      let {
-        selected
-      } = _ref3;
-      return onChange(selected);
-    },
+    onChange: ({
+      selected
+    }) => onChange(selected),
     selected: selectedItems.map(item => item.value),
     options: [...state.options, ...selectedItems],
     loading: state.loading,
@@ -107,12 +101,9 @@ const ItemSelector = _ref => {
     filterPlaceholder: i18n.t('Search'),
     filterablePicked: false,
     searchTerm: state.searchTerm,
-    onFilterChange: _ref4 => {
-      let {
-        value
-      } = _ref4;
-      return setSearchTerm(value);
-    },
+    onFilterChange: ({
+      value
+    }) => setSearchTerm(value),
     enableOrderChange: true,
     height: TRANSFER_HEIGHT,
     optionsWidth: TRANSFER_OPTIONS_WIDTH,
@@ -141,8 +132,5 @@ ItemSelector.propTypes = {
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired
   }))
-};
-ItemSelector.defaultProps = {
-  selectedItems: []
 };
 export default ItemSelector;

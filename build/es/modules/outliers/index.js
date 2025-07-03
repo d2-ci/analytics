@@ -1,6 +1,6 @@
 import isNumber from 'd2-utilizr/lib/isNumber';
-import isNumeric from 'd2-utilizr/lib/isNumeric';
 import i18n from '../../locales/index.js';
+import { isNumeric } from '../../modules/utils.js';
 import { getIQRHelper, IQR } from './iqr.js';
 import { getModZScoreHelper, MODIFIED_Z_SCORE } from './modZScore.js';
 import { getNormalizationHelper, Y_RESIDUALS_LINEAR } from './normalization.js';
@@ -55,8 +55,7 @@ const getMinMaxValue = (outlierHelper, isVertical, isMax) => {
   const extremeFactor = isNumber(extremeValue) && isMax ? extremeValue + Math.abs(extremeValue) * 0.1 : extremeValue - Math.abs(extremeValue) * 0.1;
   return [...outlierHelper.thresholds.map(t => getXYStats([t.line[0], t.line[t.line.length - 1]])[prop]), extremeFactor].filter(isNumeric).sort(isMax ? (a, b) => b - a : (a, b) => a - b)[0];
 };
-export const getOutlierHelper = function (data) {
-  let userConfig = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+export const getOutlierHelper = (data, userConfig = {}) => {
   if (data.length < 3) {
     return null;
   }

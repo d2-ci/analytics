@@ -14,13 +14,12 @@ var _visTypes = require("../../../modules/visTypes.js");
 var _DataDimension = require("../DataDimension.js");
 var _DataTypeSelectorStyle = _interopRequireDefault(require("./styles/DataTypeSelector.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const DataTypeSelector = _ref => {
-  let {
-    currentDataType,
-    dataTypes,
-    onChange,
-    dataTest
-  } = _ref;
+const DataTypeSelector = ({
+  currentDataType,
+  dataTypes,
+  onChange,
+  dataTest
+}) => {
   const {
     visType
   } = (0, _DataDimension.useDataDimensionContext)();

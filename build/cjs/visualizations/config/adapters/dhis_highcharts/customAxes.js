@@ -21,9 +21,7 @@ function getIdAxisMap(customAxes) {
     return map;
   }, {});
 }
-function getFullIdAxisMap() {
-  let customAxes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  let series = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+function getFullIdAxisMap(customAxes = [], series = []) {
   const idAxisMap = getIdAxisMap(customAxes.filter(axisItem => series.find(seriesItem => seriesItem.id === axisItem.dimensionItem)));
 
   // adds first axis ids to seriesAxisMap
@@ -42,8 +40,7 @@ function getFullIdAxisMap() {
 // }
 function getAxisIdsMap(customAxes, series) {
   const fullIdAxisMap = getFullIdAxisMap(customAxes, series);
-  return Object.entries(fullIdAxisMap).reduce((map, _ref) => {
-    let [id, axis] = _ref;
+  return Object.entries(fullIdAxisMap).reduce((map, [id, axis]) => {
     if (!(axis in map)) {
       map[axis] = [];
     }

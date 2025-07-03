@@ -4,16 +4,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { DIMENSION_TYPE_DATA_ELEMENT, DIMENSION_TYPE_DATA_SET, DIMENSION_TYPE_EVENT_DATA_ITEM, DIMENSION_TYPE_PROGRAM_INDICATOR, DIMENSION_TYPE_INDICATOR, DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM } from '../../modules/dataTypes.js';
 import styles from './styles/EmptyPlaceholder.style.js';
-export const SourceEmptyPlaceholder = _ref => {
-  let {
-    loading,
-    searchTerm,
-    options,
-    allItemsSelectedMessage,
-    noItemsMessage,
-    dataType,
-    dataTest
-  } = _ref;
+const OPTIONS_PROP_DEFAULT = [];
+export const SourceEmptyPlaceholder = ({
+  loading,
+  searchTerm,
+  options = OPTIONS_PROP_DEFAULT,
+  allItemsSelectedMessage,
+  noItemsMessage,
+  dataType,
+  dataTest
+}) => {
   let message = '';
   if (allItemsSelectedMessage && !loading && options.length && !searchTerm) {
     message = allItemsSelectedMessage;
@@ -90,9 +90,6 @@ export const SourceEmptyPlaceholder = _ref => {
   }, message), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
-};
-SourceEmptyPlaceholder.defaultProps = {
-  options: []
 };
 SourceEmptyPlaceholder.propTypes = {
   allItemsSelectedMessage: PropTypes.string,

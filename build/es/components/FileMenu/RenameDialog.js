@@ -5,13 +5,12 @@ import React, { useState } from 'react';
 import i18n from '../../locales/index.js';
 import { modalStyles } from './FileMenu.styles.js';
 import { supportedFileTypes, labelForFileType } from './utils.js';
-export const RenameDialog = _ref => {
-  let {
-    type,
-    object,
-    onClose,
-    onRename
-  } = _ref;
+export const RenameDialog = ({
+  type,
+  object,
+  onClose,
+  onRename
+}) => {
   const [name, setName] = useState(object.name);
   const [description, setDescription] = useState(object.description);
   const renameObject = () => {
@@ -34,23 +33,17 @@ export const RenameDialog = _ref => {
     label: i18n.t('Name'),
     required: true,
     value: name,
-    onChange: _ref2 => {
-      let {
-        value
-      } = _ref2;
-      return setName(value);
-    },
+    onChange: ({
+      value
+    }) => setName(value),
     dataTest: "file-menu-rename-modal-name"
   }), /*#__PURE__*/React.createElement(TextAreaField, {
     label: i18n.t('Description'),
     value: description,
     rows: 3,
-    onChange: _ref3 => {
-      let {
-        value
-      } = _ref3;
-      return setDescription(value);
-    },
+    onChange: ({
+      value
+    }) => setDescription(value),
     dataTest: "file-menu-rename-modal-description"
   }))), /*#__PURE__*/React.createElement(ModalActions, null, /*#__PURE__*/React.createElement(ButtonStrip, null, /*#__PURE__*/React.createElement(Button, {
     onClick: onClose,

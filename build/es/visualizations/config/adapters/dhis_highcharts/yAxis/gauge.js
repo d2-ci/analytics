@@ -23,10 +23,8 @@ const getLabelOffsetFromTextAlign = textAlign => {
       return 0;
   }
 };
-function getPlotLine() {
+function getPlotLine(regressionLine = {}, defaultLabel) {
   var _regressionLine$title, _regressionLine$title2;
-  let regressionLine = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  let defaultLabel = arguments.length > 1 ? arguments[1] : undefined;
   const value = regressionLine.value;
   if (!isNumber(value)) {
     return null;

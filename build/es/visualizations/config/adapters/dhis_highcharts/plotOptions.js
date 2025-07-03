@@ -1,15 +1,14 @@
 import i18n from '../../../../locales/index.js';
 import { VIS_TYPE_COLUMN, VIS_TYPE_SCATTER, VIS_TYPE_STACKED_COLUMN, VIS_TYPE_BAR, VIS_TYPE_STACKED_BAR } from '../../../../modules/visTypes.js';
 const MAX_LABELS = 10;
-export default _ref => {
-  let {
-    visType,
-    xAxisName,
-    yAxisName,
-    showLabels,
-    tooltipData,
-    onClick
-  } = _ref;
+export default ({
+  visType,
+  xAxisName,
+  yAxisName,
+  showLabels,
+  tooltipData,
+  onClick
+}) => {
   const series = {
     dataLabels: {
       enabled: showLabels,

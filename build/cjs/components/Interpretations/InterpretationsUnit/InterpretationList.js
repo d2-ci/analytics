@@ -23,17 +23,16 @@ const sortByCreatedDateDesc = (a, b) => {
   }
   return 0;
 };
-const InterpretationList = _ref => {
-  let {
-    currentUser,
-    interpretations,
-    onInterpretationClick,
-    onLikeToggled,
-    onReplyIconClick,
-    refresh,
-    disabled,
-    dashboardRedirectUrl
-  } = _ref;
+const InterpretationList = ({
+  currentUser,
+  interpretations,
+  onInterpretationClick,
+  onLikeToggled,
+  onReplyIconClick,
+  refresh,
+  disabled,
+  dashboardRedirectUrl
+}) => {
   const {
     fromServerDate
   } = (0, _appRuntime.useTimeZoneConversion)();

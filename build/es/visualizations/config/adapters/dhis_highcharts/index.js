@@ -33,15 +33,14 @@ const getTransformedExtraOptions = extraOptions => ({
   ...extraOptions,
   multiAxisTheme: extraOptions.multiAxisTheme || defaultMultiAxisTheme1
 });
-export default function (_ref) {
+export default function ({
+  store,
+  layout,
+  el,
+  extraConfig,
+  extraOptions
+}) {
   var _layout$legend, _layout$seriesKey, _layout$seriesKey2, _layout$seriesKey2$la, _config$xAxis;
-  let {
-    store,
-    layout,
-    el,
-    extraConfig,
-    extraOptions
-  } = _ref;
   const _layout = getTransformedLayout(layout);
   const _extraOptions = getTransformedExtraOptions(extraOptions);
   const stacked = isStacked(_layout.type);

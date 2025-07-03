@@ -6,12 +6,11 @@ import i18n from '../../../locales/index.js';
 import { DATA_SETS_CONSTANTS } from '../../../modules/dataSets.js';
 import { DIMENSION_TYPE_ALL } from '../../../modules/dataTypes.js';
 import styles from './styles/MetricSelector.style.js';
-export const MetricSelector = _ref => {
-  let {
-    currentValue,
-    onChange,
-    dataTest
-  } = _ref;
+export const MetricSelector = ({
+  currentValue,
+  onChange,
+  dataTest
+}) => {
   return /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "metric-container"
   }, /*#__PURE__*/React.createElement(SingleSelectField, {

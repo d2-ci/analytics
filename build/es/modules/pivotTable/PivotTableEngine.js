@@ -108,11 +108,10 @@ const buildDimensionLookup = (visualization, metadata, headers) => {
     dataHeaders
   };
 };
-const lookup = (dataRow, dimensionLookup, _ref) => {
-  let {
-    doColumnSubtotals,
-    doRowSubtotals
-  } = _ref;
+const lookup = (dataRow, dimensionLookup, {
+  doColumnSubtotals,
+  doRowSubtotals
+}) => {
   let row = 0;
   for (const headerIndex of dimensionLookup.rowHeaders) {
     const idx = dimensionLookup.headerDimensions[headerIndex].itemIds.indexOf(dataRow[headerIndex]);
@@ -142,15 +141,14 @@ const lookup = (dataRow, dimensionLookup, _ref) => {
     row
   };
 };
-const applyTotalAggregationType = (_ref2, overrideTotalAggregationType) => {
-  let {
-    totalAggregationType,
-    value,
-    numerator,
-    denominator,
-    multiplier,
-    divisor
-  } = _ref2;
+const applyTotalAggregationType = ({
+  totalAggregationType,
+  value,
+  numerator,
+  denominator,
+  multiplier,
+  divisor
+}, overrideTotalAggregationType) => {
   switch (overrideTotalAggregationType || totalAggregationType) {
     case AGGREGATE_TYPE_NA:
       return VALUE_NA;
@@ -209,12 +207,11 @@ export class PivotTableEngine {
     this.rowDepth = this.dimensionLookup.rows.length || (this.visualization.showDimensionLabels ? 1 : 0);
     this.buildMatrix();
   }
-  getRaw(_ref3) {
+  getRaw({
+    row,
+    column
+  }) {
     var _headers$find, _headers$find2;
-    let {
-      row,
-      column
-    } = _ref3;
     const cellType = this.getRawCellType({
       row,
       column
@@ -300,18 +297,16 @@ export class PivotTableEngine {
     }
     return rawCell;
   }
-  getCumulative(_ref4) {
-    let {
-      row,
-      column
-    } = _ref4;
+  getCumulative({
+    row,
+    column
+  }) {
     return this.accumulators.rows[row][column];
   }
-  get(_ref5) {
-    let {
-      row,
-      column
-    } = _ref5;
+  get({
+    row,
+    column
+  }) {
     const mappedRow = this.rowMap[row],
       mappedColumn = this.columnMap[column];
     if (!mappedRow && mappedRow !== 0 || !mappedColumn && mappedColumn !== 0) {
@@ -322,11 +317,10 @@ export class PivotTableEngine {
       column: mappedColumn
     });
   }
-  getRawCellType(_ref6) {
-    let {
-      row,
-      column
-    } = _ref6;
+  getRawCellType({
+    row,
+    column
+  }) {
     const isRowTotal = this.doRowTotals && column === this.dataWidth - 1;
     const isColumnTotal = this.doColumnTotals && row === this.dataHeight - 1;
     if (isRowTotal || isColumnTotal) {
@@ -339,11 +333,10 @@ export class PivotTableEngine {
     }
     return CELL_TYPE_VALUE;
   }
-  getCellType(_ref7) {
-    let {
-      row,
-      column
-    } = _ref7;
+  getCellType({
+    row,
+    column
+  }) {
     row = this.rowMap[row];
     column = this.columnMap[column];
     return this.getRawCellType({
@@ -373,21 +366,19 @@ export class PivotTableEngine {
       return i18n.t(this.dimensionLookup.rows[rowLevel].meta.name);
     }
   }
-  getCellDxDimension(_ref8) {
-    let {
-      row,
-      column
-    } = _ref8;
+  getCellDxDimension({
+    row,
+    column
+  }) {
     return this.getRawCellDxDimension({
       row: this.rowMap[row],
       column: this.columnMap[column]
     });
   }
-  getRawCellDxDimension(_ref9) {
-    let {
-      row,
-      column
-    } = _ref9;
+  getRawCellDxDimension({
+    row,
+    column
+  }) {
     if (!this.data[row]) {
       return undefined;
     }
@@ -484,12 +475,11 @@ export class PivotTableEngine {
   getRowHeader(row) {
     return this.getRawRowHeader(this.rowMap[row]);
   }
-  getDependantTotalCells(_ref10) {
+  getDependantTotalCells({
+    row,
+    column
+  }) {
     var _this$dimensionLookup, _this$dimensionLookup2;
-    let {
-      row,
-      column
-    } = _ref10;
     const rowSubtotalSize = ((_this$dimensionLookup = this.dimensionLookup.columns[0]) === null || _this$dimensionLookup === void 0 ? void 0 : _this$dimensionLookup.size) + 1;
     const rowSubtotal = rowSubtotalSize && this.doRowSubtotals && {
       row,
@@ -687,11 +677,10 @@ export class PivotTableEngine {
     // (numberType option default is VALUE)
     return visualization.numberType && visualization.numberType !== NUMBER_TYPE_VALUE && AGGREGATE_TYPE_SUM;
   }
-  finalizeTotal(_ref11) {
-    let {
-      row,
-      column
-    } = _ref11;
+  finalizeTotal({
+    row,
+    column
+  }) {
     if (!this.data[row]) {
       return;
     }

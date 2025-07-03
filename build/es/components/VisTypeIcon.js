@@ -2,12 +2,11 @@ import { IconVisualizationArea16, IconVisualizationAreaStacked16, IconVisualizat
 import PropTypes from 'prop-types';
 import React from 'react';
 import { VIS_TYPE_LINE_LIST, VIS_TYPE_PIVOT_TABLE, VIS_TYPE_COLUMN, VIS_TYPE_STACKED_COLUMN, VIS_TYPE_BAR, VIS_TYPE_STACKED_BAR, VIS_TYPE_LINE, VIS_TYPE_AREA, VIS_TYPE_STACKED_AREA, VIS_TYPE_PIE, VIS_TYPE_RADAR, VIS_TYPE_GAUGE, VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, VIS_TYPE_SINGLE_VALUE, VIS_TYPE_SCATTER, VIS_TYPE_OUTLIER_TABLE } from '../modules/visTypes.js';
-export const VisTypeIcon = _ref => {
-  let {
-    type,
-    useSmall = false,
-    ...props
-  } = _ref;
+export const VisTypeIcon = ({
+  type,
+  useSmall = false,
+  ...props
+}) => {
   let VisIcon;
   switch (type) {
     case VIS_TYPE_LINE_LIST:

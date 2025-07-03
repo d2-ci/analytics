@@ -105,11 +105,10 @@ describe('<HoverMenuBar/>', () => {
     });
   });
 });
-function createFullMenuBarWrapper() {
-  let {
-    menuItemOnClickSpy,
-    subMenuItemOnClickSpy
-  } = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+function createFullMenuBarWrapper({
+  menuItemOnClickSpy,
+  subMenuItemOnClickSpy
+} = {}) {
   return (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, null, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuDropdown, {
     label: "Menu A"
   }, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuList, null, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuListItem, {

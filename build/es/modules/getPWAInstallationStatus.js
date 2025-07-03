@@ -2,11 +2,10 @@ export const INSTALLATION_STATES = {
   READY: 'READY',
   INSTALLING: 'INSTALLING'
 };
-function handleInstallingWorker(_ref) {
-  let {
-    installingWorker,
-    onStateChange
-  } = _ref;
+function handleInstallingWorker({
+  installingWorker,
+  onStateChange
+}) {
   installingWorker.onstatechange = () => {
     if (installingWorker.state === 'activated') {
       // ... and update state to 'ready'
@@ -23,10 +22,9 @@ function handleInstallingWorker(_ref) {
  *
  * Returns either READY, INSTALLING, or `null` for not installed/won't install
  */
-export async function getPWAInstallationStatus(_ref2) {
-  let {
-    onStateChange
-  } = _ref2;
+export async function getPWAInstallationStatus({
+  onStateChange
+}) {
   if (!navigator.serviceWorker) {
     // Nothing to do here
     return null;

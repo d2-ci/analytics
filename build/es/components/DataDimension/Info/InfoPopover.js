@@ -19,13 +19,12 @@ import { IndicatorInfo } from './IndicatorInfo.js';
 import { OptionInfo } from './OptionInfo.js';
 import { ProgramIndicatorInfo } from './ProgramIndicatorInfo.js';
 import styles from './styles/InfoPopover.style.js';
-export const InfoPopover = _ref => {
-  let {
-    reference,
-    onClose,
-    dataTest,
-    ...props
-  } = _ref;
+export const InfoPopover = ({
+  reference,
+  onClose,
+  dataTest,
+  ...props
+}) => {
   const type = props.item.type;
   const infoProps = {
     type,

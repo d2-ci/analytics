@@ -9,24 +9,20 @@ import styles from './styles/InfoPopover.style.js';
 const dataElementOperandsQuery = {
   dataElementOperands: {
     resource: 'dataElementOperands',
-    params: _ref => {
-      let {
-        displayNameProp,
-        id
-      } = _ref;
-      return {
-        filter: `id:eq:${id}`,
-        fields: [`${getCommonFields(displayNameProp)}`, 'categoryOptionCombo[categoryCombo[categories[displayName,id],displayName],displayName]', `dataElement[${getCommonFields(displayNameProp)},aggregationType,categoryCombo[displayName,categories[id,displayName]],dataElementGroups[id,displayName],dataSetElements[dataSet[id,displayName]],legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant]`, 'displayName,id']
-      };
-    }
+    params: ({
+      displayNameProp,
+      id
+    }) => ({
+      filter: `id:eq:${id}`,
+      fields: [`${getCommonFields(displayNameProp)}`, 'categoryOptionCombo[categoryCombo[categories[displayName,id],displayName],displayName]', `dataElement[${getCommonFields(displayNameProp)},aggregationType,categoryCombo[displayName,categories[id,displayName]],dataElementGroups[id,displayName],dataSetElements[dataSet[id,displayName]],legendSets[id,displayName],optionSet[displayName],valueType,zeroIsSignificant]`, 'displayName,id']
+    })
   }
 };
-export const DataElementOperandInfo = _ref2 => {
-  let {
-    type,
-    id,
-    displayNameProp
-  } = _ref2;
+export const DataElementOperandInfo = ({
+  type,
+  id,
+  displayNameProp
+}) => {
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
@@ -74,12 +70,9 @@ export const DataElementOperandInfo = _ref2 => {
     className: `jsx-${styles.__hash}`
   }, i18n.t('Data set(s)')), /*#__PURE__*/React.createElement("td", {
     className: `jsx-${styles.__hash}`
-  }, (data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.dataSetElements) && renderDataSets(data.dataElementOperand.dataElement.dataSetElements.map(_ref3 => {
-    let {
-      dataSet
-    } = _ref3;
-    return dataSet;
-  })))), /*#__PURE__*/React.createElement("tr", {
+  }, (data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.dataSetElements) && renderDataSets(data.dataElementOperand.dataElement.dataSetElements.map(({
+    dataSet
+  }) => dataSet)))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
@@ -111,16 +104,13 @@ export const DataElementOperandInfo = _ref2 => {
     className: `jsx-${styles.__hash}`
   }, data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.categoryCombo.displayName), /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.categoryCombo.categories.map(_ref4 => {
-    let {
-      id,
-      displayName
-    } = _ref4;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, displayName);
-  }))))), (data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.optionSet) && /*#__PURE__*/React.createElement("tr", {
+  }, data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.categoryCombo.categories.map(({
+    id,
+    displayName
+  }) => /*#__PURE__*/React.createElement("li", {
+    key: id,
+    className: `jsx-${styles.__hash}`
+  }, displayName)))))), (data === null || data === void 0 ? void 0 : data.dataElementOperand.dataElement.optionSet) && /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`
@@ -158,16 +148,13 @@ export const DataElementOperandInfo = _ref2 => {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.dataElementOperand.categoryOptionCombo.categoryCombo.categories.map(_ref5 => {
-    let {
-      id,
-      displayName
-    } = _ref5;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, displayName);
-  }))))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, data === null || data === void 0 ? void 0 : data.dataElementOperand.categoryOptionCombo.categoryCombo.categories.map(({
+    id,
+    displayName
+  }) => /*#__PURE__*/React.createElement("li", {
+    key: id,
+    className: `jsx-${styles.__hash}`
+  }, displayName)))))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

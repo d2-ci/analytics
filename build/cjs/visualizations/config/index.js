@@ -10,18 +10,17 @@ var _index3 = _interopRequireDefault(require("./adapters/index.js"));
 var _index4 = _interopRequireDefault(require("./generators/index.js"));
 var _index5 = _interopRequireDefault(require("./validators/index.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _default(_ref) {
-  let {
-    store,
-    layout,
-    el,
-    inputFormat = 'dhis',
-    outputFormat = 'highcharts',
-    extraLayout,
-    extraOptions,
-    onError,
-    onWarning
-  } = _ref;
+function _default({
+  store,
+  layout,
+  el,
+  inputFormat = 'dhis',
+  outputFormat = 'highcharts',
+  extraLayout,
+  extraOptions,
+  onError,
+  onWarning
+}) {
   const _validator = _index5.default[inputFormat] || _index5.default.noValidation;
   const _adapter = _index3.default[inputFormat + '_' + outputFormat];
   const _generator = _index4.default[outputFormat];

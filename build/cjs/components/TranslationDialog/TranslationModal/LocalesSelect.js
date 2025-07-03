@@ -15,33 +15,28 @@ const query = {
     resource: 'locales/db'
   }
 };
-const LocalesSelect = _ref => {
-  let {
-    onChange,
-    selected
-  } = _ref;
+const LocalesSelect = ({
+  onChange,
+  selected
+}) => {
   const {
     data,
     fetching
   } = (0, _appRuntime.useDataQuery)(query);
   return /*#__PURE__*/_react.default.createElement(_ui.SingleSelect, {
     prefix: selected ? _d2I18n.default.t('Translating to') : _d2I18n.default.t('Choose a locale'),
-    onChange: _ref2 => {
-      let {
-        selected
-      } = _ref2;
-      return onChange(selected);
-    },
+    onChange: ({
+      selected
+    }) => onChange(selected),
     loading: fetching,
     selected: data && selected ? selected : '',
     dense: true
   }, data && data.locales
   // XXX remove duplicates ?! fr_SN - French (Senegal)
-  .reduce((locales, _ref3) => {
-    let {
-      locale,
-      name
-    } = _ref3;
+  .reduce((locales, {
+    locale,
+    name
+  }) => {
     if (!locales.find(entry => entry.locale === locale)) {
       locales.push({
         locale,
@@ -49,17 +44,14 @@ const LocalesSelect = _ref => {
       });
     }
     return locales;
-  }, []).map(_ref4 => {
-    let {
-      locale,
-      name
-    } = _ref4;
-    return /*#__PURE__*/_react.default.createElement(_ui.SingleSelectOption, {
-      key: locale,
-      value: locale,
-      label: name
-    });
-  }));
+  }, []).map(({
+    locale,
+    name
+  }) => /*#__PURE__*/_react.default.createElement(_ui.SingleSelectOption, {
+    key: locale,
+    value: locale,
+    label: name
+  })));
 };
 exports.LocalesSelect = LocalesSelect;
 LocalesSelect.propTypes = {

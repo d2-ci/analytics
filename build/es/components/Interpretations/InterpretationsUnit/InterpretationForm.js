@@ -5,26 +5,22 @@ import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import { RichTextEditor } from '../../RichText/index.js';
 import { MessageEditorContainer, MessageButtonStrip } from '../common/index.js';
-export const InterpretationForm = _ref => {
-  let {
-    type,
-    id,
-    currentUser,
-    disabled,
-    showNoTimeDimensionHelpText,
-    onSave
-  } = _ref;
+export const InterpretationForm = ({
+  type,
+  id,
+  currentUser,
+  disabled,
+  showNoTimeDimensionHelpText,
+  onSave
+}) => {
   const [showRichTextEditor, setShowRichTextEditor] = useState(false);
   const [interpretationText, setInterpretationText] = useState('');
   const saveMutationRef = useRef({
     resource: `interpretations/${type}/${id}`,
     type: 'create',
-    data: _ref2 => {
-      let {
-        interpretationText
-      } = _ref2;
-      return interpretationText;
-    }
+    data: ({
+      interpretationText
+    }) => interpretationText
   });
   const [save, {
     loading: saveMutationInProgress

@@ -29,12 +29,11 @@ function validateRow(row, headersLength, error) {
   }
   row.forEach(rowValue => validateRowValue(rowValue, error));
 }
-export default function (_ref) {
-  let {
-    data,
-    error,
-    warning
-  } = _ref;
+export default function ({
+  data,
+  error,
+  warning
+}) {
   if (!isObject(data)) {
     error(getMessage('Data is not an object'));
   }

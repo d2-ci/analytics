@@ -54,8 +54,7 @@ describe('The FileMenu component ', () => {
       href: 'http://dhis2.org'
     }
   };
-  const renderFileMenu = function () {
-    let customProps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  const renderFileMenu = (customProps = {}) => {
     const props = {
       ...baseProps,
       ...customProps
@@ -71,6 +70,11 @@ describe('The FileMenu component ', () => {
         object: {
           userAccesses: [],
           userGroupAccesses: []
+        }
+      },
+      visualizations: {
+        pager: {
+          page: 1
         }
       }
     };
