@@ -464,6 +464,5 @@
     "Axis {{axisId}}": "Axis {{axisId}}",
     "{{count}} items": "{{count}} item",
     "{{count}} items_plural": "{{count}} items",
-    "Reset zoom": "Reset zoom",
-    "__MANIFEST_APP_TITLE_Application title": "@dhis2/analytics"
+    "Reset zoom": "Reset zoom"
 }
