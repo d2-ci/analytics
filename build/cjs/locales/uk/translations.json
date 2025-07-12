@@ -155,6 +155,7 @@
     "Share…": "",
     "Get link…": "",
     "Open in this app": "Відкрити в цьому додатку",
+    "Copy to clipboard": "Копіювати в буфер обміну",
     "Close": "Закрити",
     "Rename {{fileType}}": "Перейменувати {{fileType}}",
     "Rename": "Перейменувати",
@@ -475,5 +476,6 @@
     "{{count}} items_1": "",
     "{{count}} items_2": "",
     "{{count}} items_3": "",
-    "Reset zoom": ""
+    "Reset zoom": "",
+    "__MANIFEST_APP_TITLE_Application title": ""
 }

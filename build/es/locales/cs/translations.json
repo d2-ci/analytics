@@ -155,6 +155,7 @@
     "Share…": "Sdílet…",
     "Get link…": "Získat odkaz ...",
     "Open in this app": "Otevřít v této aplikaci",
+    "Copy to clipboard": "Zkopírovat do schránky",
     "Close": "Zavřít",
     "Rename {{fileType}}": "Přejmenovat {{fileType}}",
     "Rename": "Přejmenovat",
@@ -475,5 +476,6 @@
     "{{count}} items_1": " {{count}} položky",
     "{{count}} items_2": " {{count}} položek",
     "{{count}} items_3": "{{count}} položek",
-    "Reset zoom": "Obnovit přiblížení"
+    "Reset zoom": "Obnovit přiblížení",
+    "__MANIFEST_APP_TITLE_Application title": ""
 }

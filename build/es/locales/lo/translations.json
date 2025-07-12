@@ -152,6 +152,7 @@
     "Share…": "ແບ່ງປັນ...",
     "Get link…": "ເອົາລິ້ງ...",
     "Open in this app": "ເປີດແອ໋ບນີ້",
+    "Copy to clipboard": "ສຳເນົາໄປຫາ ຄິບບອດ",
     "Close": "ປິດ",
     "Rename {{fileType}}": "ປ່ຽນຊື່ {{fileType}}",
     "Rename": "ປ່ຽນຊື່",
@@ -457,5 +458,6 @@
     "Base": "ຖານ",
     "Axis {{axisId}}": "ແກນ {{axisId}}",
     "{{count}} items": "{{count}} ລາຍການ",
-    "Reset zoom": "ຣີເຊັດຊູມ"
+    "Reset zoom": "ຣີເຊັດຊູມ",
+    "__MANIFEST_APP_TITLE_Application title": ""
 }

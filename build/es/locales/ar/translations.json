@@ -157,6 +157,7 @@
     "Share…": "",
     "Get link…": "",
     "Open in this app": "فتح في هذا التطبيق",
+    "Copy to clipboard": "نسخ إلى الحافظة",
     "Close": "إغلاق",
     "Rename {{fileType}}": "إعادة تسمية {{fileType}}",
     "Rename": "إعادة التسمية",
@@ -487,5 +488,6 @@
     "{{count}} items_3": "",
     "{{count}} items_4": "",
     "{{count}} items_5": "",
-    "Reset zoom": ""
+    "Reset zoom": "",
+    "__MANIFEST_APP_TITLE_Application title": ""
 }

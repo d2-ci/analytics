@@ -153,6 +153,7 @@
     "Share…": "Compartir...",
     "Get link…": "Obtener enlace...",
     "Open in this app": "Abrir en esta aplicación",
+    "Copy to clipboard": "Copiar al portapapeles",
     "Close": "Cerrar",
     "Rename {{fileType}}": "Cambie el nombre de {{fileType}}",
     "Rename": "Cambie el nombre de",
@@ -162,6 +163,7 @@
     "line list": "lista",
     "map": "mapa",
     "visualization": "visualización",
+    "Untitled {{visualizationType}}, {{date}}": "",
     "Edit": "Editar",
     "Write a reply": "Escribir una respuesta",
     "Post reply": "Respuesta",
@@ -451,6 +453,7 @@
     "Single value": "Valor único",
     "Outlier table": "Tabla de valores atípicos",
     "All charts": "Todos los gráficos",
+    "Map": "",
     "{{seriesName}} (trend)": "{{seriesName}} (tendencia)",
     "Trend": "Tendencia",
     "No legend for this series": "No hay leyenda para esta serie",
@@ -461,5 +464,6 @@
     "Axis {{axisId}}": "Eje {{axisId}}",
     "{{count}} items": "{{count}} artículo",
     "{{count}} items_plural": "{{count}} artículos",
-    "Reset zoom": "Restablecer zoom"
+    "Reset zoom": "Restablecer zoom",
+    "__MANIFEST_APP_TITLE_Application title": ""
 }

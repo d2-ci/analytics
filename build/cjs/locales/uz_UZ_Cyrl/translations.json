@@ -152,6 +152,7 @@
     "Share…": "",
     "Get link…": "",
     "Open in this app": "Ушбу иловада очинг",
+    "Copy to clipboard": "Буферга нусха олиш",
     "Close": "Ёпиш",
     "Rename {{fileType}}": "Қайта номлаш {{fileType}}",
     "Rename": "Қайта номлашч",
@@ -457,5 +458,6 @@
     "Base": "Асос",
     "Axis {{axisId}}": "Ўқлар {{axisId}}",
     "{{count}} items": "",
-    "Reset zoom": ""
+    "Reset zoom": "",
+    "__MANIFEST_APP_TITLE_Application title": ""
 }

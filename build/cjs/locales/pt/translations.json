@@ -153,6 +153,7 @@
     "Share…": "Partilhar...",
     "Get link…": "Obter link...",
     "Open in this app": "Abrir neste aplicativo",
+    "Copy to clipboard": "Copiar para área de transferência",
     "Close": "Fechar",
     "Rename {{fileType}}": "Renomear {{fileType}}",
     "Rename": "Renomear",
@@ -463,5 +464,6 @@
     "Axis {{axisId}}": "Eixos {{axisId}}",
     "{{count}} items": "{{count}} item",
     "{{count}} items_plural": "{{count}} itens",
-    "Reset zoom": "Repor o zoom"
+    "Reset zoom": "Repor o zoom",
+    "__MANIFEST_APP_TITLE_Application title": ""
 }

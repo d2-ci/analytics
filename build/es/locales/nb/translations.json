@@ -153,6 +153,7 @@
     "Share…": "Dele...",
     "Get link…": "Få lenke…",
     "Open in this app": "Åpne i denne appen",
+    "Copy to clipboard": "Kopier til utklippstavle",
     "Close": "Lukk",
     "Rename {{fileType}}": "Gi nytt navn til {{fileType}}",
     "Rename": "Gi nytt navn",
@@ -463,5 +464,6 @@
     "Axis {{axisId}}": "Akse {{axisId}}",
     "{{count}} items": "",
     "{{count}} items_plural": "",
-    "Reset zoom": ""
+    "Reset zoom": "",
+    "__MANIFEST_APP_TITLE_Application title": ""
 }

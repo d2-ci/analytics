@@ -153,6 +153,7 @@
     "Share…": "Deel…",
     "Get link…": "Krijg link…",
     "Open in this app": "Openen in deze app",
+    "Copy to clipboard": "Kopieer naar klembord",
     "Close": "Sluit",
     "Rename {{fileType}}": "Hernoem {{fileType}}",
     "Rename": "Hernoemen",
@@ -162,6 +163,7 @@
     "line list": "lijn lijst",
     "map": "kaart",
     "visualization": "visualisatie",
+    "Untitled {{visualizationType}}, {{date}}": "",
     "Edit": "Bewerk",
     "Write a reply": "Schrijf een reactie",
     "Post reply": "Reageer",
@@ -451,6 +453,7 @@
     "Single value": "Enkele waarde",
     "Outlier table": "",
     "All charts": "Alle grafieken",
+    "Map": "",
     "{{seriesName}} (trend)": "{{seriesName}} (trend)",
     "Trend": "Trend",
     "No legend for this series": "Geen legende voor deze serie",
@@ -461,5 +464,6 @@
     "Axis {{axisId}}": "As {{axisId}}",
     "{{count}} items": "{{count}} artikel",
     "{{count}} items_plural": "{{count}} artikelen",
-    "Reset zoom": "Zoom resetten"
+    "Reset zoom": "Zoom resetten",
+    "__MANIFEST_APP_TITLE_Application title": ""
 }

@@ -152,6 +152,7 @@
     "Share…": "",
     "Get link…": "",
     "Open in this app": "",
+    "Copy to clipboard": "复制到剪贴板",
     "Close": "关闭",
     "Rename {{fileType}}": "",
     "Rename": "重命名",
@@ -457,5 +458,6 @@
     "Base": "基",
     "Axis {{axisId}}": "轴{{axisId}}",
     "{{count}} items": "",
-    "Reset zoom": ""
+    "Reset zoom": "",
+    "__MANIFEST_APP_TITLE_Application title": ""
 }

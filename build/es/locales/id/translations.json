@@ -152,6 +152,7 @@
     "Share…": "Bagikan…",
     "Get link…": "Dapatkan tautan…",
     "Open in this app": "Buka di aplikasi ini",
+    "Copy to clipboard": "Menyalin ke clipboard",
     "Close": "Tutup",
     "Rename {{fileType}}": "Ganti nama {{fileType}}",
     "Rename": "Ganti nama",
@@ -457,5 +458,6 @@
     "Base": "Dasar",
     "Axis {{axisId}}": "Sumbu {{axisId}}",
     "{{count}} items": "",
-    "Reset zoom": "Setel ulang zoom"
+    "Reset zoom": "Setel ulang zoom",
+    "__MANIFEST_APP_TITLE_Application title": ""
 }

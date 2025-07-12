@@ -153,6 +153,7 @@
     "Share…": "",
     "Get link…": "",
     "Open in this app": "",
+    "Copy to clipboard": "Copiar para área de transferência",
     "Close": "Fechar",
     "Rename {{fileType}}": "",
     "Rename": "Renomear",
@@ -463,5 +464,6 @@
     "Axis {{axisId}}": "",
     "{{count}} items": "",
     "{{count}} items_plural": "",
-    "Reset zoom": ""
+    "Reset zoom": "",
+    "__MANIFEST_APP_TITLE_Application title": ""
 }

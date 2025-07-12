@@ -153,6 +153,7 @@
     "Share…": "Compartir…",
     "Get link…": "Obtener enlace…",
     "Open in this app": "Abierto en esta aplicación",
+    "Copy to clipboard": "Copiar al portapapeles",
     "Close": "Cerrar",
     "Rename {{fileType}}": "Renombrar {{fileType}}",
     "Rename": "Renombrar",
@@ -430,7 +431,7 @@
     "Username": "Nombre de usuario",
     "Coordinate": "Coordenada",
     "Reference": "Referencia",
-    "Age": "",
+    "Age": "Edad",
     "URL": "URL",
     "Image": "Imagen (PNG)",
     "GeoJSON": "GeoJSON",
@@ -463,5 +464,6 @@
     "Axis {{axisId}}": "Eje {{axisId}}",
     "{{count}} items": "{{count}} elemento",
     "{{count}} items_plural": "{{count}} artículos",
-    "Reset zoom": "Restablecer zoom"
+    "Reset zoom": "Restablecer zoom",
+    "__MANIFEST_APP_TITLE_Application title": ""
 }
