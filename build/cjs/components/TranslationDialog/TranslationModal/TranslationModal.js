@@ -37,7 +37,8 @@ const TranslationModal = ({
   return /*#__PURE__*/_react.default.createElement(_ui.Modal, {
     large: true,
     position: "middle",
-    onClose: onClose
+    onClose: onClose,
+    dataTest: "dhis2-analytics-translation-modal"
   }, /*#__PURE__*/_react.default.createElement(_ui.ModalTitle, null, _d2I18n.default.t('Translate: {{objectName}}', {
     objectName: objectToTranslate.name || 'TEXT',
     // XXX

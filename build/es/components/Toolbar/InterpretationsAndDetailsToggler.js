@@ -14,7 +14,9 @@ export const InterpretationsAndDetailsToggler = ({
   disabled: disabled,
   "data-test": dataTest,
   className: "jsx-1238484262 " + `jsx-${menuButtonStyles.__hash}`
-}, isShowing ? /*#__PURE__*/React.createElement(IconChevronRight24, null) : /*#__PURE__*/React.createElement(IconChevronLeft24, null), i18n.t('Interpretations and details'), /*#__PURE__*/React.createElement(_JSXStyle, {
+}, isShowing ? /*#__PURE__*/React.createElement(IconChevronRight24, {
+  dataTest: `${dataTest}-showing`
+}) : /*#__PURE__*/React.createElement(IconChevronLeft24, null), i18n.t('Interpretations and details'), /*#__PURE__*/React.createElement(_JSXStyle, {
   id: menuButtonStyles.__hash
 }, menuButtonStyles), /*#__PURE__*/React.createElement(_JSXStyle, {
   id: "1238484262"

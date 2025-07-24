@@ -29,7 +29,8 @@ export const TranslationModal = ({
   return /*#__PURE__*/React.createElement(Modal, {
     large: true,
     position: "middle",
-    onClose: onClose
+    onClose: onClose,
+    dataTest: "dhis2-analytics-translation-modal"
   }, /*#__PURE__*/React.createElement(ModalTitle, null, i18n.t('Translate: {{objectName}}', {
     objectName: objectToTranslate.name || 'TEXT',
     // XXX

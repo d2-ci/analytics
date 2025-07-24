@@ -1,7 +1,7 @@
 "use strict";
 
-var _enzyme = require("enzyme");
-var _react = _interopRequireDefault(require("react"));
+var _react = require("@testing-library/react");
+var _react2 = _interopRequireDefault(require("react"));
 var _Parser = require("../Parser.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 jest.mock('../MdParser.js', () => ({
@@ -12,7 +12,6 @@ jest.mock('../MdParser.js', () => ({
   })
 }));
 describe('RichText: Parser component', () => {
-  let richTextParser;
   const defaultProps = {
     style: {
       color: 'blue',
@@ -20,22 +19,25 @@ describe('RichText: Parser component', () => {
     }
   };
   const renderComponent = (props, text) => {
-    return (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_Parser.Parser, props, text));
+    return (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_Parser.Parser, props, text));
   };
-  it('should have rendered a result', () => {
-    richTextParser = renderComponent({}, 'test');
-    expect(richTextParser).toHaveLength(1);
+  test('should have rendered a result with the style prop', () => {
+    const {
+      container
+    } = renderComponent(defaultProps, 'test prop');
+    const divEl = container.querySelector('div');
+    expect(divEl.style.color).toBe(defaultProps.style.color);
+    expect(divEl.style.whiteSpace).toBe(defaultProps.style.whiteSpace);
   });
-  it('should have rendered a result with the style prop', () => {
-    richTextParser = renderComponent(defaultProps, 'test prop');
-    expect(richTextParser.props().style).toEqual(defaultProps.style);
+  test('should have rendered content', () => {
+    renderComponent({}, 'plain text');
+    expect(_react.screen.getByText('converted text')).toBeInTheDocument();
   });
-  it('should have rendered content', () => {
-    richTextParser = renderComponent({}, 'plain text');
-    expect(richTextParser.html()).toEqual('<div>converted text</div>');
-  });
-  it('should return null if no children is passed', () => {
-    richTextParser = renderComponent({}, undefined);
-    expect(richTextParser.html()).toBe(null);
+  test('should return null if no children is passed', () => {
+    const {
+      container
+    } = renderComponent({}, undefined);
+    const divEl = container.querySelector('div');
+    expect(divEl).toBe(null);
   });
 });

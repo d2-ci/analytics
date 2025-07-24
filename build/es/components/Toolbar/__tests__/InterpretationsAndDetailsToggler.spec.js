@@ -1,42 +1,43 @@
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { InterpretationsAndDetailsToggler } from '../index.js';
 describe('<InterpretationsAndDetailsToggler/>', () => {
   const noop = () => {};
-  it('accepts an `onClick` prop', () => {
+  test('accepts an `onClick` prop', async () => {
+    const user = userEvent.setup();
     const onClick = jest.fn();
-    const wrapper = shallow(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
+    render(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
       onClick: onClick
     }));
-    wrapper.simulate('click');
+    await user.click(screen.getByRole('button'));
     expect(onClick).toHaveBeenCalledTimes(1);
   });
-  it('accepts a `dataTest` prop', () => {
+  test('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = shallow(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
+    render(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
       onClick: noop,
       dataTest: dataTest
     }));
-    expect(wrapper.prop('data-test')).toBe(dataTest);
+    expect(screen.getByTestId(dataTest)).toBeInTheDocument();
   });
-  it('accepts a `disabled` prop', () => {
-    const wrapper = shallow(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
+  test('accepts a `disabled` prop', () => {
+    render(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
       disabled: true,
       onClick: noop
     }));
-    expect(wrapper.find('button').prop('disabled')).toEqual(true);
+    expect(screen.getByRole('button')).toBeDisabled();
   });
-  it('accepts an `isShowing` prop', () => {
-    const wrapper = shallow(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
+  test('accepts an `isShowing` prop', () => {
+    const showingDataTest = 'dhis2-analytics-interpretationsanddetailstoggler-showing';
+    render(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
       onClick: noop
     }));
-    const wrapperWithIsShowing = shallow(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
+    expect(screen.queryByTestId(showingDataTest)).not.toBeInTheDocument();
+    render(/*#__PURE__*/React.createElement(InterpretationsAndDetailsToggler, {
       isShowing: true,
       onClick: noop
     }));
-    expect(wrapper.find('SvgChevronRight24')).toHaveLength(0);
-    expect(wrapper.find('SvgChevronLeft24')).toHaveLength(1);
-    expect(wrapperWithIsShowing.find('SvgChevronRight24')).toHaveLength(1);
-    expect(wrapperWithIsShowing.find('SvgChevronLeft24')).toHaveLength(0);
+    expect(screen.getByTestId(showingDataTest)).toBeInTheDocument();
   });
 });
