@@ -27,110 +27,22 @@ describe('OrgUnitDimension', () => {
   const renderOrgUnitDimension = props => (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_appRuntime.CustomDataProvider, {
     data: {
       organisationUnitLevels: {
-        organisationUnitLevels: [{
-          name: 'Chiefdom',
-          level: 3,
-          id: 'tTUf91fCytl',
-          displayName: 'Chiefdom'
-        }, {
-          name: 'District',
-          level: 2,
-          id: 'wjP19dkFeIk',
-          displayName: 'District'
-        }, {
-          name: 'Facility',
-          level: 4,
-          id: 'm9lBJogzE95',
-          displayName: 'Facility'
-        }, {
-          name: 'National',
-          level: 1,
-          id: 'H1KlN4QIauv',
-          displayName: 'National'
-        }]
+        organisationUnitLevels: []
       },
       organisationUnitGroups: {
-        organisationUnitGroups: [{
-          name: 'CHC',
-          id: 'CXw2yu5fodb',
-          displayName: 'CHC'
-        }, {
-          name: 'Chiefdom',
-          id: 'gzcv65VyaGq',
-          displayName: 'Chiefdom'
-        }, {
-          name: 'CHP',
-          id: 'uYxK4wmcPqA',
-          displayName: 'CHP'
-        }, {
-          name: 'Clinic',
-          id: 'RXL3lPSK8oG',
-          displayName: 'Clinic'
-        }, {
-          name: 'Country',
-          id: 'RpbiCJpIYEj',
-          displayName: 'Country'
-        }, {
-          name: 'District',
-          id: 'w1Atoz18PCL',
-          displayName: 'District'
-        }, {
-          name: 'Eastern Area',
-          id: 'nlX2VoouN63',
-          displayName: 'Eastern Area'
-        }, {
-          name: 'Hospital',
-          id: 'tDZVQ1WtwpA',
-          displayName: 'Hospital'
-        }, {
-          name: 'MCHP',
-          id: 'EYbopBOJWsW',
-          displayName: 'MCHP'
-        }, {
-          name: 'Mission',
-          id: 'w0gFTTmsUcF',
-          displayName: 'Mission'
-        }, {
-          name: 'NGO',
-          id: 'PVLOW4bCshG',
-          displayName: 'NGO'
-        }, {
-          name: 'Northern Area',
-          id: 'J40PpdN4Wkk',
-          displayName: 'Northern Area'
-        }, {
-          name: 'Private Clinic',
-          id: 'MAs88nJc9nL',
-          displayName: 'Private Clinic'
-        }, {
-          name: 'Public facilities',
-          id: 'oRVt7g429ZO',
-          displayName: 'Public facilities'
-        }, {
-          name: 'Rural',
-          id: 'GGghZsfu7qV',
-          displayName: 'Rural'
-        }, {
-          name: 'Southern Area',
-          id: 'jqBqIXoXpfy',
-          displayName: 'Southern Area'
-        }, {
-          name: 'Urban',
-          id: 'f25dqv3Y7Z0',
-          displayName: 'Urban'
-        }, {
-          name: 'Western Area',
-          id: 'b0EsAxm8Nge',
-          displayName: 'Western Area'
-        }]
+        organisationUnitGroups: []
       }
     }
   }, /*#__PURE__*/_react2.default.createElement(_OrgUnitDimension.default, props)));
   beforeEach(() => onSelect.mockClear());
-  test('OrgUnitDimension matches the snapshot', () => {
+  test('OrgUnitDimension matches the snapshot', async () => {
     const {
       container
     } = renderOrgUnitDimension(props);
+
+    // avoid the act warning due to the snapshot being taken before async code is run
+    // wait for the component to be loaded, here done by testing that the OrganisationUnitTree component is loaded
+    await _react.screen.findByText('Org unit tree component mock');
     expect(container).toMatchSnapshot();
   });
   test('OrgUnitDimension calls onSelect when an organisation unit is selected', async () => {
