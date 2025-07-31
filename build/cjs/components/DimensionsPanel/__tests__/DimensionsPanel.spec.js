@@ -14,15 +14,9 @@ const props = {
     name: 'Dimension 2'
   }]
 };
-test('DimensionsPanel matches the snapshot', () => {
-  const {
-    container
-  } = (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_DimensionsPanel.default, props));
-  expect(container).toMatchSnapshot();
-});
 test('DimensionsPanel renders a DimensionList component', () => {
   (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_DimensionsPanel.default, props));
-  const dimensionListComponent = _react.screen.getByTestId('dimension-list');
+  const dimensionListComponent = _react.screen.getByTestId('dhis2-analytics-dimension-list');
   expect(dimensionListComponent).toBeInTheDocument();
   const liElements = _react.screen.getAllByTestId('dimension-item');
   expect(liElements).toHaveLength(2);

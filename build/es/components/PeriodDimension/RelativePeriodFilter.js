@@ -12,6 +12,7 @@ const RelativePeriodFilter = ({
   dataTest,
   excludedPeriodTypes
 }) => /*#__PURE__*/React.createElement("div", {
+  "data-test": dataTest,
   className: `jsx-${styles.__hash}` + " " + "leftSection"
 }, /*#__PURE__*/React.createElement(SingleSelectField, {
   label: i18n.t('Period type'),
@@ -21,12 +22,12 @@ const RelativePeriodFilter = ({
   dense: true,
   selected: currentFilter,
   className: "filterElement",
-  dataTest: dataTest
+  dataTest: `${dataTest}-period-type`
 }, filterPeriodTypesById(getRelativePeriodsOptions(), excludedPeriodTypes).map(option => /*#__PURE__*/React.createElement(SingleSelectOption, {
   key: option.id,
   value: option.id,
   label: option.name,
-  dataTest: `${dataTest}-option-${option.id}`
+  dataTest: `${dataTest}-period-type-option-${option.id}`
 }))), /*#__PURE__*/React.createElement(_JSXStyle, {
   id: styles.__hash
 }, styles));

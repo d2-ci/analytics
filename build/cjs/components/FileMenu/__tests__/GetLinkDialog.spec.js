@@ -58,6 +58,15 @@ describe('FileMenu - GetLinkDialog component', () => {
     expect(modalComponent).toBeInTheDocument();
     expect(_react.screen.getByLabelText('Close modal dialog')).toBeInTheDocument();
   });
+  test('calls the onClose callback when the Close button is clicked', async () => {
+    const user = _userEvent.default.setup();
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_GetLinkDialog.GetLinkDialog, props));
+    const closeButton = _react.screen.getByRole('button', {
+      name: 'Close'
+    });
+    await user.click(closeButton);
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
   test.each(tests)('renders a <a> tag containing the correct app path and id', ({
     apiVersion,
     baseUrl,
@@ -69,19 +78,12 @@ describe('FileMenu - GetLinkDialog component', () => {
       apiVersion: apiVersion || 42,
       baseUrl
     });
-    props.type = type;
-    props.id = id;
-    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_GetLinkDialog.GetLinkDialog, props));
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_GetLinkDialog.GetLinkDialog, {
+      onClose: onClose,
+      type: type,
+      id: id
+    }));
     const anchorElement = _react.screen.getByRole('link');
     expect(anchorElement.href).toMatch(expected);
-  });
-  test('calls the onClose callback when the Close button is clicked', async () => {
-    const user = _userEvent.default.setup();
-    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_GetLinkDialog.GetLinkDialog, props));
-    const closeButton = _react.screen.getByRole('button', {
-      name: 'Close'
-    });
-    await user.click(closeButton);
-    expect(onClose).toHaveBeenCalledTimes(1);
   });
 });

@@ -9,31 +9,28 @@ jest.mock('../MdParser.js', () => ({
   })
 }));
 describe('RichText: Parser component', () => {
-  const defaultProps = {
-    style: {
+  test('should have rendered a result with the style prop', () => {
+    const style = {
       color: 'blue',
       whiteSpace: 'pre-line'
-    }
-  };
-  const renderComponent = (props, text) => {
-    return render(/*#__PURE__*/React.createElement(Parser, props, text));
-  };
-  test('should have rendered a result with the style prop', () => {
+    };
     const {
       container
-    } = renderComponent(defaultProps, 'test prop');
+    } = render(/*#__PURE__*/React.createElement(Parser, {
+      style: style
+    }, 'test prop'));
     const divEl = container.querySelector('div');
-    expect(divEl.style.color).toBe(defaultProps.style.color);
-    expect(divEl.style.whiteSpace).toBe(defaultProps.style.whiteSpace);
+    expect(divEl.style.color).toBe(style.color);
+    expect(divEl.style.whiteSpace).toBe(style.whiteSpace);
   });
   test('should have rendered content', () => {
-    renderComponent({}, 'plain text');
+    render(/*#__PURE__*/React.createElement(Parser, null, 'plain text'));
     expect(screen.getByText('converted text')).toBeInTheDocument();
   });
   test('should return null if no children is passed', () => {
     const {
       container
-    } = renderComponent({}, undefined);
+    } = render(/*#__PURE__*/React.createElement(Parser, null));
     const divEl = container.querySelector('div');
     expect(divEl).toBe(null);
   });

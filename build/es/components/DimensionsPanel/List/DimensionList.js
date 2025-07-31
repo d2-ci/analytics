@@ -34,7 +34,7 @@ class DimensionList extends Component {
     const fixedDimensions = this.getDimensionItemsByFilter(dimension => Object.values(getFixedDimensions()).some(fixedDim => fixedDim.id === dimension.id));
     const nonPredefinedDimensions = this.getDimensionItemsByFilter(dimension => !Object.values(getPredefinedDimensions()).some(predefDim => predefDim.id === dimension.id));
     return /*#__PURE__*/React.createElement("div", {
-      "data-test": "dimension-list",
+      "data-test": "dhis2-analytics-dimension-list",
       className: `jsx-${styles.__hash}` + " " + "container"
     }, /*#__PURE__*/React.createElement("div", {
       className: `jsx-${styles.__hash}` + " " + "wrapper"

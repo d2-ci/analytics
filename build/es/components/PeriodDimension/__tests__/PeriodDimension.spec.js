@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import PeriodDimension from '../PeriodDimension.js';
 jest.mock('@dhis2/app-runtime', () => ({
@@ -13,15 +14,29 @@ jest.mock('@dhis2/app-runtime', () => ({
     }
   })
 }));
+global.ResizeObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn()
+}));
 afterEach(jest.clearAllMocks);
-test('PeriodDimension matches the snapshot', () => {
-  const props = {
-    selectedPeriods: [],
-    onSelect: jest.fn(),
-    rightFooter: /*#__PURE__*/React.createElement(React.Fragment, null)
-  };
-  const {
-    container
-  } = render(/*#__PURE__*/React.createElement(PeriodDimension, props));
-  expect(container).toMatchSnapshot();
+const props = {
+  selectedPeriods: [],
+  onSelect: jest.fn(),
+  rightFooter: /*#__PURE__*/React.createElement(React.Fragment, null)
+};
+test('PeriodDimension renders the tabs for relative/fixed with relative pre-selected', () => {
+  render(/*#__PURE__*/React.createElement(PeriodDimension, props));
+  expect(screen.getByText('Relative periods')).toBeInTheDocument();
+  expect(screen.getByTestId('period-dimension-relative-period-filter')).toBeInTheDocument();
+  expect(screen.getByText('Fixed periods')).toBeInTheDocument();
+});
+test('PeriodDimension can toggle between relative and fixed period tab', async () => {
+  const user = userEvent.setup();
+  render(/*#__PURE__*/React.createElement(PeriodDimension, props));
+  expect(screen.getByText('Relative periods')).toBeInTheDocument();
+  const fixedPeriodButton = screen.getByText('Fixed periods');
+  expect(fixedPeriodButton).toBeInTheDocument();
+  await user.click(fixedPeriodButton);
+  expect(screen.getByTestId('period-dimension-fixed-period-filter')).toBeInTheDocument();
 });

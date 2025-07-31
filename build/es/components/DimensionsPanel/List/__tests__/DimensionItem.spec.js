@@ -1,3 +1,4 @@
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 import { render } from '@testing-library/react';
 import React from 'react';
 import DimensionItem from '../DimensionItem.js';
@@ -16,30 +17,34 @@ test('DimensionItem matches the snapshot', () => {
   expect(container).toMatchSnapshot();
 });
 test('DimensionItem matches the snapshot with recommended', () => {
-  props.isRecommended = true;
   const {
     container
-  } = render(/*#__PURE__*/React.createElement(DimensionItem, props));
+  } = render(/*#__PURE__*/React.createElement(DimensionItem, _extends({}, props, {
+    isRecommended: true
+  })));
   expect(container).toMatchSnapshot();
 });
 test('DimensionItem matches the snapshot with selected', () => {
-  props.isSelected = true;
   const {
     container
-  } = render(/*#__PURE__*/React.createElement(DimensionItem, props));
+  } = render(/*#__PURE__*/React.createElement(DimensionItem, _extends({}, props, {
+    isSelected: true
+  })));
   expect(container).toMatchSnapshot();
 });
 test('DimensionItem matches the snapshot with locked', () => {
-  props.isLocked = true;
   const {
     container
-  } = render(/*#__PURE__*/React.createElement(DimensionItem, props));
+  } = render(/*#__PURE__*/React.createElement(DimensionItem, _extends({}, props, {
+    isLocked: true
+  })));
   expect(container).toMatchSnapshot();
 });
 test('DimensionItem matches the snapshot with onOptionsClick', () => {
-  props.onOptionsClick = jest.fn();
   const {
     container
-  } = render(/*#__PURE__*/React.createElement(DimensionItem, props));
+  } = render(/*#__PURE__*/React.createElement(DimensionItem, _extends({}, props, {
+    onOptionsClick: jest.fn()
+  })));
   expect(container).toMatchSnapshot();
 });
