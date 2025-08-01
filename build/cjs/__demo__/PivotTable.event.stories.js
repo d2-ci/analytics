@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.Yesonly = exports.NumericLegendset = exports.Numeric = exports.Boolean = void 0;
+exports.default = exports.Yesonly = exports.Optionset = exports.NumericLegendset = exports.Numeric = exports.Boolean = void 0;
 var _ui = require("@dhis2/ui");
 var _react = _interopRequireWildcard(require("react"));
 var _index = require("../index.js");
@@ -13,6 +13,8 @@ var _numericLegendsetData = _interopRequireDefault(require("./data/event/numeric
 var _numericLegendsetVisualization = _interopRequireDefault(require("./data/event/numeric-legendset.visualization.json"));
 var _numericData = _interopRequireDefault(require("./data/event/numeric.data.json"));
 var _numericVisualization = _interopRequireDefault(require("./data/event/numeric.visualization.json"));
+var _optionsetData = _interopRequireDefault(require("./data/event/optionset.data.json"));
+var _optionsetVisualization = _interopRequireDefault(require("./data/event/optionset.visualization.json"));
 var _yesonlyData = _interopRequireDefault(require("./data/event/yesonly.data.json"));
 var _yesonlyVisualization = _interopRequireDefault(require("./data/event/yesonly.visualization.json"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -112,10 +114,33 @@ exports.NumericLegendset = NumericLegendset;
 NumericLegendset.story = {
   name: 'Numeric with legendset'
 };
-const Boolean = (_, _ref5) => {
+const Optionset = (_, _ref5) => {
   let {
     pivotTableOptions
   } = _ref5;
+  const visualization = {
+    ..._optionsetVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _optionsetData.default,
+    visualization: visualization
+  }));
+};
+exports.Optionset = Optionset;
+Optionset.story = {
+  name: 'Optionset'
+};
+const Boolean = (_, _ref6) => {
+  let {
+    pivotTableOptions
+  } = _ref6;
   const visualization = {
     ..._booleanVisualization.default,
     ...visualizationReset,
@@ -135,10 +160,10 @@ exports.Boolean = Boolean;
 Boolean.story = {
   name: 'Boolean'
 };
-const Yesonly = (_, _ref6) => {
+const Yesonly = (_, _ref7) => {
   let {
     pivotTableOptions
-  } = _ref6;
+  } = _ref7;
   const visualization = {
     ..._yesonlyVisualization.default,
     ...visualizationReset,

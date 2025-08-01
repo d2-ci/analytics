@@ -7,6 +7,8 @@ import numericLegendsetData from './data/event/numeric-legendset.data.json';
 import numericLegendsetVisualization from './data/event/numeric-legendset.visualization.json';
 import numericData from './data/event/numeric.data.json';
 import numericVisualization from './data/event/numeric.visualization.json';
+import optionsetData from './data/event/optionset.data.json';
+import optionsetVisualization from './data/event/optionset.visualization.json';
 import yesonlyData from './data/event/yesonly.data.json';
 import yesonlyVisualization from './data/event/yesonly.visualization.json';
 const visualizationReset = {
@@ -101,10 +103,32 @@ export const NumericLegendset = (_, _ref4) => {
 NumericLegendset.story = {
   name: 'Numeric with legendset'
 };
-export const Boolean = (_, _ref5) => {
+export const Optionset = (_, _ref5) => {
   let {
     pivotTableOptions
   } = _ref5;
+  const visualization = {
+    ...optionsetVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: optionsetData,
+    visualization: visualization
+  }));
+};
+Optionset.story = {
+  name: 'Optionset'
+};
+export const Boolean = (_, _ref6) => {
+  let {
+    pivotTableOptions
+  } = _ref6;
   const visualization = {
     ...booleanVisualization,
     ...visualizationReset,
@@ -123,10 +147,10 @@ export const Boolean = (_, _ref5) => {
 Boolean.story = {
   name: 'Boolean'
 };
-export const Yesonly = (_, _ref6) => {
+export const Yesonly = (_, _ref7) => {
   let {
     pivotTableOptions
-  } = _ref6;
+  } = _ref7;
   const visualization = {
     ...yesonlyVisualization,
     ...visualizationReset,
