@@ -4,10 +4,15 @@ export const getOptionCodeIdMap = (optionIds, metaDataItems) => optionIds.reduce
 }, {});
 export const getOptionIdRows = (rows, optionCodeIdMap, headerIndex) => {
   let row;
+  let value;
   return rows.map(r => {
-    row = [...r];
-    row[headerIndex] = optionCodeIdMap[row[headerIndex]];
-    return row;
+    value = r[headerIndex];
+    if (value !== '') {
+      row = [...r];
+      row[headerIndex] = optionCodeIdMap[value];
+      return row;
+    }
+    return r;
   });
 };
 export const applyOptionSetHandler = (response, headerIndex) => {

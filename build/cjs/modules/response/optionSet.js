@@ -11,10 +11,15 @@ const getOptionCodeIdMap = (optionIds, metaDataItems) => optionIds.reduce((map, 
 exports.getOptionCodeIdMap = getOptionCodeIdMap;
 const getOptionIdRows = (rows, optionCodeIdMap, headerIndex) => {
   let row;
+  let value;
   return rows.map(r => {
-    row = [...r];
-    row[headerIndex] = optionCodeIdMap[row[headerIndex]];
-    return row;
+    value = r[headerIndex];
+    if (value !== '') {
+      row = [...r];
+      row[headerIndex] = optionCodeIdMap[value];
+      return row;
+    }
+    return r;
   });
 };
 exports.getOptionIdRows = getOptionIdRows;

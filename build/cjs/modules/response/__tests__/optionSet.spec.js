@@ -4,18 +4,18 @@ var _optionsetData = _interopRequireDefault(require("../../../__demo__/data/even
 var _optionsetDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/optionset.data.org.json"));
 var _optionSet = require("../optionSet.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const modeOfDischargeId = 'Zj7UnCAulEk.fWIAEtYVEGk';
+const dimensionId = 'Zj7UnCAulEk.fWIAEtYVEGk';
 const headerIndex = 0;
 const testOptionCodeIdMap = {
-  "MODABSC": "Fhbf4aKpZmZ",
-  "MODDIED": "gj2fKKyp8OH",
-  "MODTRANS": "fShHdgT7XGb",
-  "MODDISCH": "yeod5tOXpkP"
+  MODABSC: 'Fhbf4aKpZmZ',
+  MODDIED: 'gj2fKKyp8OH',
+  MODTRANS: 'fShHdgT7XGb',
+  MODDISCH: 'yeod5tOXpkP'
 };
 describe('optionSet', () => {
   describe('getOptionCodeIdMap', () => {
     it('should create an option code:id object', () => {
-      const testOptionIds = _optionsetData.default.metaData.dimensions[modeOfDischargeId];
+      const testOptionIds = _optionsetData.default.metaData.dimensions[dimensionId];
       const testOptionItems = _optionsetData.default.metaData.items;
       expect((0, _optionSet.getOptionCodeIdMap)(testOptionIds, testOptionItems)).toEqual(testOptionCodeIdMap);
     });
