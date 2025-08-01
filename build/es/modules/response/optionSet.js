@@ -7,12 +7,9 @@ export const getOptionIdRows = (rows, optionCodeIdMap, headerIndex) => {
   let value;
   return rows.map(r => {
     value = r[headerIndex];
-    if (value !== '') {
-      row = [...r];
-      row[headerIndex] = optionCodeIdMap[value];
-      return row;
-    }
-    return r;
+    row = [...r];
+    row[headerIndex] = optionCodeIdMap[value];
+    return row;
   });
 };
 export const applyOptionSetHandler = (response, headerIndex) => {

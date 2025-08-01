@@ -1,6 +1,17 @@
 export const getUnique = array => [...new Set(array)];
-export const sortStringsAsNumbersAsc = arr => {
-  return arr.slice().sort((a, b) => Number(a) - Number(b));
+const sortStringsAsNumbersAsc = arr => {
+  return arr.slice().sort((a, b) => {
+    if (a === '' && b === '') {
+      return 0;
+    }
+    if (a === '') {
+      return 1;
+    }
+    if (b === '') {
+      return -1;
+    }
+    return Number(a) - Number(b);
+  });
 };
 export const getPrefixedValue = (value, prefix) => `${prefix}:${value}`;
 export const getNumericItems = (values, dimensionId) => values.reduce((items, value) => {
@@ -17,12 +28,9 @@ export const getNumericRows = (rows, headerIndex, dimensionId) => {
   let value;
   return rows.map(r => {
     value = r[headerIndex];
-    if (value !== '') {
-      row = [...r];
-      row[headerIndex] = getPrefixedValue(value, dimensionId);
-      return row;
-    }
-    return r;
+    row = [...r];
+    row[headerIndex] = getPrefixedValue(value, dimensionId);
+    return row;
   });
 };
 export const applyNumericHandler = (response, headerIndex) => {

@@ -3,13 +3,23 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sortStringsAsNumbersAsc = exports.getUnique = exports.getPrefixedValue = exports.getNumericRows = exports.getNumericItems = exports.getNumericDimension = exports.applyNumericHandler = void 0;
+exports.getUnique = exports.getPrefixedValue = exports.getNumericRows = exports.getNumericItems = exports.getNumericDimension = exports.applyNumericHandler = void 0;
 const getUnique = array => [...new Set(array)];
 exports.getUnique = getUnique;
 const sortStringsAsNumbersAsc = arr => {
-  return arr.slice().sort((a, b) => Number(a) - Number(b));
+  return arr.slice().sort((a, b) => {
+    if (a === '' && b === '') {
+      return 0;
+    }
+    if (a === '') {
+      return 1;
+    }
+    if (b === '') {
+      return -1;
+    }
+    return Number(a) - Number(b);
+  });
 };
-exports.sortStringsAsNumbersAsc = sortStringsAsNumbersAsc;
 const getPrefixedValue = (value, prefix) => `${prefix}:${value}`;
 exports.getPrefixedValue = getPrefixedValue;
 const getNumericItems = (values, dimensionId) => values.reduce((items, value) => {
@@ -28,12 +38,9 @@ const getNumericRows = (rows, headerIndex, dimensionId) => {
   let value;
   return rows.map(r => {
     value = r[headerIndex];
-    if (value !== '') {
-      row = [...r];
-      row[headerIndex] = getPrefixedValue(value, dimensionId);
-      return row;
-    }
-    return r;
+    row = [...r];
+    row[headerIndex] = getPrefixedValue(value, dimensionId);
+    return row;
   });
 };
 exports.getNumericRows = getNumericRows;
