@@ -45,8 +45,7 @@ class AnalyticsRequest extends (0, _AnalyticsRequestDimensionsMixin.default)((0,
    *
    * // dimension=pe:last_12_month&dimension=dx:fbfjhsppuqd;cyeuwxtcpku;jtf34knzhzp;hfdmmspbglg&dimension=ou:imsptqpwcqd
    */
-  fromVisualization(visualization) {
-    let passFilterAsDimension = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  fromVisualization(visualization, passFilterAsDimension = false) {
     let request = this;
     const outputType = visualization.outputType;
 

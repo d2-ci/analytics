@@ -13,8 +13,8 @@ import OptionsButton from './OptionsButton.js';
 import RecommendedIcon from './RecommendedIcon.js';
 import styles from './styles/DimensionItem.style.js';
 class DimensionItem extends Component {
-  constructor() {
-    super(...arguments);
+  constructor(...args) {
+    super(...args);
     _defineProperty(this, "state", {
       mouseOver: false
     });
@@ -123,6 +123,15 @@ class DimensionItem extends Component {
     }, styles));
   }
 }
+_defineProperty(DimensionItem, "defaultProps", {
+  isDeactivated: false,
+  isRecommended: false,
+  isSelected: false,
+  isLocked: false,
+  onClick: Function.prototype,
+  innerRef: Function.prototype,
+  style: {}
+});
 DimensionItem.propTypes = {
   id: PropTypes.string.isRequired,
   isSelected: PropTypes.bool.isRequired,
@@ -136,14 +145,5 @@ DimensionItem.propTypes = {
   isRecommended: PropTypes.bool,
   onClick: PropTypes.func,
   onOptionsClick: PropTypes.func
-};
-DimensionItem.defaultProps = {
-  isDeactivated: false,
-  isRecommended: false,
-  isSelected: false,
-  isLocked: false,
-  onClick: Function.prototype,
-  innerRef: Function.prototype,
-  style: {}
 };
 export default DimensionItem;

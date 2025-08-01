@@ -10,30 +10,26 @@ import { InterpretationList } from './InterpretationList.js';
 const interpretationsQuery = {
   interpretations: {
     resource: 'interpretations',
-    params: _ref => {
-      let {
-        type,
-        id
-      } = _ref;
-      return {
-        fields: ['access[write,manage]', 'id', 'createdBy[id,displayName]', 'created', 'text', 'comments[id]', 'likes', 'likedBy[id]'],
-        filter: `${type}.id:eq:${id}`
-      };
-    }
+    params: ({
+      type,
+      id
+    }) => ({
+      fields: ['access[write,manage]', 'id', 'createdBy[id,displayName]', 'created', 'text', 'comments[id]', 'likes', 'likedBy[id]'],
+      filter: `${type}.id:eq:${id}`
+    })
   }
 };
-export const InterpretationsUnit = /*#__PURE__*/forwardRef((_ref2, ref) => {
-  let {
-    currentUser,
-    type,
-    id,
-    visualizationHasTimeDimension,
-    onInterpretationClick,
-    onReplyIconClick,
-    disabled,
-    renderId,
-    dashboardRedirectUrl
-  } = _ref2;
+export const InterpretationsUnit = /*#__PURE__*/forwardRef(({
+  currentUser,
+  type,
+  id,
+  visualizationHasTimeDimension = true,
+  onInterpretationClick = Function.prototype,
+  onReplyIconClick,
+  disabled,
+  renderId,
+  dashboardRedirectUrl
+}, ref) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [interpretations, setInterpretations] = useState([]);
   const showNoTimeDimensionHelpText = type === 'eventVisualization' && !visualizationHasTimeDimension;
@@ -62,11 +58,10 @@ export const InterpretationsUnit = /*#__PURE__*/forwardRef((_ref2, ref) => {
       });
     }
   }, [type, id, renderId, refetch]);
-  const onLikeToggled = _ref3 => {
-    let {
-      id,
-      likedBy
-    } = _ref3;
+  const onLikeToggled = ({
+    id,
+    likedBy
+  }) => {
     const interpretation = interpretations.find(interp => interp.id === id);
     interpretation.likedBy = likedBy;
     interpretation.likes = likedBy.length;
@@ -114,10 +109,6 @@ export const InterpretationsUnit = /*#__PURE__*/forwardRef((_ref2, ref) => {
   }, [`.container.__jsx-style-dynamic-selector{position:relative;padding:${spacers.dp16};border-bottom:1px solid ${colors.grey400};background-color:${colors.white};}`, ".fetching-loader.__jsx-style-dynamic-selector{position:absolute;inset:0px;background-color:rgba(255,255,255,0.8);display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;z-index:1;}", `.expanded.__jsx-style-dynamic-selector{padding-bottom:${spacers.dp32};}`, ".loader.__jsx-style-dynamic-selector{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;}", ".header.__jsx-style-dynamic-selector{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;cursor:pointer;}", `.title.__jsx-style-dynamic-selector{font-size:16px;font-weight:500;line-height:21px;color:${colors.grey900};}`]));
 });
 InterpretationsUnit.displayName = 'InterpretationsUnit';
-InterpretationsUnit.defaultProps = {
-  onInterpretationClick: Function.prototype,
-  visualizationHasTimeDimension: true
-};
 InterpretationsUnit.propTypes = {
   currentUser: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,

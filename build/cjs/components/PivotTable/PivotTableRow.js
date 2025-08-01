@@ -13,12 +13,11 @@ var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 var _PivotTableRowHeaderCell = require("./PivotTableRowHeaderCell.js");
 var _PivotTableValueCell = require("./PivotTableValueCell.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PivotTableRow = _ref => {
-  let {
-    clippingResult,
-    rowIndex,
-    onToggleContextualMenu
-  } = _ref;
+const PivotTableRow = ({
+  clippingResult,
+  rowIndex,
+  onToggleContextualMenu
+}) => {
   const engine = (0, _PivotTableEngineContext.usePivotTableEngine)();
   return /*#__PURE__*/_react.default.createElement("tr", null, (0, _times.default)(engine.rowDepth, x => x).map(rowLevel => /*#__PURE__*/_react.default.createElement(_PivotTableRowHeaderCell.PivotTableRowHeaderCell, {
     key: rowLevel,
@@ -27,27 +26,21 @@ const PivotTableRow = _ref => {
     rowLevel: rowLevel
   })), /*#__PURE__*/_react.default.createElement(_PivotTableClippedAxis.PivotTableClippedAxis, {
     axisClippingResult: clippingResult.columns,
-    EmptyComponent: _ref2 => {
-      let {
-        size
-      } = _ref2;
-      return /*#__PURE__*/_react.default.createElement(_PivotTableEmptyCell.PivotTableEmptyCell, {
-        classes: "value",
-        style: {
-          width: size
-        }
-      });
-    },
-    ItemComponent: _ref3 => {
-      let {
-        index: columnIndex
-      } = _ref3;
-      return /*#__PURE__*/_react.default.createElement(_PivotTableValueCell.PivotTableValueCell, {
-        row: rowIndex,
-        column: columnIndex,
-        onToggleContextualMenu: onToggleContextualMenu
-      });
-    }
+    EmptyComponent: ({
+      size
+    }) => /*#__PURE__*/_react.default.createElement(_PivotTableEmptyCell.PivotTableEmptyCell, {
+      classes: "value",
+      style: {
+        width: size
+      }
+    }),
+    ItemComponent: ({
+      index: columnIndex
+    }) => /*#__PURE__*/_react.default.createElement(_PivotTableValueCell.PivotTableValueCell, {
+      row: rowIndex,
+      column: columnIndex,
+      onToggleContextualMenu: onToggleContextualMenu
+    })
   }));
 };
 exports.PivotTableRow = PivotTableRow;

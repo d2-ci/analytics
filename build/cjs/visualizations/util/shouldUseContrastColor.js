@@ -4,8 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.shouldUseContrastColor = void 0;
-const shouldUseContrastColor = function () {
-  let inputColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+const shouldUseContrastColor = (inputColor = '') => {
   // based on https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
   var color = inputColor.charAt(0) === '#' ? inputColor.substring(1, 7) : inputColor;
   var r = parseInt(color.substring(0, 2), 16); // hexToR

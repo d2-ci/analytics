@@ -8,13 +8,12 @@ import React from 'react';
 import { EXPRESSION_TYPE_NUMBER, EXPRESSION_TYPE_OPERATOR } from '../../../modules/expressions.js';
 import formulaItemStyles from './styles/FormulaItem.style.js';
 import styles from './styles/Operator.style.js';
-const Operator = _ref => {
-  let {
-    label,
-    value,
-    type,
-    onDoubleClick
-  } = _ref;
+const Operator = ({
+  label,
+  value,
+  type,
+  onDoubleClick
+}) => {
   const data = {
     label,
     value,

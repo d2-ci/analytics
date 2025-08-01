@@ -7,13 +7,12 @@ import { DIMENSION_TYPE_ALL, dataTypeMap } from '../../../modules/dataTypes.js';
 import { getDisplayNameByVisType } from '../../../modules/visTypes.js';
 import { useDataDimensionContext } from '../DataDimension.js';
 import styles from './styles/DataTypeSelector.style.js';
-const DataTypeSelector = _ref => {
-  let {
-    currentDataType,
-    dataTypes,
-    onChange,
-    dataTest
-  } = _ref;
+const DataTypeSelector = ({
+  currentDataType,
+  dataTypes,
+  onChange,
+  dataTest
+}) => {
   const {
     visType
   } = useDataDimensionContext();

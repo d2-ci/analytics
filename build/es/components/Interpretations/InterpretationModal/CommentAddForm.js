@@ -5,24 +5,20 @@ import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import { RichTextEditor } from '../../RichText/index.js';
 import { MessageEditorContainer, MessageButtonStrip, MessageInput } from '../common/index.js';
-export const CommentAddForm = _ref => {
-  let {
-    interpretationId,
-    currentUser,
-    onSave,
-    focusRef
-  } = _ref;
+export const CommentAddForm = ({
+  interpretationId,
+  currentUser,
+  onSave,
+  focusRef
+}) => {
   const [showRichTextEditor, setShowRichTextEditor] = useState(false);
   const [commentText, setCommentText] = useState('');
   const saveMutationRef = useRef({
     resource: `interpretations/${interpretationId}/comments`,
     type: 'create',
-    data: _ref2 => {
-      let {
-        commentText
-      } = _ref2;
-      return commentText;
-    }
+    data: ({
+      commentText
+    }) => commentText
   });
   const [save, {
     loading

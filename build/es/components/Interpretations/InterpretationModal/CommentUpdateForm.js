@@ -6,26 +6,22 @@ import PropTypes from 'prop-types';
 import React, { useState, useRef } from 'react';
 import { RichTextEditor } from '../../RichText/index.js';
 import { MessageEditorContainer, MessageButtonStrip } from '../common/index.js';
-export const CommentUpdateForm = _ref => {
-  let {
-    interpretationId,
-    commentId,
-    currentUser,
-    text,
-    close,
-    onComplete
-  } = _ref;
+export const CommentUpdateForm = ({
+  interpretationId,
+  commentId,
+  currentUser,
+  text,
+  close,
+  onComplete
+}) => {
   const [commentText, setCommentText] = useState(text || '');
   const updateMutationRef = useRef({
     resource: `interpretations/${interpretationId}/comments/${commentId}`,
     type: 'update',
     partial: false,
-    data: _ref2 => {
-      let {
-        commentText
-      } = _ref2;
-      return commentText;
-    }
+    data: ({
+      commentText
+    }) => commentText
   });
   const [update, {
     loading,

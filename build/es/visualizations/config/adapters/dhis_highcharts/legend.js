@@ -27,13 +27,12 @@ function getLegend(fontStyle, dashboard, visType) {
     align: getTextAlignOption(fontStyle[FONT_STYLE_OPTION_TEXT_ALIGN], FONT_STYLE_LEGEND, isVerticalType(visType))
   });
 }
-export default function (_ref) {
-  let {
-    isHidden,
-    fontStyle,
-    visType,
-    dashboard
-  } = _ref;
+export default function ({
+  isHidden,
+  fontStyle,
+  visType,
+  dashboard
+}) {
   const mergedFontStyle = mergeFontStyleWithDefault(fontStyle, FONT_STYLE_LEGEND);
   return isHidden || visType === VIS_TYPE_SCATTER ? {
     enabled: false

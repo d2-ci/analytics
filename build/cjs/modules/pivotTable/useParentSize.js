@@ -11,8 +11,7 @@ const initialState = {
   width: 0,
   height: 0
 };
-const useParentSize = function (elementRef, renderCounter) {
-  let initialSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : initialState;
+const useParentSize = (elementRef, renderCounter, initialSize = initialState) => {
   const [size, setSize] = (0, _react.useState)({
     width: initialSize.width || 0,
     height: initialSize.height || 0

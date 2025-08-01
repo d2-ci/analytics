@@ -3,18 +3,17 @@ import { theme1 } from '../util/colors/index.js';
 import adapters from './adapters/index.js';
 import generators from './generators/index.js';
 import validators from './validators/index.js';
-export default function (_ref) {
-  let {
-    store,
-    layout,
-    el,
-    inputFormat = 'dhis',
-    outputFormat = 'highcharts',
-    extraLayout,
-    extraOptions,
-    onError,
-    onWarning
-  } = _ref;
+export default function ({
+  store,
+  layout,
+  el,
+  inputFormat = 'dhis',
+  outputFormat = 'highcharts',
+  extraLayout,
+  extraOptions,
+  onError,
+  onWarning
+}) {
   const _validator = validators[inputFormat] || validators.noValidation;
   const _adapter = adapters[inputFormat + '_' + outputFormat];
   const _generator = generators[outputFormat];

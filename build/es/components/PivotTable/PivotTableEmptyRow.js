@@ -2,11 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { PivotTableCell } from './PivotTableCell.js';
 import { usePivotTableEngine } from './PivotTableEngineContext.js';
-export const PivotTableEmptyRow = _ref => {
-  let {
-    height,
-    columns
-  } = _ref;
+export const PivotTableEmptyRow = ({
+  height,
+  columns
+}) => {
   const engine = usePivotTableEngine();
   return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement(PivotTableCell, {
     isHeader: true,

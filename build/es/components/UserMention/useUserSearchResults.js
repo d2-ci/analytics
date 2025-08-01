@@ -4,24 +4,20 @@ import { useCallback, useEffect, useState } from 'react';
 const usersQuery = {
   users: {
     resource: 'users/gist',
-    params: _ref => {
-      let {
-        searchText
-      } = _ref;
-      return {
-        fields: 'id,displayName,username',
-        order: 'firstName,surname',
-        total: true,
-        filter: `username:ilike:${searchText},firstName:ilike:${searchText},surname:ilike:${searchText},email:ilike:${searchText}`,
-        rootJunction: 'OR'
-      };
-    }
+    params: ({
+      searchText
+    }) => ({
+      fields: 'id,displayName,username',
+      order: 'firstName,surname',
+      total: true,
+      filter: `username:ilike:${searchText},firstName:ilike:${searchText},surname:ilike:${searchText},email:ilike:${searchText}`,
+      rootJunction: 'OR'
+    })
   }
 };
-export const useUserSearchResults = _ref2 => {
-  let {
-    searchText
-  } = _ref2;
+export const useUserSearchResults = ({
+  searchText
+}) => {
   const [{
     users,
     pager

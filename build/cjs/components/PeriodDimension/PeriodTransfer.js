@@ -19,40 +19,41 @@ var _RelativePeriodFilter = _interopRequireDefault(require("./RelativePeriodFilt
 var _fixedPeriods = require("./utils/fixedPeriods.js");
 var _index2 = require("./utils/index.js");
 var _relativePeriods = require("./utils/relativePeriods.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); } //TODO: Reimplement the icon.js
-const RightHeader = _ref => {
-  let {
-    infoBoxMessage
-  } = _ref;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
-    className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "rightHeader"
-  }, _index.default.t('Selected Periods')), infoBoxMessage && /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "info-container"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_DimensionSelectorStyle.default.__hash}`
-  }, /*#__PURE__*/_react.default.createElement(_ui.IconInfo16, null)), /*#__PURE__*/_react.default.createElement("span", {
-    className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "info-text"
-  }, infoBoxMessage)), /*#__PURE__*/_react.default.createElement(_style.default, {
-    id: _DimensionSelectorStyle.default.__hash
-  }, _DimensionSelectorStyle.default));
-};
+const RightHeader = ({
+  infoBoxMessage
+}) => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
+  className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "rightHeader"
+}, _index.default.t('Selected Periods')), infoBoxMessage && /*#__PURE__*/_react.default.createElement("div", {
+  className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "info-container"
+}, /*#__PURE__*/_react.default.createElement("div", {
+  className: `jsx-${_DimensionSelectorStyle.default.__hash}`
+}, /*#__PURE__*/_react.default.createElement(_ui.IconInfo16, null)), /*#__PURE__*/_react.default.createElement("span", {
+  className: `jsx-${_DimensionSelectorStyle.default.__hash}` + " " + "info-text"
+}, infoBoxMessage)), /*#__PURE__*/_react.default.createElement(_style.default, {
+  id: _DimensionSelectorStyle.default.__hash
+}, _DimensionSelectorStyle.default));
 RightHeader.propTypes = {
   infoBoxMessage: _propTypes.default.string
 };
-const PeriodTransfer = _ref2 => {
-  let {
-    onSelect,
-    dataTest,
-    selectedItems,
-    rightFooter,
-    excludedPeriodTypes,
-    periodsSettings,
-    infoBoxMessage,
-    height = _dimensionSelectorHelper.TRANSFER_HEIGHT
-  } = _ref2;
+const SELECTED_ITEMS_PROP_DEFAULT = [];
+const EXCLUDED_PERIOD_TYPES_PROP_DEFAULT = [];
+const PERIODS_SETTINGS_PROP_DEFAULT = {
+  calendar: 'gregory',
+  locale: 'en'
+};
+const PeriodTransfer = ({
+  onSelect,
+  dataTest,
+  selectedItems = SELECTED_ITEMS_PROP_DEFAULT,
+  rightFooter,
+  excludedPeriodTypes = EXCLUDED_PERIOD_TYPES_PROP_DEFAULT,
+  periodsSettings = PERIODS_SETTINGS_PROP_DEFAULT,
+  infoBoxMessage,
+  height = _dimensionSelectorHelper.TRANSFER_HEIGHT
+}) => {
   const defaultRelativePeriodType = excludedPeriodTypes.includes(_index2.MONTHLY) ? (0, _relativePeriods.getRelativePeriodsOptionsById)(_index2.QUARTERLY) : (0, _relativePeriods.getRelativePeriodsOptionsById)(_index2.MONTHLY);
   const defaultFixedPeriodType = excludedPeriodTypes.includes(_index2.MONTHLY) ? (0, _fixedPeriods.getFixedPeriodsOptionsById)(_index2.QUARTERLY, periodsSettings) : (0, _fixedPeriods.getFixedPeriodsOptionsById)(_index2.MONTHLY, periodsSettings);
   const now = (0, _multiCalendarDates.getNowInCalendar)(periodsSettings.calendar);
@@ -135,10 +136,9 @@ const PeriodTransfer = _ref2 => {
     id: _DimensionSelectorStyle.default.__hash
   }, _DimensionSelectorStyle.default));
   return /*#__PURE__*/_react.default.createElement(_ui.Transfer, {
-    onChange: _ref3 => {
-      let {
-        selected
-      } = _ref3;
+    onChange: ({
+      selected
+    }) => {
       const formattedItems = selected.map(id => {
         const matchingItem = [...allPeriods, ...selectedItems].find(item => item.id === id);
         return {
@@ -160,38 +160,24 @@ const PeriodTransfer = _ref2 => {
       infoBoxMessage: infoBoxMessage
     }),
     rightFooter: rightFooter,
-    options: [...allPeriods, ...selectedItems].map(_ref4 => {
-      let {
-        id,
-        name
-      } = _ref4;
-      return {
-        label: name,
-        value: id
-      };
-    }),
-    renderOption: _ref5 => {
-      let {
-        value,
-        ...props
-      } = _ref5;
-      return /*#__PURE__*/_react.default.createElement(_TransferOption.TransferOption, _extends({}, props, {
-        value: value,
-        active: isActive(value),
-        icon: _PeriodIcon.default,
-        dataTest: `${dataTest}-transfer-option`
-      }));
-    },
+    options: [...allPeriods, ...selectedItems].map(({
+      id,
+      name
+    }) => ({
+      label: name,
+      value: id
+    })),
+    renderOption: ({
+      value,
+      ...props
+    }) => /*#__PURE__*/_react.default.createElement(_TransferOption.TransferOption, _extends({}, props, {
+      value: value,
+      active: isActive(value),
+      icon: _PeriodIcon.default,
+      dataTest: `${dataTest}-transfer-option`
+    })),
     dataTest: `${dataTest}-transfer`
   });
-};
-PeriodTransfer.defaultProps = {
-  selectedItems: [],
-  excludedPeriodTypes: [],
-  periodsSettings: {
-    calendar: 'gregory',
-    locale: 'en'
-  }
 };
 PeriodTransfer.propTypes = {
   onSelect: _propTypes.default.func.isRequired,

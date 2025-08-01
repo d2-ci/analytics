@@ -16,27 +16,25 @@ var _GetLinkDialog = require("./GetLinkDialog.js");
 var _RenameDialog = require("./RenameDialog.js");
 var _SaveAsDialog = require("./SaveAsDialog.js");
 var _utils = require("./utils.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const FileMenu = _ref => {
-  var _fileObject$access, _fileObject$access2, _fileObject$access3, _fileObject$access4, _fileObject$access5, _fileObject$access6, _fileObject$access7, _fileObject$access8, _fileObject$access9, _fileObject$access10;
-  let {
-    currentUser,
-    defaultFilterVisType,
-    fileType,
-    fileObject,
-    filterVisTypes,
-    onNew,
-    onOpen,
-    onSave,
-    onSaveAs,
-    onRename,
-    onShare,
-    onDelete,
-    onError,
-    onTranslate
-  } = _ref;
+const FileMenu = ({
+  currentUser,
+  defaultFilterVisType,
+  fileType,
+  fileObject,
+  filterVisTypes,
+  onNew = Function.prototype,
+  onOpen = Function.prototype,
+  onSave,
+  onSaveAs,
+  onRename = Function.prototype,
+  onShare = Function.prototype,
+  onDelete = Function.prototype,
+  onError = Function.prototype,
+  onTranslate = Function.prototype
+}) => {
+  var _fileObject$access, _fileObject$access2, _fileObject$access3, _fileObject$access4, _fileObject$access5, _fileObject$access6, _fileObject$access7, _fileObject$access8, _fileObject$access9, _fileObject$access0;
   const [currentDialog, setCurrentDialog] = (0, _react.useState)(null);
   const onMenuItemClick = dialogToOpen => () => {
     setCurrentDialog(dialogToOpen);
@@ -193,21 +191,12 @@ const FileMenu = _ref => {
     icon: /*#__PURE__*/_react.default.createElement(_ui.IconDelete24, {
       color: fileObject !== null && fileObject !== void 0 && fileObject.id && fileObject !== null && fileObject !== void 0 && (_fileObject$access9 = fileObject.access) !== null && _fileObject$access9 !== void 0 && _fileObject$access9.delete ? _ui.colors.red700 : iconInactiveColor
     }),
-    disabled: !(fileObject !== null && fileObject !== void 0 && fileObject.id && fileObject !== null && fileObject !== void 0 && (_fileObject$access10 = fileObject.access) !== null && _fileObject$access10 !== void 0 && _fileObject$access10.delete),
+    disabled: !(fileObject !== null && fileObject !== void 0 && fileObject.id && fileObject !== null && fileObject !== void 0 && (_fileObject$access0 = fileObject.access) !== null && _fileObject$access0 !== void 0 && _fileObject$access0.delete),
     onClick: onMenuItemClick('delete'),
     dataTest: "file-menu-delete"
   }))), renderDialog());
 };
 exports.FileMenu = FileMenu;
-FileMenu.defaultProps = {
-  onDelete: Function.prototype,
-  onError: Function.prototype,
-  onNew: Function.prototype,
-  onOpen: Function.prototype,
-  onRename: Function.prototype,
-  onShare: Function.prototype,
-  onTranslate: Function.prototype
-};
 FileMenu.propTypes = {
   currentUser: _propTypes.default.object,
   defaultFilterVisType: _propTypes.default.string,

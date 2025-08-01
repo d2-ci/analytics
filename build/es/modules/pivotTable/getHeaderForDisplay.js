@@ -6,15 +6,14 @@ const headerStacksAreEqual = (a, b, limit) => {
   }
   return true;
 };
-export const getHeaderForDisplay = _ref => {
-  let {
-    start,
-    count,
-    index,
-    dimensionLevel,
-    getHeader,
-    showHierarchy
-  } = _ref;
+export const getHeaderForDisplay = ({
+  start,
+  count,
+  index,
+  dimensionLevel,
+  getHeader,
+  showHierarchy
+}) => {
   const header = getHeader(index);
   const showHeader = index === start || !headerStacksAreEqual(header, getHeader(index - 1), dimensionLevel);
   if (!showHeader) {

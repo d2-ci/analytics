@@ -12,34 +12,26 @@ var _expression = require("../../../api/expression.js");
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _InfoTable = require("./InfoTable.js");
 var _InfoPopoverStyle = _interopRequireDefault(require("./styles/InfoPopover.style.js"));
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const indicatorQuery = {
   indicator: {
     resource: 'indicators',
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
-    params: _ref2 => {
-      let {
-        displayNameProp
-      } = _ref2;
-      return {
-        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},annualized,dataSets[id,displayName],decimals,denominator,displayDenominatorDescription,displayNumeratorDescription,indicatorGroups[id,displayName],indicatorType[displayName,factor],legendSets[id,displayName],numerator`
-      };
-    }
+    id: ({
+      id
+    }) => id,
+    params: ({
+      displayNameProp
+    }) => ({
+      fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},annualized,dataSets[id,displayName],decimals,denominator,displayDenominatorDescription,displayNumeratorDescription,indicatorGroups[id,displayName],indicatorType[displayName,factor],legendSets[id,displayName],numerator`
+    })
   }
 };
-const IndicatorInfo = _ref3 => {
-  let {
-    type,
-    id,
-    displayNameProp
-  } = _ref3;
+const IndicatorInfo = ({
+  type,
+  id,
+  displayNameProp
+}) => {
   const [data, setData] = (0, _react.useState)();
   const [error, setError] = (0, _react.useState)();
   const [loading, setLoading] = (0, _react.useState)(true);
@@ -146,16 +138,13 @@ const IndicatorInfo = _ref3 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
   }, /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, data.indicator.dataSets.map(_ref4 => {
-    let {
-      id,
-      displayName
-    } = _ref4;
-    return /*#__PURE__*/_react.default.createElement("li", {
-      key: id,
-      className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, displayName);
-  }))))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, data.indicator.dataSets.map(({
+    id,
+    displayName
+  }) => /*#__PURE__*/_react.default.createElement("li", {
+    key: id,
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, displayName)))))), /*#__PURE__*/_react.default.createElement("tr", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("th", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`

@@ -6,10 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 exports.dimensionIsValid = void 0;
 var _dimension = require("./dimension.js");
 var _dimensionIsEmpty = require("./dimensionIsEmpty.js");
-const dimensionIsValid = function (dimension) {
-  let {
-    requireItems
-  } = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+const dimensionIsValid = (dimension, {
+  requireItems
+} = {}) => {
   if (!_dimension.DIMENSION.isValid(dimension)) {
     return false;
   }

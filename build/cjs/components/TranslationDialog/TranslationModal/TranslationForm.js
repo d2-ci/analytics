@@ -11,20 +11,18 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _LocalesSelect = require("./LocalesSelect.js");
 var _TranslationModalActions = require("./TranslationModalActions.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const SESSION_STORAGE_TRANSLATION_LOCALE_KEY = 'translation-dialog-selected-locale';
 const camelCaseToUnderscores = field => field.replace(/[a-z][A-Z]/g, match => [match.charAt(0), match.charAt(1)].join('_')).toLowerCase();
-const TranslationForm = _ref => {
-  let {
-    fieldsToTranslate,
-    objectToTranslate,
-    translations,
-    resource,
-    onTranslationSaved,
-    onClose
-  } = _ref;
+const TranslationForm = ({
+  fieldsToTranslate,
+  objectToTranslate,
+  translations,
+  resource,
+  onTranslationSaved,
+  onClose
+}) => {
   const [newTranslations, setNewTranslations] = (0, _react.useState)();
   const [translationLocale, setTranslationLocale] = (0, _react.useState)();
   const [fieldsTranslations, setFieldsTranslations] = (0, _react.useState)({});
@@ -77,14 +75,11 @@ const TranslationForm = _ref => {
   const translationsMutationRef = (0, _react.useRef)({
     resource: `${resource}/translations`,
     type: 'update',
-    data: _ref2 => {
-      let {
-        translations
-      } = _ref2;
-      return {
-        translations
-      };
-    }
+    data: ({
+      translations
+    }) => ({
+      translations
+    })
   });
   const [saveTranslations, {
     loading: saveInProgress
@@ -128,12 +123,9 @@ const TranslationForm = _ref => {
   })), translationLocale && /*#__PURE__*/_react.default.createElement(_ui.DataTableCell, null, /*#__PURE__*/_react.default.createElement(_ui.TextAreaField, {
     label: fieldsTranslations[field],
     value: getTranslationForField(field),
-    onChange: _ref3 => {
-      let {
-        value
-      } = _ref3;
-      return setTranslationForField(field, value);
-    },
+    onChange: ({
+      value
+    }) => setTranslationForField(field, value),
     rows: 3
   })), !translationLocale && index === 0 && /*#__PURE__*/_react.default.createElement(_ui.DataTableCell, {
     rowSpan: String(fieldsToTranslate.length)

@@ -16,21 +16,19 @@ var _list = require("../../modules/list.js");
 var _index2 = require("../../modules/ouIdHelper/index.js");
 var _predefinedDimensions = require("../../modules/predefinedDimensions.js");
 var _OrgUnitDimensionStyle = _interopRequireDefault(require("./styles/OrgUnitDimension.style.js"));
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const DYNAMIC_ORG_UNITS = [_index2.USER_ORG_UNIT, _index2.USER_ORG_UNIT_CHILDREN, _index2.USER_ORG_UNIT_GRANDCHILDREN];
-const OrgUnitDimension = _ref => {
-  let {
-    roots,
-    selected,
-    onSelect,
-    hideGroupSelect,
-    hideLevelSelect,
-    hideUserOrgUnits,
-    warning,
-    displayNameProp
-  } = _ref;
+const OrgUnitDimension = ({
+  roots,
+  selected,
+  onSelect,
+  hideGroupSelect = false,
+  hideLevelSelect = false,
+  hideUserOrgUnits = false,
+  warning,
+  displayNameProp
+}) => {
   const [ouLevels, setOuLevels] = (0, _react.useState)([]);
   const [ouGroups, setOuGroups] = (0, _react.useState)([]);
   const dataEngine = (0, _appRuntime.useDataEngine)();
@@ -147,44 +145,35 @@ const OrgUnitDimension = _ref => {
   }, /*#__PURE__*/_react.default.createElement(_ui.Checkbox, {
     label: _index.default.t('User organisation unit'),
     checked: selected.some(item => item.id === _index2.USER_ORG_UNIT),
-    onChange: _ref2 => {
-      let {
-        checked
-      } = _ref2;
-      return onSelectItems({
-        id: _index2.USER_ORG_UNIT,
-        checked,
-        displayName: _index.default.t('User organisation unit')
-      });
-    },
+    onChange: ({
+      checked
+    }) => onSelectItems({
+      id: _index2.USER_ORG_UNIT,
+      checked,
+      displayName: _index.default.t('User organisation unit')
+    }),
     dense: true
   }), /*#__PURE__*/_react.default.createElement(_ui.Checkbox, {
     label: _index.default.t('User sub-units'),
     checked: selected.some(item => item.id === _index2.USER_ORG_UNIT_CHILDREN),
-    onChange: _ref3 => {
-      let {
-        checked
-      } = _ref3;
-      return onSelectItems({
-        id: _index2.USER_ORG_UNIT_CHILDREN,
-        checked,
-        displayName: _index.default.t('User sub-units')
-      });
-    },
+    onChange: ({
+      checked
+    }) => onSelectItems({
+      id: _index2.USER_ORG_UNIT_CHILDREN,
+      checked,
+      displayName: _index.default.t('User sub-units')
+    }),
     dense: true
   }), /*#__PURE__*/_react.default.createElement(_ui.Checkbox, {
     label: _index.default.t('User sub-x2-units'),
     checked: selected.some(item => item.id === _index2.USER_ORG_UNIT_GRANDCHILDREN),
-    onChange: _ref4 => {
-      let {
-        checked
-      } = _ref4;
-      return onSelectItems({
-        id: _index2.USER_ORG_UNIT_GRANDCHILDREN,
-        checked,
-        displayName: _index.default.t('User sub-x2-units')
-      });
-    },
+    onChange: ({
+      checked
+    }) => onSelectItems({
+      id: _index2.USER_ORG_UNIT_GRANDCHILDREN,
+      checked,
+      displayName: _index.default.t('User sub-x2-units')
+    }),
     dense: true
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_OrgUnitDimensionStyle.default.__hash}` + " " + "orgUnitTreeWrapper"
@@ -200,12 +189,9 @@ const OrgUnitDimension = _ref => {
     }) || "")
   }, !hideLevelSelect && /*#__PURE__*/_react.default.createElement(_ui.MultiSelect, {
     selected: ouLevels.length ? selected.filter(item => _index2.ouIdHelper.hasLevelPrefix(item.id)).map(item => _index2.ouIdHelper.removePrefix(item.id)) : [],
-    onChange: _ref5 => {
-      let {
-        selected
-      } = _ref5;
-      return onLevelChange(selected);
-    },
+    onChange: ({
+      selected
+    }) => onLevelChange(selected),
     placeholder: _index.default.t('Select a level'),
     loading: !ouLevels.length,
     dense: true,
@@ -217,12 +203,9 @@ const OrgUnitDimension = _ref => {
     dataTest: `org-unit-level-select-option-${level.id}`
   }))), !hideGroupSelect && /*#__PURE__*/_react.default.createElement(_ui.MultiSelect, {
     selected: ouGroups.length ? selected.filter(item => _index2.ouIdHelper.hasGroupPrefix(item.id)).map(item => _index2.ouIdHelper.removePrefix(item.id)) : [],
-    onChange: _ref6 => {
-      let {
-        selected
-      } = _ref6;
-      return onGroupChange(selected);
-    },
+    onChange: ({
+      selected
+    }) => onGroupChange(selected),
     placeholder: _index.default.t('Select a group'),
     loading: !ouGroups.length,
     dense: true,
@@ -252,11 +235,6 @@ const OrgUnitDimension = _ref => {
   }, _index.default.t('Deselect all')))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _OrgUnitDimensionStyle.default.__hash
   }, _OrgUnitDimensionStyle.default));
-};
-OrgUnitDimension.defaultProps = {
-  hideGroupSelect: false,
-  hideLevelSelect: false,
-  hideUserOrgUnits: false
 };
 OrgUnitDimension.propTypes = {
   displayNameProp: _propTypes.default.string,

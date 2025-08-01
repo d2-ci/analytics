@@ -19,52 +19,46 @@ import { SourceEmptyPlaceholder } from '../SourceEmptyPlaceholder.js';
 import { TransferOption } from '../TransferOption.js';
 import DataTypeSelector from './DataTypeSelector.js';
 import GroupSelector from './GroupSelector.js';
-const LeftHeader = _ref => {
-  let {
-    searchTerm,
-    setSearchTerm,
-    dataType,
-    dataTypes,
-    setDataType,
-    group,
-    setGroup,
-    subGroup,
-    setSubGroup,
-    displayNameProp,
-    dataTest
-  } = _ref;
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + "leftHeader"
-  }, /*#__PURE__*/React.createElement(InputField, {
-    value: searchTerm,
-    onChange: _ref2 => {
-      let {
-        value
-      } = _ref2;
-      return setSearchTerm(value);
-    },
-    placeholder: i18n.t('Search by data item name'),
-    dataTest: `${dataTest}-filter-input-field`,
-    dense: true,
-    initialFocus: true,
-    type: 'search'
-  }), /*#__PURE__*/React.createElement(DataTypeSelector, {
-    currentDataType: dataType,
-    onChange: setDataType,
-    dataTest: `${dataTest}-data-types-select-field`,
-    dataTypes: dataTypes
-  }), ![DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, DIMENSION_TYPE_ALL].includes(dataType) && /*#__PURE__*/React.createElement(GroupSelector, {
-    dataType: dataType,
-    displayNameProp: displayNameProp,
-    currentGroup: group,
-    onGroupChange: setGroup,
-    currentSubGroup: subGroup,
-    onSubGroupChange: setSubGroup,
-    dataTest: dataTest
-  })), /*#__PURE__*/React.createElement(_JSXStyle, {
-    id: styles.__hash
-  }, styles));
-};
+const LeftHeader = ({
+  searchTerm,
+  setSearchTerm,
+  dataType,
+  dataTypes,
+  setDataType,
+  group,
+  setGroup,
+  subGroup,
+  setSubGroup,
+  displayNameProp,
+  dataTest
+}) => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  className: `jsx-${styles.__hash}` + " " + "leftHeader"
+}, /*#__PURE__*/React.createElement(InputField, {
+  value: searchTerm,
+  onChange: ({
+    value
+  }) => setSearchTerm(value),
+  placeholder: i18n.t('Search by data item name'),
+  dataTest: `${dataTest}-filter-input-field`,
+  dense: true,
+  initialFocus: true,
+  type: 'search'
+}), /*#__PURE__*/React.createElement(DataTypeSelector, {
+  currentDataType: dataType,
+  onChange: setDataType,
+  dataTest: `${dataTest}-data-types-select-field`,
+  dataTypes: dataTypes
+}), ![DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, DIMENSION_TYPE_ALL].includes(dataType) && /*#__PURE__*/React.createElement(GroupSelector, {
+  dataType: dataType,
+  displayNameProp: displayNameProp,
+  currentGroup: group,
+  onGroupChange: setGroup,
+  currentSubGroup: subGroup,
+  onSubGroupChange: setSubGroup,
+  dataTest: dataTest
+})), /*#__PURE__*/React.createElement(_JSXStyle, {
+  id: styles.__hash
+}, styles));
 LeftHeader.propTypes = {
   dataTest: PropTypes.string,
   dataType: PropTypes.string,
@@ -78,45 +72,42 @@ LeftHeader.propTypes = {
   setSubGroup: PropTypes.func,
   subGroup: PropTypes.string
 };
-const RightHeader = _ref3 => {
-  let {
-    infoBoxMessage
-  } = _ref3;
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
-    className: `jsx-${styles.__hash}` + " " + "rightHeader"
-  }, i18n.t('Selected Items')), infoBoxMessage && /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + "info-container"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}`
-  }, /*#__PURE__*/React.createElement(IconInfo16, null)), /*#__PURE__*/React.createElement("span", {
-    className: `jsx-${styles.__hash}` + " " + "info-text"
-  }, infoBoxMessage)), /*#__PURE__*/React.createElement(_JSXStyle, {
-    id: styles.__hash
-  }, styles));
-};
+const RightHeader = ({
+  infoBoxMessage
+}) => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+  className: `jsx-${styles.__hash}` + " " + "rightHeader"
+}, i18n.t('Selected Items')), infoBoxMessage && /*#__PURE__*/React.createElement("div", {
+  className: `jsx-${styles.__hash}` + " " + "info-container"
+}, /*#__PURE__*/React.createElement("div", {
+  className: `jsx-${styles.__hash}`
+}, /*#__PURE__*/React.createElement(IconInfo16, null)), /*#__PURE__*/React.createElement("span", {
+  className: `jsx-${styles.__hash}` + " " + "info-text"
+}, infoBoxMessage)), /*#__PURE__*/React.createElement(_JSXStyle, {
+  id: styles.__hash
+}, styles));
 RightHeader.propTypes = {
   infoBoxMessage: PropTypes.string
 };
-const ItemSelector = _ref4 => {
-  let {
-    selectedItems,
-    noItemsMessage,
-    onSelect,
-    rightFooter,
-    displayNameProp,
-    infoBoxMessage,
-    itemsRef,
-    currentCalculation,
-    setCurrentCalculation,
-    infoDataItem,
-    setInfoDataItem,
-    dataTypes,
-    dataTest,
-    onEDISave,
-    onEditClick,
-    isOptionViewMode,
-    supportsEDI
-  } = _ref4;
+const SELECTED_ITEMS_PROP_DEFAULT = [];
+const ItemSelector = ({
+  selectedItems = SELECTED_ITEMS_PROP_DEFAULT,
+  noItemsMessage,
+  onSelect,
+  rightFooter,
+  displayNameProp,
+  infoBoxMessage,
+  itemsRef,
+  currentCalculation,
+  setCurrentCalculation,
+  infoDataItem,
+  setInfoDataItem,
+  dataTypes,
+  dataTest,
+  onEDISave,
+  onEditClick,
+  isOptionViewMode,
+  supportsEDI
+}) => {
   const [state, setState] = useState({
     searchTerm: '',
     dataTypes,
@@ -230,13 +221,12 @@ const ItemSelector = _ref4 => {
     const item = selectedItems.find(item => item.value === value);
     return !item || item.isActive;
   };
-  const onSaveCalculation = async _ref5 => {
-    let {
-      id,
-      name,
-      expression,
-      isNew
-    } = _ref5;
+  const onSaveCalculation = async ({
+    id,
+    name,
+    expression,
+    isNew
+  }) => {
     onEDISave({
       id,
       name,
@@ -259,10 +249,9 @@ const ItemSelector = _ref4 => {
       }]);
     }
   };
-  const onDeleteCalculation = _ref6 => {
-    let {
-      id
-    } = _ref6;
+  const onDeleteCalculation = ({
+    id
+  }) => {
     // close the modal
     setCurrentCalculation();
 
@@ -303,12 +292,9 @@ const ItemSelector = _ref4 => {
       hidden: isOptionViewMode
     }) || "")
   }, /*#__PURE__*/React.createElement(Transfer, {
-    onChange: _ref7 => {
-      let {
-        selected
-      } = _ref7;
-      return onChange(selected);
-    },
+    onChange: ({
+      selected
+    }) => onChange(selected),
     selected: selectedItems.map(item => item.value),
     options: [...state.options,
     // remove items already in the options list
@@ -416,8 +402,5 @@ ItemSelector.propTypes = {
   supportsEDI: PropTypes.bool,
   onEDISave: PropTypes.func,
   onEditClick: PropTypes.func
-};
-ItemSelector.defaultProps = {
-  selectedItems: []
 };
 export default ItemSelector;

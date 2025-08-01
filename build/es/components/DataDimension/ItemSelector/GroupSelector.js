@@ -9,17 +9,16 @@ import { dataTypeMap as dataTypes, SUB_GROUP_DETAIL, SUB_GROUP_METRIC } from '..
 import { DetailSelector } from './DetailSelector.js';
 import { MetricSelector } from './MetricSelector.js';
 import styles from './styles/GroupSelector.style.js';
-const GroupSelector = _ref => {
+const GroupSelector = ({
+  dataType,
+  currentGroup,
+  onGroupChange,
+  dataTest,
+  displayNameProp,
+  currentSubGroup,
+  onSubGroupChange
+}) => {
   var _dataTypes$dataType, _dataTypes$dataType2, _dataTypes$dataType3, _dataTypes$dataType4, _dataTypes$dataType5, _dataTypes$dataType6, _dataTypes$dataType7;
-  let {
-    dataType,
-    currentGroup,
-    onGroupChange,
-    dataTest,
-    displayNameProp,
-    currentSubGroup,
-    onSubGroupChange
-  } = _ref;
   const dataEngine = useDataEngine();
   const [groups, setGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

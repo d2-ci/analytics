@@ -8,37 +8,30 @@ import { InfoPopover } from './Info/InfoPopover.js';
 import { ItemOptionsSelector } from './ItemOptionsSelector/ItemOptionsSelector.js';
 import ItemSelector from './ItemSelector/ItemSelector.js';
 const DataDimensionCtx = /*#__PURE__*/createContext({});
-const DataDimension = _ref => {
-  let {
-    currentUser,
-    onSelect,
-    selectedDimensions,
-    displayNameProp,
-    enabledDataTypes,
-    infoBoxMessage,
-    onCalculationSave,
-    visType
-  } = _ref;
+const SELECTED_DIMENSIONS_PROP_DEFAULT = [];
+const DataDimension = ({
+  currentUser,
+  onSelect = Function.prototype,
+  selectedDimensions = SELECTED_DIMENSIONS_PROP_DEFAULT,
+  displayNameProp,
+  enabledDataTypes,
+  infoBoxMessage,
+  onCalculationSave,
+  visType
+}) => {
   const {
     serverVersion
   } = useConfig();
   const itemsRef = useRef(new Map());
-  const filterDataTypesByVersion = useCallback(dataTypes => dataTypes.filter(_ref2 => {
-    let {
-      id
-    } = _ref2;
-    return (
-      // Calculations only available from 2.40
-      id !== DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM || serverVersion.minor >= 40
-    );
-  }), [serverVersion.minor]);
+  const filterDataTypesByVersion = useCallback(dataTypes => dataTypes.filter(({
+    id
+  }) =>
+  // Calculations only available from 2.40
+  id !== DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM || serverVersion.minor >= 40), [serverVersion.minor]);
   const [dataTypes, setDataTypes] = useState(filterDataTypesByVersion(enabledDataTypes || Object.values(dataTypeMap)));
-  const supportsEDI = dataTypes.map(_ref3 => {
-    let {
-      id
-    } = _ref3;
-    return id;
-  }).includes(DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM);
+  const supportsEDI = dataTypes.map(({
+    id
+  }) => id).includes(DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM);
   const [currentCalculation, setCurrentCalculation] = useState();
   const [currentDataItem, setCurrentDataItem] = useState();
   const [infoDataItem, setInfoDataItem] = useState();
@@ -134,10 +127,6 @@ DataDimension.propTypes = {
   infoBoxMessage: PropTypes.string,
   visType: PropTypes.string,
   onCalculationSave: PropTypes.func
-};
-DataDimension.defaultProps = {
-  selectedDimensions: [],
-  onSelect: Function.prototype
 };
 export const useDataDimensionContext = () => useContext(DataDimensionCtx);
 export default DataDimension;

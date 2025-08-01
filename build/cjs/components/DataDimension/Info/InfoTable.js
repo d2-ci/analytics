@@ -34,16 +34,13 @@ const renderDataSets = dataSets => {
       className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
     }, /*#__PURE__*/_react.default.createElement("ul", {
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, dataSets.map(_ref => {
-      let {
-        id,
-        displayName
-      } = _ref;
-      return /*#__PURE__*/_react.default.createElement("li", {
-        key: id,
-        className: `jsx-${_InfoPopoverStyle.default.__hash}`
-      }, displayName);
-    }))), /*#__PURE__*/_react.default.createElement(_style.default, {
+    }, dataSets.map(({
+      id,
+      displayName
+    }) => /*#__PURE__*/_react.default.createElement("li", {
+      key: id,
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, displayName)))), /*#__PURE__*/_react.default.createElement(_style.default, {
       id: _InfoPopoverStyle.default.__hash
     }, _InfoPopoverStyle.default));
   }
@@ -63,16 +60,13 @@ const renderGroupMemberships = groups => {
       className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
     }, /*#__PURE__*/_react.default.createElement("ul", {
       className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, groups.map(_ref2 => {
-      let {
-        id,
-        displayName
-      } = _ref2;
-      return /*#__PURE__*/_react.default.createElement("li", {
-        key: id,
-        className: `jsx-${_InfoPopoverStyle.default.__hash}`
-      }, displayName);
-    }))), /*#__PURE__*/_react.default.createElement(_style.default, {
+    }, groups.map(({
+      id,
+      displayName
+    }) => /*#__PURE__*/_react.default.createElement("li", {
+      key: id,
+      className: `jsx-${_InfoPopoverStyle.default.__hash}`
+    }, displayName)))), /*#__PURE__*/_react.default.createElement(_style.default, {
       id: _InfoPopoverStyle.default.__hash
     }, _InfoPopoverStyle.default));
   }
@@ -91,28 +85,24 @@ const renderLegendSets = legendSets => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}` + " " + "content-wrap"
   }, /*#__PURE__*/_react.default.createElement("ul", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, legendSets.map(_ref3 => {
-    let {
-      id,
-      displayName
-    } = _ref3;
-    return /*#__PURE__*/_react.default.createElement("li", {
-      key: id,
-      className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, displayName);
-  }))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, legendSets.map(({
+    id,
+    displayName
+  }) => /*#__PURE__*/_react.default.createElement("li", {
+    key: id,
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, displayName)))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };
 exports.renderLegendSets = renderLegendSets;
-const InfoTable = _ref4 => {
-  let {
-    dataType,
-    data,
-    error,
-    loading,
-    children
-  } = _ref4;
+const InfoTable = ({
+  dataType,
+  data,
+  error,
+  loading,
+  children
+}) => {
   const {
     fromServerDate
   } = (0, _appRuntime.useTimeZoneConversion)();
@@ -192,20 +182,17 @@ const InfoTable = _ref4 => {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
   }, _index.default.t('Created by')), /*#__PURE__*/_react.default.createElement("td", {
     className: `jsx-${_InfoPopoverStyle.default.__hash}`
-  }, `${data.createdBy.displayName}, ${data.createdBy.username}`)), data.attributeValues.map(_ref5 => {
-    let {
-      attribute,
-      value
-    } = _ref5;
-    return /*#__PURE__*/_react.default.createElement("tr", {
-      key: attribute.id,
-      className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, /*#__PURE__*/_react.default.createElement("th", {
-      className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, attribute.displayName), /*#__PURE__*/_react.default.createElement("td", {
-      className: `jsx-${_InfoPopoverStyle.default.__hash}`
-    }, value));
-  })))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, `${data.createdBy.displayName}, ${data.createdBy.username}`)), data.attributeValues.map(({
+    attribute,
+    value
+  }) => /*#__PURE__*/_react.default.createElement("tr", {
+    key: attribute.id,
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, /*#__PURE__*/_react.default.createElement("th", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, attribute.displayName), /*#__PURE__*/_react.default.createElement("td", {
+    className: `jsx-${_InfoPopoverStyle.default.__hash}`
+  }, value)))))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _InfoPopoverStyle.default.__hash
   }, _InfoPopoverStyle.default));
 };

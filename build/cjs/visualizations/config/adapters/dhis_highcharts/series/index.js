@@ -72,16 +72,15 @@ function getIdColorMap(series, layout, extraOptions) {
     }, {});
   }
 }
-function getDefault(_ref) {
-  let {
-    series,
-    metaData,
-    layout,
-    isStacked,
-    extraOptions,
-    legendSets,
-    displayStrategy
-  } = _ref;
+function getDefault({
+  series,
+  metaData,
+  layout,
+  isStacked,
+  extraOptions,
+  legendSets,
+  displayStrategy
+}) {
   const fullIdAxisMap = (0, _customAxes.getFullIdAxisMap)(layout.series, series);
   const idColorMap = getIdColorMap(series, layout, extraOptions);
   const indexColorPatternMap = getIndexColorPatternMap(series, layout, extraOptions);
@@ -159,17 +158,16 @@ function getDefault(_ref) {
   }
   return series;
 }
-function _default(_ref2) {
+function _default({
+  series,
+  metaData,
+  layout,
+  isStacked,
+  extraOptions,
+  legendSets,
+  displayStrategy
+}) {
   var _series;
-  let {
-    series,
-    metaData,
-    layout,
-    isStacked,
-    extraOptions,
-    legendSets,
-    displayStrategy
-  } = _ref2;
   switch (layout.type) {
     case _visTypes.VIS_TYPE_SINGLE_VALUE:
       series = [];

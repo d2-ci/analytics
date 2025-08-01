@@ -10,8 +10,8 @@ import FixedPeriodFilter from './FixedPeriodFilter.js';
 import styles from './styles/FixedPeriodSelect.style.js';
 import { parsePeriodCode, getFixedPeriodsOptionsById as getPeriodById, getYearOffsetFromNow } from './utils/fixedPeriods.js';
 class FixedPeriodSelect extends Component {
-  constructor() {
-    super(...arguments);
+  constructor(...args) {
+    super(...args);
     _defineProperty(this, "state", {
       periodType: '',
       year: '',
@@ -31,24 +31,19 @@ class FixedPeriodSelect extends Component {
       });
       this.props.onChange();
     });
-    _defineProperty(this, "onSelectPeriod", (_ref, event) => {
-      let {
-        selected: periodId
-      } = _ref;
-      const period = this.state.options.find(_ref2 => {
-        let {
-          id
-        } = _ref2;
-        return id === periodId;
-      });
+    _defineProperty(this, "onSelectPeriod", ({
+      selected: periodId
+    }, event) => {
+      const period = this.state.options.find(({
+        id
+      }) => id === periodId);
       this.props.onChange(period, event);
     });
   }
-  static getDerivedStateFromProps(_ref3) {
-    let {
-      value,
-      allowedPeriodTypes
-    } = _ref3;
+  static getDerivedStateFromProps({
+    value,
+    allowedPeriodTypes
+  }) {
     const period = parsePeriodCode(value, allowedPeriodTypes);
     if (!period) {
       return null;
@@ -91,10 +86,10 @@ class FixedPeriodSelect extends Component {
     }, styles));
   }
 }
-FixedPeriodSelect.defaultProps = {
+_defineProperty(FixedPeriodSelect, "defaultProps", {
   dataTest: 'dhis2-analytics-fixedperiodselect',
   value: ''
-};
+});
 FixedPeriodSelect.propTypes = {
   onChange: PropTypes.func.isRequired,
   allowedPeriodTypes: PropTypes.arrayOf(PropTypes.string),

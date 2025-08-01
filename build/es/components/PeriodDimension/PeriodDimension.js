@@ -11,15 +11,15 @@ const userSettingsQuery = {
     }
   }
 };
-const PeriodDimension = _ref => {
-  let {
-    onSelect,
-    selectedPeriods,
-    rightFooter,
-    excludedPeriodTypes,
-    infoBoxMessage,
-    height
-  } = _ref;
+const SELECTED_PERIODS_PROP_DEFAULT = [];
+const PeriodDimension = ({
+  onSelect,
+  selectedPeriods = SELECTED_PERIODS_PROP_DEFAULT,
+  rightFooter,
+  excludedPeriodTypes,
+  infoBoxMessage,
+  height
+}) => {
   const {
     systemInfo
   } = useConfig();
@@ -62,8 +62,5 @@ PeriodDimension.propTypes = {
   infoBoxMessage: PropTypes.string,
   rightFooter: PropTypes.node,
   selectedPeriods: PropTypes.array
-};
-PeriodDimension.defaultProps = {
-  selectedPeriods: []
 };
 export default PeriodDimension;

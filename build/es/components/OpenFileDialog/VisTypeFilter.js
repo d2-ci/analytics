@@ -5,43 +5,34 @@ import React from 'react';
 import { getDisplayNameByVisType, visTypeIcons } from '../../modules/visTypes.js';
 import { VisTypeIcon } from '../VisTypeIcon.js';
 import { CustomSelectOption } from './CustomSelectOption.js';
-export const VisTypeFilter = _ref => {
-  let {
-    visTypes,
-    selected,
-    onChange
-  } = _ref;
-  return /*#__PURE__*/React.createElement(SingleSelect, {
-    selected: selected,
-    onChange: _ref2 => {
-      let {
-        selected
-      } = _ref2;
-      return onChange(selected);
-    },
-    prefix: i18n.t('Type'),
-    dense: true,
-    maxHeight: "400px"
-  }, visTypes === null || visTypes === void 0 ? void 0 : visTypes.map(_ref3 => {
-    let {
-      type,
-      disabled,
-      insertDivider
-    } = _ref3;
-    return /*#__PURE__*/React.createElement(CustomSelectOption, {
-      key: type,
-      disabled: disabled,
-      label: getDisplayNameByVisType(type),
-      insertDivider: insertDivider,
-      value: type,
-      icon: visTypeIcons[type] ? /*#__PURE__*/React.createElement(VisTypeIcon, {
-        type: type,
-        useSmall: true,
-        color: colors.grey600
-      }) : undefined
-    });
-  }));
-};
+export const VisTypeFilter = ({
+  visTypes,
+  selected,
+  onChange
+}) => /*#__PURE__*/React.createElement(SingleSelect, {
+  selected: selected,
+  onChange: ({
+    selected
+  }) => onChange(selected),
+  prefix: i18n.t('Type'),
+  dense: true,
+  maxHeight: "400px"
+}, visTypes === null || visTypes === void 0 ? void 0 : visTypes.map(({
+  type,
+  disabled,
+  insertDivider
+}) => /*#__PURE__*/React.createElement(CustomSelectOption, {
+  key: type,
+  disabled: disabled,
+  label: getDisplayNameByVisType(type),
+  insertDivider: insertDivider,
+  value: type,
+  icon: visTypeIcons[type] ? /*#__PURE__*/React.createElement(VisTypeIcon, {
+    type: type,
+    useSmall: true,
+    color: colors.grey600
+  }) : undefined
+})));
 VisTypeFilter.propTypes = {
   selected: PropTypes.string,
   visTypes: PropTypes.arrayOf(PropTypes.shape({

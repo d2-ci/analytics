@@ -10,10 +10,9 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _LegendKeyStyle = _interopRequireDefault(require("./styles/LegendKey.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const LegendKey = _ref => {
-  let {
-    legendSets
-  } = _ref;
+const LegendKey = ({
+  legendSets
+}) => {
   return legendSets.length ? /*#__PURE__*/_react.default.createElement("div", {
     "data-test": "legend-key-container",
     className: `jsx-${_LegendKeyStyle.default.__hash}` + " " + "container"

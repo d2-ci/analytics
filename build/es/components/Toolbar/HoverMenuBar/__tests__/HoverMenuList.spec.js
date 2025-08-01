@@ -1,4 +1,6 @@
-import { shallow, mount } from 'enzyme';
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
+import { shallow } from 'enzyme';
 import React from 'react';
 import { HoverMenuList, HoverMenuListItem } from '../index.js';
 describe('<HoverMenuList/>', () => {
@@ -22,15 +24,15 @@ describe('<HoverMenuList/>', () => {
     expect(wrapper.find('ul').prop('data-test')).toBe(dataTest);
   });
   it('accept a `dense` prop', () => {
-    const wrapper = mount(/*#__PURE__*/React.createElement(HoverMenuList, {
+    render(/*#__PURE__*/React.createElement(HoverMenuList, {
       dense: true
     }, /*#__PURE__*/React.createElement(HoverMenuListItem, {
       label: "item 1"
     }), /*#__PURE__*/React.createElement(HoverMenuListItem, {
       label: "item 2"
     })));
-    expect(wrapper.find('li').first()).toHaveClassName('dense');
-    expect(wrapper.find('li').last()).toHaveClassName('dense');
+    expect(screen.getByText('item 1').closest('li')).toHaveClass('dense');
+    expect(screen.getByText('item 2').closest('li')).toHaveClass('dense');
   });
   it('accept a `maxHeight` prop', () => {
     const maxHeight = '100000px';

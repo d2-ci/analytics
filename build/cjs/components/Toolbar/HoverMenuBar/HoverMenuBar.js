@@ -7,8 +7,7 @@ exports.useHoverMenubarContext = exports.HoverMenuBar = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const throwErrorIfNotInitialized = () => {
   throw new Error('`HoverMenubarContext` has not been initialised');
@@ -22,32 +21,42 @@ const HoverMenubarContext = /*#__PURE__*/(0, _react.createContext)({
 });
 const useHoverMenubarContext = () => (0, _react.useContext)(HoverMenubarContext);
 exports.useHoverMenubarContext = useHoverMenubarContext;
-const HoverMenuBar = _ref => {
-  let {
-    children,
-    dataTest
-  } = _ref;
+const HoverMenuBar = ({
+  children,
+  dataTest = 'dhis2-analytics-hovermenubar'
+}) => {
   const [openedDropdownEl, setOpenedDropdownEl] = (0, _react.useState)(null);
-  const [lastHoveredSubMenuEl, setLastHoveredSubMenuEl] = (0, _react.useState)(null);
+  const lastHoveredSubMenuElRef = (0, _react.useRef)(null);
   const [isInHoverMode, setIsInHoverMode] = (0, _react.useState)(false);
   const closeMenu = (0, _react.useCallback)(() => {
     setIsInHoverMode(false);
     setOpenedDropdownEl(null);
   }, []);
+  const setLastHoveredSubMenuEl = (0, _react.useCallback)(element => {
+    lastHoveredSubMenuElRef.current = element;
+  }, []);
   const onDocumentClick = (0, _react.useCallback)(event => {
-    const isClickOnOpenedSubMenuAnchor = lastHoveredSubMenuEl && (lastHoveredSubMenuEl === event.target || lastHoveredSubMenuEl.contains(event.target));
+    const isClickOnOpenedSubMenuAnchor = lastHoveredSubMenuElRef.current && (lastHoveredSubMenuElRef.current === event.target || lastHoveredSubMenuElRef.current.contains(event.target));
     if (!isClickOnOpenedSubMenuAnchor) {
       closeMenu();
     }
-  }, [closeMenu, lastHoveredSubMenuEl]);
+  }, [closeMenu]);
   const onDropDownButtonClick = (0, _react.useCallback)(event => {
     if (!isInHoverMode) {
+      /* Stop event propagation to avoid it from bubling up to the
+       * document, which would actually cause the menu to close again
+       * immediately */
+      event.stopPropagation();
       setIsInHoverMode(true);
       setOpenedDropdownEl(event.currentTarget);
+      document.addEventListener('click', onDocumentClick, {
+        once: true
+      });
     } else {
+      document.removeEventListener('click', onDocumentClick);
       closeMenu();
     }
-  }, [closeMenu, isInHoverMode]);
+  }, [closeMenu, isInHoverMode, onDocumentClick]);
   const onDropDownButtonMouseOver = (0, _react.useCallback)(event => {
     if (isInHoverMode) {
       setOpenedDropdownEl(event.currentTarget);
@@ -67,16 +76,6 @@ const HoverMenuBar = _ref => {
       closeMenu();
     }
   }, [closeMenu]);
-  (0, _react.useEffect)(() => {
-    if (isInHoverMode) {
-      document.addEventListener('click', onDocumentClick, {
-        once: true
-      });
-    }
-    return () => {
-      document.removeEventListener('click', onDocumentClick);
-    };
-  }, [onDocumentClick, isInHoverMode]);
   return /*#__PURE__*/_react.default.createElement(HoverMenubarContext.Provider, {
     value: {
       onDropDownButtonClick,
@@ -93,9 +92,6 @@ const HoverMenuBar = _ref => {
   }, [".jsx-3020154784{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;}"])));
 };
 exports.HoverMenuBar = HoverMenuBar;
-HoverMenuBar.defaultProps = {
-  dataTest: 'dhis2-analytics-hovermenubar'
-};
 HoverMenuBar.propTypes = {
   children: _propTypes.default.node.isRequired,
   dataTest: _propTypes.default.string

@@ -13,15 +13,14 @@ var _PivotTableHeaderCell = require("./PivotTableHeaderCell.js");
 var _PivotTableSortIcon = require("./PivotTableSortIcon.js");
 var _PivotTableStyle = require("./styles/PivotTable.style.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PivotTableColumnHeaderCell = _ref => {
+const PivotTableColumnHeaderCell = ({
+  clippingResult,
+  index,
+  level,
+  onSortByColumn,
+  sortBy
+}) => {
   var _engine$adaptiveClipp;
-  let {
-    clippingResult,
-    index,
-    level,
-    onSortByColumn,
-    sortBy
-  } = _ref;
   const engine = (0, _PivotTableEngineContext.usePivotTableEngine)();
   const width = (_engine$adaptiveClipp = engine.adaptiveClippingController.columns.sizes[engine.columnMap[index]]) === null || _engine$adaptiveClipp === void 0 ? void 0 : _engine$adaptiveClipp.size;
   const height = engine.adaptiveClippingController.rows.headerSizes[level];

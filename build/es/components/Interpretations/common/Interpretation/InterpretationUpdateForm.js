@@ -10,28 +10,21 @@ const mutation = {
   resource: 'interpretations',
   type: 'update',
   partial: false,
-  id: _ref => {
-    let {
-      id
-    } = _ref;
-    return id;
-  },
-  data: _ref2 => {
-    let {
-      interpretationText
-    } = _ref2;
-    return interpretationText;
-  }
+  id: ({
+    id
+  }) => id,
+  data: ({
+    interpretationText
+  }) => interpretationText
 };
-export const InterpretationUpdateForm = _ref3 => {
-  let {
-    close,
-    currentUser,
-    id,
-    onComplete,
-    showSharingLink,
-    text
-  } = _ref3;
+export const InterpretationUpdateForm = ({
+  close,
+  currentUser,
+  id,
+  onComplete,
+  showSharingLink,
+  text
+}) => {
   const [interpretationText, setInterpretationText] = useState(text || '');
   const [update, {
     loading,

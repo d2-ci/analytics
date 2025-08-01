@@ -9,28 +9,21 @@ import styles from './styles/InfoPopover.style.js';
 const indicatorQuery = {
   indicator: {
     resource: 'indicators',
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
-    params: _ref2 => {
-      let {
-        displayNameProp
-      } = _ref2;
-      return {
-        fields: `${getCommonFields(displayNameProp)},annualized,dataSets[id,displayName],decimals,denominator,displayDenominatorDescription,displayNumeratorDescription,indicatorGroups[id,displayName],indicatorType[displayName,factor],legendSets[id,displayName],numerator`
-      };
-    }
+    id: ({
+      id
+    }) => id,
+    params: ({
+      displayNameProp
+    }) => ({
+      fields: `${getCommonFields(displayNameProp)},annualized,dataSets[id,displayName],decimals,denominator,displayDenominatorDescription,displayNumeratorDescription,indicatorGroups[id,displayName],indicatorType[displayName,factor],legendSets[id,displayName],numerator`
+    })
   }
 };
-export const IndicatorInfo = _ref3 => {
-  let {
-    type,
-    id,
-    displayNameProp
-  } = _ref3;
+export const IndicatorInfo = ({
+  type,
+  id,
+  displayNameProp
+}) => {
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
@@ -137,16 +130,13 @@ export const IndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}` + " " + "content-wrap"
   }, /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
-  }, data.indicator.dataSets.map(_ref4 => {
-    let {
-      id,
-      displayName
-    } = _ref4;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, displayName);
-  }))))), /*#__PURE__*/React.createElement("tr", {
+  }, data.indicator.dataSets.map(({
+    id,
+    displayName
+  }) => /*#__PURE__*/React.createElement("li", {
+    key: id,
+    className: `jsx-${styles.__hash}`
+  }, displayName)))))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`

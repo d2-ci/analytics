@@ -9,28 +9,21 @@ import styles from './styles/InfoPopover.style.js';
 const programIndicatorQuery = {
   programIndicator: {
     resource: 'programIndicators',
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
-    params: _ref2 => {
-      let {
-        displayNameProp
-      } = _ref2;
-      return {
-        fields: `${getCommonFields(displayNameProp)},aggregationType,analyticsPeriodBoundaries[analyticsPeriodBoundaryType,boundaryTarget,id,offsetPeriodType,offsetPeriods],analyticsType,decimals,expression,filter,legendSets[id,displayName],program[displayName]`
-      };
-    }
+    id: ({
+      id
+    }) => id,
+    params: ({
+      displayNameProp
+    }) => ({
+      fields: `${getCommonFields(displayNameProp)},aggregationType,analyticsPeriodBoundaries[analyticsPeriodBoundaryType,boundaryTarget,id,offsetPeriodType,offsetPeriods],analyticsType,decimals,expression,filter,legendSets[id,displayName],program[displayName]`
+    })
   }
 };
-export const ProgramIndicatorInfo = _ref3 => {
-  let {
-    type,
-    id,
-    displayNameProp
-  } = _ref3;
+export const ProgramIndicatorInfo = ({
+  type,
+  id,
+  displayNameProp
+}) => {
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
@@ -67,10 +60,9 @@ export const ProgramIndicatorInfo = _ref3 => {
         programIndicator.humanReadableFilter = result;
       }
     }
-    programIndicator.analyticsPeriodBoundaries.forEach((_ref4, index) => {
-      let {
-        boundaryTarget
-      } = _ref4;
+    programIndicator.analyticsPeriodBoundaries.forEach(({
+      boundaryTarget
+    }, index) => {
       programIndicator.analyticsPeriodBoundaries[index].boundaryTarget = ['ENROLLMENT_DATE', 'EVENT_DATE', 'INCIDENT_DATE'].includes(boundaryTarget) ? sentenceCaseText(boundaryTarget) : i18n.t('Custom');
     });
     setData({
@@ -108,38 +100,35 @@ export const ProgramIndicatorInfo = _ref3 => {
     className: `jsx-${styles.__hash}` + " " + "content-wrap"
   }, /*#__PURE__*/React.createElement("ul", {
     className: `jsx-${styles.__hash}`
-  }, data === null || data === void 0 ? void 0 : data.programIndicator.analyticsPeriodBoundaries.map(_ref5 => {
-    let {
-      analyticsPeriodBoundaryType,
-      boundaryTarget,
-      id,
-      offsetPeriodType,
-      offsetPeriods
-    } = _ref5;
-    return /*#__PURE__*/React.createElement("li", {
-      key: id,
-      className: `jsx-${styles.__hash}`
-    }, /*#__PURE__*/React.createElement("span", {
-      className: `jsx-${styles.__hash}`
-    }, /*#__PURE__*/React.createElement("span", {
-      className: `jsx-${styles.__hash}` + " " + "label"
-    }, i18n.t('Type:'), "\xA0"), sentenceCaseText(analyticsPeriodBoundaryType)), /*#__PURE__*/React.createElement("br", {
-      className: `jsx-${styles.__hash}`
-    }), /*#__PURE__*/React.createElement("span", {
-      className: `jsx-${styles.__hash}`
-    }, /*#__PURE__*/React.createElement("span", {
-      className: `jsx-${styles.__hash}` + " " + "label"
-    }, i18n.t('Target:'), "\xA0"), boundaryTarget), Boolean(offsetPeriods) && Boolean(offsetPeriodType) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("br", {
-      className: `jsx-${styles.__hash}`
-    }), /*#__PURE__*/React.createElement("span", {
-      className: `jsx-${styles.__hash}`
-    }, /*#__PURE__*/React.createElement("span", {
-      className: `jsx-${styles.__hash}` + " " + "label"
-    }, i18n.t('Offset:'), "\xA0"), i18n.t('{{ offsetPeriodType }} × {{ offsetPeriods }}', {
-      offsetPeriodType,
-      offsetPeriods
-    }))));
-  }))))), /*#__PURE__*/React.createElement("tr", {
+  }, data === null || data === void 0 ? void 0 : data.programIndicator.analyticsPeriodBoundaries.map(({
+    analyticsPeriodBoundaryType,
+    boundaryTarget,
+    id,
+    offsetPeriodType,
+    offsetPeriods
+  }) => /*#__PURE__*/React.createElement("li", {
+    key: id,
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "label"
+  }, i18n.t('Type:'), "\xA0"), sentenceCaseText(analyticsPeriodBoundaryType)), /*#__PURE__*/React.createElement("br", {
+    className: `jsx-${styles.__hash}`
+  }), /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "label"
+  }, i18n.t('Target:'), "\xA0"), boundaryTarget), Boolean(offsetPeriods) && Boolean(offsetPeriodType) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("br", {
+    className: `jsx-${styles.__hash}`
+  }), /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "label"
+  }, i18n.t('Offset:'), "\xA0"), i18n.t('{{ offsetPeriodType }} × {{ offsetPeriods }}', {
+    offsetPeriodType,
+    offsetPeriods
+  }))))))))), /*#__PURE__*/React.createElement("tr", {
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("th", {
     className: `jsx-${styles.__hash}`

@@ -26,16 +26,16 @@ const Placeholder = () => /*#__PURE__*/_react.default.createElement("div", {
 }, _d2I18n.default.t('Drag items here, or double click in the list, to start building a calculation formula')), /*#__PURE__*/_react.default.createElement(_style.default, {
   id: _FormulaFieldStyle.default.__hash
 }, _FormulaFieldStyle.default));
-const FormulaField = _ref => {
-  let {
-    items = [],
-    selectedItemId,
-    focusItemId,
-    onChange,
-    onClick,
-    onDoubleClick,
-    loading
-  } = _ref;
+const ITEMS_PROP_DEFAULT = [];
+const FormulaField = ({
+  items = ITEMS_PROP_DEFAULT,
+  selectedItemId,
+  focusItemId,
+  onChange,
+  onClick,
+  onDoubleClick,
+  loading
+}) => {
   const {
     over,
     setNodeRef: setLastDropzoneRef
@@ -60,28 +60,25 @@ const FormulaField = _ref => {
   }, /*#__PURE__*/_react.default.createElement(_DropZone.default, {
     firstElementId: itemIds[0],
     overLastDropZone: overLastDropZone
-  }), !items.length && /*#__PURE__*/_react.default.createElement(Placeholder, null), Boolean(items.length) && items.map((_ref2, index) => {
-    let {
-      id,
-      label,
-      type,
-      value
-    } = _ref2;
-    return /*#__PURE__*/_react.default.createElement(_FormulaItem.default, {
-      key: id,
-      id: id,
-      label: label,
-      type: type,
-      value: value,
-      hasFocus: focusItemId === id,
-      isHighlighted: selectedItemId === id,
-      isLast: index === items.length - 1,
-      onChange: onChange,
-      onClick: onClick,
-      onDoubleClick: onDoubleClick,
-      overLastDropZone: overLastDropZone
-    });
-  }))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }), !items.length && /*#__PURE__*/_react.default.createElement(Placeholder, null), Boolean(items.length) && items.map(({
+    id,
+    label,
+    type,
+    value
+  }, index) => /*#__PURE__*/_react.default.createElement(_FormulaItem.default, {
+    key: id,
+    id: id,
+    label: label,
+    type: type,
+    value: value,
+    hasFocus: focusItemId === id,
+    isHighlighted: selectedItemId === id,
+    isLast: index === items.length - 1,
+    onChange: onChange,
+    onClick: onClick,
+    onDoubleClick: onDoubleClick,
+    overLastDropZone: overLastDropZone
+  })))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _FormulaFieldStyle.default.__hash
   }, _FormulaFieldStyle.default));
 };

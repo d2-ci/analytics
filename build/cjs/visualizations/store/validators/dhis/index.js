@@ -36,12 +36,11 @@ function validateRow(row, headersLength, error) {
   }
   row.forEach(rowValue => validateRowValue(rowValue, error));
 }
-function _default(_ref) {
-  let {
-    data,
-    error,
-    warning
-  } = _ref;
+function _default({
+  data,
+  error,
+  warning
+}) {
   if (!(0, _isObject.default)(data)) {
     error(getMessage('Data is not an object'));
   }

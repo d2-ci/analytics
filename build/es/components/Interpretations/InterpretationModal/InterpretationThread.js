@@ -8,18 +8,17 @@ import React, { useRef, useEffect } from 'react';
 import { Interpretation, getInterpretationAccess } from '../common/index.js';
 import { Comment } from './Comment.js';
 import { CommentAddForm } from './CommentAddForm.js';
-const InterpretationThread = _ref => {
-  let {
-    currentUser,
-    fetching,
-    interpretation,
-    onInterpretationDeleted,
-    onLikeToggled,
-    initialFocus,
-    onThreadUpdated,
-    downloadMenuComponent: DownloadMenu,
-    dashboardRedirectUrl
-  } = _ref;
+const InterpretationThread = ({
+  currentUser,
+  fetching,
+  interpretation,
+  onInterpretationDeleted,
+  onLikeToggled,
+  initialFocus,
+  onThreadUpdated,
+  downloadMenuComponent: DownloadMenu,
+  dashboardRedirectUrl
+}) => {
   const {
     fromServerDate
   } = useTimeZoneConversion();

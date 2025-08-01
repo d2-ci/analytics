@@ -16,32 +16,25 @@ var _list = require("../../modules/list.js");
 var _index = require("../RichText/index.js");
 var _AboutAOUnitStyle = _interopRequireDefault(require("./styles/AboutAOUnit.style.js"));
 var _utils = require("./utils.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const READ_ONLY = 'r';
 const READ_AND_WRITE = 'rw';
 const getQueries = type => ({
   ao: {
     resource: _utils.AOTypeMap[type].apiEndpoint,
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
+    id: ({
+      id
+    }) => id,
     params: {
       fields: 'id,displayDescription,created,createdBy[displayName],lastUpdated,subscribed,sharing'
     }
   },
   dataStatistics: {
     resource: 'dataStatistics/favorites',
-    id: _ref2 => {
-      let {
-        id
-      } = _ref2;
-      return id;
-    }
+    id: ({
+      id
+    }) => id
   }
 });
 const getSubscribeMutation = (type, id) => ({
@@ -52,13 +45,12 @@ const getUnsubscribeMutation = (type, id) => ({
   resource: `${_utils.AOTypeMap[type].apiEndpoint}/${id}/subscriber`,
   type: 'delete'
 });
-const AboutAOUnit = /*#__PURE__*/(0, _react.forwardRef)((_ref3, ref) => {
+const AboutAOUnit = /*#__PURE__*/(0, _react.forwardRef)(({
+  type,
+  id,
+  renderId
+}, ref) => {
   var _data$ao$createdBy;
-  let {
-    type,
-    id,
-    renderId
-  } = _ref3;
   const [isExpanded, setIsExpanded] = (0, _react.useState)(true);
   const {
     fromServerDate

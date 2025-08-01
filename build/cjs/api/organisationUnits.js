@@ -7,27 +7,21 @@ exports.apiFetchOrganisationUnits = exports.apiFetchOrganisationUnitRoots = expo
 var _index = require("./index.js");
 const orgUnitLevelsQuery = {
   resource: 'organisationUnitLevels',
-  params: function () {
-    let {
-      displayNameProp = 'displayName'
-    } = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    return {
-      fields: `id,level,${displayNameProp}~rename(displayName),name`,
-      paging: false
-    };
-  }
+  params: ({
+    displayNameProp = 'displayName'
+  } = {}) => ({
+    fields: `id,level,${displayNameProp}~rename(displayName),name`,
+    paging: false
+  })
 };
 const orgUnitGroupsQuery = {
   resource: 'organisationUnitGroups',
-  params: function () {
-    let {
-      displayNameProp = 'displayName'
-    } = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    return {
-      fields: `id,${displayNameProp}~rename(displayName),name`,
-      paging: false
-    };
-  }
+  params: ({
+    displayNameProp = 'displayName'
+  } = {}) => ({
+    fields: `id,${displayNameProp}~rename(displayName),name`,
+    paging: false
+  })
 };
 const orgUnitRootsQuery = {
   resource: 'organisationUnits',
@@ -39,26 +33,20 @@ const orgUnitRootsQuery = {
 };
 const orgUnitsQuery = {
   resource: 'organisationUnits',
-  params: _ref => {
-    let {
-      displayNameProp
-    } = _ref;
-    return {
-      fields: `id,path,${displayNameProp}~rename(displayName),children::isNotEmpty`,
-      level: 1,
-      userDataViewFallback: true,
-      paging: false
-    };
-  }
+  params: ({
+    displayNameProp
+  }) => ({
+    fields: `id,path,${displayNameProp}~rename(displayName),children::isNotEmpty`,
+    level: 1,
+    userDataViewFallback: true,
+    paging: false
+  })
 };
 const orgUnitQuery = {
   resource: 'organisationUnits',
-  id: _ref2 => {
-    let {
-      id
-    } = _ref2;
-    return id;
-  },
+  id: ({
+    id
+  }) => id,
   params: {
     fields: 'id,level,displayName~rename(name),path,parent[id,displayName~rename(name)],children[level]',
     userDataViewFallback: true,

@@ -1,13 +1,12 @@
 import { VIS_TYPE_SINGLE_VALUE } from '../../../../../modules/visTypes.js';
 import getSingleValueCustomSVGOptions from './singleValue/index.js';
-export default function getCustomSVGOptions(_ref) {
-  let {
-    extraConfig,
-    layout,
-    extraOptions,
-    metaData,
-    series
-  } = _ref;
+export default function getCustomSVGOptions({
+  extraConfig,
+  layout,
+  extraOptions,
+  metaData,
+  series
+}) {
   const baseOptions = {
     visualizationType: layout.type
   };

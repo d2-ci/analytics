@@ -5,13 +5,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import { PivotTableCell } from './PivotTableCell.js';
 import { usePivotTableEngine } from './PivotTableEngineContext.js';
 import { cell as cellStyle } from './styles/PivotTable.style.js';
-export const PivotTableTitleRow = _ref => {
+export const PivotTableTitleRow = ({
+  title,
+  scrollPosition,
+  containerWidth
+}) => {
   var _scrollPosition$x;
-  let {
-    title,
-    scrollPosition,
-    containerWidth
-  } = _ref;
   const containerRef = useRef(null);
   const [scrollWidth, setScrollWidth] = useState(0);
   const [isTitleTruncated, setIsTitleTruncated] = useState(false);
@@ -54,22 +53,19 @@ export const PivotTableTitleRow = _ref => {
     className: `jsx-${cellStyle.__hash}` + " " + "title-cell-content"
   }, isTitleTruncated ? /*#__PURE__*/React.createElement(Tooltip, {
     content: title
-  }, _ref2 => {
-    let {
-      ref: tooltipRef,
-      onMouseOver,
-      onMouseOut
-    } = _ref2;
-    return /*#__PURE__*/React.createElement("div", {
-      ref: tooltipRef,
-      onMouseOver: onMouseOver,
-      onMouseOut: onMouseOut,
-      style: {
-        maxWidth
-      },
-      className: `jsx-${cellStyle.__hash}` + " " + "title-cell-content"
-    }, title);
-  }) : title)));
+  }, ({
+    ref: tooltipRef,
+    onMouseOver,
+    onMouseOut
+  }) => /*#__PURE__*/React.createElement("div", {
+    ref: tooltipRef,
+    onMouseOver: onMouseOver,
+    onMouseOut: onMouseOut,
+    style: {
+      maxWidth
+    },
+    className: `jsx-${cellStyle.__hash}` + " " + "title-cell-content"
+  }, title)) : title)));
 };
 PivotTableTitleRow.propTypes = {
   containerWidth: PropTypes.number.isRequired,

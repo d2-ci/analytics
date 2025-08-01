@@ -6,13 +6,12 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { styles } from './styles/OfflineTooltip.style.js';
-const OfflineTooltip = _ref => {
-  let {
-    disabledWhenOffline,
-    disabled,
-    content,
-    children
-  } = _ref;
+const OfflineTooltip = ({
+  disabledWhenOffline = true,
+  disabled = false,
+  content,
+  children
+}) => {
   const {
     isDisconnected: offline
   } = useDhis2ConnectionStatus();
@@ -21,21 +20,18 @@ const OfflineTooltip = _ref => {
     content: content || i18n.t('Not available offline'),
     openDelay: 200,
     closeDelay: 100
-  }, _ref2 => {
-    let {
-      onMouseOver,
-      onMouseOut,
-      ref
-    } = _ref2;
-    return /*#__PURE__*/React.createElement("span", {
-      onMouseOver: () => notAllowed && onMouseOver(),
-      onMouseOut: () => notAllowed && onMouseOut(),
-      ref: ref,
-      className: `jsx-${styles.__hash}` + " " + (cx('tooltip', {
-        notAllowed
-      }) || "")
-    }, children);
-  }), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, ({
+    onMouseOver,
+    onMouseOut,
+    ref
+  }) => /*#__PURE__*/React.createElement("span", {
+    onMouseOver: () => notAllowed && onMouseOver(),
+    onMouseOut: () => notAllowed && onMouseOut(),
+    ref: ref,
+    className: `jsx-${styles.__hash}` + " " + (cx('tooltip', {
+      notAllowed
+    }) || "")
+  }, children)), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };
@@ -44,9 +40,5 @@ OfflineTooltip.propTypes = {
   content: PropTypes.string,
   disabled: PropTypes.bool,
   disabledWhenOffline: PropTypes.bool
-};
-OfflineTooltip.defaultProps = {
-  disabled: false,
-  disabledWhenOffline: true
 };
 export { OfflineTooltip };

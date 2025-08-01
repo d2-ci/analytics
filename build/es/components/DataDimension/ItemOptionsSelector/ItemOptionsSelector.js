@@ -26,22 +26,22 @@ const formatOptionsFilters = (dataItemType, dataItemId) => {
   }
   return optionsFilters;
 };
-export const ItemOptionsSelector = _ref => {
+const SELECTED_ITEMS_PROP_DEFAULT = [];
+export const ItemOptionsSelector = ({
+  id: dataItemId,
+  name: dataItemName,
+  type: dataItemType,
+  selectedItems = SELECTED_ITEMS_PROP_DEFAULT,
+  infoDataItem,
+  setInfoDataItem,
+  displayNameProp,
+  itemsRef,
+  onEditClick,
+  onSelect,
+  onClose,
+  dataTest
+}) => {
   var _state$filter;
-  let {
-    id: dataItemId,
-    name: dataItemName,
-    type: dataItemType,
-    selectedItems,
-    infoDataItem,
-    setInfoDataItem,
-    displayNameProp,
-    itemsRef,
-    onEditClick,
-    onSelect,
-    onClose,
-    dataTest
-  } = _ref;
   const [state, setState] = useState({
     searchTerm: '',
     filter: formatOptionsFilters(dataItemType, dataItemId),
@@ -139,12 +139,9 @@ export const ItemOptionsSelector = _ref => {
   return /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash} jsx-${itemOptionSelectorStyles.__hash}` + " " + "transfer-container"
   }, /*#__PURE__*/React.createElement(Transfer, {
-    onChange: _ref2 => {
-      let {
-        selected
-      } = _ref2;
-      return onChange(selected);
-    },
+    onChange: ({
+      selected
+    }) => onChange(selected),
     selected: selectedItems.map(item => item.value),
     options: [...state.options,
     // remove items already in the options list
@@ -168,12 +165,9 @@ export const ItemOptionsSelector = _ref => {
     filterPlaceholder: i18n.t('Search by option name'),
     filterablePicked: false,
     searchTerm: state.searchTerm,
-    onFilterChange: _ref3 => {
-      let {
-        value
-      } = _ref3;
-      return setSearchTerm(value);
-    },
+    onFilterChange: ({
+      value
+    }) => setSearchTerm(value),
     leftHeader: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
       className: `jsx-${styles.__hash} jsx-${itemOptionSelectorStyles.__hash}` + " " + "option-set-back-button"
     }, /*#__PURE__*/React.createElement(Button, {
@@ -241,7 +235,4 @@ ItemOptionsSelector.propTypes = {
   })),
   setInfoDataItem: PropTypes.func,
   onEditClick: PropTypes.func
-};
-ItemOptionsSelector.defaultProps = {
-  selectedItems: []
 };

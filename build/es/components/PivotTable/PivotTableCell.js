@@ -5,15 +5,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePivotTableEngine } from './PivotTableEngineContext.js';
 import { cell as cellStyle } from './styles/PivotTable.style.js';
-export const PivotTableCell = /*#__PURE__*/React.forwardRef((_ref, ref) => {
-  let {
-    classes,
-    isHeader,
-    children,
-    dataTest,
-    style = {},
-    ...props
-  } = _ref;
+export const PivotTableCell = /*#__PURE__*/React.forwardRef(({
+  classes,
+  isHeader,
+  children,
+  dataTest,
+  style = {},
+  ...props
+}, ref) => {
   const engine = usePivotTableEngine();
   style.width = style.minWidth = style.maxWidth = style.width;
   style.height = style.minHeight = style.maxHeight = style.height || engine.fontSize + engine.cellPadding * 2 + 2;
@@ -36,9 +35,6 @@ export const PivotTableCell = /*#__PURE__*/React.forwardRef((_ref, ref) => {
   }, cellStyle), children);
 });
 PivotTableCell.displayName = 'PivotTableCell';
-PivotTableCell.defaultProps = {
-  isHeader: false
-};
 PivotTableCell.propTypes = {
   children: PropTypes.node,
   classes: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string]),

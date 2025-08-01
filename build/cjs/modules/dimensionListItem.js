@@ -13,12 +13,11 @@ var _CalculationIcon = _interopRequireDefault(require("./../assets/DimensionItem
 var _dataSets = require("./dataSets.js");
 var _dataTypes = require("./dataTypes.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const getDimensionType = _ref => {
+const getDimensionType = ({
+  type,
+  expression
+}) => {
   var _dataTypes$type;
-  let {
-    type,
-    expression
-  } = _ref;
   if (type === _dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM && expression) {
     return _dataTypes.dataTypeMap[_dataTypes.DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM].getItemName();
   }

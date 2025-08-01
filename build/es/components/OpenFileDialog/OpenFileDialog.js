@@ -16,13 +16,12 @@ import { VisTypeFilter } from './VisTypeFilter.js';
 const getQuery = type => ({
   files: {
     resource: AOTypeMap[type].apiEndpoint,
-    params: _ref => {
-      let {
-        sortField = 'displayName',
-        sortDirection = 'iasc',
-        page = 1,
-        filters
-      } = _ref;
+    params: ({
+      sortField = 'displayName',
+      sortDirection = 'iasc',
+      page = 1,
+      filters
+    }) => {
       const queryParams = {
         filter: filters,
         fields: `id,type,displayName,title,displayDescription,created,lastUpdated,user,access,href`,
@@ -37,17 +36,16 @@ const getQuery = type => ({
     }
   }
 });
-export const OpenFileDialog = _ref2 => {
-  let {
-    type,
-    open,
-    filterVisTypes,
-    defaultFilterVisType,
-    onClose,
-    onFileSelect,
-    onNew,
-    currentUser
-  } = _ref2;
+export const OpenFileDialog = ({
+  type,
+  open,
+  filterVisTypes,
+  defaultFilterVisType,
+  onClose,
+  onFileSelect,
+  onNew,
+  currentUser
+}) => {
   const filesQuery = useMemo(() => getQuery(type), [type]);
   const defaultFilters = {
     searchTerm: '',
@@ -129,17 +127,14 @@ export const OpenFileDialog = _ref2 => {
   const setPage = pageNum => setState({
     page: pageNum
   });
-  const sortData = _ref3 => {
-    let {
-      name,
-      direction
-    } = _ref3;
-    return setState({
-      sortField: name,
-      sortDirection: direction,
-      page: 1
-    });
-  };
+  const sortData = ({
+    name,
+    direction
+  }) => setState({
+    sortField: name,
+    sortDirection: direction,
+    page: 1
+  });
   useEffect(() => {
     // only fetch data when the dialog is open
     if (open) {
@@ -233,20 +228,17 @@ export const OpenFileDialog = _ref2 => {
     className: `jsx-${styles.__hash}` + " " + "data-table-wrapper"
   }, /*#__PURE__*/React.createElement(DataTable, {
     layout: "fixed"
-  }, /*#__PURE__*/React.createElement(DataTableHead, null, /*#__PURE__*/React.createElement(DataTableRow, null, data !== null && data !== void 0 && data.files[AOTypeMap[type].apiEndpoint].length ? headers.map(_ref4 => {
-    let {
-      field,
-      label,
-      width
-    } = _ref4;
-    return /*#__PURE__*/React.createElement(DataTableColumnHeader, {
-      width: width,
-      key: field,
-      name: field,
-      onSortIconClick: sortData,
-      sortDirection: getSortDirection(field)
-    }, label);
-  }) : /*#__PURE__*/React.createElement(DataTableColumnHeader, null))), /*#__PURE__*/React.createElement(DataTableBody, {
+  }, /*#__PURE__*/React.createElement(DataTableHead, null, /*#__PURE__*/React.createElement(DataTableRow, null, data !== null && data !== void 0 && data.files[AOTypeMap[type].apiEndpoint].length ? headers.map(({
+    field,
+    label,
+    width
+  }) => /*#__PURE__*/React.createElement(DataTableColumnHeader, {
+    width: width,
+    key: field,
+    name: field,
+    onSortIconClick: sortData,
+    sortDirection: getSortDirection(field)
+  }, label)) : /*#__PURE__*/React.createElement(DataTableColumnHeader, null))), /*#__PURE__*/React.createElement(DataTableBody, {
     className: "data-table-body"
   }, loading && /*#__PURE__*/React.createElement(DataTableRow, null, /*#__PURE__*/React.createElement(DataTableCell, {
     large: true

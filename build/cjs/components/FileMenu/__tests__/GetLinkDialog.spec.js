@@ -63,14 +63,13 @@ describe('The FileMenu - GetLinkDialog component', () => {
       id: tests[0].id
     }).find(_ui.Modal)).toHaveLength(1);
   });
-  test.each(tests)('renders a <a> tag containing the correct app path and id', _ref => {
-    let {
-      apiVersion,
-      baseUrl,
-      type,
-      id,
-      expected
-    } = _ref;
+  test.each(tests)('renders a <a> tag containing the correct app path and id', ({
+    apiVersion,
+    baseUrl,
+    type,
+    id,
+    expected
+  }) => {
     mockUseConfig.mockReturnValueOnce({
       apiVersion: apiVersion || 42,
       baseUrl

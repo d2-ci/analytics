@@ -5,13 +5,12 @@ import React, { useEffect, useState } from 'react';
 import { TranslationForm } from './TranslationForm.js';
 import { TranslationModalActions } from './TranslationModalActions.js';
 import { useTranslationsResults } from './useTranslationsResults.js';
-export const TranslationModal = _ref => {
-  let {
-    objectToTranslate,
-    fieldsToTranslate,
-    onClose,
-    onTranslationSaved
-  } = _ref;
+export const TranslationModal = ({
+  objectToTranslate,
+  fieldsToTranslate,
+  onClose,
+  onTranslationSaved
+}) => {
   const [translations, setTranslations] = useState([]);
   const endpointPath = new URL(objectToTranslate.href).pathname;
   const endpointPathMatch = endpointPath.match(/api\/(?:\d+\/)?(?<resource>.+)/);

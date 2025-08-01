@@ -5,11 +5,18 @@ var _AnalyticsRequest = _interopRequireDefault(require("../AnalyticsRequest.js")
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 let request;
 let expectedParameters;
+let warnMock;
 const getFuncName = parameter => `with${parameter.charAt(0).toUpperCase()}${parameter.slice(1)}`;
 describe('AnalyticsRequest', () => {
   beforeEach(() => {
     request = new _AnalyticsRequest.default();
     expectedParameters = {};
+    // Prevent console warnings like below from cluttering the test output:
+    // "analytics.request.withAggregationType(): "new-constant" not listed as possible value"
+    warnMock = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+  afterEach(() => {
+    warnMock.mockReset();
   });
   describe('constructor', () => {
     it('should not be allowed to be called without new', () => {
@@ -283,8 +290,7 @@ describe('AnalyticsRequest', () => {
         page: 1,
         pageSize: 50
       };
-      Object.entries(params).forEach(_ref => {
-        let [key, value] = _ref;
+      Object.entries(params).forEach(([key, value]) => {
         const parameter = key;
         const funcName = getFuncName(parameter);
         it(`should add the ${parameter} parameter with the default value`, () => {

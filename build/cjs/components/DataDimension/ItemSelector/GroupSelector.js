@@ -15,20 +15,18 @@ var _dataTypes = require("../../../modules/dataTypes.js");
 var _DetailSelector = require("./DetailSelector.js");
 var _MetricSelector = require("./MetricSelector.js");
 var _GroupSelectorStyle = _interopRequireDefault(require("./styles/GroupSelector.style.js"));
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const GroupSelector = _ref => {
+const GroupSelector = ({
+  dataType,
+  currentGroup,
+  onGroupChange,
+  dataTest,
+  displayNameProp,
+  currentSubGroup,
+  onSubGroupChange
+}) => {
   var _dataTypes$dataType, _dataTypes$dataType2, _dataTypes$dataType3, _dataTypes$dataType4, _dataTypes$dataType5, _dataTypes$dataType6, _dataTypes$dataType7;
-  let {
-    dataType,
-    currentGroup,
-    onGroupChange,
-    dataTest,
-    displayNameProp,
-    currentSubGroup,
-    onSubGroupChange
-  } = _ref;
   const dataEngine = (0, _appRuntime.useDataEngine)();
   const [groups, setGroups] = (0, _react.useState)([]);
   const [isLoading, setIsLoading] = (0, _react.useState)(true);

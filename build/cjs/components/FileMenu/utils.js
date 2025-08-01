@@ -43,12 +43,11 @@ const appPathFor = (fileType, id, apiVersion) => {
   }
 };
 exports.appPathFor = appPathFor;
-const preparePayloadForSaveAs = _ref => {
-  let {
-    visualization,
-    name,
-    description
-  } = _ref;
+const preparePayloadForSaveAs = ({
+  visualization,
+  name,
+  description
+}) => {
   delete visualization.id;
   delete visualization.created;
   delete visualization.createdBy;
@@ -65,12 +64,11 @@ const preparePayloadForSaveAs = _ref => {
   return visualization;
 };
 exports.preparePayloadForSaveAs = preparePayloadForSaveAs;
-const preparePayloadForSave = _ref2 => {
-  let {
-    visualization,
-    name,
-    description
-  } = _ref2;
+const preparePayloadForSave = ({
+  visualization,
+  name,
+  description
+}) => {
   visualization.name = name || visualization.name || _d2I18n.default.t('Untitled {{visualizationType}}, {{date}}', {
     visualizationType: (0, _visTypes.getDisplayNameByVisType)(visualization.type),
     date: new Date().toLocaleDateString(undefined, {

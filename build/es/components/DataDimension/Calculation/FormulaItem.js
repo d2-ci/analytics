@@ -15,20 +15,19 @@ const BEFORE = 'BEFORE';
 const AFTER = 'AFTER';
 const maxMsBetweenClicks = 300;
 const TAG_INPUT = 'INPUT';
-const FormulaItem = _ref => {
-  let {
-    id,
-    label,
-    value = '',
-    type,
-    isLast,
-    isHighlighted,
-    overLastDropZone,
-    onChange,
-    onClick,
-    onDoubleClick,
-    hasFocus
-  } = _ref;
+const FormulaItem = ({
+  id,
+  label,
+  value = '',
+  type,
+  isLast,
+  isHighlighted,
+  overLastDropZone,
+  onChange,
+  onClick,
+  onDoubleClick,
+  hasFocus
+}) => {
   const {
     attributes,
     listeners,

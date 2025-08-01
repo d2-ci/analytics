@@ -3,10 +3,9 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './styles/LegendKey.style.js';
-const LegendKey = _ref => {
-  let {
-    legendSets
-  } = _ref;
+const LegendKey = ({
+  legendSets
+}) => {
   return legendSets.length ? /*#__PURE__*/React.createElement("div", {
     "data-test": "legend-key-container",
     className: `jsx-${styles.__hash}` + " " + "container"

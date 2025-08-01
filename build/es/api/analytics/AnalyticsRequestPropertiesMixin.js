@@ -71,8 +71,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withFormat('xml');
    */
-  withFormat() {
-    let format = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'json';
+  withFormat(format = 'json') {
     this.format = format;
     return new AnalyticsRequest(this);
   }
@@ -147,8 +146,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withSkipMeta();
    */
-  withSkipMeta() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withSkipMeta(flag = true) {
     this.parameters.skipMeta = flag;
     return new AnalyticsRequest(this);
   }
@@ -164,8 +162,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withSkipData();
    */
-  withSkipData() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withSkipData(flag = true) {
     this.parameters.skipData = flag;
     return new AnalyticsRequest(this);
   }
@@ -181,8 +178,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withHierarchyMeta();
    */
-  withHierarchyMeta() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withHierarchyMeta(flag = true) {
     this.parameters.hierarchyMeta = flag;
     return new AnalyticsRequest(this);
   }
@@ -198,8 +194,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withIgnoreLimit();
    */
-  withIgnoreLimit() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withIgnoreLimit(flag = true) {
     this.parameters.ignoreLimit = flag;
     return new AnalyticsRequest(this);
   }
@@ -215,8 +210,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withTableLayout();
    */
-  withTableLayout() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withTableLayout(flag = true) {
     this.parameters.tableLayout = flag;
     return new AnalyticsRequest(this);
   }
@@ -232,8 +226,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withHideEmptyRows();
    */
-  withHideEmptyRows() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withHideEmptyRows(flag = true) {
     this.parameters.hideEmptyRows = flag;
     return new AnalyticsRequest(this);
   }
@@ -249,8 +242,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withHideEmptyColumns();
    */
-  withHideEmptyColumns() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withHideEmptyColumns(flag = true) {
     this.parameters.hideEmptyColumns = flag;
     return new AnalyticsRequest(this);
   }
@@ -266,8 +258,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withShowHierarchy();
    */
-  withShowHierarchy() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withShowHierarchy(flag = true) {
     this.parameters.showHierarchy = flag;
     return new AnalyticsRequest(this);
   }
@@ -283,8 +274,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withIncludeNumDen();
    */
-  withIncludeNumDen() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withIncludeNumDen(flag = true) {
     this.parameters.includeNumDen = flag;
     return new AnalyticsRequest(this);
   }
@@ -300,8 +290,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withIncludeMetadataDetails();
    */
-  withIncludeMetadataDetails() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withIncludeMetadataDetails(flag = true) {
     this.parameters.includeMetadataDetails = flag;
     return new AnalyticsRequest(this);
   }
@@ -663,8 +652,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withCoordinatesOnly();
    */
-  withCoordinatesOnly() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withCoordinatesOnly(flag = true) {
     this.parameters.coordinatesOnly = flag;
     return new AnalyticsRequest(this);
   }
@@ -680,8 +668,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withPage(2);
    */
-  withPage() {
-    let page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  withPage(page = 1) {
     this.parameters.page = page;
     return new AnalyticsRequest(this);
   }
@@ -697,8 +684,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withPageSize(10);
    */
-  withPageSize() {
-    let size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 50;
+  withPageSize(size = 50) {
     this.parameters.pageSize = size;
     return new AnalyticsRequest(this);
   }
@@ -798,8 +784,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withCollapseDataDimensions();
    */
-  withCollapseDataDimensions() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withCollapseDataDimensions(flag = true) {
     this.parameters.collapseDataDimensions = flag;
     return new AnalyticsRequest(this);
   }
@@ -815,8 +800,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withSkipRounding();
    */
-  withSkipRounding() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withSkipRounding(flag = true) {
     this.parameters.skipRounding = flag;
     return new AnalyticsRequest(this);
   }
@@ -832,8 +816,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withAggregateData();
    */
-  withAggregateData() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withAggregateData(flag = true) {
     this.parameters.aggregateData = flag;
     return new AnalyticsRequest(this);
   }
@@ -867,8 +850,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withCoordinateField('<attribute-id>');
    */
-  withCoordinateField() {
-    let field = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'EVENT';
+  withCoordinateField(field = 'EVENT') {
     // EVENT, <attribute-id>, <dataelement-id>
     this.parameters.coordinateField = field;
     return new AnalyticsRequest(this);
@@ -903,8 +885,7 @@ class extends base {
    * const req = new analytics.request()
    *    .withIncludeClusterPoints();
    */
-  withIncludeClusterPoints() {
-    let flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  withIncludeClusterPoints(flag = true) {
     this.parameters.includeClusterPoints = flag;
     return new AnalyticsRequest(this);
   }

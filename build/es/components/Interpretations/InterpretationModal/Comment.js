@@ -5,14 +5,13 @@ import React, { useState } from 'react';
 import { Message, MessageIconButton, MessageStatsBar, getCommentAccess } from '../common/index.js';
 import { CommentDeleteButton } from './CommentDeleteButton.js';
 import { CommentUpdateForm } from './CommentUpdateForm.js';
-const Comment = _ref => {
-  let {
-    comment,
-    currentUser,
-    interpretationId,
-    onThreadUpdated,
-    canComment
-  } = _ref;
+const Comment = ({
+  comment,
+  currentUser,
+  interpretationId,
+  onThreadUpdated,
+  canComment
+}) => {
   const [isUpdateMode, setIsUpdateMode] = useState(false);
   const commentAccess = getCommentAccess(comment, canComment, currentUser);
   return isUpdateMode ? /*#__PURE__*/React.createElement(CommentUpdateForm, {

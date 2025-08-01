@@ -12,13 +12,12 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _index = require("../../../RichText/index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const Message = _ref => {
-  let {
-    children,
-    text,
-    created,
-    username
-  } = _ref;
+const Message = ({
+  children,
+  text,
+  created,
+  username
+}) => {
   const {
     fromServerDate
   } = (0, _appRuntime.useTimeZoneConversion)();

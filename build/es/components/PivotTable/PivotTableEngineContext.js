@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { createContext, useContext } from 'react';
 export const PivotTableEngineContext = /*#__PURE__*/createContext(null);
-export const Provider = _ref => {
-  let {
-    engine,
-    children
-  } = _ref;
+export const Provider = ({
+  engine,
+  children
+}) => {
   return /*#__PURE__*/React.createElement(PivotTableEngineContext.Provider, {
     value: engine
   }, children);

@@ -9,12 +9,11 @@ const getOptions = () => ({
   [TOTALS]: i18n.t('Totals only'),
   [DETAIL]: i18n.t('Details only')
 });
-export const DetailSelector = _ref => {
-  let {
-    currentValue,
-    onChange,
-    dataTest
-  } = _ref;
+export const DetailSelector = ({
+  currentValue,
+  onChange,
+  dataTest
+}) => {
   const options = getOptions();
   return /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "detail-container"

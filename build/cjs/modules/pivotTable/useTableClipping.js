@@ -8,13 +8,12 @@ var _react = require("react");
 var _clipPartitionedAxis = require("./clipPartitionedAxis.js");
 var _pivotTableConstants = require("./pivotTableConstants.js");
 var _useScrollPosition = require("./useScrollPosition.js");
-const useTableClipping = _ref => {
-  let {
-    containerRef,
-    width,
-    height,
-    engine
-  } = _ref;
+const useTableClipping = ({
+  containerRef,
+  width,
+  height,
+  engine
+}) => {
   const scrollPosition = (0, _useScrollPosition.useScrollPosition)(containerRef);
   const lineHeight = engine.fontSize + engine.cellPadding * 2 + 2;
   const rows = (0, _react.useMemo)(() => {

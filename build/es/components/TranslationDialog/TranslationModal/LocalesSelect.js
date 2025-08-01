@@ -8,33 +8,28 @@ const query = {
     resource: 'locales/db'
   }
 };
-export const LocalesSelect = _ref => {
-  let {
-    onChange,
-    selected
-  } = _ref;
+export const LocalesSelect = ({
+  onChange,
+  selected
+}) => {
   const {
     data,
     fetching
   } = useDataQuery(query);
   return /*#__PURE__*/React.createElement(SingleSelect, {
     prefix: selected ? i18n.t('Translating to') : i18n.t('Choose a locale'),
-    onChange: _ref2 => {
-      let {
-        selected
-      } = _ref2;
-      return onChange(selected);
-    },
+    onChange: ({
+      selected
+    }) => onChange(selected),
     loading: fetching,
     selected: data && selected ? selected : '',
     dense: true
   }, data && data.locales
   // XXX remove duplicates ?! fr_SN - French (Senegal)
-  .reduce((locales, _ref3) => {
-    let {
-      locale,
-      name
-    } = _ref3;
+  .reduce((locales, {
+    locale,
+    name
+  }) => {
     if (!locales.find(entry => entry.locale === locale)) {
       locales.push({
         locale,
@@ -42,17 +37,14 @@ export const LocalesSelect = _ref => {
       });
     }
     return locales;
-  }, []).map(_ref4 => {
-    let {
-      locale,
-      name
-    } = _ref4;
-    return /*#__PURE__*/React.createElement(SingleSelectOption, {
-      key: locale,
-      value: locale,
-      label: name
-    });
-  }));
+  }, []).map(({
+    locale,
+    name
+  }) => /*#__PURE__*/React.createElement(SingleSelectOption, {
+    key: locale,
+    value: locale,
+    label: name
+  })));
 };
 LocalesSelect.propTypes = {
   onChange: PropTypes.func.isRequired,

@@ -8,14 +8,13 @@ import { PivotTableBody } from './PivotTableBody.js';
 import { PivotTableContainer } from './PivotTableContainer.js';
 import { Provider } from './PivotTableEngineContext.js';
 import { PivotTableHead } from './PivotTableHead.js';
-const PivotTable = _ref => {
-  let {
-    visualization,
-    data,
-    legendSets,
-    renderCounter,
-    onToggleContextualMenu
-  } = _ref;
+const PivotTable = ({
+  visualization,
+  data,
+  legendSets,
+  renderCounter,
+  onToggleContextualMenu
+}) => {
   const containerRef = useRef(undefined);
   const {
     width,

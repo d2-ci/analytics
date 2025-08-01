@@ -20,12 +20,9 @@ function _default(filters, metaData) {
   let l;
   filters.forEach(filter => {
     const items = (0, _dimensionGetItems.dimensionGetItems)(filter);
-    if ((0, _dimensionIs.dimensionIs)(filter, _predefinedDimensions.DIMENSION_ID_ORGUNIT) && items.some(_ref => {
-      let {
-        id
-      } = _ref;
-      return _index.ouIdHelper.hasGroupPrefix(id) || _index.ouIdHelper.hasLevelPrefix(id);
-    })) {
+    if ((0, _dimensionIs.dimensionIs)(filter, _predefinedDimensions.DIMENSION_ID_ORGUNIT) && items.some(({
+      id
+    }) => _index.ouIdHelper.hasGroupPrefix(id) || _index.ouIdHelper.hasLevelPrefix(id))) {
       titleFragments.push((0, _getOuLevelAndGroupText.getOuLevelAndGroupText)(filter, metaData));
     } else if ((0, _dimensionIs.dimensionIs)(filter, _predefinedDimensions.DIMENSION_ID_PERIOD)) {
       const relativePeriodNames = (0, _relativePeriods.getRelativePeriodsName)();

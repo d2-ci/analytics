@@ -14,19 +14,17 @@ const getContext = fontSize => {
   ctx.font = `${fontSize}px Roboto, Arial, sans-serif`;
   return ctx;
 };
-const measureText = function (text) {
-  let fontSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 11;
+const measureText = (text, fontSize = 11) => {
   const ctx = getContext(fontSize);
   const textMetrics = ctx.measureText(text);
   return textMetrics.width;
 };
-const measureTextWithWrapping = (text, _ref) => {
-  let {
-    fontSize = 11,
-    maxWidth = _pivotTableConstants.CLIPPED_CELL_MAX_SIZE,
-    justifyBuffer = _pivotTableConstants.WRAPPED_TEXT_JUSTIFY_BUFFER,
-    lineHeight = _pivotTableConstants.WRAPPED_TEXT_LINE_HEIGHT
-  } = _ref;
+const measureTextWithWrapping = (text, {
+  fontSize = 11,
+  maxWidth = _pivotTableConstants.CLIPPED_CELL_MAX_SIZE,
+  justifyBuffer = _pivotTableConstants.WRAPPED_TEXT_JUSTIFY_BUFFER,
+  lineHeight = _pivotTableConstants.WRAPPED_TEXT_LINE_HEIGHT
+}) => {
   if (!text) {
     return {
       width: 0,

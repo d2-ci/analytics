@@ -44,13 +44,12 @@ const PERIOD_TYPE_REGEX = exports.PERIOD_TYPE_REGEX = {
   // YYYY"July"
   [_index2.FYAPR]: /^([0-9]{4})April$/ // YYYY"April"
 };
-const getPeriods = _ref => {
-  let {
-    periodType,
-    config,
-    fnFilter,
-    periodSettings = {}
-  } = _ref;
+const getPeriods = ({
+  periodType,
+  config,
+  fnFilter,
+  periodSettings = {}
+}) => {
   const offset = parseInt(config.offset, 10);
   const isFilter = config.filterFuturePeriods;
   const isReverse = periodType.match(/^FY|YEARLY/) ? true : config.reversePeriods;

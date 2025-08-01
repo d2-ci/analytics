@@ -13,19 +13,15 @@ var _index = require("../index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const mutation = {
   resource: 'interpretations',
-  id: _ref => {
-    let {
-      id
-    } = _ref;
-    return id;
-  },
+  id: ({
+    id
+  }) => id,
   type: 'delete'
 };
-const InterpretationDeleteButton = _ref2 => {
-  let {
-    id,
-    onComplete
-  } = _ref2;
+const InterpretationDeleteButton = ({
+  id,
+  onComplete
+}) => {
   const [remove, {
     loading
   }] = (0, _appRuntime.useDataMutation)(mutation, {

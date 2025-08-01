@@ -13,36 +13,31 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _InterpretationForm = require("./InterpretationForm.js");
 var _InterpretationList = require("./InterpretationList.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const interpretationsQuery = {
   interpretations: {
     resource: 'interpretations',
-    params: _ref => {
-      let {
-        type,
-        id
-      } = _ref;
-      return {
-        fields: ['access[write,manage]', 'id', 'createdBy[id,displayName]', 'created', 'text', 'comments[id]', 'likes', 'likedBy[id]'],
-        filter: `${type}.id:eq:${id}`
-      };
-    }
+    params: ({
+      type,
+      id
+    }) => ({
+      fields: ['access[write,manage]', 'id', 'createdBy[id,displayName]', 'created', 'text', 'comments[id]', 'likes', 'likedBy[id]'],
+      filter: `${type}.id:eq:${id}`
+    })
   }
 };
-const InterpretationsUnit = exports.InterpretationsUnit = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
-  let {
-    currentUser,
-    type,
-    id,
-    visualizationHasTimeDimension,
-    onInterpretationClick,
-    onReplyIconClick,
-    disabled,
-    renderId,
-    dashboardRedirectUrl
-  } = _ref2;
+const InterpretationsUnit = exports.InterpretationsUnit = /*#__PURE__*/(0, _react.forwardRef)(({
+  currentUser,
+  type,
+  id,
+  visualizationHasTimeDimension = true,
+  onInterpretationClick = Function.prototype,
+  onReplyIconClick,
+  disabled,
+  renderId,
+  dashboardRedirectUrl
+}, ref) => {
   const [isExpanded, setIsExpanded] = (0, _react.useState)(true);
   const [interpretations, setInterpretations] = (0, _react.useState)([]);
   const showNoTimeDimensionHelpText = type === 'eventVisualization' && !visualizationHasTimeDimension;
@@ -71,11 +66,10 @@ const InterpretationsUnit = exports.InterpretationsUnit = /*#__PURE__*/(0, _reac
       });
     }
   }, [type, id, renderId, refetch]);
-  const onLikeToggled = _ref3 => {
-    let {
-      id,
-      likedBy
-    } = _ref3;
+  const onLikeToggled = ({
+    id,
+    likedBy
+  }) => {
     const interpretation = interpretations.find(interp => interp.id === id);
     interpretation.likedBy = likedBy;
     interpretation.likes = likedBy.length;
@@ -123,10 +117,6 @@ const InterpretationsUnit = exports.InterpretationsUnit = /*#__PURE__*/(0, _reac
   }, [`.container.__jsx-style-dynamic-selector{position:relative;padding:${_ui.spacers.dp16};border-bottom:1px solid ${_ui.colors.grey400};background-color:${_ui.colors.white};}`, ".fetching-loader.__jsx-style-dynamic-selector{position:absolute;inset:0px;background-color:rgba(255,255,255,0.8);display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;z-index:1;}", `.expanded.__jsx-style-dynamic-selector{padding-bottom:${_ui.spacers.dp32};}`, ".loader.__jsx-style-dynamic-selector{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;}", ".header.__jsx-style-dynamic-selector{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;cursor:pointer;}", `.title.__jsx-style-dynamic-selector{font-size:16px;font-weight:500;line-height:21px;color:${_ui.colors.grey900};}`]));
 });
 InterpretationsUnit.displayName = 'InterpretationsUnit';
-InterpretationsUnit.defaultProps = {
-  onInterpretationClick: Function.prototype,
-  visualizationHasTimeDimension: true
-};
 InterpretationsUnit.propTypes = {
   currentUser: _propTypes.default.object.isRequired,
   id: _propTypes.default.string.isRequired,

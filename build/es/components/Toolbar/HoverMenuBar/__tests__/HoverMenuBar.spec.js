@@ -102,11 +102,10 @@ describe('<HoverMenuBar/>', () => {
     });
   });
 });
-function createFullMenuBarWrapper() {
-  let {
-    menuItemOnClickSpy,
-    subMenuItemOnClickSpy
-  } = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+function createFullMenuBarWrapper({
+  menuItemOnClickSpy,
+  subMenuItemOnClickSpy
+} = {}) {
   return render(/*#__PURE__*/React.createElement(HoverMenuBar, null, /*#__PURE__*/React.createElement(HoverMenuDropdown, {
     label: "Menu A"
   }, /*#__PURE__*/React.createElement(HoverMenuList, null, /*#__PURE__*/React.createElement(HoverMenuListItem, {

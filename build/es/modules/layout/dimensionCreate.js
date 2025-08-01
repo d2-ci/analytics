@@ -1,7 +1,5 @@
 import { DIMENSION_PROP_ID, DIMENSION_PROP_ITEMS, DIMENSION_PROP_FILTER, DIMENSION_PROP_LEGEND_SET, DIMENSION_PROP_PROGRAM, DIMENSION_PROP_PROGRAM_STAGE, DIMENSION_PROP_REPETITION } from './dimension.js';
-export const dimensionCreate = function (dimensionId) {
-  let itemIds = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-  let args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+export const dimensionCreate = (dimensionId, itemIds = [], args = {}) => {
   const dimension = {
     [DIMENSION_PROP_ID.name]: dimensionId,
     ...(itemIds.length && {

@@ -16,12 +16,11 @@ const getOptions = () => ({
   [_dataTypes.TOTALS]: _index.default.t('Totals only'),
   [_dataTypes.DETAIL]: _index.default.t('Details only')
 });
-const DetailSelector = _ref => {
-  let {
-    currentValue,
-    onChange,
-    dataTest
-  } = _ref;
+const DetailSelector = ({
+  currentValue,
+  onChange,
+  dataTest
+}) => {
   const options = getOptions();
   return /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_DetailSelectorStyle.default.__hash}` + " " + "detail-container"

@@ -9,28 +9,21 @@ import styles from './styles/InfoPopover.style.js';
 const calculationQuery = {
   calculation: {
     resource: 'expressionDimensionItems',
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
-    params: _ref2 => {
-      let {
-        displayNameProp
-      } = _ref2;
-      return {
-        fields: `${getCommonFields(displayNameProp)},expression`
-      };
-    }
+    id: ({
+      id
+    }) => id,
+    params: ({
+      displayNameProp
+    }) => ({
+      fields: `${getCommonFields(displayNameProp)},expression`
+    })
   }
 };
-export const CalculationInfo = _ref3 => {
-  let {
-    type,
-    id,
-    displayNameProp
-  } = _ref3;
+export const CalculationInfo = ({
+  type,
+  id,
+  displayNameProp
+}) => {
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [expressionError, setExpressionError] = useState();

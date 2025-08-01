@@ -46,9 +46,7 @@ const parseExpression = input => {
   return input.match(regex) || [];
 };
 exports.parseExpression = parseExpression;
-const parseExpressionToArray = function () {
-  let expression = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  let metadata = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+const parseExpressionToArray = (expression = '', metadata = []) => {
   return parseExpression(expression).map(value => {
     if (value.startsWith('#{') && value.endsWith('}')) {
       var _metadata$find;
@@ -75,10 +73,7 @@ const parseExpressionToArray = function () {
   }) || [];
 };
 exports.parseExpressionToArray = parseExpressionToArray;
-const parseArrayToExpression = function () {
-  let input = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  return input.map(item => item.value).join('');
-};
+const parseArrayToExpression = (input = []) => input.map(item => item.value).join('');
 exports.parseArrayToExpression = parseArrayToExpression;
 const validateExpression = expression => {
   let result;
@@ -131,8 +126,7 @@ const validateExpression = expression => {
   return result;
 };
 exports.validateExpression = validateExpression;
-const getItemIdsFromExpression = function () {
-  let expression = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+const getItemIdsFromExpression = (expression = '') => {
   const regex = /#{([a-zA-Z0-9#]+.*?)}/g;
   const matches = expression.match(regex);
   return matches ? matches.map(match => match.slice(2, -1)) : [];

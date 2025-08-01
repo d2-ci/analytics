@@ -10,13 +10,12 @@ var _PivotTableCell = require("./PivotTableCell.js");
 var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 var _PivotTableHeaderCell = require("./PivotTableHeaderCell.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PivotTableRowHeaderCell = _ref => {
+const PivotTableRowHeaderCell = ({
+  clippingResult,
+  rowIndex,
+  rowLevel
+}) => {
   var _engine$adaptiveClipp;
-  let {
-    clippingResult,
-    rowIndex,
-    rowLevel
-  } = _ref;
   const engine = (0, _PivotTableEngineContext.usePivotTableEngine)();
   const width = engine.adaptiveClippingController.columns.headerSizes[rowLevel];
   const height = (_engine$adaptiveClipp = engine.adaptiveClippingController.rows.sizes[engine.rowMap[rowIndex]]) === null || _engine$adaptiveClipp === void 0 ? void 0 : _engine$adaptiveClipp.size;

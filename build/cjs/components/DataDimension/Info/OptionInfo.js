@@ -15,28 +15,21 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 const optionQuery = {
   option: {
     resource: 'options',
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
-    params: _ref2 => {
-      let {
-        displayNameProp
-      } = _ref2;
-      return {
-        fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},optionSet[displayName]`
-      };
-    }
+    id: ({
+      id
+    }) => id,
+    params: ({
+      displayNameProp
+    }) => ({
+      fields: `${(0, _InfoTable.getCommonFields)(displayNameProp)},optionSet[displayName]`
+    })
   }
 };
-const OptionInfo = _ref3 => {
-  let {
-    type,
-    id,
-    displayNameProp
-  } = _ref3;
+const OptionInfo = ({
+  type,
+  id,
+  displayNameProp
+}) => {
   const {
     loading,
     error,

@@ -19,19 +19,18 @@ var _DndContext = _interopRequireWildcard(require("./DndContext.js"));
 var _FormulaField = _interopRequireWildcard(require("./FormulaField.js"));
 var _MathOperatorSelector = _interopRequireDefault(require("./MathOperatorSelector.js"));
 var _CalculationModalStyle = _interopRequireDefault(require("./styles/CalculationModal.style.js"));
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const FIRST_POSITION = 0;
 const LAST_POSITION = -1;
-const CalculationModal = _ref => {
-  let {
-    calculation,
-    onSave,
-    onClose,
-    onDelete,
-    displayNameProp
-  } = _ref;
+const CALCULATION_PROP_DEFAULT = {};
+const CalculationModal = ({
+  calculation = CALCULATION_PROP_DEFAULT,
+  onSave,
+  onClose,
+  onDelete,
+  displayNameProp
+}) => {
   const {
     show: showError
   } = (0, _appRuntime.useAlert)(error => error, {
@@ -57,29 +56,23 @@ const CalculationModal = _ref => {
   const query = {
     dataElements: {
       resource: 'dataElements',
-      params: _ref2 => {
-        let {
-          ids = []
-        } = _ref2;
-        return {
-          fields: `id,${displayNameProp}~rename(name)`,
-          filter: `id:in:[${ids.join(',')}]`,
-          paging: false
-        };
-      }
+      params: ({
+        ids = []
+      }) => ({
+        fields: `id,${displayNameProp}~rename(name)`,
+        filter: `id:in:[${ids.join(',')}]`,
+        paging: false
+      })
     },
     dataElementOperands: {
       resource: 'dataElementOperands',
-      params: _ref3 => {
-        let {
-          ids = []
-        } = _ref3;
-        return {
-          fields: `id,${displayNameProp}~rename(name)`,
-          filter: `id:in:[${ids.join(',')}]`,
-          paging: false
-        };
-      }
+      params: ({
+        ids = []
+      }) => ({
+        fields: `id,${displayNameProp}~rename(name)`,
+        filter: `id:in:[${ids.join(',')}]`,
+        paging: false
+      })
     }
   };
   const {
@@ -124,13 +117,12 @@ const CalculationModal = _ref => {
   const expressionStatus = validationOutput === null || validationOutput === void 0 ? void 0 : validationOutput.status;
   const selectItem = itemId => setSelectedItemId(prevSelected => prevSelected !== itemId ? itemId : null);
   const isLoading = isCreatingCalculation || isUpdatingCalculation || isDeletingCalculation || isSavingCalculation || isValidating;
-  const addItem = _ref4 => {
-    let {
-      label,
-      value,
-      type,
-      destIndex = LAST_POSITION
-    } = _ref4;
+  const addItem = ({
+    label,
+    value,
+    type,
+    destIndex = LAST_POSITION
+  }) => {
     if (isLoading) {
       return null;
     }
@@ -155,11 +147,10 @@ const CalculationModal = _ref => {
       setFocusItemId(newItem.id);
     }
   };
-  const moveItem = _ref5 => {
-    let {
-      sourceIndex,
-      destIndex
-    } = _ref5;
+  const moveItem = ({
+    sourceIndex,
+    destIndex
+  }) => {
     if (isLoading) {
       return null;
     }
@@ -169,11 +160,10 @@ const CalculationModal = _ref => {
     sourceList.splice(destIndex, 0, moved);
     setExpressionArray(sourceList);
   };
-  const setItemValue = _ref6 => {
-    let {
-      itemId,
-      value
-    } = _ref6;
+  const setItemValue = ({
+    itemId,
+    value
+  }) => {
     const updatedItems = expressionArray.map(item => item.id === itemId ? Object.assign({}, item, {
       value
     }) : item);
@@ -189,11 +179,10 @@ const CalculationModal = _ref => {
       setSelectedItemId(null);
     }
   };
-  const addOrMoveDraggedItem = _ref7 => {
-    let {
-      item,
-      destination
-    } = _ref7;
+  const addOrMoveDraggedItem = ({
+    item,
+    destination
+  }) => {
     const destContainerId = destination.containerId;
     let destIndex = FIRST_POSITION;
     if (item.sourceContainerId === _DndContext.OPTIONS_PANEL) {
@@ -334,12 +323,9 @@ const CalculationModal = _ref => {
   }, /*#__PURE__*/_react.default.createElement(_ui.InputField, {
     label: _index.default.t('Calculation name'),
     helpText: _index.default.t('Shown in table headers and chart axes/legends'),
-    onChange: _ref8 => {
-      let {
-        value
-      } = _ref8;
-      return setName(value.substr(0, 50));
-    },
+    onChange: ({
+      value
+    }) => setName(value.substr(0, 50)),
     value: name,
     dataTest: "calculation-label",
     dense: true
@@ -393,8 +379,5 @@ CalculationModal.propTypes = {
     id: _propTypes.default.string,
     name: _propTypes.default.string
   })
-};
-CalculationModal.defaultProps = {
-  calculation: {}
 };
 var _default = exports.default = CalculationModal;

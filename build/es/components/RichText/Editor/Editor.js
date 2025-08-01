@@ -8,85 +8,76 @@ import { UserMentionWrapper } from '../../UserMention/UserMentionWrapper.js';
 import { Parser } from '../Parser/Parser.js';
 import { convertCtrlKey, insertMarkdown, emojis, EMOJI_SMILEY_FACE, EMOJI_SAD_FACE, EMOJI_THUMBS_UP, EMOJI_THUMBS_DOWN, BOLD, ITALIC, LINK, MENTION } from './markdownHandler.js';
 import { mainClasses, toolbarClasses, tooltipAnchorClasses, emojisPopoverClasses } from './styles/Editor.style.js';
-const EmojisPopover = _ref => {
-  let {
-    onInsertMarkdown,
-    onClose,
-    reference
-  } = _ref;
-  return /*#__PURE__*/React.createElement(Popover, {
-    reference: reference,
-    onClickOutside: onClose
-  }, /*#__PURE__*/React.createElement("ul", {
-    className: `jsx-${emojisPopoverClasses.__hash}` + " " + "emojisList"
-  }, /*#__PURE__*/React.createElement("li", {
-    onClick: () => onInsertMarkdown(EMOJI_SMILEY_FACE),
-    className: `jsx-${emojisPopoverClasses.__hash}`
-  }, /*#__PURE__*/React.createElement(Parser, null, emojis[EMOJI_SMILEY_FACE])), /*#__PURE__*/React.createElement("li", {
-    onClick: () => onInsertMarkdown(EMOJI_SAD_FACE),
-    className: `jsx-${emojisPopoverClasses.__hash}`
-  }, /*#__PURE__*/React.createElement(Parser, null, emojis[EMOJI_SAD_FACE])), /*#__PURE__*/React.createElement("li", {
-    onClick: () => onInsertMarkdown(EMOJI_THUMBS_UP),
-    className: `jsx-${emojisPopoverClasses.__hash}`
-  }, /*#__PURE__*/React.createElement(Parser, null, emojis[EMOJI_THUMBS_UP])), /*#__PURE__*/React.createElement("li", {
-    onClick: () => onInsertMarkdown(EMOJI_THUMBS_DOWN),
-    className: `jsx-${emojisPopoverClasses.__hash}`
-  }, /*#__PURE__*/React.createElement(Parser, null, emojis[EMOJI_THUMBS_DOWN]))), /*#__PURE__*/React.createElement(_JSXStyle, {
-    id: emojisPopoverClasses.__hash
-  }, emojisPopoverClasses));
-};
+const EmojisPopover = ({
+  onInsertMarkdown,
+  onClose,
+  reference
+}) => /*#__PURE__*/React.createElement(Popover, {
+  reference: reference,
+  onClickOutside: onClose
+}, /*#__PURE__*/React.createElement("ul", {
+  className: `jsx-${emojisPopoverClasses.__hash}` + " " + "emojisList"
+}, /*#__PURE__*/React.createElement("li", {
+  onClick: () => onInsertMarkdown(EMOJI_SMILEY_FACE),
+  className: `jsx-${emojisPopoverClasses.__hash}`
+}, /*#__PURE__*/React.createElement(Parser, null, emojis[EMOJI_SMILEY_FACE])), /*#__PURE__*/React.createElement("li", {
+  onClick: () => onInsertMarkdown(EMOJI_SAD_FACE),
+  className: `jsx-${emojisPopoverClasses.__hash}`
+}, /*#__PURE__*/React.createElement(Parser, null, emojis[EMOJI_SAD_FACE])), /*#__PURE__*/React.createElement("li", {
+  onClick: () => onInsertMarkdown(EMOJI_THUMBS_UP),
+  className: `jsx-${emojisPopoverClasses.__hash}`
+}, /*#__PURE__*/React.createElement(Parser, null, emojis[EMOJI_THUMBS_UP])), /*#__PURE__*/React.createElement("li", {
+  onClick: () => onInsertMarkdown(EMOJI_THUMBS_DOWN),
+  className: `jsx-${emojisPopoverClasses.__hash}`
+}, /*#__PURE__*/React.createElement(Parser, null, emojis[EMOJI_THUMBS_DOWN]))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  id: emojisPopoverClasses.__hash
+}, emojisPopoverClasses));
 EmojisPopover.propTypes = {
   onClose: PropTypes.func.isRequired,
   onInsertMarkdown: PropTypes.func.isRequired,
   reference: PropTypes.object
 };
-const IconButtonWithTooltip = _ref2 => {
-  let {
-    tooltipContent,
-    disabled,
-    icon,
-    onClick
-  } = _ref2;
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Tooltip, {
-    content: tooltipContent,
-    placement: "bottom",
-    closeDelay: 200
-  }, _ref3 => {
-    let {
-      ref,
-      onMouseOver,
-      onMouseOut
-    } = _ref3;
-    return /*#__PURE__*/React.createElement("span", {
-      ref: ref,
-      onMouseOver: onMouseOver,
-      onMouseOut: onMouseOut,
-      className: `jsx-${tooltipAnchorClasses.__hash}` + " " + "tooltip"
-    }, /*#__PURE__*/React.createElement(Button, {
-      secondary: true,
-      small: true,
-      disabled: disabled,
-      icon: icon,
-      onClick: onClick
-    }));
-  }), /*#__PURE__*/React.createElement(_JSXStyle, {
-    id: tooltipAnchorClasses.__hash
-  }, tooltipAnchorClasses));
-};
+const IconButtonWithTooltip = ({
+  tooltipContent,
+  disabled,
+  icon,
+  onClick
+}) => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Tooltip, {
+  content: tooltipContent,
+  placement: "bottom",
+  closeDelay: 200
+}, ({
+  ref,
+  onMouseOver,
+  onMouseOut
+}) => /*#__PURE__*/React.createElement("span", {
+  ref: ref,
+  onMouseOver: onMouseOver,
+  onMouseOut: onMouseOut,
+  className: `jsx-${tooltipAnchorClasses.__hash}` + " " + "tooltip"
+}, /*#__PURE__*/React.createElement(Button, {
+  secondary: true,
+  small: true,
+  disabled: disabled,
+  icon: icon,
+  onClick: onClick,
+  "aria-label": tooltipContent
+}))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  id: tooltipAnchorClasses.__hash
+}, tooltipAnchorClasses));
 IconButtonWithTooltip.propTypes = {
   disabled: PropTypes.bool,
   icon: PropTypes.node,
   tooltipContent: PropTypes.string,
   onClick: PropTypes.func
 };
-const Toolbar = _ref4 => {
-  let {
-    disabled,
-    onInsertMarkdown,
-    onTogglePreview,
-    previewButtonDisabled,
-    previewMode
-  } = _ref4;
+const Toolbar = ({
+  disabled,
+  onInsertMarkdown,
+  onTogglePreview,
+  previewButtonDisabled,
+  previewMode
+}) => {
   const emojisButtonRef = useRef();
   const [emojisPopoverIsOpen, setEmojisPopoverIsOpen] = useState(false);
   const iconColor = disabled ? colors.grey600 : colors.grey700;
@@ -168,17 +159,16 @@ Toolbar.propTypes = {
   onTogglePreview: PropTypes.func.isRequired,
   disabled: PropTypes.bool
 };
-export const Editor = /*#__PURE__*/forwardRef((_ref5, externalRef) => {
-  let {
-    value,
-    disabled,
-    inputPlaceholder,
-    onChange,
-    errorText,
-    helpText,
-    initialFocus,
-    resizable
-  } = _ref5;
+export const Editor = /*#__PURE__*/forwardRef(({
+  value,
+  disabled,
+  inputPlaceholder,
+  onChange,
+  errorText,
+  helpText,
+  initialFocus = true,
+  resizable = true
+}, externalRef) => {
   const [previewMode, setPreviewMode] = useState(false);
   const internalRef = useRef();
   const textareaRef = externalRef || internalRef;
@@ -242,10 +232,6 @@ export const Editor = /*#__PURE__*/forwardRef((_ref5, externalRef) => {
   }, mainClasses));
 });
 Editor.displayName = 'Editor';
-Editor.defaultProps = {
-  initialFocus: true,
-  resizable: true
-};
 Editor.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

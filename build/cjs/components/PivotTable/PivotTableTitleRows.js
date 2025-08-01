@@ -10,12 +10,11 @@ var _getFilterText = _interopRequireDefault(require("../../visualizations/util/g
 var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 var _PivotTableTitleRow = require("./PivotTableTitleRow.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PivotTableTitleRows = _ref => {
+const PivotTableTitleRows = ({
+  clippingResult,
+  width
+}) => {
   var _engine$visualization;
-  let {
-    clippingResult,
-    width
-  } = _ref;
   const engine = (0, _PivotTableEngineContext.usePivotTableEngine)();
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, engine.options.title ? /*#__PURE__*/_react.default.createElement(_PivotTableTitleRow.PivotTableTitleRow, {
     title: engine.options.title,

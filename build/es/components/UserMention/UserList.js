@@ -2,13 +2,12 @@ import i18n from '@dhis2/d2-i18n';
 import { MenuItem } from '@dhis2/ui';
 import PropTypes from 'prop-types';
 import React from 'react';
-export const UserList = _ref => {
-  let {
-    users,
-    selectedUserIndex,
-    onUserClick,
-    pager
-  } = _ref;
+export const UserList = ({
+  users,
+  selectedUserIndex,
+  onUserClick,
+  pager
+}) => {
   return /*#__PURE__*/React.createElement(React.Fragment, null, users.map(u => {
     var _users$selectedUserIn;
     return /*#__PURE__*/React.createElement(MenuItem, {

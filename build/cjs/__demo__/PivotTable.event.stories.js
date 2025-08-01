@@ -18,8 +18,7 @@ var _optionsetVisualization = _interopRequireDefault(require("./data/event/optio
 var _yesonlyData = _interopRequireDefault(require("./data/event/yesonly.data.json"));
 var _yesonlyVisualization = _interopRequireDefault(require("./data/event/yesonly.visualization.json"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 const visualizationReset = {
   colTotals: false,
   rowTotals: false,
@@ -37,28 +36,22 @@ const PivotTableOptionsWrapper = story => {
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_ui.Checkbox, {
     label: "Use fixed column headers",
     checked: pivotTableOptions.fixColumnHeaders,
-    onChange: _ref => {
-      let {
-        checked
-      } = _ref;
-      return setPivotTableOptions({
-        ...pivotTableOptions,
-        fixColumnHeaders: checked
-      });
-    },
+    onChange: ({
+      checked
+    }) => setPivotTableOptions({
+      ...pivotTableOptions,
+      fixColumnHeaders: checked
+    }),
     dense: true
   }), /*#__PURE__*/_react.default.createElement(_ui.Checkbox, {
     label: "Use fixed row headers",
     checked: pivotTableOptions.fixRowHeaders,
-    onChange: _ref2 => {
-      let {
-        checked
-      } = _ref2;
-      return setPivotTableOptions({
-        ...pivotTableOptions,
-        fixRowHeaders: checked
-      });
-    },
+    onChange: ({
+      checked
+    }) => setPivotTableOptions({
+      ...pivotTableOptions,
+      fixRowHeaders: checked
+    }),
     dense: true
   }), /*#__PURE__*/_react.default.createElement(_ui.Divider, null)), story({
     pivotTableOptions
@@ -68,10 +61,9 @@ var _default = exports.default = {
   title: 'PivotTable (event enrollment)',
   decorators: [PivotTableOptionsWrapper]
 };
-const Numeric = (_, _ref3) => {
-  let {
-    pivotTableOptions
-  } = _ref3;
+const Numeric = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._numericVisualization.default,
     ...visualizationReset,
@@ -91,10 +83,9 @@ exports.Numeric = Numeric;
 Numeric.story = {
   name: 'Numeric'
 };
-const NumericLegendset = (_, _ref4) => {
-  let {
-    pivotTableOptions
-  } = _ref4;
+const NumericLegendset = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._numericLegendsetVisualization.default,
     ...visualizationReset,
@@ -114,10 +105,9 @@ exports.NumericLegendset = NumericLegendset;
 NumericLegendset.story = {
   name: 'Numeric with legendset'
 };
-const Optionset = (_, _ref5) => {
-  let {
-    pivotTableOptions
-  } = _ref5;
+const Optionset = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._optionsetVisualization.default,
     ...visualizationReset,
@@ -137,10 +127,9 @@ exports.Optionset = Optionset;
 Optionset.story = {
   name: 'Optionset'
 };
-const Boolean = (_, _ref6) => {
-  let {
-    pivotTableOptions
-  } = _ref6;
+const Boolean = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._booleanVisualization.default,
     ...visualizationReset,
@@ -160,10 +149,9 @@ exports.Boolean = Boolean;
 Boolean.story = {
   name: 'Boolean'
 };
-const Yesonly = (_, _ref7) => {
-  let {
-    pivotTableOptions
-  } = _ref7;
+const Yesonly = (_, {
+  pivotTableOptions
+}) => {
   const visualization = {
     ..._yesonlyVisualization.default,
     ...visualizationReset,

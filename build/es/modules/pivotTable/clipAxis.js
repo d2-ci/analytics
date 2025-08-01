@@ -1,12 +1,11 @@
 import times from 'lodash/times';
-export const clipAxis = _ref => {
-  let {
-    position,
-    size,
-    step,
-    totalCount,
-    headerCount
-  } = _ref;
+export const clipAxis = ({
+  position,
+  size,
+  step,
+  totalCount,
+  headerCount
+}) => {
   // position: scroll Y position
   // size: height of table container
   // step: height of cell in px

@@ -13,26 +13,25 @@ var _react = _interopRequireDefault(require("react"));
 var _dataTypes = require("../../modules/dataTypes.js");
 var _TransferOptionStyle = _interopRequireDefault(require("./styles/TransferOption.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const TransferOption = _ref => {
-  let {
-    disabled,
-    label,
-    highlighted,
-    selected,
-    onClick,
-    onDoubleClick,
-    value,
-    icon,
-    active,
-    dataItemType,
-    dimensionType,
-    dataTest,
-    optionSetId,
-    itemsRef,
-    showingInfo,
-    onEditClick,
-    onInfoClick
-  } = _ref;
+const TransferOption = ({
+  disabled,
+  label,
+  highlighted,
+  selected,
+  onClick,
+  onDoubleClick,
+  value,
+  icon,
+  active,
+  dataItemType,
+  dimensionType,
+  dataTest,
+  optionSetId,
+  itemsRef,
+  showingInfo,
+  onEditClick,
+  onInfoClick
+}) => {
   const renderContent = () => /*#__PURE__*/_react.default.createElement("div", {
     "data-test": `${dataTest}-content`,
     onClick: event => {
@@ -79,25 +78,22 @@ const TransferOption = _ref => {
     content: _d2I18n.default.t('Click to choose from available options'),
     openDelay: 500,
     closeDelay: 0
-  }, _ref2 => {
-    let {
-      ref,
-      onMouseOver,
-      onMouseOut
-    } = _ref2;
-    return /*#__PURE__*/_react.default.createElement("span", {
-      ref: ref,
-      onMouseOver: onMouseOver,
-      onMouseOut: onMouseOut,
-      onClick: e => {
-        e.stopPropagation();
-        onMouseOut();
-        onEditClick();
-      },
-      "data-test": `${dataTest}-option-set-button`,
-      className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "option-set-button"
-    }, /*#__PURE__*/_react.default.createElement(_ui.IconList16, null));
-  })), /*#__PURE__*/_react.default.createElement("div", {
+  }, ({
+    ref,
+    onMouseOver,
+    onMouseOut
+  }) => /*#__PURE__*/_react.default.createElement("span", {
+    ref: ref,
+    onMouseOver: onMouseOver,
+    onMouseOut: onMouseOut,
+    onClick: e => {
+      e.stopPropagation();
+      onMouseOut();
+      onEditClick();
+    },
+    "data-test": `${dataTest}-option-set-button`,
+    className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "option-set-button"
+  }, /*#__PURE__*/_react.default.createElement(_ui.IconList16, null)))), /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + ((0, _classnames.default)('group', 'nowrap', 'typeGroup') || "")
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_TransferOptionStyle.default.__hash}` + " " + "type"

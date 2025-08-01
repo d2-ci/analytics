@@ -25,11 +25,10 @@ const invalidTestExpressions = [{
 }];
 const validTestExpressions = ['5+9', '((#{cYeuwXTCPkU}*#{Jtf34kNZhzP}))#{iKGjnOOaPlE}', '#{P3jJH5Tu5VC.S34ULMcHMca}*#{Jtf34kNZhzP}', '(5)+9', '(5+9)', '10/-5'];
 describe('validateExpression', () => {
-  invalidTestExpressions.forEach(_ref => {
-    let {
-      expressions,
-      message
-    } = _ref;
+  invalidTestExpressions.forEach(({
+    expressions,
+    message
+  }) => {
     expressions.forEach(exp => {
       test(`Fails: ${message}`, () => {
         expect(validateExpression(exp)).toEqual({

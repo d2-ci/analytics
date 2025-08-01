@@ -5,13 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 class AnalyticsResponseHeader {
-  constructor() {
-    let header = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
-      isPrefix: false,
-      isCollect: false,
-      index: undefined
-    };
+  constructor(header = {}, options = {
+    isPrefix: false,
+    isCollect: false,
+    index: undefined
+  }) {
     Object.assign(this, header, options);
   }
   getIndex() {

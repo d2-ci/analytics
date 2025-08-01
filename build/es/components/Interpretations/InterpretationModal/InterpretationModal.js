@@ -25,31 +25,27 @@ function getModalContentCSS(width) {
 const query = {
   interpretation: {
     resource: 'interpretations',
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
+    id: ({
+      id
+    }) => id,
     params: {
       fields: ['access[write,manage]', 'id', 'text', 'created', 'createdBy[id,displayName]', 'likes', 'likedBy', 'comments[id,text,created,createdBy[id,displayName]]']
     }
   }
 };
-const InterpretationModal = _ref2 => {
+const InterpretationModal = ({
+  currentUser,
+  isVisualizationLoading,
+  visualization,
+  onResponsesReceived,
+  downloadMenuComponent,
+  onClose,
+  onInterpretationUpdate,
+  interpretationId,
+  initialFocus,
+  pluginComponent: VisualizationPlugin
+}) => {
   var _currentUser$settings;
-  let {
-    currentUser,
-    isVisualizationLoading,
-    visualization,
-    onResponsesReceived,
-    downloadMenuComponent,
-    onClose,
-    onInterpretationUpdate,
-    interpretationId,
-    initialFocus,
-    pluginComponent: VisualizationPlugin
-  } = _ref2;
   const modalContentWidth = useModalContentWidth();
   const modalContentCSS = getModalContentCSS(modalContentWidth);
   const [isDirty, setIsDirty] = useState(false);
@@ -80,10 +76,9 @@ const InterpretationModal = _ref2 => {
       id: interpretationId
     });
   };
-  const onLikeToggled = _ref3 => {
-    let {
-      likedBy
-    } = _ref3;
+  const onLikeToggled = ({
+    likedBy
+  }) => {
     setIsDirty(true);
     interpretation.likedBy = likedBy;
     interpretation.likes = likedBy.length;

@@ -23,9 +23,5 @@ const FYNOV = exports.FYNOV = 'FYNOV';
 const FYOCT = exports.FYOCT = 'FYOCT';
 const FYJUL = exports.FYJUL = 'FYJUL';
 const FYAPR = exports.FYAPR = 'FYAPR';
-const filterPeriodTypesById = function () {
-  let allPeriodTypes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  let excludedPeriodTypes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-  return allPeriodTypes.filter(period => !excludedPeriodTypes.includes(period.id));
-};
+const filterPeriodTypesById = (allPeriodTypes = [], excludedPeriodTypes = []) => allPeriodTypes.filter(period => !excludedPeriodTypes.includes(period.id));
 exports.filterPeriodTypesById = filterPeriodTypesById;
