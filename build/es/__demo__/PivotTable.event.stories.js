@@ -9,6 +9,8 @@ import numericData from './data/event/numeric.data.json';
 import numericVisualization from './data/event/numeric.visualization.json';
 import optionsetData from './data/event/optionset.data.json';
 import optionsetVisualization from './data/event/optionset.visualization.json';
+import optionsetsData from './data/event/optionsets.data.json';
+import optionsetsVisualization from './data/event/optionsets.visualization.json';
 import yesonlyData from './data/event/yesonly.data.json';
 import yesonlyVisualization from './data/event/yesonly.visualization.json';
 const visualizationReset = {
@@ -115,6 +117,27 @@ export const Optionset = (_, {
 };
 Optionset.story = {
   name: 'Optionset'
+};
+export const OptionsetsNonUniqueCodes = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ...optionsetsVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: optionsetsData,
+    visualization: visualization
+  }));
+};
+OptionsetsNonUniqueCodes.story = {
+  name: 'Optionset, non-unique codes'
 };
 export const Boolean = (_, {
   pivotTableOptions

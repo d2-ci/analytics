@@ -1,5 +1,5 @@
 export const getUnique = array => [...new Set(array)];
-const sortStringsAsNumbersAsc = arr => {
+export const sortStringsAsNumbersAsc = arr => {
   return arr.slice().sort((a, b) => {
     if (a === '' && b === '') {
       return 0;

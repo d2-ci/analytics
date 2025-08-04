@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.Yesonly = exports.Optionset = exports.NumericLegendset = exports.Numeric = exports.Boolean = void 0;
+exports.default = exports.Yesonly = exports.OptionsetsNonUniqueCodes = exports.Optionset = exports.NumericLegendset = exports.Numeric = exports.Boolean = void 0;
 var _ui = require("@dhis2/ui");
 var _react = _interopRequireWildcard(require("react"));
 var _index = require("../index.js");
@@ -15,6 +15,8 @@ var _numericData = _interopRequireDefault(require("./data/event/numeric.data.jso
 var _numericVisualization = _interopRequireDefault(require("./data/event/numeric.visualization.json"));
 var _optionsetData = _interopRequireDefault(require("./data/event/optionset.data.json"));
 var _optionsetVisualization = _interopRequireDefault(require("./data/event/optionset.visualization.json"));
+var _optionsetsData = _interopRequireDefault(require("./data/event/optionsets.data.json"));
+var _optionsetsVisualization = _interopRequireDefault(require("./data/event/optionsets.visualization.json"));
 var _yesonlyData = _interopRequireDefault(require("./data/event/yesonly.data.json"));
 var _yesonlyVisualization = _interopRequireDefault(require("./data/event/yesonly.visualization.json"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -126,6 +128,28 @@ const Optionset = (_, {
 exports.Optionset = Optionset;
 Optionset.story = {
   name: 'Optionset'
+};
+const OptionsetsNonUniqueCodes = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._optionsetsVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _optionsetsData.default,
+    visualization: visualization
+  }));
+};
+exports.OptionsetsNonUniqueCodes = OptionsetsNonUniqueCodes;
+OptionsetsNonUniqueCodes.story = {
+  name: 'Optionset, non-unique codes'
 };
 const Boolean = (_, {
   pivotTableOptions

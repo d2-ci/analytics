@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getUnique = exports.getPrefixedValue = exports.getNumericRows = exports.getNumericItems = exports.getNumericDimension = exports.applyNumericHandler = void 0;
+exports.sortStringsAsNumbersAsc = exports.getUnique = exports.getPrefixedValue = exports.getNumericRows = exports.getNumericItems = exports.getNumericDimension = exports.applyNumericHandler = void 0;
 const getUnique = array => [...new Set(array)];
 exports.getUnique = getUnique;
 const sortStringsAsNumbersAsc = arr => {
@@ -20,6 +20,7 @@ const sortStringsAsNumbersAsc = arr => {
     return Number(a) - Number(b);
   });
 };
+exports.sortStringsAsNumbersAsc = sortStringsAsNumbersAsc;
 const getPrefixedValue = (value, prefix) => `${prefix}:${value}`;
 exports.getPrefixedValue = getPrefixedValue;
 const getNumericItems = (values, dimensionId) => values.reduce((items, value) => {
