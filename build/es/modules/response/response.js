@@ -9,7 +9,7 @@ const removeNaDimensions = obj => Object.keys(obj).reduce((acc, key) => {
 }, {});
 export const transformResponse = (response, {
   hideNaData
-}) => {
+} = {}) => {
   let transformedResponse = {
     ...response
   };

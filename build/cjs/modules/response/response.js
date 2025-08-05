@@ -15,7 +15,7 @@ const removeNaDimensions = obj => Object.keys(obj).reduce((acc, key) => {
 }, {});
 const transformResponse = (response, {
   hideNaData
-}) => {
+} = {}) => {
   let transformedResponse = {
     ...response
   };
