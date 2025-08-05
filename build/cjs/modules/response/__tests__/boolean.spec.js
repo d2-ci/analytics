@@ -4,7 +4,6 @@ var _booleanData = _interopRequireDefault(require("../../../__demo__/data/event/
 var _booleanDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/boolean.data.org.json"));
 var _boolean = require("../boolean.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const dimensionId = 'Zj7UnCAulEk.fWIAEtYVEGk';
 const headerIndex = 0;
 describe('boolean', () => {
   describe('applyBooleanHandler', () => {

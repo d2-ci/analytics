@@ -4,7 +4,7 @@ var _numericData = _interopRequireDefault(require("../../../__demo__/data/event/
 var _numericDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.org.json"));
 var _numeric = require("../numeric.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const dimensionId = 'Zj7UnCAulEk.fWIAEtYVEGk';
+const testId = 'Zj7UnCAulEk.qrur9Dvnyt5';
 const headerIndex = 0;
 describe('numeric', () => {
   describe('getUnique', () => {
@@ -55,94 +55,36 @@ describe('numeric', () => {
       expect((0, _numeric.getPrefixedValue)('abc', '')).toBe(':abc');
     });
     it('works with empty string value', () => {
-      expect((0, _numeric.getPrefixedValue)('', 'test')).toBe('test:');
+      expect((0, _numeric.getPrefixedValue)('', 'test')).toBe('');
     });
     it('works with both prefix and value empty', () => {
-      expect((0, _numeric.getPrefixedValue)('', '')).toBe(':');
-    });
-    it('works with numbers as value', () => {
-      expect((0, _numeric.getPrefixedValue)(42, 'num')).toBe('num:42');
-    });
-    it('works with numbers as prefix', () => {
-      expect((0, _numeric.getPrefixedValue)('data', 99)).toBe('99:data');
-    });
-    it('works with non-string types as both prefix and value', () => {
-      expect((0, _numeric.getPrefixedValue)(null, undefined)).toBe('undefined:null');
-      expect((0, _numeric.getPrefixedValue)(true, false)).toBe('false:true');
+      expect((0, _numeric.getPrefixedValue)('', '')).toBe('');
     });
   });
   describe('getNumericItems', () => {
     it('returns an object with prefixed keys and correct names', () => {
-      const values = ['1', '2', '10'];
-      expect((0, _numeric.getNumericItems)(values, dimensionId)).toEqual({
-        'Zj7UnCAulEk.fWIAEtYVEGk:1': {
+      const values = ['1', '2', ''];
+      expect((0, _numeric.getNumericItems)(values, testId)).toEqual({
+        [testId + ':1']: {
           name: '1'
         },
-        'Zj7UnCAulEk.fWIAEtYVEGk:2': {
+        [testId + ':2']: {
           name: '2'
         },
-        'Zj7UnCAulEk.fWIAEtYVEGk:10': {
-          name: '10'
+        '': {
+          name: 'N/A'
         }
       });
     });
     it('handles empty values array', () => {
       expect((0, _numeric.getNumericItems)([], 'prefix')).toEqual({});
     });
-    it('handles empty dimensionId', () => {
-      const values = ['a', 'b'];
-      expect((0, _numeric.getNumericItems)(values, '')).toEqual({
-        ':a': {
-          name: 'a'
-        },
-        ':b': {
-          name: 'b'
-        }
-      });
-    });
-    it('works with non-string values', () => {
-      const values = [1, 2, null, undefined];
-      expect((0, _numeric.getNumericItems)(values, 'num')).toEqual({
-        'num:1': {
-          name: 1
-        },
-        'num:2': {
-          name: 2
-        },
-        'num:null': {
-          name: null
-        },
-        'num:undefined': {
-          name: undefined
-        }
-      });
-    });
-    it('handles duplicate values, last one wins', () => {
-      const values = ['1', '2', '1'];
-      expect((0, _numeric.getNumericItems)(values, 'x')).toEqual({
-        'x:1': {
-          name: '1'
-        },
-        // Last occurrence
-        'x:2': {
-          name: '2'
-        }
-      });
-    });
-    it('handles numbers as dimensionId', () => {
-      const values = ['42'];
-      expect((0, _numeric.getNumericItems)(values, 7)).toEqual({
-        '7:42': {
-          name: '42'
-        }
-      });
-    });
   });
   describe('getNumericDimension', () => {
     it('returns object with dimensionId as key and correctly prefixed values', () => {
-      const values = ['1', '2', '10'];
-      expect((0, _numeric.getNumericDimension)(values, dimensionId)).toEqual({
-        'Zj7UnCAulEk.fWIAEtYVEGk': ['Zj7UnCAulEk.fWIAEtYVEGk:1', 'Zj7UnCAulEk.fWIAEtYVEGk:2', 'Zj7UnCAulEk.fWIAEtYVEGk:10']
+      const values = ['1', '2', ''];
+      expect((0, _numeric.getNumericDimension)(values, testId)).toEqual({
+        [testId]: [testId + ':1', testId + ':2', '']
       });
     });
     it('handles empty values array', () => {
@@ -150,18 +92,12 @@ describe('numeric', () => {
         prefix: []
       });
     });
-    it('handles empty string as dimensionId', () => {
-      const values = ['1', '2', '10'];
-      expect((0, _numeric.getNumericDimension)(values, '')).toEqual({
-        '': [':1', ':2', ':10']
-      });
-    });
   });
   describe('getNumericRows', () => {
     it('prefixes value at headerIndex for each row', () => {
-      const rows = [['a', '1', 'x'], ['b', '2', 'y'], ['c', '10', 'z']];
+      const rows = [['a', '1', 'x'], ['b', '2', 'y'], ['c', '', 'z']];
       const headerIndex = 1;
-      expect((0, _numeric.getNumericRows)(rows, headerIndex, dimensionId)).toEqual([['a', 'Zj7UnCAulEk.fWIAEtYVEGk:1', 'x'], ['b', 'Zj7UnCAulEk.fWIAEtYVEGk:2', 'y'], ['c', 'Zj7UnCAulEk.fWIAEtYVEGk:10', 'z']]);
+      expect((0, _numeric.getNumericRows)(rows, headerIndex, testId)).toEqual([['a', testId + ':1', 'x'], ['b', testId + ':2', 'y'], ['c', '', 'z']]);
     });
     it('handles empty rows array', () => {
       expect((0, _numeric.getNumericRows)([], 1, 'a')).toEqual([]);

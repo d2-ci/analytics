@@ -15,19 +15,34 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 describe('response', () => {
   describe('transformResponse', () => {
     it('transforms numeric response', () => {
-      expect((0, _response.transformResponse)(_numericDataOrg.default)).toEqual(_numericData.default);
+      expect((0, _response.transformResponse)(_numericDataOrg.default, {
+        hideNaData: false
+      })).toEqual(_numericData.default);
+    });
+    it('transforms numeric response and N/A is not a dimension', () => {
+      expect((0, _response.transformResponse)(_numericDataOrg.default, {
+        hideNaData: true
+      }).metaData.dimensions['Zj7UnCAulEk.qrur9Dvnyt5'].includes('')).toEqual(false);
     });
     it('transforms option set response', () => {
-      expect((0, _response.transformResponse)(_optionsetDataOrg.default)).toEqual(_optionsetData.default);
+      expect((0, _response.transformResponse)(_optionsetDataOrg.default, {
+        hideNaData: false
+      })).toEqual(_optionsetData.default);
     });
     it('transforms option set response with non-unique codes across two option sets', () => {
-      expect((0, _response.transformResponse)(_optionsetsDataOrg.default)).toEqual(_optionsetsData.default);
+      expect((0, _response.transformResponse)(_optionsetsDataOrg.default, {
+        hideNaData: false
+      })).toEqual(_optionsetsData.default);
     });
     it('transforms boolean response', () => {
-      expect((0, _response.transformResponse)(_booleanDataOrg.default)).toEqual(_booleanData.default);
+      expect((0, _response.transformResponse)(_booleanDataOrg.default, {
+        hideNaData: false
+      })).toEqual(_booleanData.default);
     });
     it('transforms yes only response', () => {
-      expect((0, _response.transformResponse)(_yesonlyDataOrg.default)).toEqual(_yesonlyData.default);
+      expect((0, _response.transformResponse)(_yesonlyDataOrg.default, {
+        hideNaData: false
+      })).toEqual(_yesonlyData.default);
     });
   });
 });

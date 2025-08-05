@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.sortStringsAsNumbersAsc = exports.getUnique = exports.getPrefixedValue = exports.getNumericRows = exports.getNumericItems = exports.getNumericDimension = exports.applyNumericHandler = void 0;
+var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getUnique = array => [...new Set(array)];
 exports.getUnique = getUnique;
 const sortStringsAsNumbersAsc = arr => {
@@ -21,11 +23,11 @@ const sortStringsAsNumbersAsc = arr => {
   });
 };
 exports.sortStringsAsNumbersAsc = sortStringsAsNumbersAsc;
-const getPrefixedValue = (value, prefix) => `${prefix}:${value}`;
+const getPrefixedValue = (value, prefix) => value !== '' ? `${prefix}:${value}` : value;
 exports.getPrefixedValue = getPrefixedValue;
 const getNumericItems = (values, dimensionId) => values.reduce((items, value) => {
   items[getPrefixedValue(value, dimensionId)] = {
-    name: value
+    name: value || _d2I18n.default.t('N/A')
   };
   return items;
 }, {});
@@ -36,11 +38,9 @@ const getNumericDimension = (values, dimensionId) => ({
 exports.getNumericDimension = getNumericDimension;
 const getNumericRows = (rows, headerIndex, dimensionId) => {
   let row;
-  let value;
   return rows.map(r => {
-    value = r[headerIndex];
     row = [...r];
-    row[headerIndex] = getPrefixedValue(value, dimensionId);
+    row[headerIndex] = getPrefixedValue(row[headerIndex], dimensionId);
     return row;
   });
 };

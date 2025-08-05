@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 export const getUnique = array => [...new Set(array)];
 export const sortStringsAsNumbersAsc = arr => {
   return arr.slice().sort((a, b) => {
@@ -13,10 +14,10 @@ export const sortStringsAsNumbersAsc = arr => {
     return Number(a) - Number(b);
   });
 };
-export const getPrefixedValue = (value, prefix) => `${prefix}:${value}`;
+export const getPrefixedValue = (value, prefix) => value !== '' ? `${prefix}:${value}` : value;
 export const getNumericItems = (values, dimensionId) => values.reduce((items, value) => {
   items[getPrefixedValue(value, dimensionId)] = {
-    name: value
+    name: value || i18n.t('N/A')
   };
   return items;
 }, {});
@@ -25,11 +26,9 @@ export const getNumericDimension = (values, dimensionId) => ({
 });
 export const getNumericRows = (rows, headerIndex, dimensionId) => {
   let row;
-  let value;
   return rows.map(r => {
-    value = r[headerIndex];
     row = [...r];
-    row[headerIndex] = getPrefixedValue(value, dimensionId);
+    row[headerIndex] = getPrefixedValue(row[headerIndex], dimensionId);
     return row;
   });
 };
