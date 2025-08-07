@@ -3,16 +3,17 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.transformResponse = void 0;
+exports.transformResponse = exports.removeNaDimensionItems = void 0;
 var _valueTypes = require("../valueTypes.js");
 var _boolean = require("./boolean.js");
 var _numeric = require("./numeric.js");
 var _optionSet = require("./optionSet.js");
-const removeNaDimensions = obj => Object.keys(obj).reduce((acc, key) => {
+const removeNaDimensionItems = obj => Object.keys(obj).reduce((acc, key) => {
   const value = obj[key];
   acc[key] = Array.isArray(value) ? value.filter(str => str !== '') : value;
   return acc;
 }, {});
+exports.removeNaDimensionItems = removeNaDimensionItems;
 const transformResponse = (response, {
   hideNaData
 } = {}) => {
@@ -31,7 +32,7 @@ const transformResponse = (response, {
     }
   });
   if (hideNaData) {
-    transformedResponse.metaData.dimensions = removeNaDimensions(transformedResponse.metaData.dimensions);
+    transformedResponse.metaData.dimensions = removeNaDimensionItems(transformedResponse.metaData.dimensions);
   }
   return transformedResponse;
 };

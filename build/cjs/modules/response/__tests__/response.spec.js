@@ -13,6 +13,35 @@ var _yesonlyDataOrg = _interopRequireDefault(require("../../../__demo__/data/eve
 var _response = require("../response.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('response', () => {
+  describe('removeNaDimensionItems', () => {
+    it('removes empty strings from array values', () => {
+      const input = {
+        dim1: ['a', '', 'b'],
+        dim2: ['']
+      };
+      const expected = {
+        dim1: ['a', 'b'],
+        dim2: []
+      };
+      expect((0, _response.removeNaDimensionItems)(input)).toEqual(expected);
+    });
+    it('leaves non-array values unchanged', () => {
+      const input = {
+        dim1: 'abc',
+        dim2: 123,
+        dim3: null
+      };
+      const expected = {
+        dim1: 'abc',
+        dim2: 123,
+        dim3: null
+      };
+      expect((0, _response.removeNaDimensionItems)(input)).toEqual(expected);
+    });
+    it('returns an empty object when given an empty object', () => {
+      expect((0, _response.removeNaDimensionItems)({})).toEqual({});
+    });
+  });
   describe('transformResponse', () => {
     describe('numeric', () => {
       it('transforms response', () => {
