@@ -1,7 +1,7 @@
 "use strict";
 
-require("@testing-library/jest-dom");
 var _react = require("@testing-library/react");
+var _userEvent = _interopRequireDefault(require("@testing-library/user-event"));
 var _react2 = _interopRequireDefault(require("react"));
 var _Editor = require("../Editor.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -23,16 +23,15 @@ describe('RichText: Editor component', () => {
   const renderComponent = props => {
     return (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_Editor.Editor, props));
   };
-  it('renders a result', () => {
+  test('renders a result', () => {
     renderComponent(componentProps);
     expect(_react.screen.getByTestId('@dhis2-analytics-richtexteditor')).toBeVisible();
   });
-  it('calls convertCtrlKey on keydown', () => {
+  test('calls convertCtrlKey on keydown', async () => {
+    const user = _userEvent.default.setup();
     renderComponent(componentProps);
-    _react.fireEvent.keyDown(_react.screen.getByRole('textbox'), {
-      key: 'A',
-      code: 'keyA'
-    });
+    await user.click(_react.screen.getByRole('textbox'));
+    await user.keyboard('A');
     expect(mockConvertCtrlKey).toHaveBeenCalled();
   });
 });

@@ -1,5 +1,5 @@
-import { Button, Modal } from '@dhis2/ui';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { GetLinkDialog } from '../GetLinkDialog.js';
 const testBaseUrl = 'http://host.tld/test/';
@@ -42,23 +42,27 @@ const tests = [{
   id: 'map-id-2',
   expected: 'http://localhost/dhis-web-maps/#/map-id-2'
 }];
-describe('The FileMenu - GetLinkDialog component', () => {
-  let shallowGetLinkDialog;
+describe('FileMenu - GetLinkDialog component', () => {
   const onClose = jest.fn();
-  const getGetLinkDialogComponent = props => {
-    if (!shallowGetLinkDialog) {
-      shallowGetLinkDialog = shallow(/*#__PURE__*/React.createElement(GetLinkDialog, props));
-    }
-    return shallowGetLinkDialog;
+  const props = {
+    type: tests[0].type,
+    id: tests[0].id,
+    onClose
   };
-  beforeEach(() => {
-    shallowGetLinkDialog = undefined;
+  test('renders a Modal component', () => {
+    render(/*#__PURE__*/React.createElement(GetLinkDialog, props));
+    const modalComponent = screen.getByTestId('dhis2-uicore-modal');
+    expect(modalComponent).toBeInTheDocument();
+    expect(screen.getByLabelText('Close modal dialog')).toBeInTheDocument();
   });
-  it('renders a Modal component', () => {
-    expect(getGetLinkDialogComponent({
-      type: tests[0].type,
-      id: tests[0].id
-    }).find(Modal)).toHaveLength(1);
+  test('calls the onClose callback when the Close button is clicked', async () => {
+    const user = userEvent.setup();
+    render(/*#__PURE__*/React.createElement(GetLinkDialog, props));
+    const closeButton = screen.getByRole('button', {
+      name: 'Close'
+    });
+    await user.click(closeButton);
+    expect(onClose).toHaveBeenCalledTimes(1);
   });
   test.each(tests)('renders a <a> tag containing the correct app path and id', ({
     apiVersion,
@@ -71,19 +75,12 @@ describe('The FileMenu - GetLinkDialog component', () => {
       apiVersion: apiVersion || 42,
       baseUrl
     });
-    const href = getGetLinkDialogComponent({
-      type,
-      id,
-      onClose
-    }).find('a').prop('href');
-    expect(href).toMatch(expected);
-  });
-  it('calls the onClose callback when the Close button is clicked', () => {
-    getGetLinkDialogComponent({
-      type: tests[0].type,
-      id: tests[0].id,
-      onClose
-    }).find(Button).at(1).simulate('click');
-    expect(onClose).toHaveBeenCalled();
+    render(/*#__PURE__*/React.createElement(GetLinkDialog, {
+      onClose: onClose,
+      type: type,
+      id: id
+    }));
+    const anchorElement = screen.getByRole('link');
+    expect(anchorElement.href).toMatch(expected);
   });
 });

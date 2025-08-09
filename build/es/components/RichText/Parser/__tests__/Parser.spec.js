@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Parser } from '../Parser.js';
 jest.mock('../MdParser.js', () => ({
@@ -9,30 +9,29 @@ jest.mock('../MdParser.js', () => ({
   })
 }));
 describe('RichText: Parser component', () => {
-  let richTextParser;
-  const defaultProps = {
-    style: {
+  test('should have rendered a result with the style prop', () => {
+    const style = {
       color: 'blue',
       whiteSpace: 'pre-line'
-    }
-  };
-  const renderComponent = (props, text) => {
-    return shallow(/*#__PURE__*/React.createElement(Parser, props, text));
-  };
-  it('should have rendered a result', () => {
-    richTextParser = renderComponent({}, 'test');
-    expect(richTextParser).toHaveLength(1);
+    };
+    const {
+      container
+    } = render(/*#__PURE__*/React.createElement(Parser, {
+      style: style
+    }, 'test prop'));
+    const divEl = container.querySelector('div');
+    expect(divEl.style.color).toBe(style.color);
+    expect(divEl.style.whiteSpace).toBe(style.whiteSpace);
   });
-  it('should have rendered a result with the style prop', () => {
-    richTextParser = renderComponent(defaultProps, 'test prop');
-    expect(richTextParser.props().style).toEqual(defaultProps.style);
+  test('should have rendered content', () => {
+    render(/*#__PURE__*/React.createElement(Parser, null, 'plain text'));
+    expect(screen.getByText('converted text')).toBeInTheDocument();
   });
-  it('should have rendered content', () => {
-    richTextParser = renderComponent({}, 'plain text');
-    expect(richTextParser.html()).toEqual('<div>converted text</div>');
-  });
-  it('should return null if no children is passed', () => {
-    richTextParser = renderComponent({}, undefined);
-    expect(richTextParser.html()).toBe(null);
+  test('should return null if no children is passed', () => {
+    const {
+      container
+    } = render(/*#__PURE__*/React.createElement(Parser, null));
+    const divEl = container.querySelector('div');
+    expect(divEl).toBe(null);
   });
 });

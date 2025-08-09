@@ -1,7 +1,7 @@
 "use strict";
 
-var _enzyme = require("enzyme");
-var _react = _interopRequireDefault(require("react"));
+var _react = require("@testing-library/react");
+var _react2 = _interopRequireDefault(require("react"));
 var _index = require("../index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('<HoverMenuListItem/>', () => {
@@ -10,36 +10,42 @@ describe('<HoverMenuListItem/>', () => {
    * Only the `className`, `dataTest`, `destructive` and
    * `icon` prop need to be verified here. */
 
-  it('accepts a `className` prop', () => {
+  test('accepts a `className` prop', () => {
     const className = 'className';
-    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.HoverMenuListItem, {
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.HoverMenuListItem, {
       className: className
     }));
-    expect(wrapper.find('li')).toHaveClassName(className);
+    expect(_react.screen.getByTestId('dhis2-uicore-hovermenulistitem')).toHaveClass(className);
   });
-  it('accepts a `dataTest` prop', () => {
+  test('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.HoverMenuListItem, {
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.HoverMenuListItem, {
       dataTest: dataTest
     }));
-    expect(wrapper.find('li').prop('data-test')).toBe(dataTest);
+    expect(_react.screen.getByTestId(dataTest)).toBeInTheDocument();
   });
-  it('accepts a `destructive` prop', () => {
-    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.HoverMenuListItem, {
+  test('accepts a `destructive` prop', () => {
+    const dataTest = 'test';
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.HoverMenuListItem, {
+      dataTest: dataTest,
       destructive: true
     }));
-    expect(wrapper.find('li')).toHaveClassName('destructive');
+    expect(_react.screen.getByTestId(dataTest)).toBeInTheDocument();
   });
-  it('accepts an `icon` prop', () => {
+  test('accepts an `icon` prop', () => {
+    const dataTest = 'test';
     const iconText = 'I am an icon';
-    const icon = /*#__PURE__*/_react.default.createElement("span", {
+    const icon = /*#__PURE__*/_react2.default.createElement("span", {
       id: "testicon"
     }, iconText);
-    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.HoverMenuListItem, {
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.HoverMenuListItem, {
+      dataTest: dataTest,
       icon: icon
     }));
-    expect(wrapper.find('span.icon')).toExist();
-    expect(wrapper.find('span#testicon')).toExist();
-    expect(wrapper.find('span#testicon').text()).toBe(iconText);
+    const iconWrapperEl = _react.screen.getByTestId(dataTest).firstChild;
+    expect(iconWrapperEl).toBeInTheDocument();
+    expect(iconWrapperEl).toHaveClass('icon');
+    const iconEl = iconWrapperEl.closest('span');
+    expect(iconEl).toHaveTextContent(iconText);
   });
 });

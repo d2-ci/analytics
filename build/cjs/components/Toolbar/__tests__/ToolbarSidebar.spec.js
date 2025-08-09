@@ -1,26 +1,29 @@
 "use strict";
 
-var _enzyme = require("enzyme");
-var _react = _interopRequireDefault(require("react"));
+var _react = require("@testing-library/react");
+var _react2 = _interopRequireDefault(require("react"));
 var _index = require("../index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('<ToolbarSidebar/>', () => {
-  it('renders children', () => {
+  test('renders children', () => {
     const childNode = 'text node';
-    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.ToolbarSidebar, null, childNode));
-    expect(wrapper.containsMatchingElement(childNode)).toBe(true);
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.ToolbarSidebar, null, childNode));
+    expect(_react.screen.getByText(childNode)).toBeInTheDocument();
   });
-  it('accepts a `dataTest` prop', () => {
+  test('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.ToolbarSidebar, {
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.ToolbarSidebar, {
       dataTest: dataTest
     }));
-    expect(wrapper.prop('data-test')).toBe(dataTest);
+    expect(_react.screen.getByTestId(dataTest)).toBeInTheDocument();
   });
-  it('accepts a `isHidden` prop', () => {
-    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.ToolbarSidebar, {
+  test('accepts a `isHidden` prop', () => {
+    const {
+      container
+    } = (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.ToolbarSidebar, {
       isHidden: true
     }));
-    expect(wrapper.find('div').hasClass('isHidden')).toEqual(true);
+    const divEl = container.querySelector('div');
+    expect(divEl).toHaveClass('isHidden');
   });
 });

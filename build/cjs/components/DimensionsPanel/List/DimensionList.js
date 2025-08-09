@@ -33,7 +33,8 @@ class DimensionList extends _react.Component {
       isDeactivated: this.isDisabled(dimension.id),
       onClick: this.props.onDimensionClick,
       onOptionsClick: this.props.onDimensionOptionsClick,
-      onDragStart: this.props.onDimensionDragStart
+      onDragStart: this.props.onDimensionDragStart,
+      dataTest: "dimension-item"
     }));
     _defineProperty(this, "getDimensionItemsByFilter", filter => this.props.dimensions.filter(filter).filter(this.nameContainsFilterText).map(this.renderItem));
   }
@@ -41,6 +42,7 @@ class DimensionList extends _react.Component {
     const fixedDimensions = this.getDimensionItemsByFilter(dimension => Object.values((0, _predefinedDimensions.getFixedDimensions)()).some(fixedDim => fixedDim.id === dimension.id));
     const nonPredefinedDimensions = this.getDimensionItemsByFilter(dimension => !Object.values((0, _predefinedDimensions.getPredefinedDimensions)()).some(predefDim => predefDim.id === dimension.id));
     return /*#__PURE__*/_react.default.createElement("div", {
+      "data-test": "dhis2-analytics-dimension-list",
       className: `jsx-${_DimensionListStyle.default.__hash}` + " " + "container"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: `jsx-${_DimensionListStyle.default.__hash}` + " " + "wrapper"

@@ -458,6 +458,5 @@
     "Base": "基",
     "Axis {{axisId}}": "轴{{axisId}}",
     "{{count}} items": "{{count}} 个条目",
-    "Reset zoom": "重设缩放",
-    "__MANIFEST_APP_TITLE_Application title": "@dhis2/analytics"
+    "Reset zoom": "重设缩放"
 }

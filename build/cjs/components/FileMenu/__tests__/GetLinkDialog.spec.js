@@ -1,8 +1,8 @@
 "use strict";
 
-var _ui = require("@dhis2/ui");
-var _enzyme = require("enzyme");
-var _react = _interopRequireDefault(require("react"));
+var _react = require("@testing-library/react");
+var _userEvent = _interopRequireDefault(require("@testing-library/user-event"));
+var _react2 = _interopRequireDefault(require("react"));
 var _GetLinkDialog = require("../GetLinkDialog.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const testBaseUrl = 'http://host.tld/test/';
@@ -45,23 +45,27 @@ const tests = [{
   id: 'map-id-2',
   expected: 'http://localhost/dhis-web-maps/#/map-id-2'
 }];
-describe('The FileMenu - GetLinkDialog component', () => {
-  let shallowGetLinkDialog;
+describe('FileMenu - GetLinkDialog component', () => {
   const onClose = jest.fn();
-  const getGetLinkDialogComponent = props => {
-    if (!shallowGetLinkDialog) {
-      shallowGetLinkDialog = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_GetLinkDialog.GetLinkDialog, props));
-    }
-    return shallowGetLinkDialog;
+  const props = {
+    type: tests[0].type,
+    id: tests[0].id,
+    onClose
   };
-  beforeEach(() => {
-    shallowGetLinkDialog = undefined;
+  test('renders a Modal component', () => {
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_GetLinkDialog.GetLinkDialog, props));
+    const modalComponent = _react.screen.getByTestId('dhis2-uicore-modal');
+    expect(modalComponent).toBeInTheDocument();
+    expect(_react.screen.getByLabelText('Close modal dialog')).toBeInTheDocument();
   });
-  it('renders a Modal component', () => {
-    expect(getGetLinkDialogComponent({
-      type: tests[0].type,
-      id: tests[0].id
-    }).find(_ui.Modal)).toHaveLength(1);
+  test('calls the onClose callback when the Close button is clicked', async () => {
+    const user = _userEvent.default.setup();
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_GetLinkDialog.GetLinkDialog, props));
+    const closeButton = _react.screen.getByRole('button', {
+      name: 'Close'
+    });
+    await user.click(closeButton);
+    expect(onClose).toHaveBeenCalledTimes(1);
   });
   test.each(tests)('renders a <a> tag containing the correct app path and id', ({
     apiVersion,
@@ -74,19 +78,12 @@ describe('The FileMenu - GetLinkDialog component', () => {
       apiVersion: apiVersion || 42,
       baseUrl
     });
-    const href = getGetLinkDialogComponent({
-      type,
-      id,
-      onClose
-    }).find('a').prop('href');
-    expect(href).toMatch(expected);
-  });
-  it('calls the onClose callback when the Close button is clicked', () => {
-    getGetLinkDialogComponent({
-      type: tests[0].type,
-      id: tests[0].id,
-      onClose
-    }).find(_ui.Button).at(1).simulate('click');
-    expect(onClose).toHaveBeenCalled();
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_GetLinkDialog.GetLinkDialog, {
+      onClose: onClose,
+      type: type,
+      id: id
+    }));
+    const anchorElement = _react.screen.getByRole('link');
+    expect(anchorElement.href).toMatch(expected);
   });
 });

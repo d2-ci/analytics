@@ -1,33 +1,30 @@
-import { Button, Modal, ModalTitle } from '@dhis2/ui';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { DeleteDialog } from '../DeleteDialog.js';
-describe('The FileMenu - DeleteDialog component', () => {
-  let shallowDeleteDialog;
-  let props;
-  const onClose = jest.fn();
-  const getDeleteDialogComponent = props => {
-    if (!shallowDeleteDialog) {
-      shallowDeleteDialog = shallow(/*#__PURE__*/React.createElement(DeleteDialog, props));
-    }
-    return shallowDeleteDialog;
+describe('FileMenu - DeleteDialog component', () => {
+  const props = {
+    type: 'visualization',
+    id: 'delete-test',
+    onClose: jest.fn()
   };
-  beforeEach(() => {
-    shallowDeleteDialog = undefined;
-    props = {
-      type: 'visualization',
-      id: 'delete-test',
-      onClose
-    };
+  test('renders a Modal component', () => {
+    render(/*#__PURE__*/React.createElement(DeleteDialog, props));
+    const modalComponent = screen.getByTestId('file-menu-delete-modal');
+    expect(modalComponent).toBeInTheDocument();
   });
-  it('renders a Modal component', () => {
-    expect(getDeleteDialogComponent(props).find(Modal)).toHaveLength(1);
+  test('renders a ModalTitle containing the type prop', () => {
+    render(/*#__PURE__*/React.createElement(DeleteDialog, props));
+    const modalTitleComponent = screen.getByText(`Delete ${props.type}`);
+    expect(modalTitleComponent).toBeInTheDocument();
   });
-  it('renders a ModalTitle containing the type prop', () => {
-    expect(getDeleteDialogComponent(props).find(ModalTitle).childAt(0).text()).toEqual(`Delete ${props.type}`);
-  });
-  it('calls the onClose callback when the Cancel button is clicked', () => {
-    getDeleteDialogComponent(props).find(Button).first().simulate('click');
-    expect(onClose).toHaveBeenCalled();
+  test('calls the onClose callback when the Cancel button is clicked', async () => {
+    const user = userEvent.setup();
+    render(/*#__PURE__*/React.createElement(DeleteDialog, props));
+    const cancelButton = screen.getByRole('button', {
+      name: 'Cancel'
+    });
+    await user.click(cancelButton);
+    expect(props.onClose).toHaveBeenCalledTimes(1);
   });
 });

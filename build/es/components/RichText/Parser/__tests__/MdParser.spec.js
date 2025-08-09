@@ -1,7 +1,7 @@
 import { MdParser } from '../MdParser.js';
 const Parser = new MdParser();
 describe('MdParser class', () => {
-  it('converts text into HTML', () => {
+  test('converts text into HTML', () => {
     const inlineTests = [['_italic_', '<em>italic</em>'], ['*bold*', '<strong>bold</strong>'], ['_ not italic because there is a space _', '_ not italic because there is a space _'], [':-)', '<span>\u{1F642}</span>'], [':)', '<span>\u{1F642}</span>'], [':-(', '<span>\u{1F641}</span>'], [':(', '<span>\u{1F641}</span>'], [':+1', '<span>\u{1F44D}</span>'], [':-1', '<span>\u{1F44E}</span>'], ['mixed _italic_ *bold* and :+1', 'mixed <em>italic</em> <strong>bold</strong> and <span>\u{1F44D}</span>'], ['_italic with * inside_', '<em>italic with * inside</em>'], ['*bold with _ inside*', '<strong>bold with _ inside</strong>'],
     // italic marker followed by : should work
     ['_italic_:', '<em>italic</em>:'], ['_italic_: some text, *bold*: some other text', '<em>italic</em>: some text, <strong>bold</strong>: some other text'],

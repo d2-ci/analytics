@@ -21,7 +21,9 @@ const InterpretationsAndDetailsToggler = ({
   disabled: disabled,
   "data-test": dataTest,
   className: "jsx-1238484262 " + `jsx-${_MenuButtonStyles.default.__hash}`
-}, isShowing ? /*#__PURE__*/_react.default.createElement(_ui.IconChevronRight24, null) : /*#__PURE__*/_react.default.createElement(_ui.IconChevronLeft24, null), _d2I18n.default.t('Interpretations and details'), /*#__PURE__*/_react.default.createElement(_style.default, {
+}, isShowing ? /*#__PURE__*/_react.default.createElement(_ui.IconChevronRight24, {
+  dataTest: `${dataTest}-showing`
+}) : /*#__PURE__*/_react.default.createElement(_ui.IconChevronLeft24, null), _d2I18n.default.t('Interpretations and details'), /*#__PURE__*/_react.default.createElement(_style.default, {
   id: _MenuButtonStyles.default.__hash
 }, _MenuButtonStyles.default), /*#__PURE__*/_react.default.createElement(_style.default, {
   id: "1238484262"

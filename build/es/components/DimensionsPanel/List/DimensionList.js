@@ -25,7 +25,8 @@ class DimensionList extends Component {
       isDeactivated: this.isDisabled(dimension.id),
       onClick: this.props.onDimensionClick,
       onOptionsClick: this.props.onDimensionOptionsClick,
-      onDragStart: this.props.onDimensionDragStart
+      onDragStart: this.props.onDimensionDragStart,
+      dataTest: "dimension-item"
     }));
     _defineProperty(this, "getDimensionItemsByFilter", filter => this.props.dimensions.filter(filter).filter(this.nameContainsFilterText).map(this.renderItem));
   }
@@ -33,6 +34,7 @@ class DimensionList extends Component {
     const fixedDimensions = this.getDimensionItemsByFilter(dimension => Object.values(getFixedDimensions()).some(fixedDim => fixedDim.id === dimension.id));
     const nonPredefinedDimensions = this.getDimensionItemsByFilter(dimension => !Object.values(getPredefinedDimensions()).some(predefDim => predefDim.id === dimension.id));
     return /*#__PURE__*/React.createElement("div", {
+      "data-test": "dhis2-analytics-dimension-list",
       className: `jsx-${styles.__hash}` + " " + "container"
     }, /*#__PURE__*/React.createElement("div", {
       className: `jsx-${styles.__hash}` + " " + "wrapper"

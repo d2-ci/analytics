@@ -25,6 +25,7 @@ const FixedPeriodFilter = ({
 }) => {
   const onlyAllowedTypeIsSelected = Array.isArray(allowedPeriodTypes) && allowedPeriodTypes.length === 1 && allowedPeriodTypes[0] === currentPeriodType;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+    "data-test": dataTest,
     className: `jsx-${_PeriodFilterStyle.default.__hash}` + " " + "leftSection"
   }, /*#__PURE__*/_react.default.createElement(_ui.SingleSelectField, {
     label: _index.default.t('Period type'),
