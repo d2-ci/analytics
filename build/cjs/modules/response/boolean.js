@@ -21,9 +21,6 @@ const applyBooleanHandler = (response, headerIndex) => {
         },
         [(0, _numeric.getPrefixedValue)('1', dimensionId)]: {
           name: _d2I18n.default.t('Yes')
-        },
-        '': {
-          name: _d2I18n.default.t('N/A')
         }
       }
     }

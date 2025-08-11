@@ -3,31 +3,32 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sortStringsAsNumbersAsc = exports.getUnique = exports.getPrefixedValue = exports.getNumericRows = exports.getNumericItems = exports.getNumericDimension = exports.applyNumericHandler = void 0;
-var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+exports.sortStringsAsNumbersAsc = exports.getUniqueSortedValues = exports.getUnique = exports.getPrefixedValue = exports.getNumericRows = exports.getNumericItems = exports.getNumericDimension = exports.applyNumericHandler = void 0;
+var _response = require("./response.js");
 const getUnique = array => [...new Set(array)];
 exports.getUnique = getUnique;
 const sortStringsAsNumbersAsc = arr => {
   return arr.slice().sort((a, b) => {
-    if (a === '' && b === '') {
+    if (a === _response.NA_VALUE && b === _response.NA_VALUE) {
       return 0;
     }
-    if (a === '') {
+    if (a === _response.NA_VALUE) {
       return 1;
     }
-    if (b === '') {
+    if (b === _response.NA_VALUE) {
       return -1;
     }
     return Number(a) - Number(b);
   });
 };
 exports.sortStringsAsNumbersAsc = sortStringsAsNumbersAsc;
-const getPrefixedValue = (value, prefix) => value !== '' ? `${prefix}:${value}` : value;
+const getUniqueSortedValues = (rows, headerIndex) => sortStringsAsNumbersAsc(getUnique(rows.map(row => row[headerIndex]).filter(value => value.length)));
+exports.getUniqueSortedValues = getUniqueSortedValues;
+const getPrefixedValue = (value, prefix) => `${prefix}:${value}`;
 exports.getPrefixedValue = getPrefixedValue;
 const getNumericItems = (values, dimensionId) => values.reduce((items, value) => {
   items[getPrefixedValue(value, dimensionId)] = {
-    name: value || _d2I18n.default.t('N/A')
+    name: value
   };
   return items;
 }, {});
@@ -38,19 +39,25 @@ const getNumericDimension = (values, dimensionId) => ({
 exports.getNumericDimension = getNumericDimension;
 const getNumericRows = (rows, headerIndex, dimensionId) => {
   let row;
+  let value;
   return rows.map(r => {
-    row = [...r];
-    row[headerIndex] = getPrefixedValue(row[headerIndex], dimensionId);
-    return row;
+    value = r[headerIndex];
+    if (value !== _response.NA_VALUE) {
+      row = [...r];
+      row[headerIndex] = getPrefixedValue(row[headerIndex], dimensionId);
+      return row;
+    }
+    return r;
   });
 };
 exports.getNumericRows = getNumericRows;
 const applyNumericHandler = (response, headerIndex) => {
-  const uniqueSortedValues = sortStringsAsNumbersAsc(getUnique(response.rows.map(r => r[headerIndex])));
   const dimensionId = response.headers[headerIndex].name;
+  const uniqueSortedValues = getUniqueSortedValues(response.rows, headerIndex);
   return {
     ...response,
     metaData: {
+      ...response.metaData,
       items: {
         ...response.metaData.items,
         ...getNumericItems(uniqueSortedValues, dimensionId)

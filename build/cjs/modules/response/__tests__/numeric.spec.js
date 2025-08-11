@@ -3,6 +3,7 @@
 var _numericData = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.json"));
 var _numericDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.org.json"));
 var _numeric = require("../numeric.js");
+var _response = require("../response.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const testId = 'Zj7UnCAulEk.qrur9Dvnyt5';
 const headerIndex = 0;
@@ -47,57 +48,40 @@ describe('numeric', () => {
       expect((0, _numeric.sortStringsAsNumbersAsc)(['7'])).toEqual(['7']);
     });
   });
+  describe('getUniqueSortedValues', () => {
+    expect((0, _numeric.getUniqueSortedValues)([['1', 'a'], ['5', 'b'], ['-1', 'c'], ['', 'd'], ['5', 'e'], ['3', 'f']], headerIndex)).toEqual(['-1', '1', '3', '5']);
+  });
   describe('getPrefixedValue', () => {
     it('returns prefix and value separated by a colon', () => {
       expect((0, _numeric.getPrefixedValue)('123', 'id')).toBe('id:123');
     });
-    it('works with empty string prefix', () => {
-      expect((0, _numeric.getPrefixedValue)('abc', '')).toBe(':abc');
-    });
-    it('works with empty string value', () => {
-      expect((0, _numeric.getPrefixedValue)('', 'test')).toBe('');
-    });
-    it('works with both prefix and value empty', () => {
-      expect((0, _numeric.getPrefixedValue)('', '')).toBe('');
-    });
   });
   describe('getNumericItems', () => {
     it('returns an object with prefixed keys and correct names', () => {
-      const values = ['1', '2', ''];
+      const values = ['1', '2'];
       expect((0, _numeric.getNumericItems)(values, testId)).toEqual({
         [testId + ':1']: {
           name: '1'
         },
         [testId + ':2']: {
           name: '2'
-        },
-        '': {
-          name: 'N/A'
         }
       });
-    });
-    it('handles empty values array', () => {
-      expect((0, _numeric.getNumericItems)([], 'prefix')).toEqual({});
     });
   });
   describe('getNumericDimension', () => {
     it('returns object with dimensionId as key and correctly prefixed values', () => {
-      const values = ['1', '2', ''];
+      const values = ['1', '2'];
       expect((0, _numeric.getNumericDimension)(values, testId)).toEqual({
-        [testId]: [testId + ':1', testId + ':2', '']
-      });
-    });
-    it('handles empty values array', () => {
-      expect((0, _numeric.getNumericDimension)([], 'prefix')).toEqual({
-        prefix: []
+        [testId]: [testId + ':1', testId + ':2']
       });
     });
   });
   describe('getNumericRows', () => {
     it('prefixes value at headerIndex for each row', () => {
-      const rows = [['a', '1', 'x'], ['b', '2', 'y'], ['c', '', 'z']];
+      const rows = [['a', '1', 'x'], ['b', '2', 'y'], ['c', _response.NA_VALUE, 'z']];
       const headerIndex = 1;
-      expect((0, _numeric.getNumericRows)(rows, headerIndex, testId)).toEqual([['a', testId + ':1', 'x'], ['b', testId + ':2', 'y'], ['c', '', 'z']]);
+      expect((0, _numeric.getNumericRows)(rows, headerIndex, testId)).toEqual([['a', testId + ':1', 'x'], ['b', testId + ':2', 'y'], ['c', _response.NA_VALUE, 'z']]);
     });
     it('handles empty rows array', () => {
       expect((0, _numeric.getNumericRows)([], 1, 'a')).toEqual([]);

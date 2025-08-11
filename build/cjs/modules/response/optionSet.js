@@ -4,17 +4,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getOptionIdRows = exports.getOptionCodeIdMap = exports.applyOptionSetHandler = void 0;
+var _response = require("./response.js");
 const getOptionCodeIdMap = (optionIds, metaDataItems) => optionIds.reduce((map, optionId) => {
   map[metaDataItems[optionId].code] = optionId;
   return map;
 }, {});
 exports.getOptionCodeIdMap = getOptionCodeIdMap;
 const getOptionIdRows = (rows, optionCodeIdMap, headerIndex) => {
-  let row;
   let value;
+  let row;
   return rows.map(r => {
     value = r[headerIndex];
-    if (value !== '') {
+    if (value !== _response.NA_VALUE) {
       row = [...r];
       row[headerIndex] = optionCodeIdMap[value];
       return row;
