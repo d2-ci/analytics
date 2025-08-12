@@ -42,7 +42,7 @@ describe('response', () => {
         expect((0, _response.transformResponse)(_optionsetsDataOrg.default)).toEqual(_optionsetsData.default);
       });
       it('transforms response with non-unique codes across two option sets and hides N/A data', () => {
-        expect((0, _response.transformResponse)(_optionsetDataOrg.default, {
+        expect((0, _response.transformResponse)(_optionsetsDataOrg.default, {
           hideNaData: true
         })).toEqual(_optionsetsDataHidena.default);
       });

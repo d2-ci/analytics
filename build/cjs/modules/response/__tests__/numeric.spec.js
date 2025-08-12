@@ -1,6 +1,6 @@
 "use strict";
 
-var _numericData = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.json"));
+var _numericDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.hidena.json"));
 var _numericDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.org.json"));
 var _numeric = require("../numeric.js");
 var _response = require("../response.js");
@@ -89,7 +89,7 @@ describe('numeric', () => {
   });
   describe('applyNumericHandler', () => {
     it('should return the transformed response', () => {
-      expect((0, _numeric.applyNumericHandler)(_numericDataOrg.default, headerIndex)).toEqual(_numericData.default);
+      expect((0, _numeric.applyNumericHandler)(_numericDataOrg.default, headerIndex)).toEqual(_numericDataHidena.default);
     });
   });
 });

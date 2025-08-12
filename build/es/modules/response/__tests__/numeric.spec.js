@@ -1,4 +1,4 @@
-import response from '../../../__demo__/data/event/numeric.data.json';
+import responseHideNa from '../../../__demo__/data/event/numeric.data.hidena.json';
 import responseOrg from '../../../__demo__/data/event/numeric.data.org.json';
 import { applyNumericHandler, getNumericDimension, getNumericItems, getNumericRows, getPrefixedValue, getUnique, getUniqueSortedValues, sortStringsAsNumbersAsc } from '../numeric.js';
 import { NA_VALUE } from '../response.js';
@@ -86,7 +86,7 @@ describe('numeric', () => {
   });
   describe('applyNumericHandler', () => {
     it('should return the transformed response', () => {
-      expect(applyNumericHandler(responseOrg, headerIndex)).toEqual(response);
+      expect(applyNumericHandler(responseOrg, headerIndex)).toEqual(responseHideNa);
     });
   });
 });

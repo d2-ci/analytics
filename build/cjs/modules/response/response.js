@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.transformResponse = exports.NA_VALUE = void 0;
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
+var _predefinedDimensions = require("../predefinedDimensions.js");
 var _valueTypes = require("../valueTypes.js");
 var _boolean = require("./boolean.js");
 var _numeric = require("./numeric.js");
@@ -12,15 +13,24 @@ var _optionSet = require("./optionSet.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const NA_VALUE = exports.NA_VALUE = '';
 const transformResponse = (response, {
-  hideNaData
+  hideNaData = false
 } = {}) => {
   let transformedResponse = {
-    ...response
+    ...response,
+    metaData: {
+      ...response.metaData,
+      items: {
+        ...response.metaData.items
+      },
+      dimensions: {
+        ...response.metaData.dimensions
+      }
+    }
   };
   const metaHeaders = response.headers.map((header, index) => ({
     ...header,
     index
-  })).filter(header => Boolean(header.meta));
+  })).filter(header => Boolean(header.meta) && ![_predefinedDimensions.DIMENSION_ID_PERIOD, _predefinedDimensions.DIMENSION_ID_ORGUNIT].includes(header.name));
   metaHeaders.forEach(header => {
     if (header.optionSet) {
       transformedResponse = (0, _optionSet.applyOptionSetHandler)(transformedResponse, header.index);
@@ -33,7 +43,7 @@ const transformResponse = (response, {
   if (!hideNaData) {
     metaHeaders.forEach(header => {
       if (response.rows.map(row => row[header.index]).includes(NA_VALUE)) {
-        transformedResponse.metaData.dimensions[header.name].dimensions.push(NA_VALUE);
+        transformedResponse.metaData.dimensions[header.name] = [...transformedResponse.metaData.dimensions[header.name], NA_VALUE];
       }
     });
     transformedResponse.metaData.items[NA_VALUE] = {

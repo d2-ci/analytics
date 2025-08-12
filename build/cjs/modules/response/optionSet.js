@@ -5,8 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getOptionIdRows = exports.getOptionCodeIdMap = exports.applyOptionSetHandler = void 0;
 var _response = require("./response.js");
-const getOptionCodeIdMap = (optionIds, metaDataItems) => optionIds.reduce((map, optionId) => {
-  map[metaDataItems[optionId].code] = optionId;
+const getOptionCodeIdMap = (optionIds, items) => optionIds.reduce((map, optionId) => {
+  map[items[optionId].code] = optionId;
   return map;
 }, {});
 exports.getOptionCodeIdMap = getOptionCodeIdMap;

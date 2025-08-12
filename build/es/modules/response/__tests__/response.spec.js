@@ -39,7 +39,7 @@ describe('response', () => {
         expect(transformResponse(responseOptionSetsOrg)).toEqual(responseOptionSets);
       });
       it('transforms response with non-unique codes across two option sets and hides N/A data', () => {
-        expect(transformResponse(responseOptionSetOrg, {
+        expect(transformResponse(responseOptionSetsOrg, {
           hideNaData: true
         })).toEqual(responseOptionSetsHideNa);
       });
