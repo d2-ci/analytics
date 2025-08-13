@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sortStringsAsNumbersAsc = exports.getUniqueSortedValues = exports.getUnique = exports.getPrefixedValue = exports.getNumericRows = exports.getNumericItems = exports.getNumericDimension = exports.applyNumericHandler = void 0;
+exports.sortStringsAsNumbersAsc = exports.getUniqueSortedValues = exports.getUnique = exports.getRows = exports.getPrefixedValue = exports.getItems = exports.getDimensions = exports.applyDefaultHandler = void 0;
 var _response = require("./response.js");
 const getUnique = array => [...new Set(array)];
 exports.getUnique = getUnique;
@@ -26,18 +26,18 @@ const getUniqueSortedValues = (rows, headerIndex) => sortStringsAsNumbersAsc(get
 exports.getUniqueSortedValues = getUniqueSortedValues;
 const getPrefixedValue = (value, prefix) => `${prefix}:${value}`;
 exports.getPrefixedValue = getPrefixedValue;
-const getNumericItems = (values, dimensionId) => values.reduce((items, value) => {
+const getItems = (values, dimensionId, itemFormatter) => values.reduce((items, value) => {
   items[getPrefixedValue(value, dimensionId)] = {
-    name: value
+    name: itemFormatter ? itemFormatter(value) : value
   };
   return items;
 }, {});
-exports.getNumericItems = getNumericItems;
-const getNumericDimension = (values, dimensionId) => ({
+exports.getItems = getItems;
+const getDimensions = (values, dimensionId) => ({
   [dimensionId]: values.map(value => getPrefixedValue(value, dimensionId))
 });
-exports.getNumericDimension = getNumericDimension;
-const getNumericRows = (rows, headerIndex, dimensionId) => {
+exports.getDimensions = getDimensions;
+const getRows = (rows, headerIndex, dimensionId) => {
   let row;
   let value;
   return rows.map(r => {
@@ -50,8 +50,10 @@ const getNumericRows = (rows, headerIndex, dimensionId) => {
     return r;
   });
 };
-exports.getNumericRows = getNumericRows;
-const applyNumericHandler = (response, headerIndex) => {
+exports.getRows = getRows;
+const applyDefaultHandler = (response, headerIndex, {
+  itemFormatter
+} = {}) => {
   const dimensionId = response.headers[headerIndex].name;
   const uniqueSortedValues = getUniqueSortedValues(response.rows, headerIndex);
   return {
@@ -60,14 +62,14 @@ const applyNumericHandler = (response, headerIndex) => {
       ...response.metaData,
       items: {
         ...response.metaData.items,
-        ...getNumericItems(uniqueSortedValues, dimensionId)
+        ...getItems(uniqueSortedValues, dimensionId, itemFormatter)
       },
       dimensions: {
         ...response.metaData.dimensions,
-        ...getNumericDimension(uniqueSortedValues, dimensionId)
+        ...getDimensions(uniqueSortedValues, dimensionId)
       }
     },
-    rows: [...getNumericRows(response.rows, headerIndex, dimensionId)]
+    rows: [...getRows(response.rows, headerIndex, dimensionId)]
   };
 };
-exports.applyNumericHandler = applyNumericHandler;
+exports.applyDefaultHandler = applyDefaultHandler;

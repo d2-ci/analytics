@@ -8,7 +8,7 @@ var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _predefinedDimensions = require("../predefinedDimensions.js");
 var _valueTypes = require("../valueTypes.js");
 var _boolean = require("./boolean.js");
-var _numeric = require("./numeric.js");
+var _default = require("./default.js");
 var _optionSet = require("./optionSet.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const NA_VALUE = exports.NA_VALUE = '';
@@ -34,10 +34,22 @@ const transformResponse = (response, {
   metaHeaders.forEach(header => {
     if (header.optionSet) {
       transformedResponse = (0, _optionSet.applyOptionSetHandler)(transformedResponse, header.index);
-    } else if ((0, _valueTypes.isNumericValueType)(header.valueType) && !header.legendSet) {
-      transformedResponse = (0, _numeric.applyNumericHandler)(transformedResponse, header.index);
+    } else if ((0, _valueTypes.isNumericValueType)(header.valueType) && !header.legendSet || [_valueTypes.VALUE_TYPE_EMAIL, _valueTypes.VALUE_TYPE_PHONE_NUMBER, _valueTypes.VALUE_TYPE_TEXT, _valueTypes.VALUE_TYPE_TIME, _valueTypes.VALUE_TYPE_URL, _valueTypes.VALUE_TYPE_USERNAME].includes(header.valueType)) {
+      transformedResponse = (0, _default.applyDefaultHandler)(transformedResponse, header.index);
     } else if ((0, _valueTypes.isBooleanValueType)(header.valueType)) {
       transformedResponse = (0, _boolean.applyBooleanHandler)(transformedResponse, header.index);
+    } else if (header.valueType === _valueTypes.VALUE_TYPE_DATETIME) {
+      transformedResponse = (0, _default.applyDefaultHandler)(transformedResponse, header.index, {
+        itemFormatter: name => name.replace(/:00\.0$/, '')
+      });
+    } else if (header.valueType === _valueTypes.VALUE_TYPE_DATE) {
+      transformedResponse = (0, _default.applyDefaultHandler)(transformedResponse, header.index, {
+        itemFormatter: name => name.replace(/ 00:00:00\.0$/, '')
+      });
+    } else if (header.valueType === _valueTypes.VALUE_TYPE_PERCENTAGE) {
+      transformedResponse = (0, _default.applyDefaultHandler)(transformedResponse, header.index, {
+        itemFormatter: name => name.endsWith('.0') ? name.slice(0, -2) : name
+      });
     }
   });
   if (!hideNaData) {

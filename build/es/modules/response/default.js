@@ -16,16 +16,16 @@ export const sortStringsAsNumbersAsc = arr => {
 };
 export const getUniqueSortedValues = (rows, headerIndex) => sortStringsAsNumbersAsc(getUnique(rows.map(row => row[headerIndex]).filter(value => value.length)));
 export const getPrefixedValue = (value, prefix) => `${prefix}:${value}`;
-export const getNumericItems = (values, dimensionId) => values.reduce((items, value) => {
+export const getItems = (values, dimensionId, itemFormatter) => values.reduce((items, value) => {
   items[getPrefixedValue(value, dimensionId)] = {
-    name: value
+    name: itemFormatter ? itemFormatter(value) : value
   };
   return items;
 }, {});
-export const getNumericDimension = (values, dimensionId) => ({
+export const getDimensions = (values, dimensionId) => ({
   [dimensionId]: values.map(value => getPrefixedValue(value, dimensionId))
 });
-export const getNumericRows = (rows, headerIndex, dimensionId) => {
+export const getRows = (rows, headerIndex, dimensionId) => {
   let row;
   let value;
   return rows.map(r => {
@@ -38,7 +38,9 @@ export const getNumericRows = (rows, headerIndex, dimensionId) => {
     return r;
   });
 };
-export const applyNumericHandler = (response, headerIndex) => {
+export const applyDefaultHandler = (response, headerIndex, {
+  itemFormatter
+} = {}) => {
   const dimensionId = response.headers[headerIndex].name;
   const uniqueSortedValues = getUniqueSortedValues(response.rows, headerIndex);
   return {
@@ -47,13 +49,13 @@ export const applyNumericHandler = (response, headerIndex) => {
       ...response.metaData,
       items: {
         ...response.metaData.items,
-        ...getNumericItems(uniqueSortedValues, dimensionId)
+        ...getItems(uniqueSortedValues, dimensionId, itemFormatter)
       },
       dimensions: {
         ...response.metaData.dimensions,
-        ...getNumericDimension(uniqueSortedValues, dimensionId)
+        ...getDimensions(uniqueSortedValues, dimensionId)
       }
     },
-    rows: [...getNumericRows(response.rows, headerIndex, dimensionId)]
+    rows: [...getRows(response.rows, headerIndex, dimensionId)]
   };
 };
