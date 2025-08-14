@@ -1,6 +1,6 @@
 import { NA_VALUE } from './response.js';
 export const getUnique = array => [...new Set(array)];
-export const sortStringsAsNumbersAsc = arr => {
+export const sortValuesAsc = arr => {
   return arr.slice().sort((a, b) => {
     if (a === NA_VALUE && b === NA_VALUE) {
       return 0;
@@ -11,10 +11,14 @@ export const sortStringsAsNumbersAsc = arr => {
     if (b === NA_VALUE) {
       return -1;
     }
-    return Number(a) - Number(b);
+    if (Number(a) && Number(b)) {
+      return Number(a) - Number(b);
+    } else {
+      return a.localeCompare(b);
+    }
   });
 };
-export const getUniqueSortedValues = (rows, headerIndex) => sortStringsAsNumbersAsc(getUnique(rows.map(row => row[headerIndex]).filter(value => value.length)));
+export const getUniqueSortedValues = (rows, headerIndex) => sortValuesAsc(getUnique(rows.map(row => row[headerIndex]).filter(value => value.length)));
 export const getPrefixedValue = (value, prefix) => `${prefix}:${value}`;
 export const getItems = (values, dimensionId, itemFormatter) => values.reduce((items, value) => {
   items[getPrefixedValue(value, dimensionId)] = {

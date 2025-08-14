@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sortStringsAsNumbersAsc = exports.getUniqueSortedValues = exports.getUnique = exports.getRows = exports.getPrefixedValue = exports.getItems = exports.getDimensions = exports.applyDefaultHandler = void 0;
+exports.sortValuesAsc = exports.getUniqueSortedValues = exports.getUnique = exports.getRows = exports.getPrefixedValue = exports.getItems = exports.getDimensions = exports.applyDefaultHandler = void 0;
 var _response = require("./response.js");
 const getUnique = array => [...new Set(array)];
 exports.getUnique = getUnique;
-const sortStringsAsNumbersAsc = arr => {
+const sortValuesAsc = arr => {
   return arr.slice().sort((a, b) => {
     if (a === _response.NA_VALUE && b === _response.NA_VALUE) {
       return 0;
@@ -18,11 +18,15 @@ const sortStringsAsNumbersAsc = arr => {
     if (b === _response.NA_VALUE) {
       return -1;
     }
-    return Number(a) - Number(b);
+    if (Number(a) && Number(b)) {
+      return Number(a) - Number(b);
+    } else {
+      return a.localeCompare(b);
+    }
   });
 };
-exports.sortStringsAsNumbersAsc = sortStringsAsNumbersAsc;
-const getUniqueSortedValues = (rows, headerIndex) => sortStringsAsNumbersAsc(getUnique(rows.map(row => row[headerIndex]).filter(value => value.length)));
+exports.sortValuesAsc = sortValuesAsc;
+const getUniqueSortedValues = (rows, headerIndex) => sortValuesAsc(getUnique(rows.map(row => row[headerIndex]).filter(value => value.length)));
 exports.getUniqueSortedValues = getUniqueSortedValues;
 const getPrefixedValue = (value, prefix) => `${prefix}:${value}`;
 exports.getPrefixedValue = getPrefixedValue;

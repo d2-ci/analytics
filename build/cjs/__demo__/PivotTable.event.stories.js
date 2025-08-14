@@ -3,12 +3,14 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.Yesonly = exports.OptionsetsNonUniqueCodes = exports.Optionset = exports.NumericLegendset = exports.Numeric = exports.Boolean = void 0;
+exports.default = exports.Yesonly = exports.OptionsetsNonUniqueCodes = exports.Optionset = exports.NumericLegendset = exports.Numeric = exports.Date = exports.Boolean = void 0;
 var _ui = require("@dhis2/ui");
 var _react = _interopRequireWildcard(require("react"));
 var _index = require("../index.js");
 var _booleanData = _interopRequireDefault(require("./data/event/boolean.data.json"));
 var _booleanVisualization = _interopRequireDefault(require("./data/event/boolean.visualization.json"));
+var _dateData = _interopRequireDefault(require("./data/event/date.data.json"));
+var _dateVisualization = _interopRequireDefault(require("./data/event/date.visualization.json"));
 var _numericLegendsetData = _interopRequireDefault(require("./data/event/numeric-legendset.data.json"));
 var _numericLegendsetVisualization = _interopRequireDefault(require("./data/event/numeric-legendset.visualization.json"));
 var _numericData = _interopRequireDefault(require("./data/event/numeric.data.json"));
@@ -62,6 +64,28 @@ const PivotTableOptionsWrapper = story => {
 var _default = exports.default = {
   title: 'PivotTable (event enrollment)',
   decorators: [PivotTableOptionsWrapper]
+};
+const Date = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._dateVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _dateData.default,
+    visualization: visualization
+  }));
+};
+exports.Date = Date;
+Date.story = {
+  name: 'Date'
 };
 const Numeric = (_, {
   pivotTableOptions

@@ -3,6 +3,9 @@
 var _booleanDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/boolean.data.hidena.json"));
 var _booleanData = _interopRequireDefault(require("../../../__demo__/data/event/boolean.data.json"));
 var _booleanDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/boolean.data.org.json"));
+var _dateDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/date.data.hidena.json"));
+var _dateData = _interopRequireDefault(require("../../../__demo__/data/event/date.data.json"));
+var _dateDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/date.data.org.json"));
 var _numericDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.hidena.json"));
 var _numericData = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.json"));
 var _numericDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.org.json"));
@@ -19,6 +22,16 @@ var _response = require("../response.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('response', () => {
   describe('transformResponse', () => {
+    describe('date', () => {
+      it('transforms response', () => {
+        expect((0, _response.transformResponse)(_dateDataOrg.default)).toEqual(_dateData.default);
+      });
+      it('transforms response and hides N/A data', () => {
+        expect((0, _response.transformResponse)(_dateDataOrg.default, {
+          hideNaData: true
+        })).toEqual(_dateDataHidena.default);
+      });
+    });
     describe('numeric', () => {
       it('transforms response', () => {
         expect((0, _response.transformResponse)(_numericDataOrg.default)).toEqual(_numericData.default);
