@@ -12,6 +12,11 @@ var _default = require("./default.js");
 var _optionSet = require("./optionSet.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const NA_VALUE = exports.NA_VALUE = '';
+const itemFormatterByValueType = {
+  [_valueTypes.VALUE_TYPE_DATETIME]: name => name.replace(/:00\.0$/, ''),
+  [_valueTypes.VALUE_TYPE_DATE]: name => name.replace(/ 00:00:00\.0$/, ''),
+  [_valueTypes.VALUE_TYPE_PERCENTAGE]: name => name.endsWith('.0') ? name.slice(0, -2) : name
+};
 const transformResponse = (response, {
   hideNaData = false
 } = {}) => {
