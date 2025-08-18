@@ -1,7 +1,7 @@
 import responseHideNa from '../../../__demo__/data/event/numeric.data.hidena.json';
 import responseOrg from '../../../__demo__/data/event/numeric.data.org.json';
-import { applyDefaultHandler, getDimensions, getItems, getRows, getPrefixedValue, getUnique, getUniqueSortedValues, sortValuesAsc } from '../default.js';
-import { NA_VALUE } from '../response.js';
+import { applyDefaultHandler, getDimensions, getItems, getRows, getPrefixedValue, getUnique, sortValuesAsc } from '../default.js';
+import { NA_VALUE, PREFIX_SEPARATOR } from '../response.js';
 const testId = 'Zj7UnCAulEk.qrur9Dvnyt5';
 const headerIndex = 0;
 describe('numeric', () => {
@@ -45,22 +45,22 @@ describe('numeric', () => {
       expect(sortValuesAsc(['7'])).toEqual(['7']);
     });
   });
-  describe('getUniqueSortedValues', () => {
+  describe('sortValuesAsc', () => {
     expect(sortValuesAsc([['1', 'a'], ['5', 'b'], ['-1', 'c'], ['', 'd'], ['5', 'e'], ['3', 'f']], headerIndex)).toEqual(['-1', '1', '3', '5']);
   });
   describe('getPrefixedValue', () => {
     it('returns prefix and value separated by a colon', () => {
-      expect(getPrefixedValue('123', 'id')).toBe('id:123');
+      expect(getPrefixedValue('123', 'id')).toBe(`id${PREFIX_SEPARATOR}123`);
     });
   });
   describe('getNumericItems', () => {
     it('returns an object with prefixed keys and correct names', () => {
       const values = ['1', '2'];
       expect(getItems(values, testId)).toEqual({
-        [testId + ':1']: {
+        [testId + `${PREFIX_SEPARATOR}1`]: {
           name: '1'
         },
-        [testId + ':2']: {
+        [testId + `${PREFIX_SEPARATOR}2`]: {
           name: '2'
         }
       });
@@ -70,7 +70,7 @@ describe('numeric', () => {
     it('returns object with dimensionId as key and correctly prefixed values', () => {
       const values = ['1', '2'];
       expect(getDimensions(values, testId)).toEqual({
-        [testId]: [testId + ':1', testId + ':2']
+        [testId]: [testId + `${PREFIX_SEPARATOR}1`, testId + `${PREFIX_SEPARATOR}2`]
       });
     });
   });
@@ -78,7 +78,7 @@ describe('numeric', () => {
     it('prefixes value at headerIndex for each row', () => {
       const rows = [['a', '1', 'x'], ['b', '2', 'y'], ['c', NA_VALUE, 'z']];
       const headerIndex = 1;
-      expect(getRows(rows, headerIndex, testId)).toEqual([['a', testId + ':1', 'x'], ['b', testId + ':2', 'y'], ['c', NA_VALUE, 'z']]);
+      expect(getRows(rows, headerIndex, testId)).toEqual([['a', testId + `${PREFIX_SEPARATOR}1`, 'x'], ['b', testId + `${PREFIX_SEPARATOR}2`, 'y'], ['c', NA_VALUE, 'z']]);
     });
     it('handles empty rows array', () => {
       expect(getRows([], 1, 'a')).toEqual([]);

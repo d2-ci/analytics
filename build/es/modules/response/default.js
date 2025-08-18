@@ -1,4 +1,4 @@
-import { NA_VALUE } from './response.js';
+import { NA_VALUE, PREFIX_SEPARATOR } from './response.js';
 export const getUnique = array => [...new Set(array)];
 export const sortValuesAsc = arr => {
   return arr.slice().sort((a, b) => {
@@ -11,7 +11,7 @@ export const sortValuesAsc = arr => {
     if (b === NA_VALUE) {
       return -1;
     }
-    if (Number(a) && Number(b)) {
+    if (Number.isFinite(a) && Number.isFinite(b)) {
       return Number(a) - Number(b);
     } else {
       console.log('VALUES', typeof a, a, typeof b, b);
@@ -20,7 +20,7 @@ export const sortValuesAsc = arr => {
   });
 };
 export const getUniqueSortedValues = (rows, headerIndex) => sortValuesAsc(getUnique(rows.map(row => row[headerIndex]).filter(value => value.length)));
-export const getPrefixedValue = (value, prefix) => `${prefix}:${value}`;
+export const getPrefixedValue = (value, prefix) => `${prefix}${PREFIX_SEPARATOR}${value}`;
 export const getItems = (values, dimensionId, itemFormatter) => values.reduce((items, value) => {
   items[getPrefixedValue(value, dimensionId)] = {
     name: itemFormatter ? itemFormatter(value) : value
@@ -48,6 +48,9 @@ export const applyDefaultHandler = (response, headerIndex, {
 } = {}) => {
   const dimensionId = response.headers[headerIndex].name;
   const uniqueSortedValues = getUniqueSortedValues(response.rows, headerIndex);
+  if (dimensionId === 'A03MvHHogjR.bx6fsa0t90x') {
+    console.log(response, headerIndex, uniqueSortedValues);
+  }
   return {
     ...response,
     metaData: {

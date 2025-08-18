@@ -18,7 +18,7 @@ const sortValuesAsc = arr => {
     if (b === _response.NA_VALUE) {
       return -1;
     }
-    if (Number(a) && Number(b)) {
+    if (Number.isFinite(a) && Number.isFinite(b)) {
       return Number(a) - Number(b);
     } else {
       console.log('VALUES', typeof a, a, typeof b, b);
@@ -29,7 +29,7 @@ const sortValuesAsc = arr => {
 exports.sortValuesAsc = sortValuesAsc;
 const getUniqueSortedValues = (rows, headerIndex) => sortValuesAsc(getUnique(rows.map(row => row[headerIndex]).filter(value => value.length)));
 exports.getUniqueSortedValues = getUniqueSortedValues;
-const getPrefixedValue = (value, prefix) => `${prefix}:${value}`;
+const getPrefixedValue = (value, prefix) => `${prefix}${_response.PREFIX_SEPARATOR}${value}`;
 exports.getPrefixedValue = getPrefixedValue;
 const getItems = (values, dimensionId, itemFormatter) => values.reduce((items, value) => {
   items[getPrefixedValue(value, dimensionId)] = {
@@ -61,6 +61,9 @@ const applyDefaultHandler = (response, headerIndex, {
 } = {}) => {
   const dimensionId = response.headers[headerIndex].name;
   const uniqueSortedValues = getUniqueSortedValues(response.rows, headerIndex);
+  if (dimensionId === 'A03MvHHogjR.bx6fsa0t90x') {
+    console.log(response, headerIndex, uniqueSortedValues);
+  }
   return {
     ...response,
     metaData: {
