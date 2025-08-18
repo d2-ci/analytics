@@ -3,32 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sortValuesAsc = exports.getUniqueSortedValues = exports.getUnique = exports.getRows = exports.getPrefixedValue = exports.getItems = exports.getDimensions = exports.applyDefaultHandler = void 0;
+exports.getValuesUniqueSortedAsc = exports.getUnique = exports.getRows = exports.getPrefixedValue = exports.getItems = exports.getDimensions = exports.applyDefaultHandler = void 0;
+var _valueTypes = require("../valueTypes.js");
 var _response = require("./response.js");
 const getUnique = array => [...new Set(array)];
 exports.getUnique = getUnique;
-const sortValuesAsc = arr => {
-  return arr.slice().sort((a, b) => {
-    if (a === _response.NA_VALUE && b === _response.NA_VALUE) {
-      return 0;
-    }
-    if (a === _response.NA_VALUE) {
-      return 1;
-    }
-    if (b === _response.NA_VALUE) {
-      return -1;
-    }
-    if (Number.isFinite(a) && Number.isFinite(b)) {
-      return Number(a) - Number(b);
-    } else {
-      console.log('VALUES', typeof a, a, typeof b, b);
-      return a.localeCompare(b);
-    }
-  });
-};
-exports.sortValuesAsc = sortValuesAsc;
-const getUniqueSortedValues = (rows, headerIndex) => sortValuesAsc(getUnique(rows.map(row => row[headerIndex]).filter(value => value.length)));
-exports.getUniqueSortedValues = getUniqueSortedValues;
+const getValuesUniqueSortedAsc = (values, valueType = _valueTypes.VALUE_TYPE_TEXT) => (0, _valueTypes.isNumericValueType)(valueType) || (0, _valueTypes.isBooleanValueType)(valueType) ? getUnique(values).map(x => [Number(x), x]).sort((a, b) => a[0] - b[0]).map(arr => arr[1]) : getUnique(values).slice().sort((a, b) => a.localeCompare(b));
+exports.getValuesUniqueSortedAsc = getValuesUniqueSortedAsc;
 const getPrefixedValue = (value, prefix) => `${prefix}${_response.PREFIX_SEPARATOR}${value}`;
 exports.getPrefixedValue = getPrefixedValue;
 const getItems = (values, dimensionId, itemFormatter) => values.reduce((items, value) => {
@@ -59,25 +40,22 @@ exports.getRows = getRows;
 const applyDefaultHandler = (response, headerIndex, {
   itemFormatter
 } = {}) => {
-  const dimensionId = response.headers[headerIndex].name;
-  const uniqueSortedValues = getUniqueSortedValues(response.rows, headerIndex);
-  if (dimensionId === 'A03MvHHogjR.bx6fsa0t90x') {
-    console.log(response, headerIndex, uniqueSortedValues);
-  }
+  const header = response.headers[headerIndex];
+  const uniqueSortedValuesAsc = getValuesUniqueSortedAsc(response.rows.map(row => row[headerIndex]).filter(value => value !== _response.NA_VALUE), header.valueType);
   return {
     ...response,
     metaData: {
       ...response.metaData,
       items: {
         ...response.metaData.items,
-        ...getItems(uniqueSortedValues, dimensionId, itemFormatter)
+        ...getItems(uniqueSortedValuesAsc, header.name, itemFormatter)
       },
       dimensions: {
         ...response.metaData.dimensions,
-        ...getDimensions(uniqueSortedValues, dimensionId)
+        ...getDimensions(uniqueSortedValuesAsc, header.name)
       }
     },
-    rows: [...getRows(response.rows, headerIndex, dimensionId)]
+    rows: [...getRows(response.rows, headerIndex, header.name)]
   };
 };
 exports.applyDefaultHandler = applyDefaultHandler;
