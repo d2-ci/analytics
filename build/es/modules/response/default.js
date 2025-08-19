@@ -3,7 +3,9 @@ import { NA_VALUE, PREFIX_SEPARATOR } from './response.js';
 export const getUnique = array => [...new Set(array)];
 export const getValuesUniqueSortedAsc = (values, valueType = VALUE_TYPE_TEXT) => isNumericValueType(valueType) || isBooleanValueType(valueType) ? getUnique(values).map(x => [Number(x), x]).sort((a, b) => a[0] - b[0]).map(arr => arr[1]) : getUnique(values).slice().sort((a, b) => a.localeCompare(b));
 export const getPrefixedValue = (value, prefix) => `${prefix}${PREFIX_SEPARATOR}${value}`;
-export const getItems = (values, dimensionId, itemFormatter) => values.reduce((items, value) => {
+export const getItems = (values, dimensionId, {
+  itemFormatter
+} = {}) => values.reduce((items, value) => {
   items[getPrefixedValue(value, dimensionId)] = {
     name: itemFormatter ? itemFormatter(value) : value
   };
@@ -36,7 +38,9 @@ export const applyDefaultHandler = (response, headerIndex, {
       ...response.metaData,
       items: {
         ...response.metaData.items,
-        ...getItems(uniqueSortedValuesAsc, header.name, itemFormatter)
+        ...getItems(uniqueSortedValuesAsc, header.name, {
+          itemFormatter
+        })
       },
       dimensions: {
         ...response.metaData.dimensions,

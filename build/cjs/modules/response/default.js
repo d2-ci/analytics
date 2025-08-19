@@ -12,7 +12,9 @@ const getValuesUniqueSortedAsc = (values, valueType = _valueTypes.VALUE_TYPE_TEX
 exports.getValuesUniqueSortedAsc = getValuesUniqueSortedAsc;
 const getPrefixedValue = (value, prefix) => `${prefix}${_response.PREFIX_SEPARATOR}${value}`;
 exports.getPrefixedValue = getPrefixedValue;
-const getItems = (values, dimensionId, itemFormatter) => values.reduce((items, value) => {
+const getItems = (values, dimensionId, {
+  itemFormatter
+} = {}) => values.reduce((items, value) => {
   items[getPrefixedValue(value, dimensionId)] = {
     name: itemFormatter ? itemFormatter(value) : value
   };
@@ -48,7 +50,9 @@ const applyDefaultHandler = (response, headerIndex, {
       ...response.metaData,
       items: {
         ...response.metaData.items,
-        ...getItems(uniqueSortedValuesAsc, header.name, itemFormatter)
+        ...getItems(uniqueSortedValuesAsc, header.name, {
+          itemFormatter
+        })
       },
       dimensions: {
         ...response.metaData.dimensions,
