@@ -1,5 +1,9 @@
 "use strict";
 
+var _dateDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/date.data.hidena.json"));
+var _dateDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/date.data.org.json"));
+var _datetimeDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/datetime.data.hidena.json"));
+var _datetimeDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/datetime.data.org.json"));
 var _numericDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.hidena.json"));
 var _numericDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.org.json"));
 var _valueTypes = require("../../valueTypes.js");
@@ -76,9 +80,21 @@ describe('default', () => {
       expect((0, _default.getRows)([], 1, 'a')).toEqual([]);
     });
   });
-  describe('applyNumericHandler', () => {
-    it('should return the transformed response', () => {
-      expect((0, _default.applyDefaultHandler)(_numericDataOrg.default, headerIndex)).toEqual(_numericDataHidena.default);
+  describe('applyDefaultHandler', () => {
+    describe('should return the transformed response', () => {
+      test('date', () => {
+        expect((0, _default.applyDefaultHandler)(_dateDataOrg.default, headerIndex, {
+          itemFormatter: _response.itemFormatterByValueType[_valueTypes.VALUE_TYPE_DATE]
+        })).toEqual(_dateDataHidena.default);
+      });
+      test('datetime', () => {
+        expect((0, _default.applyDefaultHandler)(_datetimeDataOrg.default, headerIndex, {
+          itemFormatter: _response.itemFormatterByValueType[_valueTypes.VALUE_TYPE_DATETIME]
+        })).toEqual(_datetimeDataHidena.default);
+      });
+      test('numeric', () => {
+        expect((0, _default.applyDefaultHandler)(_numericDataOrg.default, headerIndex)).toEqual(_numericDataHidena.default);
+      });
     });
   });
 });

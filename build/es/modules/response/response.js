@@ -6,7 +6,7 @@ import { applyDefaultHandler } from './default.js';
 import { applyOptionSetHandler } from './optionSet.js';
 export const NA_VALUE = '';
 export const PREFIX_SEPARATOR = ':';
-const itemFormatterByValueType = {
+export const itemFormatterByValueType = {
   [VALUE_TYPE_DATETIME]: name => name.replace(/:00\.0$/, ''),
   [VALUE_TYPE_DATE]: name => name.replace(/ 00:00:00\.0$/, ''),
   [VALUE_TYPE_PERCENTAGE]: name => name.endsWith('.0') ? name.slice(0, -2) : name
