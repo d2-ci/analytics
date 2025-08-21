@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.Yesonly = exports.OptionsetsNonUniqueCodes = exports.Optionset = exports.NumericLegendset = exports.Numeric = exports.Date = exports.Boolean = void 0;
+exports.default = exports.Yesonly = exports.OptionsetsNonUniqueCodes = exports.Optionset = exports.NumericLegendset = exports.Numeric = exports.Datetime = exports.Date = exports.Boolean = void 0;
 var _ui = require("@dhis2/ui");
 var _react = _interopRequireWildcard(require("react"));
 var _index = require("../index.js");
@@ -11,6 +11,8 @@ var _booleanData = _interopRequireDefault(require("./data/event/boolean.data.jso
 var _booleanVisualization = _interopRequireDefault(require("./data/event/boolean.visualization.json"));
 var _dateData = _interopRequireDefault(require("./data/event/date.data.json"));
 var _dateVisualization = _interopRequireDefault(require("./data/event/date.visualization.json"));
+var _datetimeData = _interopRequireDefault(require("./data/event/datetime.data.json"));
+var _datetimeVisualization = _interopRequireDefault(require("./data/event/datetime.visualization.json"));
 var _numericLegendsetData = _interopRequireDefault(require("./data/event/numeric-legendset.data.json"));
 var _numericLegendsetVisualization = _interopRequireDefault(require("./data/event/numeric-legendset.visualization.json"));
 var _numericData = _interopRequireDefault(require("./data/event/numeric.data.json"));
@@ -86,6 +88,28 @@ const Date = (_, {
 exports.Date = Date;
 Date.story = {
   name: 'Date'
+};
+const Datetime = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._datetimeVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _datetimeData.default,
+    visualization: visualization
+  }));
+};
+exports.Datetime = Datetime;
+Datetime.story = {
+  name: 'Datetime'
 };
 const Numeric = (_, {
   pivotTableOptions

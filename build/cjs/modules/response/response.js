@@ -12,7 +12,7 @@ var _default = require("./default.js");
 var _optionSet = require("./optionSet.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const NA_VALUE = exports.NA_VALUE = '';
-const PREFIX_SEPARATOR = exports.PREFIX_SEPARATOR = ':';
+const PREFIX_SEPARATOR = exports.PREFIX_SEPARATOR = '_';
 const itemFormatterByValueType = exports.itemFormatterByValueType = {
   [_valueTypes.VALUE_TYPE_DATETIME]: name => name.replace(/:00\.0$/, ''),
   [_valueTypes.VALUE_TYPE_DATE]: name => name.replace(/ 00:00:00\.0$/, ''),
