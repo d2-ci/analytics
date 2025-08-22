@@ -6,6 +6,7 @@ var _booleanDataOrg = _interopRequireDefault(require("../../../__demo__/data/eve
 var _dateDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/date.data.hidena.json"));
 var _dateData = _interopRequireDefault(require("../../../__demo__/data/event/date.data.json"));
 var _dateDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/date.data.org.json"));
+var _emailDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/email.data.org.json"));
 var _numericDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.hidena.json"));
 var _numericData = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.json"));
 var _numericDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.org.json"));
@@ -25,6 +26,17 @@ describe('response', () => {
     describe('date', () => {
       it('transforms response', () => {
         expect((0, _response.transformResponse)(_dateDataOrg.default)).toEqual(_dateData.default);
+      });
+      it('transforms response and hides N/A data', () => {
+        expect((0, _response.transformResponse)(_dateDataOrg.default, {
+          hideNaData: true
+        })).toEqual(_dateDataHidena.default);
+      });
+    });
+    describe('email', () => {
+      it('transforms response', () => {
+        console.log((0, _response.transformResponse)(_emailDataOrg.default).metaData.dimensions['jfuXZB3A1ko.RUZ2EBP6HQn']);
+        expect((0, _response.transformResponse)(_emailDataOrg.default)).toEqual({});
       });
       it('transforms response and hides N/A data', () => {
         expect((0, _response.transformResponse)(_dateDataOrg.default, {

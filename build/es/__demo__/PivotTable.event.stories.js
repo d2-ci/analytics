@@ -7,10 +7,12 @@ import dateData from './data/event/date.data.json';
 import dateVisualization from './data/event/date.visualization.json';
 import datetimeData from './data/event/datetime.data.json';
 import datetimeVisualization from './data/event/datetime.visualization.json';
+import emailData from './data/event/email.data.json';
+import emailVisualization from './data/event/email.visualization.json';
+import integerData from './data/event/integer.data.json';
+import integerVisualization from './data/event/integer.visualization.json';
 import numericLegendsetData from './data/event/numeric-legendset.data.json';
 import numericLegendsetVisualization from './data/event/numeric-legendset.visualization.json';
-import numericData from './data/event/numeric.data.json';
-import numericVisualization from './data/event/numeric.visualization.json';
 import optionsetData from './data/event/optionset.data.json';
 import optionsetVisualization from './data/event/optionset.visualization.json';
 import optionsetsData from './data/event/optionsets.data.json';
@@ -59,6 +61,27 @@ export default {
   title: 'PivotTable (event enrollment)',
   decorators: [PivotTableOptionsWrapper]
 };
+export const Boolean = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ...booleanVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: booleanData,
+    visualization: visualization
+  }));
+};
+Boolean.story = {
+  name: 'Boolean'
+};
 export const Date = (_, {
   pivotTableOptions
 }) => {
@@ -105,7 +128,7 @@ export const Numeric = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
-    ...numericVisualization,
+    ...integerVisualization,
     ...visualizationReset,
     ...pivotTableOptions
   };
@@ -115,7 +138,7 @@ export const Numeric = (_, {
       height: 600
     }
   }, /*#__PURE__*/React.createElement(PivotTable, {
-    data: numericData,
+    data: integerData,
     visualization: visualization
   }));
 };
@@ -185,11 +208,11 @@ export const OptionsetsNonUniqueCodes = (_, {
 OptionsetsNonUniqueCodes.story = {
   name: 'Optionset, non-unique codes'
 };
-export const Boolean = (_, {
+export const Text = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
-    ...booleanVisualization,
+    ...emailVisualization,
     ...visualizationReset,
     ...pivotTableOptions
   };
@@ -199,12 +222,12 @@ export const Boolean = (_, {
       height: 600
     }
   }, /*#__PURE__*/React.createElement(PivotTable, {
-    data: booleanData,
+    data: emailData,
     visualization: visualization
   }));
 };
-Boolean.story = {
-  name: 'Boolean'
+Text.story = {
+  name: 'Text'
 };
 export const Yesonly = (_, {
   pivotTableOptions

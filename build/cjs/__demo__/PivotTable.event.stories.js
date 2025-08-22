@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.Yesonly = exports.OptionsetsNonUniqueCodes = exports.Optionset = exports.NumericLegendset = exports.Numeric = exports.Datetime = exports.Date = exports.Boolean = void 0;
+exports.default = exports.Yesonly = exports.Text = exports.OptionsetsNonUniqueCodes = exports.Optionset = exports.NumericLegendset = exports.Numeric = exports.Datetime = exports.Date = exports.Boolean = void 0;
 var _ui = require("@dhis2/ui");
 var _react = _interopRequireWildcard(require("react"));
 var _index = require("../index.js");
@@ -13,10 +13,12 @@ var _dateData = _interopRequireDefault(require("./data/event/date.data.json"));
 var _dateVisualization = _interopRequireDefault(require("./data/event/date.visualization.json"));
 var _datetimeData = _interopRequireDefault(require("./data/event/datetime.data.json"));
 var _datetimeVisualization = _interopRequireDefault(require("./data/event/datetime.visualization.json"));
+var _emailData = _interopRequireDefault(require("./data/event/email.data.json"));
+var _emailVisualization = _interopRequireDefault(require("./data/event/email.visualization.json"));
+var _integerData = _interopRequireDefault(require("./data/event/integer.data.json"));
+var _integerVisualization = _interopRequireDefault(require("./data/event/integer.visualization.json"));
 var _numericLegendsetData = _interopRequireDefault(require("./data/event/numeric-legendset.data.json"));
 var _numericLegendsetVisualization = _interopRequireDefault(require("./data/event/numeric-legendset.visualization.json"));
-var _numericData = _interopRequireDefault(require("./data/event/numeric.data.json"));
-var _numericVisualization = _interopRequireDefault(require("./data/event/numeric.visualization.json"));
 var _optionsetData = _interopRequireDefault(require("./data/event/optionset.data.json"));
 var _optionsetVisualization = _interopRequireDefault(require("./data/event/optionset.visualization.json"));
 var _optionsetsData = _interopRequireDefault(require("./data/event/optionsets.data.json"));
@@ -67,6 +69,28 @@ var _default = exports.default = {
   title: 'PivotTable (event enrollment)',
   decorators: [PivotTableOptionsWrapper]
 };
+const Boolean = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._booleanVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _booleanData.default,
+    visualization: visualization
+  }));
+};
+exports.Boolean = Boolean;
+Boolean.story = {
+  name: 'Boolean'
+};
 const Date = (_, {
   pivotTableOptions
 }) => {
@@ -115,7 +139,7 @@ const Numeric = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
-    ..._numericVisualization.default,
+    ..._integerVisualization.default,
     ...visualizationReset,
     ...pivotTableOptions
   };
@@ -125,7 +149,7 @@ const Numeric = (_, {
       height: 600
     }
   }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
-    data: _numericData.default,
+    data: _integerData.default,
     visualization: visualization
   }));
 };
@@ -199,11 +223,11 @@ exports.OptionsetsNonUniqueCodes = OptionsetsNonUniqueCodes;
 OptionsetsNonUniqueCodes.story = {
   name: 'Optionset, non-unique codes'
 };
-const Boolean = (_, {
+const Text = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
-    ..._booleanVisualization.default,
+    ..._emailVisualization.default,
     ...visualizationReset,
     ...pivotTableOptions
   };
@@ -213,13 +237,13 @@ const Boolean = (_, {
       height: 600
     }
   }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
-    data: _booleanData.default,
+    data: _emailData.default,
     visualization: visualization
   }));
 };
-exports.Boolean = Boolean;
-Boolean.story = {
-  name: 'Boolean'
+exports.Text = Text;
+Text.story = {
+  name: 'Text'
 };
 const Yesonly = (_, {
   pivotTableOptions
