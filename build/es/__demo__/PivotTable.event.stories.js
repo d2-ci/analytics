@@ -1,22 +1,28 @@
 import { Checkbox, Divider } from '@dhis2/ui';
 import React, { useState } from 'react';
 import { PivotTable } from '../index.js';
+import booleanDataHideNa from './data/event/boolean.data.hidena.json';
 import booleanData from './data/event/boolean.data.json';
 import booleanVisualization from './data/event/boolean.visualization.json';
+import dateDataHideNa from './data/event/date.data.hidena.json';
 import dateData from './data/event/date.data.json';
 import dateVisualization from './data/event/date.visualization.json';
+import datetimeDataHideNa from './data/event/datetime.data.hidena.json';
 import datetimeData from './data/event/datetime.data.json';
 import datetimeVisualization from './data/event/datetime.visualization.json';
+import emailDataHideNa from './data/event/email.data.hidena.json';
 import emailData from './data/event/email.data.json';
 import emailVisualization from './data/event/email.visualization.json';
+import integerDataHideNa from './data/event/integer.data.hidena.json';
 import integerData from './data/event/integer.data.json';
 import integerVisualization from './data/event/integer.visualization.json';
+import numericLegendsetDataHideNa from './data/event/numeric-legendset.data.hidena.json';
 import numericLegendsetData from './data/event/numeric-legendset.data.json';
 import numericLegendsetVisualization from './data/event/numeric-legendset.visualization.json';
+import optionsetDataHideNa from './data/event/optionset.data.hidena.json';
 import optionsetData from './data/event/optionset.data.json';
 import optionsetVisualization from './data/event/optionset.visualization.json';
-import optionsetsData from './data/event/optionsets.data.json';
-import optionsetsVisualization from './data/event/optionsets.visualization.json';
+import yesonlyDataHideNa from './data/event/yesonly.data.hidena.json';
 import yesonlyData from './data/event/yesonly.data.json';
 import yesonlyVisualization from './data/event/yesonly.visualization.json';
 const visualizationReset = {
@@ -58,10 +64,10 @@ const PivotTableOptionsWrapper = story => {
   }));
 };
 export default {
-  title: 'PivotTable (event enrollment)',
+  title: 'PivotTable (event)',
   decorators: [PivotTableOptionsWrapper]
 };
-export const Boolean = (_, {
+export const BooleanNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -79,10 +85,31 @@ export const Boolean = (_, {
     visualization: visualization
   }));
 };
+BooleanNA.story = {
+  name: 'BooleanNA'
+};
+export const Boolean = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ...booleanVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: booleanDataHideNa,
+    visualization: visualization
+  }));
+};
 Boolean.story = {
   name: 'Boolean'
 };
-export const Date = (_, {
+export const DateNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -100,10 +127,31 @@ export const Date = (_, {
     visualization: visualization
   }));
 };
+DateNA.story = {
+  name: 'DateNA'
+};
+export const Date = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ...dateVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: dateDataHideNa,
+    visualization: visualization
+  }));
+};
 Date.story = {
   name: 'Date'
 };
-export const Datetime = (_, {
+export const DatetimeNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -121,10 +169,31 @@ export const Datetime = (_, {
     visualization: visualization
   }));
 };
+DatetimeNA.story = {
+  name: 'DatetimeNA'
+};
+export const Datetime = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ...datetimeVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: datetimeDataHideNa,
+    visualization: visualization
+  }));
+};
 Datetime.story = {
   name: 'Datetime'
 };
-export const Numeric = (_, {
+export const NumericNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -142,10 +211,31 @@ export const Numeric = (_, {
     visualization: visualization
   }));
 };
+NumericNA.story = {
+  name: 'NumericNA'
+};
+export const Numeric = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ...integerVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: integerDataHideNa,
+    visualization: visualization
+  }));
+};
 Numeric.story = {
   name: 'Numeric'
 };
-export const NumericLegendset = (_, {
+export const NumericLegendsetNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -163,10 +253,31 @@ export const NumericLegendset = (_, {
     visualization: visualization
   }));
 };
+NumericLegendsetNA.story = {
+  name: 'Numeric with legendset NA'
+};
+export const NumericLegendset = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ...numericLegendsetVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: numericLegendsetDataHideNa,
+    visualization: visualization
+  }));
+};
 NumericLegendset.story = {
   name: 'Numeric with legendset'
 };
-export const Optionset = (_, {
+export const OptionsetNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -184,14 +295,14 @@ export const Optionset = (_, {
     visualization: visualization
   }));
 };
-Optionset.story = {
-  name: 'Optionset'
+OptionsetNA.story = {
+  name: 'OptionsetNA'
 };
-export const OptionsetsNonUniqueCodes = (_, {
+export const Optionset = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
-    ...optionsetsVisualization,
+    ...optionsetVisualization,
     ...visualizationReset,
     ...pivotTableOptions
   };
@@ -201,14 +312,14 @@ export const OptionsetsNonUniqueCodes = (_, {
       height: 600
     }
   }, /*#__PURE__*/React.createElement(PivotTable, {
-    data: optionsetsData,
+    data: optionsetDataHideNa,
     visualization: visualization
   }));
 };
-OptionsetsNonUniqueCodes.story = {
-  name: 'Optionset, non-unique codes'
+Optionset.story = {
+  name: 'Optionset'
 };
-export const Text = (_, {
+export const TextNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -226,8 +337,50 @@ export const Text = (_, {
     visualization: visualization
   }));
 };
+TextNA.story = {
+  name: 'TextNA'
+};
+export const Text = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ...emailVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: emailDataHideNa,
+    visualization: visualization
+  }));
+};
 Text.story = {
   name: 'Text'
+};
+export const YesonlyNA = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ...yesonlyVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: yesonlyData,
+    visualization: visualization
+  }));
+};
+YesonlyNA.story = {
+  name: 'YesonlyNA'
 };
 export const Yesonly = (_, {
   pivotTableOptions
@@ -243,7 +396,7 @@ export const Yesonly = (_, {
       height: 600
     }
   }, /*#__PURE__*/React.createElement(PivotTable, {
-    data: yesonlyData,
+    data: yesonlyDataHideNa,
     visualization: visualization
   }));
 };

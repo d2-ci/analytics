@@ -3,26 +3,32 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.Yesonly = exports.Text = exports.OptionsetsNonUniqueCodes = exports.Optionset = exports.NumericLegendset = exports.Numeric = exports.Datetime = exports.Date = exports.Boolean = void 0;
+exports.default = exports.YesonlyNA = exports.Yesonly = exports.TextNA = exports.Text = exports.OptionsetNA = exports.Optionset = exports.NumericNA = exports.NumericLegendsetNA = exports.NumericLegendset = exports.Numeric = exports.DatetimeNA = exports.Datetime = exports.DateNA = exports.Date = exports.BooleanNA = exports.Boolean = void 0;
 var _ui = require("@dhis2/ui");
 var _react = _interopRequireWildcard(require("react"));
 var _index = require("../index.js");
+var _booleanDataHidena = _interopRequireDefault(require("./data/event/boolean.data.hidena.json"));
 var _booleanData = _interopRequireDefault(require("./data/event/boolean.data.json"));
 var _booleanVisualization = _interopRequireDefault(require("./data/event/boolean.visualization.json"));
+var _dateDataHidena = _interopRequireDefault(require("./data/event/date.data.hidena.json"));
 var _dateData = _interopRequireDefault(require("./data/event/date.data.json"));
 var _dateVisualization = _interopRequireDefault(require("./data/event/date.visualization.json"));
+var _datetimeDataHidena = _interopRequireDefault(require("./data/event/datetime.data.hidena.json"));
 var _datetimeData = _interopRequireDefault(require("./data/event/datetime.data.json"));
 var _datetimeVisualization = _interopRequireDefault(require("./data/event/datetime.visualization.json"));
+var _emailDataHidena = _interopRequireDefault(require("./data/event/email.data.hidena.json"));
 var _emailData = _interopRequireDefault(require("./data/event/email.data.json"));
 var _emailVisualization = _interopRequireDefault(require("./data/event/email.visualization.json"));
+var _integerDataHidena = _interopRequireDefault(require("./data/event/integer.data.hidena.json"));
 var _integerData = _interopRequireDefault(require("./data/event/integer.data.json"));
 var _integerVisualization = _interopRequireDefault(require("./data/event/integer.visualization.json"));
+var _numericLegendsetDataHidena = _interopRequireDefault(require("./data/event/numeric-legendset.data.hidena.json"));
 var _numericLegendsetData = _interopRequireDefault(require("./data/event/numeric-legendset.data.json"));
 var _numericLegendsetVisualization = _interopRequireDefault(require("./data/event/numeric-legendset.visualization.json"));
+var _optionsetDataHidena = _interopRequireDefault(require("./data/event/optionset.data.hidena.json"));
 var _optionsetData = _interopRequireDefault(require("./data/event/optionset.data.json"));
 var _optionsetVisualization = _interopRequireDefault(require("./data/event/optionset.visualization.json"));
-var _optionsetsData = _interopRequireDefault(require("./data/event/optionsets.data.json"));
-var _optionsetsVisualization = _interopRequireDefault(require("./data/event/optionsets.visualization.json"));
+var _yesonlyDataHidena = _interopRequireDefault(require("./data/event/yesonly.data.hidena.json"));
 var _yesonlyData = _interopRequireDefault(require("./data/event/yesonly.data.json"));
 var _yesonlyVisualization = _interopRequireDefault(require("./data/event/yesonly.visualization.json"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -66,10 +72,10 @@ const PivotTableOptionsWrapper = story => {
   }));
 };
 var _default = exports.default = {
-  title: 'PivotTable (event enrollment)',
+  title: 'PivotTable (event)',
   decorators: [PivotTableOptionsWrapper]
 };
-const Boolean = (_, {
+const BooleanNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -87,11 +93,33 @@ const Boolean = (_, {
     visualization: visualization
   }));
 };
+exports.BooleanNA = BooleanNA;
+BooleanNA.story = {
+  name: 'BooleanNA'
+};
+const Boolean = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._booleanVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _booleanDataHidena.default,
+    visualization: visualization
+  }));
+};
 exports.Boolean = Boolean;
 Boolean.story = {
   name: 'Boolean'
 };
-const Date = (_, {
+const DateNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -109,11 +137,33 @@ const Date = (_, {
     visualization: visualization
   }));
 };
+exports.DateNA = DateNA;
+DateNA.story = {
+  name: 'DateNA'
+};
+const Date = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._dateVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _dateDataHidena.default,
+    visualization: visualization
+  }));
+};
 exports.Date = Date;
 Date.story = {
   name: 'Date'
 };
-const Datetime = (_, {
+const DatetimeNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -131,11 +181,33 @@ const Datetime = (_, {
     visualization: visualization
   }));
 };
+exports.DatetimeNA = DatetimeNA;
+DatetimeNA.story = {
+  name: 'DatetimeNA'
+};
+const Datetime = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._datetimeVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _datetimeDataHidena.default,
+    visualization: visualization
+  }));
+};
 exports.Datetime = Datetime;
 Datetime.story = {
   name: 'Datetime'
 };
-const Numeric = (_, {
+const NumericNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -153,11 +225,33 @@ const Numeric = (_, {
     visualization: visualization
   }));
 };
+exports.NumericNA = NumericNA;
+NumericNA.story = {
+  name: 'NumericNA'
+};
+const Numeric = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._integerVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _integerDataHidena.default,
+    visualization: visualization
+  }));
+};
 exports.Numeric = Numeric;
 Numeric.story = {
   name: 'Numeric'
 };
-const NumericLegendset = (_, {
+const NumericLegendsetNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -175,11 +269,33 @@ const NumericLegendset = (_, {
     visualization: visualization
   }));
 };
+exports.NumericLegendsetNA = NumericLegendsetNA;
+NumericLegendsetNA.story = {
+  name: 'Numeric with legendset NA'
+};
+const NumericLegendset = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._numericLegendsetVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _numericLegendsetDataHidena.default,
+    visualization: visualization
+  }));
+};
 exports.NumericLegendset = NumericLegendset;
 NumericLegendset.story = {
   name: 'Numeric with legendset'
 };
-const Optionset = (_, {
+const OptionsetNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -197,15 +313,15 @@ const Optionset = (_, {
     visualization: visualization
   }));
 };
-exports.Optionset = Optionset;
-Optionset.story = {
-  name: 'Optionset'
+exports.OptionsetNA = OptionsetNA;
+OptionsetNA.story = {
+  name: 'OptionsetNA'
 };
-const OptionsetsNonUniqueCodes = (_, {
+const Optionset = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
-    ..._optionsetsVisualization.default,
+    ..._optionsetVisualization.default,
     ...visualizationReset,
     ...pivotTableOptions
   };
@@ -215,15 +331,15 @@ const OptionsetsNonUniqueCodes = (_, {
       height: 600
     }
   }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
-    data: _optionsetsData.default,
+    data: _optionsetDataHidena.default,
     visualization: visualization
   }));
 };
-exports.OptionsetsNonUniqueCodes = OptionsetsNonUniqueCodes;
-OptionsetsNonUniqueCodes.story = {
-  name: 'Optionset, non-unique codes'
+exports.Optionset = Optionset;
+Optionset.story = {
+  name: 'Optionset'
 };
-const Text = (_, {
+const TextNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
@@ -241,9 +357,53 @@ const Text = (_, {
     visualization: visualization
   }));
 };
+exports.TextNA = TextNA;
+TextNA.story = {
+  name: 'TextNA'
+};
+const Text = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._emailVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _emailDataHidena.default,
+    visualization: visualization
+  }));
+};
 exports.Text = Text;
 Text.story = {
   name: 'Text'
+};
+const YesonlyNA = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._yesonlyVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _yesonlyData.default,
+    visualization: visualization
+  }));
+};
+exports.YesonlyNA = YesonlyNA;
+YesonlyNA.story = {
+  name: 'YesonlyNA'
 };
 const Yesonly = (_, {
   pivotTableOptions
@@ -259,7 +419,7 @@ const Yesonly = (_, {
       height: 600
     }
   }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
-    data: _yesonlyData.default,
+    data: _yesonlyDataHidena.default,
     visualization: visualization
   }));
 };
