@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.transformResponse = exports.itemFormatterByValueType = exports.PREFIX_SEPARATOR = exports.NA_VALUE = void 0;
+exports.transformResponse = exports.itemFormatterByValueType = exports.PREFIX_SEPARATOR = exports.NA_VALUE_DISPLAY_NAME = exports.NA_VALUE = void 0;
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _predefinedDimensions = require("../predefinedDimensions.js");
 var _valueTypes = require("../valueTypes.js");
@@ -12,6 +12,7 @@ var _default = require("./default.js");
 var _optionSet = require("./optionSet.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const NA_VALUE = exports.NA_VALUE = '';
+const NA_VALUE_DISPLAY_NAME = exports.NA_VALUE_DISPLAY_NAME = _d2I18n.default.t('No value');
 const PREFIX_SEPARATOR = exports.PREFIX_SEPARATOR = '_';
 const itemFormatterByValueType = exports.itemFormatterByValueType = {
   [_valueTypes.VALUE_TYPE_DATETIME]: name => name.replace(/:00\.0$/, ''),
@@ -62,7 +63,7 @@ const transformResponse = (response, {
       if (response.rows.map(row => row[header.index]).includes(NA_VALUE)) {
         transformedResponse.metaData.dimensions[header.name] = [...transformedResponse.metaData.dimensions[header.name], NA_VALUE];
         transformedResponse.metaData.items[NA_VALUE] = {
-          name: _d2I18n.default.t('N/A')
+          name: NA_VALUE_DISPLAY_NAME
         };
       }
     });

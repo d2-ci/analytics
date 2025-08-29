@@ -35,7 +35,7 @@ describe('response', () => {
     });
     describe('email', () => {
       it('transforms response', () => {
-        console.log((0, _response.transformResponse)(_emailDataOrg.default).metaData.dimensions['jfuXZB3A1ko.RUZ2EBP6HQn']);
+        (0, _response.transformResponse)(_emailDataOrg.default).metaData.dimensions['jfuXZB3A1ko.RUZ2EBP6HQn'];
         expect((0, _response.transformResponse)(_emailDataOrg.default)).toEqual({});
       });
       it('transforms response and hides N/A data', () => {

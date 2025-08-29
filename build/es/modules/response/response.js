@@ -5,6 +5,7 @@ import { applyBooleanHandler } from './boolean.js';
 import { applyDefaultHandler } from './default.js';
 import { applyOptionSetHandler } from './optionSet.js';
 export const NA_VALUE = '';
+export const NA_VALUE_DISPLAY_NAME = i18n.t('No value');
 export const PREFIX_SEPARATOR = '_';
 export const itemFormatterByValueType = {
   [VALUE_TYPE_DATETIME]: name => name.replace(/:00\.0$/, ''),
@@ -55,7 +56,7 @@ export const transformResponse = (response, {
       if (response.rows.map(row => row[header.index]).includes(NA_VALUE)) {
         transformedResponse.metaData.dimensions[header.name] = [...transformedResponse.metaData.dimensions[header.name], NA_VALUE];
         transformedResponse.metaData.items[NA_VALUE] = {
-          name: i18n.t('N/A')
+          name: NA_VALUE_DISPLAY_NAME
         };
       }
     });

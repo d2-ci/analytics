@@ -351,28 +351,25 @@ const ItemSelector = ({
       infoBoxMessage: infoBoxMessage
     }),
     rightFooter: rightFooter,
-    renderOption: props => {
-      // console.log('renderOption', props)
-      return /*#__PURE__*/_react.default.createElement(_TransferOption.TransferOption
-      /* eslint-disable react/prop-types */, _extends({}, props, {
-        active: isActive(props.value),
-        showingInfo: (infoDataItem === null || infoDataItem === void 0 ? void 0 : infoDataItem.id) === props.value,
-        icon: (0, _dimensionListItem.getIcon)(props.type),
-        dataItemType: props.type,
-        dimensionType: (0, _dimensionListItem.getDimensionType)({
-          type: props.type,
-          expression: props.expression
-        }),
-        dataTest: `${dataTest}-transfer-option`,
-        itemsRef: itemsRef,
-        onEditClick: () => onEditClick(props),
-        onInfoClick: () => setInfoDataItem({
-          id: props.value,
-          type: props.type
-        })
-        /* eslint-enable react/prop-types */
-      }));
-    },
+    renderOption: props => /*#__PURE__*/_react.default.createElement(_TransferOption.TransferOption
+    /* eslint-disable react/prop-types */, _extends({}, props, {
+      active: isActive(props.value),
+      showingInfo: (infoDataItem === null || infoDataItem === void 0 ? void 0 : infoDataItem.id) === props.value,
+      icon: (0, _dimensionListItem.getIcon)(props.type),
+      dataItemType: props.type,
+      dimensionType: (0, _dimensionListItem.getDimensionType)({
+        type: props.type,
+        expression: props.expression
+      }),
+      dataTest: `${dataTest}-transfer-option`,
+      itemsRef: itemsRef,
+      onEditClick: () => onEditClick(props),
+      onInfoClick: () => setInfoDataItem({
+        id: props.value,
+        type: props.type
+      })
+      /* eslint-enable react/prop-types */
+    })),
     dataTest: `${dataTest}-transfer`
   }), currentCalculation && supportsEDI && /*#__PURE__*/_react.default.createElement(_CalculationModal.default, {
     calculation: currentCalculation,

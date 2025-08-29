@@ -20,7 +20,7 @@ export const PivotTableRowHeaderCell = ({
     showHierarchy: engine.visualization.showHierarchy,
     render: header => /*#__PURE__*/React.createElement(PivotTableCell, {
       isHeader: true,
-      classes: [header.label && header.label !== 'Total' && header.label !== 'Subtotal' ? 'row-header' : 'empty-header', header.includesHierarchy && 'row-header-hierarchy', {
+      classes: [header.label && header.label !== 'Total' && header.label !== 'Subtotal' ? 'row-header' : 'empty-header', header.isNaData && 'nadata-header', header.includesHierarchy && 'row-header-hierarchy', {
         'fixed-header': engine.options.fixRowHeaders
       }],
       rowSpan: header.span,
