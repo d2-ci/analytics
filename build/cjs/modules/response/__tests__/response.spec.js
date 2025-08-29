@@ -6,10 +6,12 @@ var _booleanDataOrg = _interopRequireDefault(require("../../../__demo__/data/eve
 var _dateDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/date.data.hidena.json"));
 var _dateData = _interopRequireDefault(require("../../../__demo__/data/event/date.data.json"));
 var _dateDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/date.data.org.json"));
+var _emailDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/email.data.hidena.json"));
+var _emailData = _interopRequireDefault(require("../../../__demo__/data/event/email.data.json"));
 var _emailDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/email.data.org.json"));
-var _numericDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.hidena.json"));
-var _numericData = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.json"));
-var _numericDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.org.json"));
+var _integerDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/integer.data.hidena.json"));
+var _integerData = _interopRequireDefault(require("../../../__demo__/data/event/integer.data.json"));
+var _integerDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/integer.data.org.json"));
 var _optionsetDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/optionset.data.hidena.json"));
 var _optionsetData = _interopRequireDefault(require("../../../__demo__/data/event/optionset.data.json"));
 var _optionsetDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/optionset.data.org.json"));
@@ -33,25 +35,24 @@ describe('response', () => {
         })).toEqual(_dateDataHidena.default);
       });
     });
-    describe('email', () => {
+    describe('text', () => {
       it('transforms response', () => {
-        (0, _response.transformResponse)(_emailDataOrg.default).metaData.dimensions['jfuXZB3A1ko.RUZ2EBP6HQn'];
-        expect((0, _response.transformResponse)(_emailDataOrg.default)).toEqual({});
+        expect((0, _response.transformResponse)(_emailDataOrg.default)).toEqual(_emailData.default);
       });
       it('transforms response and hides N/A data', () => {
-        expect((0, _response.transformResponse)(_dateDataOrg.default, {
+        expect((0, _response.transformResponse)(_emailDataOrg.default, {
           hideNaData: true
-        })).toEqual(_dateDataHidena.default);
+        })).toEqual(_emailDataHidena.default);
       });
     });
     describe('numeric', () => {
       it('transforms response', () => {
-        expect((0, _response.transformResponse)(_numericDataOrg.default)).toEqual(_numericData.default);
+        expect((0, _response.transformResponse)(_integerDataOrg.default)).toEqual(_integerData.default);
       });
       it('transforms response and hides N/A data', () => {
-        expect((0, _response.transformResponse)(_numericDataOrg.default, {
+        expect((0, _response.transformResponse)(_integerDataOrg.default, {
           hideNaData: true
-        })).toEqual(_numericDataHidena.default);
+        })).toEqual(_integerDataHidena.default);
       });
     });
     describe('option set', () => {

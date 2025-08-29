@@ -4,8 +4,8 @@ var _dateDataHidena = _interopRequireDefault(require("../../../__demo__/data/eve
 var _dateDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/date.data.org.json"));
 var _datetimeDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/datetime.data.hidena.json"));
 var _datetimeDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/datetime.data.org.json"));
-var _numericDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.hidena.json"));
-var _numericDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/numeric.data.org.json"));
+var _integerDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/integer.data.hidena.json"));
+var _integerDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/integer.data.org.json"));
 var _valueTypes = require("../../valueTypes.js");
 var _default = require("../default.js");
 var _response = require("../response.js");
@@ -93,7 +93,7 @@ describe('default', () => {
         })).toEqual(_datetimeDataHidena.default);
       });
       test('numeric', () => {
-        expect((0, _default.applyDefaultHandler)(_numericDataOrg.default, headerIndex)).toEqual(_numericDataHidena.default);
+        expect((0, _default.applyDefaultHandler)(_integerDataOrg.default, headerIndex)).toEqual(_integerDataHidena.default);
       });
     });
   });
