@@ -5,7 +5,7 @@ import { Box, Modal, ModalTitle, ModalContent, DataTable, DataTableHead, DataTab
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
-import { VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS } from '../../modules/visTypes.js';
+import { VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS, VIS_TYPE_PIVOT_TABLE } from '../../modules/visTypes.js';
 import { CreatedByFilter, CREATED_BY_ALL, CREATED_BY_ALL_BUT_CURRENT_USER, CREATED_BY_CURRENT_USER } from './CreatedByFilter.js';
 import { FileList } from './FileList.js';
 import { NameFilter } from './NameFilter.js';
@@ -81,24 +81,39 @@ export const OpenFileDialog = ({
       default:
         break;
     }
+    const defaultFilterTypes = [];
+    let defaultTypeFilter;
+    if (Array.isArray(filterVisTypes)) {
+      defaultFilterTypes.push(...filterVisTypes.filter(({
+        type,
+        disabled
+      }) => !(disabled || [VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS].includes(type))).map(({
+        type
+      }) => type));
+      if (defaultFilterTypes.length) {
+        defaultTypeFilter = `type:in:[${defaultFilterTypes.join(',')}]`;
+      }
+    }
     if (filters.visType) {
       switch (filters.visType) {
         case VIS_TYPE_GROUP_ALL:
-          if (Array.isArray(filterVisTypes)) {
-            queryFilters.push(`type:in:[${filterVisTypes.filter(({
-              type
-            }) => ![VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS].includes(type)).map(({
-              type
-            }) => type).join(',')}]`);
+          if (defaultTypeFilter) {
+            queryFilters.push(defaultTypeFilter);
           }
           break;
         case VIS_TYPE_GROUP_CHARTS:
-          queryFilters.push('type:!eq:PIVOT_TABLE');
+          if (defaultFilterTypes.length) {
+            queryFilters.push(`type:in:[${defaultFilterTypes.filter(item => item !== VIS_TYPE_PIVOT_TABLE).join(',')}]`);
+          } else {
+            queryFilters.push(`type:!eq:${VIS_TYPE_PIVOT_TABLE}`);
+          }
           break;
         default:
           queryFilters.push(`type:eq:${filters.visType}`);
           break;
       }
+    } else if (defaultTypeFilter) {
+      queryFilters.push(defaultTypeFilter);
     }
     if (filters.searchTerm) {
       queryFilters.push(`identifiable:token:${filters.searchTerm}`);
