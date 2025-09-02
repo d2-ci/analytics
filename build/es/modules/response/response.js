@@ -50,7 +50,7 @@ export const transformResponse = (response, {
     }
   });
 
-  // If Hide Na Data is not selected, we still only show N/A if there are N/A values
+  // When "Hide Na Data" option is disabled, we still only show the "No value" item if there are N/A values
   if (!hideNaData) {
     metaHeaders.forEach(header => {
       if (response.rows.map(row => row[header.index]).includes(NA_VALUE)) {
