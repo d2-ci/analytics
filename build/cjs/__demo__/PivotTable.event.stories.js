@@ -19,12 +19,12 @@ var _datetimeVisualization = _interopRequireDefault(require("./data/event/dateti
 var _emailDataHidena = _interopRequireDefault(require("./data/event/email.data.hidena.json"));
 var _emailData = _interopRequireDefault(require("./data/event/email.data.json"));
 var _emailVisualization = _interopRequireDefault(require("./data/event/email.visualization.json"));
+var _integerLegendsetDataHidena = _interopRequireDefault(require("./data/event/integer-legendset.data.hidena.json"));
+var _integerLegendsetData = _interopRequireDefault(require("./data/event/integer-legendset.data.json"));
+var _integerLegendsetVisualization = _interopRequireDefault(require("./data/event/integer-legendset.visualization.json"));
 var _integerDataHidena = _interopRequireDefault(require("./data/event/integer.data.hidena.json"));
 var _integerData = _interopRequireDefault(require("./data/event/integer.data.json"));
 var _integerVisualization = _interopRequireDefault(require("./data/event/integer.visualization.json"));
-var _numericLegendsetDataHidena = _interopRequireDefault(require("./data/event/numeric-legendset.data.hidena.json"));
-var _numericLegendsetData = _interopRequireDefault(require("./data/event/numeric-legendset.data.json"));
-var _numericLegendsetVisualization = _interopRequireDefault(require("./data/event/numeric-legendset.visualization.json"));
 var _optionsetDataHidena = _interopRequireDefault(require("./data/event/optionset.data.hidena.json"));
 var _optionsetData = _interopRequireDefault(require("./data/event/optionset.data.json"));
 var _optionsetVisualization = _interopRequireDefault(require("./data/event/optionset.visualization.json"));
@@ -255,7 +255,7 @@ const NumericLegendsetNA = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
-    ..._numericLegendsetVisualization.default,
+    ..._integerLegendsetVisualization.default,
     ...visualizationReset,
     ...pivotTableOptions
   };
@@ -265,7 +265,7 @@ const NumericLegendsetNA = (_, {
       height: 600
     }
   }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
-    data: _numericLegendsetData.default,
+    data: _integerLegendsetData.default,
     visualization: visualization
   }));
 };
@@ -277,7 +277,7 @@ const NumericLegendset = (_, {
   pivotTableOptions
 }) => {
   const visualization = {
-    ..._numericLegendsetVisualization.default,
+    ..._integerLegendsetVisualization.default,
     ...visualizationReset,
     ...pivotTableOptions
   };
@@ -287,7 +287,7 @@ const NumericLegendset = (_, {
       height: 600
     }
   }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
-    data: _numericLegendsetDataHidena.default,
+    data: _integerLegendsetDataHidena.default,
     visualization: visualization
   }));
 };

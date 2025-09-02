@@ -6,6 +6,9 @@ var _booleanDataOrg = _interopRequireDefault(require("../../../__demo__/data/eve
 var _dateDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/date.data.hidena.json"));
 var _dateData = _interopRequireDefault(require("../../../__demo__/data/event/date.data.json"));
 var _dateDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/date.data.org.json"));
+var _datetimeDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/datetime.data.hidena.json"));
+var _datetimeData = _interopRequireDefault(require("../../../__demo__/data/event/datetime.data.json"));
+var _datetimeDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/datetime.data.org.json"));
 var _emailDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/email.data.hidena.json"));
 var _emailData = _interopRequireDefault(require("../../../__demo__/data/event/email.data.json"));
 var _emailDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/email.data.org.json"));
@@ -22,6 +25,16 @@ var _response = require("../response.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('response', () => {
   describe('transformResponse', () => {
+    describe('boolean', () => {
+      it('transforms response', () => {
+        expect((0, _response.transformResponse)(_booleanDataOrg.default)).toEqual(_booleanData.default);
+      });
+      it('transforms response and hides N/A data', () => {
+        expect((0, _response.transformResponse)(_booleanDataOrg.default, {
+          hideNaData: true
+        })).toEqual(_booleanDataHidena.default);
+      });
+    });
     describe('date', () => {
       it('transforms response', () => {
         expect((0, _response.transformResponse)(_dateDataOrg.default)).toEqual(_dateData.default);
@@ -32,14 +45,14 @@ describe('response', () => {
         })).toEqual(_dateDataHidena.default);
       });
     });
-    describe('text', () => {
+    describe('datetime', () => {
       it('transforms response', () => {
-        expect((0, _response.transformResponse)(_emailDataOrg.default)).toEqual(_emailData.default);
+        expect((0, _response.transformResponse)(_datetimeDataOrg.default)).toEqual(_datetimeData.default);
       });
       it('transforms response and hides N/A data', () => {
-        expect((0, _response.transformResponse)(_emailDataOrg.default, {
+        expect((0, _response.transformResponse)(_datetimeDataOrg.default, {
           hideNaData: true
-        })).toEqual(_emailDataHidena.default);
+        })).toEqual(_datetimeDataHidena.default);
       });
     });
     describe('numeric', () => {
@@ -62,14 +75,14 @@ describe('response', () => {
         })).toEqual(_optionsetDataHidena.default);
       });
     });
-    describe('boolean', () => {
+    describe('text', () => {
       it('transforms response', () => {
-        expect((0, _response.transformResponse)(_booleanDataOrg.default)).toEqual(_booleanData.default);
+        expect((0, _response.transformResponse)(_emailDataOrg.default)).toEqual(_emailData.default);
       });
       it('transforms response and hides N/A data', () => {
-        expect((0, _response.transformResponse)(_booleanDataOrg.default, {
+        expect((0, _response.transformResponse)(_emailDataOrg.default, {
           hideNaData: true
-        })).toEqual(_booleanDataHidena.default);
+        })).toEqual(_emailDataHidena.default);
       });
     });
     describe('yes only', () => {
