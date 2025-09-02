@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.CreatedByFilter = exports.CREATED_BY_CURRENT_USER = exports.CREATED_BY_ALL_BUT_CURRENT_USER = exports.CREATED_BY_ALL = void 0;
+exports.formatUserFilter = exports.default = exports.CreatedByFilter = exports.CREATED_BY_CURRENT_USER = exports.CREATED_BY_ALL_BUT_CURRENT_USER = exports.CREATED_BY_ALL = void 0;
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -14,6 +14,14 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 const CREATED_BY_ALL = exports.CREATED_BY_ALL = 'all';
 const CREATED_BY_ALL_BUT_CURRENT_USER = exports.CREATED_BY_ALL_BUT_CURRENT_USER = 'allButCurrentUser';
 const CREATED_BY_CURRENT_USER = exports.CREATED_BY_CURRENT_USER = 'currentUser';
+const formatUserFilter = (createdBy, userId) => {
+  if (createdBy === CREATED_BY_ALL_BUT_CURRENT_USER) {
+    return `user.id:!eq:${userId}`;
+  } else if (createdBy === CREATED_BY_CURRENT_USER) {
+    return `user.id:eq:${userId}`;
+  }
+};
+exports.formatUserFilter = formatUserFilter;
 const CreatedByFilter = ({
   selected,
   onChange

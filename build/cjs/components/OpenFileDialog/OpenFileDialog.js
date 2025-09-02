@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.OpenFileDialog = void 0;
+exports.formatFilters = exports.default = exports.OpenFileDialog = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _appRuntime = require("@dhis2/app-runtime");
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
@@ -11,7 +11,6 @@ var _ui = require("@dhis2/ui");
 var _isEqual = _interopRequireDefault(require("lodash/isEqual"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
-var _visTypes = require("../../modules/visTypes.js");
 var _CreatedByFilter = require("./CreatedByFilter.js");
 var _FileList = require("./FileList.js");
 var _NameFilter = require("./NameFilter.js");
@@ -44,6 +43,16 @@ const getQuery = type => ({
     }
   }
 });
+const formatFilters = (currentUser, filters, filterVisTypes) => {
+  const queryFilters = [];
+  filters.searchTerm && queryFilters.push(`identifiable:token:${filters.searchTerm}`);
+  const userFilter = (0, _CreatedByFilter.formatUserFilter)(filters.createdBy, currentUser.id);
+  userFilter && queryFilters.push(userFilter);
+  const typeFilter = (0, _VisTypeFilter.formatTypeFilter)(filterVisTypes, filters.visType);
+  typeFilter && queryFilters.push(typeFilter);
+  return queryFilters;
+};
+exports.formatFilters = formatFilters;
 const OpenFileDialog = ({
   type,
   open,
@@ -76,36 +85,7 @@ const OpenFileDialog = ({
   });
   const [nameFilterValue, setNameFilterValue] = (0, _react.useState)(defaultFilters.searchTerm);
   const [searchTimeout, setSearchTimeout] = (0, _react.useState)(null);
-  const formatFilters = (0, _react.useCallback)(() => {
-    const queryFilters = [];
-    switch (filters.createdBy) {
-      case _CreatedByFilter.CREATED_BY_ALL_BUT_CURRENT_USER:
-        queryFilters.push(`user.id:!eq:${currentUser.id}`);
-        break;
-      case _CreatedByFilter.CREATED_BY_CURRENT_USER:
-        queryFilters.push(`user.id:eq:${currentUser.id}`);
-        break;
-      case _CreatedByFilter.CREATED_BY_ALL:
-      default:
-        break;
-    }
-    if (filters.visType) {
-      switch (filters.visType) {
-        case _visTypes.VIS_TYPE_GROUP_ALL:
-          break;
-        case _visTypes.VIS_TYPE_GROUP_CHARTS:
-          queryFilters.push('type:!eq:PIVOT_TABLE');
-          break;
-        default:
-          queryFilters.push(`type:eq:${filters.visType}`);
-          break;
-      }
-    }
-    if (filters.searchTerm) {
-      queryFilters.push(`identifiable:token:${filters.searchTerm}`);
-    }
-    return queryFilters;
-  }, [currentUser, filters]);
+  const formatFiltersCb = (0, _react.useCallback)(() => formatFilters(currentUser, filters, filterVisTypes), [currentUser, filters, filterVisTypes]);
   const formatSortDirection = (0, _react.useCallback)(() => {
     if (sortField === 'displayName' && sortDirection !== 'default') {
       return `i${sortDirection}`;
@@ -150,10 +130,10 @@ const OpenFileDialog = ({
         page,
         sortField,
         sortDirection: formatSortDirection(),
-        filters: formatFilters()
+        filters: formatFiltersCb()
       });
     }
-  }, [open, page, sortField, filters, refetch, formatFilters, formatSortDirection]);
+  }, [open, page, sortField, filters, refetch, formatFiltersCb, formatSortDirection]);
   const headers = [{
     field: 'displayName',
     label: _d2I18n.default.t('Name'),
