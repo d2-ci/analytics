@@ -15,6 +15,7 @@ const NA_VALUE = exports.NA_VALUE = '';
 const NA_VALUE_DISPLAY_NAME = exports.NA_VALUE_DISPLAY_NAME = _d2I18n.default.t('No value');
 const PREFIX_SEPARATOR = exports.PREFIX_SEPARATOR = '_';
 const itemFormatterByValueType = exports.itemFormatterByValueType = {
+  [_valueTypes.VALUE_TYPE_AGE]: name => name.replace(/ 00:00:00\.0$/, ''),
   [_valueTypes.VALUE_TYPE_DATETIME]: name => name.replace(/:00\.0$/, ''),
   [_valueTypes.VALUE_TYPE_DATE]: name => name.replace(/ 00:00:00\.0$/, ''),
   [_valueTypes.VALUE_TYPE_PERCENTAGE]: name => name.endsWith('.0') ? name.slice(0, -2) : name
@@ -22,10 +23,8 @@ const itemFormatterByValueType = exports.itemFormatterByValueType = {
 const transformResponse = (response, {
   hideNaData = false
 } = {}) => {
-  const metaHeaders = response.headers.map((header, index) => ({
-    ...header,
-    index
-  })).filter(header => Boolean(header.meta) && ![_predefinedDimensions.DIMENSION_ID_PERIOD, _predefinedDimensions.DIMENSION_ID_ORGUNIT].includes(header.name));
+  // Do not modify the original response
+  // Rows is mapped by the handlers
   let transformedResponse = {
     ...response,
     metaData: {
@@ -39,12 +38,18 @@ const transformResponse = (response, {
     }
   };
 
-  // Legendset does not need transformation
-  // Age and Coordinate not supported
+  // Add index to all headers
+  // Include only headers that are "meta" and skip "pe" and "ou"
+  const metaHeaders = response.headers.map((header, index) => Object.assign({}, header, {
+    index
+  })).filter(header => Boolean(header.meta) && ![_predefinedDimensions.DIMENSION_ID_PERIOD, _predefinedDimensions.DIMENSION_ID_ORGUNIT].includes(header.name));
+
+  // Legendsets use uids and do not need transformation
+  // Coordinate not supported
   // Option set and Boolean have separate handlers
   // All other types use default handler with specific item formatter
   metaHeaders.forEach(header => {
-    if (!(header.legendSet || [_valueTypes.VALUE_TYPE_AGE, _valueTypes.VALUE_TYPE_COORDINATE].includes(header.value))) {
+    if (!(header.legendSet || header.valueType === _valueTypes.VALUE_TYPE_COORDINATE)) {
       if (header.optionSet) {
         transformedResponse = (0, _optionSet.applyOptionSetHandler)(transformedResponse, header.index);
       } else if ((0, _valueTypes.isBooleanValueType)(header.valueType)) {
@@ -57,7 +62,8 @@ const transformResponse = (response, {
     }
   });
 
-  // When "Hide Na Data" option is disabled, we still only show the "No value" item if there are N/A values
+  // Add "No value" dimension item if "Hide NA data" option is disabled
+  // Only add if there is at least one empty value
   if (!hideNaData) {
     metaHeaders.forEach(header => {
       if (response.rows.map(row => row[header.index]).includes(NA_VALUE)) {

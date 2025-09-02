@@ -15,9 +15,6 @@ var _integerDataOrg = _interopRequireDefault(require("../../../__demo__/data/eve
 var _optionsetDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/optionset.data.hidena.json"));
 var _optionsetData = _interopRequireDefault(require("../../../__demo__/data/event/optionset.data.json"));
 var _optionsetDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/optionset.data.org.json"));
-var _optionsetsDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/optionsets.data.hidena.json"));
-var _optionsetsData = _interopRequireDefault(require("../../../__demo__/data/event/optionsets.data.json"));
-var _optionsetsDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/optionsets.data.org.json"));
 var _yesonlyDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/yesonly.data.hidena.json"));
 var _yesonlyData = _interopRequireDefault(require("../../../__demo__/data/event/yesonly.data.json"));
 var _yesonlyDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/yesonly.data.org.json"));
@@ -56,21 +53,13 @@ describe('response', () => {
       });
     });
     describe('option set', () => {
-      it('transforms response', () => {
+      it('transforms response with non-unique codes across two option sets', () => {
         expect((0, _response.transformResponse)(_optionsetDataOrg.default)).toEqual(_optionsetData.default);
       });
-      it('transforms response and hides N/A data', () => {
+      it('transforms response with non-unique codes across two option sets and hides N/A data', () => {
         expect((0, _response.transformResponse)(_optionsetDataOrg.default, {
           hideNaData: true
         })).toEqual(_optionsetDataHidena.default);
-      });
-      it('transforms response with non-unique codes across two option sets', () => {
-        expect((0, _response.transformResponse)(_optionsetsDataOrg.default)).toEqual(_optionsetsData.default);
-      });
-      it('transforms response with non-unique codes across two option sets and hides N/A data', () => {
-        expect((0, _response.transformResponse)(_optionsetsDataOrg.default, {
-          hideNaData: true
-        })).toEqual(_optionsetsDataHidena.default);
       });
     });
     describe('boolean', () => {
