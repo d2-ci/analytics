@@ -1,43 +1,50 @@
-import { shallow } from 'enzyme';
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+import { render } from '@testing-library/react';
 import React from 'react';
 import DimensionItem from '../DimensionItem.js';
-describe('DimensionItem', () => {
-  let props;
-  let shallowItem;
-  const dimensionItem = () => {
-    if (!shallowItem) {
-      shallowItem = shallow(/*#__PURE__*/React.createElement(DimensionItem, props));
-    }
-    return shallowItem;
-  };
-  beforeEach(() => {
-    props = {
-      id: 'pe',
-      name: 'Period',
-      isDeactivated: false,
-      isSelected: false,
-      isRecommended: false,
-      isLocked: false
-    };
-    shallowItem = undefined;
-  });
-  it('matches the snapshot', () => {
-    expect(dimensionItem()).toMatchSnapshot();
-  });
-  it('matches the snapshot with recommended', () => {
-    props.isRecommended = true;
-    expect(dimensionItem()).toMatchSnapshot();
-  });
-  it('matches the snapshot with selected', () => {
-    props.isSelected = true;
-    expect(dimensionItem()).toMatchSnapshot();
-  });
-  it('matches the snapshot with locked', () => {
-    props.isLocked = true;
-    expect(dimensionItem()).toMatchSnapshot();
-  });
-  it('matches the snapshot with onOptionsClick', () => {
-    props.onOptionsClick = jest.fn();
-    expect(dimensionItem()).toMatchSnapshot();
-  });
+const props = {
+  id: 'pe',
+  name: 'Period',
+  isDeactivated: false,
+  isSelected: false,
+  isRecommended: false,
+  isLocked: false
+};
+test('DimensionItem matches the snapshot', () => {
+  const {
+    container
+  } = render(/*#__PURE__*/React.createElement(DimensionItem, props));
+  expect(container).toMatchSnapshot();
+});
+test('DimensionItem matches the snapshot with recommended', () => {
+  const {
+    container
+  } = render(/*#__PURE__*/React.createElement(DimensionItem, _extends({}, props, {
+    isRecommended: true
+  })));
+  expect(container).toMatchSnapshot();
+});
+test('DimensionItem matches the snapshot with selected', () => {
+  const {
+    container
+  } = render(/*#__PURE__*/React.createElement(DimensionItem, _extends({}, props, {
+    isSelected: true
+  })));
+  expect(container).toMatchSnapshot();
+});
+test('DimensionItem matches the snapshot with locked', () => {
+  const {
+    container
+  } = render(/*#__PURE__*/React.createElement(DimensionItem, _extends({}, props, {
+    isLocked: true
+  })));
+  expect(container).toMatchSnapshot();
+});
+test('DimensionItem matches the snapshot with onOptionsClick', () => {
+  const {
+    container
+  } = render(/*#__PURE__*/React.createElement(DimensionItem, _extends({}, props, {
+    onOptionsClick: jest.fn()
+  })));
+  expect(container).toMatchSnapshot();
 });

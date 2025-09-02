@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { HoverMenuDropdown } from '../index.js';
 describe('<HoverMenuDropdown/>', () => {
@@ -6,20 +6,20 @@ describe('<HoverMenuDropdown/>', () => {
    * in the mouse interaction tests for the HoverMenuBar.
    * Only the `dataTest` prop needs to be verified here. */
 
-  it('accepts a `dataTest` prop', () => {
+  test('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = shallow(/*#__PURE__*/React.createElement(HoverMenuDropdown, {
+    render(/*#__PURE__*/React.createElement(HoverMenuDropdown, {
       label: "test dropdown",
       dataTest: dataTest
     }, "children"));
-    expect(wrapper.find('button').prop('data-test')).toBe(dataTest);
+    expect(screen.getByTestId(dataTest)).toBeInTheDocument();
   });
-  it('accepts a `className` prop', () => {
+  test('accepts a `className` prop', () => {
     const className = 'test';
-    const wrapper = shallow(/*#__PURE__*/React.createElement(HoverMenuDropdown, {
+    render(/*#__PURE__*/React.createElement(HoverMenuDropdown, {
       label: "test dropdown",
       className: className
     }, "children"));
-    expect(wrapper.find('button')).toHaveClassName(className);
+    expect(screen.getByRole('button')).toHaveClass(className);
   });
 });

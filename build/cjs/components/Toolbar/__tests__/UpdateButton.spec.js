@@ -1,39 +1,41 @@
 "use strict";
 
-var _enzyme = require("enzyme");
-var _react = _interopRequireDefault(require("react"));
+var _react = require("@testing-library/react");
+var _userEvent = _interopRequireDefault(require("@testing-library/user-event"));
+var _react2 = _interopRequireDefault(require("react"));
 var _index = require("../index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('<UpdateButton/>', () => {
   const noop = () => {};
-  it('accepts an `onClick` prop', () => {
+  test('accepts an `onClick` prop', async () => {
+    const user = _userEvent.default.setup();
     const onClick = jest.fn();
-    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.UpdateButton, {
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.UpdateButton, {
       onClick: onClick
     }));
-    wrapper.simulate('click');
+    await user.click(_react.screen.getByRole('button'));
     expect(onClick).toHaveBeenCalledTimes(1);
   });
-  it('accepts a `dataTest` prop', () => {
+  test('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.UpdateButton, {
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.UpdateButton, {
       onClick: noop,
       dataTest: dataTest
     }));
-    expect(wrapper.prop('data-test')).toBe(dataTest);
+    expect(_react.screen.getByTestId(dataTest)).toBeInTheDocument();
   });
-  it('accepts a `disabled` prop', () => {
-    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.UpdateButton, {
+  test('accepts a `disabled` prop', () => {
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.UpdateButton, {
       disabled: true,
       onClick: noop
     }));
-    expect(wrapper.find('button').prop('disabled')).toEqual(true);
+    expect(_react.screen.getByRole('button')).toBeDisabled();
   });
-  it('accepts an `loading` prop', () => {
-    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_index.UpdateButton, {
+  test('accepts an `loading` prop', () => {
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.UpdateButton, {
       onClick: noop,
       loading: true
     }));
-    expect(wrapper.find('CircularLoader')).toHaveLength(1);
+    expect(_react.screen.getByTestId('dhis2-uicore-circularloader')).toBeInTheDocument();
   });
 });

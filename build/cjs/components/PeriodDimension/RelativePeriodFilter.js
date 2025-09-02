@@ -19,6 +19,7 @@ const RelativePeriodFilter = ({
   dataTest,
   excludedPeriodTypes
 }) => /*#__PURE__*/_react.default.createElement("div", {
+  "data-test": dataTest,
   className: `jsx-${_PeriodFilterStyle.default.__hash}` + " " + "leftSection"
 }, /*#__PURE__*/_react.default.createElement(_ui.SingleSelectField, {
   label: _index.default.t('Period type'),
@@ -28,12 +29,12 @@ const RelativePeriodFilter = ({
   dense: true,
   selected: currentFilter,
   className: "filterElement",
-  dataTest: dataTest
+  dataTest: `${dataTest}-period-type`
 }, (0, _index2.filterPeriodTypesById)((0, _relativePeriods.getRelativePeriodsOptions)(), excludedPeriodTypes).map(option => /*#__PURE__*/_react.default.createElement(_ui.SingleSelectOption, {
   key: option.id,
   value: option.id,
   label: option.name,
-  dataTest: `${dataTest}-option-${option.id}`
+  dataTest: `${dataTest}-period-type-option-${option.id}`
 }))), /*#__PURE__*/_react.default.createElement(_style.default, {
   id: _PeriodFilterStyle.default.__hash
 }, _PeriodFilterStyle.default));

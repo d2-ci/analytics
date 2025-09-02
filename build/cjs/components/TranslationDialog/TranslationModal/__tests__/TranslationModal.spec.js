@@ -1,8 +1,8 @@
 "use strict";
 
-var _ui = require("@dhis2/ui");
-var _enzyme = require("enzyme");
-var _react = _interopRequireDefault(require("react"));
+var _appRuntime = require("@dhis2/app-runtime");
+var _react = require("@testing-library/react");
+var _react2 = _interopRequireDefault(require("react"));
 var _TranslationModal = require("../TranslationModal.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const mockUseTranslationResults = jest.fn(() => ({
@@ -12,19 +12,26 @@ const mockUseTranslationResults = jest.fn(() => ({
 jest.mock('../useTranslationsResults.js', () => ({
   useTranslationsResults: args => mockUseTranslationResults(args)
 }));
-describe('The Translation Dialog component', () => {
-  let shallowTranslationModal;
+describe('TranslationDialog component', () => {
   let props;
   const onClose = jest.fn();
   const onTranslationSaved = jest.fn();
-  const getTranslationModalComponent = props => {
-    if (!shallowTranslationModal) {
-      shallowTranslationModal = (0, _enzyme.shallow)(/*#__PURE__*/_react.default.createElement(_TranslationModal.TranslationModal, props));
-    }
-    return shallowTranslationModal;
+  const renderTranslationModalComponent = props => {
+    return (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_appRuntime.CustomDataProvider, {
+      data: {
+        i18n: {
+          name: 'Name',
+          description: 'Description'
+        },
+        'locales/db': [{
+          locale: 'en',
+          name: 'English',
+          displayName: 'English'
+        }]
+      }
+    }, /*#__PURE__*/_react2.default.createElement(_TranslationModal.TranslationModal, props)));
   };
   beforeEach(() => {
-    shallowTranslationModal = undefined;
     props = {
       fieldsToTranslate: ['name', 'description'],
       objectToTranslate: {
@@ -35,15 +42,17 @@ describe('The Translation Dialog component', () => {
       onTranslationSaved
     };
   });
-  it('renders a Modal component', () => {
-    expect(getTranslationModalComponent(props).find(_ui.Modal)).toHaveLength(1);
+  test('renders a Modal component', () => {
+    renderTranslationModalComponent(props);
+    expect(_react.screen.getByTestId('dhis2-analytics-translation-modal')).toBeInTheDocument();
   });
-  it("renders a ModalTitle containing the object's name", () => {
-    expect(getTranslationModalComponent(props).find(_ui.ModalTitle).childAt(0).text()).toEqual(`Translate: ${props.objectToTranslate.name}`);
+  test("renders a ModalTitle containing the object's name", () => {
+    renderTranslationModalComponent(props);
+    expect(_react.screen.getByText(`Translate: ${props.objectToTranslate.name}`)).toBeInTheDocument();
   });
   test.each(['https://dhis2.tld/path/api/visualization/object-id', 'https://dhis2.tld/path/api/42/visualization/object-id'])('uses the correct resource for the translation endpoint', href => {
     props.objectToTranslate.href = href;
-    getTranslationModalComponent(props);
+    renderTranslationModalComponent(props);
     expect(mockUseTranslationResults).toHaveBeenCalled();
     expect(mockUseTranslationResults).toHaveBeenCalledWith({
       resource: 'visualization/object-id'

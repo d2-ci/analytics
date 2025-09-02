@@ -1,36 +1,38 @@
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { UpdateButton } from '../index.js';
 describe('<UpdateButton/>', () => {
   const noop = () => {};
-  it('accepts an `onClick` prop', () => {
+  test('accepts an `onClick` prop', async () => {
+    const user = userEvent.setup();
     const onClick = jest.fn();
-    const wrapper = shallow(/*#__PURE__*/React.createElement(UpdateButton, {
+    render(/*#__PURE__*/React.createElement(UpdateButton, {
       onClick: onClick
     }));
-    wrapper.simulate('click');
+    await user.click(screen.getByRole('button'));
     expect(onClick).toHaveBeenCalledTimes(1);
   });
-  it('accepts a `dataTest` prop', () => {
+  test('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = shallow(/*#__PURE__*/React.createElement(UpdateButton, {
+    render(/*#__PURE__*/React.createElement(UpdateButton, {
       onClick: noop,
       dataTest: dataTest
     }));
-    expect(wrapper.prop('data-test')).toBe(dataTest);
+    expect(screen.getByTestId(dataTest)).toBeInTheDocument();
   });
-  it('accepts a `disabled` prop', () => {
-    const wrapper = shallow(/*#__PURE__*/React.createElement(UpdateButton, {
+  test('accepts a `disabled` prop', () => {
+    render(/*#__PURE__*/React.createElement(UpdateButton, {
       disabled: true,
       onClick: noop
     }));
-    expect(wrapper.find('button').prop('disabled')).toEqual(true);
+    expect(screen.getByRole('button')).toBeDisabled();
   });
-  it('accepts an `loading` prop', () => {
-    const wrapper = shallow(/*#__PURE__*/React.createElement(UpdateButton, {
+  test('accepts an `loading` prop', () => {
+    render(/*#__PURE__*/React.createElement(UpdateButton, {
       onClick: noop,
       loading: true
     }));
-    expect(wrapper.find('CircularLoader')).toHaveLength(1);
+    expect(screen.getByTestId('dhis2-uicore-circularloader')).toBeInTheDocument();
   });
 });

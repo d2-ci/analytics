@@ -1,5 +1,6 @@
 import { CustomDataProvider } from '@dhis2/app-runtime';
-import { render, fireEvent, screen, getByText } from '@testing-library/react';
+import { render, screen, getByText } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import React from 'react';
 import { HoverMenuBar } from '../../Toolbar/index.js';
@@ -13,7 +14,7 @@ jest.mock('../../TranslationDialog/TranslationModal/useTranslationsResults.js', 
     fetching: true
   })
 }));
-describe('The FileMenu component ', () => {
+describe('FileMenu component ', () => {
   const onDelete = jest.fn();
   const onError = jest.fn();
   const onNew = jest.fn();
@@ -71,8 +72,16 @@ describe('The FileMenu component ', () => {
       },
       visualizations: {
         pager: {
-          page: 1
-        }
+          page: 1,
+          pageSize: 50
+        },
+        visualizations: [{
+          id: 'vis1',
+          displayName: 'Visualization 1',
+          type: 'VISUALIZATION',
+          created: '2025-07-23T15:04:16.864',
+          lastUpdated: '2025-07-23T15:04:16.864'
+        }]
       }
     };
     return render(/*#__PURE__*/React.createElement(CustomDataProvider, {
@@ -80,7 +89,8 @@ describe('The FileMenu component ', () => {
     }, /*#__PURE__*/React.createElement(HoverMenuBar, null, /*#__PURE__*/React.createElement(FileMenu, props))));
   };
   const openDropdown = async () => {
-    fireEvent.click(screen.getByTestId('dhis2-analytics-hovermenudropdown'));
+    const user = userEvent.setup();
+    await user.click(screen.getByTestId('dhis2-analytics-hovermenudropdown'));
     expect(await screen.findByTestId('file-menu-container')).toBeVisible();
   };
   const MENU_ITEMS = {
@@ -132,20 +142,20 @@ describe('The FileMenu component ', () => {
       }
     }
   };
-  it('renders a button', () => {
+  test('renders a button', () => {
     renderFileMenu();
     expect(screen.getAllByTestId('dhis2-analytics-hovermenudropdown')).toHaveLength(1);
     const button = screen.getByTestId('dhis2-analytics-hovermenudropdown');
     expect(button).toBeVisible();
     expect(button).toHaveTextContent('File');
   });
-  it('opens when clicking the button', async () => {
+  test('opens when clicking the button', async () => {
     renderFileMenu();
     expect(screen.queryByTestId('file-menu-container')).not.toBeInTheDocument();
     await openDropdown();
     expect(await screen.findByTestId('file-menu-container')).toBeVisible();
   });
-  it('renders some enabled buttons regardless of the access settings', async () => {
+  test('renders some enabled buttons regardless of the access settings', async () => {
     renderFileMenu();
     await openDropdown();
     assertMenuItemsDisabledState([{
@@ -156,7 +166,7 @@ describe('The FileMenu component ', () => {
       disabled: false
     }]);
   });
-  it('renders some disabled buttons when no fileObject is present', async () => {
+  test('renders some disabled buttons when no fileObject is present', async () => {
     renderFileMenu();
     await openDropdown();
     assertMenuItemsDisabledState([{
@@ -179,7 +189,7 @@ describe('The FileMenu component ', () => {
       disabled: true
     }]);
   });
-  it('renders some enabled buttons when update access is granted', async () => {
+  test('renders some enabled buttons when update access is granted', async () => {
     const customProps = {
       fileObject: {
         id: 'test',
@@ -203,7 +213,7 @@ describe('The FileMenu component ', () => {
       disabled: false
     }]);
   });
-  it('renders enabled Delete button when delete access is granted', async () => {
+  test('renders enabled Delete button when delete access is granted', async () => {
     const customProps = {
       fileObject: {
         id: 'test',
@@ -221,7 +231,7 @@ describe('The FileMenu component ', () => {
       disabled: false
     }]);
   });
-  it('renders enabled Share button when manage access is granted', async () => {
+  test('renders enabled Share button when manage access is granted', async () => {
     const customProps = {
       fileObject: {
         id: 'test',
@@ -239,50 +249,56 @@ describe('The FileMenu component ', () => {
       disabled: false
     }]);
   });
-  it('renders the OpenFileDialog component when the Open button is clicked', async () => {
+  test('renders the OpenFileDialog component when the Open button is clicked', async () => {
+    const user = userEvent.setup();
     renderFileMenu();
     await openDropdown();
-    fireEvent.click(screen.getByTestId(MENU_ITEMS.OPEN.testId));
+    await user.click(screen.getByTestId(MENU_ITEMS.OPEN.testId));
     expect(await screen.findByText('Open a visualization', {
       selector: 'h1'
     })).toBeVisible();
   });
-  it('renders the RenameDialog when the Rename button is clicked', async () => {
+  test('renders the RenameDialog when the Rename button is clicked', async () => {
+    const user = userEvent.setup();
     renderFileMenu(fullAccessProps);
     await openDropdown();
-    fireEvent.click(screen.getByTestId(MENU_ITEMS.RENAME.testId));
+    await user.click(screen.getByTestId(MENU_ITEMS.RENAME.testId));
     expect(await screen.findByText('Rename visualization', {
       selector: 'h1'
     })).toBeVisible();
   });
-  it('renders the TranslationDialog when the Translate button is clicked', async () => {
+  test('renders the TranslationDialog when the Translate button is clicked', async () => {
+    const user = userEvent.setup();
     renderFileMenu(fullAccessProps);
     await openDropdown();
-    fireEvent.click(screen.getByTestId(MENU_ITEMS.TRANSLATE.testId));
+    await user.click(screen.getByTestId(MENU_ITEMS.TRANSLATE.testId));
     expect(await screen.findByText('Translate', {
       exact: false,
       selector: 'h1'
     })).toBeVisible();
   });
-  it('renders the SharingDialog when the Share button is clicked', async () => {
+  test('renders the SharingDialog when the Share button is clicked', async () => {
+    const user = userEvent.setup();
     renderFileMenu(fullAccessProps);
     await openDropdown();
-    fireEvent.click(screen.getByTestId(MENU_ITEMS.SHARE.testId));
+    await user.click(screen.getByTestId(MENU_ITEMS.SHARE.testId));
     expect(await screen.findByText('Sharing and access', {
       selector: 'h1'
     })).toBeVisible();
   });
-  it('renders the GetLinkDialog when the Get link button is clicked', async () => {
+  test('renders the GetLinkDialog when the Get link button is clicked', async () => {
+    const user = userEvent.setup();
     const url = 'http://localhost/dhis-web-data-visualizer/#/test';
     renderFileMenu(fullAccessProps);
     await openDropdown();
-    fireEvent.click(screen.getByTestId(MENU_ITEMS.GET_LINK.testId));
+    await user.click(screen.getByTestId(MENU_ITEMS.GET_LINK.testId));
     expect(await screen.findByTestId('dhis2-uicore-modal')).toBeVisible();
     expect(screen.getByRole('link', {
       name: url
     })).toHaveAttribute('href', url);
   });
-  it('renders the DeleteDialog when the Delete button is clicked', async () => {
+  test('renders the DeleteDialog when the Delete button is clicked', async () => {
+    const user = userEvent.setup();
     const customProps = {
       fileObject: {
         id: 'delete-test',
@@ -295,20 +311,22 @@ describe('The FileMenu component ', () => {
     };
     renderFileMenu(customProps);
     await openDropdown();
-    fireEvent.click(screen.getByTestId(MENU_ITEMS.DELETE.testId));
+    await user.click(screen.getByTestId(MENU_ITEMS.DELETE.testId));
     expect(await screen.findByText('Delete visualization', {
       selector: 'h1'
     })).toBeVisible();
   });
-  it('renders the SaveAsDialog when the Save as… button is clicked', async () => {
+  test('renders the SaveAsDialog when the Save as… button is clicked', async () => {
+    const user = userEvent.setup();
     renderFileMenu(fullAccessProps);
     await openDropdown();
-    fireEvent.click(screen.getByTestId(MENU_ITEMS.SAVE_AS.testId));
+    await user.click(screen.getByTestId(MENU_ITEMS.SAVE_AS.testId));
     expect(await screen.findByText('Save visualization as', {
       selector: 'h1'
     })).toBeVisible();
   });
-  it('renders the SaveAsDialog when the Save… button is clicked but no fileObject is present', async () => {
+  test('renders the SaveAsDialog when the Save… button is clicked but no fileObject is present', async () => {
+    const user = userEvent.setup();
     const customProps = {
       fileObject: {
         // NOTE: no `id` field
@@ -319,22 +337,24 @@ describe('The FileMenu component ', () => {
     };
     renderFileMenu(customProps);
     await openDropdown();
-    fireEvent.click(screen.getByTestId(MENU_ITEMS.SAVE.testId));
+    await user.click(screen.getByTestId(MENU_ITEMS.SAVE.testId));
     expect(await screen.findByText('Save visualization as', {
       selector: 'h1'
     })).toBeVisible();
   });
-  it('calls the onSave callback when the Save button is clicked and a fileObject is present', async () => {
+  test('calls the onSave callback when the Save button is clicked and a fileObject is present', async () => {
+    const user = userEvent.setup();
     renderFileMenu(fullAccessProps);
     await openDropdown();
-    fireEvent.click(screen.getByTestId(MENU_ITEMS.SAVE.testId));
+    await user.click(screen.getByTestId(MENU_ITEMS.SAVE.testId));
     expect(screen.queryByText('Open a visualization')).not.toBeVisible();
     expect(onSave).toHaveBeenCalledTimes(1);
   });
-  it('calls the onNew callback when the New button is clicked', async () => {
+  test('calls the onNew callback when the New button is clicked', async () => {
+    const user = userEvent.setup();
     renderFileMenu();
     await openDropdown();
-    fireEvent.click(screen.getByTestId(MENU_ITEMS.NEW.testId));
+    await user.click(screen.getByTestId(MENU_ITEMS.NEW.testId));
     expect(screen.queryByText('Open a visualization')).not.toBeVisible();
     expect(onNew).toHaveBeenCalledTimes(1);
   });
