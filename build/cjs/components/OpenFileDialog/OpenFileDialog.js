@@ -11,7 +11,6 @@ var _ui = require("@dhis2/ui");
 var _isEqual = _interopRequireDefault(require("lodash/isEqual"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
-var _visTypes = require("../../modules/visTypes.js");
 var _CreatedByFilter = require("./CreatedByFilter.js");
 var _FileList = require("./FileList.js");
 var _NameFilter = require("./NameFilter.js");
@@ -46,49 +45,11 @@ const getQuery = type => ({
 });
 const formatFilters = (currentUser, filters, filterVisTypes) => {
   const queryFilters = [];
-  if (filters.searchTerm) {
-    queryFilters.push(`identifiable:token:${filters.searchTerm}`);
-  }
-  if (filters.createdBy === _CreatedByFilter.CREATED_BY_ALL_BUT_CURRENT_USER) {
-    queryFilters.push(`user.id:!eq:${currentUser.id}`);
-  } else if (filters.createdBy === _CreatedByFilter.CREATED_BY_CURRENT_USER) {
-    queryFilters.push(`user.id:eq:${currentUser.id}`);
-  }
-  const defaultFilterTypes = [];
-  let defaultTypeFilter;
-  if (Array.isArray(filterVisTypes)) {
-    // console.log(filterVisTypes)
-    defaultFilterTypes.push(...filterVisTypes.filter(({
-      type,
-      disabled
-    }) => !(disabled || [_visTypes.VIS_TYPE_GROUP_ALL, _visTypes.VIS_TYPE_GROUP_CHARTS].includes(type))).map(({
-      type
-    }) => type));
-    if (defaultFilterTypes.length) {
-      defaultTypeFilter = `type:in:[${defaultFilterTypes.join(',')}]`;
-    }
-  }
-  if (filters.visType) {
-    switch (filters.visType) {
-      case _visTypes.VIS_TYPE_GROUP_ALL:
-        if (defaultTypeFilter) {
-          queryFilters.push(defaultTypeFilter);
-        }
-        break;
-      case _visTypes.VIS_TYPE_GROUP_CHARTS:
-        if (defaultFilterTypes.length) {
-          queryFilters.push(`type:in:[${defaultFilterTypes.filter(item => item !== _visTypes.VIS_TYPE_PIVOT_TABLE).join(',')}]`);
-        } else {
-          queryFilters.push(`type:!eq:${_visTypes.VIS_TYPE_PIVOT_TABLE}`);
-        }
-        break;
-      default:
-        queryFilters.push(`type:eq:${filters.visType}`);
-        break;
-    }
-  } else if (defaultTypeFilter) {
-    queryFilters.push(defaultTypeFilter);
-  }
+  filters.searchTerm && queryFilters.push(`identifiable:token:${filters.searchTerm}`);
+  const userFilter = (0, _CreatedByFilter.formatUserFilter)(filters.createdBy, currentUser.id);
+  userFilter && queryFilters.push(userFilter);
+  const typeFilter = (0, _VisTypeFilter.formatTypeFilter)(filterVisTypes, filters.visType);
+  typeFilter && queryFilters.push(typeFilter);
   return queryFilters;
 };
 exports.formatFilters = formatFilters;
