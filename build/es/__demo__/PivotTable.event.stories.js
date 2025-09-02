@@ -401,5 +401,5 @@ export const Yesonly = (_, {
   }));
 };
 Yesonly.story = {
-  name: 'Boolean'
+  name: 'Yesonly'
 };

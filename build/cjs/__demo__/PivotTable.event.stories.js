@@ -425,5 +425,5 @@ const Yesonly = (_, {
 };
 exports.Yesonly = Yesonly;
 Yesonly.story = {
-  name: 'Boolean'
+  name: 'Yesonly'
 };
