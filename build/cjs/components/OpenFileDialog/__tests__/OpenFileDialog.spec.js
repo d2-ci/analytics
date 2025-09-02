@@ -46,6 +46,6 @@ describe('OpenFileDialog - formatFilters', () => {
       type: _visTypes.VIS_TYPE_LINE_LIST
     }, {
       type: _visTypes.VIS_TYPE_PIVOT_TABLE
-    }])).toEqual([`user.id:eq:${currentUser.id}`, `type:in:[${_visTypes.VIS_TYPE_LINE_LIST},${_visTypes.VIS_TYPE_PIVOT_TABLE}]`, `identifiable:token:test`]);
+    }])).toEqual([`identifiable:token:test`, `user.id:eq:${currentUser.id}`, `type:in:[${_visTypes.VIS_TYPE_LINE_LIST},${_visTypes.VIS_TYPE_PIVOT_TABLE}]`]);
   });
 });
