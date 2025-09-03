@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.YesonlyNA = exports.Yesonly = exports.TextNA = exports.Text = exports.OptionsetNA = exports.Optionset = exports.NumericNA = exports.NumericLegendsetNA = exports.NumericLegendset = exports.Numeric = exports.DatetimeNA = exports.Datetime = exports.DateNA = exports.Date = exports.BooleanNA = exports.Boolean = void 0;
+exports.default = exports.YesonlyNA = exports.Yesonly = exports.TextNA = exports.Text = exports.OptionsetNA = exports.Optionset = exports.NumericNA = exports.Numeric = exports.LegendsetNA = exports.Legendset = exports.DatetimeNA = exports.Datetime = exports.DateNA = exports.Date = exports.BooleanNA = exports.Boolean = void 0;
 var _ui = require("@dhis2/ui");
 var _react = _interopRequireWildcard(require("react"));
 var _index = require("../index.js");
@@ -19,12 +19,12 @@ var _datetimeVisualization = _interopRequireDefault(require("./data/event/dateti
 var _emailDataHidena = _interopRequireDefault(require("./data/event/email.data.hidena.json"));
 var _emailData = _interopRequireDefault(require("./data/event/email.data.json"));
 var _emailVisualization = _interopRequireDefault(require("./data/event/email.visualization.json"));
-var _integerLegendsetDataHidena = _interopRequireDefault(require("./data/event/integer-legendset.data.hidena.json"));
-var _integerLegendsetData = _interopRequireDefault(require("./data/event/integer-legendset.data.json"));
-var _integerLegendsetVisualization = _interopRequireDefault(require("./data/event/integer-legendset.visualization.json"));
 var _integerDataHidena = _interopRequireDefault(require("./data/event/integer.data.hidena.json"));
 var _integerData = _interopRequireDefault(require("./data/event/integer.data.json"));
 var _integerVisualization = _interopRequireDefault(require("./data/event/integer.visualization.json"));
+var _legendsetDataHidena = _interopRequireDefault(require("./data/event/legendset.data.hidena.json"));
+var _legendsetData = _interopRequireDefault(require("./data/event/legendset.data.json"));
+var _legendsetVisualization = _interopRequireDefault(require("./data/event/legendset.visualization.json"));
 var _optionsetDataHidena = _interopRequireDefault(require("./data/event/optionset.data.hidena.json"));
 var _optionsetData = _interopRequireDefault(require("./data/event/optionset.data.json"));
 var _optionsetVisualization = _interopRequireDefault(require("./data/event/optionset.visualization.json"));
@@ -207,6 +207,50 @@ exports.Datetime = Datetime;
 Datetime.story = {
   name: 'Datetime'
 };
+const LegendsetNA = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._legendsetVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _legendsetData.default,
+    visualization: visualization
+  }));
+};
+exports.LegendsetNA = LegendsetNA;
+LegendsetNA.story = {
+  name: 'LegendsetNA'
+};
+const Legendset = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._legendsetVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _legendsetDataHidena.default,
+    visualization: visualization
+  }));
+};
+exports.Legendset = Legendset;
+Legendset.story = {
+  name: 'Legendset'
+};
 const NumericNA = (_, {
   pivotTableOptions
 }) => {
@@ -250,50 +294,6 @@ const Numeric = (_, {
 exports.Numeric = Numeric;
 Numeric.story = {
   name: 'Numeric'
-};
-const NumericLegendsetNA = (_, {
-  pivotTableOptions
-}) => {
-  const visualization = {
-    ..._integerLegendsetVisualization.default,
-    ...visualizationReset,
-    ...pivotTableOptions
-  };
-  return /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      width: 800,
-      height: 600
-    }
-  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
-    data: _integerLegendsetData.default,
-    visualization: visualization
-  }));
-};
-exports.NumericLegendsetNA = NumericLegendsetNA;
-NumericLegendsetNA.story = {
-  name: 'Numeric with legendset NA'
-};
-const NumericLegendset = (_, {
-  pivotTableOptions
-}) => {
-  const visualization = {
-    ..._integerLegendsetVisualization.default,
-    ...visualizationReset,
-    ...pivotTableOptions
-  };
-  return /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      width: 800,
-      height: 600
-    }
-  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
-    data: _integerLegendsetDataHidena.default,
-    visualization: visualization
-  }));
-};
-exports.NumericLegendset = NumericLegendset;
-NumericLegendset.story = {
-  name: 'Numeric with legendset'
 };
 const OptionsetNA = (_, {
   pivotTableOptions

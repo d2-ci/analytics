@@ -62,6 +62,9 @@ export const transformResponse = (response, {
     metaHeaders.forEach(header => {
       if (response.rows.map(row => row[header.index]).includes(NA_VALUE)) {
         transformedResponse.metaData.dimensions[header.name] = [...transformedResponse.metaData.dimensions[header.name], NA_VALUE];
+        transformedResponse.metaData.items[NA_VALUE] = {
+          name: i18n.t('No value')
+        };
       }
     });
   }
