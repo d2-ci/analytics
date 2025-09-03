@@ -39,7 +39,7 @@ export const PivotTableColumnHeaderCell = ({
       return /*#__PURE__*/React.createElement(PivotTableCell, {
         isHeader: true,
         classes: [header.label && header.label !== 'Total' && header.label !== 'Subtotal' // TODO: Actually look up the column type!
-        ? 'column-header' : 'empty-header', {
+        ? 'column-header' : 'empty-header', header.isNaData && 'nadata-header', {
           'fixed-header': engine.options.fixColumnHeaders
         }],
         colSpan: header.span,
