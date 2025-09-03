@@ -41,7 +41,8 @@ const transformResponse = (response, {
 
   // Add index to all headers
   // Include only headers that are "meta" and skip "pe" and "ou"
-  const metaHeaders = response.headers.map((header, index) => Object.assign({}, header, {
+  const metaHeaders = response.headers.map((header, index) => ({
+    ...header,
     index
   })).filter(header => Boolean(header.meta) && ![_predefinedDimensions.DIMENSION_ID_PERIOD, _predefinedDimensions.DIMENSION_ID_ORGUNIT].includes(header.name));
 
