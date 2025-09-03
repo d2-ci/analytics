@@ -4,9 +4,17 @@ import { isBooleanValueType, VALUE_TYPE_AGE, VALUE_TYPE_COORDINATE, VALUE_TYPE_D
 import { applyBooleanHandler } from './boolean.js';
 import { applyDefaultHandler } from './default.js';
 import { applyOptionSetHandler } from './optionSet.js';
-export const NA_VALUE = '';
-export const NA_VALUE_DISPLAY_NAME = i18n.t('No value');
 export const PREFIX_SEPARATOR = '_';
+export const NA_VALUE = '';
+export const NA_VALUE_ITEM = {
+  name: i18n.t('No value'),
+  style: {
+    fontStyle: 'italic',
+    color: '#6C7787',
+    fontFamily: 'monospace',
+    letterSpacing: '-0.3px'
+  }
+};
 export const UNSUPPORTED_VALUE_TYPES = [VALUE_TYPE_COORDINATE, VALUE_TYPE_GEOJSON, VALUE_TYPE_FILE_RESOURCE, VALUE_TYPE_IMAGE, VALUE_TYPE_MULTI_TEXT, VALUE_TYPE_REFERENCE];
 export const itemFormatterByValueType = {
   [VALUE_TYPE_AGE]: name => name.replace(/ 00:00:00\.0$/, ''),
@@ -63,9 +71,7 @@ export const transformResponse = (response, {
     metaHeaders.forEach(header => {
       if (response.rows.map(row => row[header.index]).includes(NA_VALUE)) {
         transformedResponse.metaData.dimensions[header.name] = [...transformedResponse.metaData.dimensions[header.name], NA_VALUE];
-        transformedResponse.metaData.items[NA_VALUE] = {
-          name: i18n.t('No value')
-        };
+        transformedResponse.metaData.items[NA_VALUE] = NA_VALUE_ITEM;
       }
     });
   }

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.transformResponse = exports.itemFormatterByValueType = exports.UNSUPPORTED_VALUE_TYPES = exports.PREFIX_SEPARATOR = exports.NA_VALUE_DISPLAY_NAME = exports.NA_VALUE = void 0;
+exports.transformResponse = exports.itemFormatterByValueType = exports.UNSUPPORTED_VALUE_TYPES = exports.PREFIX_SEPARATOR = exports.NA_VALUE_ITEM = exports.NA_VALUE = void 0;
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _predefinedDimensions = require("../predefinedDimensions.js");
 var _valueTypes = require("../valueTypes.js");
@@ -11,9 +11,17 @@ var _boolean = require("./boolean.js");
 var _default = require("./default.js");
 var _optionSet = require("./optionSet.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const NA_VALUE = exports.NA_VALUE = '';
-const NA_VALUE_DISPLAY_NAME = exports.NA_VALUE_DISPLAY_NAME = _d2I18n.default.t('No value');
 const PREFIX_SEPARATOR = exports.PREFIX_SEPARATOR = '_';
+const NA_VALUE = exports.NA_VALUE = '';
+const NA_VALUE_ITEM = exports.NA_VALUE_ITEM = {
+  name: _d2I18n.default.t('No value'),
+  style: {
+    fontStyle: 'italic',
+    color: '#6C7787',
+    fontFamily: 'monospace',
+    letterSpacing: '-0.3px'
+  }
+};
 const UNSUPPORTED_VALUE_TYPES = exports.UNSUPPORTED_VALUE_TYPES = [_valueTypes.VALUE_TYPE_COORDINATE, _valueTypes.VALUE_TYPE_GEOJSON, _valueTypes.VALUE_TYPE_FILE_RESOURCE, _valueTypes.VALUE_TYPE_IMAGE, _valueTypes.VALUE_TYPE_MULTI_TEXT, _valueTypes.VALUE_TYPE_REFERENCE];
 const itemFormatterByValueType = exports.itemFormatterByValueType = {
   [_valueTypes.VALUE_TYPE_AGE]: name => name.replace(/ 00:00:00\.0$/, ''),
@@ -70,9 +78,7 @@ const transformResponse = (response, {
     metaHeaders.forEach(header => {
       if (response.rows.map(row => row[header.index]).includes(NA_VALUE)) {
         transformedResponse.metaData.dimensions[header.name] = [...transformedResponse.metaData.dimensions[header.name], NA_VALUE];
-        transformedResponse.metaData.items[NA_VALUE] = {
-          name: _d2I18n.default.t('No value')
-        };
+        transformedResponse.metaData.items[NA_VALUE] = NA_VALUE_ITEM;
       }
     });
   }
