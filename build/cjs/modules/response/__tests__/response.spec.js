@@ -18,6 +18,9 @@ var _integerDataOrg = _interopRequireDefault(require("../../../__demo__/data/eve
 var _optionsetDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/optionset.data.hidena.json"));
 var _optionsetData = _interopRequireDefault(require("../../../__demo__/data/event/optionset.data.json"));
 var _optionsetDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/optionset.data.org.json"));
+var _timeDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/time.data.hidena.json"));
+var _timeData = _interopRequireDefault(require("../../../__demo__/data/event/time.data.json"));
+var _timeDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/time.data.org.json"));
 var _yesonlyDataHidena = _interopRequireDefault(require("../../../__demo__/data/event/yesonly.data.hidena.json"));
 var _yesonlyData = _interopRequireDefault(require("../../../__demo__/data/event/yesonly.data.json"));
 var _yesonlyDataOrg = _interopRequireDefault(require("../../../__demo__/data/event/yesonly.data.org.json"));
@@ -83,6 +86,16 @@ describe('response', () => {
         expect((0, _response.transformResponse)(_emailDataOrg.default, {
           hideNaData: true
         })).toEqual(_emailDataHidena.default);
+      });
+    });
+    describe('time', () => {
+      it('transforms response', () => {
+        expect((0, _response.transformResponse)(_timeDataOrg.default)).toEqual(_timeData.default);
+      });
+      it('transforms response and hides N/A data', () => {
+        expect((0, _response.transformResponse)(_timeDataOrg.default, {
+          hideNaData: true
+        })).toEqual(_timeDataHidena.default);
       });
     });
     describe('yes only', () => {
