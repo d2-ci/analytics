@@ -4,7 +4,6 @@ var _valueTypes = require("../../../valueTypes.js");
 var _default = require("../default.js");
 var _response = require("../response.js");
 const testId = 'Zj7UnCAulEk.qrur9Dvnyt5';
-const headerIndex = 0;
 describe('default', () => {
   // applyDefaultHandler is tested by response.spec.js
 

@@ -2,7 +2,6 @@ import { VALUE_TYPE_NUMBER } from '../../../valueTypes.js';
 import { getDimensions, getItems, getRows, getPrefixedValue, getUnique, getValuesUniqueSortedAsc } from '../default.js';
 import { PREFIX_SEPARATOR } from '../response.js';
 const testId = 'Zj7UnCAulEk.qrur9Dvnyt5';
-const headerIndex = 0;
 describe('default', () => {
   // applyDefaultHandler is tested by response.spec.js
 
