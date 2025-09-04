@@ -1,9 +1,9 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
 import PropTypes from 'prop-types';
 import React from 'react';
+import * as mockData from '../../../../__fixtures__/interpretationsMockData.js';
 import { useInterpretationsList, useActiveInterpretation, useInterpretation, useLike, useInterpretationsCurrentUser, useCreateInterpretation, useDeleteInterpretation, useUpdateInterpretationText, useAddCommentToActiveInterpretation, useDeleteCommentFromActiveInterpretation, useUpdateCommentForActiveInterpretation, useInterpretationAccess, useCommentAccess, useInterpretationsManager } from '../hooks.js';
 import { InterpretationsProvider } from '../InterpretationsProvider.js';
-import * as mockData from './mockData.js';
 const mockQuery = jest.fn();
 const mockMutate = jest.fn();
 
