@@ -1,7 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import { DIMENSION_ID_ORGUNIT, DIMENSION_ID_PERIOD } from '../predefinedDimensions.js';
-import { isBooleanValueType, VALUE_TYPE_AGE, VALUE_TYPE_COORDINATE, VALUE_TYPE_DATE, VALUE_TYPE_DATETIME, VALUE_TYPE_FILE_RESOURCE, VALUE_TYPE_GEOJSON, VALUE_TYPE_IMAGE, VALUE_TYPE_MULTI_TEXT, VALUE_TYPE_PERCENTAGE, VALUE_TYPE_REFERENCE } from '../valueTypes.js';
-import { applyBooleanHandler } from './boolean.js';
+import { isBooleanValueType, VALUE_TYPE_AGE, VALUE_TYPE_BOOLEAN, VALUE_TYPE_COORDINATE, VALUE_TYPE_DATE, VALUE_TYPE_DATETIME, VALUE_TYPE_FILE_RESOURCE, VALUE_TYPE_GEOJSON, VALUE_TYPE_IMAGE, VALUE_TYPE_MULTI_TEXT, VALUE_TYPE_PERCENTAGE, VALUE_TYPE_REFERENCE, VALUE_TYPE_TRUE_ONLY } from '../valueTypes.js';
 import { applyDefaultHandler } from './default.js';
 import { applyOptionSetHandler } from './optionSet.js';
 export const PREFIX_SEPARATOR = '_';
@@ -16,11 +15,21 @@ export const NA_VALUE_ITEM = {
   }
 };
 export const UNSUPPORTED_VALUE_TYPES = [VALUE_TYPE_COORDINATE, VALUE_TYPE_GEOJSON, VALUE_TYPE_FILE_RESOURCE, VALUE_TYPE_IMAGE, VALUE_TYPE_MULTI_TEXT, VALUE_TYPE_REFERENCE];
-export const itemFormatterByValueType = {
-  [VALUE_TYPE_AGE]: name => name.replace(/ 00:00:00\.0$/, ''),
-  [VALUE_TYPE_DATETIME]: name => name.replace(/:00\.0$/, ''),
-  [VALUE_TYPE_DATE]: name => name.replace(/ 00:00:00\.0$/, ''),
-  [VALUE_TYPE_PERCENTAGE]: name => name.endsWith('.0') ? name.slice(0, -2) : name
+export const getItemFormatterByValueType = valueType => {
+  switch (valueType) {
+    case VALUE_TYPE_AGE:
+    case VALUE_TYPE_DATE:
+      return name => name.replace(/ 00:00:00\.0$/, '');
+    case VALUE_TYPE_BOOLEAN:
+    case VALUE_TYPE_TRUE_ONLY:
+      return name => name === '1' ? i18n.t('Yes') : i18n.t('No');
+    case VALUE_TYPE_DATETIME:
+      return name => name.replace(/:00\.0$/, '');
+    case VALUE_TYPE_PERCENTAGE:
+      return name => name.endsWith('.0') ? name.slice(0, -2) : name;
+    default:
+      return undefined;
+  }
 };
 export const transformResponse = (response, {
   hideNaData = false
@@ -55,11 +64,9 @@ export const transformResponse = (response, {
     if (!(header.legendSet || UNSUPPORTED_VALUE_TYPES.includes(header.valueType))) {
       if (header.optionSet) {
         transformedResponse = applyOptionSetHandler(transformedResponse, header.index);
-      } else if (isBooleanValueType(header.valueType)) {
-        transformedResponse = applyBooleanHandler(transformedResponse, header.index);
       } else {
         transformedResponse = applyDefaultHandler(transformedResponse, header.index, {
-          itemFormatter: itemFormatterByValueType[header.valueType]
+          itemFormatter: getItemFormatterByValueType(header.valueType)
         });
       }
     }

@@ -84,12 +84,12 @@ describe('default', () => {
     describe('should return the transformed response', () => {
       test('date', () => {
         expect((0, _default.applyDefaultHandler)(_dateDataOrg.default, headerIndex, {
-          itemFormatter: _response.itemFormatterByValueType[_valueTypes.VALUE_TYPE_DATE]
+          itemFormatter: (0, _response.getItemFormatterByValueType)(_valueTypes.VALUE_TYPE_DATE)
         })).toEqual(_dateDataHidena.default);
       });
       test('datetime', () => {
         expect((0, _default.applyDefaultHandler)(_datetimeDataOrg.default, headerIndex, {
-          itemFormatter: _response.itemFormatterByValueType[_valueTypes.VALUE_TYPE_DATETIME]
+          itemFormatter: (0, _response.getItemFormatterByValueType)(_valueTypes.VALUE_TYPE_DATETIME)
         })).toEqual(_datetimeDataHidena.default);
       });
       test('numeric', () => {

@@ -3,11 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.transformResponse = exports.itemFormatterByValueType = exports.UNSUPPORTED_VALUE_TYPES = exports.PREFIX_SEPARATOR = exports.NA_VALUE_ITEM = exports.NA_VALUE = void 0;
+exports.transformResponse = exports.getItemFormatterByValueType = exports.UNSUPPORTED_VALUE_TYPES = exports.PREFIX_SEPARATOR = exports.NA_VALUE_ITEM = exports.NA_VALUE = void 0;
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _predefinedDimensions = require("../predefinedDimensions.js");
 var _valueTypes = require("../valueTypes.js");
-var _boolean = require("./boolean.js");
 var _default = require("./default.js");
 var _optionSet = require("./optionSet.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -23,12 +22,23 @@ const NA_VALUE_ITEM = exports.NA_VALUE_ITEM = {
   }
 };
 const UNSUPPORTED_VALUE_TYPES = exports.UNSUPPORTED_VALUE_TYPES = [_valueTypes.VALUE_TYPE_COORDINATE, _valueTypes.VALUE_TYPE_GEOJSON, _valueTypes.VALUE_TYPE_FILE_RESOURCE, _valueTypes.VALUE_TYPE_IMAGE, _valueTypes.VALUE_TYPE_MULTI_TEXT, _valueTypes.VALUE_TYPE_REFERENCE];
-const itemFormatterByValueType = exports.itemFormatterByValueType = {
-  [_valueTypes.VALUE_TYPE_AGE]: name => name.replace(/ 00:00:00\.0$/, ''),
-  [_valueTypes.VALUE_TYPE_DATETIME]: name => name.replace(/:00\.0$/, ''),
-  [_valueTypes.VALUE_TYPE_DATE]: name => name.replace(/ 00:00:00\.0$/, ''),
-  [_valueTypes.VALUE_TYPE_PERCENTAGE]: name => name.endsWith('.0') ? name.slice(0, -2) : name
+const getItemFormatterByValueType = valueType => {
+  switch (valueType) {
+    case _valueTypes.VALUE_TYPE_AGE:
+    case _valueTypes.VALUE_TYPE_DATE:
+      return name => name.replace(/ 00:00:00\.0$/, '');
+    case _valueTypes.VALUE_TYPE_BOOLEAN:
+    case _valueTypes.VALUE_TYPE_TRUE_ONLY:
+      return name => name === '1' ? _d2I18n.default.t('Yes') : _d2I18n.default.t('No');
+    case _valueTypes.VALUE_TYPE_DATETIME:
+      return name => name.replace(/:00\.0$/, '');
+    case _valueTypes.VALUE_TYPE_PERCENTAGE:
+      return name => name.endsWith('.0') ? name.slice(0, -2) : name;
+    default:
+      return undefined;
+  }
 };
+exports.getItemFormatterByValueType = getItemFormatterByValueType;
 const transformResponse = (response, {
   hideNaData = false
 } = {}) => {
@@ -62,11 +72,9 @@ const transformResponse = (response, {
     if (!(header.legendSet || UNSUPPORTED_VALUE_TYPES.includes(header.valueType))) {
       if (header.optionSet) {
         transformedResponse = (0, _optionSet.applyOptionSetHandler)(transformedResponse, header.index);
-      } else if ((0, _valueTypes.isBooleanValueType)(header.valueType)) {
-        transformedResponse = (0, _boolean.applyBooleanHandler)(transformedResponse, header.index);
       } else {
         transformedResponse = (0, _default.applyDefaultHandler)(transformedResponse, header.index, {
-          itemFormatter: itemFormatterByValueType[header.valueType]
+          itemFormatter: getItemFormatterByValueType(header.valueType)
         });
       }
     }

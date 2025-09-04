@@ -6,7 +6,7 @@ import numericResponseHideNa from '../../../__demo__/data/event/integer.data.hid
 import numericResponseOrg from '../../../__demo__/data/event/integer.data.org.json';
 import { VALUE_TYPE_DATE, VALUE_TYPE_DATETIME, VALUE_TYPE_NUMBER } from '../../valueTypes.js';
 import { applyDefaultHandler, getDimensions, getItems, getRows, getPrefixedValue, getUnique, getValuesUniqueSortedAsc } from '../default.js';
-import { itemFormatterByValueType, PREFIX_SEPARATOR } from '../response.js';
+import { getItemFormatterByValueType, PREFIX_SEPARATOR } from '../response.js';
 const testId = 'Zj7UnCAulEk.qrur9Dvnyt5';
 const headerIndex = 0;
 describe('default', () => {
@@ -81,12 +81,12 @@ describe('default', () => {
     describe('should return the transformed response', () => {
       test('date', () => {
         expect(applyDefaultHandler(dateResponseOrg, headerIndex, {
-          itemFormatter: itemFormatterByValueType[VALUE_TYPE_DATE]
+          itemFormatter: getItemFormatterByValueType(VALUE_TYPE_DATE)
         })).toEqual(dateResponseHideNa);
       });
       test('datetime', () => {
         expect(applyDefaultHandler(datetimeResponseOrg, headerIndex, {
-          itemFormatter: itemFormatterByValueType[VALUE_TYPE_DATETIME]
+          itemFormatter: getItemFormatterByValueType(VALUE_TYPE_DATETIME)
         })).toEqual(datetimeResponseHideNa);
       });
       test('numeric', () => {
