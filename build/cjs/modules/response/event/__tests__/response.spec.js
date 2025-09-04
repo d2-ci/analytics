@@ -27,6 +27,18 @@ var _yesonlyDataOrg = _interopRequireDefault(require("../../../../__demo__/data/
 var _response = require("../response.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('response', () => {
+  describe('getItemFormatterByValueType', () => {
+    it('should return the correct formatter and format correctly', () => {
+      expect((0, _response.getItemFormatterByValueType)('BOOLEAN')('1')).toBe('Yes');
+      expect((0, _response.getItemFormatterByValueType)('BOOLEAN')('0')).toBe('No');
+      expect((0, _response.getItemFormatterByValueType)('TRUE_ONLY')('1')).toBe('Yes');
+      expect((0, _response.getItemFormatterByValueType)('AGE')('1985-01-01 00:00:00.0')).toBe('1985-01-01');
+      expect((0, _response.getItemFormatterByValueType)('DATE')('2023-01-01 00:00:00.0')).toBe('2023-01-01');
+      expect((0, _response.getItemFormatterByValueType)('DATETIME')('2023-01-01 12:00:00.0')).toBe('2023-01-01 12:00');
+      expect((0, _response.getItemFormatterByValueType)('PERCENTAGE')('50.0')).toBe('50');
+      expect((0, _response.getItemFormatterByValueType)('NOT_A_TYPE')).toBe(undefined);
+    });
+  });
   describe('transformResponse', () => {
     describe('boolean', () => {
       it('transforms response', () => {

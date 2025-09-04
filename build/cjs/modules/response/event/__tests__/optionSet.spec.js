@@ -13,6 +13,8 @@ const testOptionCodeIdMap2 = {
   TWO: 'optionId4'
 };
 describe('optionSet', () => {
+  // applyOptionSetHandler is tested by response.spec.js
+
   describe('getOptionCodeIdMap', () => {
     it('should create an option code:id object', () => {
       const testId = _optionsetDataHidena.default.headers[0].name;
@@ -28,13 +30,6 @@ describe('optionSet', () => {
       const optionSet1Rows = (0, _optionSet.getOptionIdRows)(_optionsetDataOrg.default.rows, testOptionCodeIdMap1, 0);
       const optionSet1And2Rows = (0, _optionSet.getOptionIdRows)(optionSet1Rows, testOptionCodeIdMap2, 1);
       expect(optionSet1And2Rows).toEqual(_optionsetDataHidena.default.rows);
-    });
-  });
-  describe('applyOptionSetHandler', () => {
-    it('should return the transformed response', () => {
-      const optionSet1Response = (0, _optionSet.applyOptionSetHandler)(_optionsetDataOrg.default, 0);
-      const optionSet1And2Response = (0, _optionSet.applyOptionSetHandler)(optionSet1Response, 1);
-      expect(optionSet1And2Response).toEqual(_optionsetDataHidena.default);
     });
   });
 });

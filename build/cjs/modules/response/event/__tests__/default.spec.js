@@ -13,6 +13,8 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 const testId = 'Zj7UnCAulEk.qrur9Dvnyt5';
 const headerIndex = 0;
 describe('default', () => {
+  // applyDefaultHandler is tested by response.spec.js
+
   describe('getUnique', () => {
     it('removes duplicate string numbers', () => {
       const arr = ['2', '10', '2', '01', '1', '-1', '-1', '1', '10'];
@@ -78,23 +80,6 @@ describe('default', () => {
     });
     it('handles empty rows array', () => {
       expect((0, _default.getRows)([], 1, 'a')).toEqual([]);
-    });
-  });
-  describe('applyDefaultHandler', () => {
-    describe('should return the transformed response', () => {
-      test('date', () => {
-        expect((0, _default.applyDefaultHandler)(_dateDataOrg.default, headerIndex, {
-          itemFormatter: (0, _response.getItemFormatterByValueType)(_valueTypes.VALUE_TYPE_DATE)
-        })).toEqual(_dateDataHidena.default);
-      });
-      test('datetime', () => {
-        expect((0, _default.applyDefaultHandler)(_datetimeDataOrg.default, headerIndex, {
-          itemFormatter: (0, _response.getItemFormatterByValueType)(_valueTypes.VALUE_TYPE_DATETIME)
-        })).toEqual(_datetimeDataHidena.default);
-      });
-      test('numeric', () => {
-        expect((0, _default.applyDefaultHandler)(_integerDataOrg.default, headerIndex)).toEqual(_integerDataHidena.default);
-      });
     });
   });
 });
