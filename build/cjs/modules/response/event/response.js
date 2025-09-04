@@ -5,8 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.transformResponse = exports.getItemFormatterByValueType = exports.UNSUPPORTED_VALUE_TYPES = exports.PREFIX_SEPARATOR = exports.NA_VALUE_ITEM = exports.NA_VALUE = void 0;
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
-var _predefinedDimensions = require("../predefinedDimensions.js");
-var _valueTypes = require("../valueTypes.js");
+var _predefinedDimensions = require("../../predefinedDimensions.js");
+var _valueTypes = require("../../valueTypes.js");
 var _default = require("./default.js");
 var _optionSet = require("./optionSet.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }

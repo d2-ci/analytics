@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getValuesUniqueSortedAsc = exports.getUnique = exports.getRows = exports.getPrefixedValue = exports.getItems = exports.getDimensions = exports.applyDefaultHandler = void 0;
-var _valueTypes = require("../valueTypes.js");
+var _valueTypes = require("../../valueTypes.js");
 var _response = require("./response.js");
 const getUnique = array => [...new Set(array)];
 exports.getUnique = getUnique;

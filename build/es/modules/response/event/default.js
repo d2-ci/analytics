@@ -1,4 +1,4 @@
-import { isBooleanValueType, isNumericValueType, VALUE_TYPE_TEXT } from '../valueTypes.js';
+import { isBooleanValueType, isNumericValueType, VALUE_TYPE_TEXT } from '../../valueTypes.js';
 import { NA_VALUE, PREFIX_SEPARATOR } from './response.js';
 export const getUnique = array => [...new Set(array)];
 export const getValuesUniqueSortedAsc = (values, valueType = VALUE_TYPE_TEXT) => isNumericValueType(valueType) || isBooleanValueType(valueType) ? getUnique(values).map(x => [Number(x), x]).sort((a, b) => a[0] - b[0]).map(arr => arr[1]) : getUnique(values).slice().sort((a, b) => a.localeCompare(b));
