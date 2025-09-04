@@ -46,7 +46,7 @@ const PivotTableColumnHeaderCell = ({
       return /*#__PURE__*/_react.default.createElement(_PivotTableCell.PivotTableCell, {
         isHeader: true,
         classes: [header.label && header.label !== 'Total' && header.label !== 'Subtotal' // TODO: Actually look up the column type!
-        ? 'column-header' : 'empty-header', header.isNaData && 'nadata-header', {
+        ? 'column-header' : 'empty-header', {
           'fixed-header': engine.options.fixColumnHeaders
         }],
         colSpan: header.span,
@@ -59,6 +59,9 @@ const PivotTableColumnHeaderCell = ({
         className: `jsx-${_PivotTableStyle.cell.__hash}` + " " + "column-header-inner"
       }, /*#__PURE__*/_react.default.createElement("span", {
         "data-test": "visualization-column-header",
+        style: {
+          ...header.style
+        },
         className: `jsx-${_PivotTableStyle.cell.__hash}` + " " + "column-header-label"
       }, header.label), isSortable ? /*#__PURE__*/_react.default.createElement(_PivotTableSortIcon.PivotTableSortIcon, {
         index: index,

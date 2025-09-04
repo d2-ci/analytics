@@ -29,11 +29,12 @@ export const getHeaderForDisplay = ({
   const currentHeader = header[dimensionLevel];
   const includesHierarchy = showHierarchy && (currentHeader === null || currentHeader === void 0 ? void 0 : currentHeader.hierarchy);
   const label = includesHierarchy ? currentHeader.hierarchy.join(' / ') : currentHeader === null || currentHeader === void 0 ? void 0 : currentHeader.name;
-  const isNaData = currentHeader.isNaData;
   return {
     span,
     label,
     includesHierarchy,
-    isNaData
+    ...(currentHeader.style ? {
+      style: currentHeader.style
+    } : {})
   };
 };
