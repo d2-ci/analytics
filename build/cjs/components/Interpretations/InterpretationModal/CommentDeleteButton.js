@@ -18,7 +18,9 @@ const CommentDeleteButton = ({
   const [remove, {
     loading,
     error
-  }] = (0, _hooks.useDeleteCommentFromActiveInterpretation)(id);
+  }] = (0, _hooks.useDeleteCommentFromActiveInterpretation)({
+    id
+  });
   return /*#__PURE__*/_react.default.createElement("div", {
     className: _style.default.dynamic([["945681082", [_ui.colors.red500]]]) + " " + "delete-button-container"
   }, /*#__PURE__*/_react.default.createElement(_index.MessageIconButton, {
