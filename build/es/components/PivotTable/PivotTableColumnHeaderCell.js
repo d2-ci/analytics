@@ -52,6 +52,9 @@ export const PivotTableColumnHeaderCell = ({
         className: `jsx-${cellStyle.__hash}` + " " + "column-header-inner"
       }, /*#__PURE__*/React.createElement("span", {
         "data-test": "visualization-column-header",
+        style: {
+          ...header.style
+        },
         className: `jsx-${cellStyle.__hash}` + " " + "column-header-label"
       }, header.label), isSortable ? /*#__PURE__*/React.createElement(PivotTableSortIcon, {
         index: index,

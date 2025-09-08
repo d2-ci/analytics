@@ -10,43 +10,43 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _index = require("../index.js");
 var _pivotTableConstants = require("../modules/pivotTable/pivotTableConstants.js");
-var _avgTotalAggregationTypeData = _interopRequireDefault(require("./data/avgTotalAggregationType.data.json"));
-var _avgTotalAggregationTypeMetadata = _interopRequireDefault(require("./data/avgTotalAggregationType.metadata.json"));
-var _avgTotalAggregationTypeVisualization = _interopRequireDefault(require("./data/avgTotalAggregationType.visualization.json"));
-var _deepData = _interopRequireDefault(require("./data/deep.data.json"));
-var _deepVisualization = _interopRequireDefault(require("./data/deep.visualization.json"));
-var _deepWithFiltersData = _interopRequireDefault(require("./data/deepWithFilters.data.json"));
-var _deepWithFiltersVisualization = _interopRequireDefault(require("./data/deepWithFilters.visualization.json"));
-var _degsData = _interopRequireDefault(require("./data/degs.data.json"));
-var _degsMetadata = _interopRequireDefault(require("./data/degs.metadata.json"));
-var _degsVisualization = _interopRequireDefault(require("./data/degs.visualization.json"));
-var _diseaseWeeksData = _interopRequireDefault(require("./data/diseaseWeeks.data.json"));
-var _diseaseWeeksMetadata = _interopRequireDefault(require("./data/diseaseWeeks.metadata.json"));
-var _diseaseWeeksVisualization = _interopRequireDefault(require("./data/diseaseWeeks.visualization.json"));
-var _emptyColumnsData = _interopRequireDefault(require("./data/emptyColumns.data.json"));
-var _emptyColumnsMetadata = _interopRequireDefault(require("./data/emptyColumns.metadata.json"));
-var _emptyColumnsVisualization = _interopRequireDefault(require("./data/emptyColumns.visualization.json"));
-var _emptyRowsData = _interopRequireDefault(require("./data/emptyRows.data.json"));
-var _emptyRowsVisualization = _interopRequireDefault(require("./data/emptyRows.visualization.json"));
-var _hierarchyData = _interopRequireDefault(require("./data/hierarchy.data.json"));
-var _hierarchyMetadata = _interopRequireDefault(require("./data/hierarchy.metadata.json"));
-var _hierarchyVisualization = _interopRequireDefault(require("./data/hierarchy.visualization.json"));
-var _lastFiveYearsData = _interopRequireDefault(require("./data/lastFiveYears.data.json"));
-var _lastFiveYearsMetadata = _interopRequireDefault(require("./data/lastFiveYears.metadata.json"));
-var _lastFiveYearsVisualization = _interopRequireDefault(require("./data/lastFiveYears.visualization.json"));
-var _narrativeData = _interopRequireDefault(require("./data/narrative.data.json"));
-var _narrativeMetadata = _interopRequireDefault(require("./data/narrative.metadata.json"));
-var _narrativeVisualization = _interopRequireDefault(require("./data/narrative.visualization.json"));
-var _simpleData = _interopRequireDefault(require("./data/simple.data.json"));
-var _simpleMetadata = _interopRequireDefault(require("./data/simple.metadata.json"));
-var _simpleVisualization = _interopRequireDefault(require("./data/simple.visualization.json"));
-var _targetWithLegendData = _interopRequireDefault(require("./data/target-with-legend.data.json"));
-var _targetWithLegendMetadata = _interopRequireDefault(require("./data/target-with-legend.metadata.json"));
-var _targetWithLegendVisualization = _interopRequireDefault(require("./data/target-with-legend.visualization.json"));
-var _underAbove100LegendSet = _interopRequireDefault(require("./data/under-above-100.legendSet.json"));
-var _weeklyColumnsData = _interopRequireDefault(require("./data/weeklyColumns.data.json"));
-var _weeklyColumnsMetadata = _interopRequireDefault(require("./data/weeklyColumns.metadata.json"));
-var _weeklyColumnsVisualization = _interopRequireDefault(require("./data/weeklyColumns.visualization.json"));
+var _avgTotalAggregationTypeData = _interopRequireDefault(require("./data/aggregate/avgTotalAggregationType.data.json"));
+var _avgTotalAggregationTypeMetadata = _interopRequireDefault(require("./data/aggregate/avgTotalAggregationType.metadata.json"));
+var _avgTotalAggregationTypeVisualization = _interopRequireDefault(require("./data/aggregate/avgTotalAggregationType.visualization.json"));
+var _deepData = _interopRequireDefault(require("./data/aggregate/deep.data.json"));
+var _deepVisualization = _interopRequireDefault(require("./data/aggregate/deep.visualization.json"));
+var _deepWithFiltersData = _interopRequireDefault(require("./data/aggregate/deepWithFilters.data.json"));
+var _deepWithFiltersVisualization = _interopRequireDefault(require("./data/aggregate/deepWithFilters.visualization.json"));
+var _degsData = _interopRequireDefault(require("./data/aggregate/degs.data.json"));
+var _degsMetadata = _interopRequireDefault(require("./data/aggregate/degs.metadata.json"));
+var _degsVisualization = _interopRequireDefault(require("./data/aggregate/degs.visualization.json"));
+var _diseaseWeeksData = _interopRequireDefault(require("./data/aggregate/diseaseWeeks.data.json"));
+var _diseaseWeeksMetadata = _interopRequireDefault(require("./data/aggregate/diseaseWeeks.metadata.json"));
+var _diseaseWeeksVisualization = _interopRequireDefault(require("./data/aggregate/diseaseWeeks.visualization.json"));
+var _emptyColumnsData = _interopRequireDefault(require("./data/aggregate/emptyColumns.data.json"));
+var _emptyColumnsMetadata = _interopRequireDefault(require("./data/aggregate/emptyColumns.metadata.json"));
+var _emptyColumnsVisualization = _interopRequireDefault(require("./data/aggregate/emptyColumns.visualization.json"));
+var _emptyRowsData = _interopRequireDefault(require("./data/aggregate/emptyRows.data.json"));
+var _emptyRowsVisualization = _interopRequireDefault(require("./data/aggregate/emptyRows.visualization.json"));
+var _hierarchyData = _interopRequireDefault(require("./data/aggregate/hierarchy.data.json"));
+var _hierarchyMetadata = _interopRequireDefault(require("./data/aggregate/hierarchy.metadata.json"));
+var _hierarchyVisualization = _interopRequireDefault(require("./data/aggregate/hierarchy.visualization.json"));
+var _lastFiveYearsData = _interopRequireDefault(require("./data/aggregate/lastFiveYears.data.json"));
+var _lastFiveYearsMetadata = _interopRequireDefault(require("./data/aggregate/lastFiveYears.metadata.json"));
+var _lastFiveYearsVisualization = _interopRequireDefault(require("./data/aggregate/lastFiveYears.visualization.json"));
+var _narrativeData = _interopRequireDefault(require("./data/aggregate/narrative.data.json"));
+var _narrativeMetadata = _interopRequireDefault(require("./data/aggregate/narrative.metadata.json"));
+var _narrativeVisualization = _interopRequireDefault(require("./data/aggregate/narrative.visualization.json"));
+var _simpleData = _interopRequireDefault(require("./data/aggregate/simple.data.json"));
+var _simpleMetadata = _interopRequireDefault(require("./data/aggregate/simple.metadata.json"));
+var _simpleVisualization = _interopRequireDefault(require("./data/aggregate/simple.visualization.json"));
+var _targetWithLegendData = _interopRequireDefault(require("./data/aggregate/target-with-legend.data.json"));
+var _targetWithLegendMetadata = _interopRequireDefault(require("./data/aggregate/target-with-legend.metadata.json"));
+var _targetWithLegendVisualization = _interopRequireDefault(require("./data/aggregate/target-with-legend.visualization.json"));
+var _underAbove100LegendSet = _interopRequireDefault(require("./data/aggregate/under-above-100.legendSet.json"));
+var _weeklyColumnsData = _interopRequireDefault(require("./data/aggregate/weeklyColumns.data.json"));
+var _weeklyColumnsMetadata = _interopRequireDefault(require("./data/aggregate/weeklyColumns.metadata.json"));
+var _weeklyColumnsVisualization = _interopRequireDefault(require("./data/aggregate/weeklyColumns.visualization.json"));
 function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const visualizationReset = {
@@ -101,7 +101,7 @@ const PivotTableOptionsWrapper = story => {
   }));
 };
 var _default = exports.default = {
-  title: 'PivotTable',
+  title: 'PivotTable (aggregate)',
   decorators: [PivotTableOptionsWrapper]
 };
 const Simple = (_, {

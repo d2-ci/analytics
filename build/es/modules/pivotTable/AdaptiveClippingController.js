@@ -74,7 +74,8 @@ export class AdaptiveClippingController {
           if (isColumn) {
             var _axis$sizes$index;
             const headerSize = this.measureText(label, {
-              maxWidth: isLeafHeader ? Math.max(CLIPPED_CELL_MIN_SIZE, ((_axis$sizes$index = axis.sizes[index]) === null || _axis$sizes$index === void 0 ? void 0 : _axis$sizes$index.size) || 0) : 0
+              maxWidth: isLeafHeader ? Math.max(CLIPPED_CELL_MIN_SIZE, ((_axis$sizes$index = axis.sizes[index]) === null || _axis$sizes$index === void 0 ? void 0 : _axis$sizes$index.size) || 0) : 0,
+              ...header.style
             });
             this.addSize({
               row: -headerStack.length + level,
