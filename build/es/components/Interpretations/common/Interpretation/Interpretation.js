@@ -60,7 +60,7 @@ export const Interpretation = ({
   }), /*#__PURE__*/React.createElement(MessageIconButton, {
     tooltipContent: tooltip,
     iconComponent: IconReply16,
-    onClick: () => onReplyIconClick && onReplyIconClick(id),
+    onClick: () => onReplyIconClick === null || onReplyIconClick === void 0 ? void 0 : onReplyIconClick(id),
     count: interpretation.comments.length,
     dataTest: "interpretation-reply-button",
     viewOnly: isInThread && !interpretationAccess.comment

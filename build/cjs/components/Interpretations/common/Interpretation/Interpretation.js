@@ -68,7 +68,7 @@ const Interpretation = ({
   }), /*#__PURE__*/_react.default.createElement(_index.MessageIconButton, {
     tooltipContent: tooltip,
     iconComponent: _ui.IconReply16,
-    onClick: () => onReplyIconClick && onReplyIconClick(id),
+    onClick: () => onReplyIconClick === null || onReplyIconClick === void 0 ? void 0 : onReplyIconClick(id),
     count: interpretation.comments.length,
     dataTest: "interpretation-reply-button",
     viewOnly: isInThread && !interpretationAccess.comment

@@ -32,20 +32,20 @@ const InterpretationsUnit = ({
     error
   } = (0, _hooks.useInterpretationsList)(type, id);
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: _style.default.dynamic([["2839123256", [_ui.spacers.dp16, _ui.colors.grey400, _ui.colors.white, _ui.spacers.dp32, _ui.colors.grey900]]]) + " " + ((0, _classnames.default)('container', {
+    className: _style.default.dynamic([["2008120072", [_ui.spacers.dp16, _ui.colors.grey400, _ui.colors.white, _ui.spacers.dp32, _ui.colors.grey900]]]) + " " + ((0, _classnames.default)('container', {
       expanded: isExpanded
     }) || "")
-  }, /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("button", {
     onClick: () => setIsExpanded(!isExpanded),
-    className: _style.default.dynamic([["2839123256", [_ui.spacers.dp16, _ui.colors.grey400, _ui.colors.white, _ui.spacers.dp32, _ui.colors.grey900]]]) + " " + "header"
+    className: _style.default.dynamic([["2008120072", [_ui.spacers.dp16, _ui.colors.grey400, _ui.colors.white, _ui.spacers.dp32, _ui.colors.grey900]]]) + " " + "header"
   }, /*#__PURE__*/_react.default.createElement("span", {
-    className: _style.default.dynamic([["2839123256", [_ui.spacers.dp16, _ui.colors.grey400, _ui.colors.white, _ui.spacers.dp32, _ui.colors.grey900]]]) + " " + "title"
+    className: _style.default.dynamic([["2008120072", [_ui.spacers.dp16, _ui.colors.grey400, _ui.colors.white, _ui.spacers.dp32, _ui.colors.grey900]]]) + " " + "title"
   }, _d2I18n.default.t('Interpretations')), isExpanded ? /*#__PURE__*/_react.default.createElement(_ui.IconChevronUp24, {
     color: _ui.colors.grey700
   }) : /*#__PURE__*/_react.default.createElement(_ui.IconChevronDown24, {
     color: _ui.colors.grey700
   })), isExpanded && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, loading && /*#__PURE__*/_react.default.createElement("div", {
-    className: _style.default.dynamic([["2839123256", [_ui.spacers.dp16, _ui.colors.grey400, _ui.colors.white, _ui.spacers.dp32, _ui.colors.grey900]]]) + " " + "loader"
+    className: _style.default.dynamic([["2008120072", [_ui.spacers.dp16, _ui.colors.grey400, _ui.colors.white, _ui.spacers.dp32, _ui.colors.grey900]]]) + " " + "loader"
   }, /*#__PURE__*/_react.default.createElement(_ui.CircularLoader, {
     small: true
   })), error && /*#__PURE__*/_react.default.createElement(_ui.NoticeBox, {
@@ -63,9 +63,9 @@ const InterpretationsUnit = ({
     disabled: disabled,
     dashboardRedirectUrl: dashboardRedirectUrl
   }))), /*#__PURE__*/_react.default.createElement(_style.default, {
-    id: "2839123256",
+    id: "2008120072",
     dynamic: [_ui.spacers.dp16, _ui.colors.grey400, _ui.colors.white, _ui.spacers.dp32, _ui.colors.grey900]
-  }, [`.container.__jsx-style-dynamic-selector{position:relative;padding:${_ui.spacers.dp16};border-bottom:1px solid ${_ui.colors.grey400};background-color:${_ui.colors.white};}`, `.expanded.__jsx-style-dynamic-selector{padding-bottom:${_ui.spacers.dp32};}`, ".loader.__jsx-style-dynamic-selector{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;}", ".header.__jsx-style-dynamic-selector{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;cursor:pointer;}", `.title.__jsx-style-dynamic-selector{font-size:16px;font-weight:500;line-height:21px;color:${_ui.colors.grey900};}`]));
+  }, [`.container.__jsx-style-dynamic-selector{position:relative;padding:${_ui.spacers.dp16};border-bottom:1px solid ${_ui.colors.grey400};background-color:${_ui.colors.white};}`, `.expanded.__jsx-style-dynamic-selector{padding-bottom:${_ui.spacers.dp32};}`, ".loader.__jsx-style-dynamic-selector{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;}", ".header.__jsx-style-dynamic-selector{all:unset;inline-size:100%;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;cursor:pointer;}", `.title.__jsx-style-dynamic-selector{font-size:16px;font-weight:500;line-height:21px;color:${_ui.colors.grey900};}`]));
 };
 exports.InterpretationsUnit = InterpretationsUnit;
 InterpretationsUnit.propTypes = {
