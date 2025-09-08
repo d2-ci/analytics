@@ -1,3 +1,4 @@
+import { groupInterpretationIdsByDate } from './groupInterpretationIdsByDate.js';
 export class InterpretationsManager {
   constructor(dataEngine, currentUser) {
     if (!dataEngine || !currentUser) {
@@ -12,12 +13,6 @@ export class InterpretationsManager {
     this.activeInterpretationId = null;
     this.interpretationsListCallback = null;
     this.interpretationObservers = new Map();
-  }
-  getInterpretationsArray() {
-    // New interpretations should show at the top of the list
-    // But when we add things to a Map they are inserted at the end
-    // We therefore sort them by creation date
-    return Array.from(this.interpretations.values()).sort((a, b) => new Date(b.created) - new Date(a.created));
   }
   getInterpretation(id) {
     const interpretation = this.interpretations.get(id);
@@ -58,8 +53,7 @@ export class InterpretationsManager {
   }
   notifyInterpretationsListObserver() {
     if (this.interpretationsListCallback) {
-      const interpretationsArray = this.getInterpretationsArray();
-      this.interpretationsListCallback(interpretationsArray);
+      this.interpretationsListCallback(groupInterpretationIdsByDate(Array.from(this.interpretations.values())));
     }
   }
   notifyInterpretationObservers(id) {
@@ -124,7 +118,7 @@ export class InterpretationsManager {
     this.currentVisualizationId = id;
     const interpretations = await this.fetchInterpretationsList();
     this.resetInterpretations(interpretations);
-    return interpretations;
+    return groupInterpretationIdsByDate(interpretations);
   }
   async createInterpretation({
     type,

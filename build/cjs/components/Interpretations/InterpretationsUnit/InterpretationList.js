@@ -9,23 +9,11 @@ var _appRuntime = require("@dhis2/app-runtime");
 var _ui = require("@dhis2/ui");
 var _moment = _interopRequireDefault(require("moment"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 var _index = require("../common/index.js");
-function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const sortByCreatedDateDesc = (a, b) => {
-  const dateA = a.created;
-  const dateB = b.created;
-  if (dateA < dateB) {
-    return 1;
-  }
-  if (dateA > dateB) {
-    return -1;
-  }
-  return 0;
-};
 const InterpretationList = ({
-  interpretations,
+  interpretationIdsByDate,
   onInterpretationClick,
   onReplyIconClick,
   disabled,
@@ -34,19 +22,10 @@ const InterpretationList = ({
   const {
     fromServerDate
   } = (0, _appRuntime.useTimeZoneConversion)();
-  const interpretationsByDate = (0, _react.useMemo)(() => interpretations.reduce((groupedInterpretations, interpretation) => {
-    const date = interpretation.created.split('T')[0];
-    if (date in groupedInterpretations) {
-      groupedInterpretations[date].push(interpretation);
-    } else {
-      groupedInterpretations[date] = [interpretation];
-    }
-    return groupedInterpretations;
-  }, {}), [interpretations]);
   return /*#__PURE__*/_react.default.createElement("ol", {
     "data-test": "interpretations-list",
     className: _style.default.dynamic([["4058400613", [_ui.spacers.dp8, _ui.spacers.dp8, _ui.spacers.dp16, _ui.colors.grey800, _ui.spacers.dp12, _ui.spacers.dp12, _ui.spacers.dp32, _ui.spacers.dp4]]]) + " " + "interpretation-groups"
-  }, Object.keys(interpretationsByDate).sort().reverse().map(date => /*#__PURE__*/_react.default.createElement("li", {
+  }, Object.keys(interpretationIdsByDate).map(date => /*#__PURE__*/_react.default.createElement("li", {
     key: date,
     className: _style.default.dynamic([["4058400613", [_ui.spacers.dp8, _ui.spacers.dp8, _ui.spacers.dp16, _ui.colors.grey800, _ui.spacers.dp12, _ui.spacers.dp12, _ui.spacers.dp32, _ui.spacers.dp4]]])
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -58,9 +37,9 @@ const InterpretationList = ({
     className: _style.default.dynamic([["4058400613", [_ui.spacers.dp8, _ui.spacers.dp8, _ui.spacers.dp16, _ui.colors.grey800, _ui.spacers.dp12, _ui.spacers.dp12, _ui.spacers.dp32, _ui.spacers.dp4]]]) + " " + "date-header"
   }, (0, _moment.default)(fromServerDate(date)).format('ll'))), /*#__PURE__*/_react.default.createElement("ol", {
     className: _style.default.dynamic([["4058400613", [_ui.spacers.dp8, _ui.spacers.dp8, _ui.spacers.dp16, _ui.colors.grey800, _ui.spacers.dp12, _ui.spacers.dp12, _ui.spacers.dp32, _ui.spacers.dp4]]]) + " " + "interpretation-list"
-  }, interpretationsByDate[date].sort(sortByCreatedDateDesc).map(interpretation => /*#__PURE__*/_react.default.createElement(_index.Interpretation, {
-    key: interpretation.id,
-    id: interpretation.id,
+  }, interpretationIdsByDate[date].map(interpretationId => /*#__PURE__*/_react.default.createElement(_index.Interpretation, {
+    key: interpretationId,
+    id: interpretationId,
     onReplyIconClick: onReplyIconClick,
     dashboardRedirectUrl: dashboardRedirectUrl,
     disabled: disabled,
@@ -72,7 +51,7 @@ const InterpretationList = ({
 };
 exports.InterpretationList = InterpretationList;
 InterpretationList.propTypes = {
-  interpretations: _propTypes.default.array.isRequired,
+  interpretationIdsByDate: _propTypes.default.objectOf(_propTypes.default.arrayOf(_propTypes.default.string)).isRequired,
   onInterpretationClick: _propTypes.default.func.isRequired,
   onReplyIconClick: _propTypes.default.func.isRequired,
   dashboardRedirectUrl: _propTypes.default.string,

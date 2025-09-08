@@ -82,10 +82,10 @@ const useInterpretationsList = (type, id) => {
 
   // Ensure manager updates get propagated to the state
   (0, _react.useEffect)(() => {
-    const unsubscribe = interpretationsManager.subscribeToInterpretationsListUpdates(interpretations => {
+    const unsubscribe = interpretationsManager.subscribeToInterpretationsListUpdates(interpretationIdsByDate => {
       dispatch({
         type: SET_DATA,
-        payload: interpretations
+        payload: interpretationIdsByDate
       });
     });
     return unsubscribe;

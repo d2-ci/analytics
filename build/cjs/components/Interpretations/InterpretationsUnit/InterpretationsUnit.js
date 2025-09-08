@@ -27,7 +27,7 @@ const InterpretationsUnit = ({
   const [isExpanded, setIsExpanded] = (0, _react.useState)(true);
   const showNoTimeDimensionHelpText = type === 'eventVisualization' && !visualizationHasTimeDimension;
   const {
-    data: interpretations,
+    data: interpretationIdsByDate,
     loading,
     error
   } = (0, _hooks.useInterpretationsList)(type, id);
@@ -51,13 +51,13 @@ const InterpretationsUnit = ({
   })), error && /*#__PURE__*/_react.default.createElement(_ui.NoticeBox, {
     error: true,
     title: _d2I18n.default.t('Error loading interpretations')
-  }, error.message || _d2I18n.default.t('Could not load interpretations')), interpretations && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InterpretationForm.InterpretationForm, {
+  }, error.message || _d2I18n.default.t('Could not load interpretations')), interpretationIdsByDate && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InterpretationForm.InterpretationForm, {
     type: type,
     id: id,
     disabled: disabled,
     showNoTimeDimensionHelpText: showNoTimeDimensionHelpText
   }), /*#__PURE__*/_react.default.createElement(_InterpretationList.InterpretationList, {
-    interpretations: interpretations,
+    interpretationIdsByDate: interpretationIdsByDate,
     onInterpretationClick: onInterpretationClick,
     onReplyIconClick: onReplyIconClick,
     disabled: disabled,
