@@ -21,6 +21,7 @@ var _exportNames = {
   VisTypeIcon: true,
   LegendKey: true,
   AboutAOUnit: true,
+  DashboardItemInterpretations: true,
   InterpretationsUnit: true,
   InterpretationsProvider: true,
   InterpretationModal: true,
@@ -320,13 +321,13 @@ Object.defineProperty(exports, "Analytics", {
 Object.defineProperty(exports, "BIMONTHLY", {
   enumerable: true,
   get: function () {
-    return _index11.BIMONTHLY;
+    return _index12.BIMONTHLY;
   }
 });
 Object.defineProperty(exports, "BIWEEKLY", {
   enumerable: true,
   get: function () {
-    return _index11.BIWEEKLY;
+    return _index12.BIWEEKLY;
   }
 });
 Object.defineProperty(exports, "COLOR_SET_BASIC", {
@@ -386,7 +387,7 @@ Object.defineProperty(exports, "CachedDataQueryProvider", {
 Object.defineProperty(exports, "DAILY", {
   enumerable: true,
   get: function () {
-    return _index11.DAILY;
+    return _index12.DAILY;
   }
 });
 Object.defineProperty(exports, "DEFAULT_AXIS_IDS", {
@@ -551,6 +552,12 @@ Object.defineProperty(exports, "DIMENSION_TYPE_PROGRAM_INDICATOR", {
     return _dataTypes.DIMENSION_TYPE_PROGRAM_INDICATOR;
   }
 });
+Object.defineProperty(exports, "DashboardItemInterpretations", {
+  enumerable: true,
+  get: function () {
+    return _index2.DashboardItemInterpretations;
+  }
+});
 Object.defineProperty(exports, "DashboardPluginWrapper", {
   enumerable: true,
   get: function () {
@@ -596,7 +603,7 @@ Object.defineProperty(exports, "DynamicDimension", {
 Object.defineProperty(exports, "FINANCIAL", {
   enumerable: true,
   get: function () {
-    return _index11.FINANCIAL;
+    return _index12.FINANCIAL;
   }
 });
 Object.defineProperty(exports, "FONT_STYLE_AXIS_LABELS", {
@@ -686,25 +693,25 @@ Object.defineProperty(exports, "FONT_STYLE_VISUALIZATION_TITLE", {
 Object.defineProperty(exports, "FYAPR", {
   enumerable: true,
   get: function () {
-    return _index11.FYAPR;
+    return _index12.FYAPR;
   }
 });
 Object.defineProperty(exports, "FYJUL", {
   enumerable: true,
   get: function () {
-    return _index11.FYJUL;
+    return _index12.FYJUL;
   }
 });
 Object.defineProperty(exports, "FYNOV", {
   enumerable: true,
   get: function () {
-    return _index11.FYNOV;
+    return _index12.FYNOV;
   }
 });
 Object.defineProperty(exports, "FYOCT", {
   enumerable: true,
   get: function () {
-    return _index11.FYOCT;
+    return _index12.FYOCT;
   }
 });
 Object.defineProperty(exports, "FileMenu", {
@@ -764,25 +771,25 @@ Object.defineProperty(exports, "ITEM_PROP_ID", {
 Object.defineProperty(exports, "InterpretationModal", {
   enumerable: true,
   get: function () {
-    return _index4.InterpretationModal;
+    return _index5.InterpretationModal;
   }
 });
 Object.defineProperty(exports, "InterpretationThread", {
   enumerable: true,
   get: function () {
-    return _index4.InterpretationThread;
+    return _index5.InterpretationThread;
   }
 });
 Object.defineProperty(exports, "InterpretationsProvider", {
   enumerable: true,
   get: function () {
-    return _index3.InterpretationsProvider;
+    return _index4.InterpretationsProvider;
   }
 });
 Object.defineProperty(exports, "InterpretationsUnit", {
   enumerable: true,
   get: function () {
-    return _index2.InterpretationsUnit;
+    return _index3.InterpretationsUnit;
   }
 });
 Object.defineProperty(exports, "LAYOUT", {
@@ -872,7 +879,7 @@ Object.defineProperty(exports, "LegendKey", {
 Object.defineProperty(exports, "MONTHLY", {
   enumerable: true,
   get: function () {
-    return _index11.MONTHLY;
+    return _index12.MONTHLY;
   }
 });
 Object.defineProperty(exports, "OfflineTooltip", {
@@ -908,19 +915,19 @@ Object.defineProperty(exports, "PivotTable", {
 Object.defineProperty(exports, "QUARTERLY", {
   enumerable: true,
   get: function () {
-    return _index11.QUARTERLY;
+    return _index12.QUARTERLY;
   }
 });
 Object.defineProperty(exports, "SIXMONTHLY", {
   enumerable: true,
   get: function () {
-    return _index11.SIXMONTHLY;
+    return _index12.SIXMONTHLY;
   }
 });
 Object.defineProperty(exports, "SIXMONTHLYAPR", {
   enumerable: true,
   get: function () {
-    return _index11.SIXMONTHLYAPR;
+    return _index12.SIXMONTHLYAPR;
   }
 });
 Object.defineProperty(exports, "TEXT_ALIGN_CENTER", {
@@ -944,25 +951,25 @@ Object.defineProperty(exports, "TEXT_ALIGN_RIGHT", {
 Object.defineProperty(exports, "TranslationDialog", {
   enumerable: true,
   get: function () {
-    return _index6.TranslationDialog;
+    return _index7.TranslationDialog;
   }
 });
 Object.defineProperty(exports, "USER_ORG_UNIT", {
   enumerable: true,
   get: function () {
-    return _index8.USER_ORG_UNIT;
+    return _index9.USER_ORG_UNIT;
   }
 });
 Object.defineProperty(exports, "USER_ORG_UNIT_CHILDREN", {
   enumerable: true,
   get: function () {
-    return _index8.USER_ORG_UNIT_CHILDREN;
+    return _index9.USER_ORG_UNIT_CHILDREN;
   }
 });
 Object.defineProperty(exports, "USER_ORG_UNIT_GRANDCHILDREN", {
   enumerable: true,
   get: function () {
-    return _index8.USER_ORG_UNIT_GRANDCHILDREN;
+    return _index9.USER_ORG_UNIT_GRANDCHILDREN;
   }
 });
 Object.defineProperty(exports, "VALUE_TYPE_AGE", {
@@ -1274,43 +1281,43 @@ Object.defineProperty(exports, "VisualizationOptions", {
 Object.defineProperty(exports, "WEEKLY", {
   enumerable: true,
   get: function () {
-    return _index11.WEEKLY;
+    return _index12.WEEKLY;
   }
 });
 Object.defineProperty(exports, "WEEKLYSAT", {
   enumerable: true,
   get: function () {
-    return _index11.WEEKLYSAT;
+    return _index12.WEEKLYSAT;
   }
 });
 Object.defineProperty(exports, "WEEKLYSUN", {
   enumerable: true,
   get: function () {
-    return _index11.WEEKLYSUN;
+    return _index12.WEEKLYSUN;
   }
 });
 Object.defineProperty(exports, "WEEKLYTHU", {
   enumerable: true,
   get: function () {
-    return _index11.WEEKLYTHU;
+    return _index12.WEEKLYTHU;
   }
 });
 Object.defineProperty(exports, "WEEKLYWED", {
   enumerable: true,
   get: function () {
-    return _index11.WEEKLYWED;
+    return _index12.WEEKLYWED;
   }
 });
 Object.defineProperty(exports, "WEEKS_THIS_YEAR", {
   enumerable: true,
   get: function () {
-    return _index11.WEEKS_THIS_YEAR;
+    return _index12.WEEKS_THIS_YEAR;
   }
 });
 Object.defineProperty(exports, "YEARLY", {
   enumerable: true,
   get: function () {
-    return _index11.YEARLY;
+    return _index12.YEARLY;
   }
 });
 Object.defineProperty(exports, "apiFetchDimensions", {
@@ -1400,7 +1407,7 @@ Object.defineProperty(exports, "axisIsEmpty", {
 Object.defineProperty(exports, "canDimensionBeAddedToAxis", {
   enumerable: true,
   get: function () {
-    return _index1.canDimensionBeAddedToAxis;
+    return _index10.canDimensionBeAddedToAxis;
   }
 });
 Object.defineProperty(exports, "colorSets", {
@@ -1412,13 +1419,13 @@ Object.defineProperty(exports, "colorSets", {
 Object.defineProperty(exports, "convertOuLevelsToUids", {
   enumerable: true,
   get: function () {
-    return _index9.convertOuLevelsToUids;
+    return _index0.convertOuLevelsToUids;
   }
 });
 Object.defineProperty(exports, "createVisualization", {
   enumerable: true,
   get: function () {
-    return _index10.createVisualization;
+    return _index11.createVisualization;
   }
 });
 Object.defineProperty(exports, "dataTypeMap", {
@@ -1508,31 +1515,31 @@ Object.defineProperty(exports, "getAdaptedUiLayoutByType", {
 Object.defineProperty(exports, "getAllLockedDimensionIds", {
   enumerable: true,
   get: function () {
-    return _index1.getAllLockedDimensionIds;
+    return _index10.getAllLockedDimensionIds;
   }
 });
 Object.defineProperty(exports, "getAvailableAxes", {
   enumerable: true,
   get: function () {
-    return _index1.getAvailableAxes;
+    return _index10.getAvailableAxes;
   }
 });
 Object.defineProperty(exports, "getAxisMaxNumberOfDimensions", {
   enumerable: true,
   get: function () {
-    return _index1.getAxisMaxNumberOfDimensions;
+    return _index10.getAxisMaxNumberOfDimensions;
   }
 });
 Object.defineProperty(exports, "getAxisMaxNumberOfItems", {
   enumerable: true,
   get: function () {
-    return _index1.getAxisMaxNumberOfItems;
+    return _index10.getAxisMaxNumberOfItems;
   }
 });
 Object.defineProperty(exports, "getAxisMinNumberOfDimensions", {
   enumerable: true,
   get: function () {
-    return _index1.getAxisMinNumberOfDimensions;
+    return _index10.getAxisMinNumberOfDimensions;
   }
 });
 Object.defineProperty(exports, "getAxisName", {
@@ -1550,7 +1557,7 @@ Object.defineProperty(exports, "getAxisNameByLayoutType", {
 Object.defineProperty(exports, "getAxisPerLockedDimension", {
   enumerable: true,
   get: function () {
-    return _index1.getAxisPerLockedDimension;
+    return _index10.getAxisPerLockedDimension;
   }
 });
 Object.defineProperty(exports, "getColorByValueFromLegendSet", {
@@ -1568,13 +1575,13 @@ Object.defineProperty(exports, "getDimensionById", {
 Object.defineProperty(exports, "getDimensionMaxNumberOfItems", {
   enumerable: true,
   get: function () {
-    return _index1.getDimensionMaxNumberOfItems;
+    return _index10.getDimensionMaxNumberOfItems;
   }
 });
 Object.defineProperty(exports, "getDisallowedDimensions", {
   enumerable: true,
   get: function () {
-    return _index1.getDisallowedDimensions;
+    return _index10.getDisallowedDimensions;
   }
 });
 Object.defineProperty(exports, "getDisplayNameByVisType", {
@@ -1652,13 +1659,13 @@ Object.defineProperty(exports, "getTextAlignOptions", {
 Object.defineProperty(exports, "getTransferableDimension", {
   enumerable: true,
   get: function () {
-    return _index1.getTransferableDimension;
+    return _index10.getTransferableDimension;
   }
 });
 Object.defineProperty(exports, "hasAxisTooManyItems", {
   enumerable: true,
   get: function () {
-    return _index1.hasAxisTooManyItems;
+    return _index10.hasAxisTooManyItems;
   }
 });
 Object.defineProperty(exports, "hasCustomAxes", {
@@ -1670,19 +1677,19 @@ Object.defineProperty(exports, "hasCustomAxes", {
 Object.defineProperty(exports, "hasDimensionTooManyItems", {
   enumerable: true,
   get: function () {
-    return _index1.hasDimensionTooManyItems;
+    return _index10.hasDimensionTooManyItems;
   }
 });
 Object.defineProperty(exports, "hasRelativeItems", {
   enumerable: true,
   get: function () {
-    return _index0.hasRelativeItems;
+    return _index1.hasRelativeItems;
   }
 });
 Object.defineProperty(exports, "isAxisFull", {
   enumerable: true,
   get: function () {
-    return _index1.isAxisFull;
+    return _index10.isAxisFull;
   }
 });
 Object.defineProperty(exports, "isColumnBasedType", {
@@ -1694,7 +1701,7 @@ Object.defineProperty(exports, "isColumnBasedType", {
 Object.defineProperty(exports, "isDimensionLocked", {
   enumerable: true,
   get: function () {
-    return _index1.isDimensionLocked;
+    return _index10.isDimensionLocked;
   }
 });
 Object.defineProperty(exports, "isDualAxisType", {
@@ -1850,7 +1857,7 @@ Object.defineProperty(exports, "layoutReplaceDimension", {
 Object.defineProperty(exports, "ouIdHelper", {
   enumerable: true,
   get: function () {
-    return _index8.ouIdHelper;
+    return _index9.ouIdHelper;
   }
 });
 Object.defineProperty(exports, "preparePayloadForSave", {
@@ -1911,33 +1918,34 @@ var _utils = require("./components/FileMenu/utils.js");
 var _VisTypeIcon = _interopRequireDefault(require("./components/VisTypeIcon.js"));
 var _LegendKey = _interopRequireDefault(require("./components/LegendKey/LegendKey.js"));
 var _AboutAOUnit = _interopRequireDefault(require("./components/AboutAOUnit/AboutAOUnit.js"));
-var _index2 = require("./components/Interpretations/InterpretationsUnit/index.js");
-var _index3 = require("./components/Interpretations/InterpretationsProvider/index.js");
-var _index4 = require("./components/Interpretations/InterpretationModal/index.js");
-var _index5 = require("./components/Toolbar/index.js");
-Object.keys(_index5).forEach(function (key) {
+var _index2 = require("./components/Interpretations/DashboardItemInterpretations/index.js");
+var _index3 = require("./components/Interpretations/InterpretationsUnit/index.js");
+var _index4 = require("./components/Interpretations/InterpretationsProvider/index.js");
+var _index5 = require("./components/Interpretations/InterpretationModal/index.js");
+var _index6 = require("./components/Toolbar/index.js");
+Object.keys(_index6).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _index5[key]) return;
+  if (key in exports && exports[key] === _index6[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
-      return _index5[key];
+      return _index6[key];
     }
   });
 });
-var _index6 = require("./components/TranslationDialog/index.js");
+var _index7 = require("./components/TranslationDialog/index.js");
 var _OfflineTooltip = require("./components/OfflineTooltip.js");
 var _CachedDataQueryProvider = require("./components/CachedDataQueryProvider.js");
-var _index7 = require("./components/RichText/index.js");
-Object.keys(_index7).forEach(function (key) {
+var _index8 = require("./components/RichText/index.js");
+Object.keys(_index8).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _index7[key]) return;
+  if (key in exports && exports[key] === _index8[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
-      return _index7[key];
+      return _index8[key];
     }
   });
 });
@@ -1947,10 +1955,10 @@ var _dimensions = require("./api/dimensions.js");
 var _organisationUnits = require("./api/organisationUnits.js");
 var _axis = require("./modules/axis.js");
 var _predefinedDimensions = require("./modules/predefinedDimensions.js");
-var _index8 = require("./modules/ouIdHelper/index.js");
-var _index9 = require("./modules/ouLevelUtils/index.js");
+var _index9 = require("./modules/ouIdHelper/index.js");
+var _index0 = require("./modules/ouLevelUtils/index.js");
 var _getAdaptedUiLayoutByType = require("./modules/getAdaptedUiLayoutByType.js");
-var _index0 = require("./modules/relativeItems/index.js");
+var _index1 = require("./modules/relativeItems/index.js");
 var _layout = require("./modules/layout/layout.js");
 var _layoutFilterDimensions = require("./modules/layout/layoutFilterDimensions.js");
 var _layoutGetAllAxes = require("./modules/layout/layoutGetAllAxes.js");
@@ -1990,15 +1998,15 @@ var _itemIsValid = require("./modules/layout/itemIsValid.js");
 var _visTypeToLayoutType = require("./modules/visTypeToLayoutType.js");
 var _visTypes = require("./modules/visTypes.js");
 var _layoutTypes = require("./modules/layoutTypes.js");
-var _index1 = require("./modules/layoutUiRules/index.js");
-var _index10 = require("./visualizations/index.js");
+var _index10 = require("./modules/layoutUiRules/index.js");
+var _index11 = require("./visualizations/index.js");
 var _fontStyle = require("./modules/fontStyle.js");
 var _legends = require("./modules/legends.js");
 var _hideEmptyRowItems = require("./modules/hideEmptyRowItems.js");
 var _renderValue = require("./modules/renderValue.js");
 var _response = require("./modules/response/event/response.js");
 var _colorSets = require("./visualizations/util/colors/colorSets.js");
-var _index11 = require("./components/PeriodDimension/utils/index.js");
+var _index12 = require("./components/PeriodDimension/utils/index.js");
 var _relativePeriods = require("./components/PeriodDimension/utils/relativePeriods.js");
 var _fixedPeriods = require("./components/PeriodDimension/utils/fixedPeriods.js");
 var _VisualizationOptions = _interopRequireDefault(require("./components/Options/VisualizationOptions.js"));
