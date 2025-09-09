@@ -25,7 +25,6 @@ var _exportNames = {
   InterpretationsUnit: true,
   InterpretationsProvider: true,
   InterpretationModal: true,
-  InterpretationThread: true,
   TranslationDialog: true,
   OfflineTooltip: true,
   CachedDataQueryProvider: true,
@@ -772,12 +771,6 @@ Object.defineProperty(exports, "InterpretationModal", {
   enumerable: true,
   get: function () {
     return _index5.InterpretationModal;
-  }
-});
-Object.defineProperty(exports, "InterpretationThread", {
-  enumerable: true,
-  get: function () {
-    return _index5.InterpretationThread;
   }
 });
 Object.defineProperty(exports, "InterpretationsProvider", {
