@@ -410,6 +410,7 @@
     "Data": "Datos",
     "Organisation unit": "Unidad organizativa",
     "Assigned Categories": "Categorías asignadas",
+    "No value": "Sin valor",
     "Text": "Texto",
     "Long text": "Texto largo",
     "Multi text": "",
@@ -464,6 +465,5 @@
     "Axis {{axisId}}": "Eje {{axisId}}",
     "{{count}} items": "{{count}} elemento",
     "{{count}} items_plural": "{{count}} artículos",
-    "Reset zoom": "Restablecer zoom",
-    "__MANIFEST_APP_TITLE_Application title": ""
+    "Reset zoom": "Restablecer zoom"
 }

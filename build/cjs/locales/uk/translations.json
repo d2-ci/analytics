@@ -420,6 +420,7 @@
     "Data": "Дані",
     "Organisation unit": "Організаційний підрозділ",
     "Assigned Categories": "",
+    "No value": "Відсутнє значення",
     "Text": "Текст",
     "Long text": "Довгий текст",
     "Multi text": "",
@@ -476,6 +477,5 @@
     "{{count}} items_1": "",
     "{{count}} items_2": "",
     "{{count}} items_3": "",
-    "Reset zoom": "",
-    "__MANIFEST_APP_TITLE_Application title": ""
+    "Reset zoom": ""
 }

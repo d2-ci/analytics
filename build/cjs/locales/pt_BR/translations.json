@@ -368,7 +368,7 @@
     "Event data item": "",
     "No programs found": "",
     "Loading programs": "",
-    "Program indicators": "",
+    "Program indicators": "Indicador do programa",
     "Program indicator": "",
     "Calculations": "",
     "Option": "Opção",
@@ -410,6 +410,7 @@
     "Data": "Dados",
     "Organisation unit": "Unidade organizacional",
     "Assigned Categories": "",
+    "No value": "Sem Valor",
     "Text": "Texto",
     "Long text": "",
     "Multi text": "",
@@ -464,6 +465,5 @@
     "Axis {{axisId}}": "",
     "{{count}} items": "",
     "{{count}} items_plural": "",
-    "Reset zoom": "",
-    "__MANIFEST_APP_TITLE_Application title": ""
+    "Reset zoom": ""
 }

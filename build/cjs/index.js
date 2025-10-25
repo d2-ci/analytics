@@ -220,6 +220,7 @@ var _exportNames = {
   HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST: true,
   HIDE_EMPTY_ROW_ITEMS_ALL: true,
   formatValue: true,
+  transformEventAggregateResponse: true,
   COLOR_SET_DEFAULT: true,
   COLOR_SET_BASIC: true,
   COLOR_SET_EXTENDED: true,
@@ -1857,6 +1858,12 @@ Object.defineProperty(exports, "preparePayloadForSaveAs", {
     return _utils.preparePayloadForSaveAs;
   }
 });
+Object.defineProperty(exports, "transformEventAggregateResponse", {
+  enumerable: true,
+  get: function () {
+    return _response.transformResponse;
+  }
+});
 Object.defineProperty(exports, "useCachedDataQuery", {
   enumerable: true,
   get: function () {
@@ -1981,6 +1988,7 @@ var _fontStyle = require("./modules/fontStyle.js");
 var _legends = require("./modules/legends.js");
 var _hideEmptyRowItems = require("./modules/hideEmptyRowItems.js");
 var _renderValue = require("./modules/renderValue.js");
+var _response = require("./modules/response/event/response.js");
 var _colorSets = require("./visualizations/util/colors/colorSets.js");
 var _index10 = require("./components/PeriodDimension/utils/index.js");
 var _relativePeriods = require("./components/PeriodDimension/utils/relativePeriods.js");

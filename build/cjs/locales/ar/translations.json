@@ -430,6 +430,7 @@
     "Data": "بيانات",
     "Organisation unit": "الوحدة التنظيمية",
     "Assigned Categories": "الفئات المعينة",
+    "No value": "لا توجد قيمة",
     "Text": "نص",
     "Long text": "نص طويل",
     "Multi text": "",
@@ -488,6 +489,5 @@
     "{{count}} items_3": "",
     "{{count}} items_4": "",
     "{{count}} items_5": "",
-    "Reset zoom": "",
-    "__MANIFEST_APP_TITLE_Application title": ""
+    "Reset zoom": ""
 }

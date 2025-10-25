@@ -420,6 +420,7 @@
     "Data": "Данные",
     "Organisation unit": "Организационная единица",
     "Assigned Categories": "Назначенные категории",
+    "No value": "Нет значения",
     "Text": "Текст",
     "Long text": "Длинный текст",
     "Multi text": "",
@@ -476,6 +477,5 @@
     "{{count}} items_1": "",
     "{{count}} items_2": "",
     "{{count}} items_3": "",
-    "Reset zoom": "",
-    "__MANIFEST_APP_TITLE_Application title": ""
+    "Reset zoom": ""
 }

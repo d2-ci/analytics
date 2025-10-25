@@ -405,6 +405,7 @@
     "Data": "Data",
     "Organisation unit": "Unit organisasi",
     "Assigned Categories": "Kategori yang Ditugaskan",
+    "No value": "NO_VALUE",
     "Text": "",
     "Long text": "",
     "Multi text": "",
@@ -458,6 +459,5 @@
     "Base": "Dasar",
     "Axis {{axisId}}": "Sumbu {{axisId}}",
     "{{count}} items": "",
-    "Reset zoom": "Setel ulang zoom",
-    "__MANIFEST_APP_TITLE_Application title": ""
+    "Reset zoom": "Setel ulang zoom"
 }

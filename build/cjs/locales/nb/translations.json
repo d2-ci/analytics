@@ -410,6 +410,7 @@
     "Data": "Data",
     "Organisation unit": "Organisasjonsenhet",
     "Assigned Categories": "Tildelte Kategorier",
+    "No value": "Ingen verdi",
     "Text": "Tekst",
     "Long text": "Lang tekst",
     "Multi text": "",
@@ -464,6 +465,5 @@
     "Axis {{axisId}}": "Akse {{axisId}}",
     "{{count}} items": "",
     "{{count}} items_plural": "",
-    "Reset zoom": "",
-    "__MANIFEST_APP_TITLE_Application title": ""
+    "Reset zoom": ""
 }

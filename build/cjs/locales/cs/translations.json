@@ -51,7 +51,7 @@
     "Error loading value": "",
     "None": "Žádný",
     "Data set(s)": "",
-    "Zero is significant": "",
+    "Zero is significant": "Nula je významná",
     "True": "True",
     "False": "False",
     "Value type": "Typ hodnoty",
@@ -420,6 +420,7 @@
     "Data": "Data",
     "Organisation unit": "Organizační jednotka",
     "Assigned Categories": "Přiřazené kategorie",
+    "No value": "Žádná hodnota",
     "Text": "Text",
     "Long text": "Dlouhý text",
     "Multi text": "",
@@ -461,7 +462,7 @@
     "Radar": "Radar",
     "Scatter": "Rozptyl",
     "Single value": "Jedna hodnota",
-    "Outlier table": "",
+    "Outlier table": "Tabulka odlehlých hodnot",
     "All charts": "Všechny grafy",
     "Map": "Mapa",
     "{{seriesName}} (trend)": "{{seriesName}} (trend)",
@@ -476,6 +477,5 @@
     "{{count}} items_1": " {{count}} položky",
     "{{count}} items_2": " {{count}} položek",
     "{{count}} items_3": "{{count}} položek",
-    "Reset zoom": "Obnovit přiblížení",
-    "__MANIFEST_APP_TITLE_Application title": ""
+    "Reset zoom": "Obnovit přiblížení"
 }

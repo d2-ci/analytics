@@ -410,6 +410,7 @@
     "Data": "Gegevens",
     "Organisation unit": "Organisatieëenheid",
     "Assigned Categories": "Toegewezen categorieën",
+    "No value": "Geen waarde",
     "Text": "",
     "Long text": "",
     "Multi text": "",
@@ -464,6 +465,5 @@
     "Axis {{axisId}}": "As {{axisId}}",
     "{{count}} items": "{{count}} artikel",
     "{{count}} items_plural": "{{count}} artikelen",
-    "Reset zoom": "Zoom resetten",
-    "__MANIFEST_APP_TITLE_Application title": ""
+    "Reset zoom": "Zoom resetten"
 }

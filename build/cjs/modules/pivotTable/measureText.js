@@ -6,16 +6,16 @@ Object.defineProperty(exports, "__esModule", {
 exports.measureTextWithWrapping = void 0;
 var _pivotTableConstants = require("./pivotTableConstants.js");
 let canvas;
-const getContext = fontSize => {
+const getContext = (fontSize = 11, fontFamily = 'Roboto, Arial, sans-serif') => {
   if (!canvas) {
     canvas = document.createElement('canvas');
   }
   const ctx = canvas.getContext('2d');
-  ctx.font = `${fontSize}px Roboto, Arial, sans-serif`;
+  ctx.font = `${fontSize}px ${fontFamily}`;
   return ctx;
 };
-const measureText = (text, fontSize = 11) => {
-  const ctx = getContext(fontSize);
+const measureText = (text, fontSize, fontFamily) => {
+  const ctx = getContext(fontSize, fontFamily);
   const textMetrics = ctx.measureText(text);
   return textMetrics.width;
 };
@@ -23,7 +23,8 @@ const measureTextWithWrapping = (text, {
   fontSize = 11,
   maxWidth = _pivotTableConstants.CLIPPED_CELL_MAX_SIZE,
   justifyBuffer = _pivotTableConstants.WRAPPED_TEXT_JUSTIFY_BUFFER,
-  lineHeight = _pivotTableConstants.WRAPPED_TEXT_LINE_HEIGHT
+  lineHeight = _pivotTableConstants.WRAPPED_TEXT_LINE_HEIGHT,
+  fontFamily
 }) => {
   if (!text) {
     return {
@@ -42,7 +43,7 @@ const measureTextWithWrapping = (text, {
     const words = paragraphs.shift().split(/\s+/);
     while (words.length) {
       const nextWord = (currentLineWidth === 0 ? '' : ' ') + words.shift();
-      const nextWordWidth = measureText(nextWord, fontSize);
+      const nextWordWidth = measureText(nextWord, fontSize, fontFamily);
       if (maxWidth && currentLineWidth + nextWordWidth > maxWidth) {
         if (currentLineWidth <= maxWidth - justifyBuffer) {
           // Wrapping this word would cause an unnaturally short line

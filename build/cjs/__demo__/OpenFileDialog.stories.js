@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.NoConnection = exports.ListOfVisualizationsWithVisTypeFilterWithGroupTypeDividerAndDisabledOptionNoDefaultVisType = exports.ListOfVisualizationsWithVisTypeFilterAndDividerNoDefaultVisType = exports.ListOfMapsNoVisTypeFilter = exports.ListOfEventVisualizationsWithVisTypeFilterDisabledTypeAndDefaultVisType = void 0;
+exports.default = exports.NoConnection = exports.ListOfVisualizationsWithVisTypeGroupFilterNoDefaultVisType = exports.ListOfVisualizationsWithVisTypeFilterWithGroupTypeDividerAndDisabledOptionNoDefaultVisType = exports.ListOfVisualizationsWithVisTypeFilterAndDividerNoDefaultVisType = exports.ListOfMapsNoVisTypeFilter = exports.ListOfEventVisualizationsWithVisTypeFilterDisabledTypeAndDefaultVisType = void 0;
 var _appRuntime = require("@dhis2/app-runtime");
 var _react = _interopRequireDefault(require("react"));
 var _OpenFileDialog = require("../components/OpenFileDialog/OpenFileDialog.js");
@@ -47,6 +47,24 @@ const ListOfVisualizationsWithVisTypeFilterAndDividerNoDefaultVisType = () => /*
 exports.ListOfVisualizationsWithVisTypeFilterAndDividerNoDefaultVisType = ListOfVisualizationsWithVisTypeFilterAndDividerNoDefaultVisType;
 ListOfVisualizationsWithVisTypeFilterAndDividerNoDefaultVisType.story = {
   name: 'List of visualizations with vis type filter and divider (no default vis type)'
+};
+const filterVisTypesWithGroups = [{
+  type: _visTypes.VIS_TYPE_GROUP_ALL
+}, {
+  type: _visTypes.VIS_TYPE_GROUP_CHARTS
+}];
+const ListOfVisualizationsWithVisTypeGroupFilterNoDefaultVisType = () => /*#__PURE__*/_react.default.createElement(_OpenFileDialog.OpenFileDialog, {
+  type: "visualization",
+  filterVisTypes: filterVisTypesWithGroups,
+  onClose: Function.prototype,
+  onFileSelect: onFileSelect,
+  onNew: Function.prototype,
+  open: true,
+  currentUser: user
+});
+exports.ListOfVisualizationsWithVisTypeGroupFilterNoDefaultVisType = ListOfVisualizationsWithVisTypeGroupFilterNoDefaultVisType;
+ListOfVisualizationsWithVisTypeGroupFilterNoDefaultVisType.story = {
+  name: 'List of visualizations with only vis type group filter (no default vis type)'
 };
 const ListOfMapsNoVisTypeFilter = () => /*#__PURE__*/_react.default.createElement(_OpenFileDialog.OpenFileDialog, {
   type: "map",

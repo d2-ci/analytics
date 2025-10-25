@@ -129,6 +129,10 @@ export { HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST, HIDE_EMPTY_ROW_ITEMS_AFTER_LAST, HID
 
 export { renderValue as formatValue } from './modules/renderValue.js';
 
+// Modules: response
+
+export { transformResponse as transformEventAggregateResponse } from './modules/response/event/response.js';
+
 // Utils: colorSets
 export { COLOR_SET_DEFAULT, COLOR_SET_BASIC, COLOR_SET_EXTENDED, COLOR_SET_BRIGHT, COLOR_SET_DARK, COLOR_SET_GRAY, COLOR_SET_COLOR_BLIND, COLOR_SET_PATTERNS, colorSets } from './visualizations/util/colors/colorSets.js';
 

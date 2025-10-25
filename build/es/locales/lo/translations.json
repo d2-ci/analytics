@@ -405,6 +405,7 @@
     "Data": "ຂໍ້ມູນ",
     "Organisation unit": "​ຫົວ​ໜ່ວຍ​ການ​ຈັດ​ຕັ້ງ",
     "Assigned Categories": "ຈັດໝວດໝູ່",
+    "No value": "ບໍ່ມີຂໍ້ມູນ",
     "Text": "ຂໍ້ຄວາມ",
     "Long text": "",
     "Multi text": "",
@@ -458,6 +459,5 @@
     "Base": "ຖານ",
     "Axis {{axisId}}": "ແກນ {{axisId}}",
     "{{count}} items": "{{count}} ລາຍການ",
-    "Reset zoom": "ຣີເຊັດຊູມ",
-    "__MANIFEST_APP_TITLE_Application title": ""
+    "Reset zoom": "ຣີເຊັດຊູມ"
 }
