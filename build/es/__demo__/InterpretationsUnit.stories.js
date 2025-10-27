@@ -35,9 +35,6 @@ export const WithNoTimeDimensionsWarning = () => {
       name: 'Tom Wakiki'
     }
   }, /*#__PURE__*/React.createElement(InterpretationsUnit, {
-    currentUser: {
-      name: 'Tom Wakiki'
-    },
     id: "abcd",
     onReplyIconClick: Function.prototype,
     type: "eventVisualization",
