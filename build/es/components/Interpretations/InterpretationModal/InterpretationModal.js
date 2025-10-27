@@ -16,10 +16,10 @@ const modalCSS = {
 function getModalContentCSS(width) {
   return {
     styles: /*#__PURE__*/React.createElement(_JSXStyle, {
-      id: "1689110567",
+      id: "2099285089",
       dynamic: [width]
-    }, [`div.__jsx-style-dynamic-selector{width:${width}px;}`]),
-    className: _JSXStyle.dynamic([["1689110567", [width]]])
+    }, [`div.__jsx-style-dynamic-selector{width:${width}px;overflow-y:visible;}`]),
+    className: _JSXStyle.dynamic([["2099285089", [width]]])
   };
 }
 const InterpretationModal = ({
