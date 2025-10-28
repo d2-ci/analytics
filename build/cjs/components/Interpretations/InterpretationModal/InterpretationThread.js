@@ -32,9 +32,9 @@ const InterpretationThread = ({
   const focusRef = (0, _react.useRef)();
   (0, _react.useEffect)(() => {
     if (initialFocus && focusRef.current) {
-      window.requestAnimationFrame(() => {
+      window.setTimeout(() => {
         focusRef.current.focus();
-      });
+      }, 25);
     }
   }, [initialFocus]);
   const interpretationAccess = (0, _index.getInterpretationAccess)(interpretation, currentUser);

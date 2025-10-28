@@ -24,9 +24,9 @@ const InterpretationThread = ({
   const focusRef = useRef();
   useEffect(() => {
     if (initialFocus && focusRef.current) {
-      window.requestAnimationFrame(() => {
+      window.setTimeout(() => {
         focusRef.current.focus();
-      });
+      }, 25);
     }
   }, [initialFocus]);
   const interpretationAccess = getInterpretationAccess(interpretation, currentUser);
