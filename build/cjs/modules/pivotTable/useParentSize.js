@@ -21,11 +21,11 @@ const useParentSize = (elementRef, renderCounter, initialSize = initialState) =>
     height: initialSize.height || 0
   });
   (0, _react.useEffect)(() => {
-    console.log('jj useParentSize useEffect');
     const el = elementRef.current && elementRef.current.parentElement;
     if (!el) {
       return;
     }
+    console.log('jj useParentSize useEffect', el);
     const onResize = () => {
       console.log('jj useParentSize useEffect onResize', {
         width: el.clientWidth,
