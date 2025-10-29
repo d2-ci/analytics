@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.useParentSize = void 0;
 var _react = require("react");
-var _resizeObserverPolyfill = _interopRequireDefault(require("resize-observer-polyfill"));
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const initialState = {
   width: 0,
   height: 0
@@ -15,11 +13,11 @@ const useParentSize = ({
   elementRef,
   renderCounter,
   initialSize = initialState,
-  width
+  availableWidth
 }) => {
-  console.log('jj useParentSize renderCounter', renderCounter, width);
+  console.log('jj useParentSize counter, width', renderCounter, availableWidth);
   const [size, setSize] = (0, _react.useState)({
-    width: width || initialSize.width || 0,
+    width: availableWidth || initialSize.width || 0,
     height: initialSize.height || 0
   });
   (0, _react.useEffect)(() => {
@@ -38,7 +36,7 @@ const useParentSize = ({
         height: el.clientHeight
       });
     };
-    const observer = new _resizeObserverPolyfill.default(() => {
+    const observer = new window.ResizeObserver(() => {
       console.log('jj resize observed');
       return onResize();
     });
@@ -48,10 +46,10 @@ const useParentSize = ({
   (0, _react.useEffect)(() => {
     setSize(prevSize => ({
       ...prevSize,
-      width: width || prevSize.width
+      width: availableWidth || prevSize.width
     }));
-    console.log('jj useEffect width change to', width);
-  }, [width]);
+    console.log('jj useEffect width change to', availableWidth);
+  }, [availableWidth]);
   return size;
 };
 exports.useParentSize = useParentSize;

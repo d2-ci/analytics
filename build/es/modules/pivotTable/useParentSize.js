@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import ResizeObserver from 'resize-observer-polyfill';
 const initialState = {
   width: 0,
   height: 0
@@ -8,11 +7,11 @@ export const useParentSize = ({
   elementRef,
   renderCounter,
   initialSize = initialState,
-  width
+  availableWidth
 }) => {
-  console.log('jj useParentSize renderCounter', renderCounter, width);
+  console.log('jj useParentSize counter, width', renderCounter, availableWidth);
   const [size, setSize] = useState({
-    width: width || initialSize.width || 0,
+    width: availableWidth || initialSize.width || 0,
     height: initialSize.height || 0
   });
   useEffect(() => {
@@ -31,7 +30,7 @@ export const useParentSize = ({
         height: el.clientHeight
       });
     };
-    const observer = new ResizeObserver(() => {
+    const observer = new window.ResizeObserver(() => {
       console.log('jj resize observed');
       return onResize();
     });
@@ -41,9 +40,9 @@ export const useParentSize = ({
   useEffect(() => {
     setSize(prevSize => ({
       ...prevSize,
-      width: width || prevSize.width
+      width: availableWidth || prevSize.width
     }));
-    console.log('jj useEffect width change to', width);
-  }, [width]);
+    console.log('jj useEffect width change to', availableWidth);
+  }, [availableWidth]);
   return size;
 };
