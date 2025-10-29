@@ -8,10 +8,6 @@ import { PivotTableBody } from './PivotTableBody.js';
 import { PivotTableContainer } from './PivotTableContainer.js';
 import { Provider } from './PivotTableEngineContext.js';
 import { PivotTableHead } from './PivotTableHead.js';
-const initialState = {
-  width: 0,
-  height: 0
-};
 const PivotTable = ({
   visualization,
   data,
@@ -24,7 +20,12 @@ const PivotTable = ({
   const {
     width,
     height
-  } = useParentSize(containerRef, renderCounter, initialState, newWidth);
+  } = useParentSize({
+    elementRef: containerRef,
+    renderCounter,
+    width: newWidth
+  });
+  console.log('jj PivotTable width', width);
   const engine = useMemo(() => new PivotTableEngine(visualization, data, legendSets), [visualization, data, legendSets]);
   const {
     sortBy,
@@ -56,6 +57,7 @@ PivotTable.propTypes = {
   data: PropTypes.object.isRequired,
   visualization: PropTypes.object.isRequired,
   legendSets: PropTypes.arrayOf(PropTypes.object),
+  newWidth: PropTypes.number,
   renderCounter: PropTypes.number,
   onToggleContextualMenu: PropTypes.func
 };

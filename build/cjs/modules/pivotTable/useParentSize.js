@@ -11,7 +11,12 @@ const initialState = {
   width: 0,
   height: 0
 };
-const useParentSize = (elementRef, renderCounter, initialSize = initialState, width) => {
+const useParentSize = ({
+  elementRef,
+  renderCounter,
+  initialSize = initialState,
+  width
+}) => {
   console.log('jj useParentSize renderCounter', renderCounter, width);
   const [size, setSize] = (0, _react.useState)({
     width: width || initialSize.width || 0,

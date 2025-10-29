@@ -4,7 +4,12 @@ const initialState = {
   width: 0,
   height: 0
 };
-export const useParentSize = (elementRef, renderCounter, initialSize = initialState, width) => {
+export const useParentSize = ({
+  elementRef,
+  renderCounter,
+  initialSize = initialState,
+  width
+}) => {
   console.log('jj useParentSize renderCounter', renderCounter, width);
   const [size, setSize] = useState({
     width: width || initialSize.width || 0,
