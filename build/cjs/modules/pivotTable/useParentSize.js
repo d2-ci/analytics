@@ -7,7 +7,7 @@ exports.useParentSize = void 0;
 var _react = require("react");
 var _resizeObserverPolyfill = _interopRequireDefault(require("resize-observer-polyfill"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const initialState = {
+const initialSize = {
   width: 0,
   height: 0
 };
@@ -17,8 +17,8 @@ const useParentSize = ({
   availableWidth
 }) => {
   const [size, setSize] = (0, _react.useState)({
-    width: availableWidth || initialState.width || 0,
-    height: initialState.height || 0
+    width: initialSize.width || 0,
+    height: initialSize.height || 0
   });
   (0, _react.useEffect)(() => {
     const el = elementRef.current && elementRef.current.parentElement;
@@ -33,7 +33,7 @@ const useParentSize = ({
     };
     onResize(el);
     if (renderCounter) {
-      setSize(initialState);
+      setSize(initialSize);
     }
     const observer = new _resizeObserverPolyfill.default(onResize);
     observer.observe(el);
