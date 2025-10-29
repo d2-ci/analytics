@@ -12,10 +12,7 @@ const initialState = {
   height: 0
 };
 const useParentSize = (elementRef, renderCounter, initialSize = initialState) => {
-  console.log('jj useParentSize', {
-    renderCounter,
-    initialSize
-  });
+  console.log('jj useParentSize renderCounter', renderCounter);
   const [size, setSize] = (0, _react.useState)({
     width: initialSize.width || 0,
     height: initialSize.height || 0
@@ -25,9 +22,9 @@ const useParentSize = (elementRef, renderCounter, initialSize = initialState) =>
     if (!el) {
       return;
     }
-    console.log('jj useParentSize useEffect', el);
+    console.log('jj useEffect', el);
     const onResize = () => {
-      console.log('jj useParentSize useEffect onResize', {
+      console.log('jj useEffect onResize fn', {
         width: el.clientWidth,
         height: el.clientHeight
       });
@@ -36,12 +33,16 @@ const useParentSize = (elementRef, renderCounter, initialSize = initialState) =>
         height: el.clientHeight
       });
     };
+    console.log('jj useEffect call onResize');
     onResize(el);
     if (renderCounter) {
-      console.log('jj useParentSize useEffect reset size to', initialState);
+      console.log('jj useEffect reset size to 0,0');
       setSize(initialState);
     }
-    const observer = new _resizeObserverPolyfill.default(onResize);
+    const observer = new _resizeObserverPolyfill.default(() => {
+      console.log('jj ResizeObserver onResize');
+      return onResize();
+    });
     observer.observe(el);
     return () => observer.disconnect();
   }, [elementRef, renderCounter]);
