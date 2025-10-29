@@ -1,10 +1,10 @@
 import _JSXStyle from "styled-jsx/style";
-import { useDataQuery } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalActions, ModalContent, NoticeBox, Button, spacers, colors, Layer, CenteredContent, CircularLoader } from '@dhis2/ui';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
+import { useActiveInterpretation, useInterpretationsCurrentUser } from '../InterpretationsProvider/hooks.js';
 import { InterpretationThread } from './InterpretationThread.js';
 import { useModalContentWidth } from './useModalContentWidth.js';
 const modalCSS = {
@@ -22,25 +22,12 @@ function getModalContentCSS(width) {
     className: _JSXStyle.dynamic([["2099285089", [width]]])
   };
 }
-const query = {
-  interpretation: {
-    resource: 'interpretations',
-    id: ({
-      id
-    }) => id,
-    params: {
-      fields: ['access[write,manage]', 'id', 'text', 'created', 'createdBy[id,displayName]', 'likes', 'likedBy', 'comments[id,text,created,createdBy[id,displayName]]']
-    }
-  }
-};
 const InterpretationModal = ({
-  currentUser,
   isVisualizationLoading,
   visualization,
   onResponsesReceived,
   downloadMenuComponent,
   onClose,
-  onInterpretationUpdate,
   interpretationId,
   initialFocus,
   pluginComponent: VisualizationPlugin
@@ -48,53 +35,14 @@ const InterpretationModal = ({
   var _currentUser$settings;
   const modalContentWidth = useModalContentWidth();
   const modalContentCSS = getModalContentCSS(modalContentWidth);
-  const [isDirty, setIsDirty] = useState(false);
+  const currentUser = useInterpretationsCurrentUser();
   const {
-    data,
-    error,
+    data: interpretation,
     loading,
-    fetching,
-    refetch
-  } = useDataQuery(query, {
-    lazy: true
-  });
-  const interpretation = data === null || data === void 0 ? void 0 : data.interpretation;
+    error
+  } = useActiveInterpretation(interpretationId);
   const shouldRenderModalContent = !error && interpretation;
   const loadingInProgress = loading || isVisualizationLoading;
-  const handleClose = () => {
-    if (isDirty) {
-      onInterpretationUpdate();
-      setIsDirty(false);
-    }
-    onClose();
-  };
-  const onThreadUpdated = affectsInterpretation => {
-    if (affectsInterpretation) {
-      setIsDirty(true);
-    }
-    refetch({
-      id: interpretationId
-    });
-  };
-  const onLikeToggled = ({
-    likedBy
-  }) => {
-    setIsDirty(true);
-    interpretation.likedBy = likedBy;
-    interpretation.likes = likedBy.length;
-  };
-  const onInterpretationDeleted = () => {
-    setIsDirty(false);
-    onInterpretationUpdate();
-    onClose();
-  };
-  useEffect(() => {
-    if (interpretationId) {
-      refetch({
-        id: interpretationId
-      });
-    }
-  }, [interpretationId, refetch]);
   const filters = useMemo(() => {
     return {
       relativePeriodDate: interpretation === null || interpretation === void 0 ? void 0 : interpretation.created
@@ -102,7 +50,7 @@ const InterpretationModal = ({
   }, [interpretation === null || interpretation === void 0 ? void 0 : interpretation.created]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, loadingInProgress && /*#__PURE__*/React.createElement(Layer, null, /*#__PURE__*/React.createElement(CenteredContent, null, /*#__PURE__*/React.createElement(CircularLoader, null))), /*#__PURE__*/React.createElement(Modal, {
     fluid: true,
-    onClose: handleClose,
+    onClose: onClose,
     className: cx(modalCSS.className, {
       hidden: loadingInProgress
     }),
@@ -135,24 +83,20 @@ const InterpretationModal = ({
   })), /*#__PURE__*/React.createElement("div", {
     className: _JSXStyle.dynamic([["2014146191", [colors.grey900, spacers.dp24, spacers.dp4, spacers.dp4]]]) + " " + "thread-wrap"
   }, /*#__PURE__*/React.createElement(InterpretationThread, {
-    currentUser: currentUser,
-    fetching: fetching,
+    loading: loading,
     interpretation: interpretation,
-    onInterpretationDeleted: onInterpretationDeleted,
-    onThreadUpdated: onThreadUpdated,
     initialFocus: initialFocus,
     downloadMenuComponent: downloadMenuComponent,
-    onLikeToggled: onLikeToggled
+    onInterpretationDeleted: onClose
   }))))), /*#__PURE__*/React.createElement(ModalActions, null, /*#__PURE__*/React.createElement(Button, {
-    disabled: fetching,
-    onClick: handleClose
+    disabled: loading,
+    onClick: onClose
   }, i18n.t('Hide interpretation'))), modalCSS.styles, modalContentCSS.styles, /*#__PURE__*/React.createElement(_JSXStyle, {
     id: "2014146191",
     dynamic: [colors.grey900, spacers.dp24, spacers.dp4, spacers.dp4]
   }, [`.title.__jsx-style-dynamic-selector{color:${colors.grey900};margin:0px;padding:${spacers.dp24} 0 ${spacers.dp4};}`, ".ellipsis.__jsx-style-dynamic-selector{display:inline-block;font-size:20px;font-weight:500;line-height:24px;white-space:nowrap;width:100%;overflow:hidden;text-overflow:ellipsis;}", ".container.__jsx-style-dynamic-selector{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;height:100%;}", ".row.__jsx-style-dynamic-selector{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;gap:16px;height:100%;}", ".visualisation-wrap.__jsx-style-dynamic-selector{-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;min-width:0;}", `.thread-wrap.__jsx-style-dynamic-selector{padding-right:${spacers.dp4};-webkit-flex-basis:300px;-ms-flex-preferred-size:300px;flex-basis:300px;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;}`])));
 };
 InterpretationModal.propTypes = {
-  currentUser: PropTypes.object.isRequired,
   interpretationId: PropTypes.string.isRequired,
   isVisualizationLoading: PropTypes.bool.isRequired,
   pluginComponent: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
@@ -160,7 +104,6 @@ InterpretationModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   onResponsesReceived: PropTypes.func.isRequired,
   downloadMenuComponent: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-  initialFocus: PropTypes.bool,
-  onInterpretationUpdate: PropTypes.func
+  initialFocus: PropTypes.bool
 };
 export { InterpretationModal };
