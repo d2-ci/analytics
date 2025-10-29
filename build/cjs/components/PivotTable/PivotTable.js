@@ -31,7 +31,7 @@ const PivotTable = ({
   } = (0, _useParentSize.useParentSize)({
     elementRef: containerRef,
     renderCounter,
-    availableWidth: availableWidth
+    availableWidth
   });
   const engine = (0, _react.useMemo)(() => new _PivotTableEngine.PivotTableEngine(visualization, data, legendSets), [visualization, data, legendSets]);
   const {

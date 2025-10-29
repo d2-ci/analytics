@@ -23,7 +23,7 @@ const PivotTable = ({
   } = useParentSize({
     elementRef: containerRef,
     renderCounter,
-    availableWidth: availableWidth
+    availableWidth
   });
   const engine = useMemo(() => new PivotTableEngine(visualization, data, legendSets), [visualization, data, legendSets]);
   const {

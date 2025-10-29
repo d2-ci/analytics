@@ -12,12 +12,11 @@ const initialState = {
 const useParentSize = ({
   elementRef,
   renderCounter,
-  initialSize = initialState,
   availableWidth
 }) => {
   const [size, setSize] = (0, _react.useState)({
-    width: availableWidth || initialSize.width || 0,
-    height: initialSize.height || 0
+    width: availableWidth || initialState.width || 0,
+    height: initialState.height || 0
   });
   (0, _react.useEffect)(() => {
     const el = elementRef.current && elementRef.current.parentElement;
@@ -25,21 +24,22 @@ const useParentSize = ({
       return;
     }
     const onResize = () => {
+      console.log('jj effect for renderCounter', renderCounter);
       setSize({
         width: el.clientWidth,
         height: el.clientHeight
       });
     };
-    const observer = new window.ResizeObserver(() => {
-      if (renderCounter) {
-        setSize(initialState);
-      }
-      return onResize();
-    });
+    onResize(el);
+    if (renderCounter) {
+      setSize(initialState);
+    }
+    const observer = new window.ResizeObserver(onResize);
     observer.observe(el);
     return () => observer.disconnect();
   }, [elementRef, renderCounter]);
   (0, _react.useEffect)(() => {
+    console.log('jj effect for availableWidth', availableWidth);
     setSize(prevSize => ({
       ...prevSize,
       width: availableWidth || prevSize.width
