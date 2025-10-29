@@ -14,7 +14,6 @@ export const useParentSize = ({
     height: initialSize.height || 0
   });
   useEffect(() => {
-    console.log('jj useParentSize effect counter', renderCounter);
     const el = elementRef.current && elementRef.current.parentElement;
     if (!el) {
       return;
@@ -39,7 +38,6 @@ export const useParentSize = ({
       ...prevSize,
       width: availableWidth || prevSize.width
     }));
-    console.log('jj useEffect width change', availableWidth);
   }, [availableWidth]);
   return size;
 };

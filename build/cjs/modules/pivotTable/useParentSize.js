@@ -20,7 +20,6 @@ const useParentSize = ({
     height: initialSize.height || 0
   });
   (0, _react.useEffect)(() => {
-    console.log('jj useParentSize effect counter', renderCounter);
     const el = elementRef.current && elementRef.current.parentElement;
     if (!el) {
       return;
@@ -45,7 +44,6 @@ const useParentSize = ({
       ...prevSize,
       width: availableWidth || prevSize.width
     }));
-    console.log('jj useEffect width change', availableWidth);
   }, [availableWidth]);
   return size;
 };
