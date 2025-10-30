@@ -32,7 +32,7 @@ const Comment = ({
     onComplete: onUpdateComplete,
     onCancel: onUpdateCancel,
     id: comment.id,
-    text: comment.text
+    text: commentText
   }) : /*#__PURE__*/_react.default.createElement(_index.Message, {
     text: commentText,
     created: comment.created,
