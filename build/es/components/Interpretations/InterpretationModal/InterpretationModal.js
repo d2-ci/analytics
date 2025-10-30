@@ -32,7 +32,6 @@ const InterpretationModal = ({
   initialFocus,
   pluginComponent: VisualizationPlugin
 }) => {
-  var _currentUser$settings;
   const modalContentWidth = useModalContentWidth();
   const modalContentCSS = getModalContentCSS(modalContentWidth);
   const currentUser = useInterpretationsCurrentUser();
@@ -48,6 +47,15 @@ const InterpretationModal = ({
       relativePeriodDate: interpretation === null || interpretation === void 0 ? void 0 : interpretation.created
     };
   }, [interpretation === null || interpretation === void 0 ? void 0 : interpretation.created]);
+  const displayProperty = useMemo(() => {
+    var _ref, _currentUser$settings, _currentUser$settings2, _currentUser$settings3;
+    return (// DV and EVER apps
+      (_ref = (_currentUser$settings = (_currentUser$settings2 = currentUser.settings) === null || _currentUser$settings2 === void 0 ? void 0 : _currentUser$settings2.displayProperty) !== null && _currentUser$settings !== void 0 ? _currentUser$settings : // LL app
+      (_currentUser$settings3 = currentUser.settings) === null || _currentUser$settings3 === void 0 ? void 0 : _currentUser$settings3.keyAnalysisDisplayProperty) !== null && _ref !== void 0 ? _ref :
+      // Maps app
+      currentUser.keyAnalysisDisplayProperty
+    );
+  }, [currentUser]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, loadingInProgress && /*#__PURE__*/React.createElement(Layer, null, /*#__PURE__*/React.createElement(CenteredContent, null, /*#__PURE__*/React.createElement(CircularLoader, null))), /*#__PURE__*/React.createElement(Modal, {
     fluid: true,
     onClose: onClose,
@@ -77,7 +85,7 @@ const InterpretationModal = ({
     filters: filters,
     visualization: visualization,
     onResponsesReceived: onResponsesReceived,
-    displayProperty: (_currentUser$settings = currentUser.settings) === null || _currentUser$settings === void 0 ? void 0 : _currentUser$settings.keyAnalysisDisplayProperty,
+    displayProperty: displayProperty,
     isInModal: true,
     className: _JSXStyle.dynamic([["2014146191", [colors.grey900, spacers.dp24, spacers.dp4, spacers.dp4]]])
   })), /*#__PURE__*/React.createElement("div", {
