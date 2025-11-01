@@ -5,12 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.InterpretationModal = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
-var _appRuntime = require("@dhis2/app-runtime");
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _ui = require("@dhis2/ui");
 var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
+var _hooks = require("../InterpretationsProvider/hooks.js");
 var _InterpretationThread = require("./InterpretationThread.js");
 var _useModalContentWidth = require("./useModalContentWidth.js");
 function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
@@ -30,87 +30,43 @@ function getModalContentCSS(width) {
     className: _style.default.dynamic([["2099285089", [width]]])
   };
 }
-const query = {
-  interpretation: {
-    resource: 'interpretations',
-    id: ({
-      id
-    }) => id,
-    params: {
-      fields: ['access[write,manage]', 'id', 'text', 'created', 'createdBy[id,displayName]', 'likes', 'likedBy', 'comments[id,text,created,createdBy[id,displayName]]']
-    }
-  }
-};
 const InterpretationModal = ({
-  currentUser,
   isVisualizationLoading,
   visualization,
   onResponsesReceived,
   downloadMenuComponent,
   onClose,
-  onInterpretationUpdate,
   interpretationId,
   initialFocus,
   pluginComponent: VisualizationPlugin
 }) => {
-  var _currentUser$settings;
   const modalContentWidth = (0, _useModalContentWidth.useModalContentWidth)();
   const modalContentCSS = getModalContentCSS(modalContentWidth);
-  const [isDirty, setIsDirty] = (0, _react.useState)(false);
+  const currentUser = (0, _hooks.useInterpretationsCurrentUser)();
   const {
-    data,
-    error,
+    data: interpretation,
     loading,
-    fetching,
-    refetch
-  } = (0, _appRuntime.useDataQuery)(query, {
-    lazy: true
-  });
-  const interpretation = data === null || data === void 0 ? void 0 : data.interpretation;
+    error
+  } = (0, _hooks.useActiveInterpretation)(interpretationId);
   const shouldRenderModalContent = !error && interpretation;
   const loadingInProgress = loading || isVisualizationLoading;
-  const handleClose = () => {
-    if (isDirty) {
-      onInterpretationUpdate();
-      setIsDirty(false);
-    }
-    onClose();
-  };
-  const onThreadUpdated = affectsInterpretation => {
-    if (affectsInterpretation) {
-      setIsDirty(true);
-    }
-    refetch({
-      id: interpretationId
-    });
-  };
-  const onLikeToggled = ({
-    likedBy
-  }) => {
-    setIsDirty(true);
-    interpretation.likedBy = likedBy;
-    interpretation.likes = likedBy.length;
-  };
-  const onInterpretationDeleted = () => {
-    setIsDirty(false);
-    onInterpretationUpdate();
-    onClose();
-  };
-  (0, _react.useEffect)(() => {
-    if (interpretationId) {
-      refetch({
-        id: interpretationId
-      });
-    }
-  }, [interpretationId, refetch]);
   const filters = (0, _react.useMemo)(() => {
     return {
       relativePeriodDate: interpretation === null || interpretation === void 0 ? void 0 : interpretation.created
     };
   }, [interpretation === null || interpretation === void 0 ? void 0 : interpretation.created]);
+  const displayProperty = (0, _react.useMemo)(() => {
+    var _ref, _currentUser$settings, _currentUser$settings2, _currentUser$settings3;
+    return (// DV and EVER apps
+      (_ref = (_currentUser$settings = (_currentUser$settings2 = currentUser.settings) === null || _currentUser$settings2 === void 0 ? void 0 : _currentUser$settings2.displayProperty) !== null && _currentUser$settings !== void 0 ? _currentUser$settings : // LL app
+      (_currentUser$settings3 = currentUser.settings) === null || _currentUser$settings3 === void 0 ? void 0 : _currentUser$settings3.keyAnalysisDisplayProperty) !== null && _ref !== void 0 ? _ref :
+      // Maps app
+      currentUser.keyAnalysisDisplayProperty
+    );
+  }, [currentUser]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, loadingInProgress && /*#__PURE__*/_react.default.createElement(_ui.Layer, null, /*#__PURE__*/_react.default.createElement(_ui.CenteredContent, null, /*#__PURE__*/_react.default.createElement(_ui.CircularLoader, null))), /*#__PURE__*/_react.default.createElement(_ui.Modal, {
     fluid: true,
-    onClose: handleClose,
+    onClose: onClose,
     className: (0, _classnames.default)(modalCSS.className, {
       hidden: loadingInProgress
     }),
@@ -137,23 +93,20 @@ const InterpretationModal = ({
     filters: filters,
     visualization: visualization,
     onResponsesReceived: onResponsesReceived,
-    displayProperty: (_currentUser$settings = currentUser.settings) === null || _currentUser$settings === void 0 ? void 0 : _currentUser$settings.keyAnalysisDisplayProperty,
+    displayProperty: displayProperty,
     isInModal: true,
     className: _style.default.dynamic([["2014146191", [_ui.colors.grey900, _ui.spacers.dp24, _ui.spacers.dp4, _ui.spacers.dp4]]])
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: _style.default.dynamic([["2014146191", [_ui.colors.grey900, _ui.spacers.dp24, _ui.spacers.dp4, _ui.spacers.dp4]]]) + " " + "thread-wrap"
   }, /*#__PURE__*/_react.default.createElement(_InterpretationThread.InterpretationThread, {
-    currentUser: currentUser,
-    fetching: fetching,
+    loading: loading,
     interpretation: interpretation,
-    onInterpretationDeleted: onInterpretationDeleted,
-    onThreadUpdated: onThreadUpdated,
     initialFocus: initialFocus,
     downloadMenuComponent: downloadMenuComponent,
-    onLikeToggled: onLikeToggled
+    onInterpretationDeleted: onClose
   }))))), /*#__PURE__*/_react.default.createElement(_ui.ModalActions, null, /*#__PURE__*/_react.default.createElement(_ui.Button, {
-    disabled: fetching,
-    onClick: handleClose
+    disabled: loading,
+    onClick: onClose
   }, _d2I18n.default.t('Hide interpretation'))), modalCSS.styles, modalContentCSS.styles, /*#__PURE__*/_react.default.createElement(_style.default, {
     id: "2014146191",
     dynamic: [_ui.colors.grey900, _ui.spacers.dp24, _ui.spacers.dp4, _ui.spacers.dp4]
@@ -161,7 +114,6 @@ const InterpretationModal = ({
 };
 exports.InterpretationModal = InterpretationModal;
 InterpretationModal.propTypes = {
-  currentUser: _propTypes.default.object.isRequired,
   interpretationId: _propTypes.default.string.isRequired,
   isVisualizationLoading: _propTypes.default.bool.isRequired,
   pluginComponent: _propTypes.default.oneOfType([_propTypes.default.object, _propTypes.default.func]).isRequired,
@@ -169,6 +121,5 @@ InterpretationModal.propTypes = {
   onClose: _propTypes.default.func.isRequired,
   onResponsesReceived: _propTypes.default.func.isRequired,
   downloadMenuComponent: _propTypes.default.oneOfType([_propTypes.default.object, _propTypes.default.func]),
-  initialFocus: _propTypes.default.bool,
-  onInterpretationUpdate: _propTypes.default.func
+  initialFocus: _propTypes.default.bool
 };

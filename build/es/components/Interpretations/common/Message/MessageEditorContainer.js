@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 const MessageEditorContainer = ({
   children,
-  currentUser,
+  currentUserName,
   dataTest
 }) => /*#__PURE__*/React.createElement("div", {
   "data-test": dataTest,
@@ -12,7 +12,7 @@ const MessageEditorContainer = ({
 }, /*#__PURE__*/React.createElement("div", {
   className: _JSXStyle.dynamic([["969803715", [spacers.dp8, spacers.dp12]]]) + " " + "avatar"
 }, /*#__PURE__*/React.createElement(UserAvatar, {
-  name: currentUser.name,
+  name: currentUserName,
   medium: true
 })), /*#__PURE__*/React.createElement("div", {
   className: _JSXStyle.dynamic([["969803715", [spacers.dp8, spacers.dp12]]]) + " " + "editor"
@@ -21,7 +21,7 @@ const MessageEditorContainer = ({
   dynamic: [spacers.dp8, spacers.dp12]
 }, [`.container.__jsx-style-dynamic-selector{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;gap:${spacers.dp8};margin-top:${spacers.dp12};}`, ".avatar.__jsx-style-dynamic-selector{-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;}", ".editor.__jsx-style-dynamic-selector{-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;height:100%;}"]));
 MessageEditorContainer.propTypes = {
-  currentUser: PropTypes.object.isRequired,
+  currentUserName: PropTypes.string.isRequired,
   children: PropTypes.node,
   dataTest: PropTypes.string
 };

@@ -11,7 +11,7 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const MessageEditorContainer = ({
   children,
-  currentUser,
+  currentUserName,
   dataTest
 }) => /*#__PURE__*/_react.default.createElement("div", {
   "data-test": dataTest,
@@ -19,7 +19,7 @@ const MessageEditorContainer = ({
 }, /*#__PURE__*/_react.default.createElement("div", {
   className: _style.default.dynamic([["969803715", [_ui.spacers.dp8, _ui.spacers.dp12]]]) + " " + "avatar"
 }, /*#__PURE__*/_react.default.createElement(_ui.UserAvatar, {
-  name: currentUser.name,
+  name: currentUserName,
   medium: true
 })), /*#__PURE__*/_react.default.createElement("div", {
   className: _style.default.dynamic([["969803715", [_ui.spacers.dp8, _ui.spacers.dp12]]]) + " " + "editor"
@@ -29,7 +29,7 @@ const MessageEditorContainer = ({
 }, [`.container.__jsx-style-dynamic-selector{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;gap:${_ui.spacers.dp8};margin-top:${_ui.spacers.dp12};}`, ".avatar.__jsx-style-dynamic-selector{-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;}", ".editor.__jsx-style-dynamic-selector{-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;height:100%;}"]));
 exports.MessageEditorContainer = MessageEditorContainer;
 MessageEditorContainer.propTypes = {
-  currentUser: _propTypes.default.object.isRequired,
+  currentUserName: _propTypes.default.string.isRequired,
   children: _propTypes.default.node,
   dataTest: _propTypes.default.string
 };
