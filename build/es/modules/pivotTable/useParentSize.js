@@ -14,6 +14,7 @@ export const useParentSize = ({
     height: initialSize.height || 0
   });
   useEffect(() => {
+    console.log('jj renderCounter changed to', renderCounter);
     const el = elementRef.current && elementRef.current.parentElement;
     if (!el) {
       return;
@@ -33,6 +34,7 @@ export const useParentSize = ({
     return () => observer.disconnect();
   }, [elementRef, renderCounter]);
   useEffect(() => {
+    console.log('jj availWidth changed to', availableWidth);
     setSize(prevSize => ({
       ...prevSize,
       width: availableWidth || prevSize.width
