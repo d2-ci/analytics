@@ -19,7 +19,6 @@ export const useParentSize = ({
       return;
     }
     const onResize = () => {
-      console.log('jj onResize use clientWidth', el.clientWidth);
       setSize({
         width: el.clientWidth,
         height: el.clientHeight
@@ -27,7 +26,6 @@ export const useParentSize = ({
     };
     onResize(el);
     if (renderCounter) {
-      console.log('jj renderCounter, reset w to 0');
       setSize(initialSize);
     }
     const observer = new ResizeObserver(onResize);
@@ -35,7 +33,6 @@ export const useParentSize = ({
     return () => observer.disconnect();
   }, [elementRef, renderCounter]);
   useEffect(() => {
-    console.log('jj availWidth setSize ', availableWidth);
     setSize(prevSize => ({
       ...prevSize,
       width: availableWidth || prevSize.width

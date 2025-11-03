@@ -25,7 +25,6 @@ const PivotTable = ({
     renderCounter,
     availableWidth
   });
-  console.log('jj PivotTable width:', width);
   const engine = useMemo(() => new PivotTableEngine(visualization, data, legendSets), [visualization, data, legendSets]);
   const {
     sortBy,
