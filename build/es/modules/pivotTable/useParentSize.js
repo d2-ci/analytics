@@ -15,6 +15,7 @@ export const useParentSize = (elementRef, renderCounter, initialSize = initialSt
       return;
     }
     const onResize = () => {
+      console.log('jj anly ResizeObserver onResize', el.clientWidth);
       setSize({
         width: el.clientWidth,
         height: el.clientHeight
