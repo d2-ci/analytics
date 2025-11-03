@@ -33,6 +33,10 @@ const PivotTable = ({
     renderCounter,
     availableWidth
   });
+  console.log('jj PivotTable availableWidth:', {
+    availableWidth,
+    width
+  });
   const engine = (0, _react.useMemo)(() => new _PivotTableEngine.PivotTableEngine(visualization, data, legendSets), [visualization, data, legendSets]);
   const {
     sortBy,
