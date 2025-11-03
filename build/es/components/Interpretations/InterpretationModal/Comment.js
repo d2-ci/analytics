@@ -16,11 +16,15 @@ const Comment = ({
     setCommentText(newText);
     setIsUpdateMode(false);
   }, []);
+  const onUpdateCancel = useCallback(() => {
+    setIsUpdateMode(false);
+  }, []);
   const commentAccess = useCommentAccess(comment, canComment);
   return isUpdateMode ? /*#__PURE__*/React.createElement(CommentUpdateForm, {
     onComplete: onUpdateComplete,
+    onCancel: onUpdateCancel,
     id: comment.id,
-    text: comment.text
+    text: commentText
   }) : /*#__PURE__*/React.createElement(Message, {
     text: commentText,
     created: comment.created,

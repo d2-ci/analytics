@@ -9,6 +9,7 @@ import { useInterpretationsCurrentUser, useUpdateCommentForActiveInterpretation 
 export const CommentUpdateForm = ({
   id,
   text,
+  onCancel,
   onComplete
 }) => {
   const currentUser = useInterpretationsCurrentUser();
@@ -41,7 +42,7 @@ export const CommentUpdateForm = ({
     disabled: loading,
     secondary: true,
     small: true,
-    onClick: onComplete
+    onClick: onCancel
   }, i18n.t('Cancel')))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: "2690082310",
     dynamic: [spacers.dp8, spacers.dp8, colors.grey100]
@@ -49,6 +50,7 @@ export const CommentUpdateForm = ({
 };
 CommentUpdateForm.propTypes = {
   id: PropTypes.string.isRequired,
+  onCancel: PropTypes.func.isRequired,
   onComplete: PropTypes.func.isRequired,
   text: PropTypes.string
 };
