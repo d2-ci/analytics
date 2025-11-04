@@ -14,9 +14,7 @@ export const useParentSize = (elementRef, renderCounter, initialSize = initialSt
     if (!el) {
       return;
     }
-    const onResize = e => {
-      console.log('jj onResize', e, e.stopPropagation);
-      // e.stopPropagation()
+    const onResize = () => {
       setSize({
         width: el.clientWidth,
         height: el.clientHeight
@@ -26,7 +24,15 @@ export const useParentSize = (elementRef, renderCounter, initialSize = initialSt
     if (renderCounter) {
       setSize(initialState);
     }
-    const observer = new ResizeObserver(onResize);
+    const observer = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        if (entry.target) {
+          console.log('jj ResizeObserver entry:', entry.target);
+        }
+        onResize(entry);
+      }
+      // return onResize()
+    });
     observer.observe(el);
     return () => observer.disconnect();
   }, [elementRef, renderCounter]);
