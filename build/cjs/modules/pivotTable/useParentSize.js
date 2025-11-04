@@ -22,7 +22,8 @@ const useParentSize = (elementRef, renderCounter, initialSize = initialState) =>
       return;
     }
     const onResize = e => {
-      e.stopPropagation();
+      console.log('jj onResize', e, e.stopPropagation);
+      // e.stopPropagation()
       setSize({
         width: el.clientWidth,
         height: el.clientHeight
