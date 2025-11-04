@@ -21,18 +21,13 @@ const PivotTable = ({
   data,
   legendSets,
   renderCounter,
-  onToggleContextualMenu,
-  availableWidth
+  onToggleContextualMenu
 }) => {
   const containerRef = (0, _react.useRef)(undefined);
   const {
     width,
     height
-  } = (0, _useParentSize.useParentSize)({
-    elementRef: containerRef,
-    renderCounter,
-    availableWidth
-  });
+  } = (0, _useParentSize.useParentSize)(containerRef, renderCounter);
   const engine = (0, _react.useMemo)(() => new _PivotTableEngine.PivotTableEngine(visualization, data, legendSets), [visualization, data, legendSets]);
   const {
     sortBy,
@@ -63,7 +58,6 @@ const PivotTable = ({
 PivotTable.propTypes = {
   data: _propTypes.default.object.isRequired,
   visualization: _propTypes.default.object.isRequired,
-  availableWidth: _propTypes.default.number,
   legendSets: _propTypes.default.arrayOf(_propTypes.default.object),
   renderCounter: _propTypes.default.number,
   onToggleContextualMenu: _propTypes.default.func

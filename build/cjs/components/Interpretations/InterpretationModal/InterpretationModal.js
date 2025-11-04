@@ -40,6 +40,7 @@ const InterpretationModal = ({
   initialFocus,
   pluginComponent: VisualizationPlugin
 }) => {
+  var _currentUser$settings;
   const modalContentWidth = (0, _useModalContentWidth.useModalContentWidth)();
   const modalContentCSS = getModalContentCSS(modalContentWidth);
   const currentUser = (0, _hooks.useInterpretationsCurrentUser)();
@@ -55,15 +56,6 @@ const InterpretationModal = ({
       relativePeriodDate: interpretation === null || interpretation === void 0 ? void 0 : interpretation.created
     };
   }, [interpretation === null || interpretation === void 0 ? void 0 : interpretation.created]);
-  const displayProperty = (0, _react.useMemo)(() => {
-    var _ref, _currentUser$settings, _currentUser$settings2, _currentUser$settings3;
-    return (// DV and EVER apps
-      (_ref = (_currentUser$settings = (_currentUser$settings2 = currentUser.settings) === null || _currentUser$settings2 === void 0 ? void 0 : _currentUser$settings2.displayProperty) !== null && _currentUser$settings !== void 0 ? _currentUser$settings : // LL app
-      (_currentUser$settings3 = currentUser.settings) === null || _currentUser$settings3 === void 0 ? void 0 : _currentUser$settings3.keyAnalysisDisplayProperty) !== null && _ref !== void 0 ? _ref :
-      // Maps app
-      currentUser.keyAnalysisDisplayProperty
-    );
-  }, [currentUser]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, loadingInProgress && /*#__PURE__*/_react.default.createElement(_ui.Layer, null, /*#__PURE__*/_react.default.createElement(_ui.CenteredContent, null, /*#__PURE__*/_react.default.createElement(_ui.CircularLoader, null))), /*#__PURE__*/_react.default.createElement(_ui.Modal, {
     fluid: true,
     onClose: onClose,
@@ -93,7 +85,7 @@ const InterpretationModal = ({
     filters: filters,
     visualization: visualization,
     onResponsesReceived: onResponsesReceived,
-    displayProperty: displayProperty,
+    displayProperty: (_currentUser$settings = currentUser.settings) === null || _currentUser$settings === void 0 ? void 0 : _currentUser$settings.keyAnalysisDisplayProperty,
     isInModal: true,
     className: _style.default.dynamic([["2014146191", [_ui.colors.grey900, _ui.spacers.dp24, _ui.spacers.dp4, _ui.spacers.dp4]]])
   })), /*#__PURE__*/_react.default.createElement("div", {

@@ -17,7 +17,6 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 const CommentUpdateForm = ({
   id,
   text,
-  onCancel,
   onComplete
 }) => {
   const currentUser = (0, _hooks.useInterpretationsCurrentUser)();
@@ -50,7 +49,7 @@ const CommentUpdateForm = ({
     disabled: loading,
     secondary: true,
     small: true,
-    onClick: onCancel
+    onClick: onComplete
   }, _d2I18n.default.t('Cancel')))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: "2690082310",
     dynamic: [_ui.spacers.dp8, _ui.spacers.dp8, _ui.colors.grey100]
@@ -59,7 +58,6 @@ const CommentUpdateForm = ({
 exports.CommentUpdateForm = CommentUpdateForm;
 CommentUpdateForm.propTypes = {
   id: _propTypes.default.string.isRequired,
-  onCancel: _propTypes.default.func.isRequired,
   onComplete: _propTypes.default.func.isRequired,
   text: _propTypes.default.string
 };

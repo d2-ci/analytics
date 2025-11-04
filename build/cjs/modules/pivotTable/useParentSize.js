@@ -11,11 +11,7 @@ const initialSize = {
   width: 0,
   height: 0
 };
-const useParentSize = ({
-  elementRef,
-  renderCounter,
-  availableWidth
-}) => {
+const useParentSize = (elementRef, renderCounter) => {
   const [size, setSize] = (0, _react.useState)({
     width: initialSize.width || 0,
     height: initialSize.height || 0
@@ -26,10 +22,10 @@ const useParentSize = ({
       return;
     }
     const onResize = () => {
-      setSize({
+      setTimeout(() => setSize({
         width: el.clientWidth,
         height: el.clientHeight
-      });
+      }), 0);
     };
     onResize(el);
     if (renderCounter) {
@@ -39,12 +35,6 @@ const useParentSize = ({
     observer.observe(el);
     return () => observer.disconnect();
   }, [elementRef, renderCounter]);
-  (0, _react.useEffect)(() => {
-    setSize(prevSize => ({
-      ...prevSize,
-      width: availableWidth || prevSize.width
-    }));
-  }, [availableWidth]);
   return size;
 };
 exports.useParentSize = useParentSize;
