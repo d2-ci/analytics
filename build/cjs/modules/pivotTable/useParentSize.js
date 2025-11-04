@@ -12,10 +12,7 @@ const initialSize = {
   height: 0
 };
 const useParentSize = (elementRef, renderCounter) => {
-  const [size, setSize] = (0, _react.useState)({
-    width: initialSize.width || 0,
-    height: initialSize.height || 0
-  });
+  const [size, setSize] = (0, _react.useState)(initialSize);
   (0, _react.useEffect)(() => {
     const el = elementRef.current && elementRef.current.parentElement;
     if (!el) {

@@ -5,10 +5,7 @@ const initialSize = {
   height: 0
 };
 export const useParentSize = (elementRef, renderCounter) => {
-  const [size, setSize] = useState({
-    width: initialSize.width || 0,
-    height: initialSize.height || 0
-  });
+  const [size, setSize] = useState(initialSize);
   useEffect(() => {
     const el = elementRef.current && elementRef.current.parentElement;
     if (!el) {
