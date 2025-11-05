@@ -8,42 +8,31 @@ var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
+var _hooks = require("../../InterpretationsProvider/hooks.js");
 var _index = require("../index.js");
 var _InterpretationDeleteButton = require("./InterpretationDeleteButton.js");
 var _InterpretationUpdateForm = require("./InterpretationUpdateForm.js");
-var _useLike = require("./useLike.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const Interpretation = _ref => {
-  let {
-    interpretation,
-    currentUser,
-    onClick,
-    onUpdated,
-    onDeleted,
-    disabled,
-    onReplyIconClick,
-    dashboardRedirectUrl,
-    isInThread,
-    onLikeToggled
-  } = _ref;
+const Interpretation = ({
+  id,
+  onReplyIconClick,
+  dashboardRedirectUrl,
+  disabled,
+  isInThread,
+  onClick,
+  onDeleted
+}) => {
+  const interpretation = (0, _hooks.useInterpretation)(id);
+  const interpretationAccess = (0, _hooks.useInterpretationAccess)(interpretation);
   const [isUpdateMode, setIsUpdateMode] = (0, _react.useState)(false);
   const [showSharingDialog, setShowSharingDialog] = (0, _react.useState)(false);
   const {
     toggleLike,
     isLikedByCurrentUser,
     toggleLikeInProgress
-  } = (0, _useLike.useLike)({
-    interpretation,
-    currentUser,
-    onComplete: likedBy => onLikeToggled({
-      id: interpretation.id,
-      likedBy
-    })
-  });
+  } = (0, _hooks.useLike)(id);
   const shouldShowButton = Boolean(!!onClick && !disabled & !dashboardRedirectUrl);
-  const interpretationAccess = (0, _index.getInterpretationAccess)(interpretation, currentUser);
   let tooltip = _d2I18n.default.t('Reply');
   if (!interpretationAccess.comment) {
     if (isInThread) {
@@ -58,14 +47,12 @@ const Interpretation = _ref => {
   }
 
   // Maps still uses old url style /?id= instead of hash
-  const getAppInterpretationUrl = () => dashboardRedirectUrl.includes('?') ? `${dashboardRedirectUrl}&interpretationId=${interpretation.id}` : `${dashboardRedirectUrl}?interpretationId=${interpretation.id}`;
+  const getAppInterpretationUrl = () => dashboardRedirectUrl.includes('?') ? `${dashboardRedirectUrl}&interpretationId=${id}` : `${dashboardRedirectUrl}?interpretationId=${id}`;
   return isUpdateMode ? /*#__PURE__*/_react.default.createElement(_InterpretationUpdateForm.InterpretationUpdateForm, {
-    close: () => setIsUpdateMode(false),
-    id: interpretation.id,
+    onComplete: () => setIsUpdateMode(false),
+    id: id,
     showSharingLink: interpretationAccess.share,
-    onComplete: onUpdated,
-    text: interpretation.text,
-    currentUser: currentUser
+    text: interpretation.text
   }) : /*#__PURE__*/_react.default.createElement(_index.Message, {
     text: interpretation.text,
     created: interpretation.created,
@@ -81,14 +68,14 @@ const Interpretation = _ref => {
   }), /*#__PURE__*/_react.default.createElement(_index.MessageIconButton, {
     tooltipContent: tooltip,
     iconComponent: _ui.IconReply16,
-    onClick: () => onReplyIconClick && onReplyIconClick(interpretation.id),
+    onClick: () => onReplyIconClick === null || onReplyIconClick === void 0 ? void 0 : onReplyIconClick(id),
     count: interpretation.comments.length,
     dataTest: "interpretation-reply-button",
     viewOnly: isInThread && !interpretationAccess.comment
   }), dashboardRedirectUrl && !isInThread && /*#__PURE__*/_react.default.createElement(_index.MessageIconButton, {
     tooltipContent: _d2I18n.default.t('See interpretation'),
     iconComponent: _ui.IconView16,
-    onClick: () => onClick(interpretation.id),
+    onClick: () => onClick(id),
     dataTest: "interpretation-view-button"
   }), dashboardRedirectUrl && /*#__PURE__*/_react.default.createElement(_index.MessageIconButton, {
     tooltipContent: _d2I18n.default.t('Open in app'),
@@ -103,7 +90,7 @@ const Interpretation = _ref => {
   }), showSharingDialog && /*#__PURE__*/_react.default.createElement(_ui.SharingDialog, {
     open: true,
     type: 'interpretation',
-    id: interpretation.id,
+    id: id,
     onClose: () => setShowSharingDialog(false)
   }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, interpretationAccess.edit && /*#__PURE__*/_react.default.createElement(_index.MessageIconButton, {
     iconComponent: _ui.IconEdit16,
@@ -111,27 +98,24 @@ const Interpretation = _ref => {
     onClick: () => setIsUpdateMode(true),
     dataTest: "interpretation-edit-button"
   }), interpretationAccess.delete && /*#__PURE__*/_react.default.createElement(_InterpretationDeleteButton.InterpretationDeleteButton, {
-    id: interpretation.id,
+    id: id,
     onComplete: onDeleted
   }))), shouldShowButton && /*#__PURE__*/_react.default.createElement(_ui.Button, {
     secondary: true,
     small: true,
     onClick: (_, event) => {
       event.stopPropagation();
-      onClick(interpretation.id);
+      onClick(id);
     }
   }, _d2I18n.default.t('See interpretation')));
 };
 exports.Interpretation = Interpretation;
 Interpretation.propTypes = {
-  currentUser: _propTypes.default.object.isRequired,
-  interpretation: _propTypes.default.object.isRequired,
-  onDeleted: _propTypes.default.func.isRequired,
-  onLikeToggled: _propTypes.default.func.isRequired,
+  id: _propTypes.default.string.isRequired,
   onReplyIconClick: _propTypes.default.func.isRequired,
-  onUpdated: _propTypes.default.func.isRequired,
   dashboardRedirectUrl: _propTypes.default.string,
   disabled: _propTypes.default.bool,
   isInThread: _propTypes.default.bool,
-  onClick: _propTypes.default.func
+  onClick: _propTypes.default.func,
+  onDeleted: _propTypes.default.func
 };

@@ -2,13 +2,12 @@ import { colors } from '@dhis2/ui';
 import { getSingleValueFormattedValue } from './getSingleValueFormattedValue.js';
 import { getSingleValueSubtext } from './getSingleValueSubtext.js';
 import { getSingleValueTextColor } from './getSingleValueTextColor.js';
-export default function getSingleValueCustomSVGOptions(_ref) {
-  let {
-    layout,
-    extraOptions,
-    metaData,
-    series
-  } = _ref;
+export default function getSingleValueCustomSVGOptions({
+  layout,
+  extraOptions,
+  metaData,
+  series
+}) {
   const {
     dashboard,
     icon

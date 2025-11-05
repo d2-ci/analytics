@@ -37,9 +37,7 @@ export const parseExpression = input => {
   const regex = /(#{[a-zA-Z0-9#.]+}|[+\-*/()])|(\d+(\.\d+)?)/g;
   return input.match(regex) || [];
 };
-export const parseExpressionToArray = function () {
-  let expression = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  let metadata = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+export const parseExpressionToArray = (expression = '', metadata = []) => {
   return parseExpression(expression).map(value => {
     if (value.startsWith('#{') && value.endsWith('}')) {
       var _metadata$find;
@@ -65,10 +63,7 @@ export const parseExpressionToArray = function () {
     };
   }) || [];
 };
-export const parseArrayToExpression = function () {
-  let input = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  return input.map(item => item.value).join('');
-};
+export const parseArrayToExpression = (input = []) => input.map(item => item.value).join('');
 export const validateExpression = expression => {
   let result;
   const leftParenthesisCount = expression.split('(').length - 1;
@@ -119,8 +114,7 @@ export const validateExpression = expression => {
   }
   return result;
 };
-export const getItemIdsFromExpression = function () {
-  let expression = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+export const getItemIdsFromExpression = (expression = '') => {
   const regex = /#{([a-zA-Z0-9#]+.*?)}/g;
   const matches = expression.match(regex);
   return matches ? matches.map(match => match.slice(2, -1)) : [];

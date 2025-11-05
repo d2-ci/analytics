@@ -11,36 +11,27 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _OfflineTooltip = require("../../OfflineTooltip.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const SaveButton = _ref => {
-  let {
-    disabled,
-    loading,
-    onClick
-  } = _ref;
-  return /*#__PURE__*/_react.default.createElement(_ui.Button, {
-    primary: true,
-    onClick: onClick,
-    loading: loading,
-    disabled: disabled
-  }, _d2I18n.default.t('Save translations'));
-};
-SaveButton.defaultProps = {
-  disabled: false,
-  loading: false,
-  onClick: Function.prototype
-};
+const SaveButton = ({
+  disabled = false,
+  loading = false,
+  onClick = Function.prototype
+}) => /*#__PURE__*/_react.default.createElement(_ui.Button, {
+  primary: true,
+  onClick: onClick,
+  loading: loading,
+  disabled: disabled
+}, _d2I18n.default.t('Save translations'));
 SaveButton.propTypes = {
   disabled: _propTypes.default.bool.isRequired,
-  loading: _propTypes.default.bool.isRequired,
-  onClick: _propTypes.default.func.isRequired
+  onClick: _propTypes.default.func.isRequired,
+  loading: _propTypes.default.bool
 };
-const TranslationModalActions = _ref2 => {
-  let {
-    onClose,
-    onSave,
-    saveInProgress,
-    saveButtonDisabled
-  } = _ref2;
+const TranslationModalActions = ({
+  onClose,
+  onSave = Function.prototype,
+  saveInProgress,
+  saveButtonDisabled
+}) => {
   const {
     isDisconnected: offline
   } = (0, _appRuntime.useDhis2ConnectionStatus)();

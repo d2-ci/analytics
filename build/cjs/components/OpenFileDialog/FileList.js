@@ -10,28 +10,25 @@ var _react = _interopRequireDefault(require("react"));
 var _VisTypeIcon = require("../VisTypeIcon.js");
 var _DateField = require("./DateField.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const FileList = _ref => {
-  let {
-    data,
-    onSelect,
-    showVisTypeColumn
-  } = _ref;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, data.map(visualization => /*#__PURE__*/_react.default.createElement(_ui.DataTableRow, {
-    key: visualization.id
-  }, /*#__PURE__*/_react.default.createElement(_ui.DataTableCell, {
-    onClick: () => onSelect(visualization.id)
-  }, visualization.displayName), showVisTypeColumn && /*#__PURE__*/_react.default.createElement(_ui.DataTableCell, {
-    align: "center"
-  }, /*#__PURE__*/_react.default.createElement(_VisTypeIcon.VisTypeIcon, {
-    type: visualization.type,
-    useSmall: true,
-    color: _ui.colors.grey600
-  })), /*#__PURE__*/_react.default.createElement(_ui.DataTableCell, null, /*#__PURE__*/_react.default.createElement(_DateField.DateField, {
-    date: visualization.created
-  })), /*#__PURE__*/_react.default.createElement(_ui.DataTableCell, null, /*#__PURE__*/_react.default.createElement(_DateField.DateField, {
-    date: visualization.lastUpdated
-  })))));
-};
+const FileList = ({
+  data,
+  onSelect,
+  showVisTypeColumn
+}) => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, data.map(visualization => /*#__PURE__*/_react.default.createElement(_ui.DataTableRow, {
+  key: visualization.id
+}, /*#__PURE__*/_react.default.createElement(_ui.DataTableCell, {
+  onClick: () => onSelect(visualization.id)
+}, visualization.displayName), showVisTypeColumn && /*#__PURE__*/_react.default.createElement(_ui.DataTableCell, {
+  align: "center"
+}, /*#__PURE__*/_react.default.createElement(_VisTypeIcon.VisTypeIcon, {
+  type: visualization.type,
+  useSmall: true,
+  color: _ui.colors.grey600
+})), /*#__PURE__*/_react.default.createElement(_ui.DataTableCell, null, /*#__PURE__*/_react.default.createElement(_DateField.DateField, {
+  date: visualization.created
+})), /*#__PURE__*/_react.default.createElement(_ui.DataTableCell, null, /*#__PURE__*/_react.default.createElement(_DateField.DateField, {
+  date: visualization.lastUpdated
+})))));
 exports.FileList = FileList;
 FileList.propTypes = {
   data: _propTypes.default.arrayOf(_propTypes.default.shape({

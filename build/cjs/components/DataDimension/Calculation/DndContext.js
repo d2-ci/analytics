@@ -8,8 +8,7 @@ var _core = require("@dnd-kit/core");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _DraggingItem = _interopRequireDefault(require("./DraggingItem.js"));
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : i + ""; }
@@ -32,24 +31,21 @@ const getIntersectionRatio = (entry, target) => {
 
   return 0;
 };
-const sortCollisionsDesc = (_ref, _ref2) => {
-  let {
-    data: {
-      value: a
-    }
-  } = _ref;
-  let {
-    data: {
-      value: b
-    }
-  } = _ref2;
+const sortCollisionsDesc = ({
+  data: {
+    value: a
+  }
+}, {
+  data: {
+    value: b
+  }
+}) => {
   return b - a;
 };
-const rectIntersectionCustom = _ref3 => {
-  let {
-    pointerCoordinates,
-    droppableContainers
-  } = _ref3;
+const rectIntersectionCustom = ({
+  pointerCoordinates,
+  droppableContainers
+}) => {
   // create a rect around the pointerCoords for calculating the intersection
 
   const pointerRectWidth = 40;
@@ -97,22 +93,20 @@ const isInteractiveElement = el => {
 class PointerSensor extends _core.PointerSensor {}
 _defineProperty(PointerSensor, "activators", [{
   eventName: 'onPointerDown',
-  handler: _ref7 => {
-    let {
-      nativeEvent: event
-    } = _ref7;
+  handler: ({
+    nativeEvent: event
+  }) => {
     if (!event.isPrimary || event.button !== 0 || isInteractiveElement(event.target)) {
       return false;
     }
     return true;
   }
 }]);
-const OuterDndContext = _ref4 => {
-  let {
-    children,
-    onDragEnd,
-    onDragStart
-  } = _ref4;
+const OuterDndContext = ({
+  children,
+  onDragEnd,
+  onDragStart
+}) => {
   const [draggingItem, setDraggingItem] = (0, _react.useState)(null);
   const sensor = (0, _core.useSensor)(PointerSensor, {
     activationConstraint: {
@@ -120,22 +114,20 @@ const OuterDndContext = _ref4 => {
     }
   });
   const sensors = (0, _core.useSensors)(sensor);
-  const handleDragStart = _ref5 => {
-    let {
-      active
-    } = _ref5;
+  const handleDragStart = ({
+    active
+  }) => {
     setDraggingItem(active.data.current);
     onDragStart && onDragStart();
   };
   const handleDragCancel = () => {
     setDraggingItem(null);
   };
-  const handleDragEnd = _ref6 => {
+  const handleDragEnd = ({
+    active,
+    over
+  }) => {
     var _over$data, _over$data$current, _over$data$current$so, _over$data$current2, _over$data$current3;
-    let {
-      active,
-      over
-    } = _ref6;
     if (!(over !== null && over !== void 0 && over.id) || (over === null || over === void 0 ? void 0 : (_over$data = over.data) === null || _over$data === void 0 ? void 0 : (_over$data$current = _over$data.current) === null || _over$data$current === void 0 ? void 0 : (_over$data$current$so = _over$data$current.sortable) === null || _over$data$current$so === void 0 ? void 0 : _over$data$current$so.containerId) === OPTIONS_PANEL || !active.data.current) {
       // dropped over non-droppable or over options panel
       handleDragCancel();

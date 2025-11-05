@@ -9,11 +9,10 @@ var _react = _interopRequireDefault(require("react"));
 var _PivotTableCell = require("./PivotTableCell.js");
 var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PivotTableEmptyRow = _ref => {
-  let {
-    height,
-    columns
-  } = _ref;
+const PivotTableEmptyRow = ({
+  height,
+  columns
+}) => {
   const engine = (0, _PivotTableEngineContext.usePivotTableEngine)();
   return /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement(_PivotTableCell.PivotTableCell, {
     isHeader: true,

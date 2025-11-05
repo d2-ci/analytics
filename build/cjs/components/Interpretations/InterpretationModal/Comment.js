@@ -9,30 +9,32 @@ var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _index = require("../common/index.js");
+var _hooks = require("../InterpretationsProvider/hooks.js");
 var _CommentDeleteButton = require("./CommentDeleteButton.js");
 var _CommentUpdateForm = require("./CommentUpdateForm.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const Comment = _ref => {
-  let {
-    comment,
-    currentUser,
-    interpretationId,
-    onThreadUpdated,
-    canComment
-  } = _ref;
+const Comment = ({
+  comment,
+  canComment
+}) => {
   const [isUpdateMode, setIsUpdateMode] = (0, _react.useState)(false);
-  const commentAccess = (0, _index.getCommentAccess)(comment, canComment, currentUser);
+  const [commentText, setCommentText] = (0, _react.useState)(comment.text);
+  const onUpdateComplete = (0, _react.useCallback)(newText => {
+    setCommentText(newText);
+    setIsUpdateMode(false);
+  }, []);
+  const onUpdateCancel = (0, _react.useCallback)(() => {
+    setIsUpdateMode(false);
+  }, []);
+  const commentAccess = (0, _hooks.useCommentAccess)(comment, canComment);
   return isUpdateMode ? /*#__PURE__*/_react.default.createElement(_CommentUpdateForm.CommentUpdateForm, {
-    close: () => setIsUpdateMode(false),
-    commentId: comment.id,
-    interpretationId: interpretationId,
-    onComplete: () => onThreadUpdated(false),
-    text: comment.text,
-    currentUser: currentUser
+    onComplete: onUpdateComplete,
+    onCancel: onUpdateCancel,
+    id: comment.id,
+    text: commentText
   }) : /*#__PURE__*/_react.default.createElement(_index.Message, {
-    text: comment.text,
+    text: commentText,
     created: comment.created,
     username: comment.createdBy.displayName
   }, commentAccess.edit && /*#__PURE__*/_react.default.createElement(_index.MessageStatsBar, null, /*#__PURE__*/_react.default.createElement(_index.MessageIconButton, {
@@ -40,16 +42,11 @@ const Comment = _ref => {
     tooltipContent: _d2I18n.default.t('Edit'),
     onClick: () => setIsUpdateMode(true)
   }), commentAccess.delete && /*#__PURE__*/_react.default.createElement(_CommentDeleteButton.CommentDeleteButton, {
-    commentId: comment.id,
-    interpretationId: interpretationId,
-    onComplete: () => onThreadUpdated(true)
+    id: comment.id
   })));
 };
 exports.Comment = Comment;
 Comment.propTypes = {
   comment: _propTypes.default.object.isRequired,
-  currentUser: _propTypes.default.object.isRequired,
-  interpretationId: _propTypes.default.string.isRequired,
-  onThreadUpdated: _propTypes.default.func.isRequired,
   canComment: _propTypes.default.bool
 };

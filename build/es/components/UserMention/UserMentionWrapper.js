@@ -23,12 +23,11 @@ const getVirtualPopperReference = ref => {
     })
   };
 };
-export const UserMentionWrapper = _ref => {
-  let {
-    children,
-    inputReference,
-    onUserSelect
-  } = _ref;
+export const UserMentionWrapper = ({
+  children,
+  inputReference,
+  onUserSelect = Function.prototype
+}) => {
   const [listIsOpen, setListIsOpen] = useState(false);
   const [captureText, setCaptureText] = useState(false);
   const [capturedText, setCapturedText] = useState('');
@@ -61,10 +60,9 @@ export const UserMentionWrapper = _ref => {
   const onUserListClose = () => reset();
 
   // event bubbles up from the input/textarea
-  const onInput = _ref2 => {
-    let {
-      target
-    } = _ref2;
+  const onInput = ({
+    target
+  }) => {
     const {
       selectionEnd,
       value
@@ -83,11 +81,10 @@ export const UserMentionWrapper = _ref => {
   };
 
   // event bubbles up from the wrapped input/textarea
-  const onKeyDown = _ref3 => {
-    let {
-      key,
-      target
-    } = _ref3;
+  const onKeyDown = ({
+    key,
+    target
+  }) => {
     const {
       selectionStart
     } = target;
@@ -186,9 +183,6 @@ export const UserMentionWrapper = _ref => {
   })))))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: userMentionWrapperClasses.__hash
   }, userMentionWrapperClasses), resolvedHeaderStyle.styles);
-};
-UserMentionWrapper.defaultProps = {
-  onUserSelect: Function.prototype
 };
 UserMentionWrapper.propTypes = {
   inputReference: PropTypes.object.isRequired,

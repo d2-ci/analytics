@@ -6,15 +6,14 @@ import { usePivotTableEngine } from './PivotTableEngineContext.js';
 import { PivotTableHeaderCell } from './PivotTableHeaderCell.js';
 import { PivotTableSortIcon } from './PivotTableSortIcon.js';
 import { cell as cellStyle } from './styles/PivotTable.style.js';
-export const PivotTableColumnHeaderCell = _ref => {
+export const PivotTableColumnHeaderCell = ({
+  clippingResult,
+  index,
+  level,
+  onSortByColumn,
+  sortBy
+}) => {
   var _engine$adaptiveClipp;
-  let {
-    clippingResult,
-    index,
-    level,
-    onSortByColumn,
-    sortBy
-  } = _ref;
   const engine = usePivotTableEngine();
   const width = (_engine$adaptiveClipp = engine.adaptiveClippingController.columns.sizes[engine.columnMap[index]]) === null || _engine$adaptiveClipp === void 0 ? void 0 : _engine$adaptiveClipp.size;
   const height = engine.adaptiveClippingController.rows.headerSizes[level];
@@ -53,6 +52,9 @@ export const PivotTableColumnHeaderCell = _ref => {
         className: `jsx-${cellStyle.__hash}` + " " + "column-header-inner"
       }, /*#__PURE__*/React.createElement("span", {
         "data-test": "visualization-column-header",
+        style: {
+          ...header.style
+        },
         className: `jsx-${cellStyle.__hash}` + " " + "column-header-label"
       }, header.label), isSortable ? /*#__PURE__*/React.createElement(PivotTableSortIcon, {
         index: index,

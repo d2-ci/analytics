@@ -1,5 +1,5 @@
-import '@testing-library/jest-dom';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Editor } from '../Editor.js';
 const mockConvertCtrlKey = jest.fn();
@@ -20,16 +20,15 @@ describe('RichText: Editor component', () => {
   const renderComponent = props => {
     return render(/*#__PURE__*/React.createElement(Editor, props));
   };
-  it('renders a result', () => {
+  test('renders a result', () => {
     renderComponent(componentProps);
     expect(screen.getByTestId('@dhis2-analytics-richtexteditor')).toBeVisible();
   });
-  it('calls convertCtrlKey on keydown', () => {
+  test('calls convertCtrlKey on keydown', async () => {
+    const user = userEvent.setup();
     renderComponent(componentProps);
-    fireEvent.keyDown(screen.getByRole('textbox'), {
-      key: 'A',
-      code: 'keyA'
-    });
+    await user.click(screen.getByRole('textbox'));
+    await user.keyboard('A');
     expect(mockConvertCtrlKey).toHaveBeenCalled();
   });
 });

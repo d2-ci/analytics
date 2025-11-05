@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.WithMenu = exports.SelectedDimension = exports.RecommendedDimension = exports.LockedDimension = exports.FixedDimensionsOnly = exports.FixedAndDynamicDimensions = exports.DynamicDimensionsOnly = exports.DisabledDimension = void 0;
+exports.default = exports.WithMenu = exports.TextWrapping = exports.SelectedDimension = exports.RecommendedDimension = exports.LockedDimension = exports.FixedDimensionsOnly = exports.FixedAndDynamicDimensions = exports.DynamicDimensionsOnly = exports.DisabledDimension = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _DimensionsPanel = _interopRequireDefault(require("../components/DimensionsPanel/DimensionsPanel.js"));
 var _predefinedDimensions = require("../modules/predefinedDimensions.js");
@@ -20,13 +20,16 @@ const fixedDimensions = [{
 }];
 const dynamicDimensions = [{
   id: '0000001',
-  name: 'One'
+  name: 'Dietary diversity score based on variety of consumed food groups over a weekly period'
 }, {
   id: '0000002',
-  name: 'Two'
+  name: 'Healthcare services access and utilization frequency including preventive check-ups and specialist care'
 }, {
   id: '0000003',
-  name: 'Three'
+  name: 'Sleep quality index incorporating duration, time to sleep, frequency of awakenings, and restfulness'
+}, {
+  id: '0000004',
+  name: 'Malaria incidence rate'
 }];
 const onDimensionClick = () => alert('click');
 var _default = exports.default = {
@@ -120,4 +123,26 @@ const WithMenu = () => {
 exports.WithMenu = WithMenu;
 WithMenu.story = {
   name: 'with menu'
+};
+const TextWrapping = () => {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: '260px',
+      height: '400px',
+      borderInlineEnd: '1px dotted #CCC',
+      resize: 'both',
+      overflow: 'auto'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_DimensionsPanel.default, {
+    dimensions: [...fixedDimensions, ...dynamicDimensions],
+    onDimensionClick: onDimensionClick,
+    onDimensionOptionsClick: () => alert('options click'),
+    recommendedDimension: dimension => dimension === '0000002',
+    lockedDimension: dimension => dimension === '0000003',
+    selectedIds: ['0000003', '0000002']
+  }));
+};
+exports.TextWrapping = TextWrapping;
+TextWrapping.story = {
+  name: 'text wrapping'
 };

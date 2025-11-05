@@ -8,8 +8,8 @@ const Wrapper = story => /*#__PURE__*/React.createElement(ConfigProvider, {
     systemInfo: {}
   }
 }, /*#__PURE__*/React.createElement(DataProvider, {
-  baseUrl: "https://test.e2e.dhis2.org/analytics-41dev/",
-  apiVersion: "41"
+  baseUrl: "https://test.e2e.dhis2.org/anly-42/",
+  apiVersion: "42"
 }, story()));
 const selectedPeriods = [{
   id: 'LAST_12_MONTHS',

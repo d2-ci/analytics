@@ -15,13 +15,12 @@ var _FormulaItemStyle = _interopRequireDefault(require("./styles/FormulaItem.sty
 var _OperatorStyle = _interopRequireDefault(require("./styles/Operator.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const Operator = _ref => {
-  let {
-    label,
-    value,
-    type,
-    onDoubleClick
-  } = _ref;
+const Operator = ({
+  label,
+  value,
+  type,
+  onDoubleClick
+}) => {
   const data = {
     label,
     value,

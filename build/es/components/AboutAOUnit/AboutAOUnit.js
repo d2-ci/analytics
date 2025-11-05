@@ -15,24 +15,18 @@ const READ_AND_WRITE = 'rw';
 const getQueries = type => ({
   ao: {
     resource: AOTypeMap[type].apiEndpoint,
-    id: _ref => {
-      let {
-        id
-      } = _ref;
-      return id;
-    },
+    id: ({
+      id
+    }) => id,
     params: {
       fields: 'id,displayDescription,created,createdBy[displayName],lastUpdated,subscribed,sharing'
     }
   },
   dataStatistics: {
     resource: 'dataStatistics/favorites',
-    id: _ref2 => {
-      let {
-        id
-      } = _ref2;
-      return id;
-    }
+    id: ({
+      id
+    }) => id
   }
 });
 const getSubscribeMutation = (type, id) => ({
@@ -43,13 +37,12 @@ const getUnsubscribeMutation = (type, id) => ({
   resource: `${AOTypeMap[type].apiEndpoint}/${id}/subscriber`,
   type: 'delete'
 });
-const AboutAOUnit = /*#__PURE__*/forwardRef((_ref3, ref) => {
+const AboutAOUnit = /*#__PURE__*/forwardRef(({
+  type,
+  id,
+  renderId
+}, ref) => {
   var _data$ao$createdBy;
-  let {
-    type,
-    id,
-    renderId
-  } = _ref3;
   const [isExpanded, setIsExpanded] = useState(true);
   const {
     fromServerDate

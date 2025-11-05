@@ -198,8 +198,7 @@ function gaussianElimination(a, o) {
 //              N * Σ(X^2) - Σ(X)^2
 //
 // correlation = N * Σ(XY) - Σ(X) * Σ (Y) / √ (  N * Σ(X^2) - Σ(X) ) * ( N * Σ(Y^2) - Σ(Y)^2 ) ) )
-function linear(data) {
-  let decimalPlaces = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+function linear(data, decimalPlaces = 2) {
   const sum = [0, 0, 0, 0, 0],
     results = [];
   let N = data.length;
@@ -248,10 +247,7 @@ function linear(data) {
 }
 
 // Code extracted from https://github.com/Tom-Alexander/regression-js/
-function polynomial(data) {
-  let order = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
-  let extrapolate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-  let decimalPlaces = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 2;
+function polynomial(data, order = 2, extrapolate = 0, decimalPlaces = 2) {
   const lhs = [],
     rhs = [],
     results = [],
@@ -332,8 +328,7 @@ function polynomial(data) {
 // Based on
 // - http://commons.apache.org/proper/commons-math/download_math.cgi LoesInterpolator.java
 // - https://gist.github.com/avibryant/1151823
-function loess(data) {
-  let bandwidth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.25;
+function loess(data, bandwidth = 0.25) {
   const xval = data.map(pair => {
     return pair[0];
   });

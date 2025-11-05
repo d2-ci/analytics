@@ -5,16 +5,15 @@ import React, { useEffect, useState } from 'react';
 import { TranslationForm } from './TranslationForm.js';
 import { TranslationModalActions } from './TranslationModalActions.js';
 import { useTranslationsResults } from './useTranslationsResults.js';
-export const TranslationModal = _ref => {
-  let {
-    objectToTranslate,
-    fieldsToTranslate,
-    onClose,
-    onTranslationSaved
-  } = _ref;
+export const TranslationModal = ({
+  objectToTranslate,
+  fieldsToTranslate,
+  onClose,
+  onTranslationSaved
+}) => {
   const [translations, setTranslations] = useState([]);
   const endpointPath = new URL(objectToTranslate.href).pathname;
-  const endpointPathMatch = endpointPath.match(/api\/\d+\/(?<resource>.+)/);
+  const endpointPathMatch = endpointPath.match(/api\/(?:\d+\/)?(?<resource>.+)/);
   const resource = endpointPathMatch !== null && endpointPathMatch !== void 0 && endpointPathMatch.groups ? endpointPathMatch.groups.resource : null;
   const {
     translationsData,
@@ -30,7 +29,8 @@ export const TranslationModal = _ref => {
   return /*#__PURE__*/React.createElement(Modal, {
     large: true,
     position: "middle",
-    onClose: onClose
+    onClose: onClose,
+    dataTest: "dhis2-analytics-translation-modal"
   }, /*#__PURE__*/React.createElement(ModalTitle, null, i18n.t('Translate: {{objectName}}', {
     objectName: objectToTranslate.name || 'TEXT',
     // XXX

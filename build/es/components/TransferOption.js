@@ -4,21 +4,20 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './styles/TransferOption.style.js';
-export const TransferOption = _ref => {
-  let {
-    disabled,
-    label,
-    highlighted,
-    selected,
-    onClick,
-    onDoubleClick,
-    value,
-    icon,
-    active,
-    tooltipText,
-    dataTest,
-    onEditClick
-  } = _ref;
+export const TransferOption = ({
+  disabled,
+  label,
+  highlighted,
+  selected,
+  onClick,
+  onDoubleClick,
+  value,
+  icon,
+  active,
+  tooltipText,
+  dataTest,
+  onEditClick
+}) => {
   const renderContent = () => /*#__PURE__*/React.createElement("div", {
     "data-test": `${dataTest}-content`,
     onClick: event => {

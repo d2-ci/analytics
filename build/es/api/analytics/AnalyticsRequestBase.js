@@ -12,17 +12,16 @@ import { customEncodeURIComponent } from './utils.js';
  * @abstract
  */
 class AnalyticsRequestBase {
-  constructor() {
-    let {
-      endPoint = 'analytics',
-      format = 'json',
-      path,
-      program,
-      trackedEntityType,
-      dimensions = [],
-      filters = [],
-      parameters = {}
-    } = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  constructor({
+    endPoint = 'analytics',
+    format = 'json',
+    path,
+    program,
+    trackedEntityType,
+    dimensions = [],
+    filters = [],
+    parameters = {}
+  } = {}) {
     this.endPoint = endPoint;
     this.format = format.toLowerCase();
     this.path = path;
@@ -52,11 +51,10 @@ class AnalyticsRequestBase {
     if (dimensions.length && options !== null && options !== void 0 && options.sorted) {
       dimensions = sortBy(dimensions, 'dimension');
     }
-    const encodedDimensions = dimensions.map(_ref => {
-      let {
-        dimension,
-        items
-      } = _ref;
+    const encodedDimensions = dimensions.map(({
+      dimension,
+      items
+    }) => {
       if (Array.isArray(items) && items.length) {
         const encodedItems = items.map(customEncodeURIComponent);
         if (options !== null && options !== void 0 && options.sorted) {
@@ -92,11 +90,10 @@ class AnalyticsRequestBase {
     if (filters.length && options !== null && options !== void 0 && options.sorted) {
       filters = sortBy(filters, 'dimension');
     }
-    const encodedFilters = filters.map(_ref2 => {
-      let {
-        dimension,
-        items
-      } = _ref2;
+    const encodedFilters = filters.map(({
+      dimension,
+      items
+    }) => {
       if (Array.isArray(items) && items.length) {
         const encodedItems = items.map(customEncodeURIComponent);
         if (options !== null && options !== void 0 && options.sorted) {

@@ -12,14 +12,8 @@ export const getMedian = values => {
 
 // Absolute deviation
 
-export const getMedianAbsoluteDeviation = function (values) {
-  let median = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : getMedian(values);
-  return getMedian(values.map(value => Math.abs(value - median)).sort((a, b) => a - b));
-};
-export const getMeanAbsoluteDeviation = function (values) {
-  let mean = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : getMean(values);
-  return getMean(values.map(value => Math.abs(value - mean)));
-};
+export const getMedianAbsoluteDeviation = (values, median = getMedian(values)) => getMedian(values.map(value => Math.abs(value - median)).sort((a, b) => a - b));
+export const getMeanAbsoluteDeviation = (values, mean = getMean(values)) => getMean(values.map(value => Math.abs(value - mean)));
 
 // Modified z-scores
 
@@ -30,8 +24,7 @@ export const getModZScoreMAD0 = (value, median, meanAD) => (value - median) / (m
 
 export const getModZScoreThresholds = (thresholdFactor, medianAD, median) => [median - medianAD * thresholdFactor / MEDIAN_AD_CORRECTION, median + medianAD * thresholdFactor / MEDIAN_AD_CORRECTION];
 export const getModZScoreMAD0Thresholds = (thresholdFactor, meanAD, median) => [median - thresholdFactor * meanAD * MEAN_AD_CORRECTION, median + thresholdFactor * meanAD * MEAN_AD_CORRECTION];
-export const getDataWithZScore = function (dataWithNormalization) {
-  let cache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+export const getDataWithZScore = (dataWithNormalization, cache = {}) => {
   const normalizedData = cache.normalizedData || dataWithNormalization.map(obj => obj.normalized);
   const median = isNumber(cache.median) ? cache.median : getMedian(normalizedData);
   const medianAD = isNumber(cache.medianAD) ? cache.medianAD : getMedianAbsoluteDeviation();
@@ -50,10 +43,9 @@ export const getDataWithZScore = function (dataWithNormalization) {
   }
   return dataWithZScore;
 };
-export const getModZScoreHelper = (normalizationHelper, config, _ref) => {
-  let {
-    xyStats
-  } = _ref;
+export const getModZScoreHelper = (normalizationHelper, config, {
+  xyStats
+}) => {
   const sortedNormalized = normalizationHelper.normalized.slice().sort((a, b) => a - b);
   const median = getMedian(sortedNormalized);
   const medianAD = getMedianAbsoluteDeviation(sortedNormalized, median);

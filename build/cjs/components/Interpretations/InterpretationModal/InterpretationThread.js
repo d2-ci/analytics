@@ -12,38 +12,35 @@ var _moment = _interopRequireDefault(require("moment"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _index = require("../common/index.js");
+var _hooks = require("../InterpretationsProvider/hooks.js");
 var _Comment = require("./Comment.js");
 var _CommentAddForm = require("./CommentAddForm.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const InterpretationThread = _ref => {
-  let {
-    currentUser,
-    fetching,
-    interpretation,
-    onInterpretationDeleted,
-    onLikeToggled,
-    initialFocus,
-    onThreadUpdated,
-    downloadMenuComponent: DownloadMenu,
-    dashboardRedirectUrl
-  } = _ref;
+const InterpretationThread = ({
+  loading,
+  interpretation,
+  onInterpretationDeleted,
+  initialFocus,
+  downloadMenuComponent: DownloadMenu,
+  dashboardRedirectUrl
+}) => {
+  const currentUser = (0, _hooks.useInterpretationsCurrentUser)();
   const {
     fromServerDate
   } = (0, _appRuntime.useTimeZoneConversion)();
   const focusRef = (0, _react.useRef)();
   (0, _react.useEffect)(() => {
     if (initialFocus && focusRef.current) {
-      window.requestAnimationFrame(() => {
+      window.setTimeout(() => {
         focusRef.current.focus();
-      });
+      }, 25);
     }
   }, [initialFocus]);
   const interpretationAccess = (0, _index.getInterpretationAccess)(interpretation, currentUser);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "jsx-3292109121" + " " + ((0, _classnames.default)('container', {
-      fetching,
+      fetching: loading,
       dashboard: !!dashboardRedirectUrl
     }) || "")
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -56,30 +53,21 @@ const InterpretationThread = _ref => {
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "jsx-3292109121" + " " + 'thread'
   }, /*#__PURE__*/_react.default.createElement(_index.Interpretation, {
-    currentUser: currentUser,
-    interpretation: interpretation,
-    onLikeToggled: onLikeToggled,
+    id: interpretation.id,
     onReplyIconClick: interpretationAccess.comment ? () => {
       var _focusRef$current;
       return (_focusRef$current = focusRef.current) === null || _focusRef$current === void 0 ? void 0 : _focusRef$current.focus();
     } : null,
-    onUpdated: () => onThreadUpdated(true),
-    onDeleted: onInterpretationDeleted,
     dashboardRedirectUrl: dashboardRedirectUrl,
-    isInThread: true
+    isInThread: true,
+    onDeleted: onInterpretationDeleted
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "jsx-3292109121" + " " + 'comments'
   }, interpretation.comments.map(comment => /*#__PURE__*/_react.default.createElement(_Comment.Comment, {
     key: comment.id,
     comment: comment,
-    currentUser: currentUser,
-    interpretationId: interpretation.id,
-    onThreadUpdated: onThreadUpdated,
     canComment: interpretationAccess.comment
   })))), interpretationAccess.comment && /*#__PURE__*/_react.default.createElement(_CommentAddForm.CommentAddForm, {
-    currentUser: currentUser,
-    interpretationId: interpretation.id,
-    onSave: () => onThreadUpdated(true),
     focusRef: focusRef
   }), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: "3292109121"
@@ -87,13 +75,10 @@ const InterpretationThread = _ref => {
 };
 exports.InterpretationThread = InterpretationThread;
 InterpretationThread.propTypes = {
-  currentUser: _propTypes.default.object.isRequired,
-  fetching: _propTypes.default.bool.isRequired,
   interpretation: _propTypes.default.object.isRequired,
+  loading: _propTypes.default.bool.isRequired,
   onInterpretationDeleted: _propTypes.default.func.isRequired,
-  onLikeToggled: _propTypes.default.func.isRequired,
   dashboardRedirectUrl: _propTypes.default.string,
   downloadMenuComponent: _propTypes.default.oneOfType([_propTypes.default.object, _propTypes.default.func]),
-  initialFocus: _propTypes.default.bool,
-  onThreadUpdated: _propTypes.default.func
+  initialFocus: _propTypes.default.bool
 };

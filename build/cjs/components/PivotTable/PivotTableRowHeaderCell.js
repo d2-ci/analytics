@@ -10,13 +10,12 @@ var _PivotTableCell = require("./PivotTableCell.js");
 var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 var _PivotTableHeaderCell = require("./PivotTableHeaderCell.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PivotTableRowHeaderCell = _ref => {
+const PivotTableRowHeaderCell = ({
+  clippingResult,
+  rowIndex,
+  rowLevel
+}) => {
   var _engine$adaptiveClipp;
-  let {
-    clippingResult,
-    rowIndex,
-    rowLevel
-  } = _ref;
   const engine = (0, _PivotTableEngineContext.usePivotTableEngine)();
   const width = engine.adaptiveClippingController.columns.headerSizes[rowLevel];
   const height = (_engine$adaptiveClipp = engine.adaptiveClippingController.rows.sizes[engine.rowMap[rowIndex]]) === null || _engine$adaptiveClipp === void 0 ? void 0 : _engine$adaptiveClipp.size;
@@ -38,7 +37,8 @@ const PivotTableRowHeaderCell = _ref => {
         height,
         left: rowLevel > 0 ?
         // calculate the width of all row header cells on the left of current cell
-        engine.adaptiveClippingController.columns.headerSizes.slice(0, rowLevel).reduce((width, acc) => acc += width, 0) : 0
+        engine.adaptiveClippingController.columns.headerSizes.slice(0, rowLevel).reduce((width, acc) => acc += width, 0) : 0,
+        ...header.style
       },
       dataTest: "visualization-row-header"
     }, header.label)

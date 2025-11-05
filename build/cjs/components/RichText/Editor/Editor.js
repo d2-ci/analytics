@@ -14,88 +14,78 @@ var _UserMentionWrapper = require("../../UserMention/UserMentionWrapper.js");
 var _Parser = require("../Parser/Parser.js");
 var _markdownHandler = require("./markdownHandler.js");
 var _EditorStyle = require("./styles/Editor.style.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const EmojisPopover = _ref => {
-  let {
-    onInsertMarkdown,
-    onClose,
-    reference
-  } = _ref;
-  return /*#__PURE__*/_react.default.createElement(_ui.Popover, {
-    reference: reference,
-    onClickOutside: onClose
-  }, /*#__PURE__*/_react.default.createElement("ul", {
-    className: `jsx-${_EditorStyle.emojisPopoverClasses.__hash}` + " " + "emojisList"
-  }, /*#__PURE__*/_react.default.createElement("li", {
-    onClick: () => onInsertMarkdown(_markdownHandler.EMOJI_SMILEY_FACE),
-    className: `jsx-${_EditorStyle.emojisPopoverClasses.__hash}`
-  }, /*#__PURE__*/_react.default.createElement(_Parser.Parser, null, _markdownHandler.emojis[_markdownHandler.EMOJI_SMILEY_FACE])), /*#__PURE__*/_react.default.createElement("li", {
-    onClick: () => onInsertMarkdown(_markdownHandler.EMOJI_SAD_FACE),
-    className: `jsx-${_EditorStyle.emojisPopoverClasses.__hash}`
-  }, /*#__PURE__*/_react.default.createElement(_Parser.Parser, null, _markdownHandler.emojis[_markdownHandler.EMOJI_SAD_FACE])), /*#__PURE__*/_react.default.createElement("li", {
-    onClick: () => onInsertMarkdown(_markdownHandler.EMOJI_THUMBS_UP),
-    className: `jsx-${_EditorStyle.emojisPopoverClasses.__hash}`
-  }, /*#__PURE__*/_react.default.createElement(_Parser.Parser, null, _markdownHandler.emojis[_markdownHandler.EMOJI_THUMBS_UP])), /*#__PURE__*/_react.default.createElement("li", {
-    onClick: () => onInsertMarkdown(_markdownHandler.EMOJI_THUMBS_DOWN),
-    className: `jsx-${_EditorStyle.emojisPopoverClasses.__hash}`
-  }, /*#__PURE__*/_react.default.createElement(_Parser.Parser, null, _markdownHandler.emojis[_markdownHandler.EMOJI_THUMBS_DOWN]))), /*#__PURE__*/_react.default.createElement(_style.default, {
-    id: _EditorStyle.emojisPopoverClasses.__hash
-  }, _EditorStyle.emojisPopoverClasses));
-};
+const EmojisPopover = ({
+  onInsertMarkdown,
+  onClose,
+  reference
+}) => /*#__PURE__*/_react.default.createElement(_ui.Popover, {
+  reference: reference,
+  onClickOutside: onClose
+}, /*#__PURE__*/_react.default.createElement("ul", {
+  className: `jsx-${_EditorStyle.emojisPopoverClasses.__hash}` + " " + "emojisList"
+}, /*#__PURE__*/_react.default.createElement("li", {
+  onClick: () => onInsertMarkdown(_markdownHandler.EMOJI_SMILEY_FACE),
+  className: `jsx-${_EditorStyle.emojisPopoverClasses.__hash}`
+}, /*#__PURE__*/_react.default.createElement(_Parser.Parser, null, _markdownHandler.emojis[_markdownHandler.EMOJI_SMILEY_FACE])), /*#__PURE__*/_react.default.createElement("li", {
+  onClick: () => onInsertMarkdown(_markdownHandler.EMOJI_SAD_FACE),
+  className: `jsx-${_EditorStyle.emojisPopoverClasses.__hash}`
+}, /*#__PURE__*/_react.default.createElement(_Parser.Parser, null, _markdownHandler.emojis[_markdownHandler.EMOJI_SAD_FACE])), /*#__PURE__*/_react.default.createElement("li", {
+  onClick: () => onInsertMarkdown(_markdownHandler.EMOJI_THUMBS_UP),
+  className: `jsx-${_EditorStyle.emojisPopoverClasses.__hash}`
+}, /*#__PURE__*/_react.default.createElement(_Parser.Parser, null, _markdownHandler.emojis[_markdownHandler.EMOJI_THUMBS_UP])), /*#__PURE__*/_react.default.createElement("li", {
+  onClick: () => onInsertMarkdown(_markdownHandler.EMOJI_THUMBS_DOWN),
+  className: `jsx-${_EditorStyle.emojisPopoverClasses.__hash}`
+}, /*#__PURE__*/_react.default.createElement(_Parser.Parser, null, _markdownHandler.emojis[_markdownHandler.EMOJI_THUMBS_DOWN]))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  id: _EditorStyle.emojisPopoverClasses.__hash
+}, _EditorStyle.emojisPopoverClasses));
 EmojisPopover.propTypes = {
   onClose: _propTypes.default.func.isRequired,
   onInsertMarkdown: _propTypes.default.func.isRequired,
   reference: _propTypes.default.object
 };
-const IconButtonWithTooltip = _ref2 => {
-  let {
-    tooltipContent,
-    disabled,
-    icon,
-    onClick
-  } = _ref2;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ui.Tooltip, {
-    content: tooltipContent,
-    placement: "bottom",
-    closeDelay: 200
-  }, _ref3 => {
-    let {
-      ref,
-      onMouseOver,
-      onMouseOut
-    } = _ref3;
-    return /*#__PURE__*/_react.default.createElement("span", {
-      ref: ref,
-      onMouseOver: onMouseOver,
-      onMouseOut: onMouseOut,
-      className: `jsx-${_EditorStyle.tooltipAnchorClasses.__hash}` + " " + "tooltip"
-    }, /*#__PURE__*/_react.default.createElement(_ui.Button, {
-      secondary: true,
-      small: true,
-      disabled: disabled,
-      icon: icon,
-      onClick: onClick
-    }));
-  }), /*#__PURE__*/_react.default.createElement(_style.default, {
-    id: _EditorStyle.tooltipAnchorClasses.__hash
-  }, _EditorStyle.tooltipAnchorClasses));
-};
+const IconButtonWithTooltip = ({
+  tooltipContent,
+  disabled,
+  icon,
+  onClick
+}) => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ui.Tooltip, {
+  content: tooltipContent,
+  placement: "bottom",
+  closeDelay: 200
+}, ({
+  ref,
+  onMouseOver,
+  onMouseOut
+}) => /*#__PURE__*/_react.default.createElement("span", {
+  ref: ref,
+  onMouseOver: onMouseOver,
+  onMouseOut: onMouseOut,
+  className: `jsx-${_EditorStyle.tooltipAnchorClasses.__hash}` + " " + "tooltip"
+}, /*#__PURE__*/_react.default.createElement(_ui.Button, {
+  secondary: true,
+  small: true,
+  disabled: disabled,
+  icon: icon,
+  onClick: onClick,
+  "aria-label": tooltipContent
+}))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  id: _EditorStyle.tooltipAnchorClasses.__hash
+}, _EditorStyle.tooltipAnchorClasses));
 IconButtonWithTooltip.propTypes = {
   disabled: _propTypes.default.bool,
   icon: _propTypes.default.node,
   tooltipContent: _propTypes.default.string,
   onClick: _propTypes.default.func
 };
-const Toolbar = _ref4 => {
-  let {
-    disabled,
-    onInsertMarkdown,
-    onTogglePreview,
-    previewButtonDisabled,
-    previewMode
-  } = _ref4;
+const Toolbar = ({
+  disabled,
+  onInsertMarkdown,
+  onTogglePreview,
+  previewButtonDisabled,
+  previewMode
+}) => {
   const emojisButtonRef = (0, _react.useRef)();
   const [emojisPopoverIsOpen, setEmojisPopoverIsOpen] = (0, _react.useState)(false);
   const iconColor = disabled ? _ui.colors.grey600 : _ui.colors.grey700;
@@ -177,17 +167,16 @@ Toolbar.propTypes = {
   onTogglePreview: _propTypes.default.func.isRequired,
   disabled: _propTypes.default.bool
 };
-const Editor = exports.Editor = /*#__PURE__*/(0, _react.forwardRef)((_ref5, externalRef) => {
-  let {
-    value,
-    disabled,
-    inputPlaceholder,
-    onChange,
-    errorText,
-    helpText,
-    initialFocus,
-    resizable
-  } = _ref5;
+const Editor = exports.Editor = /*#__PURE__*/(0, _react.forwardRef)(({
+  value,
+  disabled,
+  inputPlaceholder,
+  onChange,
+  errorText,
+  helpText,
+  initialFocus = true,
+  resizable = true
+}, externalRef) => {
   const [previewMode, setPreviewMode] = (0, _react.useState)(false);
   const internalRef = (0, _react.useRef)();
   const textareaRef = externalRef || internalRef;
@@ -251,10 +240,6 @@ const Editor = exports.Editor = /*#__PURE__*/(0, _react.forwardRef)((_ref5, exte
   }, _EditorStyle.mainClasses));
 });
 Editor.displayName = 'Editor';
-Editor.defaultProps = {
-  initialFocus: true,
-  resizable: true
-};
 Editor.propTypes = {
   value: _propTypes.default.string.isRequired,
   onChange: _propTypes.default.func.isRequired,

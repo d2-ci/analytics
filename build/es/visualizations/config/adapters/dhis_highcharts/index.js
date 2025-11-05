@@ -1,5 +1,6 @@
 import isString from 'd2-utilizr/lib/isString';
 import objectClean from 'd2-utilizr/lib/objectClean';
+import { HIDE_EMPTY_ROW_ITEMS_AFTER_LAST, HIDE_EMPTY_ROW_ITEMS_ALL, HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST, HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST } from '../../../../modules/hideEmptyRowItems.js';
 import { LEGEND_DISPLAY_STRATEGY_BY_DATA_ITEM, LEGEND_DISPLAY_STRATEGY_FIXED } from '../../../../modules/legends.js';
 import { getOutlierHelper } from '../../../../modules/outliers/index.js';
 import { isStacked, isLegendSetType, VIS_TYPE_SCATTER, VIS_TYPE_GAUGE, VIS_TYPE_LINE } from '../../../../modules/visTypes.js';
@@ -32,15 +33,14 @@ const getTransformedExtraOptions = extraOptions => ({
   ...extraOptions,
   multiAxisTheme: extraOptions.multiAxisTheme || defaultMultiAxisTheme1
 });
-export default function (_ref) {
+export default function ({
+  store,
+  layout,
+  el,
+  extraConfig,
+  extraOptions
+}) {
   var _layout$legend, _layout$seriesKey, _layout$seriesKey2, _layout$seriesKey2$la, _config$xAxis;
-  let {
-    store,
-    layout,
-    el,
-    extraConfig,
-    extraOptions
-  } = _ref;
   const _layout = getTransformedLayout(layout);
   const _extraOptions = getTransformedExtraOptions(extraOptions);
   const stacked = isStacked(_layout.type);
@@ -97,7 +97,7 @@ export default function (_ref) {
       enabled: false
     },
     // exporting
-    exporting: getExporting(_layout.type),
+    exporting: getExporting(_layout, _extraOptions.legendSets, series),
     /* The config object passed to the Highcharts Chart constructor
      * can contain arbitrary properties, which are made accessible
      * under the Chart instance's `userOptions` member. This means
@@ -135,7 +135,7 @@ export default function (_ref) {
   }
 
   // hide empty categories
-  if (_layout.hideEmptyRowItems !== 'NONE') {
+  if (_layout.hideEmptyRowItems && [HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST, HIDE_EMPTY_ROW_ITEMS_AFTER_LAST, HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST, HIDE_EMPTY_ROW_ITEMS_ALL].includes(_layout.hideEmptyRowItems)) {
     config = getTrimmedConfig(config, _layout);
   }
 
@@ -185,6 +185,5 @@ export default function (_ref) {
 
   // force apply extra config
   Object.assign(config, extraConfig);
-  console.log(objectClean(config));
   return objectClean(config);
 }

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = _default;
 var _isString = _interopRequireDefault(require("d2-utilizr/lib/isString"));
 var _objectClean = _interopRequireDefault(require("d2-utilizr/lib/objectClean"));
+var _hideEmptyRowItems = require("../../../../modules/hideEmptyRowItems.js");
 var _legends = require("../../../../modules/legends.js");
 var _index = require("../../../../modules/outliers/index.js");
 var _visTypes = require("../../../../modules/visTypes.js");
@@ -28,8 +29,7 @@ var _index6 = _interopRequireDefault(require("./subtitle/index.js"));
 var _index7 = _interopRequireDefault(require("./title/index.js"));
 var _index8 = _interopRequireDefault(require("./xAxis/index.js"));
 var _index9 = _interopRequireDefault(require("./yAxis/index.js"));
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getTransformedLayout = layout => ({
   ...layout,
@@ -41,15 +41,14 @@ const getTransformedExtraOptions = extraOptions => ({
   ...extraOptions,
   multiAxisTheme: extraOptions.multiAxisTheme || _themes.defaultMultiAxisTheme1
 });
-function _default(_ref) {
+function _default({
+  store,
+  layout,
+  el,
+  extraConfig,
+  extraOptions
+}) {
   var _layout$legend, _layout$seriesKey, _layout$seriesKey2, _layout$seriesKey2$la, _config$xAxis;
-  let {
-    store,
-    layout,
-    el,
-    extraConfig,
-    extraOptions
-  } = _ref;
   const _layout = getTransformedLayout(layout);
   const _extraOptions = getTransformedExtraOptions(extraOptions);
   const stacked = (0, _visTypes.isStacked)(_layout.type);
@@ -106,7 +105,7 @@ function _default(_ref) {
       enabled: false
     },
     // exporting
-    exporting: (0, _exporting.default)(_layout.type),
+    exporting: (0, _exporting.default)(_layout, _extraOptions.legendSets, series),
     /* The config object passed to the Highcharts Chart constructor
      * can contain arbitrary properties, which are made accessible
      * under the Chart instance's `userOptions` member. This means
@@ -144,7 +143,7 @@ function _default(_ref) {
   }
 
   // hide empty categories
-  if (_layout.hideEmptyRowItems !== 'NONE') {
+  if (_layout.hideEmptyRowItems && [_hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST, _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_AFTER_LAST, _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST, _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_ALL].includes(_layout.hideEmptyRowItems)) {
     config = (0, _getTrimmedConfig.default)(config, _layout);
   }
 
@@ -194,6 +193,5 @@ function _default(_ref) {
 
   // force apply extra config
   Object.assign(config, extraConfig);
-  console.log((0, _objectClean.default)(config));
   return (0, _objectClean.default)(config);
 }

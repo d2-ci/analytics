@@ -17,16 +17,19 @@ var _exportNames = {
   PivotTable: true,
   FileMenu: true,
   preparePayloadForSaveAs: true,
+  preparePayloadForSave: true,
   VisTypeIcon: true,
   LegendKey: true,
   AboutAOUnit: true,
+  DashboardItemInterpretations: true,
   InterpretationsUnit: true,
+  InterpretationsProvider: true,
   InterpretationModal: true,
-  InterpretationThread: true,
   TranslationDialog: true,
   OfflineTooltip: true,
   CachedDataQueryProvider: true,
   useCachedDataQuery: true,
+  DashboardPluginWrapper: true,
   Analytics: true,
   apiFetchDimensions: true,
   apiFetchRecommendedIds: true,
@@ -70,6 +73,17 @@ var _exportNames = {
   layoutHasDimension: true,
   layoutHasDynamicDimension: true,
   layoutHasPeriodDimension: true,
+  VALUE_TYPE_TEXT: true,
+  VALUE_TYPE_LONG_TEXT: true,
+  VALUE_TYPE_MULTI_TEXT: true,
+  VALUE_TYPE_LETTER: true,
+  VALUE_TYPE_PHONE_NUMBER: true,
+  VALUE_TYPE_EMAIL: true,
+  VALUE_TYPE_BOOLEAN: true,
+  VALUE_TYPE_TRUE_ONLY: true,
+  VALUE_TYPE_DATE: true,
+  VALUE_TYPE_DATETIME: true,
+  VALUE_TYPE_TIME: true,
   VALUE_TYPE_NUMBER: true,
   VALUE_TYPE_UNIT_INTERVAL: true,
   VALUE_TYPE_PERCENTAGE: true,
@@ -77,20 +91,17 @@ var _exportNames = {
   VALUE_TYPE_INTEGER_POSITIVE: true,
   VALUE_TYPE_INTEGER_NEGATIVE: true,
   VALUE_TYPE_INTEGER_ZERO_OR_POSITIVE: true,
-  VALUE_TYPE_TEXT: true,
-  VALUE_TYPE_LONG_TEXT: true,
-  VALUE_TYPE_LETTER: true,
-  VALUE_TYPE_PHONE_NUMBER: true,
-  VALUE_TYPE_EMAIL: true,
+  VALUE_TYPE_TRACKER_ASSOCIATE: true,
   VALUE_TYPE_USERNAME: true,
-  VALUE_TYPE_URL: true,
-  VALUE_TYPE_BOOLEAN: true,
-  VALUE_TYPE_TRUE_ONLY: true,
-  VALUE_TYPE_DATE: true,
-  VALUE_TYPE_TIME: true,
-  VALUE_TYPE_DATETIME: true,
+  VALUE_TYPE_COORDINATE: true,
   VALUE_TYPE_ORGANISATION_UNIT: true,
+  VALUE_TYPE_REFERENCE: true,
   VALUE_TYPE_AGE: true,
+  VALUE_TYPE_URL: true,
+  VALUE_TYPE_FILE_RESOURCE: true,
+  VALUE_TYPE_IMAGE: true,
+  VALUE_TYPE_GEOJSON: true,
+  valueTypeDisplayNames: true,
   AXIS: true,
   AXIS_ID_COLUMNS: true,
   AXIS_ID_ROWS: true,
@@ -141,6 +152,7 @@ var _exportNames = {
   VIS_TYPE_SCATTER: true,
   VIS_TYPE_LINE_LIST: true,
   VIS_TYPE_OUTLIER_TABLE: true,
+  VIS_TYPE_MAP: true,
   visTypeDisplayNames: true,
   visTypeIcons: true,
   getDisplayNameByVisType: true,
@@ -204,7 +216,12 @@ var _exportNames = {
   LEGEND_DISPLAY_STYLE_FILL: true,
   LEGEND_DISPLAY_STYLE_TEXT: true,
   getColorByValueFromLegendSet: true,
+  HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST: true,
+  HIDE_EMPTY_ROW_ITEMS_AFTER_LAST: true,
+  HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST: true,
+  HIDE_EMPTY_ROW_ITEMS_ALL: true,
   formatValue: true,
+  transformEventAggregateResponse: true,
   COLOR_SET_DEFAULT: true,
   COLOR_SET_BASIC: true,
   COLOR_SET_EXTENDED: true,
@@ -234,7 +251,10 @@ var _exportNames = {
   FYJUL: true,
   FYAPR: true,
   getRelativePeriodsOptionsById: true,
+  getRelativePeriodsName: true,
+  getRelativePeriodsDetails: true,
   getFixedPeriodsOptionsById: true,
+  PERIOD_TYPE_REGEX: true,
   VisualizationOptions: true,
   DIMENSION_TYPE_INDICATOR: true,
   DIMENSION_TYPE_DATA_ELEMENT: true,
@@ -531,6 +551,18 @@ Object.defineProperty(exports, "DIMENSION_TYPE_PROGRAM_INDICATOR", {
     return _dataTypes.DIMENSION_TYPE_PROGRAM_INDICATOR;
   }
 });
+Object.defineProperty(exports, "DashboardItemInterpretations", {
+  enumerable: true,
+  get: function () {
+    return _index2.DashboardItemInterpretations;
+  }
+});
+Object.defineProperty(exports, "DashboardPluginWrapper", {
+  enumerable: true,
+  get: function () {
+    return _DashboardPluginWrapper.DashboardPluginWrapper;
+  }
+});
 Object.defineProperty(exports, "DataDimension", {
   enumerable: true,
   get: function () {
@@ -693,6 +725,30 @@ Object.defineProperty(exports, "FixedPeriodSelect", {
     return _FixedPeriodSelect.default;
   }
 });
+Object.defineProperty(exports, "HIDE_EMPTY_ROW_ITEMS_AFTER_LAST", {
+  enumerable: true,
+  get: function () {
+    return _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_AFTER_LAST;
+  }
+});
+Object.defineProperty(exports, "HIDE_EMPTY_ROW_ITEMS_ALL", {
+  enumerable: true,
+  get: function () {
+    return _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_ALL;
+  }
+});
+Object.defineProperty(exports, "HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST", {
+  enumerable: true,
+  get: function () {
+    return _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST;
+  }
+});
+Object.defineProperty(exports, "HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST", {
+  enumerable: true,
+  get: function () {
+    return _hideEmptyRowItems.HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST;
+  }
+});
 Object.defineProperty(exports, "ITEM", {
   enumerable: true,
   get: function () {
@@ -714,19 +770,19 @@ Object.defineProperty(exports, "ITEM_PROP_ID", {
 Object.defineProperty(exports, "InterpretationModal", {
   enumerable: true,
   get: function () {
-    return _index3.InterpretationModal;
+    return _index5.InterpretationModal;
   }
 });
-Object.defineProperty(exports, "InterpretationThread", {
+Object.defineProperty(exports, "InterpretationsProvider", {
   enumerable: true,
   get: function () {
-    return _index3.InterpretationThread;
+    return _index4.InterpretationsProvider;
   }
 });
 Object.defineProperty(exports, "InterpretationsUnit", {
   enumerable: true,
   get: function () {
-    return _index2.InterpretationsUnit;
+    return _index3.InterpretationsUnit;
   }
 });
 Object.defineProperty(exports, "LAYOUT", {
@@ -831,6 +887,12 @@ Object.defineProperty(exports, "OrgUnitDimension", {
     return _OrgUnitDimension.default;
   }
 });
+Object.defineProperty(exports, "PERIOD_TYPE_REGEX", {
+  enumerable: true,
+  get: function () {
+    return _fixedPeriods.PERIOD_TYPE_REGEX;
+  }
+});
 Object.defineProperty(exports, "PeriodDimension", {
   enumerable: true,
   get: function () {
@@ -882,25 +944,25 @@ Object.defineProperty(exports, "TEXT_ALIGN_RIGHT", {
 Object.defineProperty(exports, "TranslationDialog", {
   enumerable: true,
   get: function () {
-    return _index5.TranslationDialog;
+    return _index7.TranslationDialog;
   }
 });
 Object.defineProperty(exports, "USER_ORG_UNIT", {
   enumerable: true,
   get: function () {
-    return _index7.USER_ORG_UNIT;
+    return _index9.USER_ORG_UNIT;
   }
 });
 Object.defineProperty(exports, "USER_ORG_UNIT_CHILDREN", {
   enumerable: true,
   get: function () {
-    return _index7.USER_ORG_UNIT_CHILDREN;
+    return _index9.USER_ORG_UNIT_CHILDREN;
   }
 });
 Object.defineProperty(exports, "USER_ORG_UNIT_GRANDCHILDREN", {
   enumerable: true,
   get: function () {
-    return _index7.USER_ORG_UNIT_GRANDCHILDREN;
+    return _index9.USER_ORG_UNIT_GRANDCHILDREN;
   }
 });
 Object.defineProperty(exports, "VALUE_TYPE_AGE", {
@@ -913,6 +975,12 @@ Object.defineProperty(exports, "VALUE_TYPE_BOOLEAN", {
   enumerable: true,
   get: function () {
     return _valueTypes.VALUE_TYPE_BOOLEAN;
+  }
+});
+Object.defineProperty(exports, "VALUE_TYPE_COORDINATE", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_COORDINATE;
   }
 });
 Object.defineProperty(exports, "VALUE_TYPE_DATE", {
@@ -931,6 +999,24 @@ Object.defineProperty(exports, "VALUE_TYPE_EMAIL", {
   enumerable: true,
   get: function () {
     return _valueTypes.VALUE_TYPE_EMAIL;
+  }
+});
+Object.defineProperty(exports, "VALUE_TYPE_FILE_RESOURCE", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_FILE_RESOURCE;
+  }
+});
+Object.defineProperty(exports, "VALUE_TYPE_GEOJSON", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_GEOJSON;
+  }
+});
+Object.defineProperty(exports, "VALUE_TYPE_IMAGE", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_IMAGE;
   }
 });
 Object.defineProperty(exports, "VALUE_TYPE_INTEGER", {
@@ -969,6 +1055,12 @@ Object.defineProperty(exports, "VALUE_TYPE_LONG_TEXT", {
     return _valueTypes.VALUE_TYPE_LONG_TEXT;
   }
 });
+Object.defineProperty(exports, "VALUE_TYPE_MULTI_TEXT", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_MULTI_TEXT;
+  }
+});
 Object.defineProperty(exports, "VALUE_TYPE_NUMBER", {
   enumerable: true,
   get: function () {
@@ -993,6 +1085,12 @@ Object.defineProperty(exports, "VALUE_TYPE_PHONE_NUMBER", {
     return _valueTypes.VALUE_TYPE_PHONE_NUMBER;
   }
 });
+Object.defineProperty(exports, "VALUE_TYPE_REFERENCE", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_REFERENCE;
+  }
+});
 Object.defineProperty(exports, "VALUE_TYPE_TEXT", {
   enumerable: true,
   get: function () {
@@ -1003,6 +1101,12 @@ Object.defineProperty(exports, "VALUE_TYPE_TIME", {
   enumerable: true,
   get: function () {
     return _valueTypes.VALUE_TYPE_TIME;
+  }
+});
+Object.defineProperty(exports, "VALUE_TYPE_TRACKER_ASSOCIATE", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.VALUE_TYPE_TRACKER_ASSOCIATE;
   }
 });
 Object.defineProperty(exports, "VALUE_TYPE_TRUE_ONLY", {
@@ -1081,6 +1185,12 @@ Object.defineProperty(exports, "VIS_TYPE_LINE_LIST", {
   enumerable: true,
   get: function () {
     return _visTypes.VIS_TYPE_LINE_LIST;
+  }
+});
+Object.defineProperty(exports, "VIS_TYPE_MAP", {
+  enumerable: true,
+  get: function () {
+    return _visTypes.VIS_TYPE_MAP;
   }
 });
 Object.defineProperty(exports, "VIS_TYPE_OUTLIER_TABLE", {
@@ -1302,7 +1412,7 @@ Object.defineProperty(exports, "colorSets", {
 Object.defineProperty(exports, "convertOuLevelsToUids", {
   enumerable: true,
   get: function () {
-    return _index8.convertOuLevelsToUids;
+    return _index0.convertOuLevelsToUids;
   }
 });
 Object.defineProperty(exports, "createVisualization", {
@@ -1515,6 +1625,18 @@ Object.defineProperty(exports, "getPredefinedDimensions", {
     return _predefinedDimensions.getPredefinedDimensions;
   }
 });
+Object.defineProperty(exports, "getRelativePeriodsDetails", {
+  enumerable: true,
+  get: function () {
+    return _relativePeriods.getRelativePeriodsDetails;
+  }
+});
+Object.defineProperty(exports, "getRelativePeriodsName", {
+  enumerable: true,
+  get: function () {
+    return _relativePeriods.getRelativePeriodsName;
+  }
+});
 Object.defineProperty(exports, "getRelativePeriodsOptionsById", {
   enumerable: true,
   get: function () {
@@ -1554,7 +1676,7 @@ Object.defineProperty(exports, "hasDimensionTooManyItems", {
 Object.defineProperty(exports, "hasRelativeItems", {
   enumerable: true,
   get: function () {
-    return _index9.hasRelativeItems;
+    return _index1.hasRelativeItems;
   }
 });
 Object.defineProperty(exports, "isAxisFull", {
@@ -1728,7 +1850,13 @@ Object.defineProperty(exports, "layoutReplaceDimension", {
 Object.defineProperty(exports, "ouIdHelper", {
   enumerable: true,
   get: function () {
-    return _index7.ouIdHelper;
+    return _index9.ouIdHelper;
+  }
+});
+Object.defineProperty(exports, "preparePayloadForSave", {
+  enumerable: true,
+  get: function () {
+    return _utils.preparePayloadForSave;
   }
 });
 Object.defineProperty(exports, "preparePayloadForSaveAs", {
@@ -1737,10 +1865,22 @@ Object.defineProperty(exports, "preparePayloadForSaveAs", {
     return _utils.preparePayloadForSaveAs;
   }
 });
+Object.defineProperty(exports, "transformEventAggregateResponse", {
+  enumerable: true,
+  get: function () {
+    return _response.transformResponse;
+  }
+});
 Object.defineProperty(exports, "useCachedDataQuery", {
   enumerable: true,
   get: function () {
     return _CachedDataQueryProvider.useCachedDataQuery;
+  }
+});
+Object.defineProperty(exports, "valueTypeDisplayNames", {
+  enumerable: true,
+  get: function () {
+    return _valueTypes.valueTypeDisplayNames;
   }
 });
 Object.defineProperty(exports, "visTypeDisplayNames", {
@@ -1771,24 +1911,11 @@ var _utils = require("./components/FileMenu/utils.js");
 var _VisTypeIcon = _interopRequireDefault(require("./components/VisTypeIcon.js"));
 var _LegendKey = _interopRequireDefault(require("./components/LegendKey/LegendKey.js"));
 var _AboutAOUnit = _interopRequireDefault(require("./components/AboutAOUnit/AboutAOUnit.js"));
-var _index2 = require("./components/Interpretations/InterpretationsUnit/index.js");
-var _index3 = require("./components/Interpretations/InterpretationModal/index.js");
-var _index4 = require("./components/Toolbar/index.js");
-Object.keys(_index4).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _index4[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function () {
-      return _index4[key];
-    }
-  });
-});
-var _index5 = require("./components/TranslationDialog/index.js");
-var _OfflineTooltip = require("./components/OfflineTooltip.js");
-var _CachedDataQueryProvider = require("./components/CachedDataQueryProvider.js");
-var _index6 = require("./components/RichText/index.js");
+var _index2 = require("./components/Interpretations/DashboardItemInterpretations/index.js");
+var _index3 = require("./components/Interpretations/InterpretationsUnit/index.js");
+var _index4 = require("./components/Interpretations/InterpretationsProvider/index.js");
+var _index5 = require("./components/Interpretations/InterpretationModal/index.js");
+var _index6 = require("./components/Toolbar/index.js");
 Object.keys(_index6).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
@@ -1800,15 +1927,31 @@ Object.keys(_index6).forEach(function (key) {
     }
   });
 });
+var _index7 = require("./components/TranslationDialog/index.js");
+var _OfflineTooltip = require("./components/OfflineTooltip.js");
+var _CachedDataQueryProvider = require("./components/CachedDataQueryProvider.js");
+var _index8 = require("./components/RichText/index.js");
+Object.keys(_index8).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _index8[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _index8[key];
+    }
+  });
+});
+var _DashboardPluginWrapper = require("./components/DashboardPluginWrapper/DashboardPluginWrapper.js");
 var _Analytics = _interopRequireDefault(require("./api/analytics/Analytics.js"));
 var _dimensions = require("./api/dimensions.js");
 var _organisationUnits = require("./api/organisationUnits.js");
 var _axis = require("./modules/axis.js");
 var _predefinedDimensions = require("./modules/predefinedDimensions.js");
-var _index7 = require("./modules/ouIdHelper/index.js");
-var _index8 = require("./modules/ouLevelUtils/index.js");
+var _index9 = require("./modules/ouIdHelper/index.js");
+var _index0 = require("./modules/ouLevelUtils/index.js");
 var _getAdaptedUiLayoutByType = require("./modules/getAdaptedUiLayoutByType.js");
-var _index9 = require("./modules/relativeItems/index.js");
+var _index1 = require("./modules/relativeItems/index.js");
 var _layout = require("./modules/layout/layout.js");
 var _layoutFilterDimensions = require("./modules/layout/layoutFilterDimensions.js");
 var _layoutGetAllAxes = require("./modules/layout/layoutGetAllAxes.js");
@@ -1852,13 +1995,14 @@ var _index10 = require("./modules/layoutUiRules/index.js");
 var _index11 = require("./visualizations/index.js");
 var _fontStyle = require("./modules/fontStyle.js");
 var _legends = require("./modules/legends.js");
+var _hideEmptyRowItems = require("./modules/hideEmptyRowItems.js");
 var _renderValue = require("./modules/renderValue.js");
+var _response = require("./modules/response/event/response.js");
 var _colorSets = require("./visualizations/util/colors/colorSets.js");
 var _index12 = require("./components/PeriodDimension/utils/index.js");
 var _relativePeriods = require("./components/PeriodDimension/utils/relativePeriods.js");
 var _fixedPeriods = require("./components/PeriodDimension/utils/fixedPeriods.js");
 var _VisualizationOptions = _interopRequireDefault(require("./components/Options/VisualizationOptions.js"));
 var _dataTypes = require("./modules/dataTypes.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }

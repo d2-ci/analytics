@@ -12,15 +12,14 @@ var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _FixedPeriodFilter = _interopRequireDefault(require("./FixedPeriodFilter.js"));
 var _FixedPeriodSelectStyle = _interopRequireDefault(require("./styles/FixedPeriodSelect.style.js"));
 var _fixedPeriods = require("./utils/fixedPeriods.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 class FixedPeriodSelect extends _react.Component {
-  constructor() {
-    super(...arguments);
+  constructor(...args) {
+    super(...args);
     _defineProperty(this, "state", {
       periodType: '',
       year: '',
@@ -40,24 +39,19 @@ class FixedPeriodSelect extends _react.Component {
       });
       this.props.onChange();
     });
-    _defineProperty(this, "onSelectPeriod", (_ref, event) => {
-      let {
-        selected: periodId
-      } = _ref;
-      const period = this.state.options.find(_ref2 => {
-        let {
-          id
-        } = _ref2;
-        return id === periodId;
-      });
+    _defineProperty(this, "onSelectPeriod", ({
+      selected: periodId
+    }, event) => {
+      const period = this.state.options.find(({
+        id
+      }) => id === periodId);
       this.props.onChange(period, event);
     });
   }
-  static getDerivedStateFromProps(_ref3) {
-    let {
-      value,
-      allowedPeriodTypes
-    } = _ref3;
+  static getDerivedStateFromProps({
+    value,
+    allowedPeriodTypes
+  }) {
     const period = (0, _fixedPeriods.parsePeriodCode)(value, allowedPeriodTypes);
     if (!period) {
       return null;
@@ -100,10 +94,10 @@ class FixedPeriodSelect extends _react.Component {
     }, _FixedPeriodSelectStyle.default));
   }
 }
-FixedPeriodSelect.defaultProps = {
+_defineProperty(FixedPeriodSelect, "defaultProps", {
   dataTest: 'dhis2-analytics-fixedperiodselect',
   value: ''
-};
+});
 FixedPeriodSelect.propTypes = {
   onChange: _propTypes.default.func.isRequired,
   allowedPeriodTypes: _propTypes.default.arrayOf(_propTypes.default.string),

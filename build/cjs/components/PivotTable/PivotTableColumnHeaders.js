@@ -13,12 +13,11 @@ var _PivotTableDimensionLabelCell = require("./PivotTableDimensionLabelCell.js")
 var _PivotTableEmptyCell = require("./PivotTableEmptyCell.js");
 var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PivotTableColumnHeaders = _ref => {
-  let {
-    clippingResult,
-    onSortByColumn,
-    sortBy
-  } = _ref;
+const PivotTableColumnHeaders = ({
+  clippingResult,
+  onSortByColumn,
+  sortBy
+}) => {
   const engine = (0, _PivotTableEngineContext.usePivotTableEngine)();
   const columns = (0, _times.default)(engine.columnDepth, x => x);
   const rows = (0, _times.default)(engine.rowDepth, x => x);
@@ -30,29 +29,23 @@ const PivotTableColumnHeaders = _ref => {
     columnLevel: columnLevel
   })), /*#__PURE__*/_react.default.createElement(_PivotTableClippedAxis.PivotTableClippedAxis, {
     axisClippingResult: clippingResult.columns,
-    EmptyComponent: _ref2 => {
-      let {
-        size
-      } = _ref2;
-      return /*#__PURE__*/_react.default.createElement(_PivotTableEmptyCell.PivotTableEmptyCell, {
-        classes: "column-header",
-        style: {
-          minWidth: size
-        }
-      });
-    },
-    ItemComponent: _ref3 => {
-      let {
-        index
-      } = _ref3;
-      return /*#__PURE__*/_react.default.createElement(_PivotTableColumnHeaderCell.PivotTableColumnHeaderCell, {
-        clippingResult: clippingResult,
-        index: index,
-        level: columnLevel,
-        onSortByColumn: onSortByColumn,
-        sortBy: sortBy
-      });
-    }
+    EmptyComponent: ({
+      size
+    }) => /*#__PURE__*/_react.default.createElement(_PivotTableEmptyCell.PivotTableEmptyCell, {
+      classes: "column-header",
+      style: {
+        minWidth: size
+      }
+    }),
+    ItemComponent: ({
+      index
+    }) => /*#__PURE__*/_react.default.createElement(_PivotTableColumnHeaderCell.PivotTableColumnHeaderCell, {
+      clippingResult: clippingResult,
+      index: index,
+      level: columnLevel,
+      onSortByColumn: onSortByColumn,
+      sortBy: sortBy
+    })
   })));
 };
 exports.PivotTableColumnHeaders = PivotTableColumnHeaders;

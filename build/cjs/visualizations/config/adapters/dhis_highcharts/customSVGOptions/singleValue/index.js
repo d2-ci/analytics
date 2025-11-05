@@ -8,13 +8,12 @@ var _ui = require("@dhis2/ui");
 var _getSingleValueFormattedValue = require("./getSingleValueFormattedValue.js");
 var _getSingleValueSubtext = require("./getSingleValueSubtext.js");
 var _getSingleValueTextColor = require("./getSingleValueTextColor.js");
-function getSingleValueCustomSVGOptions(_ref) {
-  let {
-    layout,
-    extraOptions,
-    metaData,
-    series
-  } = _ref;
+function getSingleValueCustomSVGOptions({
+  layout,
+  extraOptions,
+  metaData,
+  series
+}) {
   const {
     dashboard,
     icon

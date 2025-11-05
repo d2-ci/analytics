@@ -3,12 +3,11 @@ import React from 'react';
 import getFilterText from '../../visualizations/util/getFilterText.js';
 import { usePivotTableEngine } from './PivotTableEngineContext.js';
 import { PivotTableTitleRow } from './PivotTableTitleRow.js';
-export const PivotTableTitleRows = _ref => {
+export const PivotTableTitleRows = ({
+  clippingResult,
+  width
+}) => {
   var _engine$visualization;
-  let {
-    clippingResult,
-    width
-  } = _ref;
   const engine = usePivotTableEngine();
   return /*#__PURE__*/React.createElement(React.Fragment, null, engine.options.title ? /*#__PURE__*/React.createElement(PivotTableTitleRow, {
     title: engine.options.title,

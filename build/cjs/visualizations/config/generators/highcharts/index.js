@@ -5,24 +5,38 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 var _highcharts = _interopRequireDefault(require("highcharts"));
-var _highchartsMore = _interopRequireDefault(require("highcharts/highcharts-more"));
-var _boost = _interopRequireDefault(require("highcharts/modules/boost"));
-var _exporting = _interopRequireDefault(require("highcharts/modules/exporting"));
-var _noDataToDisplay = _interopRequireDefault(require("highcharts/modules/no-data-to-display"));
-var _patternFill = _interopRequireDefault(require("highcharts/modules/pattern-fill"));
-var _solidGauge = _interopRequireDefault(require("highcharts/modules/solid-gauge"));
+require("highcharts/highcharts-more");
+require("highcharts/modules/boost");
+require("highcharts/modules/exporting");
+require("highcharts/modules/no-data-to-display");
+require("highcharts/modules/offline-exporting");
+require("highcharts/modules/pattern-fill");
+require("highcharts/modules/solid-gauge");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-// apply
-(0, _highchartsMore.default)(_highcharts.default);
-(0, _solidGauge.default)(_highcharts.default);
-(0, _noDataToDisplay.default)(_highcharts.default);
-(0, _exporting.default)(_highcharts.default);
-(0, _patternFill.default)(_highcharts.default);
-(0, _boost.default)(_highcharts.default);
+/* Whitelist some additional SVG attributes and tags here. Without this,
+ * the PDF export for the SingleValue visualization and charts in boost-mode
+ * breaks. For more info about the boost mode issue, see:
+ * https://github.com/highcharts/highcharts/issues/8333 */
+_highcharts.default.AST.allowedTags.push('fedropshadow', 'image');
+_highcharts.default.AST.allowedAttributes.push('transform-origin', 'preserveAspectRatio', 'fill-rule', 'clip-rule');
 
-/* Whitelist some additional SVG attributes here. Without this,
- * the PDF export for the SingleValue visualization breaks. */
-_highcharts.default.AST.allowedAttributes.push('fill-rule', 'clip-rule');
+/* This is a workaround for https://github.com/highcharts/highcharts/issues/22008
+ * We add some transparent text in a non-ASCII script to the chart to prevent
+ * the chart from being exported in a serif font */
+_highcharts.default.addEvent(_highcharts.default.Chart, 'load', function () {
+  this.renderer.text('모', 20, 20).attr({
+    opacity: 0
+  }).add();
+});
+
+/* Workaround for https://github.com/highcharts/highcharts/issues/23049
+ * (there happen to be 10 colors and 10 patterns)*/
+const {
+  colors
+} = _highcharts.default.getOptions();
+_highcharts.default.patterns.forEach((pattern, i) => {
+  pattern.color = colors[i];
+});
 function drawLegendSymbolWrap() {
   const pick = _highcharts.default.pick;
   _highcharts.default.wrap(_highcharts.default.seriesTypes.column.prototype, 'drawLegendSymbol', function (proceed, legend, item) {

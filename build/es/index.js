@@ -12,17 +12,20 @@ export { default as DimensionFilter } from './components/Filter/Filter.js';
 export { default as DimensionMenu } from './components/DimensionMenu.js';
 export { default as PivotTable } from './components/PivotTable/PivotTable.js';
 export { default as FileMenu } from './components/FileMenu/FileMenu.js';
-export { preparePayloadForSaveAs } from './components/FileMenu/utils.js';
+export { preparePayloadForSaveAs, preparePayloadForSave } from './components/FileMenu/utils.js';
 export { default as VisTypeIcon } from './components/VisTypeIcon.js';
 export { default as LegendKey } from './components/LegendKey/LegendKey.js';
 export { default as AboutAOUnit } from './components/AboutAOUnit/AboutAOUnit.js';
+export { DashboardItemInterpretations } from './components/Interpretations/DashboardItemInterpretations/index.js';
 export { InterpretationsUnit } from './components/Interpretations/InterpretationsUnit/index.js';
-export { InterpretationModal, InterpretationThread } from './components/Interpretations/InterpretationModal/index.js';
+export { InterpretationsProvider } from './components/Interpretations/InterpretationsProvider/index.js';
+export { InterpretationModal } from './components/Interpretations/InterpretationModal/index.js';
 export * from './components/Toolbar/index.js';
 export { TranslationDialog } from './components/TranslationDialog/index.js';
 export { OfflineTooltip } from './components/OfflineTooltip.js';
 export { CachedDataQueryProvider, useCachedDataQuery } from './components/CachedDataQueryProvider.js';
 export * from './components/RichText/index.js';
+export { DashboardPluginWrapper } from './components/DashboardPluginWrapper/DashboardPluginWrapper.js';
 
 // Api
 
@@ -70,7 +73,7 @@ export { layoutHasDynamicDimension } from './modules/layout/layoutHasDynamicDime
 export { layoutHasPeriodDimension } from './modules/layout/layoutHasPeriodDimension.js';
 
 // Modules: valueTypes
-export { VALUE_TYPE_NUMBER, VALUE_TYPE_UNIT_INTERVAL, VALUE_TYPE_PERCENTAGE, VALUE_TYPE_INTEGER, VALUE_TYPE_INTEGER_POSITIVE, VALUE_TYPE_INTEGER_NEGATIVE, VALUE_TYPE_INTEGER_ZERO_OR_POSITIVE, VALUE_TYPE_TEXT, VALUE_TYPE_LONG_TEXT, VALUE_TYPE_LETTER, VALUE_TYPE_PHONE_NUMBER, VALUE_TYPE_EMAIL, VALUE_TYPE_USERNAME, VALUE_TYPE_URL, VALUE_TYPE_BOOLEAN, VALUE_TYPE_TRUE_ONLY, VALUE_TYPE_DATE, VALUE_TYPE_TIME, VALUE_TYPE_DATETIME, VALUE_TYPE_ORGANISATION_UNIT, VALUE_TYPE_AGE } from './modules/valueTypes.js';
+export { VALUE_TYPE_TEXT, VALUE_TYPE_LONG_TEXT, VALUE_TYPE_MULTI_TEXT, VALUE_TYPE_LETTER, VALUE_TYPE_PHONE_NUMBER, VALUE_TYPE_EMAIL, VALUE_TYPE_BOOLEAN, VALUE_TYPE_TRUE_ONLY, VALUE_TYPE_DATE, VALUE_TYPE_DATETIME, VALUE_TYPE_TIME, VALUE_TYPE_NUMBER, VALUE_TYPE_UNIT_INTERVAL, VALUE_TYPE_PERCENTAGE, VALUE_TYPE_INTEGER, VALUE_TYPE_INTEGER_POSITIVE, VALUE_TYPE_INTEGER_NEGATIVE, VALUE_TYPE_INTEGER_ZERO_OR_POSITIVE, VALUE_TYPE_TRACKER_ASSOCIATE, VALUE_TYPE_USERNAME, VALUE_TYPE_COORDINATE, VALUE_TYPE_ORGANISATION_UNIT, VALUE_TYPE_REFERENCE, VALUE_TYPE_AGE, VALUE_TYPE_URL, VALUE_TYPE_FILE_RESOURCE, VALUE_TYPE_IMAGE, VALUE_TYPE_GEOJSON, valueTypeDisplayNames } from './modules/valueTypes.js';
 export { AXIS, AXIS_ID_COLUMNS, AXIS_ID_ROWS, AXIS_ID_FILTERS, DEFAULT_AXIS_IDS } from './modules/layout/axis.js';
 export { axisGetAllItems } from './modules/layout/axisGetAllItems.js';
 export { axisGetDimension } from './modules/layout/axisGetDimension.js';
@@ -98,7 +101,7 @@ export { getLayoutTypeByVisType } from './modules/visTypeToLayoutType.js';
 
 // Modules: visTypes
 
-export { VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS, VIS_TYPE_COLUMN, VIS_TYPE_STACKED_COLUMN, VIS_TYPE_BAR, VIS_TYPE_STACKED_BAR, VIS_TYPE_LINE, VIS_TYPE_AREA, VIS_TYPE_STACKED_AREA, VIS_TYPE_PIE, VIS_TYPE_RADAR, VIS_TYPE_GAUGE, VIS_TYPE_BUBBLE, VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, VIS_TYPE_SINGLE_VALUE, VIS_TYPE_PIVOT_TABLE, VIS_TYPE_SCATTER, VIS_TYPE_LINE_LIST, VIS_TYPE_OUTLIER_TABLE, visTypeDisplayNames, visTypeIcons, getDisplayNameByVisType, defaultVisType, isStacked, isMultiType, isYearOverYear, isDualAxisType, isSingleValue, isOutlierTable, isTwoCategoryChartType, isLegendSetType, isColumnBasedType, isVerticalType } from './modules/visTypes.js';
+export { VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS, VIS_TYPE_COLUMN, VIS_TYPE_STACKED_COLUMN, VIS_TYPE_BAR, VIS_TYPE_STACKED_BAR, VIS_TYPE_LINE, VIS_TYPE_AREA, VIS_TYPE_STACKED_AREA, VIS_TYPE_PIE, VIS_TYPE_RADAR, VIS_TYPE_GAUGE, VIS_TYPE_BUBBLE, VIS_TYPE_YEAR_OVER_YEAR_LINE, VIS_TYPE_YEAR_OVER_YEAR_COLUMN, VIS_TYPE_SINGLE_VALUE, VIS_TYPE_PIVOT_TABLE, VIS_TYPE_SCATTER, VIS_TYPE_LINE_LIST, VIS_TYPE_OUTLIER_TABLE, VIS_TYPE_MAP, visTypeDisplayNames, visTypeIcons, getDisplayNameByVisType, defaultVisType, isStacked, isMultiType, isYearOverYear, isDualAxisType, isSingleValue, isOutlierTable, isTwoCategoryChartType, isLegendSetType, isColumnBasedType, isVerticalType } from './modules/visTypes.js';
 
 // Modules: layoutTypes
 
@@ -120,16 +123,24 @@ export { FONT_STYLE_VISUALIZATION_TITLE, FONT_STYLE_VISUALIZATION_SUBTITLE, FONT
 
 export { LEGEND_DISPLAY_STRATEGY_BY_DATA_ITEM, LEGEND_DISPLAY_STRATEGY_FIXED, LEGEND_DISPLAY_STYLE_FILL, LEGEND_DISPLAY_STYLE_TEXT, getColorByValueFromLegendSet } from './modules/legends.js';
 
+// Modules: hideEmptyRowItems
+
+export { HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST, HIDE_EMPTY_ROW_ITEMS_AFTER_LAST, HIDE_EMPTY_ROW_ITEMS_BEFORE_FIRST_AFTER_LAST, HIDE_EMPTY_ROW_ITEMS_ALL } from './modules/hideEmptyRowItems.js';
+
 // Modules: general
 
 export { renderValue as formatValue } from './modules/renderValue.js';
+
+// Modules: response
+
+export { transformResponse as transformEventAggregateResponse } from './modules/response/event/response.js';
 
 // Utils: colorSets
 export { COLOR_SET_DEFAULT, COLOR_SET_BASIC, COLOR_SET_EXTENDED, COLOR_SET_BRIGHT, COLOR_SET_DARK, COLOR_SET_GRAY, COLOR_SET_COLOR_BLIND, COLOR_SET_PATTERNS, colorSets } from './visualizations/util/colors/colorSets.js';
 
 // Utils: periods
 export { DAILY, WEEKLY, WEEKLYWED, WEEKLYTHU, WEEKLYSAT, WEEKLYSUN, WEEKS_THIS_YEAR, BIWEEKLY, MONTHLY, BIMONTHLY, QUARTERLY, SIXMONTHLY, SIXMONTHLYAPR, YEARLY, FINANCIAL, FYNOV, FYOCT, FYJUL, FYAPR } from './components/PeriodDimension/utils/index.js';
-export { getRelativePeriodsOptionsById } from './components/PeriodDimension/utils/relativePeriods.js';
-export { getFixedPeriodsOptionsById } from './components/PeriodDimension/utils/fixedPeriods.js';
+export { getRelativePeriodsOptionsById, getRelativePeriodsName, getRelativePeriodsDetails } from './components/PeriodDimension/utils/relativePeriods.js';
+export { getFixedPeriodsOptionsById, PERIOD_TYPE_REGEX } from './components/PeriodDimension/utils/fixedPeriods.js';
 export { default as VisualizationOptions } from './components/Options/VisualizationOptions.js';
 export { DIMENSION_TYPE_INDICATOR, DIMENSION_TYPE_DATA_ELEMENT, DIMENSION_TYPE_DATA_SET, DIMENSION_TYPE_EVENT_DATA_ITEM, DIMENSION_TYPE_PROGRAM_INDICATOR, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_DATA_ELEMENT_OPERAND, DIMENSION_TYPE_CATEGORY, DIMENSION_TYPE_CATEGORY_OPTION_GROUP_SET, DIMENSION_TYPE_ALL, DIMENSION_TYPE_DATA, DIMENSION_TYPE_DATA_ELEMENT_GROUP_SET, DIMENSION_TYPE_ORGANISATION_UNIT, DIMENSION_TYPE_PERIOD, DIMENSION_TYPE_ORGANISATION_UNIT_GROUP_SET, DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, dataTypeMap } from './modules/dataTypes.js';

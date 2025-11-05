@@ -3,8 +3,8 @@ import React from 'react';
 import { OpenFileDialog } from '../components/OpenFileDialog/OpenFileDialog.js';
 import { VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS, VIS_TYPE_PIVOT_TABLE, VIS_TYPE_COLUMN, VIS_TYPE_BAR, VIS_TYPE_LINE_LIST } from '../modules/visTypes.js';
 const Wrapper = story => /*#__PURE__*/React.createElement(DataProvider, {
-  baseUrl: "https://test.e2e.dhis2.org/analytics-41dev/",
-  apiVersion: "41"
+  baseUrl: "https://test.e2e.dhis2.org/anly-42/",
+  apiVersion: "42"
 }, story());
 const user = {
   displayName: 'John Traore',
@@ -39,6 +39,23 @@ export const ListOfVisualizationsWithVisTypeFilterAndDividerNoDefaultVisType = (
 });
 ListOfVisualizationsWithVisTypeFilterAndDividerNoDefaultVisType.story = {
   name: 'List of visualizations with vis type filter and divider (no default vis type)'
+};
+const filterVisTypesWithGroups = [{
+  type: VIS_TYPE_GROUP_ALL
+}, {
+  type: VIS_TYPE_GROUP_CHARTS
+}];
+export const ListOfVisualizationsWithVisTypeGroupFilterNoDefaultVisType = () => /*#__PURE__*/React.createElement(OpenFileDialog, {
+  type: "visualization",
+  filterVisTypes: filterVisTypesWithGroups,
+  onClose: Function.prototype,
+  onFileSelect: onFileSelect,
+  onNew: Function.prototype,
+  open: true,
+  currentUser: user
+});
+ListOfVisualizationsWithVisTypeGroupFilterNoDefaultVisType.story = {
+  name: 'List of visualizations with only vis type group filter (no default vis type)'
 };
 export const ListOfMapsNoVisTypeFilter = () => /*#__PURE__*/React.createElement(OpenFileDialog, {
   type: "map",

@@ -3,40 +3,33 @@ import { ButtonStrip, Modal, ModalTitle, ModalContent, ModalActions, Button, Fie
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { modalContent, tabSection, tabSectionTitle, tabSectionTitleDisabled, tabSectionTitleMargin, tabSectionOption, tabSectionOptionItem, tabSectionOptionToggleable, tabSectionToggleableSubsection, tabSectionOptionComplexInline, tabSectionOptionText, tabBar, tabContent, tabSectionOptionIcon } from './styles/VisualizationOptions.style.js';
-const VisualizationOptions = _ref => {
-  let {
-    initiallyActiveTabKey,
-    optionsConfig,
-    onClose,
-    onUpdate
-  } = _ref;
+const VisualizationOptions = ({
+  initiallyActiveTabKey,
+  optionsConfig,
+  onClose,
+  onUpdate
+}) => {
   const [activeTabKey, setActiveTabKey] = useState(initiallyActiveTabKey);
-  const generateTabContent = sections => sections.map(_ref2 => {
-    let {
-      key,
-      label,
-      content,
-      helpText
-    } = _ref2;
-    return /*#__PURE__*/React.createElement("div", {
-      key: key,
-      className: tabSection.className
-    }, /*#__PURE__*/React.createElement(FieldSet, null, label ? /*#__PURE__*/React.createElement(Legend, null, /*#__PURE__*/React.createElement("span", {
-      className: tabSectionTitle.className
-    }, label)) : null, content, helpText ? /*#__PURE__*/React.createElement(Legend, null, /*#__PURE__*/React.createElement(Help, null, helpText)) : null));
-  });
-  const generateTabs = tabs => tabs.map(_ref3 => {
-    let {
-      key,
-      label,
-      content
-    } = _ref3;
-    return {
-      key,
-      label,
-      content: generateTabContent(content)
-    };
-  });
+  const generateTabContent = sections => sections.map(({
+    key,
+    label,
+    content,
+    helpText
+  }) => /*#__PURE__*/React.createElement("div", {
+    key: key,
+    className: tabSection.className
+  }, /*#__PURE__*/React.createElement(FieldSet, null, label ? /*#__PURE__*/React.createElement(Legend, null, /*#__PURE__*/React.createElement("span", {
+    className: tabSectionTitle.className
+  }, label)) : null, content, helpText ? /*#__PURE__*/React.createElement(Legend, null, /*#__PURE__*/React.createElement(Help, null, helpText)) : null)));
+  const generateTabs = tabs => tabs.map(({
+    key,
+    label,
+    content
+  }) => ({
+    key,
+    label,
+    content: generateTabContent(content)
+  }));
   const getModalContent = () => {
     const tabs = generateTabs(optionsConfig);
     let activeTabIndex = tabs.findIndex(tab => tab.key === activeTabKey);
@@ -47,17 +40,14 @@ const VisualizationOptions = _ref => {
       className: tabBar.className
     }, /*#__PURE__*/React.createElement(TabBar, {
       dataTest: 'options-modal-tab-bar'
-    }, tabs.map((_ref4, index) => {
-      let {
-        key,
-        label
-      } = _ref4;
-      return /*#__PURE__*/React.createElement(Tab, {
-        key: key,
-        onClick: () => setActiveTabKey(key),
-        selected: index === activeTabIndex
-      }, label);
-    })), tabBar.styles), /*#__PURE__*/React.createElement("div", {
+    }, tabs.map(({
+      key,
+      label
+    }, index) => /*#__PURE__*/React.createElement(Tab, {
+      key: key,
+      onClick: () => setActiveTabKey(key),
+      selected: index === activeTabIndex
+    }, label))), tabBar.styles), /*#__PURE__*/React.createElement("div", {
       className: tabContent.className
     }, tabs[activeTabIndex].content, tabContent.styles, tabSection.styles, tabSectionTitle.styles, tabSectionTitleDisabled.styles, tabSectionTitleMargin.styles, tabSectionOption.styles, tabSectionOptionItem.styles, tabSectionOptionToggleable.styles, tabSectionToggleableSubsection.styles, tabSectionOptionComplexInline.styles, tabSectionOptionText.styles, tabSectionOptionIcon.styles));
   };

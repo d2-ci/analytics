@@ -44,7 +44,8 @@ function _default(layout, metaData, extraOptions, series) {
   const legendOptions = layout.legend;
   const fontStyle = (0, _fontStyle.mergeFontStyleWithDefault)(layout.fontStyle && layout.fontStyle[_fontStyle.FONT_STYLE_VISUALIZATION_TITLE], _fontStyle.FONT_STYLE_VISUALIZATION_TITLE);
   const title = Object.assign({
-    text: undefined
+    text: undefined,
+    minScale: 1
   }, dashboard ? DASHBOARD_TITLE_STYLE : {
     margin: 30,
     align: (0, _getTextAlignOption.getTextAlignOption)(fontStyle[_fontStyle.FONT_STYLE_OPTION_TEXT_ALIGN], _fontStyle.FONT_STYLE_VISUALIZATION_TITLE, (0, _visTypes.isVerticalType)(layout.type)),

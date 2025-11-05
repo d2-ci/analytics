@@ -12,44 +12,20 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _index = require("../common/index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const sortByCreatedDateDesc = (a, b) => {
-  const dateA = a.created;
-  const dateB = b.created;
-  if (dateA < dateB) {
-    return 1;
-  }
-  if (dateA > dateB) {
-    return -1;
-  }
-  return 0;
-};
-const InterpretationList = _ref => {
-  let {
-    currentUser,
-    interpretations,
-    onInterpretationClick,
-    onLikeToggled,
-    onReplyIconClick,
-    refresh,
-    disabled,
-    dashboardRedirectUrl
-  } = _ref;
+const InterpretationList = ({
+  interpretationIdsByDate,
+  onInterpretationClick,
+  onReplyIconClick,
+  disabled,
+  dashboardRedirectUrl
+}) => {
   const {
     fromServerDate
   } = (0, _appRuntime.useTimeZoneConversion)();
-  const interpretationsByDate = interpretations.reduce((groupedInterpretations, interpretation) => {
-    const date = interpretation.created.split('T')[0];
-    if (date in groupedInterpretations) {
-      groupedInterpretations[date].push(interpretation);
-    } else {
-      groupedInterpretations[date] = [interpretation];
-    }
-    return groupedInterpretations;
-  }, {});
   return /*#__PURE__*/_react.default.createElement("ol", {
     "data-test": "interpretations-list",
     className: _style.default.dynamic([["4058400613", [_ui.spacers.dp8, _ui.spacers.dp8, _ui.spacers.dp16, _ui.colors.grey800, _ui.spacers.dp12, _ui.spacers.dp12, _ui.spacers.dp32, _ui.spacers.dp4]]]) + " " + "interpretation-groups"
-  }, Object.keys(interpretationsByDate).sort().reverse().map(date => /*#__PURE__*/_react.default.createElement("li", {
+  }, Object.keys(interpretationIdsByDate).map(date => /*#__PURE__*/_react.default.createElement("li", {
     key: date,
     className: _style.default.dynamic([["4058400613", [_ui.spacers.dp8, _ui.spacers.dp8, _ui.spacers.dp16, _ui.colors.grey800, _ui.spacers.dp12, _ui.spacers.dp12, _ui.spacers.dp32, _ui.spacers.dp4]]])
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -61,17 +37,13 @@ const InterpretationList = _ref => {
     className: _style.default.dynamic([["4058400613", [_ui.spacers.dp8, _ui.spacers.dp8, _ui.spacers.dp16, _ui.colors.grey800, _ui.spacers.dp12, _ui.spacers.dp12, _ui.spacers.dp32, _ui.spacers.dp4]]]) + " " + "date-header"
   }, (0, _moment.default)(fromServerDate(date)).format('ll'))), /*#__PURE__*/_react.default.createElement("ol", {
     className: _style.default.dynamic([["4058400613", [_ui.spacers.dp8, _ui.spacers.dp8, _ui.spacers.dp16, _ui.colors.grey800, _ui.spacers.dp12, _ui.spacers.dp12, _ui.spacers.dp32, _ui.spacers.dp4]]]) + " " + "interpretation-list"
-  }, interpretationsByDate[date].sort(sortByCreatedDateDesc).map(interpretation => /*#__PURE__*/_react.default.createElement(_index.Interpretation, {
-    key: interpretation.id,
-    interpretation: interpretation,
-    currentUser: currentUser,
-    onClick: onInterpretationClick,
-    onLikeToggled: onLikeToggled,
+  }, interpretationIdsByDate[date].map(interpretationId => /*#__PURE__*/_react.default.createElement(_index.Interpretation, {
+    key: interpretationId,
+    id: interpretationId,
     onReplyIconClick: onReplyIconClick,
-    onDeleted: refresh,
-    onUpdated: refresh,
+    dashboardRedirectUrl: dashboardRedirectUrl,
     disabled: disabled,
-    dashboardRedirectUrl: dashboardRedirectUrl
+    onClick: onInterpretationClick
   }))))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: "4058400613",
     dynamic: [_ui.spacers.dp8, _ui.spacers.dp8, _ui.spacers.dp16, _ui.colors.grey800, _ui.spacers.dp12, _ui.spacers.dp12, _ui.spacers.dp32, _ui.spacers.dp4]
@@ -79,11 +51,8 @@ const InterpretationList = _ref => {
 };
 exports.InterpretationList = InterpretationList;
 InterpretationList.propTypes = {
-  currentUser: _propTypes.default.object.isRequired,
-  interpretations: _propTypes.default.array.isRequired,
-  refresh: _propTypes.default.func.isRequired,
+  interpretationIdsByDate: _propTypes.default.objectOf(_propTypes.default.arrayOf(_propTypes.default.string)).isRequired,
   onInterpretationClick: _propTypes.default.func.isRequired,
-  onLikeToggled: _propTypes.default.func.isRequired,
   onReplyIconClick: _propTypes.default.func.isRequired,
   dashboardRedirectUrl: _propTypes.default.string,
   disabled: _propTypes.default.bool

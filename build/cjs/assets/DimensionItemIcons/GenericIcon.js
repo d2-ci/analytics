@@ -12,6 +12,6 @@ var _default = exports.default = /*#__PURE__*/_react.default.createElement("svg"
   height: "16",
   viewBox: "0 0 16 16"
 }, /*#__PURE__*/_react.default.createElement("path", {
-  fill: "#6E7A8A",
+  fill: "currentColor",
   d: "M11,5 L11,11 L5,11 L5,5 L11,5 Z M10,6 L6,6 L6,10 L10,10 L10,6 Z"
 }));

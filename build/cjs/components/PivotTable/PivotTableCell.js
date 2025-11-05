@@ -12,15 +12,14 @@ var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 var _PivotTableStyle = require("./styles/PivotTable.style.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const PivotTableCell = exports.PivotTableCell = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
-  let {
-    classes,
-    isHeader,
-    children,
-    dataTest,
-    style = {},
-    ...props
-  } = _ref;
+const PivotTableCell = exports.PivotTableCell = /*#__PURE__*/_react.default.forwardRef(({
+  classes,
+  isHeader,
+  children,
+  dataTest,
+  style = {},
+  ...props
+}, ref) => {
   const engine = (0, _PivotTableEngineContext.usePivotTableEngine)();
   style.width = style.minWidth = style.maxWidth = style.width;
   style.height = style.minHeight = style.maxHeight = style.height || engine.fontSize + engine.cellPadding * 2 + 2;
@@ -43,9 +42,6 @@ const PivotTableCell = exports.PivotTableCell = /*#__PURE__*/_react.default.forw
   }, _PivotTableStyle.cell), children);
 });
 PivotTableCell.displayName = 'PivotTableCell';
-PivotTableCell.defaultProps = {
-  isHeader: false
-};
 PivotTableCell.propTypes = {
   children: _propTypes.default.node,
   classes: _propTypes.default.oneOfType([_propTypes.default.array, _propTypes.default.object, _propTypes.default.string]),

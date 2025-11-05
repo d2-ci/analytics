@@ -1,9 +1,8 @@
 import { DIMENSION, DIMENSION_PROPS } from './dimension.js';
 import { dimensionIsEmpty } from './dimensionIsEmpty.js';
-export const dimensionIsValid = function (dimension) {
-  let {
-    requireItems
-  } = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+export const dimensionIsValid = (dimension, {
+  requireItems
+} = {}) => {
   if (!DIMENSION.isValid(dimension)) {
     return false;
   }

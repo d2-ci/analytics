@@ -1,63 +1,56 @@
-import { useDataMutation } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { Button, Input } from '@dhis2/ui';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { RichTextEditor } from '../../RichText/index.js';
 import { MessageEditorContainer, MessageButtonStrip } from '../common/index.js';
-export const InterpretationForm = _ref => {
-  let {
+import { useCreateInterpretation, useInterpretationsCurrentUser } from '../InterpretationsProvider/hooks.js';
+export const InterpretationForm = ({
+  type,
+  id,
+  disabled,
+  showNoTimeDimensionHelpText
+}) => {
+  const [showRichTextEditor, setShowRichTextEditor] = useState(false);
+  const [text, setText] = useState('');
+  const onComplete = useCallback(() => {
+    setShowRichTextEditor(false);
+    setText('');
+  }, []);
+  const currentUser = useInterpretationsCurrentUser();
+  const [save, {
+    loading,
+    error
+  }] = useCreateInterpretation({
     type,
     id,
-    currentUser,
-    disabled,
-    showNoTimeDimensionHelpText,
-    onSave
-  } = _ref;
-  const [showRichTextEditor, setShowRichTextEditor] = useState(false);
-  const [interpretationText, setInterpretationText] = useState('');
-  const saveMutationRef = useRef({
-    resource: `interpretations/${type}/${id}`,
-    type: 'create',
-    data: _ref2 => {
-      let {
-        interpretationText
-      } = _ref2;
-      return interpretationText;
-    }
-  });
-  const [save, {
-    loading: saveMutationInProgress
-  }] = useDataMutation(saveMutationRef.current, {
-    onComplete: () => {
-      setShowRichTextEditor(false);
-      setInterpretationText('');
-      onSave();
-    }
+    text,
+    onComplete
   });
   const inputPlaceholder = i18n.t('Write an interpretation');
   return /*#__PURE__*/React.createElement(MessageEditorContainer, {
-    currentUser: currentUser,
+    currentUserName: currentUser.name,
     dataTest: "interpretation-form"
   }, showRichTextEditor ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(RichTextEditor, {
-    disabled: saveMutationInProgress,
+    disabled: loading,
     inputPlaceholder: inputPlaceholder,
-    onChange: setInterpretationText,
-    value: interpretationText,
+    onChange: setText,
+    value: text,
+    errorText: error ? i18n.t('Could not post interpretation') : '',
     helpText: showNoTimeDimensionHelpText ? i18n.t('Other people viewing this interpretation in the future may see more data.') : undefined
   }), /*#__PURE__*/React.createElement(MessageButtonStrip, null, /*#__PURE__*/React.createElement(Button, {
     primary: true,
     small: true,
-    loading: saveMutationInProgress,
+    loading: loading,
     onClick: () => save({
-      interpretationText
+      interpretationText: text
     })
   }, i18n.t('Post interpretation')), /*#__PURE__*/React.createElement(Button, {
     secondary: true,
     small: true,
-    disabled: saveMutationInProgress,
+    disabled: loading,
     onClick: () => {
-      setInterpretationText('');
+      setText('');
       setShowRichTextEditor(false);
     }
   }, i18n.t('Cancel')))) : /*#__PURE__*/React.createElement(Input, {
@@ -67,10 +60,8 @@ export const InterpretationForm = _ref => {
   }));
 };
 InterpretationForm.propTypes = {
-  currentUser: PropTypes.object,
   disabled: PropTypes.bool,
   id: PropTypes.string,
   showNoTimeDimensionHelpText: PropTypes.bool,
-  type: PropTypes.string,
-  onSave: PropTypes.func
+  type: PropTypes.string
 };

@@ -13,13 +13,12 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _OfflineTooltipStyle = require("./styles/OfflineTooltip.style.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const OfflineTooltip = _ref => {
-  let {
-    disabledWhenOffline,
-    disabled,
-    content,
-    children
-  } = _ref;
+const OfflineTooltip = ({
+  disabledWhenOffline = true,
+  disabled = false,
+  content,
+  children
+}) => {
   const {
     isDisconnected: offline
   } = (0, _appRuntime.useDhis2ConnectionStatus)();
@@ -28,21 +27,18 @@ const OfflineTooltip = _ref => {
     content: content || _d2I18n.default.t('Not available offline'),
     openDelay: 200,
     closeDelay: 100
-  }, _ref2 => {
-    let {
-      onMouseOver,
-      onMouseOut,
-      ref
-    } = _ref2;
-    return /*#__PURE__*/_react.default.createElement("span", {
-      onMouseOver: () => notAllowed && onMouseOver(),
-      onMouseOut: () => notAllowed && onMouseOut(),
-      ref: ref,
-      className: `jsx-${_OfflineTooltipStyle.styles.__hash}` + " " + ((0, _classnames.default)('tooltip', {
-        notAllowed
-      }) || "")
-    }, children);
-  }), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, ({
+    onMouseOver,
+    onMouseOut,
+    ref
+  }) => /*#__PURE__*/_react.default.createElement("span", {
+    onMouseOver: () => notAllowed && onMouseOver(),
+    onMouseOut: () => notAllowed && onMouseOut(),
+    ref: ref,
+    className: `jsx-${_OfflineTooltipStyle.styles.__hash}` + " " + ((0, _classnames.default)('tooltip', {
+      notAllowed
+    }) || "")
+  }, children)), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _OfflineTooltipStyle.styles.__hash
   }, _OfflineTooltipStyle.styles));
 };
@@ -52,8 +48,4 @@ OfflineTooltip.propTypes = {
   content: _propTypes.default.string,
   disabled: _propTypes.default.bool,
   disabledWhenOffline: _propTypes.default.bool
-};
-OfflineTooltip.defaultProps = {
-  disabled: false,
-  disabledWhenOffline: true
 };

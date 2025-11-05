@@ -8,12 +8,11 @@ import { DIMENSION_TYPE_DATA_ELEMENT } from '../../../modules/dataTypes.js';
 import { getIcon } from '../../../modules/dimensionListItem.js';
 import { EXPRESSION_TYPE_DATA } from '../../../modules/expressions.js';
 import styles from './styles/DataElementOption.style.js';
-const DataElementOption = _ref => {
-  let {
-    label,
-    value,
-    onDoubleClick
-  } = _ref;
+const DataElementOption = ({
+  label,
+  value,
+  onDoubleClick
+}) => {
   const data = {
     label,
     value,

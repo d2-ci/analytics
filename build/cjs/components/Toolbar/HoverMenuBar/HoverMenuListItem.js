@@ -5,28 +5,24 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.HoverMenuListItem = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
-var _uiIcons = require("@dhis2/ui-icons");
-var _popper = require("@dhis2-ui/popper");
-var _portal = require("@dhis2-ui/portal");
+var _ui = require("@dhis2/ui");
 var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _HoverMenuList = require("./HoverMenuList.js");
 var _HoverMenuListItemStyles = _interopRequireDefault(require("./HoverMenuListItem.styles.js"));
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const HoverMenuListItem = _ref => {
-  let {
-    onClick,
-    children,
-    icon,
-    className,
-    destructive,
-    disabled,
-    dataTest,
-    label
-  } = _ref;
+const HoverMenuListItem = ({
+  onClick,
+  children,
+  icon,
+  className,
+  destructive,
+  disabled,
+  dataTest = 'dhis2-uicore-hovermenulistitem',
+  label
+}) => {
   const ref = (0, _react.useRef)();
   const {
     onSubmenuAnchorMouseEnter,
@@ -53,9 +49,9 @@ const HoverMenuListItem = _ref => {
     className: `jsx-${_HoverMenuListItemStyles.default.__hash}` + " " + "label"
   }, label), !!children && /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_HoverMenuListItemStyles.default.__hash}` + " " + "chevron"
-  }, /*#__PURE__*/_react.default.createElement(_uiIcons.IconChevronRight24, null)), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, /*#__PURE__*/_react.default.createElement(_ui.IconChevronRight24, null)), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _HoverMenuListItemStyles.default.__hash
-  }, _HoverMenuListItemStyles.default)), children && isSubMenuOpen && /*#__PURE__*/_react.default.createElement(_portal.Portal, null, /*#__PURE__*/_react.default.createElement(_popper.Popper, {
+  }, _HoverMenuListItemStyles.default)), children && isSubMenuOpen && /*#__PURE__*/_react.default.createElement(_ui.Portal, null, /*#__PURE__*/_react.default.createElement(_ui.Popper, {
     placement: "right-start",
     reference: ref
   }, /*#__PURE__*/_react.default.createElement(_HoverMenuList.HoverMenuList, {
@@ -63,9 +59,6 @@ const HoverMenuListItem = _ref => {
   }, children))));
 };
 exports.HoverMenuListItem = HoverMenuListItem;
-HoverMenuListItem.defaultProps = {
-  dataTest: 'dhis2-uicore-hovermenulistitem'
-};
 HoverMenuListItem.propTypes = {
   // Nested menu items become submenus
   children: _propTypes.default.node,

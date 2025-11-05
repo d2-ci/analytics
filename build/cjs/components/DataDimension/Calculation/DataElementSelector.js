@@ -17,20 +17,18 @@ var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _dataTypes = require("../../../modules/dataTypes.js");
 var _DataElementOption = _interopRequireDefault(require("./DataElementOption.js"));
 var _DataElementSelectorStyle = _interopRequireDefault(require("./styles/DataElementSelector.style.js"));
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getOptions = () => ({
   [_dataTypes.TOTALS]: _index.default.t('Totals only'),
   [_dataTypes.DETAIL]: _index.default.t('Details only')
 });
-const GroupSelector = _ref => {
+const GroupSelector = ({
+  currentValue,
+  onChange,
+  displayNameProp
+}) => {
   var _dataTypes$DIMENSION_;
-  let {
-    currentValue,
-    onChange,
-    displayNameProp
-  } = _ref;
   const dataEngine = (0, _appRuntime.useDataEngine)();
   const [loading, setLoading] = (0, _react.useState)(true);
   const [groups, setGroups] = (0, _react.useState)([]);
@@ -72,11 +70,10 @@ GroupSelector.propTypes = {
   displayNameProp: _propTypes.default.string.isRequired,
   onChange: _propTypes.default.func.isRequired
 };
-const DisaggregationSelector = _ref2 => {
-  let {
-    currentValue,
-    onChange
-  } = _ref2;
+const DisaggregationSelector = ({
+  currentValue,
+  onChange
+}) => {
   const options = getOptions();
   return /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_DataElementSelectorStyle.default.__hash}` + " " + "group-select"
@@ -98,11 +95,10 @@ DisaggregationSelector.propTypes = {
   currentValue: _propTypes.default.string.isRequired,
   onChange: _propTypes.default.func.isRequired
 };
-const DataElementSelector = _ref3 => {
-  let {
-    displayNameProp,
-    onDoubleClick
-  } = _ref3;
+const DataElementSelector = ({
+  displayNameProp,
+  onDoubleClick
+}) => {
   const dataEngine = (0, _appRuntime.useDataEngine)();
   const [searchTerm, setSearchTerm] = (0, _react.useState)('');
   const [group, setGroup] = (0, _react.useState)(_dataTypes.DIMENSION_TYPE_ALL);
@@ -159,10 +155,9 @@ const DataElementSelector = _ref3 => {
     searchTermRef.current = newSearchTerm;
     fetchData(true);
   }, 500);
-  const onSearchChange = _ref4 => {
-    let {
-      value
-    } = _ref4;
+  const onSearchChange = ({
+    value
+  }) => {
     const newSearchTerm = value;
     setSearchTerm(newSearchTerm);
 
@@ -182,10 +177,9 @@ const DataElementSelector = _ref3 => {
     pageRef.current = 1;
     fetchData(true);
   };
-  const onEndReached = _ref5 => {
-    let {
-      isIntersecting
-    } = _ref5;
+  const onEndReached = ({
+    isIntersecting
+  }) => {
     if (isIntersecting) {
       // if hasNextPage is set it means at least 1 request already happened and there is
       // another page, fetch the next page
@@ -242,18 +236,15 @@ const DataElementSelector = _ref3 => {
     className: `jsx-${_DataElementSelectorStyle.default.__hash}` + " " + ((0, _classnames.default)('dimension-list-scroller', {
       loading
     }) || "")
-  }, Boolean(options.length) && options.map(_ref6 => {
-    let {
-      label,
-      value
-    } = _ref6;
-    return /*#__PURE__*/_react.default.createElement(_DataElementOption.default, {
-      key: value,
-      label: label,
-      value: value,
-      onDoubleClick: onDoubleClick
-    });
-  }), !loading && !options.length && /*#__PURE__*/_react.default.createElement("div", {
+  }, Boolean(options.length) && options.map(({
+    label,
+    value
+  }) => /*#__PURE__*/_react.default.createElement(_DataElementOption.default, {
+    key: value,
+    label: label,
+    value: value,
+    onDoubleClick: onDoubleClick
+  })), !loading && !options.length && /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_DataElementSelectorStyle.default.__hash}` + " " + "empty-list"
   }, searchTermRef.current ? _index.default.t('No data elements found for "{{- searchTerm}}"', {
     searchTerm: searchTermRef.current

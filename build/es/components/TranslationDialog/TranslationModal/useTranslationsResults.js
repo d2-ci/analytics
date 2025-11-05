@@ -1,10 +1,9 @@
 import { useAlert, useDataQuery } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { useRef } from 'react';
-export const useTranslationsResults = _ref => {
-  let {
-    resource
-  } = _ref;
+export const useTranslationsResults = ({
+  resource
+}) => {
   const translationsQueryRef = useRef({
     translations: {
       resource: `${resource}/translations`

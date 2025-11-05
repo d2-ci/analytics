@@ -3,8 +3,7 @@
 var _dimensions = require("../dimensions.js");
 let mockDataEngine;
 let mockQueryFn;
-const asyncCheckMatches = (_ref, done) => {
-  let [queryDefinition, queryVariables, callCount = 1, callIndex = 0] = _ref;
+const asyncCheckMatches = ([queryDefinition, queryVariables, callCount = 1, callIndex = 0], done) => {
   setTimeout(() => {
     expect(mockQueryFn).toHaveBeenCalledTimes(callCount);
     expect(mockQueryFn.mock.calls[callIndex][0]).toEqual(queryDefinition);

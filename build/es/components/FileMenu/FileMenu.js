@@ -10,24 +10,23 @@ import { GetLinkDialog } from './GetLinkDialog.js';
 import { RenameDialog } from './RenameDialog.js';
 import { SaveAsDialog } from './SaveAsDialog.js';
 import { supportedFileTypes } from './utils.js';
-export const FileMenu = _ref => {
-  var _fileObject$access, _fileObject$access2, _fileObject$access3, _fileObject$access4, _fileObject$access5, _fileObject$access6, _fileObject$access7, _fileObject$access8, _fileObject$access9, _fileObject$access10;
-  let {
-    currentUser,
-    defaultFilterVisType,
-    fileType,
-    fileObject,
-    filterVisTypes,
-    onNew,
-    onOpen,
-    onSave,
-    onSaveAs,
-    onRename,
-    onShare,
-    onDelete,
-    onError,
-    onTranslate
-  } = _ref;
+export const FileMenu = ({
+  currentUser,
+  defaultFilterVisType,
+  fileType,
+  fileObject,
+  filterVisTypes,
+  onNew = Function.prototype,
+  onOpen = Function.prototype,
+  onSave,
+  onSaveAs,
+  onRename = Function.prototype,
+  onShare = Function.prototype,
+  onDelete = Function.prototype,
+  onError = Function.prototype,
+  onTranslate = Function.prototype
+}) => {
+  var _fileObject$access, _fileObject$access2, _fileObject$access3, _fileObject$access4, _fileObject$access5, _fileObject$access6, _fileObject$access7, _fileObject$access8, _fileObject$access9, _fileObject$access0;
   const [currentDialog, setCurrentDialog] = useState(null);
   const onMenuItemClick = dialogToOpen => () => {
     setCurrentDialog(dialogToOpen);
@@ -48,8 +47,7 @@ export const FileMenu = _ref => {
           type: fileType,
           object: fileObject,
           onClose: onDialogClose,
-          onRename: onRename,
-          onError: onError
+          onRename: onRename
         });
       case 'translate':
         return /*#__PURE__*/React.createElement(TranslationDialog, {
@@ -185,19 +183,10 @@ export const FileMenu = _ref => {
     icon: /*#__PURE__*/React.createElement(IconDelete24, {
       color: fileObject !== null && fileObject !== void 0 && fileObject.id && fileObject !== null && fileObject !== void 0 && (_fileObject$access9 = fileObject.access) !== null && _fileObject$access9 !== void 0 && _fileObject$access9.delete ? colors.red700 : iconInactiveColor
     }),
-    disabled: !(fileObject !== null && fileObject !== void 0 && fileObject.id && fileObject !== null && fileObject !== void 0 && (_fileObject$access10 = fileObject.access) !== null && _fileObject$access10 !== void 0 && _fileObject$access10.delete),
+    disabled: !(fileObject !== null && fileObject !== void 0 && fileObject.id && fileObject !== null && fileObject !== void 0 && (_fileObject$access0 = fileObject.access) !== null && _fileObject$access0 !== void 0 && _fileObject$access0.delete),
     onClick: onMenuItemClick('delete'),
     dataTest: "file-menu-delete"
   }))), renderDialog());
-};
-FileMenu.defaultProps = {
-  onDelete: Function.prototype,
-  onError: Function.prototype,
-  onNew: Function.prototype,
-  onOpen: Function.prototype,
-  onRename: Function.prototype,
-  onShare: Function.prototype,
-  onTranslate: Function.prototype
 };
 FileMenu.propTypes = {
   currentUser: PropTypes.object,

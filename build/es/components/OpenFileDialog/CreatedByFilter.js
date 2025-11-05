@@ -8,32 +8,33 @@ import React from 'react';
 export const CREATED_BY_ALL = 'all';
 export const CREATED_BY_ALL_BUT_CURRENT_USER = 'allButCurrentUser';
 export const CREATED_BY_CURRENT_USER = 'currentUser';
-export const CreatedByFilter = _ref => {
-  let {
-    selected,
-    onChange
-  } = _ref;
-  return /*#__PURE__*/React.createElement(SingleSelect, {
-    selected: selected,
-    onChange: _ref2 => {
-      let {
-        selected
-      } = _ref2;
-      return onChange(selected);
-    },
-    prefix: i18n.t('Created by'),
-    dense: true
-  }, /*#__PURE__*/React.createElement(SingleSelectOption, {
-    label: i18n.t('Anyone'),
-    value: CREATED_BY_ALL
-  }), /*#__PURE__*/React.createElement(SingleSelectOption, {
-    label: i18n.t('Only you'),
-    value: CREATED_BY_CURRENT_USER
-  }), /*#__PURE__*/React.createElement(SingleSelectOption, {
-    label: i18n.t('Others'),
-    value: CREATED_BY_ALL_BUT_CURRENT_USER
-  }));
+export const formatUserFilter = (createdBy, userId) => {
+  if (createdBy === CREATED_BY_ALL_BUT_CURRENT_USER) {
+    return `user.id:!eq:${userId}`;
+  } else if (createdBy === CREATED_BY_CURRENT_USER) {
+    return `user.id:eq:${userId}`;
+  }
 };
+export const CreatedByFilter = ({
+  selected,
+  onChange
+}) => /*#__PURE__*/React.createElement(SingleSelect, {
+  selected: selected,
+  onChange: ({
+    selected
+  }) => onChange(selected),
+  prefix: i18n.t('Created by'),
+  dense: true
+}, /*#__PURE__*/React.createElement(SingleSelectOption, {
+  label: i18n.t('Anyone'),
+  value: CREATED_BY_ALL
+}), /*#__PURE__*/React.createElement(SingleSelectOption, {
+  label: i18n.t('Only you'),
+  value: CREATED_BY_CURRENT_USER
+}), /*#__PURE__*/React.createElement(SingleSelectOption, {
+  label: i18n.t('Others'),
+  value: CREATED_BY_ALL_BUT_CURRENT_USER
+}));
 CreatedByFilter.propTypes = {
   onChange: PropTypes.func.isRequired,
   selected: PropTypes.string

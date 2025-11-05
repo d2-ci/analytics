@@ -77,14 +77,13 @@ function getSeriesFunction(type, categoryIds) {
       return getDefault;
   }
 }
-export default function (_ref) {
-  let {
-    type,
-    data,
-    seriesId,
-    categoryIds,
-    extraOptions
-  } = _ref;
+export default function ({
+  type,
+  data,
+  seriesId,
+  categoryIds,
+  extraOptions
+}) {
   categoryIds = categoryIds || [];
   const seriesFunction = getSeriesFunction(type, categoryIds);
   return data.reduce((acc, res) => {

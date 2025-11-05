@@ -5,13 +5,12 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { RichTextParser } from '../../../RichText/index.js';
-const Message = _ref => {
-  let {
-    children,
-    text,
-    created,
-    username
-  } = _ref;
+const Message = ({
+  children,
+  text,
+  created,
+  username
+}) => {
   const {
     fromServerDate
   } = useTimeZoneConversion();

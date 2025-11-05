@@ -11,11 +11,10 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _DropZoneStyle = _interopRequireDefault(require("./styles/DropZone.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const DropZone = _ref => {
-  let {
-    firstElementId,
-    overLastDropZone
-  } = _ref;
+const DropZone = ({
+  firstElementId,
+  overLastDropZone
+}) => {
   const {
     isOver,
     setNodeRef,

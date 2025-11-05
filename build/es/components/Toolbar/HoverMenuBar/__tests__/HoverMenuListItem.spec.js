@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { HoverMenuListItem } from '../index.js';
 describe('<HoverMenuListItem/>', () => {
@@ -7,36 +7,42 @@ describe('<HoverMenuListItem/>', () => {
    * Only the `className`, `dataTest`, `destructive` and
    * `icon` prop need to be verified here. */
 
-  it('accepts a `className` prop', () => {
+  test('accepts a `className` prop', () => {
     const className = 'className';
-    const wrapper = shallow(/*#__PURE__*/React.createElement(HoverMenuListItem, {
+    render(/*#__PURE__*/React.createElement(HoverMenuListItem, {
       className: className
     }));
-    expect(wrapper.find('li')).toHaveClassName(className);
+    expect(screen.getByTestId('dhis2-uicore-hovermenulistitem')).toHaveClass(className);
   });
-  it('accepts a `dataTest` prop', () => {
+  test('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = shallow(/*#__PURE__*/React.createElement(HoverMenuListItem, {
+    render(/*#__PURE__*/React.createElement(HoverMenuListItem, {
       dataTest: dataTest
     }));
-    expect(wrapper.find('li').prop('data-test')).toBe(dataTest);
+    expect(screen.getByTestId(dataTest)).toBeInTheDocument();
   });
-  it('accepts a `destructive` prop', () => {
-    const wrapper = shallow(/*#__PURE__*/React.createElement(HoverMenuListItem, {
+  test('accepts a `destructive` prop', () => {
+    const dataTest = 'test';
+    render(/*#__PURE__*/React.createElement(HoverMenuListItem, {
+      dataTest: dataTest,
       destructive: true
     }));
-    expect(wrapper.find('li')).toHaveClassName('destructive');
+    expect(screen.getByTestId(dataTest)).toBeInTheDocument();
   });
-  it('accepts an `icon` prop', () => {
+  test('accepts an `icon` prop', () => {
+    const dataTest = 'test';
     const iconText = 'I am an icon';
     const icon = /*#__PURE__*/React.createElement("span", {
       id: "testicon"
     }, iconText);
-    const wrapper = shallow(/*#__PURE__*/React.createElement(HoverMenuListItem, {
+    render(/*#__PURE__*/React.createElement(HoverMenuListItem, {
+      dataTest: dataTest,
       icon: icon
     }));
-    expect(wrapper.find('span.icon')).toExist();
-    expect(wrapper.find('span#testicon')).toExist();
-    expect(wrapper.find('span#testicon').text()).toBe(iconText);
+    const iconWrapperEl = screen.getByTestId(dataTest).firstChild;
+    expect(iconWrapperEl).toBeInTheDocument();
+    expect(iconWrapperEl).toHaveClass('icon');
+    const iconEl = iconWrapperEl.closest('span');
+    expect(iconEl).toHaveTextContent(iconText);
   });
 });

@@ -13,10 +13,9 @@ const getStdDev = data => (0, _mathjs.std)(data, 'unbiased');
 exports.getStdDev = getStdDev;
 const getMean = data => (0, _mathjs.mean)(data);
 exports.getMean = getMean;
-const getZScoreHelper = (normalizationHelper, config, _ref) => {
-  let {
-    xyStats
-  } = _ref;
+const getZScoreHelper = (normalizationHelper, config, {
+  xyStats
+}) => {
   const sortedNormalized = normalizationHelper.normalized.slice().sort((a, b) => a - b);
   const stdDev = getStdDev(sortedNormalized);
   const zScoreThreshold = stdDev * config[_index2.PROP_THRESHOLD_FACTOR];

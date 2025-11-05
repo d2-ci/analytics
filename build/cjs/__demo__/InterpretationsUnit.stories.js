@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = exports.WithNoTimeDimensionsWarning = exports.Default = void 0;
 var _appRuntime = require("@dhis2/app-runtime");
 var _react = _interopRequireDefault(require("react"));
+var _InterpretationsProvider = require("../components/Interpretations/InterpretationsProvider/InterpretationsProvider.js");
 var _index = require("../components/Interpretations/InterpretationsUnit/index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var _default = exports.default = {
@@ -18,15 +19,16 @@ const Default = () => {
         interpretations: []
       }
     }
-  }, /*#__PURE__*/_react.default.createElement(_index.InterpretationsUnit, {
+  }, /*#__PURE__*/_react.default.createElement(_InterpretationsProvider.InterpretationsProvider, {
     currentUser: {
       name: 'Tom Wakiki'
-    },
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.InterpretationsUnit, {
     id: "abcd",
     onReplyIconClick: Function.prototype,
     type: "eventVisualization",
     visualizationHasTimeDimension: true
-  }));
+  })));
 };
 exports.Default = Default;
 const WithNoTimeDimensionsWarning = () => {
@@ -36,15 +38,16 @@ const WithNoTimeDimensionsWarning = () => {
         interpretations: []
       }
     }
-  }, /*#__PURE__*/_react.default.createElement(_index.InterpretationsUnit, {
+  }, /*#__PURE__*/_react.default.createElement(_InterpretationsProvider.InterpretationsProvider, {
     currentUser: {
       name: 'Tom Wakiki'
-    },
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.InterpretationsUnit, {
     id: "abcd",
     onReplyIconClick: Function.prototype,
     type: "eventVisualization",
     visualizationHasTimeDimension: false
-  }));
+  })));
 };
 exports.WithNoTimeDimensionsWarning = WithNoTimeDimensionsWarning;
 WithNoTimeDimensionsWarning.story = {

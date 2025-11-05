@@ -15,8 +15,8 @@ const Wrapper = story => /*#__PURE__*/_react.default.createElement(_appServiceCo
     systemInfo: {}
   }
 }, /*#__PURE__*/_react.default.createElement(_appRuntime.DataProvider, {
-  baseUrl: "https://test.e2e.dhis2.org/analytics-41dev/",
-  apiVersion: "41"
+  baseUrl: "https://test.e2e.dhis2.org/anly-42/",
+  apiVersion: "42"
 }, story()));
 const selectedPeriods = [{
   id: 'LAST_12_MONTHS',

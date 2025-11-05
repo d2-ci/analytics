@@ -4,7 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = _default;
+var _relativePeriods = require("../../components/PeriodDimension/utils/relativePeriods.js");
 var _getOuLevelAndGroupText = require("../../modules/getOuLevelAndGroupText.js");
+var _dimensionGetItemIds = require("../../modules/layout/dimensionGetItemIds.js");
 var _dimensionGetItems = require("../../modules/layout/dimensionGetItems.js");
 var _dimensionIs = require("../../modules/layout/dimensionIs.js");
 var _index = require("../../modules/ouIdHelper/index.js");
@@ -18,13 +20,16 @@ function _default(filters, metaData) {
   let l;
   filters.forEach(filter => {
     const items = (0, _dimensionGetItems.dimensionGetItems)(filter);
-    if ((0, _dimensionIs.dimensionIs)(filter, _predefinedDimensions.DIMENSION_ID_ORGUNIT) && items.some(_ref => {
-      let {
-        id
-      } = _ref;
-      return _index.ouIdHelper.hasGroupPrefix(id) || _index.ouIdHelper.hasLevelPrefix(id);
-    })) {
+    if ((0, _dimensionIs.dimensionIs)(filter, _predefinedDimensions.DIMENSION_ID_ORGUNIT) && items.some(({
+      id
+    }) => _index.ouIdHelper.hasGroupPrefix(id) || _index.ouIdHelper.hasLevelPrefix(id))) {
       titleFragments.push((0, _getOuLevelAndGroupText.getOuLevelAndGroupText)(filter, metaData));
+    } else if ((0, _dimensionIs.dimensionIs)(filter, _predefinedDimensions.DIMENSION_ID_PERIOD)) {
+      const relativePeriodNames = (0, _relativePeriods.getRelativePeriodsName)();
+      titleFragments.push((0, _dimensionGetItemIds.dimensionGetItemIds)(filter).map(id => {
+        var _metaData$items$id;
+        return relativePeriodNames[id] || ((_metaData$items$id = metaData.items[id]) === null || _metaData$items$id === void 0 ? void 0 : _metaData$items$id.name) || id;
+      }).join(', '));
     } else {
       const filterItems = metaData.dimensions[filter.dimension];
       if (Array.isArray(filterItems)) {

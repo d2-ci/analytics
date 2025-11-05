@@ -1,8 +1,7 @@
 import { NUMBER_TYPE_ROW_PERCENTAGE, NUMBER_TYPE_COLUMN_PERCENTAGE } from './pivotTable/pivotTableConstants.js';
 import { isNumericValueType, isBooleanValueType } from './valueTypes.js';
 const trimTrailingZeros = stringValue => stringValue.replace(/\.?0+$/, '');
-export const separateDigitGroups = function (stringValue) {
-  let decimalSeparator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '.';
+export const separateDigitGroups = (stringValue, decimalSeparator = '.') => {
   const isNegative = stringValue[0] === '-';
   const [integer, remainder] = stringValue.replace(/^-/, '').split('.');
   const groups = [];

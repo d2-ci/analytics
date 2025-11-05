@@ -11,12 +11,11 @@ var _react = _interopRequireDefault(require("react"));
 var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 var _PivotTableStyle = require("./styles/PivotTable.style.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PivotTableContainer = exports.PivotTableContainer = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
-  let {
-    width,
-    height,
-    children
-  } = _ref;
+const PivotTableContainer = exports.PivotTableContainer = /*#__PURE__*/_react.default.forwardRef(({
+  width,
+  height,
+  children
+}, ref) => {
   const engine = (0, _PivotTableEngineContext.usePivotTableEngine)();
   return /*#__PURE__*/_react.default.createElement("div", {
     style: {

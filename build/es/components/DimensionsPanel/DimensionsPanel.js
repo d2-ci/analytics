@@ -8,8 +8,8 @@ import Filter from '../Filter/Filter.js';
 import DimensionList from './List/DimensionList.js';
 import { styles } from './styles/DimensionsPanel.style.js';
 class DimensionsPanel extends Component {
-  constructor() {
-    super(...arguments);
+  constructor(...args) {
+    super(...args);
     _defineProperty(this, "state", {
       filterText: ''
     });
@@ -60,6 +60,11 @@ class DimensionsPanel extends Component {
     }));
   }
 }
+_defineProperty(DimensionsPanel, "defaultProps", {
+  selectedIds: [],
+  style: {},
+  onDimensionClick: Function.prototype
+});
 DimensionsPanel.propTypes = {
   dimensions: PropTypes.array.isRequired,
   disabledDimension: PropTypes.func,
@@ -70,10 +75,5 @@ DimensionsPanel.propTypes = {
   onDimensionClick: PropTypes.func,
   onDimensionDragStart: PropTypes.func,
   onDimensionOptionsClick: PropTypes.func
-};
-DimensionsPanel.defaultProps = {
-  selectedIds: [],
-  style: {},
-  onDimensionClick: Function.prototype
 };
 export default DimensionsPanel;

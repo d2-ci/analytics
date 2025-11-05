@@ -11,14 +11,15 @@ const userSettingsQuery = {
     }
   }
 };
-const PeriodDimension = _ref => {
-  let {
-    onSelect,
-    selectedPeriods,
-    rightFooter,
-    excludedPeriodTypes,
-    infoBoxMessage
-  } = _ref;
+const SELECTED_PERIODS_PROP_DEFAULT = [];
+const PeriodDimension = ({
+  onSelect,
+  selectedPeriods = SELECTED_PERIODS_PROP_DEFAULT,
+  rightFooter,
+  excludedPeriodTypes,
+  infoBoxMessage,
+  height
+}) => {
   const {
     systemInfo
   } = useConfig();
@@ -50,17 +51,16 @@ const PeriodDimension = _ref => {
     rightFooter: rightFooter,
     dataTest: 'period-dimension',
     excludedPeriodTypes: excludedPeriodTypes,
-    periodsSettings: periodsSettings
+    periodsSettings: periodsSettings,
+    height: height
   });
 };
 PeriodDimension.propTypes = {
   onSelect: PropTypes.func.isRequired,
   excludedPeriodTypes: PropTypes.arrayOf(PropTypes.string),
+  height: PropTypes.string,
   infoBoxMessage: PropTypes.string,
   rightFooter: PropTypes.node,
   selectedPeriods: PropTypes.array
-};
-PeriodDimension.defaultProps = {
-  selectedPeriods: []
 };
 export default PeriodDimension;

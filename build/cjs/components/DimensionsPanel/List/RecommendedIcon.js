@@ -10,19 +10,16 @@ var _react = _interopRequireDefault(require("react"));
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _RecommendedIconStyle = require("./styles/RecommendedIcon.style.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const RecommendedIcon = _ref => {
-  let {
-    isRecommended,
-    dataTest
-  } = _ref;
-  return isRecommended ? /*#__PURE__*/_react.default.createElement(_ui.Tooltip, {
-    content: _index.default.t('Dimension recommended with selected data'),
-    placement: "bottom"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    style: _RecommendedIconStyle.styles.recommendedIcon,
-    "data-test": dataTest
-  })) : null;
-};
+const RecommendedIcon = ({
+  isRecommended,
+  dataTest
+}) => isRecommended ? /*#__PURE__*/_react.default.createElement(_ui.Tooltip, {
+  content: _index.default.t('Dimension recommended with selected data'),
+  placement: "bottom"
+}, /*#__PURE__*/_react.default.createElement("div", {
+  style: _RecommendedIconStyle.styles.recommendedIcon,
+  "data-test": dataTest
+})) : null;
 RecommendedIcon.propTypes = {
   isRecommended: _propTypes.default.bool.isRequired,
   dataTest: _propTypes.default.string

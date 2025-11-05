@@ -13,19 +13,17 @@ var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _GetLinkDialogStyles = require("./GetLinkDialog.styles.js");
 var _utils = require("./utils.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const GetLinkDialog = _ref => {
-  let {
-    type,
-    id,
-    onClose
-  } = _ref;
+const GetLinkDialog = ({
+  type,
+  id,
+  onClose
+}) => {
   const {
+    apiVersion,
     baseUrl
   } = (0, _appRuntime.useConfig)();
-
-  // TODO simply use href from the visualization object?
-  const appBaseUrl = new URL(baseUrl, self.location.href);
-  const appUrl = new URL((0, _utils.appPathFor)(type, id), appBaseUrl);
+  const appBaseUrl = new URL(baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`, self.location.href).href;
+  const appUrl = new URL((0, _utils.appPathFor)(type, id, apiVersion), appBaseUrl).href;
   return /*#__PURE__*/_react.default.createElement(_ui.Modal, {
     onClose: onClose
   }, /*#__PURE__*/_react.default.createElement(_style.default, {
@@ -35,12 +33,13 @@ const GetLinkDialog = _ref => {
   }, _index.default.t('Open in this app')), /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_GetLinkDialogStyles.styles.__hash}` + " " + "link-container"
   }, /*#__PURE__*/_react.default.createElement("a", {
-    href: appUrl.href,
+    href: appUrl,
     className: `jsx-${_GetLinkDialogStyles.styles.__hash}`
-  }, appUrl.href), /*#__PURE__*/_react.default.createElement(_ui.Button, {
+  }, appUrl), /*#__PURE__*/_react.default.createElement(_ui.Button, {
     icon: /*#__PURE__*/_react.default.createElement(_ui.IconCopy24, null),
     small: true,
-    onClick: () => navigator.clipboard.writeText(appUrl.href)
+    onClick: () => navigator.clipboard.writeText(appUrl),
+    "aria-label": _index.default.t('Copy to clipboard')
   }))), /*#__PURE__*/_react.default.createElement(_ui.ModalActions, null, /*#__PURE__*/_react.default.createElement(_ui.ButtonStrip, null, /*#__PURE__*/_react.default.createElement(_ui.Button, {
     onClick: onClose,
     secondary: true

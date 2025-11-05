@@ -4,7 +4,7 @@ import { Button, Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Inp
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { createCalculationMutation, deleteCalculationMutation, updateCalculationMutation, validateExpressionMutation } from '../../../api/expression.js';
+import { createCalculationMutation, deleteCalculationMutation, updateCalculationMutation, validateIndicatorExpressionMutation } from '../../../api/expression.js';
 import i18n from '../../../locales/index.js';
 import { parseExpressionToArray, parseArrayToExpression, validateExpression, EXPRESSION_TYPE_DATA, EXPRESSION_TYPE_NUMBER, INVALID_EXPRESSION, VALID_EXPRESSION, getItemIdsFromExpression } from '../../../modules/expressions.js';
 import { OfflineTooltip as Tooltip } from '../../OfflineTooltip.js';
@@ -15,14 +15,14 @@ import MathOperatorSelector from './MathOperatorSelector.js';
 import styles from './styles/CalculationModal.style.js';
 const FIRST_POSITION = 0;
 const LAST_POSITION = -1;
-const CalculationModal = _ref => {
-  let {
-    calculation,
-    onSave,
-    onClose,
-    onDelete,
-    displayNameProp
-  } = _ref;
+const CALCULATION_PROP_DEFAULT = {};
+const CalculationModal = ({
+  calculation = CALCULATION_PROP_DEFAULT,
+  onSave,
+  onClose,
+  onDelete,
+  displayNameProp
+}) => {
   const {
     show: showError
   } = useAlert(error => error, {
@@ -42,35 +42,29 @@ const CalculationModal = _ref => {
   }] = useDataMutation(deleteCalculationMutation, mutationParams);
   const [doBackendValidation, {
     loading: isValidating
-  }] = useDataMutation(validateExpressionMutation, {
+  }] = useDataMutation(validateIndicatorExpressionMutation, {
     onError: error => showError(error)
   });
   const query = {
     dataElements: {
       resource: 'dataElements',
-      params: _ref2 => {
-        let {
-          ids = []
-        } = _ref2;
-        return {
-          fields: `id,${displayNameProp}~rename(name)`,
-          filter: `id:in:[${ids.join(',')}]`,
-          paging: false
-        };
-      }
+      params: ({
+        ids = []
+      }) => ({
+        fields: `id,${displayNameProp}~rename(name)`,
+        filter: `id:in:[${ids.join(',')}]`,
+        paging: false
+      })
     },
     dataElementOperands: {
       resource: 'dataElementOperands',
-      params: _ref3 => {
-        let {
-          ids = []
-        } = _ref3;
-        return {
-          fields: `id,${displayNameProp}~rename(name)`,
-          filter: `id:in:[${ids.join(',')}]`,
-          paging: false
-        };
-      }
+      params: ({
+        ids = []
+      }) => ({
+        fields: `id,${displayNameProp}~rename(name)`,
+        filter: `id:in:[${ids.join(',')}]`,
+        paging: false
+      })
     }
   };
   const {
@@ -115,13 +109,12 @@ const CalculationModal = _ref => {
   const expressionStatus = validationOutput === null || validationOutput === void 0 ? void 0 : validationOutput.status;
   const selectItem = itemId => setSelectedItemId(prevSelected => prevSelected !== itemId ? itemId : null);
   const isLoading = isCreatingCalculation || isUpdatingCalculation || isDeletingCalculation || isSavingCalculation || isValidating;
-  const addItem = _ref4 => {
-    let {
-      label,
-      value,
-      type,
-      destIndex = LAST_POSITION
-    } = _ref4;
+  const addItem = ({
+    label,
+    value,
+    type,
+    destIndex = LAST_POSITION
+  }) => {
     if (isLoading) {
       return null;
     }
@@ -146,11 +139,10 @@ const CalculationModal = _ref => {
       setFocusItemId(newItem.id);
     }
   };
-  const moveItem = _ref5 => {
-    let {
-      sourceIndex,
-      destIndex
-    } = _ref5;
+  const moveItem = ({
+    sourceIndex,
+    destIndex
+  }) => {
     if (isLoading) {
       return null;
     }
@@ -160,11 +152,10 @@ const CalculationModal = _ref => {
     sourceList.splice(destIndex, 0, moved);
     setExpressionArray(sourceList);
   };
-  const setItemValue = _ref6 => {
-    let {
-      itemId,
-      value
-    } = _ref6;
+  const setItemValue = ({
+    itemId,
+    value
+  }) => {
     const updatedItems = expressionArray.map(item => item.id === itemId ? Object.assign({}, item, {
       value
     }) : item);
@@ -180,11 +171,10 @@ const CalculationModal = _ref => {
       setSelectedItemId(null);
     }
   };
-  const addOrMoveDraggedItem = _ref7 => {
-    let {
-      item,
-      destination
-    } = _ref7;
+  const addOrMoveDraggedItem = ({
+    item,
+    destination
+  }) => {
     const destContainerId = destination.containerId;
     let destIndex = FIRST_POSITION;
     if (item.sourceContainerId === OPTIONS_PANEL) {
@@ -325,12 +315,9 @@ const CalculationModal = _ref => {
   }, /*#__PURE__*/React.createElement(InputField, {
     label: i18n.t('Calculation name'),
     helpText: i18n.t('Shown in table headers and chart axes/legends'),
-    onChange: _ref8 => {
-      let {
-        value
-      } = _ref8;
-      return setName(value.substr(0, 50));
-    },
+    onChange: ({
+      value
+    }) => setName(value.substr(0, 50)),
     value: name,
     dataTest: "calculation-label",
     dense: true
@@ -384,8 +371,5 @@ CalculationModal.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string
   })
-};
-CalculationModal.defaultProps = {
-  calculation: {}
 };
 export default CalculationModal;

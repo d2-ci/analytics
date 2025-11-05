@@ -7,14 +7,13 @@ exports.default = getCustomSVGOptions;
 var _visTypes = require("../../../../../modules/visTypes.js");
 var _index = _interopRequireDefault(require("./singleValue/index.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function getCustomSVGOptions(_ref) {
-  let {
-    extraConfig,
-    layout,
-    extraOptions,
-    metaData,
-    series
-  } = _ref;
+function getCustomSVGOptions({
+  extraConfig,
+  layout,
+  extraOptions,
+  metaData,
+  series
+}) {
   const baseOptions = {
     visualizationType: layout.type
   };

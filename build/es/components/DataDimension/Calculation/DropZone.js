@@ -4,11 +4,10 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './styles/DropZone.style.js';
-const DropZone = _ref => {
-  let {
-    firstElementId,
-    overLastDropZone
-  } = _ref;
+const DropZone = ({
+  firstElementId,
+  overLastDropZone
+}) => {
   const {
     isOver,
     setNodeRef,

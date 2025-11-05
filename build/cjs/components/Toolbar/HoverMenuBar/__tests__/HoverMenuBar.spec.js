@@ -1,115 +1,124 @@
 "use strict";
 
-require("@testing-library/jest-dom");
 var _react = require("@testing-library/react");
-var _enzyme = require("enzyme");
+var _userEvent = _interopRequireDefault(require("@testing-library/user-event"));
 var _react2 = _interopRequireDefault(require("react"));
 var _index = require("../index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('<HoverMenuBar/>', () => {
-  it('renders children', () => {
+  test('renders children', () => {
     const childNode = 'text node';
-    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, null, childNode));
-    expect(wrapper.containsMatchingElement(childNode)).toBe(true);
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, null, childNode));
+    expect(_react.screen.getByText(childNode)).toBeInTheDocument();
   });
-  it('accepts a `dataTest` prop', () => {
+  test('accepts a `dataTest` prop', () => {
     const dataTest = 'test';
-    const wrapper = (0, _enzyme.shallow)(/*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, {
+    (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, {
       dataTest: dataTest
     }, "children"));
-    expect(wrapper.find('div').prop('data-test')).toBe(dataTest);
+    expect(_react.screen.getByTestId(dataTest)).toBeInTheDocument();
   });
   describe('mouse interactions', () => {
-    it('does not open on hover before a dropdown anchor is clicked', async () => {
+    test('does not open on hover before a dropdown anchor is clicked', async () => {
+      const user = _userEvent.default.setup();
       createFullMenuBarWrapper();
-      _react.fireEvent.mouseOver(_react.screen.getByText('Menu A'));
+      await user.hover(_react.screen.getByText('Menu A'));
       await expectMenuItemsInDocument([['Menu item A.1', false], ['Menu item A.2', false], ['Menu item A.3', false]]);
     });
-    it('does not open when a disabled dropdown anchor is clicked', async () => {
+    test('does not open when a disabled dropdown anchor is clicked', async () => {
+      const user = _userEvent.default.setup();
       createFullMenuBarWrapper();
-      _react.fireEvent.click(_react.screen.getByText('Menu C'));
+      await user.click(_react.screen.getByText('Menu C'));
       await expectMenuItemsInDocument([['Menu item A.1', false], ['Menu item A.2', false], ['Menu item A.3', false]]);
     });
-    it('opens menu list when clicked', async () => {
+    test('opens menu list when clicked', async () => {
+      const user = _userEvent.default.setup();
       createFullMenuBarWrapper();
-      _react.fireEvent.click(_react.screen.getByText('Menu A'));
+      await user.click(_react.screen.getByText('Menu A'));
       await expectMenuItemsInDocument([['Menu item A.1', true], ['Menu item B.1', false], ['Menu item C.1', false]]);
     });
-    it('responds to hover once open', async () => {
+    test('responds to hover once open', async () => {
+      const user = _userEvent.default.setup();
       createFullMenuBarWrapper();
-      _react.fireEvent.click(_react.screen.getByText('Menu A'));
-      _react.fireEvent.mouseOver(_react.screen.getByText('Menu B'));
+      await user.click(_react.screen.getByText('Menu A'));
+      await user.hover(_react.screen.getByText('Menu B'));
       await expectMenuItemsInDocument([['Menu item A.1', false], ['Menu item B.1', true], ['Menu item C.1', false]]);
     });
-    it('does not open disabled dropdown on hover in hover mode', async () => {
+    test('does not open disabled dropdown on hover in hover mode', async () => {
+      const user = _userEvent.default.setup();
       createFullMenuBarWrapper();
-      _react.fireEvent.click(_react.screen.getByText('Menu B'));
-      _react.fireEvent.mouseOver(_react.screen.getByText('Menu C'));
+      await user.click(_react.screen.getByText('Menu B'));
+      await user.hover(_react.screen.getByText('Menu C'));
       await expectMenuItemsInDocument([['Menu item B.1', true], ['Menu item C.1', false]]);
     });
-    it('opens submenus when in hover mode', async () => {
+    test('opens submenus when in hover mode', async () => {
+      const user = _userEvent.default.setup();
       createFullMenuBarWrapper();
-      _react.fireEvent.click(_react.screen.getByText('Menu B'));
-      _react.fireEvent.mouseOver(_react.screen.getByText('Menu item B.1'));
+      await user.click(_react.screen.getByText('Menu B'));
+      await user.hover(_react.screen.getByText('Menu item B.1'));
       await expectMenuItemsInDocument([['Menu item B.1.1', true], ['Menu item B.1.2', true], ['Menu item B.1.3', true], ['Menu item B.2.1', false], ['Menu item B.2.2', false], ['Menu item B.2.3', false]]);
-      _react.fireEvent.mouseOver(_react.screen.getByText('Menu item B.2'));
+      await user.hover(_react.screen.getByText('Menu item B.2'));
       await expectMenuItemsInDocument([['Menu item B.1.1', false], ['Menu item B.1.2', false], ['Menu item B.1.3', false], ['Menu item B.2.1', true], ['Menu item B.2.2', true], ['Menu item B.2.3', true]]);
     });
-    it('does not open disabled submenus when in hover mode', async () => {
+    test('does not open disabled submenus when in hover mode', async () => {
+      const user = _userEvent.default.setup();
       createFullMenuBarWrapper();
-      _react.fireEvent.click(_react.screen.getByText('Menu B'));
-      _react.fireEvent.mouseOver(_react.screen.getByText('Menu item B.2'));
+      await user.click(_react.screen.getByText('Menu B'));
+      await user.hover(_react.screen.getByText('Menu item B.2'));
       await expectMenuItemsInDocument([['Menu item B.2.1', true], ['Menu item B.2.2', true], ['Menu item B.2.3', true], ['Menu item B.3.1', false], ['Menu item B.3.2', false], ['Menu item B.3.3', false]]);
-      _react.fireEvent.mouseOver(_react.screen.getByText('Menu item B.3'));
+      await user.hover(_react.screen.getByText('Menu item B.3'));
       await expectMenuItemsInDocument([['Menu item B.2.1', true], ['Menu item B.2.2', true], ['Menu item B.2.3', true], ['Menu item B.3.1', false], ['Menu item B.3.2', false], ['Menu item B.3.3', false]]);
     });
-    it('closes when clicking on then document', async () => {
+    test('closes when clicking on then document', async () => {
+      const user = _userEvent.default.setup();
       createFullMenuBarWrapper();
-      _react.fireEvent.click(_react.screen.getByText('Menu A'));
+      await user.click(_react.screen.getByText('Menu A'));
       await expectMenuItemsInDocument([['Menu item A.1', true]]);
-      _react.fireEvent.click(document);
+      await user.click(document.body);
       await expectMenuItemsInDocument([['Menu item A.1', false]]);
     });
-    it('stays open when clicking a open submenu anchor', async () => {
+    test('stays open when clicking a open submenu anchor', async () => {
+      const user = _userEvent.default.setup();
       createFullMenuBarWrapper();
-      _react.fireEvent.click(_react.screen.getByText('Menu B'));
+      await user.click(_react.screen.getByText('Menu B'));
       await expectMenuItemsInDocument([['Menu item B.1', true]]);
-      _react.fireEvent.mouseOver(_react.screen.getByText('Menu item B.1'));
+      await user.hover(_react.screen.getByText('Menu item B.1'));
       await expectMenuItemsInDocument([['Menu item B.1', true], ['Menu item B.1.1', true], ['Menu item B.1.2', true], ['Menu item B.1.3', true]]);
-      _react.fireEvent.click(_react.screen.getByText('Menu item B.1'));
+      await user.click(_react.screen.getByText('Menu item B.1'));
       await expectMenuItemsInDocument([['Menu item B.1', true], ['Menu item B.1.1', true], ['Menu item B.1.2', true], ['Menu item B.1.3', true]]);
     });
-    it('calls the onClick of the menu item and closes when clicking a menu item', async () => {
+    test('calls the onClick of the menu item and closes when clicking a menu item', async () => {
+      const user = _userEvent.default.setup();
       const menuItemOnClickSpy = jest.fn();
       createFullMenuBarWrapper({
         menuItemOnClickSpy
       });
-      _react.fireEvent.click(_react.screen.getByText('Menu A'));
+      await user.click(_react.screen.getByText('Menu A'));
       await expectMenuItemsInDocument([['Menu item A.1', true]]);
-      _react.fireEvent.click(_react.screen.getByText('Menu item A.1'));
+      await user.click(_react.screen.getByText('Menu item A.1'));
       expect(menuItemOnClickSpy).toHaveBeenCalledTimes(1);
       await expectMenuItemsInDocument([['Menu item A.1', false]]);
     });
-    it('calls the onClick of the menu item and closes when clicking a submenu item', async () => {
+    test('calls the onClick of the menu item and closes when clicking a submenu item', async () => {
+      const user = _userEvent.default.setup();
       const subMenuItemOnClickSpy = jest.fn();
       createFullMenuBarWrapper({
         subMenuItemOnClickSpy
       });
-      _react.fireEvent.click(_react.screen.getByText('Menu B'));
+      await user.click(_react.screen.getByText('Menu B'));
       await expectMenuItemsInDocument([['Menu item B.1', true]]);
-      _react.fireEvent.mouseOver(_react.screen.getByText('Menu item B.1'));
+      await user.hover(_react.screen.getByText('Menu item B.1'));
       await expectMenuItemsInDocument([['Menu item B.1.1', true]]);
-      _react.fireEvent.click(_react.screen.getByText('Menu item B.1.1'));
+      await user.click(_react.screen.getByText('Menu item B.1.1'));
       expect(subMenuItemOnClickSpy).toHaveBeenCalledTimes(1);
       await expectMenuItemsInDocument([['Menu item B.1', false], ['Menu item B.1.1', false], ['Menu item B.1.1', false]]);
     });
   });
 });
-function createFullMenuBarWrapper() {
-  let {
-    menuItemOnClickSpy,
-    subMenuItemOnClickSpy
-  } = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+function createFullMenuBarWrapper({
+  menuItemOnClickSpy,
+  subMenuItemOnClickSpy
+} = {}) {
   return (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_index.HoverMenuBar, null, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuDropdown, {
     label: "Menu A"
   }, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuList, null, /*#__PURE__*/_react2.default.createElement(_index.HoverMenuListItem, {

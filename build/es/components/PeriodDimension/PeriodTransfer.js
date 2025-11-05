@@ -14,35 +14,38 @@ import RelativePeriodFilter from './RelativePeriodFilter.js';
 import { getFixedPeriodsOptionsById } from './utils/fixedPeriods.js';
 import { MONTHLY, QUARTERLY } from './utils/index.js';
 import { getRelativePeriodsOptionsById } from './utils/relativePeriods.js';
-const RightHeader = _ref => {
-  let {
-    infoBoxMessage
-  } = _ref;
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
-    className: `jsx-${styles.__hash}` + " " + "rightHeader"
-  }, i18n.t('Selected Periods')), infoBoxMessage && /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + "info-container"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}`
-  }, /*#__PURE__*/React.createElement(IconInfo16, null)), /*#__PURE__*/React.createElement("span", {
-    className: `jsx-${styles.__hash}` + " " + "info-text"
-  }, infoBoxMessage)), /*#__PURE__*/React.createElement(_JSXStyle, {
-    id: styles.__hash
-  }, styles));
-};
+const RightHeader = ({
+  infoBoxMessage
+}) => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+  className: `jsx-${styles.__hash}` + " " + "rightHeader"
+}, i18n.t('Selected Periods')), infoBoxMessage && /*#__PURE__*/React.createElement("div", {
+  className: `jsx-${styles.__hash}` + " " + "info-container"
+}, /*#__PURE__*/React.createElement("div", {
+  className: `jsx-${styles.__hash}`
+}, /*#__PURE__*/React.createElement(IconInfo16, null)), /*#__PURE__*/React.createElement("span", {
+  className: `jsx-${styles.__hash}` + " " + "info-text"
+}, infoBoxMessage)), /*#__PURE__*/React.createElement(_JSXStyle, {
+  id: styles.__hash
+}, styles));
 RightHeader.propTypes = {
   infoBoxMessage: PropTypes.string
 };
-const PeriodTransfer = _ref2 => {
-  let {
-    onSelect,
-    dataTest,
-    selectedItems,
-    rightFooter,
-    excludedPeriodTypes,
-    periodsSettings,
-    infoBoxMessage
-  } = _ref2;
+const SELECTED_ITEMS_PROP_DEFAULT = [];
+const EXCLUDED_PERIOD_TYPES_PROP_DEFAULT = [];
+const PERIODS_SETTINGS_PROP_DEFAULT = {
+  calendar: 'gregory',
+  locale: 'en'
+};
+const PeriodTransfer = ({
+  onSelect,
+  dataTest,
+  selectedItems = SELECTED_ITEMS_PROP_DEFAULT,
+  rightFooter,
+  excludedPeriodTypes = EXCLUDED_PERIOD_TYPES_PROP_DEFAULT,
+  periodsSettings = PERIODS_SETTINGS_PROP_DEFAULT,
+  infoBoxMessage,
+  height = TRANSFER_HEIGHT
+}) => {
   const defaultRelativePeriodType = excludedPeriodTypes.includes(MONTHLY) ? getRelativePeriodsOptionsById(QUARTERLY) : getRelativePeriodsOptionsById(MONTHLY);
   const defaultFixedPeriodType = excludedPeriodTypes.includes(MONTHLY) ? getFixedPeriodsOptionsById(QUARTERLY, periodsSettings) : getFixedPeriodsOptionsById(MONTHLY, periodsSettings);
   const now = getNowInCalendar(periodsSettings.calendar);
@@ -125,10 +128,9 @@ const PeriodTransfer = _ref2 => {
     id: styles.__hash
   }, styles));
   return /*#__PURE__*/React.createElement(Transfer, {
-    onChange: _ref3 => {
-      let {
-        selected
-      } = _ref3;
+    onChange: ({
+      selected
+    }) => {
       const formattedItems = selected.map(id => {
         const matchingItem = [...allPeriods, ...selectedItems].find(item => item.id === id);
         return {
@@ -142,7 +144,7 @@ const PeriodTransfer = _ref2 => {
     selected: selectedItems.map(period => period.id),
     leftHeader: renderLeftHeader(),
     enableOrderChange: true,
-    height: TRANSFER_HEIGHT,
+    height: height,
     optionsWidth: TRANSFER_OPTIONS_WIDTH,
     selectedWidth: TRANSFER_SELECTED_WIDTH,
     selectedEmptyComponent: renderEmptySelection(),
@@ -150,43 +152,30 @@ const PeriodTransfer = _ref2 => {
       infoBoxMessage: infoBoxMessage
     }),
     rightFooter: rightFooter,
-    options: [...allPeriods, ...selectedItems].map(_ref4 => {
-      let {
-        id,
-        name
-      } = _ref4;
-      return {
-        label: name,
-        value: id
-      };
-    }),
-    renderOption: _ref5 => {
-      let {
-        value,
-        ...props
-      } = _ref5;
-      return /*#__PURE__*/React.createElement(TransferOption, _extends({}, props, {
-        value: value,
-        active: isActive(value),
-        icon: PeriodIcon,
-        dataTest: `${dataTest}-transfer-option`
-      }));
-    },
+    options: [...allPeriods, ...selectedItems].map(({
+      id,
+      name
+    }) => ({
+      label: name,
+      value: id
+    })),
+    renderOption: ({
+      value,
+      ...props
+    }) => /*#__PURE__*/React.createElement(TransferOption, _extends({}, props, {
+      value: value,
+      active: isActive(value),
+      icon: PeriodIcon,
+      dataTest: `${dataTest}-transfer-option`
+    })),
     dataTest: `${dataTest}-transfer`
   });
-};
-PeriodTransfer.defaultProps = {
-  selectedItems: [],
-  excludedPeriodTypes: [],
-  periodsSettings: {
-    calendar: 'gregory',
-    locale: 'en'
-  }
 };
 PeriodTransfer.propTypes = {
   onSelect: PropTypes.func.isRequired,
   dataTest: PropTypes.string,
   excludedPeriodTypes: PropTypes.arrayOf(PropTypes.string),
+  height: PropTypes.string,
   infoBoxMessage: PropTypes.string,
   periodsSettings: PropTypes.shape({
     calendar: PropTypes.string,

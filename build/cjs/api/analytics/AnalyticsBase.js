@@ -10,51 +10,41 @@ var _utils = require("./utils.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const analyticsQuery = {
   resource: 'analytics',
-  id: _ref => {
-    let {
-      path,
-      program,
-      trackedEntityType
-    } = _ref;
-    return (0, _utils.formatRequestPath)({
-      path,
-      program,
-      trackedEntityType
-    });
-  },
-  params: _ref2 => {
-    let {
-      dimensions,
-      filters,
-      parameters
-    } = _ref2;
-    return {
-      dimension: dimensions.length ? dimensions : undefined,
-      filter: filters.length ? filters : undefined,
-      ...parameters
-    };
-  }
+  id: ({
+    path,
+    program,
+    trackedEntityType
+  }) => (0, _utils.formatRequestPath)({
+    path,
+    program,
+    trackedEntityType
+  }),
+  params: ({
+    dimensions,
+    filters,
+    parameters
+  }) => ({
+    dimension: dimensions.length ? dimensions : undefined,
+    filter: filters.length ? filters : undefined,
+    ...parameters
+  })
 };
 const analyticsDataQuery = {
   resource: 'analytics',
-  id: _ref3 => {
-    let {
-      path,
-      program,
-      trackedEntityType
-    } = _ref3;
-    return (0, _utils.formatRequestPath)({
-      path,
-      program,
-      trackedEntityType
-    });
-  },
-  params: _ref4 => {
-    let {
-      dimensions,
-      filters,
-      parameters
-    } = _ref4;
+  id: ({
+    path,
+    program,
+    trackedEntityType
+  }) => (0, _utils.formatRequestPath)({
+    path,
+    program,
+    trackedEntityType
+  }),
+  params: ({
+    dimensions,
+    filters,
+    parameters
+  }) => {
     return {
       dimension: dimensions.length ? generateDimensionStrings(dimensions, {
         sorted: true
@@ -70,43 +60,34 @@ const analyticsDataQuery = {
 };
 const analyticsMetaDataQuery = {
   resource: 'analytics',
-  id: _ref5 => {
-    let {
-      path,
-      program,
-      trackedEntityType
-    } = _ref5;
-    return (0, _utils.formatRequestPath)({
-      path,
-      program,
-      trackedEntityType
-    });
-  },
-  params: _ref6 => {
-    let {
-      dimensions,
-      filters,
-      parameters
-    } = _ref6;
-    return {
-      dimension: dimensions.length ? generateDimensionStrings(dimensions) : undefined,
-      filter: filters.length ? generateDimensionStrings(filters) : undefined,
-      ...parameters,
-      skipMeta: false,
-      skipData: true,
-      includeMetadataDetails: true
-    };
-  }
+  id: ({
+    path,
+    program,
+    trackedEntityType
+  }) => (0, _utils.formatRequestPath)({
+    path,
+    program,
+    trackedEntityType
+  }),
+  params: ({
+    dimensions,
+    filters,
+    parameters
+  }) => ({
+    dimension: dimensions.length ? generateDimensionStrings(dimensions) : undefined,
+    filter: filters.length ? generateDimensionStrings(filters) : undefined,
+    ...parameters,
+    skipMeta: false,
+    skipData: true,
+    includeMetadataDetails: true
+  })
 };
-const generateDimensionStrings = function () {
-  let dimensions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  let options = arguments.length > 1 ? arguments[1] : undefined;
+const generateDimensionStrings = (dimensions = [], options) => {
   const sortedDimensions = (0, _sortBy.default)(dimensions, 'dimension');
-  return sortedDimensions.map(_ref7 => {
-    let {
-      dimension,
-      items
-    } = _ref7;
+  return sortedDimensions.map(({
+    dimension,
+    items
+  }) => {
     if (Array.isArray(items) && items.length) {
       if (options && options.sorted) {
         items = items.slice().sort();

@@ -7,15 +7,14 @@ import { LocalesSelect } from './LocalesSelect.js';
 import { TranslationModalActions } from './TranslationModalActions.js';
 const SESSION_STORAGE_TRANSLATION_LOCALE_KEY = 'translation-dialog-selected-locale';
 const camelCaseToUnderscores = field => field.replace(/[a-z][A-Z]/g, match => [match.charAt(0), match.charAt(1)].join('_')).toLowerCase();
-export const TranslationForm = _ref => {
-  let {
-    fieldsToTranslate,
-    objectToTranslate,
-    translations,
-    resource,
-    onTranslationSaved,
-    onClose
-  } = _ref;
+export const TranslationForm = ({
+  fieldsToTranslate,
+  objectToTranslate,
+  translations,
+  resource,
+  onTranslationSaved,
+  onClose
+}) => {
   const [newTranslations, setNewTranslations] = useState();
   const [translationLocale, setTranslationLocale] = useState();
   const [fieldsTranslations, setFieldsTranslations] = useState({});
@@ -68,14 +67,11 @@ export const TranslationForm = _ref => {
   const translationsMutationRef = useRef({
     resource: `${resource}/translations`,
     type: 'update',
-    data: _ref2 => {
-      let {
-        translations
-      } = _ref2;
-      return {
-        translations
-      };
-    }
+    data: ({
+      translations
+    }) => ({
+      translations
+    })
   });
   const [saveTranslations, {
     loading: saveInProgress
@@ -119,12 +115,9 @@ export const TranslationForm = _ref => {
   })), translationLocale && /*#__PURE__*/React.createElement(DataTableCell, null, /*#__PURE__*/React.createElement(TextAreaField, {
     label: fieldsTranslations[field],
     value: getTranslationForField(field),
-    onChange: _ref3 => {
-      let {
-        value
-      } = _ref3;
-      return setTranslationForField(field, value);
-    },
+    onChange: ({
+      value
+    }) => setTranslationForField(field, value),
     rows: 3
   })), !translationLocale && index === 0 && /*#__PURE__*/React.createElement(DataTableCell, {
     rowSpan: String(fieldsToTranslate.length)

@@ -11,15 +11,13 @@ export class AdaptiveClippingController {
     this.engine = engine;
     this.reset();
   }
-  addSize(_ref, _ref2) {
-    let {
-      row,
-      column
-    } = _ref;
-    let {
-      width,
-      height
-    } = _ref2;
+  addSize({
+    row,
+    column
+  }, {
+    width,
+    height
+  }) {
     if (column >= 0) {
       const columnSize = this.columns.sizes[column] || {
         pre: 0,
@@ -43,18 +41,16 @@ export class AdaptiveClippingController {
       this.rows.headerSizes[index] = Math.max(this.rows.headerSizes[index] || 0, height);
     }
   }
-  add(_ref3, renderedValue) {
-    let {
-      row,
-      column
-    } = _ref3;
+  add({
+    row,
+    column
+  }, renderedValue) {
     this.addSize({
       row,
       column
     }, this.measureText(renderedValue));
   }
-  measureText(renderedValue) {
-    let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  measureText(renderedValue, options = {}) {
     return measureTextWithWrapping(renderedValue, {
       fontSize: this.engine.fontSize,
       ...options
@@ -78,7 +74,8 @@ export class AdaptiveClippingController {
           if (isColumn) {
             var _axis$sizes$index;
             const headerSize = this.measureText(label, {
-              maxWidth: isLeafHeader ? Math.max(CLIPPED_CELL_MIN_SIZE, ((_axis$sizes$index = axis.sizes[index]) === null || _axis$sizes$index === void 0 ? void 0 : _axis$sizes$index.size) || 0) : 0
+              maxWidth: isLeafHeader ? Math.max(CLIPPED_CELL_MIN_SIZE, ((_axis$sizes$index = axis.sizes[index]) === null || _axis$sizes$index === void 0 ? void 0 : _axis$sizes$index.size) || 0) : 0,
+              ...header.style
             });
             this.addSize({
               row: -headerStack.length + level,

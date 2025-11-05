@@ -3,12 +3,12 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.parsePeriodCode = exports.getYearOffsetFromNow = exports.getFixedPeriodsOptionsById = exports.getFixedPeriodsOptions = void 0;
+exports.parsePeriodCode = exports.getYearOffsetFromNow = exports.getFixedPeriodsOptionsById = exports.getFixedPeriodsOptions = exports.PERIOD_TYPE_REGEX = void 0;
 var _multiCalendarDates = require("@dhis2/multi-calendar-dates");
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _index2 = require("./index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PERIOD_TYPE_REGEX = {
+const PERIOD_TYPE_REGEX = exports.PERIOD_TYPE_REGEX = {
   [_index2.DAILY]: /^([0-9]{4})([0-9]{2})([0-9]{2})$/,
   // YYYYMMDD
   [_index2.WEEKLY]: /^([0-9]{4})()W([0-9]{1,2})$/,
@@ -44,13 +44,12 @@ const PERIOD_TYPE_REGEX = {
   // YYYY"July"
   [_index2.FYAPR]: /^([0-9]{4})April$/ // YYYY"April"
 };
-const getPeriods = _ref => {
-  let {
-    periodType,
-    config,
-    fnFilter,
-    periodSettings = {}
-  } = _ref;
+const getPeriods = ({
+  periodType,
+  config,
+  fnFilter,
+  periodSettings = {}
+}) => {
   const offset = parseInt(config.offset, 10);
   const isFilter = config.filterFuturePeriods;
   const isReverse = periodType.match(/^FY|YEARLY/) ? true : config.reversePeriods;

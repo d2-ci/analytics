@@ -3,10 +3,9 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 import React from 'react';
 import { PivotTableCell } from './PivotTableCell.js';
 import { cell as cellStyle } from './styles/PivotTable.style.js';
-export const PivotTableEmptyCell = /*#__PURE__*/React.forwardRef((_ref, ref) => {
-  let {
-    ...props
-  } = _ref;
+export const PivotTableEmptyCell = /*#__PURE__*/React.forwardRef(({
+  ...props
+}, ref) => {
   return /*#__PURE__*/React.createElement(PivotTableCell, _extends({
     ref: ref
   }, props), /*#__PURE__*/React.createElement(_JSXStyle, {

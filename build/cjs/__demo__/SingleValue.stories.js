@@ -6,8 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = exports.Default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _index = require("../index.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 const constainerStyleBase = {
   width: 800,
   height: 800,
@@ -593,6 +592,7 @@ const Default = () => {
   const [dashboard, setDashboard] = (0, _react.useState)(false);
   const [showIcon, setShowIcon] = (0, _react.useState)(true);
   const [indicatorType, setIndicatorType] = (0, _react.useState)('plain');
+  const [exportAsPdf, setExportAsPdf] = (0, _react.useState)(true);
   const [width, setWidth] = (0, _react.useState)(constainerStyleBase.width);
   const [height, setHeight] = (0, _react.useState)(constainerStyleBase.height);
   const containerStyle = (0, _react.useMemo)(() => ({
@@ -600,6 +600,31 @@ const Default = () => {
     width,
     height
   }), [width, height]);
+  const downloadOffline = (0, _react.useCallback)(() => {
+    if (newChartRef.current) {
+      const currentBackgroundColor = newChartRef.current.userOptions.chart.backgroundColor;
+      newChartRef.current.update({
+        exporting: {
+          chartOptions: {
+            isPdfExport: exportAsPdf
+          }
+        }
+      });
+      newChartRef.current.exportChartLocal({
+        sourceHeight: 768,
+        sourceWidth: 1024,
+        scale: 1,
+        fallbackToExportServer: false,
+        filename: 'testOfflineDownload',
+        showExportInProgress: true,
+        type: exportAsPdf ? 'application/pdf' : 'image/png'
+      }, {
+        chart: {
+          backgroundColor: currentBackgroundColor === 'transparent' ? '#ffffff' : currentBackgroundColor
+        }
+      });
+    }
+  }, [exportAsPdf]);
   (0, _react.useEffect)(() => {
     if (newContainerRef.current) {
       requestAnimationFrame(() => {
@@ -660,13 +685,19 @@ const Default = () => {
     checked: showIcon,
     onChange: () => setShowIcon(!showIcon),
     type: "checkbox"
-  }), "\xA0Show icon"), /*#__PURE__*/_react.default.createElement("label", null, "Indicator type\xA0", /*#__PURE__*/_react.default.createElement("select", {
+  }), "\xA0Show icon"), /*#__PURE__*/_react.default.createElement("label", null, "Indicator type", ' ', /*#__PURE__*/_react.default.createElement("select", {
     onChange: event => setIndicatorType(event.target.value)
   }, indicatorTypes.map((type, index) => {
     return /*#__PURE__*/_react.default.createElement("option", {
       key: index
     }, type);
-  })))), /*#__PURE__*/_react.default.createElement("div", {
+  }))), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
+    checked: exportAsPdf,
+    onChange: () => setExportAsPdf(!exportAsPdf),
+    type: "checkbox"
+  }), ' ', "Export as PDF"), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: downloadOffline
+  }, "Download offline")), /*#__PURE__*/_react.default.createElement("div", {
     style: {
       display: 'flex',
       gap: 12

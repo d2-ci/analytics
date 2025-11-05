@@ -2,11 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { PivotTableCell } from './PivotTableCell.js';
 import { usePivotTableEngine } from './PivotTableEngineContext.js';
-export const PivotTableDimensionLabelCell = _ref => {
-  let {
-    rowLevel,
-    columnLevel
-  } = _ref;
+export const PivotTableDimensionLabelCell = ({
+  rowLevel,
+  columnLevel
+}) => {
   const engine = usePivotTableEngine();
   const colCount = engine.rowDepth;
   const rowCount = engine.columnDepth;

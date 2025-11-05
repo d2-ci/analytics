@@ -15,13 +15,12 @@ const getOptions = () => ({
   [TOTALS]: i18n.t('Totals only'),
   [DETAIL]: i18n.t('Details only')
 });
-const GroupSelector = _ref => {
+const GroupSelector = ({
+  currentValue,
+  onChange,
+  displayNameProp
+}) => {
   var _dataTypes$DIMENSION_;
-  let {
-    currentValue,
-    onChange,
-    displayNameProp
-  } = _ref;
   const dataEngine = useDataEngine();
   const [loading, setLoading] = useState(true);
   const [groups, setGroups] = useState([]);
@@ -63,11 +62,10 @@ GroupSelector.propTypes = {
   displayNameProp: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 };
-const DisaggregationSelector = _ref2 => {
-  let {
-    currentValue,
-    onChange
-  } = _ref2;
+const DisaggregationSelector = ({
+  currentValue,
+  onChange
+}) => {
   const options = getOptions();
   return /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "group-select"
@@ -89,11 +87,10 @@ DisaggregationSelector.propTypes = {
   currentValue: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 };
-const DataElementSelector = _ref3 => {
-  let {
-    displayNameProp,
-    onDoubleClick
-  } = _ref3;
+const DataElementSelector = ({
+  displayNameProp,
+  onDoubleClick
+}) => {
   const dataEngine = useDataEngine();
   const [searchTerm, setSearchTerm] = useState('');
   const [group, setGroup] = useState(DIMENSION_TYPE_ALL);
@@ -150,10 +147,9 @@ const DataElementSelector = _ref3 => {
     searchTermRef.current = newSearchTerm;
     fetchData(true);
   }, 500);
-  const onSearchChange = _ref4 => {
-    let {
-      value
-    } = _ref4;
+  const onSearchChange = ({
+    value
+  }) => {
     const newSearchTerm = value;
     setSearchTerm(newSearchTerm);
 
@@ -173,10 +169,9 @@ const DataElementSelector = _ref3 => {
     pageRef.current = 1;
     fetchData(true);
   };
-  const onEndReached = _ref5 => {
-    let {
-      isIntersecting
-    } = _ref5;
+  const onEndReached = ({
+    isIntersecting
+  }) => {
     if (isIntersecting) {
       // if hasNextPage is set it means at least 1 request already happened and there is
       // another page, fetch the next page
@@ -233,18 +228,15 @@ const DataElementSelector = _ref3 => {
     className: `jsx-${styles.__hash}` + " " + (cx('dimension-list-scroller', {
       loading
     }) || "")
-  }, Boolean(options.length) && options.map(_ref6 => {
-    let {
-      label,
-      value
-    } = _ref6;
-    return /*#__PURE__*/React.createElement(DataElementOption, {
-      key: value,
-      label: label,
-      value: value,
-      onDoubleClick: onDoubleClick
-    });
-  }), !loading && !options.length && /*#__PURE__*/React.createElement("div", {
+  }, Boolean(options.length) && options.map(({
+    label,
+    value
+  }) => /*#__PURE__*/React.createElement(DataElementOption, {
+    key: value,
+    label: label,
+    value: value,
+    onDoubleClick: onDoubleClick
+  })), !loading && !options.length && /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "empty-list"
   }, searchTermRef.current ? i18n.t('No data elements found for "{{- searchTerm}}"', {
     searchTerm: searchTermRef.current

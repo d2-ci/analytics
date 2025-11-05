@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.OpenFileDialog = void 0;
+exports.formatFilters = exports.default = exports.OpenFileDialog = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _appRuntime = require("@dhis2/app-runtime");
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
@@ -11,7 +11,6 @@ var _ui = require("@dhis2/ui");
 var _isEqual = _interopRequireDefault(require("lodash/isEqual"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
-var _visTypes = require("../../modules/visTypes.js");
 var _CreatedByFilter = require("./CreatedByFilter.js");
 var _FileList = require("./FileList.js");
 var _NameFilter = require("./NameFilter.js");
@@ -19,19 +18,17 @@ var _OpenFileDialogStyles = require("./OpenFileDialog.styles.js");
 var _PaginationControls = require("./PaginationControls.js");
 var _utils = require("./utils.js");
 var _VisTypeFilter = require("./VisTypeFilter.js");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getQuery = type => ({
   files: {
     resource: _utils.AOTypeMap[type].apiEndpoint,
-    params: _ref => {
-      let {
-        sortField = 'displayName',
-        sortDirection = 'iasc',
-        page = 1,
-        filters
-      } = _ref;
+    params: ({
+      sortField = 'displayName',
+      sortDirection = 'iasc',
+      page = 1,
+      filters
+    }) => {
       const queryParams = {
         filter: filters,
         fields: `id,type,displayName,title,displayDescription,created,lastUpdated,user,access,href`,
@@ -46,17 +43,26 @@ const getQuery = type => ({
     }
   }
 });
-const OpenFileDialog = _ref2 => {
-  let {
-    type,
-    open,
-    filterVisTypes,
-    defaultFilterVisType,
-    onClose,
-    onFileSelect,
-    onNew,
-    currentUser
-  } = _ref2;
+const formatFilters = (currentUser, filters, filterVisTypes) => {
+  const queryFilters = [];
+  filters.searchTerm && queryFilters.push(`identifiable:token:${filters.searchTerm}`);
+  const userFilter = (0, _CreatedByFilter.formatUserFilter)(filters.createdBy, currentUser.id);
+  userFilter && queryFilters.push(userFilter);
+  const typeFilter = (0, _VisTypeFilter.formatTypeFilter)(filterVisTypes, filters.visType);
+  typeFilter && queryFilters.push(typeFilter);
+  return queryFilters;
+};
+exports.formatFilters = formatFilters;
+const OpenFileDialog = ({
+  type,
+  open,
+  filterVisTypes,
+  defaultFilterVisType,
+  onClose,
+  onFileSelect,
+  onNew,
+  currentUser
+}) => {
   const filesQuery = (0, _react.useMemo)(() => getQuery(type), [type]);
   const defaultFilters = {
     searchTerm: '',
@@ -79,36 +85,7 @@ const OpenFileDialog = _ref2 => {
   });
   const [nameFilterValue, setNameFilterValue] = (0, _react.useState)(defaultFilters.searchTerm);
   const [searchTimeout, setSearchTimeout] = (0, _react.useState)(null);
-  const formatFilters = (0, _react.useCallback)(() => {
-    const queryFilters = [];
-    switch (filters.createdBy) {
-      case _CreatedByFilter.CREATED_BY_ALL_BUT_CURRENT_USER:
-        queryFilters.push(`user.id:!eq:${currentUser.id}`);
-        break;
-      case _CreatedByFilter.CREATED_BY_CURRENT_USER:
-        queryFilters.push(`user.id:eq:${currentUser.id}`);
-        break;
-      case _CreatedByFilter.CREATED_BY_ALL:
-      default:
-        break;
-    }
-    if (filters.visType) {
-      switch (filters.visType) {
-        case _visTypes.VIS_TYPE_GROUP_ALL:
-          break;
-        case _visTypes.VIS_TYPE_GROUP_CHARTS:
-          queryFilters.push('type:!eq:PIVOT_TABLE');
-          break;
-        default:
-          queryFilters.push(`type:eq:${filters.visType}`);
-          break;
-      }
-    }
-    if (filters.searchTerm) {
-      queryFilters.push(`identifiable:token:${filters.searchTerm}`);
-    }
-    return queryFilters;
-  }, [currentUser, filters]);
+  const formatFiltersCb = (0, _react.useCallback)(() => formatFilters(currentUser, filters, filterVisTypes), [currentUser, filters, filterVisTypes]);
   const formatSortDirection = (0, _react.useCallback)(() => {
     if (sortField === 'displayName' && sortDirection !== 'default') {
       return `i${sortDirection}`;
@@ -138,17 +115,14 @@ const OpenFileDialog = _ref2 => {
   const setPage = pageNum => setState({
     page: pageNum
   });
-  const sortData = _ref3 => {
-    let {
-      name,
-      direction
-    } = _ref3;
-    return setState({
-      sortField: name,
-      sortDirection: direction,
-      page: 1
-    });
-  };
+  const sortData = ({
+    name,
+    direction
+  }) => setState({
+    sortField: name,
+    sortDirection: direction,
+    page: 1
+  });
   (0, _react.useEffect)(() => {
     // only fetch data when the dialog is open
     if (open) {
@@ -156,10 +130,10 @@ const OpenFileDialog = _ref2 => {
         page,
         sortField,
         sortDirection: formatSortDirection(),
-        filters: formatFilters()
+        filters: formatFiltersCb()
       });
     }
-  }, [open, page, sortField, filters, refetch, formatFilters, formatSortDirection]);
+  }, [open, page, sortField, filters, refetch, formatFiltersCb, formatSortDirection]);
   const headers = [{
     field: 'displayName',
     label: _d2I18n.default.t('Name'),
@@ -242,20 +216,17 @@ const OpenFileDialog = _ref2 => {
     small: true
   }, _d2I18n.default.t('Clear filters')))), /*#__PURE__*/_react.default.createElement(_ui.DataTable, {
     layout: "fixed"
-  }, /*#__PURE__*/_react.default.createElement(_ui.DataTableHead, null, /*#__PURE__*/_react.default.createElement(_ui.DataTableRow, null, data !== null && data !== void 0 && data.files[_utils.AOTypeMap[type].apiEndpoint].length ? headers.map(_ref4 => {
-    let {
-      field,
-      label,
-      width
-    } = _ref4;
-    return /*#__PURE__*/_react.default.createElement(_ui.DataTableColumnHeader, {
-      width: width,
-      key: field,
-      name: field,
-      onSortIconClick: sortData,
-      sortDirection: getSortDirection(field)
-    }, label);
-  }) : /*#__PURE__*/_react.default.createElement(_ui.DataTableColumnHeader, null))), /*#__PURE__*/_react.default.createElement(_ui.DataTableBody, {
+  }, /*#__PURE__*/_react.default.createElement(_ui.DataTableHead, null, /*#__PURE__*/_react.default.createElement(_ui.DataTableRow, null, data !== null && data !== void 0 && data.files[_utils.AOTypeMap[type].apiEndpoint].length ? headers.map(({
+    field,
+    label,
+    width
+  }) => /*#__PURE__*/_react.default.createElement(_ui.DataTableColumnHeader, {
+    width: width,
+    key: field,
+    name: field,
+    onSortIconClick: sortData,
+    sortDirection: getSortDirection(field)
+  }, label)) : /*#__PURE__*/_react.default.createElement(_ui.DataTableColumnHeader, null))), /*#__PURE__*/_react.default.createElement(_ui.DataTableBody, {
     className: "data-table-body"
   }, loading && /*#__PURE__*/_react.default.createElement(_ui.DataTableRow, null, /*#__PURE__*/_react.default.createElement(_ui.DataTableCell, {
     large: true

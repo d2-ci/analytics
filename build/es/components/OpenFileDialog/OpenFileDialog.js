@@ -5,24 +5,22 @@ import { Box, Modal, ModalTitle, ModalContent, DataTable, DataTableHead, DataTab
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
-import { VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS } from '../../modules/visTypes.js';
-import { CreatedByFilter, CREATED_BY_ALL, CREATED_BY_ALL_BUT_CURRENT_USER, CREATED_BY_CURRENT_USER } from './CreatedByFilter.js';
+import { CreatedByFilter, formatUserFilter, CREATED_BY_ALL } from './CreatedByFilter.js';
 import { FileList } from './FileList.js';
 import { NameFilter } from './NameFilter.js';
 import { styles } from './OpenFileDialog.styles.js';
 import { PaginationControls } from './PaginationControls.js';
 import { getTranslatedString, AOTypeMap } from './utils.js';
-import { VisTypeFilter } from './VisTypeFilter.js';
+import { VisTypeFilter, formatTypeFilter } from './VisTypeFilter.js';
 const getQuery = type => ({
   files: {
     resource: AOTypeMap[type].apiEndpoint,
-    params: _ref => {
-      let {
-        sortField = 'displayName',
-        sortDirection = 'iasc',
-        page = 1,
-        filters
-      } = _ref;
+    params: ({
+      sortField = 'displayName',
+      sortDirection = 'iasc',
+      page = 1,
+      filters
+    }) => {
       const queryParams = {
         filter: filters,
         fields: `id,type,displayName,title,displayDescription,created,lastUpdated,user,access,href`,
@@ -37,17 +35,25 @@ const getQuery = type => ({
     }
   }
 });
-export const OpenFileDialog = _ref2 => {
-  let {
-    type,
-    open,
-    filterVisTypes,
-    defaultFilterVisType,
-    onClose,
-    onFileSelect,
-    onNew,
-    currentUser
-  } = _ref2;
+export const formatFilters = (currentUser, filters, filterVisTypes) => {
+  const queryFilters = [];
+  filters.searchTerm && queryFilters.push(`identifiable:token:${filters.searchTerm}`);
+  const userFilter = formatUserFilter(filters.createdBy, currentUser.id);
+  userFilter && queryFilters.push(userFilter);
+  const typeFilter = formatTypeFilter(filterVisTypes, filters.visType);
+  typeFilter && queryFilters.push(typeFilter);
+  return queryFilters;
+};
+export const OpenFileDialog = ({
+  type,
+  open,
+  filterVisTypes,
+  defaultFilterVisType,
+  onClose,
+  onFileSelect,
+  onNew,
+  currentUser
+}) => {
   const filesQuery = useMemo(() => getQuery(type), [type]);
   const defaultFilters = {
     searchTerm: '',
@@ -70,36 +76,7 @@ export const OpenFileDialog = _ref2 => {
   });
   const [nameFilterValue, setNameFilterValue] = useState(defaultFilters.searchTerm);
   const [searchTimeout, setSearchTimeout] = useState(null);
-  const formatFilters = useCallback(() => {
-    const queryFilters = [];
-    switch (filters.createdBy) {
-      case CREATED_BY_ALL_BUT_CURRENT_USER:
-        queryFilters.push(`user.id:!eq:${currentUser.id}`);
-        break;
-      case CREATED_BY_CURRENT_USER:
-        queryFilters.push(`user.id:eq:${currentUser.id}`);
-        break;
-      case CREATED_BY_ALL:
-      default:
-        break;
-    }
-    if (filters.visType) {
-      switch (filters.visType) {
-        case VIS_TYPE_GROUP_ALL:
-          break;
-        case VIS_TYPE_GROUP_CHARTS:
-          queryFilters.push('type:!eq:PIVOT_TABLE');
-          break;
-        default:
-          queryFilters.push(`type:eq:${filters.visType}`);
-          break;
-      }
-    }
-    if (filters.searchTerm) {
-      queryFilters.push(`identifiable:token:${filters.searchTerm}`);
-    }
-    return queryFilters;
-  }, [currentUser, filters]);
+  const formatFiltersCb = useCallback(() => formatFilters(currentUser, filters, filterVisTypes), [currentUser, filters, filterVisTypes]);
   const formatSortDirection = useCallback(() => {
     if (sortField === 'displayName' && sortDirection !== 'default') {
       return `i${sortDirection}`;
@@ -129,17 +106,14 @@ export const OpenFileDialog = _ref2 => {
   const setPage = pageNum => setState({
     page: pageNum
   });
-  const sortData = _ref3 => {
-    let {
-      name,
-      direction
-    } = _ref3;
-    return setState({
-      sortField: name,
-      sortDirection: direction,
-      page: 1
-    });
-  };
+  const sortData = ({
+    name,
+    direction
+  }) => setState({
+    sortField: name,
+    sortDirection: direction,
+    page: 1
+  });
   useEffect(() => {
     // only fetch data when the dialog is open
     if (open) {
@@ -147,10 +121,10 @@ export const OpenFileDialog = _ref2 => {
         page,
         sortField,
         sortDirection: formatSortDirection(),
-        filters: formatFilters()
+        filters: formatFiltersCb()
       });
     }
-  }, [open, page, sortField, filters, refetch, formatFilters, formatSortDirection]);
+  }, [open, page, sortField, filters, refetch, formatFiltersCb, formatSortDirection]);
   const headers = [{
     field: 'displayName',
     label: i18n.t('Name'),
@@ -233,20 +207,17 @@ export const OpenFileDialog = _ref2 => {
     small: true
   }, i18n.t('Clear filters')))), /*#__PURE__*/React.createElement(DataTable, {
     layout: "fixed"
-  }, /*#__PURE__*/React.createElement(DataTableHead, null, /*#__PURE__*/React.createElement(DataTableRow, null, data !== null && data !== void 0 && data.files[AOTypeMap[type].apiEndpoint].length ? headers.map(_ref4 => {
-    let {
-      field,
-      label,
-      width
-    } = _ref4;
-    return /*#__PURE__*/React.createElement(DataTableColumnHeader, {
-      width: width,
-      key: field,
-      name: field,
-      onSortIconClick: sortData,
-      sortDirection: getSortDirection(field)
-    }, label);
-  }) : /*#__PURE__*/React.createElement(DataTableColumnHeader, null))), /*#__PURE__*/React.createElement(DataTableBody, {
+  }, /*#__PURE__*/React.createElement(DataTableHead, null, /*#__PURE__*/React.createElement(DataTableRow, null, data !== null && data !== void 0 && data.files[AOTypeMap[type].apiEndpoint].length ? headers.map(({
+    field,
+    label,
+    width
+  }) => /*#__PURE__*/React.createElement(DataTableColumnHeader, {
+    width: width,
+    key: field,
+    name: field,
+    onSortIconClick: sortData,
+    sortDirection: getSortDirection(field)
+  }, label)) : /*#__PURE__*/React.createElement(DataTableColumnHeader, null))), /*#__PURE__*/React.createElement(DataTableBody, {
     className: "data-table-body"
   }, loading && /*#__PURE__*/React.createElement(DataTableRow, null, /*#__PURE__*/React.createElement(DataTableCell, {
     large: true

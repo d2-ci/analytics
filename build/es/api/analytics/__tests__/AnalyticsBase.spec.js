@@ -26,20 +26,18 @@ describe('generateDimensionString', () => {
     outputSorted: ['dim1:item1', 'dim2:item1;item2']
   }];
   it('should return dimension strings correctly formatted', () => {
-    tests.forEach(_ref => {
-      let {
-        input,
-        output
-      } = _ref;
+    tests.forEach(({
+      input,
+      output
+    }) => {
       expect(generateDimensionStrings(input)).toEqual(output);
     });
   });
   it('should return dimension strings correctly formatted and sorted', () => {
-    tests.forEach(_ref2 => {
-      let {
-        input,
-        outputSorted
-      } = _ref2;
+    tests.forEach(({
+      input,
+      outputSorted
+    }) => {
       expect(generateDimensionStrings(input, {
         sorted: true
       })).toEqual(outputSorted);

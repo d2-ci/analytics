@@ -4,13 +4,12 @@ import { Layer, CenteredContent, CircularLoader, NoticeBox } from '@dhis2/ui';
 import PropTypes from 'prop-types';
 import React, { createContext, useContext } from 'react';
 const CachedDataQueryCtx = /*#__PURE__*/createContext({});
-const CachedDataQueryProvider = _ref => {
-  let {
-    query,
-    dataTransformation,
-    children,
-    translucent = true
-  } = _ref;
+const CachedDataQueryProvider = ({
+  query,
+  dataTransformation,
+  children,
+  translucent = true
+}) => {
   const {
     data: rawData,
     ...rest

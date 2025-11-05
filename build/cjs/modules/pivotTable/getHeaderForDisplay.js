@@ -12,15 +12,14 @@ const headerStacksAreEqual = (a, b, limit) => {
   }
   return true;
 };
-const getHeaderForDisplay = _ref => {
-  let {
-    start,
-    count,
-    index,
-    dimensionLevel,
-    getHeader,
-    showHierarchy
-  } = _ref;
+const getHeaderForDisplay = ({
+  start,
+  count,
+  index,
+  dimensionLevel,
+  getHeader,
+  showHierarchy
+}) => {
   const header = getHeader(index);
   const showHeader = index === start || !headerStacksAreEqual(header, getHeader(index - 1), dimensionLevel);
   if (!showHeader) {
@@ -39,7 +38,10 @@ const getHeaderForDisplay = _ref => {
   return {
     span,
     label,
-    includesHierarchy
+    includesHierarchy,
+    ...(currentHeader !== null && currentHeader !== void 0 && currentHeader.style ? {
+      style: currentHeader.style
+    } : {})
   };
 };
 exports.getHeaderForDisplay = getHeaderForDisplay;

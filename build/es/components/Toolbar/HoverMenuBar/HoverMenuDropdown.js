@@ -1,19 +1,17 @@
 import _JSXStyle from "styled-jsx/style";
-import { Popper } from '@dhis2-ui/popper';
-import { Portal } from '@dhis2-ui/portal';
+import { Popper, Portal } from '@dhis2/ui';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import menuButtonStyles from '../MenuButton.styles.js';
 import { useHoverMenubarContext } from './HoverMenuBar.js';
-export const HoverMenuDropdown = _ref => {
-  let {
-    children,
-    className,
-    label,
-    dataTest,
-    disabled
-  } = _ref;
+export const HoverMenuDropdown = ({
+  children,
+  className,
+  label,
+  dataTest = 'dhis2-analytics-hovermenudropdown',
+  disabled
+}) => {
   const buttonRef = useRef();
   const {
     onDropDownButtonClick,
@@ -36,9 +34,6 @@ export const HoverMenuDropdown = _ref => {
     placement: "bottom-start",
     reference: buttonRef
   }, children)));
-};
-HoverMenuDropdown.defaultProps = {
-  dataTest: 'dhis2-analytics-hovermenudropdown'
 };
 HoverMenuDropdown.propTypes = {
   children: PropTypes.node.isRequired,

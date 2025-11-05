@@ -13,27 +13,25 @@ var _PeriodFilterStyle = _interopRequireDefault(require("./styles/PeriodFilter.s
 var _fixedPeriods = require("./utils/fixedPeriods.js");
 var _index2 = require("./utils/index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const FixedPeriodFilter = _ref => {
-  let {
-    allowedPeriodTypes,
-    excludedPeriodTypes,
-    currentPeriodType,
-    currentYear,
-    onSelectPeriodType,
-    onSelectYear,
-    dataTest
-  } = _ref;
+const EXCLUDED_PERIOD_TYPES_PROP_DEFAULT = [];
+const FixedPeriodFilter = ({
+  allowedPeriodTypes,
+  excludedPeriodTypes = EXCLUDED_PERIOD_TYPES_PROP_DEFAULT,
+  currentPeriodType,
+  currentYear,
+  onSelectPeriodType,
+  onSelectYear,
+  dataTest
+}) => {
   const onlyAllowedTypeIsSelected = Array.isArray(allowedPeriodTypes) && allowedPeriodTypes.length === 1 && allowedPeriodTypes[0] === currentPeriodType;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+    "data-test": dataTest,
     className: `jsx-${_PeriodFilterStyle.default.__hash}` + " " + "leftSection"
   }, /*#__PURE__*/_react.default.createElement(_ui.SingleSelectField, {
     label: _index.default.t('Period type'),
-    onChange: _ref2 => {
-      let {
-        selected
-      } = _ref2;
-      return onSelectPeriodType(selected);
-    },
+    onChange: ({
+      selected
+    }) => onSelectPeriodType(selected),
     dense: true,
     selected: currentPeriodType,
     disabled: onlyAllowedTypeIsSelected,
@@ -52,20 +50,14 @@ const FixedPeriodFilter = _ref => {
     type: "number",
     placeholder: _index.default.t('Select year'),
     value: currentYear,
-    onChange: _ref3 => {
-      let {
-        value
-      } = _ref3;
-      return onSelectYear(value);
-    },
+    onChange: ({
+      value
+    }) => onSelectYear(value),
     dense: true,
     dataTest: `${dataTest}-year`
   })), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _PeriodFilterStyle.default.__hash
   }, _PeriodFilterStyle.default));
-};
-FixedPeriodFilter.defaultProps = {
-  excludedPeriodTypes: []
 };
 FixedPeriodFilter.propTypes = {
   currentPeriodType: _propTypes.default.string.isRequired,

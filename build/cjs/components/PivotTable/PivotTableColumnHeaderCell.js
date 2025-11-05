@@ -13,15 +13,14 @@ var _PivotTableHeaderCell = require("./PivotTableHeaderCell.js");
 var _PivotTableSortIcon = require("./PivotTableSortIcon.js");
 var _PivotTableStyle = require("./styles/PivotTable.style.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PivotTableColumnHeaderCell = _ref => {
+const PivotTableColumnHeaderCell = ({
+  clippingResult,
+  index,
+  level,
+  onSortByColumn,
+  sortBy
+}) => {
   var _engine$adaptiveClipp;
-  let {
-    clippingResult,
-    index,
-    level,
-    onSortByColumn,
-    sortBy
-  } = _ref;
   const engine = (0, _PivotTableEngineContext.usePivotTableEngine)();
   const width = (_engine$adaptiveClipp = engine.adaptiveClippingController.columns.sizes[engine.columnMap[index]]) === null || _engine$adaptiveClipp === void 0 ? void 0 : _engine$adaptiveClipp.size;
   const height = engine.adaptiveClippingController.rows.headerSizes[level];
@@ -60,6 +59,9 @@ const PivotTableColumnHeaderCell = _ref => {
         className: `jsx-${_PivotTableStyle.cell.__hash}` + " " + "column-header-inner"
       }, /*#__PURE__*/_react.default.createElement("span", {
         "data-test": "visualization-column-header",
+        style: {
+          ...header.style
+        },
         className: `jsx-${_PivotTableStyle.cell.__hash}` + " " + "column-header-label"
       }, header.label), isSortable ? /*#__PURE__*/_react.default.createElement(_PivotTableSortIcon.PivotTableSortIcon, {
         index: index,

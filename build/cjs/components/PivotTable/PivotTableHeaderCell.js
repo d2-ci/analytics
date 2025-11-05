@@ -7,15 +7,14 @@ exports.PivotTableHeaderCell = void 0;
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _getHeaderForDisplay = require("../../modules/pivotTable/getHeaderForDisplay.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const PivotTableHeaderCell = _ref => {
-  let {
-    axisClippingResult,
-    index,
-    level,
-    getHeader,
-    render,
-    showHierarchy
-  } = _ref;
+const PivotTableHeaderCell = ({
+  axisClippingResult,
+  index,
+  level,
+  getHeader,
+  render,
+  showHierarchy
+}) => {
   const header = (0, _getHeaderForDisplay.getHeaderForDisplay)({
     start: axisClippingResult.indices[0],
     count: axisClippingResult.indices.length,

@@ -9,12 +9,11 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _visTypes = require("../modules/visTypes.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const VisTypeIcon = _ref => {
-  let {
-    type,
-    useSmall = false,
-    ...props
-  } = _ref;
+const VisTypeIcon = ({
+  type,
+  useSmall = false,
+  ...props
+}) => {
   let VisIcon;
   switch (type) {
     case _visTypes.VIS_TYPE_LINE_LIST:
