@@ -19,20 +19,23 @@ const userSettingsQuery = {
     }
   }
 };
-const enabledPeriodTypesQuery = {
+const v43Query = {
   enabledPeriodTypes: {
     resource: 'configuration/dataOutputPeriodTypes'
-  }
-};
-const financialYearStartQuery = {
+  },
   financialYearStart: {
     resource: 'systemSettings/analyticsFinancialYearStart'
-  }
-};
-const analysisRelativePeriodQuery = {
+  },
   analysisRelativePeriod: {
     resource: 'systemSettings/keyAnalysisRelativePeriod'
   }
+};
+const FY_SETTING_TO_SERVER_PT = {
+  FINANCIAL_YEAR_APRIL: 'FinancialApril',
+  FINANCIAL_YEAR_JULY: 'FinancialJuly',
+  FINANCIAL_YEAR_SEPTEMBER: 'FinancialSep',
+  FINANCIAL_YEAR_OCTOBER: 'FinancialOct',
+  FINANCIAL_YEAR_NOVEMBER: 'FinancialNov'
 };
 const SELECTED_PERIODS_PROP_DEFAULT = [];
 const PeriodDimension = ({
@@ -50,21 +53,18 @@ const PeriodDimension = ({
   } = config;
   const userSettingsResult = (0, _appRuntime.useDataQuery)(userSettingsQuery);
   const supportsEnabledPeriodTypes = serverVersion.minor >= 43;
-
-  // Conditionally fetch enabled period types for v43+
-  const enabledPeriodTypesResult = (0, _appRuntime.useDataQuery)(supportsEnabledPeriodTypes ? enabledPeriodTypesQuery : {
-    skip: true
+  const {
+    data: v43Data,
+    error: v43Error,
+    refetch: v43Refetch
+  } = (0, _appRuntime.useDataQuery)(v43Query, {
+    lazy: true
   });
-
-  // Conditionally fetch financial year start setting for v43+
-  const financialYearStartResult = (0, _appRuntime.useDataQuery)(supportsEnabledPeriodTypes ? financialYearStartQuery : {
-    skip: true
-  });
-
-  // Conditionally fetch analysis relative period setting for v43+
-  const analysisRelativePeriodResult = (0, _appRuntime.useDataQuery)(supportsEnabledPeriodTypes ? analysisRelativePeriodQuery : {
-    skip: true
-  });
+  (0, _react.useEffect)(() => {
+    if (supportsEnabledPeriodTypes) {
+      v43Refetch();
+    }
+  }, [supportsEnabledPeriodTypes, v43Refetch]);
   const {
     calendar = 'gregory'
   } = systemInfo;
@@ -79,70 +79,39 @@ const PeriodDimension = ({
     calendar,
     locale
   };
-
-  // Process enabled period types and validate financial year setting
   const enabledPeriodTypesData = (0, _react.useMemo)(() => {
-    var _fyStartData$financia, _analysisRpData$analy;
+    var _v43Data$financialYea, _v43Data$analysisRela;
     if (!supportsEnabledPeriodTypes) {
       return null;
     }
-    const {
-      data: enabledTypesData,
-      error: enabledTypesError
-    } = enabledPeriodTypesResult;
-    const {
-      data: fyStartData,
-      error: fyStartError
-    } = financialYearStartResult;
-    const {
-      data: analysisRpData,
-      error: analysisRpError
-    } = analysisRelativePeriodResult;
-    if (enabledTypesError || fyStartError || analysisRpError) {
+    if (v43Error || !(v43Data !== null && v43Data !== void 0 && v43Data.enabledPeriodTypes)) {
       return null;
     }
-    if (!(enabledTypesData !== null && enabledTypesData !== void 0 && enabledTypesData.enabledPeriodTypes)) {
-      return null;
-    }
-    const enabledTypes = enabledTypesData.enabledPeriodTypes;
-
-    // Handle empty enabled types
+    const enabledTypes = v43Data.enabledPeriodTypes;
     if (!enabledTypes || enabledTypes.length === 0) {
-      alert('No period types are enabled in the system. Please contact your system administrator.');
       return {
         enabledTypes: [],
         financialYearStart: null,
-        analysisRelativePeriod: null
+        analysisRelativePeriod: null,
+        noEnabledTypes: true
       };
     }
-
-    // Process financial year start setting
     let financialYearStart = null;
-    if (fyStartData !== null && fyStartData !== void 0 && (_fyStartData$financia = fyStartData.financialYearStart) !== null && _fyStartData$financia !== void 0 && _fyStartData$financia.analyticsFinancialYearStart) {
-      const fyStartValue = fyStartData.financialYearStart.analyticsFinancialYearStart;
-
-      // Map system setting to server PT name
-      const FY_SETTING_TO_SERVER_PT = {
-        FINANCIAL_YEAR_APRIL: 'FinancialApril',
-        FINANCIAL_YEAR_JULY: 'FinancialJuly',
-        FINANCIAL_YEAR_SEPTEMBER: 'FinancialSep',
-        FINANCIAL_YEAR_OCTOBER: 'FinancialOct',
-        FINANCIAL_YEAR_NOVEMBER: 'FinancialNov'
-      };
+    if ((_v43Data$financialYea = v43Data.financialYearStart) !== null && _v43Data$financialYea !== void 0 && _v43Data$financialYea.analyticsFinancialYearStart) {
+      const fyStartValue = v43Data.financialYearStart.analyticsFinancialYearStart;
       const mappedFyPt = FY_SETTING_TO_SERVER_PT[fyStartValue];
       if (mappedFyPt && enabledTypes.some(pt => pt.name === mappedFyPt)) {
         financialYearStart = fyStartValue;
       }
     }
-
-    // Process analysis relative period setting
-    const analysisRelativePeriod = (analysisRpData === null || analysisRpData === void 0 ? void 0 : (_analysisRpData$analy = analysisRpData.analysisRelativePeriod) === null || _analysisRpData$analy === void 0 ? void 0 : _analysisRpData$analy.keyAnalysisRelativePeriod) || null;
+    const analysisRelativePeriod = ((_v43Data$analysisRela = v43Data.analysisRelativePeriod) === null || _v43Data$analysisRela === void 0 ? void 0 : _v43Data$analysisRela.keyAnalysisRelativePeriod) || null;
     return {
       enabledTypes,
       financialYearStart,
-      analysisRelativePeriod
+      analysisRelativePeriod,
+      noEnabledTypes: false
     };
-  }, [supportsEnabledPeriodTypes, enabledPeriodTypesResult, financialYearStartResult, analysisRelativePeriodResult]);
+  }, [supportsEnabledPeriodTypes, v43Data, v43Error]);
   const selectPeriods = periods => {
     onSelect({
       dimensionId: _predefinedDimensions.DIMENSION_ID_PERIOD,

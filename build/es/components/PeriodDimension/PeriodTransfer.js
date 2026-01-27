@@ -1,7 +1,7 @@
 import _JSXStyle from "styled-jsx/style";
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 import { getNowInCalendar } from '@dhis2/multi-calendar-dates';
-import { IconInfo16, TabBar, Tab, Transfer } from '@dhis2/ui';
+import { IconInfo16, NoticeBox, TabBar, Tab, Transfer } from '@dhis2/ui';
 import PropTypes from 'prop-types';
 import React, { useState, useMemo } from 'react';
 import PeriodIcon from '../../assets/DimensionItemIcons/PeriodIcon.js'; //TODO: Reimplement the icon.js
@@ -12,9 +12,9 @@ import { TransferOption } from '../TransferOption.js';
 import FixedPeriodFilter from './FixedPeriodFilter.js';
 import RelativePeriodFilter from './RelativePeriodFilter.js';
 import { filterEnabledFixedPeriodTypes, filterEnabledRelativePeriodTypes, findBestAvailableRelativePeriod } from './utils/enabledPeriodTypes.js';
-import { getFixedPeriodsOptionsById, getFixedPeriodsOptions } from './utils/fixedPeriods.js';
+import { getFixedPeriodsOptions } from './utils/fixedPeriods.js';
 import { MONTHLY, QUARTERLY, filterPeriodTypesById } from './utils/index.js';
-import { getRelativePeriodsOptionsById, getRelativePeriodsOptions } from './utils/relativePeriods.js';
+import { getRelativePeriodsOptions } from './utils/relativePeriods.js';
 const RightHeader = ({
   infoBoxMessage
 }) => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
@@ -49,13 +49,11 @@ const PeriodTransfer = ({
   enabledPeriodTypesData = null,
   supportsEnabledPeriodTypes = false
 }) => {
-  // Get filtered period options based on enabled types (v43+) or exclude list (v40-42)
   const {
     filteredFixedOptions,
     filteredRelativeOptions
   } = useMemo(() => {
     if (supportsEnabledPeriodTypes && enabledPeriodTypesData) {
-      // v43+: Use server-provided enabled period types (ignore excludedPeriodTypes)
       const {
         enabledTypes,
         financialYearStart
@@ -67,8 +65,6 @@ const PeriodTransfer = ({
         filteredRelativeOptions: filteredRelative
       };
     } else {
-      // v40-42: Fallback to old behavior with legacy excluded period types
-      // (based on keyHide*Periods system settings from consuming apps)
       const allFixed = getFixedPeriodsOptions(periodsSettings);
       const allRelative = getRelativePeriodsOptions();
       return {
@@ -77,8 +73,6 @@ const PeriodTransfer = ({
       };
     }
   }, [supportsEnabledPeriodTypes, enabledPeriodTypesData, excludedPeriodTypes, periodsSettings]);
-
-  // Choose default period types from filtered options
   const bestRelativePeriod = useMemo(() => {
     if (supportsEnabledPeriodTypes && enabledPeriodTypesData) {
       const {
@@ -115,9 +109,21 @@ const PeriodTransfer = ({
   const onIsRelativeClick = state => {
     if (state !== isRelative) {
       setIsRelative(state);
-      setAllPeriods(state ? getRelativePeriodsOptionsById(relativeFilter.periodType).getPeriods() : getFixedPeriodsOptionsById(fixedFilter.periodType, periodsSettings).getPeriods(fixedPeriodConfig(Number(fixedFilter.year))));
+      if (state) {
+        const selectedOption = filteredRelativeOptions.find(opt => opt.id === relativeFilter.periodType);
+        setAllPeriods((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.getPeriods()) || []);
+      } else {
+        const selectedOption = filteredFixedOptions.find(opt => opt.id === fixedFilter.periodType);
+        setAllPeriods((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.getPeriods(fixedPeriodConfig(Number(fixedFilter.year)))) || []);
+      }
     }
   };
+  if (enabledPeriodTypesData !== null && enabledPeriodTypesData !== void 0 && enabledPeriodTypesData.noEnabledTypes) {
+    return /*#__PURE__*/React.createElement(NoticeBox, {
+      warning: true,
+      title: i18n.t('No period types available')
+    }, i18n.t('No period types are enabled in the system. Please contact your system administrator.'));
+  }
   const renderLeftHeader = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TabBar, null, /*#__PURE__*/React.createElement(Tab, {
     selected: isRelative,
     onClick: () => onIsRelativeClick(true),
@@ -138,9 +144,7 @@ const PeriodTransfer = ({
       setAllPeriods((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.getPeriods()) || []);
     },
     dataTest: `${dataTest}-relative-period-filter`,
-    availableOptions: filteredRelativeOptions,
-    supportsEnabledPeriodTypes: supportsEnabledPeriodTypes,
-    excludedPeriodTypes: excludedPeriodTypes
+    availableOptions: filteredRelativeOptions
   }) : /*#__PURE__*/React.createElement(FixedPeriodFilter, {
     currentPeriodType: fixedFilter.periodType,
     currentYear: fixedFilter.year,
@@ -157,9 +161,7 @@ const PeriodTransfer = ({
       });
     },
     dataTest: `${dataTest}-fixed-period-filter`,
-    availableOptions: filteredFixedOptions,
-    supportsEnabledPeriodTypes: supportsEnabledPeriodTypes,
-    excludedPeriodTypes: excludedPeriodTypes
+    availableOptions: filteredFixedOptions
   })), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
@@ -223,8 +225,10 @@ PeriodTransfer.propTypes = {
   onSelect: PropTypes.func.isRequired,
   dataTest: PropTypes.string,
   enabledPeriodTypesData: PropTypes.shape({
+    analysisRelativePeriod: PropTypes.string,
     enabledTypes: PropTypes.array,
-    financialYearStart: PropTypes.string
+    financialYearStart: PropTypes.string,
+    noEnabledTypes: PropTypes.bool
   }),
   excludedPeriodTypes: PropTypes.arrayOf(PropTypes.string),
   height: PropTypes.string,

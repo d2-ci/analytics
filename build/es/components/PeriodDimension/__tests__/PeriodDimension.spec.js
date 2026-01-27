@@ -7,14 +7,24 @@ jest.mock('@dhis2/app-runtime', () => ({
     systemInfo: {},
     serverVersion: {
       minor: 42
-    } // Mock v42 to test legacy behavior
-  }),
-  useDataQuery: () => ({
-    data: {
-      userSettings: {
-        keyUiLocale: 'en'
-      }
     }
+  }),
+  useDataQuery: jest.fn().mockImplementation((_query, options) => {
+    if (options !== null && options !== void 0 && options.lazy) {
+      return {
+        data: null,
+        error: undefined,
+        loading: false,
+        refetch: jest.fn()
+      };
+    }
+    return {
+      data: {
+        userSettings: {
+          keyUiLocale: 'en'
+        }
+      }
+    };
   })
 }));
 global.ResizeObserver = jest.fn().mockImplementation(() => ({

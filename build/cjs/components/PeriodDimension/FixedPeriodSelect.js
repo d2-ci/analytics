@@ -69,13 +69,15 @@ class FixedPeriodSelect extends _react.Component {
     });
   }
   render() {
+    const allOptions = (0, _fixedPeriods.getFixedPeriodsOptions)();
+    const availableOptions = this.props.allowedPeriodTypes ? allOptions.filter(option => this.props.allowedPeriodTypes.includes(option.id)) : allOptions;
     return /*#__PURE__*/_react.default.createElement("div", {
       "data-test": this.props.dataTest,
       className: `jsx-${_FixedPeriodSelectStyle.default.__hash}` + " " + (this.props.className || "")
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: `jsx-${_FixedPeriodSelectStyle.default.__hash}` + " " + "row"
     }, /*#__PURE__*/_react.default.createElement(_FixedPeriodFilter.default, {
-      allowedPeriodTypes: this.props.allowedPeriodTypes,
+      availableOptions: availableOptions,
       currentPeriodType: this.state.periodType,
       currentYear: this.state.year,
       onSelectPeriodType: this.onSelectPeriodType,

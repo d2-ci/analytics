@@ -57,13 +57,11 @@ const PeriodTransfer = ({
   enabledPeriodTypesData = null,
   supportsEnabledPeriodTypes = false
 }) => {
-  // Get filtered period options based on enabled types (v43+) or exclude list (v40-42)
   const {
     filteredFixedOptions,
     filteredRelativeOptions
   } = (0, _react.useMemo)(() => {
     if (supportsEnabledPeriodTypes && enabledPeriodTypesData) {
-      // v43+: Use server-provided enabled period types (ignore excludedPeriodTypes)
       const {
         enabledTypes,
         financialYearStart
@@ -75,8 +73,6 @@ const PeriodTransfer = ({
         filteredRelativeOptions: filteredRelative
       };
     } else {
-      // v40-42: Fallback to old behavior with legacy excluded period types
-      // (based on keyHide*Periods system settings from consuming apps)
       const allFixed = (0, _fixedPeriods.getFixedPeriodsOptions)(periodsSettings);
       const allRelative = (0, _relativePeriods.getRelativePeriodsOptions)();
       return {
@@ -85,8 +81,6 @@ const PeriodTransfer = ({
       };
     }
   }, [supportsEnabledPeriodTypes, enabledPeriodTypesData, excludedPeriodTypes, periodsSettings]);
-
-  // Choose default period types from filtered options
   const bestRelativePeriod = (0, _react.useMemo)(() => {
     if (supportsEnabledPeriodTypes && enabledPeriodTypesData) {
       const {
@@ -123,9 +117,21 @@ const PeriodTransfer = ({
   const onIsRelativeClick = state => {
     if (state !== isRelative) {
       setIsRelative(state);
-      setAllPeriods(state ? (0, _relativePeriods.getRelativePeriodsOptionsById)(relativeFilter.periodType).getPeriods() : (0, _fixedPeriods.getFixedPeriodsOptionsById)(fixedFilter.periodType, periodsSettings).getPeriods(fixedPeriodConfig(Number(fixedFilter.year))));
+      if (state) {
+        const selectedOption = filteredRelativeOptions.find(opt => opt.id === relativeFilter.periodType);
+        setAllPeriods((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.getPeriods()) || []);
+      } else {
+        const selectedOption = filteredFixedOptions.find(opt => opt.id === fixedFilter.periodType);
+        setAllPeriods((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.getPeriods(fixedPeriodConfig(Number(fixedFilter.year)))) || []);
+      }
     }
   };
+  if (enabledPeriodTypesData !== null && enabledPeriodTypesData !== void 0 && enabledPeriodTypesData.noEnabledTypes) {
+    return /*#__PURE__*/_react.default.createElement(_ui.NoticeBox, {
+      warning: true,
+      title: _index.default.t('No period types available')
+    }, _index.default.t('No period types are enabled in the system. Please contact your system administrator.'));
+  }
   const renderLeftHeader = () => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ui.TabBar, null, /*#__PURE__*/_react.default.createElement(_ui.Tab, {
     selected: isRelative,
     onClick: () => onIsRelativeClick(true),
@@ -146,9 +152,7 @@ const PeriodTransfer = ({
       setAllPeriods((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.getPeriods()) || []);
     },
     dataTest: `${dataTest}-relative-period-filter`,
-    availableOptions: filteredRelativeOptions,
-    supportsEnabledPeriodTypes: supportsEnabledPeriodTypes,
-    excludedPeriodTypes: excludedPeriodTypes
+    availableOptions: filteredRelativeOptions
   }) : /*#__PURE__*/_react.default.createElement(_FixedPeriodFilter.default, {
     currentPeriodType: fixedFilter.periodType,
     currentYear: fixedFilter.year,
@@ -165,9 +169,7 @@ const PeriodTransfer = ({
       });
     },
     dataTest: `${dataTest}-fixed-period-filter`,
-    availableOptions: filteredFixedOptions,
-    supportsEnabledPeriodTypes: supportsEnabledPeriodTypes,
-    excludedPeriodTypes: excludedPeriodTypes
+    availableOptions: filteredFixedOptions
   })), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _DimensionSelectorStyle.default.__hash
   }, _DimensionSelectorStyle.default));
@@ -231,8 +233,10 @@ PeriodTransfer.propTypes = {
   onSelect: _propTypes.default.func.isRequired,
   dataTest: _propTypes.default.string,
   enabledPeriodTypesData: _propTypes.default.shape({
+    analysisRelativePeriod: _propTypes.default.string,
     enabledTypes: _propTypes.default.array,
-    financialYearStart: _propTypes.default.string
+    financialYearStart: _propTypes.default.string,
+    noEnabledTypes: _propTypes.default.bool
   }),
   excludedPeriodTypes: _propTypes.default.arrayOf(_propTypes.default.string),
   height: _propTypes.default.string,

@@ -256,6 +256,8 @@
     "Select year": "Select year",
     "Period": "Period",
     "Selected Periods": "Selected Periods",
+    "No period types available": "No period types available",
+    "No period types are enabled in the system. Please contact your system administrator.": "No period types are enabled in the system. Please contact your system administrator.",
     "Relative periods": "Relative periods",
     "Fixed periods": "Fixed periods",
     "No periods selected": "No periods selected",
