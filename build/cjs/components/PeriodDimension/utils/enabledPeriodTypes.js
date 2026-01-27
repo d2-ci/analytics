@@ -47,7 +47,7 @@ const filterEnabledFixedPeriodTypes = (allFixedPeriodOptions, enabledServerPerio
   if (!enabledServerPeriodTypes || enabledServerPeriodTypes.length === 0) {
     return [];
   }
-  const enabledServerPtNames = enabledServerPeriodTypes.map(pt => pt.name);
+  const enabledServerPtNames = new Set(enabledServerPeriodTypes.map(pt => pt.name));
   const enabledMultiCalendarPts = new Set();
 
   // Map server PT names to multi-calendar-dates constants
@@ -74,7 +74,7 @@ const filterEnabledRelativePeriodTypes = (allRelativePeriodOptions, enabledServe
   if (!enabledServerPeriodTypes || enabledServerPeriodTypes.length === 0) {
     return [];
   }
-  const enabledServerPtNames = enabledServerPeriodTypes.map(pt => pt.name);
+  const enabledServerPtNames = new Set(enabledServerPeriodTypes.map(pt => pt.name));
   return allRelativePeriodOptions.filter(option => {
     // Special handling for financial years
     if (option.id === 'FINANCIAL') {
@@ -86,7 +86,7 @@ const filterEnabledRelativePeriodTypes = (allRelativePeriodOptions, enabledServe
     if (!requiredFpTypes) {
       return true; // Show if no dependency mapping (shouldn't happen)
     }
-    return requiredFpTypes.some(fpType => enabledServerPtNames.includes(fpType));
+    return requiredFpTypes.some(fpType => enabledServerPtNames.has(fpType));
   });
 };
 
