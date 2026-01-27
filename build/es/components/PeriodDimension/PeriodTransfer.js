@@ -3,7 +3,7 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 import { getNowInCalendar } from '@dhis2/multi-calendar-dates';
 import { IconInfo16, NoticeBox, TabBar, Tab, Transfer } from '@dhis2/ui';
 import PropTypes from 'prop-types';
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import PeriodIcon from '../../assets/DimensionItemIcons/PeriodIcon.js'; //TODO: Reimplement the icon.js
 import i18n from '../../locales/index.js';
 import { TRANSFER_HEIGHT, TRANSFER_OPTIONS_WIDTH, TRANSFER_SELECTED_WIDTH } from '../../modules/dimensionSelectorHelper.js';
@@ -102,6 +102,31 @@ const PeriodTransfer = ({
     periodType: (defaultFixedPeriodType === null || defaultFixedPeriodType === void 0 ? void 0 : defaultFixedPeriodType.id) || '',
     year: defaultFixedPeriodYear.toString()
   });
+  useEffect(() => {
+    if (!defaultRelativePeriodType) {
+      return;
+    }
+    setRelativeFilter({
+      periodType: defaultRelativePeriodType.id
+    });
+    if (isRelative) {
+      setAllPeriods(defaultRelativePeriodType.getPeriods());
+    }
+  }, [defaultRelativePeriodType]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!defaultFixedPeriodType) {
+      return;
+    }
+    setFixedFilter(prev => ({
+      ...prev,
+      periodType: defaultFixedPeriodType.id
+    }));
+    if (!isRelative) {
+      setAllPeriods(defaultFixedPeriodType.getPeriods(fixedPeriodConfig(Number(fixedFilter.year))) || []);
+    }
+  }, [defaultFixedPeriodType]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const isActive = value => {
     const item = selectedItems.find(item => item.id === value);
     return !item || item.isActive;

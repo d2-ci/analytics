@@ -110,6 +110,31 @@ const PeriodTransfer = ({
     periodType: (defaultFixedPeriodType === null || defaultFixedPeriodType === void 0 ? void 0 : defaultFixedPeriodType.id) || '',
     year: defaultFixedPeriodYear.toString()
   });
+  (0, _react.useEffect)(() => {
+    if (!defaultRelativePeriodType) {
+      return;
+    }
+    setRelativeFilter({
+      periodType: defaultRelativePeriodType.id
+    });
+    if (isRelative) {
+      setAllPeriods(defaultRelativePeriodType.getPeriods());
+    }
+  }, [defaultRelativePeriodType]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  (0, _react.useEffect)(() => {
+    if (!defaultFixedPeriodType) {
+      return;
+    }
+    setFixedFilter(prev => ({
+      ...prev,
+      periodType: defaultFixedPeriodType.id
+    }));
+    if (!isRelative) {
+      setAllPeriods(defaultFixedPeriodType.getPeriods(fixedPeriodConfig(Number(fixedFilter.year))) || []);
+    }
+  }, [defaultFixedPeriodType]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const isActive = value => {
     const item = selectedItems.find(item => item.id === value);
     return !item || item.isActive;
