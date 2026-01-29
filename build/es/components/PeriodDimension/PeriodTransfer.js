@@ -3,7 +3,7 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 import { getNowInCalendar } from '@dhis2/multi-calendar-dates';
 import { IconInfo16, NoticeBox, TabBar, Tab, Transfer } from '@dhis2/ui';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import PeriodIcon from '../../assets/DimensionItemIcons/PeriodIcon.js'; //TODO: Reimplement the icon.js
 import i18n from '../../locales/index.js';
 import { TRANSFER_HEIGHT, TRANSFER_OPTIONS_WIDTH, TRANSFER_SELECTED_WIDTH } from '../../modules/dimensionSelectorHelper.js';
@@ -93,7 +93,7 @@ const PeriodTransfer = ({
     filterFuturePeriods: false,
     reversePeriods: false
   });
-  const [allPeriods, setAllPeriods] = useState((defaultRelativePeriodType === null || defaultRelativePeriodType === void 0 ? void 0 : defaultRelativePeriodType.getPeriods()) || []);
+  const [userPeriods, setUserPeriods] = useState(null);
   const [isRelative, setIsRelative] = useState(true);
   const [relativeFilter, setRelativeFilter] = useState({
     periodType: (defaultRelativePeriodType === null || defaultRelativePeriodType === void 0 ? void 0 : defaultRelativePeriodType.id) || ''
@@ -102,31 +102,43 @@ const PeriodTransfer = ({
     periodType: (defaultFixedPeriodType === null || defaultFixedPeriodType === void 0 ? void 0 : defaultFixedPeriodType.id) || '',
     year: defaultFixedPeriodYear.toString()
   });
-  useEffect(() => {
-    if (!defaultRelativePeriodType) {
-      return;
+  const effectiveRelativeFilterType = filteredRelativeOptions.some(opt => opt.id === relativeFilter.periodType) ? relativeFilter.periodType : (defaultRelativePeriodType === null || defaultRelativePeriodType === void 0 ? void 0 : defaultRelativePeriodType.id) || '';
+  const effectiveFixedFilterType = filteredFixedOptions.some(opt => opt.id === fixedFilter.periodType) ? fixedFilter.periodType : (defaultFixedPeriodType === null || defaultFixedPeriodType === void 0 ? void 0 : defaultFixedPeriodType.id) || '';
+  const prevEffectiveRelativeRef = useRef(effectiveRelativeFilterType);
+  const prevEffectiveFixedRef = useRef(effectiveFixedFilterType);
+  if (prevEffectiveRelativeRef.current !== effectiveRelativeFilterType) {
+    prevEffectiveRelativeRef.current = effectiveRelativeFilterType;
+    if (relativeFilter.periodType !== effectiveRelativeFilterType) {
+      setRelativeFilter({
+        periodType: effectiveRelativeFilterType
+      });
     }
-    setRelativeFilter({
-      periodType: defaultRelativePeriodType.id
-    });
     if (isRelative) {
-      setAllPeriods(defaultRelativePeriodType.getPeriods());
+      setUserPeriods(null);
     }
-  }, [defaultRelativePeriodType]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (!defaultFixedPeriodType) {
-      return;
+  }
+  if (prevEffectiveFixedRef.current !== effectiveFixedFilterType) {
+    prevEffectiveFixedRef.current = effectiveFixedFilterType;
+    if (fixedFilter.periodType !== effectiveFixedFilterType) {
+      setFixedFilter(prev => ({
+        ...prev,
+        periodType: effectiveFixedFilterType
+      }));
     }
-    setFixedFilter(prev => ({
-      ...prev,
-      periodType: defaultFixedPeriodType.id
-    }));
     if (!isRelative) {
-      setAllPeriods(defaultFixedPeriodType.getPeriods(fixedPeriodConfig(Number(fixedFilter.year))) || []);
+      setUserPeriods(null);
     }
-  }, [defaultFixedPeriodType]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  }
+  const derivedPeriods = useMemo(() => {
+    if (isRelative) {
+      const opt = filteredRelativeOptions.find(o => o.id === effectiveRelativeFilterType);
+      return (opt === null || opt === void 0 ? void 0 : opt.getPeriods()) || [];
+    } else {
+      const opt = filteredFixedOptions.find(o => o.id === effectiveFixedFilterType);
+      return (opt === null || opt === void 0 ? void 0 : opt.getPeriods(fixedPeriodConfig(Number(fixedFilter.year)))) || [];
+    }
+  }, [isRelative, effectiveRelativeFilterType, effectiveFixedFilterType, filteredRelativeOptions, filteredFixedOptions, fixedFilter.year]);
+  const allPeriods = userPeriods !== null ? userPeriods : derivedPeriods;
   const isActive = value => {
     const item = selectedItems.find(item => item.id === value);
     return !item || item.isActive;
@@ -134,13 +146,7 @@ const PeriodTransfer = ({
   const onIsRelativeClick = state => {
     if (state !== isRelative) {
       setIsRelative(state);
-      if (state) {
-        const selectedOption = filteredRelativeOptions.find(opt => opt.id === relativeFilter.periodType);
-        setAllPeriods((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.getPeriods()) || []);
-      } else {
-        const selectedOption = filteredFixedOptions.find(opt => opt.id === fixedFilter.periodType);
-        setAllPeriods((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.getPeriods(fixedPeriodConfig(Number(fixedFilter.year)))) || []);
-      }
+      setUserPeriods(null);
     }
   };
   if (enabledPeriodTypesData !== null && enabledPeriodTypesData !== void 0 && enabledPeriodTypesData.noEnabledTypes) {
@@ -160,18 +166,18 @@ const PeriodTransfer = ({
   }, i18n.t('Fixed periods'))), /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "filterContainer"
   }, isRelative ? /*#__PURE__*/React.createElement(RelativePeriodFilter, {
-    currentFilter: relativeFilter.periodType,
+    currentFilter: effectiveRelativeFilterType,
     onSelectFilter: filter => {
       setRelativeFilter({
         periodType: filter
       });
       const selectedOption = filteredRelativeOptions.find(opt => opt.id === filter);
-      setAllPeriods((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.getPeriods()) || []);
+      setUserPeriods((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.getPeriods()) || []);
     },
     dataTest: `${dataTest}-relative-period-filter`,
     availableOptions: filteredRelativeOptions
   }) : /*#__PURE__*/React.createElement(FixedPeriodFilter, {
-    currentPeriodType: fixedFilter.periodType,
+    currentPeriodType: effectiveFixedFilterType,
     currentYear: fixedFilter.year,
     onSelectPeriodType: periodType => {
       onSelectFixedPeriods({
@@ -194,7 +200,7 @@ const PeriodTransfer = ({
     setFixedFilter(filter);
     if (filter.year.match(/[0-9]{4}/)) {
       const selectedOption = filteredFixedOptions.find(opt => opt.id === filter.periodType);
-      setAllPeriods((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.getPeriods(fixedPeriodConfig(Number(filter.year)))) || []);
+      setUserPeriods((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.getPeriods(fixedPeriodConfig(Number(filter.year)))) || []);
     }
   };
   const renderEmptySelection = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {

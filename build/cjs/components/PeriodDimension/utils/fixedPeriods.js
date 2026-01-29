@@ -164,40 +164,10 @@ const getYearlyPeriodType = (fnFilter, periodSettings) => {
     });
   };
 };
-const getFinancialOctoberPeriodType = (fnFilter, periodSettings) => {
+const getFinancialPeriodType = (periodType, fnFilter, periodSettings) => {
   return config => {
     return getPeriods({
-      periodType: 'FYOCT',
-      config,
-      fnFilter,
-      periodSettings
-    });
-  };
-};
-const getFinancialNovemberPeriodType = (fnFilter, periodSettings) => {
-  return config => {
-    return getPeriods({
-      periodType: 'FYNOV',
-      config,
-      fnFilter,
-      periodSettings
-    });
-  };
-};
-const getFinancialJulyPeriodType = (fnFilter, periodSettings) => {
-  return config => {
-    return getPeriods({
-      periodType: 'FYJUL',
-      config,
-      fnFilter,
-      periodSettings
-    });
-  };
-};
-const getFinancialAprilPeriodType = (fnFilter, periodSettings) => {
-  return config => {
-    return getPeriods({
-      periodType: 'FYAPR',
+      periodType,
       config,
       fnFilter,
       periodSettings
@@ -278,21 +248,53 @@ const getOptions = periodSettings => {
     getPeriods: getYearlyPeriodType(filterFuturePeriods, periodSettings),
     name: _index.default.t('Yearly')
   }, {
-    id: _index2.FYNOV,
-    getPeriods: getFinancialNovemberPeriodType(filterFuturePeriods, periodSettings),
-    name: _index.default.t('Financial year (Start November)')
+    id: _index2.FYJAN,
+    getPeriods: getFinancialPeriodType('FYJAN', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start January)')
   }, {
-    id: _index2.FYOCT,
-    getPeriods: getFinancialOctoberPeriodType(filterFuturePeriods, periodSettings),
-    name: _index.default.t('Financial year (Start October)')
+    id: _index2.FYFEB,
+    getPeriods: getFinancialPeriodType('FYFEB', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start February)')
   }, {
-    id: _index2.FYJUL,
-    getPeriods: getFinancialJulyPeriodType(filterFuturePeriods, periodSettings),
-    name: _index.default.t('Financial year (Start July)')
+    id: _index2.FYMAR,
+    getPeriods: getFinancialPeriodType('FYMAR', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start March)')
   }, {
     id: _index2.FYAPR,
-    getPeriods: getFinancialAprilPeriodType(filterFuturePeriods, periodSettings),
+    getPeriods: getFinancialPeriodType('FYAPR', filterFuturePeriods, periodSettings),
     name: _index.default.t('Financial year (Start April)')
+  }, {
+    id: _index2.FYMAY,
+    getPeriods: getFinancialPeriodType('FYMAY', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start May)')
+  }, {
+    id: _index2.FYJUN,
+    getPeriods: getFinancialPeriodType('FYJUN', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start June)')
+  }, {
+    id: _index2.FYJUL,
+    getPeriods: getFinancialPeriodType('FYJUL', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start July)')
+  }, {
+    id: _index2.FYAUG,
+    getPeriods: getFinancialPeriodType('FYAUG', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start August)')
+  }, {
+    id: _index2.FYSEP,
+    getPeriods: getFinancialPeriodType('FYSEP', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start September)')
+  }, {
+    id: _index2.FYOCT,
+    getPeriods: getFinancialPeriodType('FYOCT', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start October)')
+  }, {
+    id: _index2.FYNOV,
+    getPeriods: getFinancialPeriodType('FYNOV', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start November)')
+  }, {
+    id: _index2.FYDEC,
+    getPeriods: getFinancialPeriodType('FYDEC', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start December)')
   }];
 };
 const getFixedPeriodsOptionsById = (id, periodSettings) => {
