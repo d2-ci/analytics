@@ -64,10 +64,25 @@ const PeriodTransfer = ({
     if (supportsEnabledPeriodTypes && enabledPeriodTypesData) {
       const {
         enabledTypes,
-        financialYearStart
+        financialYearStart,
+        financialYearDisplayLabel,
+        metaData
       } = enabledPeriodTypesData;
       const filteredFixed = (0, _enabledPeriodTypes.filterEnabledFixedPeriodTypes)((0, _fixedPeriods.getFixedPeriodsOptions)(periodsSettings), enabledTypes);
-      const filteredRelative = (0, _enabledPeriodTypes.filterEnabledRelativePeriodTypes)((0, _relativePeriods.getRelativePeriodsOptions)(), enabledTypes, financialYearStart);
+      let filteredRelative = (0, _enabledPeriodTypes.filterEnabledRelativePeriodTypes)((0, _relativePeriods.getRelativePeriodsOptions)(), enabledTypes, financialYearStart);
+      if (financialYearDisplayLabel && metaData) {
+        filteredRelative = filteredRelative.map(option => option.id === 'FINANCIAL' ? {
+          ...option,
+          name: financialYearDisplayLabel,
+          getPeriods: () => option.getPeriods().map(period => {
+            var _metaData$period$id;
+            return {
+              ...period,
+              name: ((_metaData$period$id = metaData[period.id]) === null || _metaData$period$id === void 0 ? void 0 : _metaData$period$id.name) || period.name
+            };
+          })
+        } : option);
+      }
       return {
         filteredFixedOptions: filteredFixed,
         filteredRelativeOptions: filteredRelative
@@ -266,6 +281,7 @@ PeriodTransfer.propTypes = {
   enabledPeriodTypesData: _propTypes.default.shape({
     analysisRelativePeriod: _propTypes.default.string,
     enabledTypes: _propTypes.default.array,
+    financialYearDisplayLabel: _propTypes.default.string,
     financialYearStart: _propTypes.default.string,
     noEnabledTypes: _propTypes.default.bool
   }),

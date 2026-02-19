@@ -7,6 +7,7 @@ var _exportNames = {
   DataDimension: true,
   PeriodDimension: true,
   FixedPeriodSelect: true,
+  useDataOutputPeriodTypes: true,
   OrgUnitDimension: true,
   DynamicDimension: true,
   ALL_DYNAMIC_DIMENSION_ITEMS: true,
@@ -1877,6 +1878,12 @@ Object.defineProperty(exports, "useCachedDataQuery", {
     return _CachedDataQueryProvider.useCachedDataQuery;
   }
 });
+Object.defineProperty(exports, "useDataOutputPeriodTypes", {
+  enumerable: true,
+  get: function () {
+    return _useDataOutputPeriodTypes.useDataOutputPeriodTypes;
+  }
+});
 Object.defineProperty(exports, "valueTypeDisplayNames", {
   enumerable: true,
   get: function () {
@@ -1899,6 +1906,7 @@ require("./locales/index.js");
 var _DataDimension = _interopRequireDefault(require("./components/DataDimension/DataDimension.js"));
 var _PeriodDimension = _interopRequireDefault(require("./components/PeriodDimension/PeriodDimension.js"));
 var _FixedPeriodSelect = _interopRequireDefault(require("./components/PeriodDimension/FixedPeriodSelect.js"));
+var _useDataOutputPeriodTypes = require("./components/PeriodDimension/useDataOutputPeriodTypes.js");
 var _OrgUnitDimension = _interopRequireDefault(require("./components/OrgUnitDimension/OrgUnitDimension.js"));
 var _DynamicDimension = _interopRequireWildcard(require("./components/DynamicDimension/DynamicDimension.js"));
 var _DimensionsPanel = _interopRequireDefault(require("./components/DimensionsPanel/DimensionsPanel.js"));

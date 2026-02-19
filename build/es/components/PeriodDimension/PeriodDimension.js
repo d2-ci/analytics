@@ -1,8 +1,9 @@
+import React from "react";
 import { useConfig, useDataQuery } from '@dhis2/app-runtime';
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo } from 'react';
 import { DIMENSION_ID_PERIOD } from '../../modules/predefinedDimensions.js';
 import PeriodTransfer from './PeriodTransfer.js';
+import { useDataOutputPeriodTypes } from './useDataOutputPeriodTypes.js';
 const userSettingsQuery = {
   userSettings: {
     resource: 'userSettings',
@@ -10,24 +11,6 @@ const userSettingsQuery = {
       key: ['keyUiLocale']
     }
   }
-};
-const v43Query = {
-  enabledPeriodTypes: {
-    resource: 'configuration/dataOutputPeriodTypes'
-  },
-  financialYearStart: {
-    resource: 'systemSettings/analyticsFinancialYearStart'
-  },
-  analysisRelativePeriod: {
-    resource: 'systemSettings/keyAnalysisRelativePeriod'
-  }
-};
-const FY_SETTING_TO_SERVER_PT = {
-  FINANCIAL_YEAR_APRIL: 'FinancialApril',
-  FINANCIAL_YEAR_JULY: 'FinancialJuly',
-  FINANCIAL_YEAR_SEPTEMBER: 'FinancialSep',
-  FINANCIAL_YEAR_OCTOBER: 'FinancialOct',
-  FINANCIAL_YEAR_NOVEMBER: 'FinancialNov'
 };
 const SELECTED_PERIODS_PROP_DEFAULT = [];
 const PeriodDimension = ({
@@ -40,23 +23,13 @@ const PeriodDimension = ({
 }) => {
   const config = useConfig();
   const {
-    systemInfo,
-    serverVersion
+    systemInfo
   } = config;
   const userSettingsResult = useDataQuery(userSettingsQuery);
-  const supportsEnabledPeriodTypes = serverVersion.minor >= 43;
   const {
-    data: v43Data,
-    error: v43Error,
-    refetch: v43Refetch
-  } = useDataQuery(v43Query, {
-    lazy: true
-  });
-  useEffect(() => {
-    if (supportsEnabledPeriodTypes) {
-      v43Refetch();
-    }
-  }, [supportsEnabledPeriodTypes, v43Refetch]);
+    supportsEnabledPeriodTypes,
+    enabledPeriodTypesData
+  } = useDataOutputPeriodTypes();
   const {
     calendar = 'gregory'
   } = systemInfo;
@@ -71,48 +44,22 @@ const PeriodDimension = ({
     calendar,
     locale
   };
-  const enabledPeriodTypesData = useMemo(() => {
-    var _v43Data$financialYea, _v43Data$analysisRela;
-    if (!supportsEnabledPeriodTypes) {
-      return null;
-    }
-    if (v43Error || !(v43Data !== null && v43Data !== void 0 && v43Data.enabledPeriodTypes)) {
-      return null;
-    }
-    const enabledTypes = v43Data.enabledPeriodTypes;
-    if (!enabledTypes || enabledTypes.length === 0) {
-      return {
-        enabledTypes: [],
-        financialYearStart: null,
-        analysisRelativePeriod: null,
-        noEnabledTypes: true
-      };
-    }
-    let financialYearStart = null;
-    if ((_v43Data$financialYea = v43Data.financialYearStart) !== null && _v43Data$financialYea !== void 0 && _v43Data$financialYea.analyticsFinancialYearStart) {
-      const fyStartValue = v43Data.financialYearStart.analyticsFinancialYearStart;
-      const mappedFyPt = FY_SETTING_TO_SERVER_PT[fyStartValue];
-      if (mappedFyPt && enabledTypes.some(pt => pt.name === mappedFyPt)) {
-        financialYearStart = fyStartValue;
-      }
-    }
-    const analysisRelativePeriod = ((_v43Data$analysisRela = v43Data.analysisRelativePeriod) === null || _v43Data$analysisRela === void 0 ? void 0 : _v43Data$analysisRela.keyAnalysisRelativePeriod) || null;
-    return {
-      enabledTypes,
-      financialYearStart,
-      analysisRelativePeriod,
-      noEnabledTypes: false
-    };
-  }, [supportsEnabledPeriodTypes, v43Data, v43Error]);
   const selectPeriods = periods => {
     onSelect({
       dimensionId: DIMENSION_ID_PERIOD,
       items: periods
     });
   };
+
+  // DHIS2-20270 Apply custom period type label to period names
+  const metaData = enabledPeriodTypesData === null || enabledPeriodTypesData === void 0 ? void 0 : enabledPeriodTypesData.metaData;
+  const selectedPeriodsWithCustomDisplayNames = metaData ? selectedPeriods.map(period => metaData[period.id] ? {
+    ...period,
+    name: metaData[period.id].name
+  } : period) : selectedPeriods;
   return /*#__PURE__*/React.createElement(PeriodTransfer, {
     onSelect: selectPeriods,
-    selectedItems: selectedPeriods,
+    selectedItems: selectedPeriodsWithCustomDisplayNames,
     infoBoxMessage: infoBoxMessage,
     rightFooter: rightFooter,
     dataTest: 'period-dimension',
