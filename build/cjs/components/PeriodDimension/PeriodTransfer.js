@@ -69,7 +69,7 @@ const PeriodTransfer = ({
         weeklyDisplayLabel,
         metaData
       } = enabledPeriodTypesData;
-      const filteredFixed = (0, _enabledPeriodTypes.filterEnabledFixedPeriodTypes)((0, _fixedPeriods.getFixedPeriodsOptions)(periodsSettings), enabledTypes);
+      const filteredFixed = (0, _enabledPeriodTypes.applyFixedPeriodTypeDisplayLabels)((0, _enabledPeriodTypes.filterEnabledFixedPeriodTypes)((0, _fixedPeriods.getFixedPeriodsOptions)(periodsSettings), enabledTypes), enabledTypes);
       const filteredRelative = (0, _enabledPeriodTypes.applyDisplayLabelOverrides)((0, _enabledPeriodTypes.filterEnabledRelativePeriodTypes)((0, _relativePeriods.getRelativePeriodsOptions)(), enabledTypes, financialYearStart), {
         financialYearDisplayLabel,
         weeklyDisplayLabel,

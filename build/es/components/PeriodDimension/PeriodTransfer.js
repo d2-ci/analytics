@@ -11,7 +11,7 @@ import styles from '../styles/DimensionSelector.style.js';
 import { TransferOption } from '../TransferOption.js';
 import FixedPeriodFilter from './FixedPeriodFilter.js';
 import RelativePeriodFilter from './RelativePeriodFilter.js';
-import { applyDisplayLabelOverrides, filterEnabledFixedPeriodTypes, filterEnabledRelativePeriodTypes } from './utils/enabledPeriodTypes.js';
+import { applyDisplayLabelOverrides, applyFixedPeriodTypeDisplayLabels, filterEnabledFixedPeriodTypes, filterEnabledRelativePeriodTypes } from './utils/enabledPeriodTypes.js';
 import { getFixedPeriodsOptions } from './utils/fixedPeriods.js';
 import { MONTHLY, QUARTERLY, filterPeriodTypesById } from './utils/index.js';
 import { getRelativePeriodsOptions } from './utils/relativePeriods.js';
@@ -61,7 +61,7 @@ const PeriodTransfer = ({
         weeklyDisplayLabel,
         metaData
       } = enabledPeriodTypesData;
-      const filteredFixed = filterEnabledFixedPeriodTypes(getFixedPeriodsOptions(periodsSettings), enabledTypes);
+      const filteredFixed = applyFixedPeriodTypeDisplayLabels(filterEnabledFixedPeriodTypes(getFixedPeriodsOptions(periodsSettings), enabledTypes), enabledTypes);
       const filteredRelative = applyDisplayLabelOverrides(filterEnabledRelativePeriodTypes(getRelativePeriodsOptions(), enabledTypes, financialYearStart), {
         financialYearDisplayLabel,
         weeklyDisplayLabel,

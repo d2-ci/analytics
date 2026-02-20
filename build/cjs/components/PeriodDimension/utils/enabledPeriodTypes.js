@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.filterEnabledRelativePeriodTypes = exports.filterEnabledFixedPeriodTypes = exports.applyPeriodNameOverrides = exports.applyDisplayLabelOverrides = exports.SERVER_PT_TO_MULTI_CALENDAR_PT = exports.RP_CATEGORY_TO_FP_DEPENDENCIES = void 0;
+exports.filterEnabledRelativePeriodTypes = exports.filterEnabledFixedPeriodTypes = exports.applyPeriodNameOverrides = exports.applyFixedPeriodTypeDisplayLabels = exports.applyDisplayLabelOverrides = exports.SERVER_PT_TO_MULTI_CALENDAR_PT = exports.RP_CATEGORY_TO_FP_DEPENDENCIES = void 0;
 // Mapping from server period type names to multi-calendar-dates constants
 const SERVER_PT_TO_MULTI_CALENDAR_PT = exports.SERVER_PT_TO_MULTI_CALENDAR_PT = {
   Daily: 'DAILY',
@@ -69,6 +69,36 @@ const filterEnabledFixedPeriodTypes = (allFixedPeriodOptions, enabledServerPerio
 };
 
 /**
+ * Apply displayLabel overrides to fixed period type names
+ * v43-only: in v44 the API provides these names directly
+ */
+exports.filterEnabledFixedPeriodTypes = filterEnabledFixedPeriodTypes;
+const applyFixedPeriodTypeDisplayLabels = (filteredFixedOptions, enabledServerPeriodTypes) => {
+  if (!enabledServerPeriodTypes) {
+    return filteredFixedOptions;
+  }
+  const displayLabelMap = new Map();
+  enabledServerPeriodTypes.forEach(pt => {
+    if (pt.displayLabel) {
+      const multiCalendarPt = SERVER_PT_TO_MULTI_CALENDAR_PT[pt.name];
+      if (multiCalendarPt) {
+        displayLabelMap.set(multiCalendarPt, pt.displayLabel);
+      }
+    }
+  });
+  if (displayLabelMap.size === 0) {
+    return filteredFixedOptions;
+  }
+  return filteredFixedOptions.map(option => {
+    const displayLabel = displayLabelMap.get(option.id);
+    return displayLabel ? {
+      ...option,
+      name: displayLabel
+    } : option;
+  });
+};
+
+/**
  * Filter relative period categories based on enabled server period types
  * @param {Array} allRelativePeriodOptions - All available relative period options
  * @param {Array} enabledServerPeriodTypes - Enabled period types from server
@@ -79,7 +109,7 @@ const filterEnabledFixedPeriodTypes = (allFixedPeriodOptions, enabledServerPerio
  * Apply metaData name overrides to a list of periods
  * v43-only: in v44 the API provides these names directly
  */
-exports.filterEnabledFixedPeriodTypes = filterEnabledFixedPeriodTypes;
+exports.applyFixedPeriodTypeDisplayLabels = applyFixedPeriodTypeDisplayLabels;
 const applyPeriodNameOverrides = (periods, metaData) => {
   if (!metaData) {
     return periods;
