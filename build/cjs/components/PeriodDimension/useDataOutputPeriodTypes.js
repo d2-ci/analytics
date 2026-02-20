@@ -10,6 +10,7 @@ const v43Query = {
   enabledPeriodTypes: {
     resource: 'configuration/dataOutputPeriodTypes'
   },
+  // v43-only: analyticsFinancialYearStart is removed in v44
   financialYearStart: {
     resource: 'systemSettings/analyticsFinancialYearStart'
   },
@@ -17,6 +18,8 @@ const v43Query = {
     resource: 'systemSettings/keyAnalysisRelativePeriod'
   }
 };
+
+// v43-only: analyticsFinancialYearStart is removed in v44
 const FY_SETTING_TO_SERVER_PT = {
   FINANCIAL_YEAR_APRIL: 'FinancialApril',
   FINANCIAL_YEAR_JULY: 'FinancialJuly',
@@ -58,15 +61,15 @@ const useDataOutputPeriodTypes = () => {
         noEnabledTypes: true
       };
     }
+
+    // v43-only: financial year logic goes away in v44
     let financialYearStart = null;
     let financialYearDisplayLabel = null;
     if ((_v43Data$financialYea = v43Data.financialYearStart) !== null && _v43Data$financialYea !== void 0 && _v43Data$financialYea.analyticsFinancialYearStart) {
       const fyStartValue = v43Data.financialYearStart.analyticsFinancialYearStart;
       const mappedFyPt = FY_SETTING_TO_SERVER_PT[fyStartValue];
       const matchingPt = enabledTypes.find(pt => pt.name === mappedFyPt);
-      //TODO: remove
-      matchingPt.displayLabel = 'Academic year';
-      if (mappedFyPt && matchingPt) {
+      if (matchingPt) {
         financialYearStart = fyStartValue;
         if (matchingPt.displayLabel) {
           financialYearDisplayLabel = matchingPt.displayLabel;

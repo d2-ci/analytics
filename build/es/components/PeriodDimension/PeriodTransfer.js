@@ -11,7 +11,7 @@ import styles from '../styles/DimensionSelector.style.js';
 import { TransferOption } from '../TransferOption.js';
 import FixedPeriodFilter from './FixedPeriodFilter.js';
 import RelativePeriodFilter from './RelativePeriodFilter.js';
-import { filterEnabledFixedPeriodTypes, filterEnabledRelativePeriodTypes, findBestAvailableRelativePeriod } from './utils/enabledPeriodTypes.js';
+import { filterEnabledFixedPeriodTypes, filterEnabledRelativePeriodTypes } from './utils/enabledPeriodTypes.js';
 import { getFixedPeriodsOptions } from './utils/fixedPeriods.js';
 import { MONTHLY, QUARTERLY, filterPeriodTypesById } from './utils/index.js';
 import { getRelativePeriodsOptions } from './utils/relativePeriods.js';
@@ -88,16 +88,16 @@ const PeriodTransfer = ({
       };
     }
   }, [supportsEnabledPeriodTypes, enabledPeriodTypesData, excludedPeriodTypes, periodsSettings]);
-  const bestRelativePeriod = useMemo(() => {
-    if (supportsEnabledPeriodTypes && enabledPeriodTypesData) {
-      const {
-        analysisRelativePeriod
-      } = enabledPeriodTypesData;
-      return findBestAvailableRelativePeriod(filteredRelativeOptions, analysisRelativePeriod);
+  const analysisRelativePeriod = enabledPeriodTypesData === null || enabledPeriodTypesData === void 0 ? void 0 : enabledPeriodTypesData.analysisRelativePeriod;
+  const defaultRelativePeriodType = (() => {
+    if (analysisRelativePeriod) {
+      const match = filteredRelativeOptions.find(opt => opt.getPeriods().some(p => p.id === analysisRelativePeriod));
+      if (match) {
+        return match;
+      }
     }
-    return null;
-  }, [supportsEnabledPeriodTypes, enabledPeriodTypesData, filteredRelativeOptions]);
-  const defaultRelativePeriodType = supportsEnabledPeriodTypes && bestRelativePeriod ? filteredRelativeOptions.find(opt => opt.id === bestRelativePeriod.categoryId) : filteredRelativeOptions.find(opt => opt.id === MONTHLY) || filteredRelativeOptions.find(opt => opt.id === QUARTERLY) || filteredRelativeOptions[0];
+    return filteredRelativeOptions.find(opt => opt.id === MONTHLY) || filteredRelativeOptions.find(opt => opt.id === QUARTERLY) || filteredRelativeOptions[0];
+  })();
   const defaultFixedPeriodType = filteredFixedOptions.find(opt => opt.id === MONTHLY) || filteredFixedOptions.find(opt => opt.id === QUARTERLY) || filteredFixedOptions[0];
   const now = getNowInCalendar(periodsSettings.calendar);
   // use ".eraYear" rather than ".year" because in Ethiopian calendar, eraYear is what our users expect to see (for other calendars, it doesn't matter)

@@ -96,16 +96,16 @@ const PeriodTransfer = ({
       };
     }
   }, [supportsEnabledPeriodTypes, enabledPeriodTypesData, excludedPeriodTypes, periodsSettings]);
-  const bestRelativePeriod = (0, _react.useMemo)(() => {
-    if (supportsEnabledPeriodTypes && enabledPeriodTypesData) {
-      const {
-        analysisRelativePeriod
-      } = enabledPeriodTypesData;
-      return (0, _enabledPeriodTypes.findBestAvailableRelativePeriod)(filteredRelativeOptions, analysisRelativePeriod);
+  const analysisRelativePeriod = enabledPeriodTypesData === null || enabledPeriodTypesData === void 0 ? void 0 : enabledPeriodTypesData.analysisRelativePeriod;
+  const defaultRelativePeriodType = (() => {
+    if (analysisRelativePeriod) {
+      const match = filteredRelativeOptions.find(opt => opt.getPeriods().some(p => p.id === analysisRelativePeriod));
+      if (match) {
+        return match;
+      }
     }
-    return null;
-  }, [supportsEnabledPeriodTypes, enabledPeriodTypesData, filteredRelativeOptions]);
-  const defaultRelativePeriodType = supportsEnabledPeriodTypes && bestRelativePeriod ? filteredRelativeOptions.find(opt => opt.id === bestRelativePeriod.categoryId) : filteredRelativeOptions.find(opt => opt.id === _index2.MONTHLY) || filteredRelativeOptions.find(opt => opt.id === _index2.QUARTERLY) || filteredRelativeOptions[0];
+    return filteredRelativeOptions.find(opt => opt.id === _index2.MONTHLY) || filteredRelativeOptions.find(opt => opt.id === _index2.QUARTERLY) || filteredRelativeOptions[0];
+  })();
   const defaultFixedPeriodType = filteredFixedOptions.find(opt => opt.id === _index2.MONTHLY) || filteredFixedOptions.find(opt => opt.id === _index2.QUARTERLY) || filteredFixedOptions[0];
   const now = (0, _multiCalendarDates.getNowInCalendar)(periodsSettings.calendar);
   // use ".eraYear" rather than ".year" because in Ethiopian calendar, eraYear is what our users expect to see (for other calendars, it doesn't matter)
