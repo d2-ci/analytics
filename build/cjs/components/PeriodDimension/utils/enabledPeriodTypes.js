@@ -3,13 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.filterEnabledRelativePeriodTypes = exports.filterEnabledFixedPeriodTypes = exports.SERVER_PT_TO_MULTI_CALENDAR_PT = exports.RP_CATEGORY_TO_FP_DEPENDENCIES = void 0;
+exports.filterEnabledRelativePeriodTypes = exports.filterEnabledFixedPeriodTypes = exports.applyPeriodNameOverrides = exports.applyDisplayLabelOverrides = exports.SERVER_PT_TO_MULTI_CALENDAR_PT = exports.RP_CATEGORY_TO_FP_DEPENDENCIES = void 0;
 // Mapping from server period type names to multi-calendar-dates constants
 const SERVER_PT_TO_MULTI_CALENDAR_PT = exports.SERVER_PT_TO_MULTI_CALENDAR_PT = {
   Daily: 'DAILY',
   Weekly: 'WEEKLY',
-  WeeklyMonday: 'WEEKLYMON',
-  WeeklyTuesday: 'WEEKLYTUE',
   WeeklyWednesday: 'WEEKLYWED',
   WeeklyThursday: 'WEEKLYTHU',
   WeeklyFriday: 'WEEKLYFRI',
@@ -19,55 +17,29 @@ const SERVER_PT_TO_MULTI_CALENDAR_PT = exports.SERVER_PT_TO_MULTI_CALENDAR_PT = 
   Monthly: 'MONTHLY',
   BiMonthly: 'BIMONTHLY',
   Quarterly: 'QUARTERLY',
-  QuarterlyJan: 'QUARTERLYJAN',
-  QuarterlyFeb: 'QUARTERLYFEB',
-  QuarterlyMar: 'QUARTERLYMAR',
-  QuarterlyApr: 'QUARTERLYAPR',
-  QuarterlyMay: 'QUARTERLYMAY',
-  QuarterlyJun: 'QUARTERLYJUN',
-  QuarterlyJul: 'QUARTERLYJUL',
-  QuarterlyAug: 'QUARTERLYAUG',
-  QuarterlySep: 'QUARTERLYSEP',
-  QuarterlyOct: 'QUARTERLYOCT',
   QuarterlyNov: 'QUARTERLYNOV',
-  QuarterlyDec: 'QUARTERLYDEC',
   SixMonthly: 'SIXMONTHLY',
-  SixMonthlyJan: 'SIXMONTHLYJAN',
-  SixMonthlyFeb: 'SIXMONTHLYFEB',
-  SixMonthlyMar: 'SIXMONTHLYMAR',
   SixMonthlyApril: 'SIXMONTHLYAPR',
-  SixMonthlyMay: 'SIXMONTHLYMAY',
-  SixMonthlyJun: 'SIXMONTHLYJUN',
-  SixMonthlyJul: 'SIXMONTHLYJUL',
-  SixMonthlyAug: 'SIXMONTHLYAUG',
-  SixMonthlySep: 'SIXMONTHLYSEP',
-  SixMonthlyOct: 'SIXMONTHLYOCT',
   SixMonthlyNov: 'SIXMONTHLYNOV',
-  SixMonthlyDec: 'SIXMONTHLYDEC',
   Yearly: 'YEARLY',
-  FinancialJan: 'FYJAN',
   FinancialFeb: 'FYFEB',
-  FinancialMar: 'FYMAR',
   FinancialApril: 'FYAPR',
-  FinancialMay: 'FYMAY',
-  FinancialJun: 'FYJUN',
   FinancialJuly: 'FYJUL',
   FinancialAug: 'FYAUG',
   FinancialSep: 'FYSEP',
   FinancialOct: 'FYOCT',
-  FinancialNov: 'FYNOV',
-  FinancialDec: 'FYDEC'
+  FinancialNov: 'FYNOV'
 };
 
 // Mapping from relative period categories to their corresponding fixed period types
 const RP_CATEGORY_TO_FP_DEPENDENCIES = exports.RP_CATEGORY_TO_FP_DEPENDENCIES = {
   DAILY: ['Daily'],
-  WEEKLY: ['Weekly', 'WeeklyMonday', 'WeeklyTuesday', 'WeeklyWednesday', 'WeeklyThursday', 'WeeklyFriday', 'WeeklySaturday', 'WeeklySunday'],
+  WEEKLY: ['Weekly', 'WeeklyWednesday', 'WeeklyThursday', 'WeeklyFriday', 'WeeklySaturday', 'WeeklySunday'],
   BIWEEKLY: ['BiWeekly'],
   MONTHLY: ['Monthly'],
   BIMONTHLY: ['BiMonthly'],
-  QUARTERLY: ['Quarterly', 'QuarterlyJan', 'QuarterlyFeb', 'QuarterlyMar', 'QuarterlyApr', 'QuarterlyMay', 'QuarterlyJun', 'QuarterlyJul', 'QuarterlyAug', 'QuarterlySep', 'QuarterlyOct', 'QuarterlyNov', 'QuarterlyDec'],
-  SIXMONTHLY: ['SixMonthly', 'SixMonthlyJan', 'SixMonthlyFeb', 'SixMonthlyMar', 'SixMonthlyApril', 'SixMonthlyMay', 'SixMonthlyJun', 'SixMonthlyJul', 'SixMonthlyAug', 'SixMonthlySep', 'SixMonthlyOct', 'SixMonthlyNov', 'SixMonthlyDec'],
+  QUARTERLY: ['Quarterly', 'QuarterlyNov'],
+  SIXMONTHLY: ['SixMonthly', 'SixMonthlyApril', 'SixMonthlyNov'],
   YEARLY: ['Yearly']
 };
 
@@ -103,7 +75,58 @@ const filterEnabledFixedPeriodTypes = (allFixedPeriodOptions, enabledServerPerio
  * @param {string|null} financialYearStart - Financial year start setting (if enabled)
  * @returns {Array} Filtered relative period options
  */
+/**
+ * Apply metaData name overrides to a list of periods
+ * v43-only: in v44 the API provides these names directly
+ */
 exports.filterEnabledFixedPeriodTypes = filterEnabledFixedPeriodTypes;
+const applyPeriodNameOverrides = (periods, metaData) => {
+  if (!metaData) {
+    return periods;
+  }
+  return periods.map(period => metaData[period.id] ? {
+    ...period,
+    name: metaData[period.id].name
+  } : period);
+};
+
+/**
+ * Apply display label overrides to relative period options
+ * v43-only: in v44 the API provides these names directly
+ */
+exports.applyPeriodNameOverrides = applyPeriodNameOverrides;
+const applyDisplayLabelOverrides = (filteredRelativeOptions, {
+  financialYearDisplayLabel,
+  weeklyDisplayLabel,
+  metaData
+}) => {
+  const overrides = {};
+  if (financialYearDisplayLabel) {
+    overrides['FINANCIAL'] = {
+      name: financialYearDisplayLabel
+    };
+  }
+  if (weeklyDisplayLabel) {
+    overrides['WEEKLY'] = {
+      name: weeklyDisplayLabel
+    };
+  }
+  if (Object.keys(overrides).length === 0) {
+    return filteredRelativeOptions;
+  }
+  return filteredRelativeOptions.map(option => {
+    const override = overrides[option.id];
+    if (!override) {
+      return option;
+    }
+    return {
+      ...option,
+      name: override.name,
+      getPeriods: () => applyPeriodNameOverrides(option.getPeriods(), metaData)
+    };
+  });
+};
+exports.applyDisplayLabelOverrides = applyDisplayLabelOverrides;
 const filterEnabledRelativePeriodTypes = (allRelativePeriodOptions, enabledServerPeriodTypes, financialYearStart = null) => {
   if (!enabledServerPeriodTypes || enabledServerPeriodTypes.length === 0) {
     return [];

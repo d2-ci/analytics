@@ -11,7 +11,7 @@ import styles from '../styles/DimensionSelector.style.js';
 import { TransferOption } from '../TransferOption.js';
 import FixedPeriodFilter from './FixedPeriodFilter.js';
 import RelativePeriodFilter from './RelativePeriodFilter.js';
-import { filterEnabledFixedPeriodTypes, filterEnabledRelativePeriodTypes } from './utils/enabledPeriodTypes.js';
+import { applyDisplayLabelOverrides, filterEnabledFixedPeriodTypes, filterEnabledRelativePeriodTypes } from './utils/enabledPeriodTypes.js';
 import { getFixedPeriodsOptions } from './utils/fixedPeriods.js';
 import { MONTHLY, QUARTERLY, filterPeriodTypesById } from './utils/index.js';
 import { getRelativePeriodsOptions } from './utils/relativePeriods.js';
@@ -58,23 +58,15 @@ const PeriodTransfer = ({
         enabledTypes,
         financialYearStart,
         financialYearDisplayLabel,
+        weeklyDisplayLabel,
         metaData
       } = enabledPeriodTypesData;
       const filteredFixed = filterEnabledFixedPeriodTypes(getFixedPeriodsOptions(periodsSettings), enabledTypes);
-      let filteredRelative = filterEnabledRelativePeriodTypes(getRelativePeriodsOptions(), enabledTypes, financialYearStart);
-      if (financialYearDisplayLabel && metaData) {
-        filteredRelative = filteredRelative.map(option => option.id === 'FINANCIAL' ? {
-          ...option,
-          name: financialYearDisplayLabel,
-          getPeriods: () => option.getPeriods().map(period => {
-            var _metaData$period$id;
-            return {
-              ...period,
-              name: ((_metaData$period$id = metaData[period.id]) === null || _metaData$period$id === void 0 ? void 0 : _metaData$period$id.name) || period.name
-            };
-          })
-        } : option);
-      }
+      const filteredRelative = applyDisplayLabelOverrides(filterEnabledRelativePeriodTypes(getRelativePeriodsOptions(), enabledTypes, financialYearStart), {
+        financialYearDisplayLabel,
+        weeklyDisplayLabel,
+        metaData
+      });
       return {
         filteredFixedOptions: filteredFixed,
         filteredRelativeOptions: filteredRelative

@@ -10,6 +10,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _predefinedDimensions = require("../../modules/predefinedDimensions.js");
 var _PeriodTransfer = _interopRequireDefault(require("./PeriodTransfer.js"));
 var _useDataOutputPeriodTypes = require("./useDataOutputPeriodTypes.js");
+var _enabledPeriodTypes = require("./utils/enabledPeriodTypes.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const userSettingsQuery = {
   userSettings: {
@@ -57,13 +58,7 @@ const PeriodDimension = ({
       items: periods
     });
   };
-
-  // DHIS2-20270 Apply custom period type label to period names
-  const metaData = enabledPeriodTypesData === null || enabledPeriodTypesData === void 0 ? void 0 : enabledPeriodTypesData.metaData;
-  const selectedPeriodsWithCustomDisplayNames = metaData ? selectedPeriods.map(period => metaData[period.id] ? {
-    ...period,
-    name: metaData[period.id].name
-  } : period) : selectedPeriods;
+  const selectedPeriodsWithCustomDisplayNames = (0, _enabledPeriodTypes.applyPeriodNameOverrides)(selectedPeriods, enabledPeriodTypesData === null || enabledPeriodTypesData === void 0 ? void 0 : enabledPeriodTypesData.metaData);
   return /*#__PURE__*/_react.default.createElement(_PeriodTransfer.default, {
     onSelect: selectPeriods,
     selectedItems: selectedPeriodsWithCustomDisplayNames,

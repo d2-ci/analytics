@@ -66,23 +66,15 @@ const PeriodTransfer = ({
         enabledTypes,
         financialYearStart,
         financialYearDisplayLabel,
+        weeklyDisplayLabel,
         metaData
       } = enabledPeriodTypesData;
       const filteredFixed = (0, _enabledPeriodTypes.filterEnabledFixedPeriodTypes)((0, _fixedPeriods.getFixedPeriodsOptions)(periodsSettings), enabledTypes);
-      let filteredRelative = (0, _enabledPeriodTypes.filterEnabledRelativePeriodTypes)((0, _relativePeriods.getRelativePeriodsOptions)(), enabledTypes, financialYearStart);
-      if (financialYearDisplayLabel && metaData) {
-        filteredRelative = filteredRelative.map(option => option.id === 'FINANCIAL' ? {
-          ...option,
-          name: financialYearDisplayLabel,
-          getPeriods: () => option.getPeriods().map(period => {
-            var _metaData$period$id;
-            return {
-              ...period,
-              name: ((_metaData$period$id = metaData[period.id]) === null || _metaData$period$id === void 0 ? void 0 : _metaData$period$id.name) || period.name
-            };
-          })
-        } : option);
-      }
+      const filteredRelative = (0, _enabledPeriodTypes.applyDisplayLabelOverrides)((0, _enabledPeriodTypes.filterEnabledRelativePeriodTypes)((0, _relativePeriods.getRelativePeriodsOptions)(), enabledTypes, financialYearStart), {
+        financialYearDisplayLabel,
+        weeklyDisplayLabel,
+        metaData
+      });
       return {
         filteredFixedOptions: filteredFixed,
         filteredRelativeOptions: filteredRelative

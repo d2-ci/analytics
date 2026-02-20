@@ -10,6 +10,10 @@ const v43Query = {
   },
   analysisRelativePeriod: {
     resource: 'systemSettings/keyAnalysisRelativePeriod'
+  },
+  // v43-only: analyticsWeeklyStart is removed in v44
+  weeklyStart: {
+    resource: 'systemSettings/analyticsWeeklyStart'
   }
 };
 
@@ -20,6 +24,16 @@ const FY_SETTING_TO_SERVER_PT = {
   FINANCIAL_YEAR_SEPTEMBER: 'FinancialSep',
   FINANCIAL_YEAR_OCTOBER: 'FinancialOct',
   FINANCIAL_YEAR_NOVEMBER: 'FinancialNov'
+};
+
+// v43-only: analyticsWeeklyStart is removed in v44
+const WEEKLY_START_TO_SERVER_PT = {
+  WEEKLY: 'Weekly',
+  WEEKLY_WEDNESDAY: 'WeeklyWednesday',
+  WEEKLY_THURSDAY: 'WeeklyThursday',
+  WEEKLY_FRIDAY: 'WeeklyFriday',
+  WEEKLY_SATURDAY: 'WeeklySaturday',
+  WEEKLY_SUNDAY: 'WeeklySunday'
 };
 const useDataOutputPeriodTypes = () => {
   const {
@@ -39,7 +53,7 @@ const useDataOutputPeriodTypes = () => {
     }
   }, [supportsEnabledPeriodTypes, v43Refetch]);
   const enabledPeriodTypesData = useMemo(() => {
-    var _v43Data$financialYea, _v43Data$analysisRela;
+    var _v43Data$financialYea, _v43Data$weeklyStart, _v43Data$analysisRela;
     if (!supportsEnabledPeriodTypes) {
       return null;
     }
@@ -70,22 +84,56 @@ const useDataOutputPeriodTypes = () => {
         }
       }
     }
-    const analysisRelativePeriod = ((_v43Data$analysisRela = v43Data.analysisRelativePeriod) === null || _v43Data$analysisRela === void 0 ? void 0 : _v43Data$analysisRela.keyAnalysisRelativePeriod) || null;
-    const metaData = financialYearDisplayLabel ? {
-      THIS_FINANCIAL_YEAR: {
-        name: `This ${financialYearDisplayLabel}`
-      },
-      LAST_FINANCIAL_YEAR: {
-        name: `Last ${financialYearDisplayLabel}`
-      },
-      LAST_5_FINANCIAL_YEARS: {
-        name: `Last 5 ${financialYearDisplayLabel}`
+
+    // v43-only: weekly start logic goes away in v44
+    let weeklyDisplayLabel = null;
+    if ((_v43Data$weeklyStart = v43Data.weeklyStart) !== null && _v43Data$weeklyStart !== void 0 && _v43Data$weeklyStart.analyticsWeeklyStart) {
+      const weeklyStartValue = v43Data.weeklyStart.analyticsWeeklyStart;
+      const mappedWeeklyPt = WEEKLY_START_TO_SERVER_PT[weeklyStartValue];
+      const matchingWeeklyPt = enabledTypes.find(pt => pt.name === mappedWeeklyPt);
+      if (matchingWeeklyPt !== null && matchingWeeklyPt !== void 0 && matchingWeeklyPt.displayLabel) {
+        weeklyDisplayLabel = matchingWeeklyPt.displayLabel;
       }
-    } : null;
+    }
+    const analysisRelativePeriod = ((_v43Data$analysisRela = v43Data.analysisRelativePeriod) === null || _v43Data$analysisRela === void 0 ? void 0 : _v43Data$analysisRela.keyAnalysisRelativePeriod) || null;
+    const metaData = {
+      ...(financialYearDisplayLabel && {
+        THIS_FINANCIAL_YEAR: {
+          name: `This ${financialYearDisplayLabel}`
+        },
+        LAST_FINANCIAL_YEAR: {
+          name: `Last ${financialYearDisplayLabel}`
+        },
+        LAST_5_FINANCIAL_YEARS: {
+          name: `Last 5 ${financialYearDisplayLabel}`
+        }
+      }),
+      ...(weeklyDisplayLabel && {
+        THIS_WEEK: {
+          name: `This ${weeklyDisplayLabel}`
+        },
+        LAST_WEEK: {
+          name: `Last ${weeklyDisplayLabel}`
+        },
+        LAST_4_WEEKS: {
+          name: `Last 4 ${weeklyDisplayLabel}s`
+        },
+        LAST_12_WEEKS: {
+          name: `Last 12 ${weeklyDisplayLabel}s`
+        },
+        LAST_52_WEEKS: {
+          name: `Last 52 ${weeklyDisplayLabel}s`
+        },
+        WEEKS_THIS_YEAR: {
+          name: `${weeklyDisplayLabel}s this year`
+        }
+      })
+    };
     return {
       enabledTypes,
       financialYearStart,
       financialYearDisplayLabel,
+      weeklyDisplayLabel,
       analysisRelativePeriod,
       metaData,
       noEnabledTypes: false
