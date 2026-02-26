@@ -34,7 +34,7 @@ const getItemFormatter = ({
 }) => getItemFormatterByHeaderName(name) || getItemFormatterByValueType(valueType);
 exports.getItemFormatter = getItemFormatter;
 const getItemFormatterByHeaderName = name => {
-  if (name.endsWith("eventstatus") || name.endsWith("programstatus")) {
+  if (name.endsWith('eventstatus') || name.endsWith('programstatus')) {
     return n => STATUSES[n] || n;
   }
   return undefined;
@@ -57,7 +57,7 @@ const getItemFormatterByValueType = valueType => {
   }
 };
 exports.getItemFormatterByValueType = getItemFormatterByValueType;
-const includeHeaderChecks = [header => Boolean(header.meta), header => header.name !== _predefinedDimensions.DIMENSION_ID_PERIOD, header => header.name !== _predefinedDimensions.DIMENSION_ID_ORGUNIT && !header.name.endsWith('.ou')];
+const includeHeaderChecks = [header => Boolean(header.meta), header => header.name !== _predefinedDimensions.DIMENSION_ID_PERIOD, header => header.name !== _predefinedDimensions.DIMENSION_ID_ORGUNIT, header => !header.name.endsWith('.eventdate'), header => !header.name.endsWith('.enrollmentdate'), header => !header.name.endsWith('.scheduleddate'), header => !header.name.endsWith('.incidentdate'), header => header.name !== 'lastupdated', header => header.name !== 'created', header => header.name !== 'completed', header => !header.name.endsWith('.ou')];
 const transformResponse = (response, {
   hideNaData = false
 } = {}) => {
