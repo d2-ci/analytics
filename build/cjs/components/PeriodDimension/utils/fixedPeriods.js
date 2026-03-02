@@ -248,29 +248,13 @@ const getOptions = periodSettings => {
     getPeriods: getYearlyPeriodType(filterFuturePeriods, periodSettings),
     name: _index.default.t('Yearly')
   }, {
-    id: _index2.FYJAN,
-    getPeriods: getFinancialPeriodType('FYJAN', filterFuturePeriods, periodSettings),
-    name: _index.default.t('Financial year (Start January)')
-  }, {
     id: _index2.FYFEB,
     getPeriods: getFinancialPeriodType('FYFEB', filterFuturePeriods, periodSettings),
     name: _index.default.t('Financial year (Start February)')
   }, {
-    id: _index2.FYMAR,
-    getPeriods: getFinancialPeriodType('FYMAR', filterFuturePeriods, periodSettings),
-    name: _index.default.t('Financial year (Start March)')
-  }, {
     id: _index2.FYAPR,
     getPeriods: getFinancialPeriodType('FYAPR', filterFuturePeriods, periodSettings),
     name: _index.default.t('Financial year (Start April)')
-  }, {
-    id: _index2.FYMAY,
-    getPeriods: getFinancialPeriodType('FYMAY', filterFuturePeriods, periodSettings),
-    name: _index.default.t('Financial year (Start May)')
-  }, {
-    id: _index2.FYJUN,
-    getPeriods: getFinancialPeriodType('FYJUN', filterFuturePeriods, periodSettings),
-    name: _index.default.t('Financial year (Start June)')
   }, {
     id: _index2.FYJUL,
     getPeriods: getFinancialPeriodType('FYJUL', filterFuturePeriods, periodSettings),
@@ -291,10 +275,6 @@ const getOptions = periodSettings => {
     id: _index2.FYNOV,
     getPeriods: getFinancialPeriodType('FYNOV', filterFuturePeriods, periodSettings),
     name: _index.default.t('Financial year (Start November)')
-  }, {
-    id: _index2.FYDEC,
-    getPeriods: getFinancialPeriodType('FYDEC', filterFuturePeriods, periodSettings),
-    name: _index.default.t('Financial year (Start December)')
   }];
 };
 const getFixedPeriodsOptionsById = (id, periodSettings) => {

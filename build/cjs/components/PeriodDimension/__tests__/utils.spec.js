@@ -8,7 +8,7 @@ describe('utils', () => {
     it('should filter fixed periods', () => {
       const excludedPeriodTypes = ['DAILY', 'WEEKLY', 'WEEKLYSAT', 'MONTHLY', 'FYOCT'];
       const periodIds = (0, _index.filterPeriodTypesById)((0, _fixedPeriods.getFixedPeriodsOptions)(), excludedPeriodTypes).map(option => option.id);
-      expect(periodIds).toEqual(['WEEKLYWED', 'WEEKLYTHU', 'WEEKLYSUN', 'BIWEEKLY', 'BIMONTHLY', 'QUARTERLY', 'SIXMONTHLY', 'SIXMONTHLYAPR', 'YEARLY', 'FYJAN', 'FYFEB', 'FYMAR', 'FYAPR', 'FYMAY', 'FYJUN', 'FYJUL', 'FYAUG', 'FYSEP', 'FYNOV', 'FYDEC']);
+      expect(periodIds).toEqual(['WEEKLYWED', 'WEEKLYTHU', 'WEEKLYSUN', 'BIWEEKLY', 'BIMONTHLY', 'QUARTERLY', 'SIXMONTHLY', 'SIXMONTHLYAPR', 'YEARLY', 'FYFEB', 'FYAPR', 'FYJUL', 'FYAUG', 'FYSEP', 'FYNOV']);
     });
     it('should filter relative periods', () => {
       const excludedPeriodTypes = ['MONTHLY', 'BIMONTHLY'];
