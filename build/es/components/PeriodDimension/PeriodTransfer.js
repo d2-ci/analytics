@@ -145,7 +145,7 @@ const PeriodTransfer = ({
       return (opt === null || opt === void 0 ? void 0 : opt.getPeriods(fixedPeriodConfig(Number(fixedFilter.year)))) || [];
     }
   }, [isRelative, effectiveRelativeFilterType, effectiveFixedFilterType, filteredRelativeOptions, filteredFixedOptions, fixedFilter.year]);
-  const allPeriods = userPeriods !== null ? userPeriods : derivedPeriods;
+  const allPeriods = userPeriods !== null && userPeriods !== void 0 ? userPeriods : derivedPeriods;
   const isActive = value => {
     const item = selectedItems.find(item => item.id === value);
     return !item || item.isActive;
