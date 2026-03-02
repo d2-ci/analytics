@@ -62,7 +62,7 @@ export const dataItemsQuery = {
       }
     }
     if (searchTerm) {
-      filters.push(`${nameProp}:ilike:${searchTerm}`);
+      filters.push(`identifiable:token:${searchTerm}`);
     }
     return objectClean({
       fields,
@@ -86,7 +86,7 @@ export const indicatorsQuery = {
       filters.push(`indicatorGroups.id:eq:${filter.group}`);
     }
     if (searchTerm) {
-      filters.push(`${nameProp}:ilike:${searchTerm}`);
+      filters.push(`identifiable:token:${searchTerm}`);
     }
     return {
       fields: `id,${nameProp}~rename(name),dimensionItemType`,
@@ -121,7 +121,7 @@ export const dataElementsQuery = {
       filters.push(`dataElementGroups.id:eq:${filter.group}`);
     }
     if (searchTerm) {
-      filters.push(`${nameProp}:ilike:${searchTerm}`);
+      filters.push(`identifiable:token:${searchTerm}`);
     }
     return {
       fields: `${idField},${nameProp}~rename(name),dimensionItemType`,
@@ -154,7 +154,7 @@ export const itemsByDimensionQuery = {
   }) => {
     const filters = [];
     if (searchTerm) {
-      filters.push(`${nameProp}:ilike:${searchTerm}`);
+      filters.push(`identifiable:token:${searchTerm}`);
     }
     return {
       fields: `id,${nameProp}~rename(name)`,
@@ -179,7 +179,7 @@ export const dataElementOperandsQuery = {
       filters.push(`dataElement.dataElementGroups.id:eq:${filter.group}`);
     }
     if (searchTerm) {
-      filters.push(`${nameProp}:ilike:${searchTerm}`);
+      filters.push(`identifiable:token:${searchTerm}`);
     }
     return {
       fields: `${idField},${nameProp}~rename(name),dimensionItemType`,
@@ -200,7 +200,7 @@ export const dataSetsQuery = {
   }) => {
     const filters = [];
     if (searchTerm) {
-      filters.push(`${nameProp}:ilike:${searchTerm}`);
+      filters.push(`identifiable:token:${searchTerm}`);
     }
     if (filter !== null && filter !== void 0 && filter.group && filter.group !== DIMENSION_TYPE_ALL) {
       filters.push(`id:eq:${filter.group}`);

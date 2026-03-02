@@ -68,7 +68,7 @@ const dataItemsQuery = exports.dataItemsQuery = {
       }
     }
     if (searchTerm) {
-      filters.push(`${nameProp}:ilike:${searchTerm}`);
+      filters.push(`identifiable:token:${searchTerm}`);
     }
     return (0, _objectClean.default)({
       fields,
@@ -92,7 +92,7 @@ const indicatorsQuery = exports.indicatorsQuery = {
       filters.push(`indicatorGroups.id:eq:${filter.group}`);
     }
     if (searchTerm) {
-      filters.push(`${nameProp}:ilike:${searchTerm}`);
+      filters.push(`identifiable:token:${searchTerm}`);
     }
     return {
       fields: `id,${nameProp}~rename(name),dimensionItemType`,
@@ -127,7 +127,7 @@ const dataElementsQuery = exports.dataElementsQuery = {
       filters.push(`dataElementGroups.id:eq:${filter.group}`);
     }
     if (searchTerm) {
-      filters.push(`${nameProp}:ilike:${searchTerm}`);
+      filters.push(`identifiable:token:${searchTerm}`);
     }
     return {
       fields: `${idField},${nameProp}~rename(name),dimensionItemType`,
@@ -160,7 +160,7 @@ const itemsByDimensionQuery = exports.itemsByDimensionQuery = {
   }) => {
     const filters = [];
     if (searchTerm) {
-      filters.push(`${nameProp}:ilike:${searchTerm}`);
+      filters.push(`identifiable:token:${searchTerm}`);
     }
     return {
       fields: `id,${nameProp}~rename(name)`,
@@ -185,7 +185,7 @@ const dataElementOperandsQuery = exports.dataElementOperandsQuery = {
       filters.push(`dataElement.dataElementGroups.id:eq:${filter.group}`);
     }
     if (searchTerm) {
-      filters.push(`${nameProp}:ilike:${searchTerm}`);
+      filters.push(`identifiable:token:${searchTerm}`);
     }
     return {
       fields: `${idField},${nameProp}~rename(name),dimensionItemType`,
@@ -206,7 +206,7 @@ const dataSetsQuery = exports.dataSetsQuery = {
   }) => {
     const filters = [];
     if (searchTerm) {
-      filters.push(`${nameProp}:ilike:${searchTerm}`);
+      filters.push(`identifiable:token:${searchTerm}`);
     }
     if (filter !== null && filter !== void 0 && filter.group && filter.group !== _dataTypes.DIMENSION_TYPE_ALL) {
       filters.push(`id:eq:${filter.group}`);
