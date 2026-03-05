@@ -8,7 +8,7 @@ describe('fixedPeriods utils', () => {
   describe('getOptions', () => {
     it('should return a list of available period ranges', () => {
       const periodIds = (0, _fixedPeriods.getFixedPeriodsOptions)().map(option => option.id);
-      expect(periodIds).toEqual(['DAILY', 'WEEKLY', 'WEEKLYWED', 'WEEKLYTHU', 'WEEKLYSAT', 'WEEKLYSUN', 'BIWEEKLY', 'MONTHLY', 'BIMONTHLY', 'QUARTERLY', 'SIXMONTHLY', 'SIXMONTHLYAPR', 'YEARLY', 'FYFEB', 'FYAPR', 'FYJUL', 'FYAUG', 'FYSEP', 'FYOCT', 'FYNOV']);
+      expect(periodIds).toEqual(['DAILY', 'WEEKLY', 'WEEKLYWED', 'WEEKLYTHU', 'WEEKLYFRI', 'WEEKLYSAT', 'WEEKLYSUN', 'BIWEEKLY', 'MONTHLY', 'BIMONTHLY', 'QUARTERLY', 'SIXMONTHLY', 'SIXMONTHLYAPR', 'YEARLY', 'FYFEB', 'FYAPR', 'FYJUL', 'FYAUG', 'FYSEP', 'FYOCT', 'FYNOV']);
     });
   });
   describe('Daily period generator', () => {
