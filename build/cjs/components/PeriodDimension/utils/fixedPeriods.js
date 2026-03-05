@@ -11,7 +11,7 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 const PERIOD_TYPE_REGEX = exports.PERIOD_TYPE_REGEX = {
   [_index2.DAILY]: /^(\d{4})(\d{2})(\d{2})$/,
   // YYYYMMDD
-  [_index2.WEEKLY]: /^(\d{4})()W(\d{1,2})$/,
+  [_index2.WEEKLY]: /^(\d{4})W(\d{1,2})$/,
   // YYYY"W"[1-53]
   [_index2.BIWEEKLY]: /^(\d{4})BiW(\d{1,2})$/,
   // YYYY"BiW"[1-27]

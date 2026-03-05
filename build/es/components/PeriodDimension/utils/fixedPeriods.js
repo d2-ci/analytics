@@ -4,7 +4,7 @@ import { DAILY, WEEKLY, WEEKLYWED, WEEKLYTHU, WEEKLYFRI, WEEKLYSAT, WEEKLYSUN, B
 export const PERIOD_TYPE_REGEX = {
   [DAILY]: /^(\d{4})(\d{2})(\d{2})$/,
   // YYYYMMDD
-  [WEEKLY]: /^(\d{4})()W(\d{1,2})$/,
+  [WEEKLY]: /^(\d{4})W(\d{1,2})$/,
   // YYYY"W"[1-53]
   [BIWEEKLY]: /^(\d{4})BiW(\d{1,2})$/,
   // YYYY"BiW"[1-27]
