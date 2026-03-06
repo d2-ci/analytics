@@ -31,13 +31,19 @@ export const PERIOD_TYPE_REGEX = {
   // [SIXMONTHLYNOV]: /^(\d{4})NovS([12])$/, // YYYY"NovS"[1/2] Not supported?
   [YEARLY]: /^(\d{4})$/,
   // YYYY
-  [FYNOV]: /^(\d{4})Nov$/,
-  // YYYY"Nov"
-  [FYOCT]: /^(\d{4})Oct$/,
-  // YYYY"Oct"
+  [FYFEB]: /^(\d{4})Feb$/,
+  // YYYY"Feb"
+  [FYAPR]: /^(\d{4})April$/,
+  // YYYY"April"
   [FYJUL]: /^(\d{4})July$/,
   // YYYY"July"
-  [FYAPR]: /^(\d{4})April$/ // YYYY"April"
+  [FYAUG]: /^(\d{4})Aug$/,
+  // YYYY"Aug"
+  [FYSEP]: /^(\d{4})Sep$/,
+  // YYYY"Sep"
+  [FYOCT]: /^(\d{4})Oct$/,
+  // YYYY"Oct"
+  [FYNOV]: /^(\d{4})Nov$/ // YYYY"Nov"
 };
 const getPeriods = ({
   periodType,
