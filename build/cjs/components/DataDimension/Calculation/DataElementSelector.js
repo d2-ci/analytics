@@ -19,6 +19,7 @@ var _DataElementOption = _interopRequireDefault(require("./DataElementOption.js"
 var _DataElementSelectorStyle = _interopRequireDefault(require("./styles/DataElementSelector.style.js"));
 function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const SCROLLBOX_HEIGHT = 337;
 const getOptions = () => ({
   [_dataTypes.TOTALS]: _index.default.t('Totals only'),
   [_dataTypes.DETAIL]: _index.default.t('Details only')
@@ -97,7 +98,8 @@ DisaggregationSelector.propTypes = {
 };
 const DataElementSelector = ({
   displayNameProp,
-  onDoubleClick
+  onDoubleClick,
+  height = SCROLLBOX_HEIGHT
 }) => {
   const dataEngine = (0, _appRuntime.useDataEngine)();
   const [searchTerm, setSearchTerm] = (0, _react.useState)('');
@@ -223,6 +225,9 @@ const DataElementSelector = ({
     className: `jsx-${_DataElementSelectorStyle.default.__hash}` + " " + "dimension-list-overlay"
   }, /*#__PURE__*/_react.default.createElement(_ui.CircularLoader, null)), /*#__PURE__*/_react.default.createElement("div", {
     ref: rootRef,
+    style: {
+      height
+    },
     onScroll: () => {
       if (isSorting) {
         rootRef.current.scrollTo({
@@ -259,6 +264,7 @@ const DataElementSelector = ({
 };
 DataElementSelector.propTypes = {
   displayNameProp: _propTypes.default.string.isRequired,
-  onDoubleClick: _propTypes.default.func.isRequired
+  onDoubleClick: _propTypes.default.func.isRequired,
+  height: _propTypes.default.string
 };
 var _default = exports.default = DataElementSelector;

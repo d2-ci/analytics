@@ -21,7 +21,8 @@ const CalculationModal = ({
   onSave,
   onClose,
   onDelete,
-  displayNameProp
+  displayNameProp,
+  height
 }) => {
   const {
     show: showError
@@ -269,7 +270,8 @@ const CalculationModal = ({
     className: `jsx-${styles.__hash}` + " " + "left-section"
   }, /*#__PURE__*/React.createElement(DataElementSelector, {
     displayNameProp: displayNameProp,
-    onDoubleClick: addItem
+    onDoubleClick: addItem,
+    height: height
   }), /*#__PURE__*/React.createElement(MathOperatorSelector, {
     onDoubleClick: addItem
   })), /*#__PURE__*/React.createElement("div", {
@@ -370,6 +372,7 @@ CalculationModal.propTypes = {
     expression: PropTypes.string,
     id: PropTypes.string,
     name: PropTypes.string
-  })
+  }),
+  height: PropTypes.string
 };
 export default CalculationModal;

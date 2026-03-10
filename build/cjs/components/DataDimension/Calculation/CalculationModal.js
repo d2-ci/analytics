@@ -29,7 +29,8 @@ const CalculationModal = ({
   onSave,
   onClose,
   onDelete,
-  displayNameProp
+  displayNameProp,
+  height
 }) => {
   const {
     show: showError
@@ -277,7 +278,8 @@ const CalculationModal = ({
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "left-section"
   }, /*#__PURE__*/_react.default.createElement(_DataElementSelector.default, {
     displayNameProp: displayNameProp,
-    onDoubleClick: addItem
+    onDoubleClick: addItem,
+    height: height
   }), /*#__PURE__*/_react.default.createElement(_MathOperatorSelector.default, {
     onDoubleClick: addItem
   })), /*#__PURE__*/_react.default.createElement("div", {
@@ -378,6 +380,7 @@ CalculationModal.propTypes = {
     expression: _propTypes.default.string,
     id: _propTypes.default.string,
     name: _propTypes.default.string
-  })
+  }),
+  height: _propTypes.default.string
 };
 var _default = exports.default = CalculationModal;

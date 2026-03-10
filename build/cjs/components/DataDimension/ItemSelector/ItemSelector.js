@@ -115,7 +115,8 @@ const ItemSelector = ({
   onEditClick,
   isOptionViewMode,
   supportsEDI,
-  height = _dimensionSelectorHelper.TRANSFER_HEIGHT
+  height = _dimensionSelectorHelper.TRANSFER_HEIGHT,
+  heightCalculation
 }) => {
   const [state, setState] = (0, _react.useState)({
     searchTerm: '',
@@ -377,7 +378,8 @@ const ItemSelector = ({
     onSave: onSaveCalculation,
     onClose: () => setCurrentCalculation(),
     onDelete: onDeleteCalculation,
-    displayNameProp: displayNameProp
+    displayNameProp: displayNameProp,
+    height: heightCalculation
   }), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _DimensionSelectorStyle.default.__hash
   }, _DimensionSelectorStyle.default));
@@ -389,6 +391,7 @@ ItemSelector.propTypes = {
   dataTest: _propTypes.default.string,
   dataTypes: _propTypes.default.array,
   height: _propTypes.default.string,
+  heightCalculation: _propTypes.default.string,
   infoBoxMessage: _propTypes.default.string,
   infoDataItem: _propTypes.default.object,
   isOptionViewMode: _propTypes.default.bool,
