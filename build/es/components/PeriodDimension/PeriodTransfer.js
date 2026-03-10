@@ -13,7 +13,7 @@ import FixedPeriodFilter from './FixedPeriodFilter.js';
 import RelativePeriodFilter from './RelativePeriodFilter.js';
 import { applyDisplayLabelOverrides, applyFixedPeriodTypeDisplayLabels, filterEnabledFixedPeriodTypes, filterEnabledRelativePeriodTypes } from './utils/enabledPeriodTypes.js';
 import { getFixedPeriodsOptions } from './utils/fixedPeriods.js';
-import { MONTHLY, QUARTERLY, filterPeriodTypesById } from './utils/index.js';
+import { FYFEB, FYAUG, FYSEP, MONTHLY, QUARTERLY, WEEKLYFRI, filterPeriodTypesById } from './utils/index.js';
 import { getRelativePeriodsOptions } from './utils/relativePeriods.js';
 const RightHeader = ({
   infoBoxMessage
@@ -74,9 +74,11 @@ const PeriodTransfer = ({
     } else {
       const allFixed = getFixedPeriodsOptions(periodsSettings);
       const allRelative = getRelativePeriodsOptions();
+      const v43OnlyPeriodTypes = [WEEKLYFRI, FYFEB, FYAUG, FYSEP];
+      const allExcludedPeriodTypes = [...excludedPeriodTypes, ...v43OnlyPeriodTypes];
       return {
-        filteredFixedOptions: filterPeriodTypesById(allFixed, excludedPeriodTypes),
-        filteredRelativeOptions: filterPeriodTypesById(allRelative, excludedPeriodTypes)
+        filteredFixedOptions: filterPeriodTypesById(allFixed, allExcludedPeriodTypes),
+        filteredRelativeOptions: filterPeriodTypesById(allRelative, allExcludedPeriodTypes)
       };
     }
   }, [supportsEnabledPeriodTypes, enabledPeriodTypesData, excludedPeriodTypes, periodsSettings]);

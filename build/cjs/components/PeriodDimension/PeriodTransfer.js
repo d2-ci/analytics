@@ -82,9 +82,11 @@ const PeriodTransfer = ({
     } else {
       const allFixed = (0, _fixedPeriods.getFixedPeriodsOptions)(periodsSettings);
       const allRelative = (0, _relativePeriods.getRelativePeriodsOptions)();
+      const v43OnlyPeriodTypes = [_index2.WEEKLYFRI, _index2.FYFEB, _index2.FYAUG, _index2.FYSEP];
+      const allExcludedPeriodTypes = [...excludedPeriodTypes, ...v43OnlyPeriodTypes];
       return {
-        filteredFixedOptions: (0, _index2.filterPeriodTypesById)(allFixed, excludedPeriodTypes),
-        filteredRelativeOptions: (0, _index2.filterPeriodTypesById)(allRelative, excludedPeriodTypes)
+        filteredFixedOptions: (0, _index2.filterPeriodTypesById)(allFixed, allExcludedPeriodTypes),
+        filteredRelativeOptions: (0, _index2.filterPeriodTypesById)(allRelative, allExcludedPeriodTypes)
       };
     }
   }, [supportsEnabledPeriodTypes, enabledPeriodTypesData, excludedPeriodTypes, periodsSettings]);
