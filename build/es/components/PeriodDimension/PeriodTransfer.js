@@ -74,8 +74,8 @@ const PeriodTransfer = ({
     } else {
       const allFixed = getFixedPeriodsOptions(periodsSettings);
       const allRelative = getRelativePeriodsOptions();
-      const v43OnlyPeriodTypes = [WEEKLYFRI, FYFEB, FYAUG, FYSEP];
-      const allExcludedPeriodTypes = [...excludedPeriodTypes, ...v43OnlyPeriodTypes];
+      const v43PeriodTypes = [WEEKLYFRI, FYFEB, FYAUG, FYSEP];
+      const allExcludedPeriodTypes = [...excludedPeriodTypes, ...v43PeriodTypes];
       return {
         filteredFixedOptions: filterPeriodTypesById(allFixed, allExcludedPeriodTypes),
         filteredRelativeOptions: filterPeriodTypesById(allRelative, allExcludedPeriodTypes)
@@ -97,11 +97,11 @@ const PeriodTransfer = ({
   // use ".eraYear" rather than ".year" because in Ethiopian calendar, eraYear is what our users expect to see (for other calendars, it doesn't matter)
   // there is still a pending decision in Temporal regarding which era to use by default: https://github.com/js-temporal/temporal-polyfill/blob/9350ee7dd0d29f329fc097debf923a517c32f813/lib/calendar.ts#L1964
   const defaultFixedPeriodYear = now.eraYear || now.year;
-  const fixedPeriodConfig = year => ({
+  const fixedPeriodConfig = useCallback(year => ({
     offset: year - defaultFixedPeriodYear,
     filterFuturePeriods: false,
     reversePeriods: false
-  });
+  }), [defaultFixedPeriodYear]);
   const [userPeriods, setUserPeriods] = useState(null);
   const [isRelative, setIsRelative] = useState(true);
   const [relativeFilter, setRelativeFilter] = useState({
