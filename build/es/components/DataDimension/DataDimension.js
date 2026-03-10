@@ -18,7 +18,8 @@ const DataDimension = ({
   infoBoxMessage,
   onCalculationSave,
   visType,
-  height
+  height,
+  heightCalculation
 }) => {
   const {
     serverVersion
@@ -95,7 +96,8 @@ const DataDimension = ({
     infoDataItem: infoDataItem,
     setInfoDataItem: setInfoDataItem,
     onEditClick: onEditClick,
-    height: height
+    height: height,
+    heightCalculation: heightCalculation
   }), currentDataItem && /*#__PURE__*/React.createElement(ItemOptionsSelector, _extends({}, currentDataItem, {
     selectedItems: selectedItems,
     onSelect: onSelectItems,
@@ -128,6 +130,7 @@ DataDimension.propTypes = {
   currentUser: PropTypes.object,
   enabledDataTypes: PropTypes.array,
   height: PropTypes.string,
+  heightCalculation: PropTypes.string,
   infoBoxMessage: PropTypes.string,
   visType: PropTypes.string,
   onCalculationSave: PropTypes.func
