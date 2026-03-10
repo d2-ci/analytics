@@ -3,7 +3,7 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 import { getNowInCalendar } from '@dhis2/multi-calendar-dates';
 import { IconInfo16, NoticeBox, TabBar, Tab, Transfer } from '@dhis2/ui';
 import PropTypes from 'prop-types';
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useCallback, useRef, useState, useMemo } from 'react';
 import PeriodIcon from '../../assets/DimensionItemIcons/PeriodIcon.js'; //TODO: Reimplement the icon.js
 import i18n from '../../locales/index.js';
 import { TRANSFER_HEIGHT, TRANSFER_OPTIONS_WIDTH, TRANSFER_SELECTED_WIDTH } from '../../modules/dimensionSelectorHelper.js';
@@ -146,7 +146,7 @@ const PeriodTransfer = ({
       const opt = filteredFixedOptions.find(o => o.id === effectiveFixedFilterType);
       return (opt === null || opt === void 0 ? void 0 : opt.getPeriods(fixedPeriodConfig(Number(fixedFilter.year)))) || [];
     }
-  }, [isRelative, effectiveRelativeFilterType, effectiveFixedFilterType, filteredRelativeOptions, filteredFixedOptions, fixedFilter.year]);
+  }, [isRelative, effectiveRelativeFilterType, effectiveFixedFilterType, filteredRelativeOptions, filteredFixedOptions, fixedFilter.year, fixedPeriodConfig]);
   const allPeriods = userPeriods !== null && userPeriods !== void 0 ? userPeriods : derivedPeriods;
   const isActive = value => {
     const item = selectedItems.find(item => item.id === value);
