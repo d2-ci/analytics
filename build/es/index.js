@@ -145,7 +145,7 @@ export { transformResponse as transformEventAggregateResponse } from './modules/
 export { COLOR_SET_DEFAULT, COLOR_SET_BASIC, COLOR_SET_EXTENDED, COLOR_SET_BRIGHT, COLOR_SET_DARK, COLOR_SET_GRAY, COLOR_SET_COLOR_BLIND, COLOR_SET_PATTERNS, colorSets } from './visualizations/util/colors/colorSets.js';
 
 // Utils: periods
-export { DAILY, WEEKLY, WEEKLYWED, WEEKLYTHU, WEEKLYFRI, WEEKLYSAT, WEEKLYSUN, WEEKS_THIS_YEAR, BIWEEKLY, MONTHLY, BIMONTHLY, QUARTERLY, SIXMONTHLY, SIXMONTHLYAPR, YEARLY, FINANCIAL, FYNOV, FYOCT, FYJUL, FYAPR } from './components/PeriodDimension/utils/index.js';
+export { DAILY, WEEKLY, WEEKLYWED, WEEKLYTHU, WEEKLYFRI, WEEKLYSAT, WEEKLYSUN, WEEKS_THIS_YEAR, BIWEEKLY, MONTHLY, BIMONTHLY, QUARTERLY, SIXMONTHLY, SIXMONTHLYAPR, YEARLY, FINANCIAL, FYFEB, FYAPR, FYJUL, FYAUG, FYSEP, FYOCT, FYNOV } from './components/PeriodDimension/utils/index.js';
 export { getRelativePeriodsOptionsById, getRelativePeriodsName, getRelativePeriodsDetails } from './components/PeriodDimension/utils/relativePeriods.js';
 export { getFixedPeriodsOptionsById, PERIOD_TYPE_REGEX } from './components/PeriodDimension/utils/fixedPeriods.js';
 export { default as VisualizationOptions } from './components/Options/VisualizationOptions.js';

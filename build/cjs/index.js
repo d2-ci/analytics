@@ -253,10 +253,13 @@ var _exportNames = {
   SIXMONTHLYAPR: true,
   YEARLY: true,
   FINANCIAL: true,
-  FYNOV: true,
-  FYOCT: true,
-  FYJUL: true,
+  FYFEB: true,
   FYAPR: true,
+  FYJUL: true,
+  FYAUG: true,
+  FYSEP: true,
+  FYOCT: true,
+  FYNOV: true,
   getRelativePeriodsOptionsById: true,
   getRelativePeriodsName: true,
   getRelativePeriodsDetails: true,
@@ -708,6 +711,18 @@ Object.defineProperty(exports, "FYAPR", {
     return _index12.FYAPR;
   }
 });
+Object.defineProperty(exports, "FYAUG", {
+  enumerable: true,
+  get: function () {
+    return _index12.FYAUG;
+  }
+});
+Object.defineProperty(exports, "FYFEB", {
+  enumerable: true,
+  get: function () {
+    return _index12.FYFEB;
+  }
+});
 Object.defineProperty(exports, "FYJUL", {
   enumerable: true,
   get: function () {
@@ -724,6 +739,12 @@ Object.defineProperty(exports, "FYOCT", {
   enumerable: true,
   get: function () {
     return _index12.FYOCT;
+  }
+});
+Object.defineProperty(exports, "FYSEP", {
+  enumerable: true,
+  get: function () {
+    return _index12.FYSEP;
   }
 });
 Object.defineProperty(exports, "FileMenu", {
