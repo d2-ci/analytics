@@ -48,7 +48,8 @@ const ItemOptionsSelector = ({
   onSelect,
   onClose,
   dataTest,
-  height = _dimensionSelectorHelper.TRANSFER_HEIGHT
+  height = _dimensionSelectorHelper.TRANSFER_HEIGHT,
+  maxSelections
 }) => {
   var _state$filter;
   const [state, setState] = (0, _react.useState)({
@@ -190,7 +191,7 @@ const ItemOptionsSelector = ({
     rightHeader: /*#__PURE__*/_react.default.createElement("p", {
       className: `jsx-${_DimensionSelectorStyle.default.__hash} jsx-${_ItemOptionSelectorStyle.default.__hash}` + " " + "rightHeader"
     }, _index.default.t('Selected items')),
-    enableOrderChange: true,
+    enableOrderChange: !maxSelections || maxSelections > 1,
     height: height,
     optionsWidth: _dimensionSelectorHelper.TRANSFER_OPTIONS_WIDTH,
     selectedWidth: _dimensionSelectorHelper.TRANSFER_SELECTED_WIDTH,
@@ -216,6 +217,7 @@ const ItemOptionsSelector = ({
         /* eslint-enable react/prop-types */
       }));
     },
+    maxSelections: maxSelections,
     dataTest: `${dataTest}-option-view-mode-transfer`
   }), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _DimensionSelectorStyle.default.__hash
@@ -235,6 +237,7 @@ ItemOptionsSelector.propTypes = {
   height: _propTypes.default.string,
   infoDataItem: _propTypes.default.object,
   itemsRef: _propTypes.default.object,
+  maxSelections: _propTypes.default.number,
   selectedItems: _propTypes.default.arrayOf(_propTypes.default.exact({
     label: _propTypes.default.string.isRequired,
     value: _propTypes.default.string.isRequired,

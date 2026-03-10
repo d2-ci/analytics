@@ -116,7 +116,8 @@ const ItemSelector = ({
   isOptionViewMode,
   supportsEDI,
   height = _dimensionSelectorHelper.TRANSFER_HEIGHT,
-  heightCalculation
+  heightCalculation,
+  maxSelections
 }) => {
   const [state, setState] = (0, _react.useState)({
     searchTerm: '',
@@ -344,7 +345,7 @@ const ItemSelector = ({
       onClick: () => setCurrentCalculation({}),
       small: true
     }, _index.default.t('Calculation'))) : undefined,
-    enableOrderChange: true,
+    enableOrderChange: !maxSelections || maxSelections > 1,
     height: height,
     optionsWidth: _dimensionSelectorHelper.TRANSFER_OPTIONS_WIDTH,
     selectedWidth: _dimensionSelectorHelper.TRANSFER_SELECTED_WIDTH,
@@ -372,6 +373,7 @@ const ItemSelector = ({
       })
       /* eslint-enable react/prop-types */
     })),
+    maxSelections: maxSelections,
     dataTest: `${dataTest}-transfer`
   }), currentCalculation && supportsEDI && /*#__PURE__*/_react.default.createElement(_CalculationModal.default, {
     calculation: currentCalculation,
@@ -396,6 +398,7 @@ ItemSelector.propTypes = {
   infoDataItem: _propTypes.default.object,
   isOptionViewMode: _propTypes.default.bool,
   itemsRef: _propTypes.default.object,
+  maxSelections: _propTypes.default.number,
   noItemsMessage: _propTypes.default.string,
   rightFooter: _propTypes.default.node,
   selectedItems: _propTypes.default.arrayOf(_propTypes.default.exact({
