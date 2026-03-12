@@ -82,9 +82,11 @@ const PeriodTransfer = ({
     } else {
       const allFixed = (0, _fixedPeriods.getFixedPeriodsOptions)(periodsSettings);
       const allRelative = (0, _relativePeriods.getRelativePeriodsOptions)();
+      const v43PeriodTypes = [_index2.WEEKLYFRI, _index2.FYFEB, _index2.FYAUG, _index2.FYSEP];
+      const allExcludedPeriodTypes = [...excludedPeriodTypes, ...v43PeriodTypes];
       return {
-        filteredFixedOptions: (0, _index2.filterPeriodTypesById)(allFixed, excludedPeriodTypes),
-        filteredRelativeOptions: (0, _index2.filterPeriodTypesById)(allRelative, excludedPeriodTypes)
+        filteredFixedOptions: (0, _index2.filterPeriodTypesById)(allFixed, allExcludedPeriodTypes),
+        filteredRelativeOptions: (0, _index2.filterPeriodTypesById)(allRelative, allExcludedPeriodTypes)
       };
     }
   }, [supportsEnabledPeriodTypes, enabledPeriodTypesData, excludedPeriodTypes, periodsSettings]);
@@ -103,11 +105,11 @@ const PeriodTransfer = ({
   // use ".eraYear" rather than ".year" because in Ethiopian calendar, eraYear is what our users expect to see (for other calendars, it doesn't matter)
   // there is still a pending decision in Temporal regarding which era to use by default: https://github.com/js-temporal/temporal-polyfill/blob/9350ee7dd0d29f329fc097debf923a517c32f813/lib/calendar.ts#L1964
   const defaultFixedPeriodYear = now.eraYear || now.year;
-  const fixedPeriodConfig = year => ({
+  const fixedPeriodConfig = (0, _react.useCallback)(year => ({
     offset: year - defaultFixedPeriodYear,
     filterFuturePeriods: false,
     reversePeriods: false
-  });
+  }), [defaultFixedPeriodYear]);
   const [userPeriods, setUserPeriods] = (0, _react.useState)(null);
   const [isRelative, setIsRelative] = (0, _react.useState)(true);
   const [relativeFilter, setRelativeFilter] = (0, _react.useState)({
@@ -152,7 +154,7 @@ const PeriodTransfer = ({
       const opt = filteredFixedOptions.find(o => o.id === effectiveFixedFilterType);
       return (opt === null || opt === void 0 ? void 0 : opt.getPeriods(fixedPeriodConfig(Number(fixedFilter.year)))) || [];
     }
-  }, [isRelative, effectiveRelativeFilterType, effectiveFixedFilterType, filteredRelativeOptions, filteredFixedOptions, fixedFilter.year]);
+  }, [isRelative, effectiveRelativeFilterType, effectiveFixedFilterType, filteredRelativeOptions, filteredFixedOptions, fixedFilter.year, fixedPeriodConfig]);
   const allPeriods = userPeriods !== null && userPeriods !== void 0 ? userPeriods : derivedPeriods;
   const isActive = value => {
     const item = selectedItems.find(item => item.id === value);
