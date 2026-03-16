@@ -151,6 +151,9 @@ const PeriodTransfer = ({
       const opt = filteredRelativeOptions.find(o => o.id === effectiveRelativeFilterType);
       return (opt === null || opt === void 0 ? void 0 : opt.getPeriods()) || [];
     } else {
+      if (!/\d{4}/.test(fixedFilter.year)) {
+        return [];
+      }
       const opt = filteredFixedOptions.find(o => o.id === effectiveFixedFilterType);
       return (opt === null || opt === void 0 ? void 0 : opt.getPeriods(fixedPeriodConfig(Number(fixedFilter.year)))) || [];
     }
