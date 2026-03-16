@@ -11,7 +11,7 @@ import i18n from '../../../locales/index.js';
 import { TOTALS, DETAIL, DIMENSION_TYPE_ALL, DIMENSION_TYPE_DATA_ELEMENT, dataTypeMap as dataTypes } from '../../../modules/dataTypes.js';
 import DataElementOption from './DataElementOption.js';
 import styles from './styles/DataElementSelector.style.js';
-const SCROLLBOX_HEIGHT = 337;
+const SCROLLBOX_HEIGHT = '337px';
 const getOptions = () => ({
   [TOTALS]: i18n.t('Totals only'),
   [DETAIL]: i18n.t('Details only')
