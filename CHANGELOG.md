@@ -1,3 +1,17 @@
+## [29.4.1](https://github.com/dhis2/analytics/compare/v29.4.0...v29.4.1) (2026-03-17)
+
+
+### Bug Fixes
+
+* upgrade deps to support custom translations ([#1825](https://github.com/dhis2/analytics/issues/1825)) ([ed6023f](https://github.com/dhis2/analytics/commit/ed6023fa6a1c74b1625abbcd346965f593a95d8b))
+
+# [29.4.0](https://github.com/dhis2/analytics/compare/v29.3.3...v29.4.0) (2026-03-16)
+
+
+### Features
+
+* add flexibility to DataDimension ([#1819](https://github.com/dhis2/analytics/issues/1819)) ([328bc5d](https://github.com/dhis2/analytics/commit/328bc5db79c4b653f8fe73b38df57c33610fe61a))
+
 ## [29.3.3](https://github.com/dhis2/analytics/compare/v29.3.2...v29.3.3) (2026-03-14)
 
 

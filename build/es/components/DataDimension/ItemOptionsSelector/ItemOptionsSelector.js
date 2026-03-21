@@ -39,7 +39,9 @@ export const ItemOptionsSelector = ({
   onEditClick,
   onSelect,
   onClose,
-  dataTest
+  dataTest,
+  height = TRANSFER_HEIGHT,
+  maxSelections
 }) => {
   var _state$filter;
   const [state, setState] = useState({
@@ -70,7 +72,7 @@ export const ItemOptionsSelector = ({
       searchTerm: state.searchTerm
     });
     const newOptions = [];
-    (_result$dimensionItem = result.dimensionItems) === null || _result$dimensionItem === void 0 ? void 0 : _result$dimensionItem.forEach(item => {
+    (_result$dimensionItem = result.dimensionItems) === null || _result$dimensionItem === void 0 || _result$dimensionItem.forEach(item => {
       newOptions.push({
         label: item.name,
         value: item.id,
@@ -181,8 +183,8 @@ export const ItemOptionsSelector = ({
     rightHeader: /*#__PURE__*/React.createElement("p", {
       className: `jsx-${styles.__hash} jsx-${itemOptionSelectorStyles.__hash}` + " " + "rightHeader"
     }, i18n.t('Selected items')),
-    enableOrderChange: true,
-    height: TRANSFER_HEIGHT,
+    enableOrderChange: !maxSelections || maxSelections > 1,
+    height: height,
     optionsWidth: TRANSFER_OPTIONS_WIDTH,
     selectedWidth: TRANSFER_SELECTED_WIDTH,
     selectedEmptyComponent: /*#__PURE__*/React.createElement(SelectedEmptyPlaceholder, null),
@@ -207,6 +209,7 @@ export const ItemOptionsSelector = ({
         /* eslint-enable react/prop-types */
       }));
     },
+    maxSelections: maxSelections,
     dataTest: `${dataTest}-option-view-mode-transfer`
   }), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
@@ -222,8 +225,10 @@ ItemOptionsSelector.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired,
   dataTest: PropTypes.string,
+  height: PropTypes.string,
   infoDataItem: PropTypes.object,
   itemsRef: PropTypes.object,
+  maxSelections: PropTypes.number,
   selectedItems: PropTypes.arrayOf(PropTypes.exact({
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,

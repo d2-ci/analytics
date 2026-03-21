@@ -181,13 +181,13 @@ export const Editor = /*#__PURE__*/forwardRef(({
   useEffect(() => {
     if (initialFocus) {
       var _textareaRef$current;
-      (_textareaRef$current = textareaRef.current) === null || _textareaRef$current === void 0 ? void 0 : _textareaRef$current.focus();
+      (_textareaRef$current = textareaRef.current) === null || _textareaRef$current === void 0 || _textareaRef$current.focus();
     }
   }, [initialFocus, textareaRef]);
   useEffect(() => {
     if (caretPosRef.current) {
       var _textareaRef$current2;
-      (_textareaRef$current2 = textareaRef.current) === null || _textareaRef$current2 === void 0 ? void 0 : _textareaRef$current2.setSelectionRange(caretPosRef.current, caretPosRef.current);
+      (_textareaRef$current2 = textareaRef.current) === null || _textareaRef$current2 === void 0 || _textareaRef$current2.setSelectionRange(caretPosRef.current, caretPosRef.current);
       caretPosRef.current = undefined;
     }
   }, [value, textareaRef]);

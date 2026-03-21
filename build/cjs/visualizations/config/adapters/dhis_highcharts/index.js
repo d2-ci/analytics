@@ -48,7 +48,7 @@ function _default({
   extraConfig,
   extraOptions
 }) {
-  var _layout$legend, _layout$seriesKey, _layout$seriesKey2, _layout$seriesKey2$la, _config$xAxis;
+  var _layout$legend, _layout$seriesKey, _layout$seriesKey2, _config$xAxis;
   const _layout = getTransformedLayout(layout);
   const _extraOptions = getTransformedExtraOptions(extraOptions);
   const stacked = (0, _visTypes.isStacked)(_layout.type);
@@ -91,7 +91,7 @@ function _default({
     // legend
     legend: (0, _legend.default)({
       isHidden: (_layout$seriesKey = _layout.seriesKey) === null || _layout$seriesKey === void 0 ? void 0 : _layout$seriesKey.hidden,
-      fontStyle: (_layout$seriesKey2 = _layout.seriesKey) === null || _layout$seriesKey2 === void 0 ? void 0 : (_layout$seriesKey2$la = _layout$seriesKey2.label) === null || _layout$seriesKey2$la === void 0 ? void 0 : _layout$seriesKey2$la.fontStyle,
+      fontStyle: (_layout$seriesKey2 = _layout.seriesKey) === null || _layout$seriesKey2 === void 0 || (_layout$seriesKey2 = _layout$seriesKey2.label) === null || _layout$seriesKey2 === void 0 ? void 0 : _layout$seriesKey2.fontStyle,
       visType: _layout.type,
       dashboard: _extraOptions.dashboard
     }),

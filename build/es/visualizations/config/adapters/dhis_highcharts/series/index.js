@@ -185,7 +185,7 @@ export default function ({
         displayStrategy
       });
   }
-  (_series = series) === null || _series === void 0 ? void 0 : _series.forEach(seriesObj => {
+  (_series = series) === null || _series === void 0 || _series.forEach(seriesObj => {
     // animation
     seriesObj.animation = extraOptions.dashboard ? false : {
       duration: getAnimation(extraOptions.animation, DEFAULT_ANIMATION_DURATION)

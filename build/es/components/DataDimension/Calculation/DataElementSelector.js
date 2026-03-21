@@ -11,6 +11,7 @@ import i18n from '../../../locales/index.js';
 import { TOTALS, DETAIL, DIMENSION_TYPE_ALL, DIMENSION_TYPE_DATA_ELEMENT, dataTypeMap as dataTypes } from '../../../modules/dataTypes.js';
 import DataElementOption from './DataElementOption.js';
 import styles from './styles/DataElementSelector.style.js';
+const SCROLLBOX_HEIGHT = '337px';
 const getOptions = () => ({
   [TOTALS]: i18n.t('Totals only'),
   [DETAIL]: i18n.t('Details only')
@@ -89,7 +90,8 @@ DisaggregationSelector.propTypes = {
 };
 const DataElementSelector = ({
   displayNameProp,
-  onDoubleClick
+  onDoubleClick,
+  height = SCROLLBOX_HEIGHT
 }) => {
   const dataEngine = useDataEngine();
   const [searchTerm, setSearchTerm] = useState('');
@@ -215,6 +217,9 @@ const DataElementSelector = ({
     className: `jsx-${styles.__hash}` + " " + "dimension-list-overlay"
   }, /*#__PURE__*/React.createElement(CircularLoader, null)), /*#__PURE__*/React.createElement("div", {
     ref: rootRef,
+    style: {
+      height
+    },
     onScroll: () => {
       if (isSorting) {
         rootRef.current.scrollTo({
@@ -251,6 +256,7 @@ const DataElementSelector = ({
 };
 DataElementSelector.propTypes = {
   displayNameProp: PropTypes.string.isRequired,
-  onDoubleClick: PropTypes.func.isRequired
+  onDoubleClick: PropTypes.func.isRequired,
+  height: PropTypes.string
 };
 export default DataElementSelector;

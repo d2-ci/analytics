@@ -40,9 +40,9 @@ _highcharts.default.patterns.forEach((pattern, i) => {
 function drawLegendSymbolWrap() {
   const pick = _highcharts.default.pick;
   _highcharts.default.wrap(_highcharts.default.seriesTypes.column.prototype, 'drawLegendSymbol', function (proceed, legend, item) {
-    var _this$options$legendS, _this$options$legendS2;
+    var _this$options$legendS;
     const legendItem = item.legendItem;
-    if ((_this$options$legendS = this.options.legendSet) !== null && _this$options$legendS !== void 0 && (_this$options$legendS2 = _this$options$legendS.legends) !== null && _this$options$legendS2 !== void 0 && _this$options$legendS2.length) {
+    if ((_this$options$legendS = this.options.legendSet) !== null && _this$options$legendS !== void 0 && (_this$options$legendS = _this$options$legendS.legends) !== null && _this$options$legendS !== void 0 && _this$options$legendS.length) {
       const ys = legend.baseline - legend.symbolHeight + 1,
         // y start
         x = legend.symbolWidth / 2 > 8 ? legend.symbolWidth / 2 : 8,
