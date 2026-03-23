@@ -39,7 +39,7 @@ const useUserSearchResults = ({
   } = (0, _appRuntime.useDataQuery)(usersQuery, {
     lazy: true
   });
-  const debouncedRefetch = (0, _react.useCallback)((0, _debounce.default)(refetch, 250), [refetch]);
+  const debouncedRefetch = (0, _react.useMemo)(() => (0, _debounce.default)(refetch, 250), [refetch]);
   (0, _react.useEffect)(() => {
     if (searchText.length) {
       debouncedRefetch({

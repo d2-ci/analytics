@@ -18,7 +18,7 @@ export const DeleteDialog = ({
   onDelete,
   onError
 }) => {
-  const mutation = useMemo(() => getMutation(type), []);
+  const mutation = useMemo(() => getMutation(type), [type]);
   const [mutate] = useDataMutation(mutation, {
     variables: {
       id

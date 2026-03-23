@@ -26,7 +26,7 @@ const DeleteDialog = ({
   onDelete,
   onError
 }) => {
-  const mutation = (0, _react.useMemo)(() => getMutation(type), []);
+  const mutation = (0, _react.useMemo)(() => getMutation(type), [type]);
   const [mutate] = (0, _appRuntime.useDataMutation)(mutation, {
     variables: {
       id

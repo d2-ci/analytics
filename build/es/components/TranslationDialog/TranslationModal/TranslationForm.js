@@ -92,7 +92,7 @@ export const TranslationForm = ({
   useEffect(() => {
     const fetchTranslations = () => fetchFieldsTranslations(fieldsToTranslate);
     fetchTranslations();
-  }, [fieldsToTranslate]);
+  }, [fieldsToTranslate, fetchFieldsTranslations]);
   useEffect(() => setNewTranslations(translations), [translations]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ModalContent, null, /*#__PURE__*/React.createElement(DataTable, {
     layout: "fixed"
