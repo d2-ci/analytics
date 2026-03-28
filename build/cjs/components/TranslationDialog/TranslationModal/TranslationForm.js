@@ -100,6 +100,7 @@ const TranslationForm = ({
   (0, _react.useEffect)(() => {
     const fetchTranslations = () => fetchFieldsTranslations(fieldsToTranslate);
     fetchTranslations();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fieldsToTranslate]);
   (0, _react.useEffect)(() => setNewTranslations(translations), [translations]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ui.ModalContent, null, /*#__PURE__*/_react.default.createElement(_ui.DataTable, {
