@@ -52,7 +52,7 @@ const DataElementOperandInfo = ({
     const dataElementOperand = dataElementOperands.dataElementOperands[0]
 
     // copy some common fields from dataElement
-    ;
+;
     ['code', 'created', 'createdBy', 'displayDescription', 'lastUpdated'].forEach(key => dataElementOperand[key] = dataElementOperand.dataElement[key]);
 
     // inject href as it is not returned from the API

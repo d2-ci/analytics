@@ -12,13 +12,13 @@ const useScrollPosition = (containerRef, debounceWait = 10) => {
     x: 0,
     y: 0
   });
-  const onScroll = (0, _react.useCallback)((0, _debounce.default)(() => {
+  const onScroll = (0, _react.useMemo)(() => (0, _debounce.default)(() => {
     const scroll = {
       x: containerRef.current.scrollLeft,
       y: containerRef.current.scrollTop
     };
     setScrollPosition(scroll);
-  }, debounceWait));
+  }, debounceWait), [containerRef, debounceWait]);
   (0, _react.useEffect)(() => {
     const currentRef = containerRef.current;
     if (!currentRef) {

@@ -3,6 +3,12 @@ import { DIMENSION_ID_ORGUNIT, DIMENSION_ID_PERIOD } from '../../predefinedDimen
 import { VALUE_TYPE_AGE, VALUE_TYPE_BOOLEAN, VALUE_TYPE_COORDINATE, VALUE_TYPE_DATE, VALUE_TYPE_DATETIME, VALUE_TYPE_FILE_RESOURCE, VALUE_TYPE_GEOJSON, VALUE_TYPE_IMAGE, VALUE_TYPE_MULTI_TEXT, VALUE_TYPE_PERCENTAGE, VALUE_TYPE_REFERENCE, VALUE_TYPE_TRUE_ONLY } from '../../valueTypes.js';
 import { applyDefaultHandler } from './default.js';
 import { applyOptionSetHandler } from './optionSet.js';
+
+// Responses coming from these endpoints need transformation
+// before we can pass it to the pivot table engine:
+// - analytics/events/aggregate
+// - analytics/enrollments/aggregate
+
 export const PREFIX_SEPARATOR = '_';
 export const NA_VALUE = '';
 export const NA_VALUE_ITEM = {
@@ -77,7 +83,6 @@ export const transformResponse = (response, {
   // Skip unsupported value types
   // Option set and Boolean have separate handlers
   // All other types use default handler with specific item formatter
-  console.log("metaHeaders", metaHeaders);
   metaHeaders.forEach(header => {
     if (!(header.legendSet || UNSUPPORTED_VALUE_TYPES.includes(header.valueType))) {
       if (header.optionSet) {

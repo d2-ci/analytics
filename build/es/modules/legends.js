@@ -4,7 +4,7 @@ export const LEGEND_DISPLAY_STYLE_FILL = 'FILL';
 export const LEGEND_DISPLAY_STYLE_TEXT = 'TEXT';
 export const getLegendByValueFromLegendSet = (legendSet, value) => {
   var _legendSet$legends;
-  return Number.isInteger(parseInt(value)) ? legendSet === null || legendSet === void 0 ? void 0 : (_legendSet$legends = legendSet.legends) === null || _legendSet$legends === void 0 ? void 0 : _legendSet$legends.find(legend => value >= legend.startValue && value < legend.endValue // TODO: Confirm inclusive/exclusive bounds
+  return Number.isInteger(parseInt(value)) ? legendSet === null || legendSet === void 0 || (_legendSet$legends = legendSet.legends) === null || _legendSet$legends === void 0 ? void 0 : _legendSet$legends.find(legend => value >= legend.startValue && value < legend.endValue // TODO: Confirm inclusive/exclusive bounds
   ) : null;
 };
 export const getColorByValueFromLegendSet = (legendSet, value) => {

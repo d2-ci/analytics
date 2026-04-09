@@ -28,11 +28,11 @@ export default function loadSingleValueSVG() {
   while (!fitsWithinContainer && dynamicStyles.hasNext()) {
     styles = dynamicStyles.next();
     valueElement.attr(styles.value);
-    subTextElement === null || subTextElement === void 0 ? void 0 : subTextElement.attr(styles.subText);
+    subTextElement === null || subTextElement === void 0 || subTextElement.attr(styles.subText);
     fitsWithinContainer = checkIfFitsWithinContainer(getAvailableSpace.call(this, styles.spacing.valueTop), valueElement, subTextElement, icon, subText, styles.spacing);
   }
   positionElements.call(this, valueElement, subTextElement, iconElement, styles.spacing);
   valueElement.attr('visibility', 'visible');
-  iconElement === null || iconElement === void 0 ? void 0 : iconElement.attr('visibility', 'visible');
-  subTextElement === null || subTextElement === void 0 ? void 0 : subTextElement.attr('visibility', 'visible');
+  iconElement === null || iconElement === void 0 || iconElement.attr('visibility', 'visible');
+  subTextElement === null || subTextElement === void 0 || subTextElement.attr('visibility', 'visible');
 }

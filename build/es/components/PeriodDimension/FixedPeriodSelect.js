@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import i18n from '../../locales/index.js';
 import FixedPeriodFilter from './FixedPeriodFilter.js';
 import styles from './styles/FixedPeriodSelect.style.js';
-import { parsePeriodCode, getFixedPeriodsOptionsById as getPeriodById, getYearOffsetFromNow } from './utils/fixedPeriods.js';
+import { parsePeriodCode, getFixedPeriodsOptionsById as getPeriodById, getFixedPeriodsOptions, getYearOffsetFromNow } from './utils/fixedPeriods.js';
 class FixedPeriodSelect extends Component {
   constructor(...args) {
     super(...args);
@@ -61,13 +61,15 @@ class FixedPeriodSelect extends Component {
     });
   }
   render() {
+    const allOptions = getFixedPeriodsOptions();
+    const availableOptions = this.props.allowedPeriodTypes ? allOptions.filter(option => this.props.allowedPeriodTypes.includes(option.id)) : allOptions;
     return /*#__PURE__*/React.createElement("div", {
       "data-test": this.props.dataTest,
       className: `jsx-${styles.__hash}` + " " + (this.props.className || "")
     }, /*#__PURE__*/React.createElement("div", {
       className: `jsx-${styles.__hash}` + " " + "row"
     }, /*#__PURE__*/React.createElement(FixedPeriodFilter, {
-      allowedPeriodTypes: this.props.allowedPeriodTypes,
+      availableOptions: availableOptions,
       currentPeriodType: this.state.periodType,
       currentYear: this.state.year,
       onSelectPeriodType: this.onSelectPeriodType,

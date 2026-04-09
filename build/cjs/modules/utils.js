@@ -26,6 +26,7 @@ const useDidUpdateEffect = (fn, inputs) => {
     } else {
       didMountRef.current = true;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, inputs);
 };
 

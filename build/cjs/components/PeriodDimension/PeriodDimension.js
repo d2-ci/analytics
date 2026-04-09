@@ -9,6 +9,8 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _predefinedDimensions = require("../../modules/predefinedDimensions.js");
 var _PeriodTransfer = _interopRequireDefault(require("./PeriodTransfer.js"));
+var _useDataOutputPeriodTypes = require("./useDataOutputPeriodTypes.js");
+var _enabledPeriodTypes = require("./utils/enabledPeriodTypes.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const userSettingsQuery = {
   userSettings: {
@@ -27,10 +29,15 @@ const PeriodDimension = ({
   infoBoxMessage,
   height
 }) => {
+  const config = (0, _appRuntime.useConfig)();
   const {
     systemInfo
-  } = (0, _appRuntime.useConfig)();
-  const result = (0, _appRuntime.useDataQuery)(userSettingsQuery);
+  } = config;
+  const userSettingsResult = (0, _appRuntime.useDataQuery)(userSettingsQuery);
+  const {
+    supportsEnabledPeriodTypes,
+    enabledPeriodTypesData
+  } = (0, _useDataOutputPeriodTypes.useDataOutputPeriodTypes)();
   const {
     calendar = 'gregory'
   } = systemInfo;
@@ -40,7 +47,7 @@ const PeriodDimension = ({
         keyUiLocale: locale
       } = {}
     } = {}
-  } = result;
+  } = userSettingsResult;
   const periodsSettings = {
     calendar,
     locale
@@ -51,15 +58,18 @@ const PeriodDimension = ({
       items: periods
     });
   };
+  const selectedPeriodsWithCustomDisplayNames = (0, _enabledPeriodTypes.applyPeriodNameOverrides)(selectedPeriods, enabledPeriodTypesData === null || enabledPeriodTypesData === void 0 ? void 0 : enabledPeriodTypesData.metaData);
   return /*#__PURE__*/_react.default.createElement(_PeriodTransfer.default, {
     onSelect: selectPeriods,
-    selectedItems: selectedPeriods,
+    selectedItems: selectedPeriodsWithCustomDisplayNames,
     infoBoxMessage: infoBoxMessage,
     rightFooter: rightFooter,
     dataTest: 'period-dimension',
     excludedPeriodTypes: excludedPeriodTypes,
     periodsSettings: periodsSettings,
-    height: height
+    height: height,
+    enabledPeriodTypesData: enabledPeriodTypesData,
+    supportsEnabledPeriodTypes: supportsEnabledPeriodTypes
   });
 };
 PeriodDimension.propTypes = {

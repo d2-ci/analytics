@@ -10,6 +10,11 @@ var _valueTypes = require("../../valueTypes.js");
 var _default = require("./default.js");
 var _optionSet = require("./optionSet.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+// Responses coming from these endpoints need transformation
+// before we can pass it to the pivot table engine:
+// - analytics/events/aggregate
+// - analytics/enrollments/aggregate
+
 const PREFIX_SEPARATOR = exports.PREFIX_SEPARATOR = '_';
 const NA_VALUE = exports.NA_VALUE = '';
 const NA_VALUE_ITEM = exports.NA_VALUE_ITEM = {
@@ -87,7 +92,6 @@ const transformResponse = (response, {
   // Skip unsupported value types
   // Option set and Boolean have separate handlers
   // All other types use default handler with specific item formatter
-  console.log("metaHeaders", metaHeaders);
   metaHeaders.forEach(header => {
     if (!(header.legendSet || UNSUPPORTED_VALUE_TYPES.includes(header.valueType))) {
       if (header.optionSet) {

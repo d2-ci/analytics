@@ -47,7 +47,7 @@ class AnalyticsRequest extends AnalyticsRequestDimensionsMixin(AnalyticsRequestF
     const columns = visualization.columns || [];
     const rows = visualization.rows || [];
     columns.concat(rows).forEach(d => {
-      var _d$legendSet, _d$programStage, _d$repetition, _d$repetition$indexes;
+      var _d$legendSet, _d$programStage, _d$repetition;
       let dimension = d.dimension;
       if ((_d$legendSet = d.legendSet) !== null && _d$legendSet !== void 0 && _d$legendSet.id) {
         dimension += `-${d.legendSet.id}`;
@@ -56,7 +56,7 @@ class AnalyticsRequest extends AnalyticsRequestDimensionsMixin(AnalyticsRequestF
         dimension += `:${d.filter}`;
       }
       const programStageId = (_d$programStage = d.programStage) === null || _d$programStage === void 0 ? void 0 : _d$programStage.id;
-      if ((_d$repetition = d.repetition) !== null && _d$repetition !== void 0 && (_d$repetition$indexes = _d$repetition.indexes) !== null && _d$repetition$indexes !== void 0 && _d$repetition$indexes.length) {
+      if ((_d$repetition = d.repetition) !== null && _d$repetition !== void 0 && (_d$repetition = _d$repetition.indexes) !== null && _d$repetition !== void 0 && _d$repetition.length) {
         d.repetition.indexes.forEach(index => {
           var _d$program;
           request = request.addDimension(formatDimension({
@@ -87,13 +87,13 @@ class AnalyticsRequest extends AnalyticsRequestDimensionsMixin(AnalyticsRequestF
         var _f$items;
         request = request.addDimension(f.dimension, (_f$items = f.items) === null || _f$items === void 0 ? void 0 : _f$items.map(item => item.id));
       } else {
-        var _f$programStage, _f$repetition, _f$repetition$indexes;
+        var _f$programStage, _f$repetition;
         let filterString = f.dimension;
         if (f.filter) {
           filterString += `:${f.filter}`;
         }
         const programStageId = (_f$programStage = f.programStage) === null || _f$programStage === void 0 ? void 0 : _f$programStage.id;
-        if ((_f$repetition = f.repetition) !== null && _f$repetition !== void 0 && (_f$repetition$indexes = _f$repetition.indexes) !== null && _f$repetition$indexes !== void 0 && _f$repetition$indexes.length) {
+        if ((_f$repetition = f.repetition) !== null && _f$repetition !== void 0 && (_f$repetition = _f$repetition.indexes) !== null && _f$repetition !== void 0 && _f$repetition.length) {
           f.repetition.indexes.forEach(index => {
             var _f$program;
             request = request.addFilter(formatDimension({

@@ -9,40 +9,48 @@ var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _index2 = require("./index.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const PERIOD_TYPE_REGEX = exports.PERIOD_TYPE_REGEX = {
-  [_index2.DAILY]: /^([0-9]{4})([0-9]{2})([0-9]{2})$/,
+  [_index2.DAILY]: /^(\d{4})(\d{2})(\d{2})$/,
   // YYYYMMDD
-  [_index2.WEEKLY]: /^([0-9]{4})()W([0-9]{1,2})$/,
+  [_index2.WEEKLY]: /^(\d{4})W(\d{1,2})$/,
   // YYYY"W"[1-53]
-  [_index2.BIWEEKLY]: /^([0-9]{4})BiW([0-9]{1,2})$/,
+  [_index2.BIWEEKLY]: /^(\d{4})BiW(\d{1,2})$/,
   // YYYY"BiW"[1-27]
-  [_index2.WEEKLYWED]: /^([0-9]{4})(Wed)W([0-9]{1,2})$/,
+  [_index2.WEEKLYWED]: /^(\d{4})(Wed)W(\d{1,2})$/,
   // YYYY"WedW"[1-53]
-  [_index2.WEEKLYTHU]: /^([0-9]{4})(Thu)W([0-9]{1,2})$/,
+  [_index2.WEEKLYTHU]: /^(\d{4})(Thu)W(\d{1,2})$/,
   // YYYY"ThuW"[1-53]
-  [_index2.WEEKLYSAT]: /^([0-9]{4})(Sat)W([0-9]{1,2})$/,
+  [_index2.WEEKLYFRI]: /^(\d{4})(Fri)W(\d{1,2})$/,
+  // YYYY"FriW"[1-53]
+  [_index2.WEEKLYSAT]: /^(\d{4})(Sat)W(\d{1,2})$/,
   // YYYY"SatW"[1-53]
-  [_index2.WEEKLYSUN]: /^([0-9]{4})(Sun)W([0-9]{1,2})$/,
+  [_index2.WEEKLYSUN]: /^(\d{4})(Sun)W(\d{1,2})$/,
   // YYYY"SunW"[1-53]
-  [_index2.MONTHLY]: /^([0-9]{4})([0-9]{2})$/,
+  [_index2.MONTHLY]: /^(\d{4})(\d{2})$/,
   // YYYYMM
-  [_index2.BIMONTHLY]: /^([0-9]{4})([0-9]{2})B$/,
+  [_index2.BIMONTHLY]: /^(\d{4})(\d{2})B$/,
   // YYYY0[1-6]"B"
-  [_index2.QUARTERLY]: /^([0-9]{4})Q([1234])$/,
+  [_index2.QUARTERLY]: /^(\d{4})Q([1234])$/,
   // YYYY"Q"[1-4]
-  [_index2.SIXMONTHLY]: /^([0-9]{4})S([12])$/,
+  [_index2.SIXMONTHLY]: /^(\d{4})S([12])$/,
   // YYYY"S"[1/2]
-  [_index2.SIXMONTHLYAPR]: /^([0-9]{4})AprilS([12])$/,
+  [_index2.SIXMONTHLYAPR]: /^(\d{4})AprilS([12])$/,
   // YYYY"AprilS"[1/2]
-  // [SIXMONTHLYNOV]: /^([0-9]{4})NovS([12])$/, // YYYY"NovS"[1/2] Not supported?
-  [_index2.YEARLY]: /^([0-9]{4})$/,
+  // [SIXMONTHLYNOV]: /^(\d{4})NovS([12])$/, // YYYY"NovS"[1/2] Not supported?
+  [_index2.YEARLY]: /^(\d{4})$/,
   // YYYY
-  [_index2.FYNOV]: /^([0-9]{4})Nov$/,
-  // YYYY"Nov"
-  [_index2.FYOCT]: /^([0-9]{4})Oct$/,
-  // YYYY"Oct"
-  [_index2.FYJUL]: /^([0-9]{4})July$/,
+  [_index2.FYFEB]: /^(\d{4})Feb$/,
+  // YYYY"Feb"
+  [_index2.FYAPR]: /^(\d{4})April$/,
+  // YYYY"April"
+  [_index2.FYJUL]: /^(\d{4})July$/,
   // YYYY"July"
-  [_index2.FYAPR]: /^([0-9]{4})April$/ // YYYY"April"
+  [_index2.FYAUG]: /^(\d{4})Aug$/,
+  // YYYY"Aug"
+  [_index2.FYSEP]: /^(\d{4})Sep$/,
+  // YYYY"Sep"
+  [_index2.FYOCT]: /^(\d{4})Oct$/,
+  // YYYY"Oct"
+  [_index2.FYNOV]: /^(\d{4})Nov$/ // YYYY"Nov"
 };
 const getPeriods = ({
   periodType,
@@ -164,40 +172,10 @@ const getYearlyPeriodType = (fnFilter, periodSettings) => {
     });
   };
 };
-const getFinancialOctoberPeriodType = (fnFilter, periodSettings) => {
+const getFinancialPeriodType = (periodType, fnFilter, periodSettings) => {
   return config => {
     return getPeriods({
-      periodType: 'FYOCT',
-      config,
-      fnFilter,
-      periodSettings
-    });
-  };
-};
-const getFinancialNovemberPeriodType = (fnFilter, periodSettings) => {
-  return config => {
-    return getPeriods({
-      periodType: 'FYNOV',
-      config,
-      fnFilter,
-      periodSettings
-    });
-  };
-};
-const getFinancialJulyPeriodType = (fnFilter, periodSettings) => {
-  return config => {
-    return getPeriods({
-      periodType: 'FYJUL',
-      config,
-      fnFilter,
-      periodSettings
-    });
-  };
-};
-const getFinancialAprilPeriodType = (fnFilter, periodSettings) => {
-  return config => {
-    return getPeriods({
-      periodType: 'FYAPR',
+      periodType,
       config,
       fnFilter,
       periodSettings
@@ -237,6 +215,12 @@ const getOptions = periodSettings => {
       startDay: 4
     }, filterFuturePeriods, periodSettings),
     name: _index.default.t('Weekly (Start Thursday)')
+  }, {
+    id: _index2.WEEKLYFRI,
+    getPeriods: getWeeklyPeriodType({
+      startDay: 5
+    }, filterFuturePeriods, periodSettings),
+    name: _index.default.t('Weekly (Start Friday)')
   }, {
     id: _index2.WEEKLYSAT,
     getPeriods: getWeeklyPeriodType({
@@ -278,21 +262,33 @@ const getOptions = periodSettings => {
     getPeriods: getYearlyPeriodType(filterFuturePeriods, periodSettings),
     name: _index.default.t('Yearly')
   }, {
-    id: _index2.FYNOV,
-    getPeriods: getFinancialNovemberPeriodType(filterFuturePeriods, periodSettings),
-    name: _index.default.t('Financial year (Start November)')
-  }, {
-    id: _index2.FYOCT,
-    getPeriods: getFinancialOctoberPeriodType(filterFuturePeriods, periodSettings),
-    name: _index.default.t('Financial year (Start October)')
-  }, {
-    id: _index2.FYJUL,
-    getPeriods: getFinancialJulyPeriodType(filterFuturePeriods, periodSettings),
-    name: _index.default.t('Financial year (Start July)')
+    id: _index2.FYFEB,
+    getPeriods: getFinancialPeriodType('FYFEB', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start February)')
   }, {
     id: _index2.FYAPR,
-    getPeriods: getFinancialAprilPeriodType(filterFuturePeriods, periodSettings),
+    getPeriods: getFinancialPeriodType('FYAPR', filterFuturePeriods, periodSettings),
     name: _index.default.t('Financial year (Start April)')
+  }, {
+    id: _index2.FYJUL,
+    getPeriods: getFinancialPeriodType('FYJUL', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start July)')
+  }, {
+    id: _index2.FYAUG,
+    getPeriods: getFinancialPeriodType('FYAUG', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start August)')
+  }, {
+    id: _index2.FYSEP,
+    getPeriods: getFinancialPeriodType('FYSEP', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start September)')
+  }, {
+    id: _index2.FYOCT,
+    getPeriods: getFinancialPeriodType('FYOCT', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start October)')
+  }, {
+    id: _index2.FYNOV,
+    getPeriods: getFinancialPeriodType('FYNOV', filterFuturePeriods, periodSettings),
+    name: _index.default.t('Financial year (Start November)')
   }];
 };
 const getFixedPeriodsOptionsById = (id, periodSettings) => {

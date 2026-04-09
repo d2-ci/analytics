@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { DIMENSION_ID_PERIOD } from '../../modules/predefinedDimensions.js';
 import PeriodTransfer from './PeriodTransfer.js';
+import { useDataOutputPeriodTypes } from './useDataOutputPeriodTypes.js';
+import { applyPeriodNameOverrides } from './utils/enabledPeriodTypes.js';
 const userSettingsQuery = {
   userSettings: {
     resource: 'userSettings',
@@ -20,10 +22,15 @@ const PeriodDimension = ({
   infoBoxMessage,
   height
 }) => {
+  const config = useConfig();
   const {
     systemInfo
-  } = useConfig();
-  const result = useDataQuery(userSettingsQuery);
+  } = config;
+  const userSettingsResult = useDataQuery(userSettingsQuery);
+  const {
+    supportsEnabledPeriodTypes,
+    enabledPeriodTypesData
+  } = useDataOutputPeriodTypes();
   const {
     calendar = 'gregory'
   } = systemInfo;
@@ -33,7 +40,7 @@ const PeriodDimension = ({
         keyUiLocale: locale
       } = {}
     } = {}
-  } = result;
+  } = userSettingsResult;
   const periodsSettings = {
     calendar,
     locale
@@ -44,15 +51,18 @@ const PeriodDimension = ({
       items: periods
     });
   };
+  const selectedPeriodsWithCustomDisplayNames = applyPeriodNameOverrides(selectedPeriods, enabledPeriodTypesData === null || enabledPeriodTypesData === void 0 ? void 0 : enabledPeriodTypesData.metaData);
   return /*#__PURE__*/React.createElement(PeriodTransfer, {
     onSelect: selectPeriods,
-    selectedItems: selectedPeriods,
+    selectedItems: selectedPeriodsWithCustomDisplayNames,
     infoBoxMessage: infoBoxMessage,
     rightFooter: rightFooter,
     dataTest: 'period-dimension',
     excludedPeriodTypes: excludedPeriodTypes,
     periodsSettings: periodsSettings,
-    height: height
+    height: height,
+    enabledPeriodTypesData: enabledPeriodTypesData,
+    supportsEnabledPeriodTypes: supportsEnabledPeriodTypes
   });
 };
 PeriodDimension.propTypes = {

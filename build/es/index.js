@@ -4,6 +4,7 @@ import './locales/index.js';
 export { default as DataDimension } from './components/DataDimension/DataDimension.js';
 export { default as PeriodDimension } from './components/PeriodDimension/PeriodDimension.js';
 export { default as FixedPeriodSelect } from './components/PeriodDimension/FixedPeriodSelect.js';
+export { useDataOutputPeriodTypes } from './components/PeriodDimension/useDataOutputPeriodTypes.js';
 export { default as OrgUnitDimension } from './components/OrgUnitDimension/OrgUnitDimension.js';
 export { default as DynamicDimension, ALL_DYNAMIC_DIMENSION_ITEMS } from './components/DynamicDimension/DynamicDimension.js';
 export { default as DimensionsPanel } from './components/DimensionsPanel/DimensionsPanel.js';
@@ -12,7 +13,12 @@ export { default as DimensionFilter } from './components/Filter/Filter.js';
 export { default as DimensionMenu } from './components/DimensionMenu.js';
 export { default as PivotTable } from './components/PivotTable/PivotTable.js';
 export { default as FileMenu } from './components/FileMenu/FileMenu.js';
+export { DeleteDialog } from './components/FileMenu/DeleteDialog.js';
+export { GetLinkDialog } from './components/FileMenu/GetLinkDialog.js';
+export { RenameDialog } from './components/FileMenu/RenameDialog.js';
+export { SaveAsDialog } from './components/FileMenu/SaveAsDialog.js';
 export { preparePayloadForSaveAs, preparePayloadForSave } from './components/FileMenu/utils.js';
+export { default as OpenFileDialog } from './components/OpenFileDialog/OpenFileDialog.js';
 export { default as VisTypeIcon } from './components/VisTypeIcon.js';
 export { default as LegendKey } from './components/LegendKey/LegendKey.js';
 export { default as AboutAOUnit } from './components/AboutAOUnit/AboutAOUnit.js';
@@ -139,7 +145,7 @@ export { transformResponse as transformEventAggregateResponse } from './modules/
 export { COLOR_SET_DEFAULT, COLOR_SET_BASIC, COLOR_SET_EXTENDED, COLOR_SET_BRIGHT, COLOR_SET_DARK, COLOR_SET_GRAY, COLOR_SET_COLOR_BLIND, COLOR_SET_PATTERNS, colorSets } from './visualizations/util/colors/colorSets.js';
 
 // Utils: periods
-export { DAILY, WEEKLY, WEEKLYWED, WEEKLYTHU, WEEKLYSAT, WEEKLYSUN, WEEKS_THIS_YEAR, BIWEEKLY, MONTHLY, BIMONTHLY, QUARTERLY, SIXMONTHLY, SIXMONTHLYAPR, YEARLY, FINANCIAL, FYNOV, FYOCT, FYJUL, FYAPR } from './components/PeriodDimension/utils/index.js';
+export { DAILY, WEEKLY, WEEKLYWED, WEEKLYTHU, WEEKLYFRI, WEEKLYSAT, WEEKLYSUN, WEEKS_THIS_YEAR, BIWEEKLY, MONTHLY, BIMONTHLY, QUARTERLY, SIXMONTHLY, SIXMONTHLYAPR, YEARLY, FINANCIAL, FYFEB, FYAPR, FYJUL, FYAUG, FYSEP, FYOCT, FYNOV } from './components/PeriodDimension/utils/index.js';
 export { getRelativePeriodsOptionsById, getRelativePeriodsName, getRelativePeriodsDetails } from './components/PeriodDimension/utils/relativePeriods.js';
 export { getFixedPeriodsOptionsById, PERIOD_TYPE_REGEX } from './components/PeriodDimension/utils/fixedPeriods.js';
 export { default as VisualizationOptions } from './components/Options/VisualizationOptions.js';

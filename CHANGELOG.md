@@ -1,3 +1,73 @@
+## [29.4.2](https://github.com/dhis2/analytics/compare/v29.4.1...v29.4.2) (2026-03-25)
+
+
+### Bug Fixes
+
+* config to satisfy node 24 + yarn upgrades ([#1826](https://github.com/dhis2/analytics/issues/1826)) ([76f86d7](https://github.com/dhis2/analytics/commit/76f86d715aa15046333095e12b9feb52b1d93adc))
+
+## [29.4.1](https://github.com/dhis2/analytics/compare/v29.4.0...v29.4.1) (2026-03-17)
+
+
+### Bug Fixes
+
+* upgrade deps to support custom translations ([#1825](https://github.com/dhis2/analytics/issues/1825)) ([ed6023f](https://github.com/dhis2/analytics/commit/ed6023fa6a1c74b1625abbcd346965f593a95d8b))
+
+# [29.4.0](https://github.com/dhis2/analytics/compare/v29.3.3...v29.4.0) (2026-03-16)
+
+
+### Features
+
+* add flexibility to DataDimension ([#1819](https://github.com/dhis2/analytics/issues/1819)) ([328bc5d](https://github.com/dhis2/analytics/commit/328bc5db79c4b653f8fe73b38df57c33610fe61a))
+
+## [29.3.3](https://github.com/dhis2/analytics/compare/v29.3.2...v29.3.3) (2026-03-14)
+
+
+### Bug Fixes
+
+* check against invalid year in fixed periods ([#1821](https://github.com/dhis2/analytics/issues/1821)) ([cb1ee75](https://github.com/dhis2/analytics/commit/cb1ee75801f9d4157e8117b60f4e6174ca71096d))
+
+## [29.3.2](https://github.com/dhis2/analytics/compare/v29.3.1...v29.3.2) (2026-03-11)
+
+
+### Bug Fixes
+
+* version specific period types ([#1820](https://github.com/dhis2/analytics/issues/1820)) ([2c78208](https://github.com/dhis2/analytics/commit/2c78208dfecae4617cb5ae78cad99ee8501b696b))
+
+## [29.3.1](https://github.com/dhis2/analytics/compare/v29.3.0...v29.3.1) (2026-03-06)
+
+
+### Bug Fixes
+
+* yearly and fy period type mapping (DHIS2-21028) ([#1817](https://github.com/dhis2/analytics/issues/1817)) ([51b7042](https://github.com/dhis2/analytics/commit/51b70427cc5bb50939a2110bce6b3b705a880b9e))
+
+# [29.3.0](https://github.com/dhis2/analytics/compare/v29.2.1...v29.3.0) (2026-03-03)
+
+
+### Features
+
+* use enabled period types (DHIS2-21001) ([#1801](https://github.com/dhis2/analytics/issues/1801)) ([1550e4c](https://github.com/dhis2/analytics/commit/1550e4c757234886303cdc98122501a54407e9f5))
+
+## [29.2.1](https://github.com/dhis2/analytics/compare/v29.2.0...v29.2.1) (2026-03-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([927f4a0](https://github.com/dhis2/analytics/commit/927f4a0f2afdb4400c757368ed6f914bb939343a))
+
+# [29.2.0](https://github.com/dhis2/analytics/compare/v29.1.1...v29.2.0) (2026-02-18)
+
+
+### Features
+
+* export FileMenu dialogs ([#1811](https://github.com/dhis2/analytics/issues/1811)) ([95bb0d9](https://github.com/dhis2/analytics/commit/95bb0d9611a836e712f0f752a9c0d58625c40cfd))
+
+## [29.1.1](https://github.com/dhis2/analytics/compare/v29.1.0...v29.1.1) (2026-02-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([bae19bc](https://github.com/dhis2/analytics/commit/bae19bca5fb62a6b14f69f7ba7f4344ce9a144d3))
+
 # [29.1.0](https://github.com/dhis2/analytics/compare/v29.0.5...v29.1.0) (2026-02-10)
 
 

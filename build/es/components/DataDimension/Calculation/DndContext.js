@@ -119,8 +119,8 @@ const OuterDndContext = ({
     active,
     over
   }) => {
-    var _over$data, _over$data$current, _over$data$current$so, _over$data$current2, _over$data$current3;
-    if (!(over !== null && over !== void 0 && over.id) || (over === null || over === void 0 ? void 0 : (_over$data = over.data) === null || _over$data === void 0 ? void 0 : (_over$data$current = _over$data.current) === null || _over$data$current === void 0 ? void 0 : (_over$data$current$so = _over$data$current.sortable) === null || _over$data$current$so === void 0 ? void 0 : _over$data$current$so.containerId) === OPTIONS_PANEL || !active.data.current) {
+    var _over$data, _over$data$current, _over$data$current2;
+    if (!(over !== null && over !== void 0 && over.id) || (over === null || over === void 0 || (_over$data = over.data) === null || _over$data === void 0 || (_over$data = _over$data.current) === null || _over$data === void 0 || (_over$data = _over$data.sortable) === null || _over$data === void 0 ? void 0 : _over$data.containerId) === OPTIONS_PANEL || !active.data.current) {
       // dropped over non-droppable or over options panel
       handleDragCancel();
       return;
@@ -136,8 +136,8 @@ const OuterDndContext = ({
       }
     };
     const destination = {
-      containerId: ((_over$data$current2 = over.data.current) === null || _over$data$current2 === void 0 ? void 0 : _over$data$current2.sortable.containerId) || over.id,
-      index: (_over$data$current3 = over.data.current) === null || _over$data$current3 === void 0 ? void 0 : _over$data$current3.sortable.index
+      containerId: ((_over$data$current = over.data.current) === null || _over$data$current === void 0 ? void 0 : _over$data$current.sortable.containerId) || over.id,
+      index: (_over$data$current2 = over.data.current) === null || _over$data$current2 === void 0 ? void 0 : _over$data$current2.sortable.index
     };
     onDragEnd({
       item,

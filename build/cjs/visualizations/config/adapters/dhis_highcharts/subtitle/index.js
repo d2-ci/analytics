@@ -77,9 +77,9 @@ function subtitle(series, layout, metaData, extraOptions) {
   switch (layout.type) {
     case _visTypes.VIS_TYPE_SINGLE_VALUE:
       {
-        var _defaultFontStyle$FON, _layout$fontStyle, _layout$fontStyle$FON;
-        const defaultColor = _fontStyle.defaultFontStyle === null || _fontStyle.defaultFontStyle === void 0 ? void 0 : (_defaultFontStyle$FON = _fontStyle.defaultFontStyle[_fontStyle.FONT_STYLE_VISUALIZATION_SUBTITLE]) === null || _defaultFontStyle$FON === void 0 ? void 0 : _defaultFontStyle$FON[_fontStyle.FONT_STYLE_OPTION_TEXT_COLOR];
-        const customColor = layout === null || layout === void 0 ? void 0 : (_layout$fontStyle = layout.fontStyle) === null || _layout$fontStyle === void 0 ? void 0 : (_layout$fontStyle$FON = _layout$fontStyle[_fontStyle.FONT_STYLE_VISUALIZATION_SUBTITLE]) === null || _layout$fontStyle$FON === void 0 ? void 0 : _layout$fontStyle$FON[_fontStyle.FONT_STYLE_OPTION_TEXT_COLOR];
+        var _defaultFontStyle$FON, _layout$fontStyle;
+        const defaultColor = _fontStyle.defaultFontStyle === null || _fontStyle.defaultFontStyle === void 0 || (_defaultFontStyle$FON = _fontStyle.defaultFontStyle[_fontStyle.FONT_STYLE_VISUALIZATION_SUBTITLE]) === null || _defaultFontStyle$FON === void 0 ? void 0 : _defaultFontStyle$FON[_fontStyle.FONT_STYLE_OPTION_TEXT_COLOR];
+        const customColor = layout === null || layout === void 0 || (_layout$fontStyle = layout.fontStyle) === null || _layout$fontStyle === void 0 || (_layout$fontStyle = _layout$fontStyle[_fontStyle.FONT_STYLE_VISUALIZATION_SUBTITLE]) === null || _layout$fontStyle === void 0 ? void 0 : _layout$fontStyle[_fontStyle.FONT_STYLE_OPTION_TEXT_COLOR];
         subtitle.style.color = (0, _singleValue.getSingleValueSubtitleColor)(customColor, defaultColor, series[0], legendOptions, legendSets);
         if (dashboard) {
           // Single value subtitle text should be multiline

@@ -1,41 +1,49 @@
 import { generateFixedPeriods, getNowInCalendar } from '@dhis2/multi-calendar-dates';
 import i18n from '../../../locales/index.js';
-import { DAILY, WEEKLY, WEEKLYWED, WEEKLYTHU, WEEKLYSAT, WEEKLYSUN, BIWEEKLY, MONTHLY, BIMONTHLY, QUARTERLY, SIXMONTHLY, SIXMONTHLYAPR, YEARLY, FYNOV, FYOCT, FYJUL, FYAPR } from './index.js';
+import { DAILY, WEEKLY, WEEKLYWED, WEEKLYTHU, WEEKLYFRI, WEEKLYSAT, WEEKLYSUN, BIWEEKLY, MONTHLY, BIMONTHLY, QUARTERLY, SIXMONTHLY, SIXMONTHLYAPR, YEARLY, FYFEB, FYAPR, FYJUL, FYAUG, FYSEP, FYOCT, FYNOV } from './index.js';
 export const PERIOD_TYPE_REGEX = {
-  [DAILY]: /^([0-9]{4})([0-9]{2})([0-9]{2})$/,
+  [DAILY]: /^(\d{4})(\d{2})(\d{2})$/,
   // YYYYMMDD
-  [WEEKLY]: /^([0-9]{4})()W([0-9]{1,2})$/,
+  [WEEKLY]: /^(\d{4})W(\d{1,2})$/,
   // YYYY"W"[1-53]
-  [BIWEEKLY]: /^([0-9]{4})BiW([0-9]{1,2})$/,
+  [BIWEEKLY]: /^(\d{4})BiW(\d{1,2})$/,
   // YYYY"BiW"[1-27]
-  [WEEKLYWED]: /^([0-9]{4})(Wed)W([0-9]{1,2})$/,
+  [WEEKLYWED]: /^(\d{4})(Wed)W(\d{1,2})$/,
   // YYYY"WedW"[1-53]
-  [WEEKLYTHU]: /^([0-9]{4})(Thu)W([0-9]{1,2})$/,
+  [WEEKLYTHU]: /^(\d{4})(Thu)W(\d{1,2})$/,
   // YYYY"ThuW"[1-53]
-  [WEEKLYSAT]: /^([0-9]{4})(Sat)W([0-9]{1,2})$/,
+  [WEEKLYFRI]: /^(\d{4})(Fri)W(\d{1,2})$/,
+  // YYYY"FriW"[1-53]
+  [WEEKLYSAT]: /^(\d{4})(Sat)W(\d{1,2})$/,
   // YYYY"SatW"[1-53]
-  [WEEKLYSUN]: /^([0-9]{4})(Sun)W([0-9]{1,2})$/,
+  [WEEKLYSUN]: /^(\d{4})(Sun)W(\d{1,2})$/,
   // YYYY"SunW"[1-53]
-  [MONTHLY]: /^([0-9]{4})([0-9]{2})$/,
+  [MONTHLY]: /^(\d{4})(\d{2})$/,
   // YYYYMM
-  [BIMONTHLY]: /^([0-9]{4})([0-9]{2})B$/,
+  [BIMONTHLY]: /^(\d{4})(\d{2})B$/,
   // YYYY0[1-6]"B"
-  [QUARTERLY]: /^([0-9]{4})Q([1234])$/,
+  [QUARTERLY]: /^(\d{4})Q([1234])$/,
   // YYYY"Q"[1-4]
-  [SIXMONTHLY]: /^([0-9]{4})S([12])$/,
+  [SIXMONTHLY]: /^(\d{4})S([12])$/,
   // YYYY"S"[1/2]
-  [SIXMONTHLYAPR]: /^([0-9]{4})AprilS([12])$/,
+  [SIXMONTHLYAPR]: /^(\d{4})AprilS([12])$/,
   // YYYY"AprilS"[1/2]
-  // [SIXMONTHLYNOV]: /^([0-9]{4})NovS([12])$/, // YYYY"NovS"[1/2] Not supported?
-  [YEARLY]: /^([0-9]{4})$/,
+  // [SIXMONTHLYNOV]: /^(\d{4})NovS([12])$/, // YYYY"NovS"[1/2] Not supported?
+  [YEARLY]: /^(\d{4})$/,
   // YYYY
-  [FYNOV]: /^([0-9]{4})Nov$/,
-  // YYYY"Nov"
-  [FYOCT]: /^([0-9]{4})Oct$/,
-  // YYYY"Oct"
-  [FYJUL]: /^([0-9]{4})July$/,
+  [FYFEB]: /^(\d{4})Feb$/,
+  // YYYY"Feb"
+  [FYAPR]: /^(\d{4})April$/,
+  // YYYY"April"
+  [FYJUL]: /^(\d{4})July$/,
   // YYYY"July"
-  [FYAPR]: /^([0-9]{4})April$/ // YYYY"April"
+  [FYAUG]: /^(\d{4})Aug$/,
+  // YYYY"Aug"
+  [FYSEP]: /^(\d{4})Sep$/,
+  // YYYY"Sep"
+  [FYOCT]: /^(\d{4})Oct$/,
+  // YYYY"Oct"
+  [FYNOV]: /^(\d{4})Nov$/ // YYYY"Nov"
 };
 const getPeriods = ({
   periodType,
@@ -157,40 +165,10 @@ const getYearlyPeriodType = (fnFilter, periodSettings) => {
     });
   };
 };
-const getFinancialOctoberPeriodType = (fnFilter, periodSettings) => {
+const getFinancialPeriodType = (periodType, fnFilter, periodSettings) => {
   return config => {
     return getPeriods({
-      periodType: 'FYOCT',
-      config,
-      fnFilter,
-      periodSettings
-    });
-  };
-};
-const getFinancialNovemberPeriodType = (fnFilter, periodSettings) => {
-  return config => {
-    return getPeriods({
-      periodType: 'FYNOV',
-      config,
-      fnFilter,
-      periodSettings
-    });
-  };
-};
-const getFinancialJulyPeriodType = (fnFilter, periodSettings) => {
-  return config => {
-    return getPeriods({
-      periodType: 'FYJUL',
-      config,
-      fnFilter,
-      periodSettings
-    });
-  };
-};
-const getFinancialAprilPeriodType = (fnFilter, periodSettings) => {
-  return config => {
-    return getPeriods({
-      periodType: 'FYAPR',
+      periodType,
       config,
       fnFilter,
       periodSettings
@@ -230,6 +208,12 @@ const getOptions = periodSettings => {
       startDay: 4
     }, filterFuturePeriods, periodSettings),
     name: i18n.t('Weekly (Start Thursday)')
+  }, {
+    id: WEEKLYFRI,
+    getPeriods: getWeeklyPeriodType({
+      startDay: 5
+    }, filterFuturePeriods, periodSettings),
+    name: i18n.t('Weekly (Start Friday)')
   }, {
     id: WEEKLYSAT,
     getPeriods: getWeeklyPeriodType({
@@ -271,21 +255,33 @@ const getOptions = periodSettings => {
     getPeriods: getYearlyPeriodType(filterFuturePeriods, periodSettings),
     name: i18n.t('Yearly')
   }, {
-    id: FYNOV,
-    getPeriods: getFinancialNovemberPeriodType(filterFuturePeriods, periodSettings),
-    name: i18n.t('Financial year (Start November)')
-  }, {
-    id: FYOCT,
-    getPeriods: getFinancialOctoberPeriodType(filterFuturePeriods, periodSettings),
-    name: i18n.t('Financial year (Start October)')
-  }, {
-    id: FYJUL,
-    getPeriods: getFinancialJulyPeriodType(filterFuturePeriods, periodSettings),
-    name: i18n.t('Financial year (Start July)')
+    id: FYFEB,
+    getPeriods: getFinancialPeriodType('FYFEB', filterFuturePeriods, periodSettings),
+    name: i18n.t('Financial year (Start February)')
   }, {
     id: FYAPR,
-    getPeriods: getFinancialAprilPeriodType(filterFuturePeriods, periodSettings),
+    getPeriods: getFinancialPeriodType('FYAPR', filterFuturePeriods, periodSettings),
     name: i18n.t('Financial year (Start April)')
+  }, {
+    id: FYJUL,
+    getPeriods: getFinancialPeriodType('FYJUL', filterFuturePeriods, periodSettings),
+    name: i18n.t('Financial year (Start July)')
+  }, {
+    id: FYAUG,
+    getPeriods: getFinancialPeriodType('FYAUG', filterFuturePeriods, periodSettings),
+    name: i18n.t('Financial year (Start August)')
+  }, {
+    id: FYSEP,
+    getPeriods: getFinancialPeriodType('FYSEP', filterFuturePeriods, periodSettings),
+    name: i18n.t('Financial year (Start September)')
+  }, {
+    id: FYOCT,
+    getPeriods: getFinancialPeriodType('FYOCT', filterFuturePeriods, periodSettings),
+    name: i18n.t('Financial year (Start October)')
+  }, {
+    id: FYNOV,
+    getPeriods: getFinancialPeriodType('FYNOV', filterFuturePeriods, periodSettings),
+    name: i18n.t('Financial year (Start November)')
   }];
 };
 export const getFixedPeriodsOptionsById = (id, periodSettings) => {

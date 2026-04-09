@@ -4,19 +4,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import i18n from '../../locales/index.js';
 import styles from './styles/PeriodFilter.style.js';
-import { getFixedPeriodsOptions } from './utils/fixedPeriods.js';
-import { filterPeriodTypesById } from './utils/index.js';
-const EXCLUDED_PERIOD_TYPES_PROP_DEFAULT = [];
 const FixedPeriodFilter = ({
-  allowedPeriodTypes,
-  excludedPeriodTypes = EXCLUDED_PERIOD_TYPES_PROP_DEFAULT,
+  availableOptions,
   currentPeriodType,
   currentYear,
   onSelectPeriodType,
   onSelectYear,
   dataTest
 }) => {
-  const onlyAllowedTypeIsSelected = Array.isArray(allowedPeriodTypes) && allowedPeriodTypes.length === 1 && allowedPeriodTypes[0] === currentPeriodType;
+  const onlyAllowedTypeIsSelected = availableOptions.length === 1 && availableOptions[0].id === currentPeriodType;
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     "data-test": dataTest,
     className: `jsx-${styles.__hash}` + " " + "leftSection"
@@ -30,7 +26,7 @@ const FixedPeriodFilter = ({
     disabled: onlyAllowedTypeIsSelected,
     className: "filterElement",
     dataTest: `${dataTest}-period-type`
-  }, (allowedPeriodTypes ? getFixedPeriodsOptions().filter(option => allowedPeriodTypes.some(type => type === option.id)) : filterPeriodTypesById(getFixedPeriodsOptions(), excludedPeriodTypes)).map(option => /*#__PURE__*/React.createElement(SingleSelectOption, {
+  }, availableOptions.map(option => /*#__PURE__*/React.createElement(SingleSelectOption, {
     key: option.id,
     value: option.id,
     label: option.name,
@@ -53,12 +49,11 @@ const FixedPeriodFilter = ({
   }, styles));
 };
 FixedPeriodFilter.propTypes = {
+  availableOptions: PropTypes.array.isRequired,
   currentPeriodType: PropTypes.string.isRequired,
   currentYear: PropTypes.string.isRequired,
   onSelectPeriodType: PropTypes.func.isRequired,
   onSelectYear: PropTypes.func.isRequired,
-  allowedPeriodTypes: PropTypes.arrayOf(PropTypes.string),
-  dataTest: PropTypes.string,
-  excludedPeriodTypes: PropTypes.arrayOf(PropTypes.string)
+  dataTest: PropTypes.string
 };
 export default FixedPeriodFilter;

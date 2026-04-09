@@ -106,7 +106,10 @@ const ItemSelector = ({
   onEDISave,
   onEditClick,
   isOptionViewMode,
-  supportsEDI
+  supportsEDI,
+  height = TRANSFER_HEIGHT,
+  heightCalculation,
+  maxSelections
 }) => {
   const [state, setState] = useState({
     searchTerm: '',
@@ -141,7 +144,7 @@ const ItemSelector = ({
       searchTerm: state.searchTerm
     });
     const newOptions = [];
-    (_result$dimensionItem = result.dimensionItems) === null || _result$dimensionItem === void 0 ? void 0 : _result$dimensionItem.forEach(item => {
+    (_result$dimensionItem = result.dimensionItems) === null || _result$dimensionItem === void 0 || _result$dimensionItem.forEach(item => {
       if (item.dimensionItemType === REPORTING_RATE) {
         if (state.filter.subGroup && state.filter.subGroup !== DIMENSION_TYPE_ALL) {
           const metric = DATA_SETS_CONSTANTS.find(item => item.id === state.filter.subGroup);
@@ -334,8 +337,8 @@ const ItemSelector = ({
       onClick: () => setCurrentCalculation({}),
       small: true
     }, i18n.t('Calculation'))) : undefined,
-    enableOrderChange: true,
-    height: TRANSFER_HEIGHT,
+    enableOrderChange: !maxSelections || maxSelections > 1,
+    height: height,
     optionsWidth: TRANSFER_OPTIONS_WIDTH,
     selectedWidth: TRANSFER_SELECTED_WIDTH,
     selectedEmptyComponent: /*#__PURE__*/React.createElement(SelectedEmptyPlaceholder, null),
@@ -362,13 +365,15 @@ const ItemSelector = ({
       })
       /* eslint-enable react/prop-types */
     })),
+    maxSelections: maxSelections,
     dataTest: `${dataTest}-transfer`
   }), currentCalculation && supportsEDI && /*#__PURE__*/React.createElement(CalculationModal, {
     calculation: currentCalculation,
     onSave: onSaveCalculation,
     onClose: () => setCurrentCalculation(),
     onDelete: onDeleteCalculation,
-    displayNameProp: displayNameProp
+    displayNameProp: displayNameProp,
+    height: heightCalculation
   }), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
@@ -379,10 +384,13 @@ ItemSelector.propTypes = {
   currentCalculation: PropTypes.object,
   dataTest: PropTypes.string,
   dataTypes: PropTypes.array,
+  height: PropTypes.string,
+  heightCalculation: PropTypes.string,
   infoBoxMessage: PropTypes.string,
   infoDataItem: PropTypes.object,
   isOptionViewMode: PropTypes.bool,
   itemsRef: PropTypes.object,
+  maxSelections: PropTypes.number,
   noItemsMessage: PropTypes.string,
   rightFooter: PropTypes.node,
   selectedItems: PropTypes.arrayOf(PropTypes.exact({

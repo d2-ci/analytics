@@ -10,14 +10,12 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _PeriodFilterStyle = _interopRequireDefault(require("./styles/PeriodFilter.style.js"));
-var _index2 = require("./utils/index.js");
-var _relativePeriods = require("./utils/relativePeriods.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const RelativePeriodFilter = ({
   currentFilter,
   onSelectFilter,
   dataTest,
-  excludedPeriodTypes
+  availableOptions
 }) => /*#__PURE__*/_react.default.createElement("div", {
   "data-test": dataTest,
   className: `jsx-${_PeriodFilterStyle.default.__hash}` + " " + "leftSection"
@@ -30,7 +28,7 @@ const RelativePeriodFilter = ({
   selected: currentFilter,
   className: "filterElement",
   dataTest: `${dataTest}-period-type`
-}, (0, _index2.filterPeriodTypesById)((0, _relativePeriods.getRelativePeriodsOptions)(), excludedPeriodTypes).map(option => /*#__PURE__*/_react.default.createElement(_ui.SingleSelectOption, {
+}, availableOptions.map(option => /*#__PURE__*/_react.default.createElement(_ui.SingleSelectOption, {
   key: option.id,
   value: option.id,
   label: option.name,
@@ -39,9 +37,9 @@ const RelativePeriodFilter = ({
   id: _PeriodFilterStyle.default.__hash
 }, _PeriodFilterStyle.default));
 RelativePeriodFilter.propTypes = {
+  availableOptions: _propTypes.default.array.isRequired,
   currentFilter: _propTypes.default.string.isRequired,
   onSelectFilter: _propTypes.default.func.isRequired,
-  dataTest: _propTypes.default.string,
-  excludedPeriodTypes: _propTypes.default.arrayOf(_propTypes.default.string)
+  dataTest: _propTypes.default.string
 };
 var _default = exports.default = RelativePeriodFilter;

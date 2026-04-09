@@ -28,7 +28,7 @@ function _default(filters, metaData) {
       const relativePeriodNames = (0, _relativePeriods.getRelativePeriodsName)();
       titleFragments.push((0, _dimensionGetItemIds.dimensionGetItemIds)(filter).map(id => {
         var _metaData$items$id;
-        return relativePeriodNames[id] || ((_metaData$items$id = metaData.items[id]) === null || _metaData$items$id === void 0 ? void 0 : _metaData$items$id.name) || id;
+        return ((_metaData$items$id = metaData.items[id]) === null || _metaData$items$id === void 0 ? void 0 : _metaData$items$id.name) || relativePeriodNames[id] || id;
       }).join(', '));
     } else {
       const filterItems = metaData.dimensions[filter.dimension];

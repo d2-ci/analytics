@@ -17,7 +17,10 @@ const DataDimension = ({
   enabledDataTypes,
   infoBoxMessage,
   onCalculationSave,
-  visType
+  visType,
+  height,
+  heightCalculation,
+  maxSelections
 }) => {
   const {
     serverVersion
@@ -93,7 +96,10 @@ const DataDimension = ({
     setCurrentCalculation: setCurrentCalculation,
     infoDataItem: infoDataItem,
     setInfoDataItem: setInfoDataItem,
-    onEditClick: onEditClick
+    onEditClick: onEditClick,
+    height: height,
+    heightCalculation: heightCalculation,
+    maxSelections: maxSelections
   }), currentDataItem && /*#__PURE__*/React.createElement(ItemOptionsSelector, _extends({}, currentDataItem, {
     selectedItems: selectedItems,
     onSelect: onSelectItems,
@@ -103,7 +109,9 @@ const DataDimension = ({
     infoDataItem: infoDataItem,
     setInfoDataItem: setInfoDataItem,
     onClose: () => setCurrentDataItem(),
-    onEditClick: onEditClick
+    onEditClick: onEditClick,
+    height: height,
+    maxSelections: maxSelections
   })), infoDataItem && /*#__PURE__*/React.createElement(InfoPopover, {
     dataTest: 'data-dimension-info',
     item: infoDataItem,
@@ -124,7 +132,10 @@ DataDimension.propTypes = {
   onSelect: PropTypes.func.isRequired,
   currentUser: PropTypes.object,
   enabledDataTypes: PropTypes.array,
+  height: PropTypes.string,
+  heightCalculation: PropTypes.string,
   infoBoxMessage: PropTypes.string,
+  maxSelections: PropTypes.number,
   visType: PropTypes.string,
   onCalculationSave: PropTypes.func
 };
