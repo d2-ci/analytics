@@ -83,10 +83,10 @@ export const Loading = () => /*#__PURE__*/React.createElement(InterpretationsSto
 Loading.story = {
   name: 'Loading'
 };
-export const Error = () => /*#__PURE__*/React.createElement(InterpretationsStory, {
+export const ErrorState = () => /*#__PURE__*/React.createElement(InterpretationsStory, {
   interpretationsResolver: () => Promise.reject(new Error('Network request failed while loading interpretations'))
 }, /*#__PURE__*/React.createElement(DefaultUnit, null));
-Error.story = {
+ErrorState.story = {
   name: 'Error'
 };
 const dashboardRedirectUrl = 'https://play.dhis2.org/demo/dhis-web-dashboard/abcd123ef';

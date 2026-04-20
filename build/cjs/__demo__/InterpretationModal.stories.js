@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.WithManyComments = exports.WithAFewComments = exports.NoComments = exports.Error = void 0;
+exports.default = exports.WithManyComments = exports.WithAFewComments = exports.NoComments = exports.ErrorState = void 0;
 var _appRuntime = require("@dhis2/app-runtime");
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _ui = require("@dhis2/ui");
@@ -291,7 +291,7 @@ exports.WithManyComments = WithManyComments;
 WithManyComments.story = {
   name: 'With many comments'
 };
-const Error = () => /*#__PURE__*/_react.default.createElement(ModalStory, {
+const ErrorState = () => /*#__PURE__*/_react.default.createElement(ModalStory, {
   interpretationsResolver: () => Promise.reject(new Error('Network request failed while loading the interpretation'))
 }, /*#__PURE__*/_react.default.createElement(_InterpretationModal.InterpretationModal, {
   interpretationId: "interp-1",
@@ -305,7 +305,7 @@ const Error = () => /*#__PURE__*/_react.default.createElement(ModalStory, {
   onClose: Function.prototype,
   onResponsesReceived: Function.prototype
 }));
-exports.Error = Error;
-Error.story = {
+exports.ErrorState = ErrorState;
+ErrorState.story = {
   name: 'Error'
 };

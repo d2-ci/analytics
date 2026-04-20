@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.WithOneInterpretation = exports.WithNoTimeDimensionsWarning = exports.WithManyInterpretations = exports.WithInterpretationForCurrentUser = exports.StressTest = exports.Loading = exports.Error = exports.Default = exports.DashboardUsage = void 0;
+exports.default = exports.WithOneInterpretation = exports.WithNoTimeDimensionsWarning = exports.WithManyInterpretations = exports.WithInterpretationForCurrentUser = exports.StressTest = exports.Loading = exports.ErrorState = exports.Default = exports.DashboardUsage = void 0;
 var _appRuntime = require("@dhis2/app-runtime");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
@@ -93,11 +93,11 @@ exports.Loading = Loading;
 Loading.story = {
   name: 'Loading'
 };
-const Error = () => /*#__PURE__*/_react.default.createElement(InterpretationsStory, {
+const ErrorState = () => /*#__PURE__*/_react.default.createElement(InterpretationsStory, {
   interpretationsResolver: () => Promise.reject(new Error('Network request failed while loading interpretations'))
 }, /*#__PURE__*/_react.default.createElement(DefaultUnit, null));
-exports.Error = Error;
-Error.story = {
+exports.ErrorState = ErrorState;
+ErrorState.story = {
   name: 'Error'
 };
 const dashboardRedirectUrl = 'https://play.dhis2.org/demo/dhis-web-dashboard/abcd123ef';

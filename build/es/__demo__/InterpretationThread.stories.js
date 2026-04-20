@@ -232,12 +232,12 @@ export const Loading = () => /*#__PURE__*/React.createElement(ThreadStory, {
 Loading.story = {
   name: 'Loading'
 };
-export const Error = () => /*#__PURE__*/React.createElement(ThreadStory, {
+export const ErrorState = () => /*#__PURE__*/React.createElement(ThreadStory, {
   interpretationsResolver: () => Promise.reject(new Error('Network request failed while loading the interpretation'))
 }, /*#__PURE__*/React.createElement(DashboardInterpretationThread, {
   interpretationId: "interp-1",
   onClose: Function.prototype
 }));
-Error.story = {
+ErrorState.story = {
   name: 'Error'
 };

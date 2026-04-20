@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.WithManyComments = exports.WithAFewComments = exports.NoComments = exports.Loading = exports.Error = void 0;
+exports.default = exports.WithManyComments = exports.WithAFewComments = exports.NoComments = exports.Loading = exports.ErrorState = void 0;
 var _appRuntime = require("@dhis2/app-runtime");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
@@ -243,13 +243,13 @@ exports.Loading = Loading;
 Loading.story = {
   name: 'Loading'
 };
-const Error = () => /*#__PURE__*/_react.default.createElement(ThreadStory, {
+const ErrorState = () => /*#__PURE__*/_react.default.createElement(ThreadStory, {
   interpretationsResolver: () => Promise.reject(new Error('Network request failed while loading the interpretation'))
 }, /*#__PURE__*/_react.default.createElement(_DashboardInterpretationThread.DashboardInterpretationThread, {
   interpretationId: "interp-1",
   onClose: Function.prototype
 }));
-exports.Error = Error;
-Error.story = {
+exports.ErrorState = ErrorState;
+ErrorState.story = {
   name: 'Error'
 };

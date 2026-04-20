@@ -281,7 +281,7 @@ export const WithManyComments = () => {
 WithManyComments.story = {
   name: 'With many comments'
 };
-export const Error = () => /*#__PURE__*/React.createElement(ModalStory, {
+export const ErrorState = () => /*#__PURE__*/React.createElement(ModalStory, {
   interpretationsResolver: () => Promise.reject(new Error('Network request failed while loading the interpretation'))
 }, /*#__PURE__*/React.createElement(InterpretationModal, {
   interpretationId: "interp-1",
@@ -295,6 +295,6 @@ export const Error = () => /*#__PURE__*/React.createElement(ModalStory, {
   onClose: Function.prototype,
   onResponsesReceived: Function.prototype
 }));
-Error.story = {
+ErrorState.story = {
   name: 'Error'
 };
