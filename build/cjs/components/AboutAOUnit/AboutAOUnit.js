@@ -147,8 +147,7 @@ const AboutAOUnit = /*#__PURE__*/(0, _react.forwardRef)(({
   })), data && /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + "content"
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + ((0, _classnames.default)('detailLine', {
-      description: true,
+    className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + ((0, _classnames.default)('description', {
       noDescription: !data.ao.displayDescription
     }) || "")
   }, data.ao.displayDescription ? /*#__PURE__*/_react.default.createElement(_index.RichTextParser, null, data.ao.displayDescription) : /*#__PURE__*/_react.default.createElement("p", {
@@ -157,28 +156,36 @@ const AboutAOUnit = /*#__PURE__*/(0, _react.forwardRef)(({
     className: `jsx-${_AboutAOUnitStyle.default.__hash}`
   }, /*#__PURE__*/_react.default.createElement("p", {
     className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + "detailLine"
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + "icon"
   }, /*#__PURE__*/_react.default.createElement(_ui.IconShare16, {
     color: _ui.colors.grey700
-  }), getSharingSummary(data.ao)), /*#__PURE__*/_react.default.createElement("p", {
+  })), getSharingSummary(data.ao)), /*#__PURE__*/_react.default.createElement("p", {
     className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + "detailLine"
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + "icon"
   }, /*#__PURE__*/_react.default.createElement(_ui.IconClock16, {
     color: _ui.colors.grey700
-  }), _d2I18n.default.t('Last updated {{time}}', {
+  })), _d2I18n.default.t('Last updated {{time}}', {
     time: (0, _moment.default)(fromServerDate(data.ao.lastUpdated)).fromNow()
   })), /*#__PURE__*/_react.default.createElement("p", {
     className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + "detailLine"
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + "icon"
   }, /*#__PURE__*/_react.default.createElement(_ui.IconUser16, {
     color: _ui.colors.grey700
-  }), (_data$ao$createdBy = data.ao.createdBy) !== null && _data$ao$createdBy !== void 0 && _data$ao$createdBy.displayName ? _d2I18n.default.t('Created {{time}} by {{author}}', {
+  })), (_data$ao$createdBy = data.ao.createdBy) !== null && _data$ao$createdBy !== void 0 && _data$ao$createdBy.displayName ? _d2I18n.default.t('Created {{time}} by {{author}}', {
     time: (0, _moment.default)(fromServerDate(data.ao.created)).fromNow(),
     author: data.ao.createdBy.displayName
   }) : _d2I18n.default.t('Created {{time}}', {
     time: (0, _moment.default)(fromServerDate(data.ao.created)).fromNow()
   })), /*#__PURE__*/_react.default.createElement("p", {
     className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + "detailLine"
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + "icon"
   }, /*#__PURE__*/_react.default.createElement(_ui.IconView16, {
     color: _ui.colors.grey700
-  }), _d2I18n.default.t('Viewed {{count}} times', {
+  })), _d2I18n.default.t('Viewed {{count}} times', {
     count: data.dataStatistics.views,
     defaultValue: 'Viewed 1 time',
     defaultValue_plural: 'Viewed {{count}} times'
@@ -189,7 +196,7 @@ const AboutAOUnit = /*#__PURE__*/(0, _react.forwardRef)(({
   }, _d2I18n.default.t('Notifications')), data.ao.subscribed ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
     className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + "subscriptionLabel"
   }, _d2I18n.default.t("You're subscribed and getting updates about new interpretations.")), /*#__PURE__*/_react.default.createElement(_ui.Button, {
-    icon: /*#__PURE__*/_react.default.createElement(_ui.IconSubscribeOff24, {
+    icon: /*#__PURE__*/_react.default.createElement(_ui.IconSubscribeOff16, {
       color: _ui.colors.grey700
     }),
     secondary: true,
@@ -199,7 +206,7 @@ const AboutAOUnit = /*#__PURE__*/(0, _react.forwardRef)(({
   }, _d2I18n.default.t('Unsubscribe'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
     className: `jsx-${_AboutAOUnitStyle.default.__hash}` + " " + "subscriptionLabel"
   }, _d2I18n.default.t('Subscribe to get updates about new interpretations.')), /*#__PURE__*/_react.default.createElement(_ui.Button, {
-    icon: /*#__PURE__*/_react.default.createElement(_ui.IconSubscribe24, {
+    icon: /*#__PURE__*/_react.default.createElement(_ui.IconSubscribe16, {
       color: _ui.colors.grey700
     }),
     secondary: true,

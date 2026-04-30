@@ -4,38 +4,22 @@ import { layoutGetAllDimensions } from '../layout/layoutGetAllDimensions.js';
 // Dimensions saved with program or program stage in an EventVisualization need
 // transformation before we can pass them to the pivot table engine
 
+const cloneAxis = axis => axis === null || axis === void 0 ? void 0 : axis.map(dim => ({
+  ...dim
+}));
 export const transformEventVisualization = vis => {
-  var _vis$columns, _vis$rows, _vis$filters;
   // Do not modify the original visualization
   const transformedVis = {
-    ...vis
+    ...vis,
+    columns: cloneAxis(vis.columns),
+    rows: cloneAxis(vis.rows),
+    filters: cloneAxis(vis.filters)
   };
-  if ((_vis$columns = vis.columns) !== null && _vis$columns !== void 0 && _vis$columns.length) {
-    transformedVis.columns = [...vis.columns.map(col => ({
-      ...col
-    }))];
-  }
-  if ((_vis$rows = vis.rows) !== null && _vis$rows !== void 0 && _vis$rows.length) {
-    transformedVis.rows = [...vis.rows.map(row => ({
-      ...row
-    }))];
-  }
-  if ((_vis$filters = vis.filters) !== null && _vis$filters !== void 0 && _vis$filters.length) {
-    transformedVis.filters = [...vis.filters.map(filter => ({
-      ...filter
-    }))];
-  }
-  let headerName;
   layoutGetAllDimensions(transformedVis).forEach(dim => {
-    var _dim$program, _dim$programStage;
-    headerName = getHeaderByVis(dim.dimension);
-    if ((_dim$program = dim.program) !== null && _dim$program !== void 0 && _dim$program.id) {
-      dim.dimension = `${dim.program.id}.${headerName}`;
-    } else if ((_dim$programStage = dim.programStage) !== null && _dim$programStage !== void 0 && _dim$programStage.id) {
-      dim.dimension = `${dim.programStage.id}.${headerName}`;
-    } else {
-      dim.dimension = headerName;
-    }
+    var _dim$program$id, _dim$program, _dim$programStage;
+    const headerName = getHeaderByVis(dim.dimension);
+    const prefix = (_dim$program$id = (_dim$program = dim.program) === null || _dim$program === void 0 ? void 0 : _dim$program.id) !== null && _dim$program$id !== void 0 ? _dim$program$id : (_dim$programStage = dim.programStage) === null || _dim$programStage === void 0 ? void 0 : _dim$programStage.id;
+    dim.dimension = prefix ? `${prefix}.${headerName}` : headerName;
   });
   return transformedVis;
 };

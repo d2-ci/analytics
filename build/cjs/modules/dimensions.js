@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getHeaderByVis = void 0;
-// vis: 'dimension' in EventVisualization colums/rows/filters
+// vis: 'dimension' in EventVisualization columns/rows/filters
 // dim: tracker analytics api dimension/filter id
 // header: tracker analytics api header name (query endpoints)
 
@@ -60,10 +60,6 @@ const EVENT_DIMENSIONS = [{
   vis: 'lastUpdatedBy',
   dim: '',
   header: 'lastupdatedbydisplayname'
-}, {
-  vis: 'createdBy',
-  dim: '',
-  header: 'createdbydisplayname'
 }];
 const getHeaderByVis = vis => {
   var _EVENT_DIMENSIONS$fin;

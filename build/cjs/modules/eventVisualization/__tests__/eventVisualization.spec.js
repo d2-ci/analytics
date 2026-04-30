@@ -1,6 +1,6 @@
 "use strict";
 
-var _eventVisualization = require("../eventVisualization");
+var _eventVisualization = require("../eventVisualization.js");
 const testDim1 = {
   dimension: 'eventDate',
   programStage: {
@@ -26,9 +26,9 @@ describe('eventVisualization', () => {
   describe('transformEventVisualization', () => {
     it('does not modify dimension, axis or vis', () => {
       const newVis = (0, _eventVisualization.transformEventVisualization)(testVis);
-      expect(newVis === testVis).toBe(false);
-      expect(newVis.columns === testAxis).toBe(false);
-      expect(newVis.columns[0] === testDim1).toBe(false);
+      expect(newVis).not.toBe(testVis);
+      expect(newVis.columns).not.toBe(testAxis);
+      expect(newVis.columns[0]).not.toBe(testDim1);
     });
     it('applies program stage to id', () => {
       const newVis = (0, _eventVisualization.transformEventVisualization)(testVis);

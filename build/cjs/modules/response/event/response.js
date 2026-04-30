@@ -33,17 +33,13 @@ const STATUSES = {
   SCHEDULE: _d2I18n.default.t('Scheduled'),
   CANCELLED: _d2I18n.default.t('Cancelled')
 };
+const formatStatus = value => STATUSES[value] || value;
 const getItemFormatter = ({
   name,
   valueType
 }) => getItemFormatterByHeaderName(name) || getItemFormatterByValueType(valueType);
 exports.getItemFormatter = getItemFormatter;
-const getItemFormatterByHeaderName = name => {
-  if (name.endsWith('eventstatus') || name.endsWith('programstatus')) {
-    return n => STATUSES[n] || n;
-  }
-  return undefined;
-};
+const getItemFormatterByHeaderName = name => name.endsWith('eventstatus') || name.endsWith('programstatus') ? formatStatus : undefined;
 exports.getItemFormatterByHeaderName = getItemFormatterByHeaderName;
 const getItemFormatterByValueType = valueType => {
   switch (valueType) {
@@ -62,7 +58,9 @@ const getItemFormatterByValueType = valueType => {
   }
 };
 exports.getItemFormatterByValueType = getItemFormatterByValueType;
-const includeHeaderChecks = [header => Boolean(header.meta), header => header.name !== _predefinedDimensions.DIMENSION_ID_PERIOD, header => header.name !== _predefinedDimensions.DIMENSION_ID_ORGUNIT, header => !header.name.endsWith('.eventdate'), header => !header.name.endsWith('.enrollmentdate'), header => !header.name.endsWith('.scheduleddate'), header => !header.name.endsWith('.incidentdate'), header => header.name !== 'lastupdated', header => header.name !== 'created', header => header.name !== 'completed', header => !header.name.endsWith('.ou')];
+const EXCLUDED_HEADER_NAMES = new Set([_predefinedDimensions.DIMENSION_ID_PERIOD, _predefinedDimensions.DIMENSION_ID_ORGUNIT, 'lastupdated', 'created', 'completed']);
+const EXCLUDED_HEADER_SUFFIXES = ['.eventdate', '.enrollmentdate', '.scheduleddate', '.incidentdate', '.ou'];
+const isIncludedHeader = header => Boolean(header.meta) && !EXCLUDED_HEADER_NAMES.has(header.name) && !EXCLUDED_HEADER_SUFFIXES.some(suffix => header.name.endsWith(suffix));
 const transformResponse = (response, {
   hideNaData = false
 } = {}) => {
@@ -86,7 +84,7 @@ const transformResponse = (response, {
   const metaHeaders = response.headers.map((header, index) => ({
     ...header,
     index
-  })).filter(header => includeHeaderChecks.every(check => check(header)));
+  })).filter(isIncludedHeader);
 
   // Legendsets use uids and do not need transformation
   // Skip unsupported value types

@@ -1,4 +1,4 @@
-import { transformEventVisualization } from "../eventVisualization";
+import { transformEventVisualization } from '../eventVisualization.js';
 const testDim1 = {
   dimension: 'eventDate',
   programStage: {
@@ -24,9 +24,9 @@ describe('eventVisualization', () => {
   describe('transformEventVisualization', () => {
     it('does not modify dimension, axis or vis', () => {
       const newVis = transformEventVisualization(testVis);
-      expect(newVis === testVis).toBe(false);
-      expect(newVis.columns === testAxis).toBe(false);
-      expect(newVis.columns[0] === testDim1).toBe(false);
+      expect(newVis).not.toBe(testVis);
+      expect(newVis.columns).not.toBe(testAxis);
+      expect(newVis.columns[0]).not.toBe(testDim1);
     });
     it('applies program stage to id', () => {
       const newVis = transformEventVisualization(testVis);

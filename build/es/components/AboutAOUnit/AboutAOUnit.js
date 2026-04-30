@@ -1,7 +1,7 @@
 import _JSXStyle from "styled-jsx/style";
 import { useDataQuery, useDataMutation, useTimeZoneConversion } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
-import { Button, CircularLoader, IconChevronDown24, IconChevronUp24, IconClock16, IconShare16, IconSubscribe24, IconSubscribeOff24, IconUser16, IconView16, colors } from '@dhis2/ui';
+import { Button, CircularLoader, IconChevronDown24, IconChevronUp24, IconClock16, IconShare16, IconSubscribe16, IconSubscribeOff16, IconUser16, IconView16, colors } from '@dhis2/ui';
 import cx from 'classnames';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -139,8 +139,7 @@ const AboutAOUnit = /*#__PURE__*/forwardRef(({
   })), data && /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "content"
   }, /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + (cx('detailLine', {
-      description: true,
+    className: `jsx-${styles.__hash}` + " " + (cx('description', {
       noDescription: !data.ao.displayDescription
     }) || "")
   }, data.ao.displayDescription ? /*#__PURE__*/React.createElement(RichTextParser, null, data.ao.displayDescription) : /*#__PURE__*/React.createElement("p", {
@@ -149,28 +148,36 @@ const AboutAOUnit = /*#__PURE__*/forwardRef(({
     className: `jsx-${styles.__hash}`
   }, /*#__PURE__*/React.createElement("p", {
     className: `jsx-${styles.__hash}` + " " + "detailLine"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "icon"
   }, /*#__PURE__*/React.createElement(IconShare16, {
     color: colors.grey700
-  }), getSharingSummary(data.ao)), /*#__PURE__*/React.createElement("p", {
+  })), getSharingSummary(data.ao)), /*#__PURE__*/React.createElement("p", {
     className: `jsx-${styles.__hash}` + " " + "detailLine"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "icon"
   }, /*#__PURE__*/React.createElement(IconClock16, {
     color: colors.grey700
-  }), i18n.t('Last updated {{time}}', {
+  })), i18n.t('Last updated {{time}}', {
     time: moment(fromServerDate(data.ao.lastUpdated)).fromNow()
   })), /*#__PURE__*/React.createElement("p", {
     className: `jsx-${styles.__hash}` + " " + "detailLine"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "icon"
   }, /*#__PURE__*/React.createElement(IconUser16, {
     color: colors.grey700
-  }), (_data$ao$createdBy = data.ao.createdBy) !== null && _data$ao$createdBy !== void 0 && _data$ao$createdBy.displayName ? i18n.t('Created {{time}} by {{author}}', {
+  })), (_data$ao$createdBy = data.ao.createdBy) !== null && _data$ao$createdBy !== void 0 && _data$ao$createdBy.displayName ? i18n.t('Created {{time}} by {{author}}', {
     time: moment(fromServerDate(data.ao.created)).fromNow(),
     author: data.ao.createdBy.displayName
   }) : i18n.t('Created {{time}}', {
     time: moment(fromServerDate(data.ao.created)).fromNow()
   })), /*#__PURE__*/React.createElement("p", {
     className: `jsx-${styles.__hash}` + " " + "detailLine"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "icon"
   }, /*#__PURE__*/React.createElement(IconView16, {
     color: colors.grey700
-  }), i18n.t('Viewed {{count}} times', {
+  })), i18n.t('Viewed {{count}} times', {
     count: data.dataStatistics.views,
     defaultValue: 'Viewed 1 time',
     defaultValue_plural: 'Viewed {{count}} times'
@@ -181,7 +188,7 @@ const AboutAOUnit = /*#__PURE__*/forwardRef(({
   }, i18n.t('Notifications')), data.ao.subscribed ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
     className: `jsx-${styles.__hash}` + " " + "subscriptionLabel"
   }, i18n.t("You're subscribed and getting updates about new interpretations.")), /*#__PURE__*/React.createElement(Button, {
-    icon: /*#__PURE__*/React.createElement(IconSubscribeOff24, {
+    icon: /*#__PURE__*/React.createElement(IconSubscribeOff16, {
       color: colors.grey700
     }),
     secondary: true,
@@ -191,7 +198,7 @@ const AboutAOUnit = /*#__PURE__*/forwardRef(({
   }, i18n.t('Unsubscribe'))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
     className: `jsx-${styles.__hash}` + " " + "subscriptionLabel"
   }, i18n.t('Subscribe to get updates about new interpretations.')), /*#__PURE__*/React.createElement(Button, {
-    icon: /*#__PURE__*/React.createElement(IconSubscribe24, {
+    icon: /*#__PURE__*/React.createElement(IconSubscribe16, {
       color: colors.grey700
     }),
     secondary: true,
