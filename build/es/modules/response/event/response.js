@@ -3,6 +3,12 @@ import { DIMENSION_ID_ORGUNIT, DIMENSION_ID_PERIOD } from '../../predefinedDimen
 import { VALUE_TYPE_AGE, VALUE_TYPE_BOOLEAN, VALUE_TYPE_COORDINATE, VALUE_TYPE_DATE, VALUE_TYPE_DATETIME, VALUE_TYPE_FILE_RESOURCE, VALUE_TYPE_GEOJSON, VALUE_TYPE_IMAGE, VALUE_TYPE_MULTI_TEXT, VALUE_TYPE_PERCENTAGE, VALUE_TYPE_REFERENCE, VALUE_TYPE_TRUE_ONLY } from '../../valueTypes.js';
 import { applyDefaultHandler } from './default.js';
 import { applyOptionSetHandler } from './optionSet.js';
+
+// Responses coming from these endpoints need transformation
+// before we can pass it to the pivot table engine:
+// - analytics/events/aggregate
+// - analytics/enrollments/aggregate
+
 export const PREFIX_SEPARATOR = '_';
 export const NA_VALUE = '';
 export const NA_VALUE_ITEM = {
@@ -15,6 +21,18 @@ export const NA_VALUE_ITEM = {
   }
 };
 export const UNSUPPORTED_VALUE_TYPES = [VALUE_TYPE_COORDINATE, VALUE_TYPE_GEOJSON, VALUE_TYPE_FILE_RESOURCE, VALUE_TYPE_IMAGE, VALUE_TYPE_MULTI_TEXT, VALUE_TYPE_REFERENCE];
+const STATUSES = {
+  ACTIVE: i18n.t('Active'),
+  COMPLETED: i18n.t('Completed'),
+  SCHEDULE: i18n.t('Scheduled'),
+  CANCELLED: i18n.t('Cancelled')
+};
+const formatStatus = value => STATUSES[value] || value;
+export const getItemFormatter = ({
+  name,
+  valueType
+}) => getItemFormatterByHeaderName(name) || getItemFormatterByValueType(valueType);
+export const getItemFormatterByHeaderName = name => name.endsWith('eventstatus') || name.endsWith('programstatus') ? formatStatus : undefined;
 export const getItemFormatterByValueType = valueType => {
   switch (valueType) {
     case VALUE_TYPE_AGE:
@@ -31,6 +49,9 @@ export const getItemFormatterByValueType = valueType => {
       return undefined;
   }
 };
+const EXCLUDED_HEADER_NAMES = new Set([DIMENSION_ID_PERIOD, DIMENSION_ID_ORGUNIT, 'lastupdated', 'created', 'completed']);
+const EXCLUDED_HEADER_SUFFIXES = ['.eventdate', '.enrollmentdate', '.scheduleddate', '.incidentdate', '.ou'];
+const isIncludedHeader = header => Boolean(header.meta) && !EXCLUDED_HEADER_NAMES.has(header.name) && !EXCLUDED_HEADER_SUFFIXES.some(suffix => header.name.endsWith(suffix));
 export const transformResponse = (response, {
   hideNaData = false
 } = {}) => {
@@ -54,7 +75,7 @@ export const transformResponse = (response, {
   const metaHeaders = response.headers.map((header, index) => ({
     ...header,
     index
-  })).filter(header => Boolean(header.meta) && ![DIMENSION_ID_PERIOD, DIMENSION_ID_ORGUNIT].includes(header.name));
+  })).filter(isIncludedHeader);
 
   // Legendsets use uids and do not need transformation
   // Skip unsupported value types
@@ -66,7 +87,7 @@ export const transformResponse = (response, {
         transformedResponse = applyOptionSetHandler(transformedResponse, header.index);
       } else {
         transformedResponse = applyDefaultHandler(transformedResponse, header.index, {
-          itemFormatter: getItemFormatterByValueType(header.valueType)
+          itemFormatter: getItemFormatter(header)
         });
       }
     }

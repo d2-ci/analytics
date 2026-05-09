@@ -141,6 +141,10 @@ export { renderValue as formatValue } from './modules/renderValue.js';
 
 export { transformResponse as transformEventAggregateResponse } from './modules/response/event/response.js';
 
+// Modules: eventVisualization
+
+export { transformEventVisualization } from './modules/eventVisualization/eventVisualization.js';
+
 // Utils: colorSets
 export { COLOR_SET_DEFAULT, COLOR_SET_BASIC, COLOR_SET_EXTENDED, COLOR_SET_BRIGHT, COLOR_SET_DARK, COLOR_SET_GRAY, COLOR_SET_COLOR_BLIND, COLOR_SET_PATTERNS, colorSets } from './visualizations/util/colors/colorSets.js';
 

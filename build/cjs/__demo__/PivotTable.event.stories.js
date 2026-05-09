@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.YesonlyNA = exports.Yesonly = exports.TypeNumericNA = exports.TypeNumeric = exports.TypeLegendsetNA = exports.TypeLegendset = exports.TypeDatetimeNA = exports.TypeDatetime = exports.TypeDateNA = exports.TypeDate = exports.TypeBooleanNA = exports.TypeBoolean = exports.TimeNA = exports.Time = exports.TextNA = exports.Text = exports.OptionsetNA = exports.Optionset = void 0;
+exports.default = exports.YesonlyNA = exports.Yesonly = exports.TypeNumericNA = exports.TypeNumeric = exports.TypeLegendsetNA = exports.TypeLegendset = exports.TypeDatetimeNA = exports.TypeDatetime = exports.TypeDateNA = exports.TypeDate = exports.TypeBooleanNA = exports.TypeBoolean = exports.TimeNA = exports.Time = exports.TextNA = exports.Text = exports.OptionsetNA = exports.Optionset = exports.EventstatusNA = exports.Eventstatus = exports.Eventou = void 0;
 var _ui = require("@dhis2/ui");
 var _react = _interopRequireWildcard(require("react"));
 var _index = require("../index.js");
@@ -19,6 +19,11 @@ var _datetimeVisualization = _interopRequireDefault(require("./data/event/dateti
 var _emailDataHidena = _interopRequireDefault(require("./data/event/email.data.hidena.json"));
 var _emailData = _interopRequireDefault(require("./data/event/email.data.json"));
 var _emailVisualization = _interopRequireDefault(require("./data/event/email.visualization.json"));
+var _eventouData = _interopRequireDefault(require("./data/event/eventou.data.json"));
+var _eventouVisualization = _interopRequireDefault(require("./data/event/eventou.visualization.json"));
+var _eventstatusDataHidena = _interopRequireDefault(require("./data/event/eventstatus.data.hidena.json"));
+var _eventstatusData = _interopRequireDefault(require("./data/event/eventstatus.data.json"));
+var _eventstatusVisualization = _interopRequireDefault(require("./data/event/eventstatus.visualization.json"));
 var _integerDataHidena = _interopRequireDefault(require("./data/event/integer.data.hidena.json"));
 var _integerData = _interopRequireDefault(require("./data/event/integer.data.json"));
 var _integerVisualization = _interopRequireDefault(require("./data/event/integer.visualization.json"));
@@ -438,3 +443,63 @@ const Yesonly = (_, {
 };
 exports.Yesonly = Yesonly;
 Yesonly.storyName = 'Yesonly';
+const EventstatusNA = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._eventstatusVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _eventstatusData.default,
+    visualization: visualization
+  }));
+};
+exports.EventstatusNA = EventstatusNA;
+EventstatusNA.storyName = 'Eventstatus N/A';
+const Eventstatus = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._eventstatusVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _eventstatusDataHidena.default,
+    visualization: visualization
+  }));
+};
+exports.Eventstatus = Eventstatus;
+Eventstatus.storyName = 'Eventstatus';
+const Eventou = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ..._eventouVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _eventouData.default,
+    visualization: visualization
+  }));
+};
+exports.Eventou = Eventou;
+Eventou.storyName = 'Event orgunit';

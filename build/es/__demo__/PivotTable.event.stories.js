@@ -13,6 +13,11 @@ import datetimeVisualization from './data/event/datetime.visualization.json';
 import emailDataHideNa from './data/event/email.data.hidena.json';
 import emailData from './data/event/email.data.json';
 import emailVisualization from './data/event/email.visualization.json';
+import eventouData from './data/event/eventou.data.json';
+import eventouVisualization from './data/event/eventou.visualization.json';
+import eventstatusDataHideNa from './data/event/eventstatus.data.hidena.json';
+import eventstatusData from './data/event/eventstatus.data.json';
+import eventstatusVisualization from './data/event/eventstatus.visualization.json';
 import integerDataHideNa from './data/event/integer.data.hidena.json';
 import integerData from './data/event/integer.data.json';
 import integerVisualization from './data/event/integer.visualization.json';
@@ -412,3 +417,60 @@ export const Yesonly = (_, {
   }));
 };
 Yesonly.storyName = 'Yesonly';
+export const EventstatusNA = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ...eventstatusVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: eventstatusData,
+    visualization: visualization
+  }));
+};
+EventstatusNA.storyName = 'Eventstatus N/A';
+export const Eventstatus = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ...eventstatusVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: eventstatusDataHideNa,
+    visualization: visualization
+  }));
+};
+Eventstatus.storyName = 'Eventstatus';
+export const Eventou = (_, {
+  pivotTableOptions
+}) => {
+  const visualization = {
+    ...eventouVisualization,
+    ...visualizationReset,
+    ...pivotTableOptions
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/React.createElement(PivotTable, {
+    data: eventouData,
+    visualization: visualization
+  }));
+};
+Eventou.storyName = 'Event orgunit';

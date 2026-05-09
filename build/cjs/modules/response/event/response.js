@@ -3,13 +3,18 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.transformResponse = exports.getItemFormatterByValueType = exports.UNSUPPORTED_VALUE_TYPES = exports.PREFIX_SEPARATOR = exports.NA_VALUE_ITEM = exports.NA_VALUE = void 0;
+exports.transformResponse = exports.getItemFormatterByValueType = exports.getItemFormatterByHeaderName = exports.getItemFormatter = exports.UNSUPPORTED_VALUE_TYPES = exports.PREFIX_SEPARATOR = exports.NA_VALUE_ITEM = exports.NA_VALUE = void 0;
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _predefinedDimensions = require("../../predefinedDimensions.js");
 var _valueTypes = require("../../valueTypes.js");
 var _default = require("./default.js");
 var _optionSet = require("./optionSet.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+// Responses coming from these endpoints need transformation
+// before we can pass it to the pivot table engine:
+// - analytics/events/aggregate
+// - analytics/enrollments/aggregate
+
 const PREFIX_SEPARATOR = exports.PREFIX_SEPARATOR = '_';
 const NA_VALUE = exports.NA_VALUE = '';
 const NA_VALUE_ITEM = exports.NA_VALUE_ITEM = {
@@ -22,6 +27,20 @@ const NA_VALUE_ITEM = exports.NA_VALUE_ITEM = {
   }
 };
 const UNSUPPORTED_VALUE_TYPES = exports.UNSUPPORTED_VALUE_TYPES = [_valueTypes.VALUE_TYPE_COORDINATE, _valueTypes.VALUE_TYPE_GEOJSON, _valueTypes.VALUE_TYPE_FILE_RESOURCE, _valueTypes.VALUE_TYPE_IMAGE, _valueTypes.VALUE_TYPE_MULTI_TEXT, _valueTypes.VALUE_TYPE_REFERENCE];
+const STATUSES = {
+  ACTIVE: _d2I18n.default.t('Active'),
+  COMPLETED: _d2I18n.default.t('Completed'),
+  SCHEDULE: _d2I18n.default.t('Scheduled'),
+  CANCELLED: _d2I18n.default.t('Cancelled')
+};
+const formatStatus = value => STATUSES[value] || value;
+const getItemFormatter = ({
+  name,
+  valueType
+}) => getItemFormatterByHeaderName(name) || getItemFormatterByValueType(valueType);
+exports.getItemFormatter = getItemFormatter;
+const getItemFormatterByHeaderName = name => name.endsWith('eventstatus') || name.endsWith('programstatus') ? formatStatus : undefined;
+exports.getItemFormatterByHeaderName = getItemFormatterByHeaderName;
 const getItemFormatterByValueType = valueType => {
   switch (valueType) {
     case _valueTypes.VALUE_TYPE_AGE:
@@ -39,6 +58,9 @@ const getItemFormatterByValueType = valueType => {
   }
 };
 exports.getItemFormatterByValueType = getItemFormatterByValueType;
+const EXCLUDED_HEADER_NAMES = new Set([_predefinedDimensions.DIMENSION_ID_PERIOD, _predefinedDimensions.DIMENSION_ID_ORGUNIT, 'lastupdated', 'created', 'completed']);
+const EXCLUDED_HEADER_SUFFIXES = ['.eventdate', '.enrollmentdate', '.scheduleddate', '.incidentdate', '.ou'];
+const isIncludedHeader = header => Boolean(header.meta) && !EXCLUDED_HEADER_NAMES.has(header.name) && !EXCLUDED_HEADER_SUFFIXES.some(suffix => header.name.endsWith(suffix));
 const transformResponse = (response, {
   hideNaData = false
 } = {}) => {
@@ -62,7 +84,7 @@ const transformResponse = (response, {
   const metaHeaders = response.headers.map((header, index) => ({
     ...header,
     index
-  })).filter(header => Boolean(header.meta) && ![_predefinedDimensions.DIMENSION_ID_PERIOD, _predefinedDimensions.DIMENSION_ID_ORGUNIT].includes(header.name));
+  })).filter(isIncludedHeader);
 
   // Legendsets use uids and do not need transformation
   // Skip unsupported value types
@@ -74,7 +96,7 @@ const transformResponse = (response, {
         transformedResponse = (0, _optionSet.applyOptionSetHandler)(transformedResponse, header.index);
       } else {
         transformedResponse = (0, _default.applyDefaultHandler)(transformedResponse, header.index, {
-          itemFormatter: getItemFormatterByValueType(header.valueType)
+          itemFormatter: getItemFormatter(header)
         });
       }
     }

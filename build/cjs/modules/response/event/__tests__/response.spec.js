@@ -12,6 +12,9 @@ var _datetimeDataOrg = _interopRequireDefault(require("../../../../__demo__/data
 var _emailDataHidena = _interopRequireDefault(require("../../../../__demo__/data/event/email.data.hidena.json"));
 var _emailData = _interopRequireDefault(require("../../../../__demo__/data/event/email.data.json"));
 var _emailDataOrg = _interopRequireDefault(require("../../../../__demo__/data/event/email.data.org.json"));
+var _eventstatusDataHidena = _interopRequireDefault(require("../../../../__demo__/data/event/eventstatus.data.hidena.json"));
+var _eventstatusData = _interopRequireDefault(require("../../../../__demo__/data/event/eventstatus.data.json"));
+var _eventstatusDataOrg = _interopRequireDefault(require("../../../../__demo__/data/event/eventstatus.data.org.json"));
 var _integerDataHidena = _interopRequireDefault(require("../../../../__demo__/data/event/integer.data.hidena.json"));
 var _integerData = _interopRequireDefault(require("../../../../__demo__/data/event/integer.data.json"));
 var _integerDataOrg = _interopRequireDefault(require("../../../../__demo__/data/event/integer.data.org.json"));
@@ -28,6 +31,16 @@ var _valueTypes = require("../../../valueTypes.js");
 var _response = require("../response.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('response', () => {
+  describe('getItemFormatterByHeaderName', () => {
+    it('should return the correct formatter and format correctly', () => {
+      expect((0, _response.getItemFormatterByHeaderName)('eventstatus')('ACTIVE')).toBe('Active');
+      expect((0, _response.getItemFormatterByHeaderName)('eventstatus')('COMPLETED')).toBe('Completed');
+      expect((0, _response.getItemFormatterByHeaderName)('eventstatus')('SCHEDULE')).toBe('Scheduled');
+      expect((0, _response.getItemFormatterByHeaderName)('programstatus')('ACTIVE')).toBe('Active');
+      expect((0, _response.getItemFormatterByHeaderName)('programstatus')('COMPLETED')).toBe('Completed');
+      expect((0, _response.getItemFormatterByHeaderName)('programstatus')('CANCELLED')).toBe('Cancelled');
+    });
+  });
   describe('getItemFormatterByValueType', () => {
     it('should return the correct formatter and format correctly', () => {
       expect((0, _response.getItemFormatterByValueType)(_valueTypes.VALUE_TYPE_BOOLEAN)('1')).toBe('Yes');
@@ -119,6 +132,16 @@ describe('response', () => {
         expect((0, _response.transformResponse)(_yesonlyDataOrg.default, {
           hideNaData: true
         })).toEqual(_yesonlyDataHidena.default);
+      });
+    });
+    describe('eventstatus', () => {
+      it('transforms response', () => {
+        expect((0, _response.transformResponse)(_eventstatusDataOrg.default)).toEqual(_eventstatusData.default);
+      });
+      it('transforms response and hides N/A data', () => {
+        expect((0, _response.transformResponse)(_eventstatusDataOrg.default, {
+          hideNaData: true
+        })).toEqual(_eventstatusDataHidena.default);
       });
     });
   });
