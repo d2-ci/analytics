@@ -1,0 +1,66 @@
+import { isBooleanValueType, isNumericValueType, VALUE_TYPE_TEXT } from '../../valueTypes.js';
+import { NA_VALUE, PREFIX_SEPARATOR } from './response.js';
+export const getUnique = array => [...new Set(array)];
+export const getValuesUniqueSortedAsc = (values, valueType = VALUE_TYPE_TEXT) => isNumericValueType(valueType) || isBooleanValueType(valueType) ? getUnique(values).map(x => [Number(x), x]).sort((a, b) => a[0] - b[0]).map(arr => arr[1]) : getUnique(values).slice().sort((a, b) => a.localeCompare(b));
+export const getPrefixedValue = (value, prefix) => `${prefix}${PREFIX_SEPARATOR}${value}`;
+const resolveName = (value, itemFormatter, items) => {
+  var _items$value;
+  if (itemFormatter) {
+    return itemFormatter(value);
+  }
+  // For id-valued columns (e.g. a CATEGORY data element) the response
+  // already carries a proper label in metaData.items keyed by the id.
+  // Prefer it; for genuine free-text columns the lookup misses and we
+  // fall back to the raw value.
+  const existingName = items === null || items === void 0 || (_items$value = items[value]) === null || _items$value === void 0 ? void 0 : _items$value.name;
+  return existingName && existingName !== value ? existingName : value;
+};
+export const getItems = (values, dimensionId, {
+  itemFormatter,
+  items
+} = {}) => values.reduce((acc, value) => {
+  acc[getPrefixedValue(value, dimensionId)] = {
+    name: resolveName(value, itemFormatter, items)
+  };
+  return acc;
+}, {});
+export const getDimensions = (values, dimensionId) => ({
+  [dimensionId]: values.map(value => getPrefixedValue(value, dimensionId))
+});
+export const getRows = (rows, headerIndex, dimensionId) => {
+  let row;
+  let value;
+  return rows.map(r => {
+    value = r[headerIndex];
+    if (value !== NA_VALUE) {
+      row = [...r];
+      row[headerIndex] = getPrefixedValue(row[headerIndex], dimensionId);
+      return row;
+    }
+    return r;
+  });
+};
+export const applyDefaultHandler = (response, headerIndex, {
+  itemFormatter
+} = {}) => {
+  const header = response.headers[headerIndex];
+  const uniqueSortedValuesAsc = getValuesUniqueSortedAsc(response.rows.map(row => row[headerIndex]).filter(value => value !== NA_VALUE), header.valueType);
+  return {
+    ...response,
+    metaData: {
+      ...response.metaData,
+      items: {
+        ...response.metaData.items,
+        ...getItems(uniqueSortedValuesAsc, header.name, {
+          itemFormatter,
+          items: response.metaData.items
+        })
+      },
+      dimensions: {
+        ...response.metaData.dimensions,
+        ...getDimensions(uniqueSortedValuesAsc, header.name)
+      }
+    },
+    rows: [...getRows(response.rows, headerIndex, header.name)]
+  };
+};
