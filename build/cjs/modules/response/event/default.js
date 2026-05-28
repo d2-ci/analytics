@@ -13,16 +13,14 @@ exports.getValuesUniqueSortedAsc = getValuesUniqueSortedAsc;
 const getPrefixedValue = (value, prefix) => `${prefix}${_response.PREFIX_SEPARATOR}${value}`;
 exports.getPrefixedValue = getPrefixedValue;
 const resolveName = (value, itemFormatter, items) => {
-  var _items$value;
+  var _items$value$name, _items$value;
   if (itemFormatter) {
     return itemFormatter(value);
   }
-  // For id-valued columns (e.g. a CATEGORY data element) the response
-  // already carries a proper label in metaData.items keyed by the id.
-  // Prefer it; for genuine free-text columns the lookup misses and we
-  // fall back to the raw value.
-  const existingName = items === null || items === void 0 || (_items$value = items[value]) === null || _items$value === void 0 ? void 0 : _items$value.name;
-  return existingName && existingName !== value ? existingName : value;
+  // Look up the value in metaData.items: id-valued columns (e.g. a
+  // CATEGORY data element) carry their label there keyed by the id.
+  // Free-text columns miss the lookup and fall back to the raw value.
+  return (_items$value$name = items === null || items === void 0 || (_items$value = items[value]) === null || _items$value === void 0 ? void 0 : _items$value.name) !== null && _items$value$name !== void 0 ? _items$value$name : value;
 };
 const getItems = (values, dimensionId, {
   itemFormatter,
