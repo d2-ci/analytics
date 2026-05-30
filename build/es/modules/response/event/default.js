@@ -3,13 +3,24 @@ import { NA_VALUE, PREFIX_SEPARATOR } from './response.js';
 export const getUnique = array => [...new Set(array)];
 export const getValuesUniqueSortedAsc = (values, valueType = VALUE_TYPE_TEXT) => isNumericValueType(valueType) || isBooleanValueType(valueType) ? getUnique(values).map(x => [Number(x), x]).sort((a, b) => a[0] - b[0]).map(arr => arr[1]) : getUnique(values).slice().sort((a, b) => a.localeCompare(b));
 export const getPrefixedValue = (value, prefix) => `${prefix}${PREFIX_SEPARATOR}${value}`;
+const resolveName = (value, itemFormatter, items) => {
+  var _items$value$name, _items$value;
+  if (itemFormatter) {
+    return itemFormatter(value);
+  }
+  /* Assume the value could be an ID, which means the name should
+   * be looked up in `metaData.items`. If that lookup fails the
+   * value is used directly. */
+  return (_items$value$name = items === null || items === void 0 || (_items$value = items[value]) === null || _items$value === void 0 ? void 0 : _items$value.name) !== null && _items$value$name !== void 0 ? _items$value$name : value;
+};
 export const getItems = (values, dimensionId, {
-  itemFormatter
-} = {}) => values.reduce((items, value) => {
-  items[getPrefixedValue(value, dimensionId)] = {
-    name: itemFormatter ? itemFormatter(value) : value
+  itemFormatter,
+  items
+} = {}) => values.reduce((acc, value) => {
+  acc[getPrefixedValue(value, dimensionId)] = {
+    name: resolveName(value, itemFormatter, items)
   };
-  return items;
+  return acc;
 }, {});
 export const getDimensions = (values, dimensionId) => ({
   [dimensionId]: values.map(value => getPrefixedValue(value, dimensionId))
@@ -39,7 +50,8 @@ export const applyDefaultHandler = (response, headerIndex, {
       items: {
         ...response.metaData.items,
         ...getItems(uniqueSortedValuesAsc, header.name, {
-          itemFormatter
+          itemFormatter,
+          items: response.metaData.items
         })
       },
       dimensions: {

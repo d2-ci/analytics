@@ -23,6 +23,22 @@ describe('analytics.enrollments', () => {
     enrollments = new _AnalyticsEnrollments.default(dataEngineMockObject);
     expect(enrollments.dataEngine).toBe(dataEngineMockObject);
   });
+  describe('.getAggregate()', () => {
+    beforeEach(() => {
+      enrollments = new _AnalyticsEnrollments.default(new _DataEngine.default());
+      request = new _AnalyticsRequest.default().withLimit(10);
+      fixture = _fixtures.default.get('/api/analytics/aggregate');
+      dataEngineMock.query.mockReturnValue(Promise.resolve({
+        data: fixture
+      }));
+    });
+    it('should be a function', () => {
+      expect(enrollments.getAggregate).toBeInstanceOf(Function);
+    });
+    it('should resolve a promise with data', () => enrollments.getAggregate(request).then(data => {
+      expect(data).toEqual(fixture);
+    }));
+  });
   describe('.getQuery()', () => {
     beforeEach(() => {
       enrollments = new _AnalyticsEnrollments.default(new _DataEngine.default());
