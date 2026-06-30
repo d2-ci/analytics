@@ -48,16 +48,10 @@ const texts = {
     noDataText: _d2I18n.default.t('No maps found. Click New map to get started.'),
     noFilteredDataText: _d2I18n.default.t("No maps found. Try adjusting your search or filter options to find what you're looking for."),
     newButtonLabel: _d2I18n.default.t('New map')
-  },
-  [AO_TYPE_EVENT_VISUALIZATION]: {
-    modalTitle: _d2I18n.default.t('Open a line list'),
-    loadingText: _d2I18n.default.t('Loading line lists'),
-    errorTitle: _d2I18n.default.t("Couldn't load line lists"),
-    errorText: _d2I18n.default.t('There was a problem loading line lists. Try again or contact your system administrator.'),
-    noDataText: _d2I18n.default.t('No line lists found. Click New line list to get started.'),
-    noFilteredDataText: _d2I18n.default.t("No line lists found. Try adjusting your search or filter options to find what you're looking for."),
-    newButtonLabel: _d2I18n.default.t('New line list')
   }
 };
+
+// Event visualizations use the same texts as visualizations
+texts[AO_TYPE_EVENT_VISUALIZATION] = texts[AO_TYPE_VISUALIZATION];
 const getTranslatedString = (type, key) => (texts[type] || texts[NO_TYPE])[key];
 exports.getTranslatedString = getTranslatedString;

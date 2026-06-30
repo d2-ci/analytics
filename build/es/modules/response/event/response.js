@@ -51,7 +51,16 @@ export const getItemFormatterByValueType = valueType => {
 };
 const EXCLUDED_HEADER_NAMES = new Set([DIMENSION_ID_PERIOD, DIMENSION_ID_ORGUNIT, 'lastupdated', 'created', 'completed']);
 const EXCLUDED_HEADER_SUFFIXES = ['.eventdate', '.enrollmentdate', '.scheduleddate', '.incidentdate', '.ou'];
-const isIncludedHeader = header => Boolean(header.meta) && !EXCLUDED_HEADER_NAMES.has(header.name) && !EXCLUDED_HEADER_SUFFIXES.some(suffix => header.name.endsWith(suffix));
+
+// Time/org-unit dimensions must keep the dimension members provided by the
+// server (e.g. all the period buckets of a relative period like LAST_12_MONTHS)
+// instead of having them re-derived from the data rows by applyDefaultHandler.
+// EXCLUDED_HEADER_SUFFIXES already covers the program-stage-prefixed forms
+// (e.g. "<stageId>.eventdate"); their bare, program-level counterparts
+// (e.g. "enrollmentdate") must be excluded too, otherwise a response with no
+// rows would re-derive an empty members list and collapse the pivot table.
+const isExcludedHeaderName = name => EXCLUDED_HEADER_NAMES.has(name) || EXCLUDED_HEADER_SUFFIXES.some(suffix => name.endsWith(suffix) || name === suffix.slice(1));
+const isIncludedHeader = header => Boolean(header.meta) && !isExcludedHeaderName(header.name);
 export const transformResponse = (response, {
   hideNaData = false
 } = {}) => {

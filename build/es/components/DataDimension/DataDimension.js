@@ -35,6 +35,7 @@ const DataDimension = ({
   const supportsEDI = dataTypes.map(({
     id
   }) => id).includes(DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM);
+  const supportsOptionSetId = serverVersion.minor >= 42;
   const [currentCalculation, setCurrentCalculation] = useState();
   const [currentDataItem, setCurrentDataItem] = useState();
   const [infoDataItem, setInfoDataItem] = useState();
@@ -90,6 +91,7 @@ const DataDimension = ({
     dataTypes: dataTypes,
     itemsRef: itemsRef,
     supportsEDI: supportsEDI,
+    supportsOptionSetId: supportsOptionSetId,
     onEDISave: onCalculationSave,
     isOptionViewMode: Boolean(currentDataItem),
     currentCalculation: currentCalculation,

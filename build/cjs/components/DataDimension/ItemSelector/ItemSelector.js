@@ -115,6 +115,7 @@ const ItemSelector = ({
   onEditClick,
   isOptionViewMode,
   supportsEDI,
+  supportsOptionSetId,
   height = _dimensionSelectorHelper.TRANSFER_HEIGHT,
   heightCalculation,
   maxSelections
@@ -149,7 +150,8 @@ const ItemSelector = ({
       nameProp: displayNameProp,
       page,
       filter: state.filter,
-      searchTerm: state.searchTerm
+      searchTerm: state.searchTerm,
+      supportsOptionSetId
     });
     const newOptions = [];
     (_result$dimensionItem = result.dimensionItems) === null || _result$dimensionItem === void 0 || _result$dimensionItem.forEach(item => {
@@ -413,6 +415,7 @@ ItemSelector.propTypes = {
   setCurrentCalculation: _propTypes.default.func,
   setInfoDataItem: _propTypes.default.func,
   supportsEDI: _propTypes.default.bool,
+  supportsOptionSetId: _propTypes.default.bool,
   onEDISave: _propTypes.default.func,
   onEditClick: _propTypes.default.func
 };
