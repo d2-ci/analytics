@@ -8,8 +8,6 @@ const OPERATORS = getOperators();
 const MathOperatorSelector = ({
   onClick
 }) => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-  className: `jsx-${styles.__hash}` + " " + "wrapper"
-}, /*#__PURE__*/React.createElement("div", {
   "data-test": "operators-list",
   className: `jsx-${styles.__hash}` + " " + "operators"
 }, OPERATORS.map(({
@@ -23,7 +21,7 @@ const MathOperatorSelector = ({
   type: type,
   index: index,
   onClick: onClick
-})))), /*#__PURE__*/React.createElement(_JSXStyle, {
+}))), /*#__PURE__*/React.createElement(_JSXStyle, {
   id: styles.__hash
 }, styles));
 MathOperatorSelector.propTypes = {

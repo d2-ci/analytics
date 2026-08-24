@@ -26,7 +26,6 @@ const FormulaField = ({
   focusItemId,
   onChange,
   onClick,
-  onDoubleClick,
   loading
 }) => {
   const {
@@ -65,7 +64,6 @@ const FormulaField = ({
     isLast: index === items.length - 1,
     onChange: onChange,
     onClick: onClick,
-    onDoubleClick: onDoubleClick,
     overLastDropZone: overLastDropZone
   }))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
@@ -74,7 +72,6 @@ const FormulaField = ({
 FormulaField.propTypes = {
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
-  onDoubleClick: PropTypes.func.isRequired,
   focusItemId: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,

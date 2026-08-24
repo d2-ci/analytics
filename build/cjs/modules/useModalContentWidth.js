@@ -5,16 +5,20 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.useModalContentWidth = void 0;
 var _react = require("react");
-var _utils = require("../../../modules/utils.js");
+var _utils = require("./utils.js");
 const MODAL_SIDE_PADDING = 2 * 24;
 const MODAL_SIDE_MARGINS = 2 * 128;
-const computeModalContentWidth = windowWidth => {
-  return windowWidth - MODAL_SIDE_MARGINS - MODAL_SIDE_PADDING;
+const computeModalContentWidth = (windowWidth, minWidth, maxWidth) => {
+  const width = windowWidth - MODAL_SIDE_MARGINS - MODAL_SIDE_PADDING;
+  return Math.min(Math.max(width, minWidth), maxWidth);
 };
-const useModalContentWidth = () => {
+const useModalContentWidth = ({
+  minWidth = 0,
+  maxWidth = Infinity
+} = {}) => {
   const [windowWidth, setWindowWidth] = (0, _react.useState)(window.innerWidth);
   const debouncedWindowWidth = (0, _utils.useDebounce)(windowWidth, 150);
-  const [modalContentWidth, setModalContentWidth] = (0, _react.useState)(computeModalContentWidth(windowWidth));
+  const [modalContentWidth, setModalContentWidth] = (0, _react.useState)(computeModalContentWidth(windowWidth, minWidth, maxWidth));
   (0, _react.useEffect)(() => {
     const onResize = () => {
       setWindowWidth(window.innerWidth);
@@ -25,8 +29,8 @@ const useModalContentWidth = () => {
     };
   }, []);
   (0, _react.useEffect)(() => {
-    setModalContentWidth(computeModalContentWidth(debouncedWindowWidth));
-  }, [debouncedWindowWidth]);
+    setModalContentWidth(computeModalContentWidth(debouncedWindowWidth, minWidth, maxWidth));
+  }, [debouncedWindowWidth, minWidth, maxWidth]);
   return modalContentWidth;
 };
 exports.useModalContentWidth = useModalContentWidth;

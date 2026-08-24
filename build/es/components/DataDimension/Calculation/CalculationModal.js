@@ -1,21 +1,35 @@
 import _JSXStyle from "styled-jsx/style";
 import { useAlert, useDataMutation, useDataQuery } from '@dhis2/app-runtime';
-import { Button, Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Help, InputField, NoticeBox, Popper, Portal } from '@dhis2/ui';
+import { Button, Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, IconQuestion16, InputField, Popper, Portal } from '@dhis2/ui';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import { createCalculationMutation, deleteCalculationMutation, updateCalculationMutation, validateIndicatorExpressionMutation } from '../../../api/expression.js';
 import i18n from '../../../locales/index.js';
 import { parseExpressionToArray, parseArrayToExpression, validateExpression, getOperators, EXPRESSION_TYPE_DATA, EXPRESSION_TYPE_NUMBER, EXPRESSION_TYPE_OPERATOR, INVALID_EXPRESSION, VALID_EXPRESSION, getItemIdsFromExpression } from '../../../modules/expressions.js';
+import { useModalContentWidth } from '../../../modules/useModalContentWidth.js';
 import { OfflineTooltip as Tooltip } from '../../OfflineTooltip.js';
 import DataElementSelector from './DataElementSelector.js';
 import DndContext, { OPTIONS_PANEL, isInteractiveElement } from './DndContext.js';
 import FormulaField, { LAST_DROPZONE_ID, FORMULA_BOX_ID } from './FormulaField.js';
-import MathOperatorSelector from './MathOperatorSelector.js';
+import FormulaToolbar from './FormulaToolbar.js';
 import styles from './styles/CalculationModal.style.js';
 const FIRST_POSITION = 0;
 const LAST_POSITION = -1;
 const CALCULATION_PROP_DEFAULT = {};
 const OPERATORS = getOperators();
+// Matches the content width of the previous fixed `large` Modal size, so
+// the modal never gets narrower than it used to on small windows.
+const MODAL_MIN_CONTENT_WIDTH = 740;
+// Caps how far the modal grows on wide screens, so the two columns don't
+// stretch out further than is useful.
+const MODAL_MAX_CONTENT_WIDTH = 1000;
+const getContentWidthCSS = width => ({
+  styles: /*#__PURE__*/React.createElement(_JSXStyle, {
+    id: "3490052393",
+    dynamic: [width]
+  }, [`.content.__jsx-style-dynamic-selector{width:${width}px;}`]),
+  className: _JSXStyle.dynamic([["3490052393", [width]]])
+});
 const Key = ({
   children
 }) => /*#__PURE__*/React.createElement("kbd", {
@@ -28,24 +42,38 @@ Key.propTypes = {
 };
 const ShortcutsPopoverContent = () => /*#__PURE__*/React.createElement("div", {
   className: `jsx-${styles.__hash}` + " " + "shortcuts"
-}, /*#__PURE__*/React.createElement("ul", {
+}, /*#__PURE__*/React.createElement("h4", {
+  className: `jsx-${styles.__hash}` + " " + "shortcuts-header"
+}, i18n.t('Usage tips')), /*#__PURE__*/React.createElement("ul", {
   className: `jsx-${styles.__hash}`
 }, /*#__PURE__*/React.createElement("li", {
   className: `jsx-${styles.__hash}`
-}, /*#__PURE__*/React.createElement("span", {
-  className: `jsx-${styles.__hash}` + " " + "shortcut-keys"
-}, /*#__PURE__*/React.createElement(Key, null, "Enter"), /*#__PURE__*/React.createElement(Key, null, "Space")), i18n.t('Add or select the focused item')), /*#__PURE__*/React.createElement("li", {
+}, i18n.t('Click or drag a data element or operator to add it to the formula.')), /*#__PURE__*/React.createElement("li", {
   className: `jsx-${styles.__hash}`
-}, /*#__PURE__*/React.createElement("span", {
-  className: `jsx-${styles.__hash}` + " " + "shortcut-keys"
-}, /*#__PURE__*/React.createElement(Key, null, "\u2190"), /*#__PURE__*/React.createElement(Key, null, "\u2192")), i18n.t('Move the selected item')), /*#__PURE__*/React.createElement("li", {
+}, i18n.t('Drag an item to reorder it.')), /*#__PURE__*/React.createElement("li", {
   className: `jsx-${styles.__hash}`
-}, /*#__PURE__*/React.createElement("span", {
+}, i18n.t('Select an item, then click'), ' ', /*#__PURE__*/React.createElement("strong", {
+  className: `jsx-${styles.__hash}`
+}, i18n.t('Remove item')), ' ', i18n.t('to delete it.'))), /*#__PURE__*/React.createElement("h4", {
+  className: `jsx-${styles.__hash}` + " " + "shortcuts-header"
+}, i18n.t('Keyboard shortcuts')), /*#__PURE__*/React.createElement("ul", {
+  className: `jsx-${styles.__hash}`
+}, /*#__PURE__*/React.createElement("li", {
+  className: `jsx-${styles.__hash}`
+}, i18n.t('Press'), ' ', /*#__PURE__*/React.createElement("span", {
   className: `jsx-${styles.__hash}` + " " + "shortcut-keys"
-}, /*#__PURE__*/React.createElement(Key, null, "+"), /*#__PURE__*/React.createElement(Key, null, "-"), /*#__PURE__*/React.createElement(Key, null, "*"), /*#__PURE__*/React.createElement(Key, null, "/"), /*#__PURE__*/React.createElement(Key, null, "("), /*#__PURE__*/React.createElement(Key, null, ")")), i18n.t('Insert an operator after the selected item'))), /*#__PURE__*/React.createElement(_JSXStyle, {
+}, /*#__PURE__*/React.createElement(Key, null, "Enter"), i18n.t('or'), /*#__PURE__*/React.createElement(Key, null, "Space")), ' ', i18n.t('to add or select the focused item.')), /*#__PURE__*/React.createElement("li", {
+  className: `jsx-${styles.__hash}`
+}, i18n.t('Press'), ' ', /*#__PURE__*/React.createElement("span", {
+  className: `jsx-${styles.__hash}` + " " + "shortcut-keys"
+}, /*#__PURE__*/React.createElement(Key, null, "\u2190"), i18n.t('or'), /*#__PURE__*/React.createElement(Key, null, "\u2192")), ' ', i18n.t('to move the selected item.')), /*#__PURE__*/React.createElement("li", {
+  className: `jsx-${styles.__hash}`
+}, i18n.t('Press'), ' ', /*#__PURE__*/React.createElement("span", {
+  className: `jsx-${styles.__hash}` + " " + "shortcut-keys"
+}, /*#__PURE__*/React.createElement(Key, null, "+"), /*#__PURE__*/React.createElement(Key, null, "-"), /*#__PURE__*/React.createElement(Key, null, "*"), /*#__PURE__*/React.createElement(Key, null, "/"), /*#__PURE__*/React.createElement(Key, null, "("), /*#__PURE__*/React.createElement(Key, null, ")")), ' ', i18n.t('to insert an operator after the selected item.'))), /*#__PURE__*/React.createElement(_JSXStyle, {
   id: styles.__hash
 }, styles));
-const KeyboardNavigationHint = () => {
+const UsageHint = () => {
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef();
   return /*#__PURE__*/React.createElement("span", {
@@ -53,14 +81,15 @@ const KeyboardNavigationHint = () => {
   }, /*#__PURE__*/React.createElement("button", {
     type: "button",
     ref: triggerRef,
-    "data-test": "keyboard-navigation-hint",
+    "data-test": "usage-hint",
+    "aria-label": i18n.t('Usage tips'),
     onMouseEnter: () => setIsOpen(true),
     onMouseLeave: () => setIsOpen(false),
     onFocus: () => setIsOpen(true),
     onBlur: () => setIsOpen(false),
     className: `jsx-${styles.__hash}` + " " + "hint-trigger"
-  }, i18n.t('Keyboard navigation')), isOpen && /*#__PURE__*/React.createElement(Portal, null, /*#__PURE__*/React.createElement(Popper, {
-    placement: "top-start",
+  }, /*#__PURE__*/React.createElement(IconQuestion16, null)), isOpen && /*#__PURE__*/React.createElement(Portal, null, /*#__PURE__*/React.createElement(Popper, {
+    placement: "bottom-start",
     reference: triggerRef
   }, /*#__PURE__*/React.createElement(ShortcutsPopoverContent, null))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
@@ -161,6 +190,11 @@ const CalculationModal = ({
   const [isSavingCalculation, setIsSavingCalculation] = useState();
   const [focusItemId, setFocusItemId] = useState(null);
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const modalContentWidth = useModalContentWidth({
+    minWidth: MODAL_MIN_CONTENT_WIDTH,
+    maxWidth: MODAL_MAX_CONTENT_WIDTH
+  });
+  const contentWidthCSS = getContentWidthCSS(modalContentWidth);
   const expressionStatus = validationOutput === null || validationOutput === void 0 ? void 0 : validationOutput.status;
   const validationMessage = expressionStatus === VALID_EXPRESSION ? i18n.t('The formula is valid') : validationOutput === null || validationOutput === void 0 ? void 0 : validationOutput.message;
   const selectItem = itemId => setSelectedItemId(prevSelected => {
@@ -400,7 +434,7 @@ const CalculationModal = ({
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Modal, {
     dataTest: "calculation-modal",
     position: "top",
-    large: true
+    fluid: true
   }, /*#__PURE__*/React.createElement(ModalTitle, {
     dataTest: "calculation-modal-title"
   }, calculation.id ? i18n.t('Data / Edit calculation') : i18n.t('Data / New calculation')), /*#__PURE__*/React.createElement(ModalContent, {
@@ -420,7 +454,7 @@ const CalculationModal = ({
     onDragStart: () => setFocusItemId(null),
     onDragEnd: addOrMoveDraggedItem
   }, /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + "content"
+    className: `jsx-${styles.__hash}` + " " + `content ${contentWidthCSS.className}`
   }, /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "left-section"
   }, /*#__PURE__*/React.createElement(DataElementSelector, {
@@ -431,44 +465,27 @@ const CalculationModal = ({
     className: `jsx-${styles.__hash}` + " " + "right-section"
   }, /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "formula-section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "sub-header-row"
   }, /*#__PURE__*/React.createElement("h4", {
     className: `jsx-${styles.__hash}` + " " + "sub-header"
-  }, i18n.t('Formula')), /*#__PURE__*/React.createElement(FormulaField, {
+  }, i18n.t('Formula')), /*#__PURE__*/React.createElement(UsageHint, null)), /*#__PURE__*/React.createElement(FormulaToolbar, {
+    onAddOperator: addItem,
+    onRemove: () => removeItem(selectedItemId),
+    onValidate: validate,
+    canRemove: Boolean(selectedItemId),
+    isValidating: isValidating,
+    isLoading: isLoading,
+    validationStatus: expressionStatus,
+    validationMessage: validationMessage
+  }), /*#__PURE__*/React.createElement(FormulaField, {
     items: expressionArray,
     selectedItemId: selectedItemId,
     focusItemId: focusItemId,
     onChange: setItemValue,
     onClick: selectItem,
-    onDoubleClick: removeItem,
     loading: !expressionArray
-  }), /*#__PURE__*/React.createElement(MathOperatorSelector, {
-    onClick: addItem
-  }), /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + "formula-actions"
-  }, /*#__PURE__*/React.createElement(Button, {
-    small: true,
-    secondary: true,
-    onClick: () => removeItem(selectedItemId),
-    dataTest: "remove-button",
-    disabled: !selectedItemId
-  }, i18n.t('Remove item')), /*#__PURE__*/React.createElement(Button, {
-    small: true,
-    secondary: true,
-    onClick: validate,
-    dataTest: "validate-button",
-    loading: isValidating,
-    disabled: isLoading
-  }, i18n.t('Check formula')))), validationMessage && /*#__PURE__*/React.createElement("div", {
-    "data-test": "validation-message",
-    className: `jsx-${styles.__hash}` + " " + "validation-notice"
-  }, /*#__PURE__*/React.createElement(NoticeBox, {
-    error: expressionStatus === INVALID_EXPRESSION,
-    valid: expressionStatus === VALID_EXPRESSION
-  }, validationMessage)), /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + "usage-legend"
-  }, /*#__PURE__*/React.createElement(Help, null, i18n.t('Drag or click a data element or operator to add it to the formula. Drag to reorder. Select an item and click Remove item, or double-click, to delete it.')), /*#__PURE__*/React.createElement("p", {
-    className: `jsx-${styles.__hash}` + " " + "see-also"
-  }, /*#__PURE__*/React.createElement(KeyboardNavigationHint, null))))))), /*#__PURE__*/React.createElement(ModalActions, {
+  })))))), /*#__PURE__*/React.createElement(ModalActions, {
     dataTest: "calculation-modal-actions"
   }, /*#__PURE__*/React.createElement(ButtonStrip, null, calculation.id && /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "delete-button"
@@ -504,7 +521,7 @@ const CalculationModal = ({
   }, i18n.t('Cancel')), /*#__PURE__*/React.createElement(Button, {
     onClick: onDeleteClick,
     destructive: true
-  }, i18n.t('Yes, delete'))))), /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, i18n.t('Yes, delete'))))), contentWidthCSS.styles, /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

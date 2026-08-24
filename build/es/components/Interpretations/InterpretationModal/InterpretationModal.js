@@ -4,9 +4,9 @@ import { Modal, ModalActions, ModalContent, NoticeBox, Button, spacers, colors, 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
+import { useModalContentWidth } from '../../../modules/useModalContentWidth.js';
 import { useActiveInterpretation, useInterpretationsCurrentUser } from '../InterpretationsProvider/hooks.js';
 import { InterpretationThread } from './InterpretationThread.js';
-import { useModalContentWidth } from './useModalContentWidth.js';
 const modalCSS = {
   styles: /*#__PURE__*/React.createElement(_JSXStyle, {
     id: "2559940363"

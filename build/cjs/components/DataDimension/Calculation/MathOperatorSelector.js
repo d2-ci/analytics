@@ -15,8 +15,6 @@ const OPERATORS = (0, _expressions.getOperators)();
 const MathOperatorSelector = ({
   onClick
 }) => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-  className: `jsx-${_MathOperatorSelectorStyle.default.__hash}` + " " + "wrapper"
-}, /*#__PURE__*/_react.default.createElement("div", {
   "data-test": "operators-list",
   className: `jsx-${_MathOperatorSelectorStyle.default.__hash}` + " " + "operators"
 }, OPERATORS.map(({
@@ -30,7 +28,7 @@ const MathOperatorSelector = ({
   type: type,
   index: index,
   onClick: onClick
-})))), /*#__PURE__*/_react.default.createElement(_style.default, {
+}))), /*#__PURE__*/_react.default.createElement(_style.default, {
   id: _MathOperatorSelectorStyle.default.__hash
 }, _MathOperatorSelectorStyle.default));
 MathOperatorSelector.propTypes = {

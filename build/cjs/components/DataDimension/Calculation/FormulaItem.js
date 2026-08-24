@@ -5,7 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
-var _ui = require("@dhis2/ui");
 var _sortable = require("@dnd-kit/sortable");
 var _utilities = require("@dnd-kit/utilities");
 var _classnames = _interopRequireDefault(require("classnames"));
@@ -22,7 +21,6 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 const BEFORE = 'BEFORE';
 const AFTER = 'AFTER';
-const DOUBLE_CLICK_THRESHOLD_MS = 300;
 const FormulaItem = ({
   id,
   label,
@@ -33,7 +31,6 @@ const FormulaItem = ({
   overLastDropZone,
   onChange,
   onClick,
-  onDoubleClick,
   hasFocus
 }) => {
   const {
@@ -55,11 +52,7 @@ const FormulaItem = ({
     }
   });
   const inputRef = (0, _react.useRef)(null);
-  const clickTimeoutRef = (0, _react.useRef)(null);
   const ignoreClickRef = (0, _react.useRef)(false);
-  (0, _react.useEffect)(() => {
-    return () => clearTimeout(clickTimeoutRef.current);
-  }, []);
   (0, _react.useEffect)(() => {
     if (hasFocus && inputRef.current) {
       // setTimeout seems to be needed in order for the cursor
@@ -105,20 +98,7 @@ const FormulaItem = ({
       inputRef.current && inputRef.current.focus();
       return;
     }
-    // Delay in case this click is the first of a double-click, so
-    // selecting the item doesn't flicker in between removing it.
-    clearTimeout(clickTimeoutRef.current);
-    clickTimeoutRef.current = setTimeout(() => {
-      onClick(id);
-    }, DOUBLE_CLICK_THRESHOLD_MS);
-  };
-  const handleDoubleClick = e => {
-    if ((0, _DndContext.isInteractiveElement)(e.target)) {
-      inputRef.current && inputRef.current.focus();
-      return;
-    }
-    clearTimeout(clickTimeoutRef.current);
-    onDoubleClick(id);
+    onClick(id);
   };
   const handleChange = e => onChange({
     itemId: id,
@@ -130,7 +110,7 @@ const FormulaItem = ({
     }
     if (e.key === 'Enter' || e.key === ' ') {
       // role="button" from dnd-kit also synthesizes a click on Enter/Space;
-      // ignore that click so selection is not toggled off 300ms later.
+      // ignore that click so selection is not toggled off right after.
       ignoreClickRef.current = true;
     }
     (0, _DndContext.onActivationKeydown)(() => onClick(id))(e);
@@ -159,10 +139,7 @@ const FormulaItem = ({
       }, _FormulaItemStyle.default));
     }
     if (type === _expressions.EXPRESSION_TYPE_DATA) {
-      return /*#__PURE__*/_react.default.createElement(_ui.Tooltip, {
-        content: label,
-        placement: "bottom"
-      }, /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react.default.createElement("div", {
         className: `jsx-${_FormulaItemStyle.default.__hash}` + " " + ((0, _classnames.default)('content', 'data', {
           highlighted: isHighlighted
         }) || "")
@@ -172,7 +149,7 @@ const FormulaItem = ({
         className: `jsx-${_FormulaItemStyle.default.__hash}` + " " + "label"
       }, label), /*#__PURE__*/_react.default.createElement(_style.default, {
         id: _FormulaItemStyle.default.__hash
-      }, _FormulaItemStyle.default)));
+      }, _FormulaItemStyle.default));
     }
     return /*#__PURE__*/_react.default.createElement("div", {
       className: `jsx-${_FormulaItemStyle.default.__hash}` + " " + ((0, _classnames.default)('content', 'operator', {
@@ -192,7 +169,6 @@ const FormulaItem = ({
     }) || "")
   }, /*#__PURE__*/_react.default.createElement("div", _extends({}, attributes, listeners, {
     onClick: handleClick,
-    onDoubleClick: handleDoubleClick,
     onKeyDown: handleKeyDown,
     "data-test": `formula-item-${id}`,
     className: `jsx-${_FormulaItemStyle.default.__hash}` + " " + ((0, _classnames.default)('formula-item', {
@@ -210,7 +186,6 @@ FormulaItem.propTypes = {
   type: _propTypes.default.string.isRequired,
   onChange: _propTypes.default.func.isRequired,
   onClick: _propTypes.default.func.isRequired,
-  onDoubleClick: _propTypes.default.func.isRequired,
   hasFocus: _propTypes.default.bool,
   isHighlighted: _propTypes.default.bool,
   isLast: _propTypes.default.bool,

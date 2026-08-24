@@ -12,11 +12,12 @@ var _react = _interopRequireWildcard(require("react"));
 var _expression = require("../../../api/expression.js");
 var _index = _interopRequireDefault(require("../../../locales/index.js"));
 var _expressions = require("../../../modules/expressions.js");
+var _useModalContentWidth = require("../../../modules/useModalContentWidth.js");
 var _OfflineTooltip = require("../../OfflineTooltip.js");
 var _DataElementSelector = _interopRequireDefault(require("./DataElementSelector.js"));
 var _DndContext = _interopRequireWildcard(require("./DndContext.js"));
 var _FormulaField = _interopRequireWildcard(require("./FormulaField.js"));
-var _MathOperatorSelector = _interopRequireDefault(require("./MathOperatorSelector.js"));
+var _FormulaToolbar = _interopRequireDefault(require("./FormulaToolbar.js"));
 var _CalculationModalStyle = _interopRequireDefault(require("./styles/CalculationModal.style.js"));
 function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -24,6 +25,19 @@ const FIRST_POSITION = 0;
 const LAST_POSITION = -1;
 const CALCULATION_PROP_DEFAULT = {};
 const OPERATORS = (0, _expressions.getOperators)();
+// Matches the content width of the previous fixed `large` Modal size, so
+// the modal never gets narrower than it used to on small windows.
+const MODAL_MIN_CONTENT_WIDTH = 740;
+// Caps how far the modal grows on wide screens, so the two columns don't
+// stretch out further than is useful.
+const MODAL_MAX_CONTENT_WIDTH = 1000;
+const getContentWidthCSS = width => ({
+  styles: /*#__PURE__*/_react.default.createElement(_style.default, {
+    id: "3490052393",
+    dynamic: [width]
+  }, [`.content.__jsx-style-dynamic-selector{width:${width}px;}`]),
+  className: _style.default.dynamic([["3490052393", [width]]])
+});
 const Key = ({
   children
 }) => /*#__PURE__*/_react.default.createElement("kbd", {
@@ -36,24 +50,38 @@ Key.propTypes = {
 };
 const ShortcutsPopoverContent = () => /*#__PURE__*/_react.default.createElement("div", {
   className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcuts"
-}, /*#__PURE__*/_react.default.createElement("ul", {
+}, /*#__PURE__*/_react.default.createElement("h4", {
+  className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcuts-header"
+}, _index.default.t('Usage tips')), /*#__PURE__*/_react.default.createElement("ul", {
   className: `jsx-${_CalculationModalStyle.default.__hash}`
 }, /*#__PURE__*/_react.default.createElement("li", {
   className: `jsx-${_CalculationModalStyle.default.__hash}`
-}, /*#__PURE__*/_react.default.createElement("span", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcut-keys"
-}, /*#__PURE__*/_react.default.createElement(Key, null, "Enter"), /*#__PURE__*/_react.default.createElement(Key, null, "Space")), _index.default.t('Add or select the focused item')), /*#__PURE__*/_react.default.createElement("li", {
+}, _index.default.t('Click or drag a data element or operator to add it to the formula.')), /*#__PURE__*/_react.default.createElement("li", {
   className: `jsx-${_CalculationModalStyle.default.__hash}`
-}, /*#__PURE__*/_react.default.createElement("span", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcut-keys"
-}, /*#__PURE__*/_react.default.createElement(Key, null, "\u2190"), /*#__PURE__*/_react.default.createElement(Key, null, "\u2192")), _index.default.t('Move the selected item')), /*#__PURE__*/_react.default.createElement("li", {
+}, _index.default.t('Drag an item to reorder it.')), /*#__PURE__*/_react.default.createElement("li", {
   className: `jsx-${_CalculationModalStyle.default.__hash}`
-}, /*#__PURE__*/_react.default.createElement("span", {
+}, _index.default.t('Select an item, then click'), ' ', /*#__PURE__*/_react.default.createElement("strong", {
+  className: `jsx-${_CalculationModalStyle.default.__hash}`
+}, _index.default.t('Remove item')), ' ', _index.default.t('to delete it.'))), /*#__PURE__*/_react.default.createElement("h4", {
+  className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcuts-header"
+}, _index.default.t('Keyboard shortcuts')), /*#__PURE__*/_react.default.createElement("ul", {
+  className: `jsx-${_CalculationModalStyle.default.__hash}`
+}, /*#__PURE__*/_react.default.createElement("li", {
+  className: `jsx-${_CalculationModalStyle.default.__hash}`
+}, _index.default.t('Press'), ' ', /*#__PURE__*/_react.default.createElement("span", {
   className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcut-keys"
-}, /*#__PURE__*/_react.default.createElement(Key, null, "+"), /*#__PURE__*/_react.default.createElement(Key, null, "-"), /*#__PURE__*/_react.default.createElement(Key, null, "*"), /*#__PURE__*/_react.default.createElement(Key, null, "/"), /*#__PURE__*/_react.default.createElement(Key, null, "("), /*#__PURE__*/_react.default.createElement(Key, null, ")")), _index.default.t('Insert an operator after the selected item'))), /*#__PURE__*/_react.default.createElement(_style.default, {
+}, /*#__PURE__*/_react.default.createElement(Key, null, "Enter"), _index.default.t('or'), /*#__PURE__*/_react.default.createElement(Key, null, "Space")), ' ', _index.default.t('to add or select the focused item.')), /*#__PURE__*/_react.default.createElement("li", {
+  className: `jsx-${_CalculationModalStyle.default.__hash}`
+}, _index.default.t('Press'), ' ', /*#__PURE__*/_react.default.createElement("span", {
+  className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcut-keys"
+}, /*#__PURE__*/_react.default.createElement(Key, null, "\u2190"), _index.default.t('or'), /*#__PURE__*/_react.default.createElement(Key, null, "\u2192")), ' ', _index.default.t('to move the selected item.')), /*#__PURE__*/_react.default.createElement("li", {
+  className: `jsx-${_CalculationModalStyle.default.__hash}`
+}, _index.default.t('Press'), ' ', /*#__PURE__*/_react.default.createElement("span", {
+  className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcut-keys"
+}, /*#__PURE__*/_react.default.createElement(Key, null, "+"), /*#__PURE__*/_react.default.createElement(Key, null, "-"), /*#__PURE__*/_react.default.createElement(Key, null, "*"), /*#__PURE__*/_react.default.createElement(Key, null, "/"), /*#__PURE__*/_react.default.createElement(Key, null, "("), /*#__PURE__*/_react.default.createElement(Key, null, ")")), ' ', _index.default.t('to insert an operator after the selected item.'))), /*#__PURE__*/_react.default.createElement(_style.default, {
   id: _CalculationModalStyle.default.__hash
 }, _CalculationModalStyle.default));
-const KeyboardNavigationHint = () => {
+const UsageHint = () => {
   const [isOpen, setIsOpen] = (0, _react.useState)(false);
   const triggerRef = (0, _react.useRef)();
   return /*#__PURE__*/_react.default.createElement("span", {
@@ -61,14 +89,15 @@ const KeyboardNavigationHint = () => {
   }, /*#__PURE__*/_react.default.createElement("button", {
     type: "button",
     ref: triggerRef,
-    "data-test": "keyboard-navigation-hint",
+    "data-test": "usage-hint",
+    "aria-label": _index.default.t('Usage tips'),
     onMouseEnter: () => setIsOpen(true),
     onMouseLeave: () => setIsOpen(false),
     onFocus: () => setIsOpen(true),
     onBlur: () => setIsOpen(false),
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "hint-trigger"
-  }, _index.default.t('Keyboard navigation')), isOpen && /*#__PURE__*/_react.default.createElement(_ui.Portal, null, /*#__PURE__*/_react.default.createElement(_ui.Popper, {
-    placement: "top-start",
+  }, /*#__PURE__*/_react.default.createElement(_ui.IconQuestion16, null)), isOpen && /*#__PURE__*/_react.default.createElement(_ui.Portal, null, /*#__PURE__*/_react.default.createElement(_ui.Popper, {
+    placement: "bottom-start",
     reference: triggerRef
   }, /*#__PURE__*/_react.default.createElement(ShortcutsPopoverContent, null))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _CalculationModalStyle.default.__hash
@@ -169,6 +198,11 @@ const CalculationModal = ({
   const [isSavingCalculation, setIsSavingCalculation] = (0, _react.useState)();
   const [focusItemId, setFocusItemId] = (0, _react.useState)(null);
   const [selectedItemId, setSelectedItemId] = (0, _react.useState)(null);
+  const modalContentWidth = (0, _useModalContentWidth.useModalContentWidth)({
+    minWidth: MODAL_MIN_CONTENT_WIDTH,
+    maxWidth: MODAL_MAX_CONTENT_WIDTH
+  });
+  const contentWidthCSS = getContentWidthCSS(modalContentWidth);
   const expressionStatus = validationOutput === null || validationOutput === void 0 ? void 0 : validationOutput.status;
   const validationMessage = expressionStatus === _expressions.VALID_EXPRESSION ? _index.default.t('The formula is valid') : validationOutput === null || validationOutput === void 0 ? void 0 : validationOutput.message;
   const selectItem = itemId => setSelectedItemId(prevSelected => {
@@ -408,7 +442,7 @@ const CalculationModal = ({
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ui.Modal, {
     dataTest: "calculation-modal",
     position: "top",
-    large: true
+    fluid: true
   }, /*#__PURE__*/_react.default.createElement(_ui.ModalTitle, {
     dataTest: "calculation-modal-title"
   }, calculation.id ? _index.default.t('Data / Edit calculation') : _index.default.t('Data / New calculation')), /*#__PURE__*/_react.default.createElement(_ui.ModalContent, {
@@ -428,7 +462,7 @@ const CalculationModal = ({
     onDragStart: () => setFocusItemId(null),
     onDragEnd: addOrMoveDraggedItem
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "content"
+    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + `content ${contentWidthCSS.className}`
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "left-section"
   }, /*#__PURE__*/_react.default.createElement(_DataElementSelector.default, {
@@ -439,44 +473,27 @@ const CalculationModal = ({
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "right-section"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "formula-section"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "sub-header-row"
   }, /*#__PURE__*/_react.default.createElement("h4", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "sub-header"
-  }, _index.default.t('Formula')), /*#__PURE__*/_react.default.createElement(_FormulaField.default, {
+  }, _index.default.t('Formula')), /*#__PURE__*/_react.default.createElement(UsageHint, null)), /*#__PURE__*/_react.default.createElement(_FormulaToolbar.default, {
+    onAddOperator: addItem,
+    onRemove: () => removeItem(selectedItemId),
+    onValidate: validate,
+    canRemove: Boolean(selectedItemId),
+    isValidating: isValidating,
+    isLoading: isLoading,
+    validationStatus: expressionStatus,
+    validationMessage: validationMessage
+  }), /*#__PURE__*/_react.default.createElement(_FormulaField.default, {
     items: expressionArray,
     selectedItemId: selectedItemId,
     focusItemId: focusItemId,
     onChange: setItemValue,
     onClick: selectItem,
-    onDoubleClick: removeItem,
     loading: !expressionArray
-  }), /*#__PURE__*/_react.default.createElement(_MathOperatorSelector.default, {
-    onClick: addItem
-  }), /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "formula-actions"
-  }, /*#__PURE__*/_react.default.createElement(_ui.Button, {
-    small: true,
-    secondary: true,
-    onClick: () => removeItem(selectedItemId),
-    dataTest: "remove-button",
-    disabled: !selectedItemId
-  }, _index.default.t('Remove item')), /*#__PURE__*/_react.default.createElement(_ui.Button, {
-    small: true,
-    secondary: true,
-    onClick: validate,
-    dataTest: "validate-button",
-    loading: isValidating,
-    disabled: isLoading
-  }, _index.default.t('Check formula')))), validationMessage && /*#__PURE__*/_react.default.createElement("div", {
-    "data-test": "validation-message",
-    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "validation-notice"
-  }, /*#__PURE__*/_react.default.createElement(_ui.NoticeBox, {
-    error: expressionStatus === _expressions.INVALID_EXPRESSION,
-    valid: expressionStatus === _expressions.VALID_EXPRESSION
-  }, validationMessage)), /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "usage-legend"
-  }, /*#__PURE__*/_react.default.createElement(_ui.Help, null, _index.default.t('Drag or click a data element or operator to add it to the formula. Drag to reorder. Select an item and click Remove item, or double-click, to delete it.')), /*#__PURE__*/_react.default.createElement("p", {
-    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "see-also"
-  }, /*#__PURE__*/_react.default.createElement(KeyboardNavigationHint, null))))))), /*#__PURE__*/_react.default.createElement(_ui.ModalActions, {
+  })))))), /*#__PURE__*/_react.default.createElement(_ui.ModalActions, {
     dataTest: "calculation-modal-actions"
   }, /*#__PURE__*/_react.default.createElement(_ui.ButtonStrip, null, calculation.id && /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "delete-button"
@@ -512,7 +529,7 @@ const CalculationModal = ({
   }, _index.default.t('Cancel')), /*#__PURE__*/_react.default.createElement(_ui.Button, {
     onClick: onDeleteClick,
     destructive: true
-  }, _index.default.t('Yes, delete'))))), /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, _index.default.t('Yes, delete'))))), contentWidthCSS.styles, /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _CalculationModalStyle.default.__hash
   }, _CalculationModalStyle.default));
 };
