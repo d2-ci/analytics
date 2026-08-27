@@ -63,10 +63,8 @@ const isExcludedHeaderName = name => EXCLUDED_HEADER_NAMES.has(name) || EXCLUDED
 const isIncludedHeader = header => Boolean(header.meta) && !isExcludedHeaderName(header.name);
 
 /* Display names supplied by the consuming app, keyed by `metaData.items` key.
- * The backend name for a dimension is not always the one the app shows the
- * user (the app has its own fallbacks and labels), and for some dimensions the
- * backend omits the item altogether, so these names win over the response and
- * may introduce an item that was not there. */
+ * The app has its own labels and fallbacks that the backend does not always
+ * match, so these win. A key with no item in the response gets one added. */
 const applyMetaDataItemNameOverrides = (items, metaDataItemNames) => Object.entries(metaDataItemNames).reduce((acc, [id, name]) => {
   acc[id] = {
     ...acc[id],
