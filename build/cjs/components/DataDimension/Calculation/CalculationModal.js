@@ -408,43 +408,43 @@ const CalculationModal = ({
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "right-section"
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + ((0, _classnames.default)('formula-section', {
-      valid: expressionStatus === _expressions.VALID_EXPRESSION,
-      invalid: expressionStatus === _expressions.INVALID_EXPRESSION
-    }) || "")
+    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "formula-section"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "sub-header-row"
   }, /*#__PURE__*/_react.default.createElement("h4", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "sub-header"
-  }, _index.default.t('Formula')), /*#__PURE__*/_react.default.createElement("div", {
-    "aria-live": "polite",
-    "data-test": "validation-message",
-    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "validation-status"
-  }, validationMessage && /*#__PURE__*/_react.default.createElement("span", {
-    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + ((0, _classnames.default)('status', {
-      valid: expressionStatus === _expressions.VALID_EXPRESSION
-    }) || "")
-  }, expressionStatus === _expressions.VALID_EXPRESSION ? /*#__PURE__*/_react.default.createElement(_ui.IconCheckmarkCircle16, {
-    color: _ui.colors.green700
-  }) : /*#__PURE__*/_react.default.createElement(_ui.IconErrorFilled16, {
-    color: _ui.colors.red700
-  }), /*#__PURE__*/_react.default.createElement("span", {
-    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "status-text"
-  }, validationMessage)))), /*#__PURE__*/_react.default.createElement(_FormulaToolbar.default, {
+  }, _index.default.t('Formula'))), /*#__PURE__*/_react.default.createElement(_FormulaToolbar.default, {
     onAddOperator: addItem,
     onRemove: () => removeItem(selectedItemId),
     onValidate: validate,
     canRemove: Boolean(selectedItemId),
     isValidating: isValidating,
     isLoading: isLoading
-  }), /*#__PURE__*/_react.default.createElement(_FormulaField.default, {
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + ((0, _classnames.default)('formula-box', {
+      valid: expressionStatus === _expressions.VALID_EXPRESSION,
+      invalid: expressionStatus === _expressions.INVALID_EXPRESSION
+    }) || "")
+  }, /*#__PURE__*/_react.default.createElement(_FormulaField.default, {
     items: expressionArray,
     selectedItemId: selectedItemId,
     focusItemId: focusItemId,
     onChange: setItemValue,
     onClick: selectItem,
     loading: !expressionArray
-  })))))), /*#__PURE__*/_react.default.createElement(_ui.ModalActions, {
+  }), validationMessage && /*#__PURE__*/_react.default.createElement("div", {
+    "aria-live": "polite",
+    "data-test": "validation-message",
+    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "validation-bar"
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "status"
+  }, expressionStatus === _expressions.VALID_EXPRESSION ? /*#__PURE__*/_react.default.createElement(_ui.IconCheckmarkCircle16, {
+    color: _ui.colors.green700
+  }) : /*#__PURE__*/_react.default.createElement(_ui.IconErrorFilled16, {
+    color: _ui.colors.red700
+  }), /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "status-text"
+  }, validationMessage))))))))), /*#__PURE__*/_react.default.createElement(_ui.ModalActions, {
     dataTest: "calculation-modal-actions"
   }, /*#__PURE__*/_react.default.createElement(_ui.ButtonStrip, null, calculation.id && /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "delete-button"

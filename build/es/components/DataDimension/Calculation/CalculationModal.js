@@ -400,43 +400,43 @@ const CalculationModal = ({
   })), /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "right-section"
   }, /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + (cx('formula-section', {
-      valid: expressionStatus === VALID_EXPRESSION,
-      invalid: expressionStatus === INVALID_EXPRESSION
-    }) || "")
+    className: `jsx-${styles.__hash}` + " " + "formula-section"
   }, /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "sub-header-row"
   }, /*#__PURE__*/React.createElement("h4", {
     className: `jsx-${styles.__hash}` + " " + "sub-header"
-  }, i18n.t('Formula')), /*#__PURE__*/React.createElement("div", {
-    "aria-live": "polite",
-    "data-test": "validation-message",
-    className: `jsx-${styles.__hash}` + " " + "validation-status"
-  }, validationMessage && /*#__PURE__*/React.createElement("span", {
-    className: `jsx-${styles.__hash}` + " " + (cx('status', {
-      valid: expressionStatus === VALID_EXPRESSION
-    }) || "")
-  }, expressionStatus === VALID_EXPRESSION ? /*#__PURE__*/React.createElement(IconCheckmarkCircle16, {
-    color: colors.green700
-  }) : /*#__PURE__*/React.createElement(IconErrorFilled16, {
-    color: colors.red700
-  }), /*#__PURE__*/React.createElement("span", {
-    className: `jsx-${styles.__hash}` + " " + "status-text"
-  }, validationMessage)))), /*#__PURE__*/React.createElement(FormulaToolbar, {
+  }, i18n.t('Formula'))), /*#__PURE__*/React.createElement(FormulaToolbar, {
     onAddOperator: addItem,
     onRemove: () => removeItem(selectedItemId),
     onValidate: validate,
     canRemove: Boolean(selectedItemId),
     isValidating: isValidating,
     isLoading: isLoading
-  }), /*#__PURE__*/React.createElement(FormulaField, {
+  }), /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + (cx('formula-box', {
+      valid: expressionStatus === VALID_EXPRESSION,
+      invalid: expressionStatus === INVALID_EXPRESSION
+    }) || "")
+  }, /*#__PURE__*/React.createElement(FormulaField, {
     items: expressionArray,
     selectedItemId: selectedItemId,
     focusItemId: focusItemId,
     onChange: setItemValue,
     onClick: selectItem,
     loading: !expressionArray
-  })))))), /*#__PURE__*/React.createElement(ModalActions, {
+  }), validationMessage && /*#__PURE__*/React.createElement("div", {
+    "aria-live": "polite",
+    "data-test": "validation-message",
+    className: `jsx-${styles.__hash}` + " " + "validation-bar"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "status"
+  }, expressionStatus === VALID_EXPRESSION ? /*#__PURE__*/React.createElement(IconCheckmarkCircle16, {
+    color: colors.green700
+  }) : /*#__PURE__*/React.createElement(IconErrorFilled16, {
+    color: colors.red700
+  }), /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "status-text"
+  }, validationMessage))))))))), /*#__PURE__*/React.createElement(ModalActions, {
     dataTest: "calculation-modal-actions"
   }, /*#__PURE__*/React.createElement(ButtonStrip, null, calculation.id && /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "delete-button"
