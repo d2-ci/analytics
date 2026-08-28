@@ -382,7 +382,10 @@ const CalculationModal = ({
   }, /*#__PURE__*/_react.default.createElement(_ui.ModalTitle, {
     dataTest: "calculation-modal-title"
   }, calculation.id ? _index.default.t('Data / Edit calculation') : _index.default.t('Data / New calculation')), /*#__PURE__*/_react.default.createElement(_ui.ModalContent, {
-    dataTest: "calculation-modal-content"
+    dataTest: "calculation-modal-content",
+    className: "calculation-modal-content"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "modal-content-inner"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "name-field"
   }, /*#__PURE__*/_react.default.createElement(_ui.InputField, {
@@ -444,7 +447,7 @@ const CalculationModal = ({
     color: _ui.colors.red700
   }), /*#__PURE__*/_react.default.createElement("span", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "status-text"
-  }, validationMessage))))))))), /*#__PURE__*/_react.default.createElement(_ui.ModalActions, {
+  }, validationMessage)))))))))), /*#__PURE__*/_react.default.createElement(_ui.ModalActions, {
     dataTest: "calculation-modal-actions"
   }, /*#__PURE__*/_react.default.createElement(_ui.ButtonStrip, null, calculation.id && /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "delete-button"

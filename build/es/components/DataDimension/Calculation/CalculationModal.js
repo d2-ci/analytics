@@ -374,7 +374,10 @@ const CalculationModal = ({
   }, /*#__PURE__*/React.createElement(ModalTitle, {
     dataTest: "calculation-modal-title"
   }, calculation.id ? i18n.t('Data / Edit calculation') : i18n.t('Data / New calculation')), /*#__PURE__*/React.createElement(ModalContent, {
-    dataTest: "calculation-modal-content"
+    dataTest: "calculation-modal-content",
+    className: "calculation-modal-content"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + "modal-content-inner"
   }, /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "name-field"
   }, /*#__PURE__*/React.createElement(InputField, {
@@ -436,7 +439,7 @@ const CalculationModal = ({
     color: colors.red700
   }), /*#__PURE__*/React.createElement("span", {
     className: `jsx-${styles.__hash}` + " " + "status-text"
-  }, validationMessage))))))))), /*#__PURE__*/React.createElement(ModalActions, {
+  }, validationMessage)))))))))), /*#__PURE__*/React.createElement(ModalActions, {
     dataTest: "calculation-modal-actions"
   }, /*#__PURE__*/React.createElement(ButtonStrip, null, calculation.id && /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "delete-button"
