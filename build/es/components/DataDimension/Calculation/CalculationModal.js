@@ -1,6 +1,7 @@
 import _JSXStyle from "styled-jsx/style";
 import { useAlert, useDataMutation, useDataQuery } from '@dhis2/app-runtime';
-import { Button, Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, IconQuestion16, InputField, Popper, Portal } from '@dhis2/ui';
+import { Button, Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, IconCheckmarkCircle16, IconErrorFilled16, InputField, colors } from '@dhis2/ui';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import { createCalculationMutation, deleteCalculationMutation, updateCalculationMutation, validateIndicatorExpressionMutation } from '../../../api/expression.js';
@@ -30,71 +31,6 @@ const getContentWidthCSS = width => ({
   }, [`.content.__jsx-style-dynamic-selector{width:${width}px;}`]),
   className: _JSXStyle.dynamic([["3490052393", [width]]])
 });
-const Key = ({
-  children
-}) => /*#__PURE__*/React.createElement("kbd", {
-  className: `jsx-${styles.__hash}` + " " + "key"
-}, children, /*#__PURE__*/React.createElement(_JSXStyle, {
-  id: styles.__hash
-}, styles));
-Key.propTypes = {
-  children: PropTypes.node.isRequired
-};
-const ShortcutsPopoverContent = () => /*#__PURE__*/React.createElement("div", {
-  className: `jsx-${styles.__hash}` + " " + "shortcuts"
-}, /*#__PURE__*/React.createElement("h4", {
-  className: `jsx-${styles.__hash}` + " " + "shortcuts-header"
-}, i18n.t('Usage tips')), /*#__PURE__*/React.createElement("ul", {
-  className: `jsx-${styles.__hash}`
-}, /*#__PURE__*/React.createElement("li", {
-  className: `jsx-${styles.__hash}`
-}, i18n.t('Click or drag a data element or operator to add it to the formula.')), /*#__PURE__*/React.createElement("li", {
-  className: `jsx-${styles.__hash}`
-}, i18n.t('Drag an item to reorder it.')), /*#__PURE__*/React.createElement("li", {
-  className: `jsx-${styles.__hash}`
-}, i18n.t('Select an item, then click'), ' ', /*#__PURE__*/React.createElement("strong", {
-  className: `jsx-${styles.__hash}`
-}, i18n.t('Remove item')), ' ', i18n.t('to delete it.'))), /*#__PURE__*/React.createElement("h4", {
-  className: `jsx-${styles.__hash}` + " " + "shortcuts-header"
-}, i18n.t('Keyboard shortcuts')), /*#__PURE__*/React.createElement("ul", {
-  className: `jsx-${styles.__hash}`
-}, /*#__PURE__*/React.createElement("li", {
-  className: `jsx-${styles.__hash}`
-}, i18n.t('Press'), ' ', /*#__PURE__*/React.createElement("span", {
-  className: `jsx-${styles.__hash}` + " " + "shortcut-keys"
-}, /*#__PURE__*/React.createElement(Key, null, "Enter"), i18n.t('or'), /*#__PURE__*/React.createElement(Key, null, "Space")), ' ', i18n.t('to add or select the focused item.')), /*#__PURE__*/React.createElement("li", {
-  className: `jsx-${styles.__hash}`
-}, i18n.t('Press'), ' ', /*#__PURE__*/React.createElement("span", {
-  className: `jsx-${styles.__hash}` + " " + "shortcut-keys"
-}, /*#__PURE__*/React.createElement(Key, null, "\u2190"), i18n.t('or'), /*#__PURE__*/React.createElement(Key, null, "\u2192")), ' ', i18n.t('to move the selected item.')), /*#__PURE__*/React.createElement("li", {
-  className: `jsx-${styles.__hash}`
-}, i18n.t('Press'), ' ', /*#__PURE__*/React.createElement("span", {
-  className: `jsx-${styles.__hash}` + " " + "shortcut-keys"
-}, /*#__PURE__*/React.createElement(Key, null, "+"), /*#__PURE__*/React.createElement(Key, null, "-"), /*#__PURE__*/React.createElement(Key, null, "*"), /*#__PURE__*/React.createElement(Key, null, "/"), /*#__PURE__*/React.createElement(Key, null, "("), /*#__PURE__*/React.createElement(Key, null, ")")), ' ', i18n.t('to insert an operator after the selected item.'))), /*#__PURE__*/React.createElement(_JSXStyle, {
-  id: styles.__hash
-}, styles));
-const UsageHint = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const triggerRef = useRef();
-  return /*#__PURE__*/React.createElement("span", {
-    className: `jsx-${styles.__hash}` + " " + "hint"
-  }, /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    ref: triggerRef,
-    "data-test": "usage-hint",
-    "aria-label": i18n.t('Usage tips'),
-    onMouseEnter: () => setIsOpen(true),
-    onMouseLeave: () => setIsOpen(false),
-    onFocus: () => setIsOpen(true),
-    onBlur: () => setIsOpen(false),
-    className: `jsx-${styles.__hash}` + " " + "hint-trigger"
-  }, /*#__PURE__*/React.createElement(IconQuestion16, null)), isOpen && /*#__PURE__*/React.createElement(Portal, null, /*#__PURE__*/React.createElement(Popper, {
-    placement: "bottom-start",
-    reference: triggerRef
-  }, /*#__PURE__*/React.createElement(ShortcutsPopoverContent, null))), /*#__PURE__*/React.createElement(_JSXStyle, {
-    id: styles.__hash
-  }, styles));
-};
 const CalculationModal = ({
   calculation = CALCULATION_PROP_DEFAULT,
   onSave,
@@ -469,23 +405,38 @@ const CalculationModal = ({
     className: `jsx-${styles.__hash}` + " " + "sub-header-row"
   }, /*#__PURE__*/React.createElement("h4", {
     className: `jsx-${styles.__hash}` + " " + "sub-header"
-  }, i18n.t('Formula')), /*#__PURE__*/React.createElement(UsageHint, null)), /*#__PURE__*/React.createElement(FormulaToolbar, {
+  }, i18n.t('Formula'))), /*#__PURE__*/React.createElement(FormulaToolbar, {
     onAddOperator: addItem,
     onRemove: () => removeItem(selectedItemId),
     onValidate: validate,
     canRemove: Boolean(selectedItemId),
     isValidating: isValidating,
-    isLoading: isLoading,
-    validationStatus: expressionStatus,
-    validationMessage: validationMessage
-  }), /*#__PURE__*/React.createElement(FormulaField, {
+    isLoading: isLoading
+  }), /*#__PURE__*/React.createElement("div", {
+    className: `jsx-${styles.__hash}` + " " + (cx('formula-box', {
+      valid: expressionStatus === VALID_EXPRESSION,
+      invalid: expressionStatus === INVALID_EXPRESSION
+    }) || "")
+  }, /*#__PURE__*/React.createElement(FormulaField, {
     items: expressionArray,
     selectedItemId: selectedItemId,
     focusItemId: focusItemId,
     onChange: setItemValue,
     onClick: selectItem,
     loading: !expressionArray
-  })))))), /*#__PURE__*/React.createElement(ModalActions, {
+  }), validationMessage && /*#__PURE__*/React.createElement("div", {
+    "aria-live": "polite",
+    "data-test": "validation-message",
+    className: `jsx-${styles.__hash}` + " " + "validation-bar"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "status"
+  }, expressionStatus === VALID_EXPRESSION ? /*#__PURE__*/React.createElement(IconCheckmarkCircle16, {
+    color: colors.green700
+  }) : /*#__PURE__*/React.createElement(IconErrorFilled16, {
+    color: colors.red700
+  }), /*#__PURE__*/React.createElement("span", {
+    className: `jsx-${styles.__hash}` + " " + "status-text"
+  }, validationMessage))))))))), /*#__PURE__*/React.createElement(ModalActions, {
     dataTest: "calculation-modal-actions"
   }, /*#__PURE__*/React.createElement(ButtonStrip, null, calculation.id && /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "delete-button"

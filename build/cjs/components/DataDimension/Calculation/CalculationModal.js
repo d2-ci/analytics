@@ -7,6 +7,7 @@ exports.default = void 0;
 var _style = _interopRequireDefault(require("styled-jsx/style"));
 var _appRuntime = require("@dhis2/app-runtime");
 var _ui = require("@dhis2/ui");
+var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireWildcard(require("react"));
 var _expression = require("../../../api/expression.js");
@@ -38,71 +39,6 @@ const getContentWidthCSS = width => ({
   }, [`.content.__jsx-style-dynamic-selector{width:${width}px;}`]),
   className: _style.default.dynamic([["3490052393", [width]]])
 });
-const Key = ({
-  children
-}) => /*#__PURE__*/_react.default.createElement("kbd", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "key"
-}, children, /*#__PURE__*/_react.default.createElement(_style.default, {
-  id: _CalculationModalStyle.default.__hash
-}, _CalculationModalStyle.default));
-Key.propTypes = {
-  children: _propTypes.default.node.isRequired
-};
-const ShortcutsPopoverContent = () => /*#__PURE__*/_react.default.createElement("div", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcuts"
-}, /*#__PURE__*/_react.default.createElement("h4", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcuts-header"
-}, _index.default.t('Usage tips')), /*#__PURE__*/_react.default.createElement("ul", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}`
-}, /*#__PURE__*/_react.default.createElement("li", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}`
-}, _index.default.t('Click or drag a data element or operator to add it to the formula.')), /*#__PURE__*/_react.default.createElement("li", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}`
-}, _index.default.t('Drag an item to reorder it.')), /*#__PURE__*/_react.default.createElement("li", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}`
-}, _index.default.t('Select an item, then click'), ' ', /*#__PURE__*/_react.default.createElement("strong", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}`
-}, _index.default.t('Remove item')), ' ', _index.default.t('to delete it.'))), /*#__PURE__*/_react.default.createElement("h4", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcuts-header"
-}, _index.default.t('Keyboard shortcuts')), /*#__PURE__*/_react.default.createElement("ul", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}`
-}, /*#__PURE__*/_react.default.createElement("li", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}`
-}, _index.default.t('Press'), ' ', /*#__PURE__*/_react.default.createElement("span", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcut-keys"
-}, /*#__PURE__*/_react.default.createElement(Key, null, "Enter"), _index.default.t('or'), /*#__PURE__*/_react.default.createElement(Key, null, "Space")), ' ', _index.default.t('to add or select the focused item.')), /*#__PURE__*/_react.default.createElement("li", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}`
-}, _index.default.t('Press'), ' ', /*#__PURE__*/_react.default.createElement("span", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcut-keys"
-}, /*#__PURE__*/_react.default.createElement(Key, null, "\u2190"), _index.default.t('or'), /*#__PURE__*/_react.default.createElement(Key, null, "\u2192")), ' ', _index.default.t('to move the selected item.')), /*#__PURE__*/_react.default.createElement("li", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}`
-}, _index.default.t('Press'), ' ', /*#__PURE__*/_react.default.createElement("span", {
-  className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "shortcut-keys"
-}, /*#__PURE__*/_react.default.createElement(Key, null, "+"), /*#__PURE__*/_react.default.createElement(Key, null, "-"), /*#__PURE__*/_react.default.createElement(Key, null, "*"), /*#__PURE__*/_react.default.createElement(Key, null, "/"), /*#__PURE__*/_react.default.createElement(Key, null, "("), /*#__PURE__*/_react.default.createElement(Key, null, ")")), ' ', _index.default.t('to insert an operator after the selected item.'))), /*#__PURE__*/_react.default.createElement(_style.default, {
-  id: _CalculationModalStyle.default.__hash
-}, _CalculationModalStyle.default));
-const UsageHint = () => {
-  const [isOpen, setIsOpen] = (0, _react.useState)(false);
-  const triggerRef = (0, _react.useRef)();
-  return /*#__PURE__*/_react.default.createElement("span", {
-    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "hint"
-  }, /*#__PURE__*/_react.default.createElement("button", {
-    type: "button",
-    ref: triggerRef,
-    "data-test": "usage-hint",
-    "aria-label": _index.default.t('Usage tips'),
-    onMouseEnter: () => setIsOpen(true),
-    onMouseLeave: () => setIsOpen(false),
-    onFocus: () => setIsOpen(true),
-    onBlur: () => setIsOpen(false),
-    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "hint-trigger"
-  }, /*#__PURE__*/_react.default.createElement(_ui.IconQuestion16, null)), isOpen && /*#__PURE__*/_react.default.createElement(_ui.Portal, null, /*#__PURE__*/_react.default.createElement(_ui.Popper, {
-    placement: "bottom-start",
-    reference: triggerRef
-  }, /*#__PURE__*/_react.default.createElement(ShortcutsPopoverContent, null))), /*#__PURE__*/_react.default.createElement(_style.default, {
-    id: _CalculationModalStyle.default.__hash
-  }, _CalculationModalStyle.default));
-};
 const CalculationModal = ({
   calculation = CALCULATION_PROP_DEFAULT,
   onSave,
@@ -477,23 +413,38 @@ const CalculationModal = ({
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "sub-header-row"
   }, /*#__PURE__*/_react.default.createElement("h4", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "sub-header"
-  }, _index.default.t('Formula')), /*#__PURE__*/_react.default.createElement(UsageHint, null)), /*#__PURE__*/_react.default.createElement(_FormulaToolbar.default, {
+  }, _index.default.t('Formula'))), /*#__PURE__*/_react.default.createElement(_FormulaToolbar.default, {
     onAddOperator: addItem,
     onRemove: () => removeItem(selectedItemId),
     onValidate: validate,
     canRemove: Boolean(selectedItemId),
     isValidating: isValidating,
-    isLoading: isLoading,
-    validationStatus: expressionStatus,
-    validationMessage: validationMessage
-  }), /*#__PURE__*/_react.default.createElement(_FormulaField.default, {
+    isLoading: isLoading
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + ((0, _classnames.default)('formula-box', {
+      valid: expressionStatus === _expressions.VALID_EXPRESSION,
+      invalid: expressionStatus === _expressions.INVALID_EXPRESSION
+    }) || "")
+  }, /*#__PURE__*/_react.default.createElement(_FormulaField.default, {
     items: expressionArray,
     selectedItemId: selectedItemId,
     focusItemId: focusItemId,
     onChange: setItemValue,
     onClick: selectItem,
     loading: !expressionArray
-  })))))), /*#__PURE__*/_react.default.createElement(_ui.ModalActions, {
+  }), validationMessage && /*#__PURE__*/_react.default.createElement("div", {
+    "aria-live": "polite",
+    "data-test": "validation-message",
+    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "validation-bar"
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "status"
+  }, expressionStatus === _expressions.VALID_EXPRESSION ? /*#__PURE__*/_react.default.createElement(_ui.IconCheckmarkCircle16, {
+    color: _ui.colors.green700
+  }) : /*#__PURE__*/_react.default.createElement(_ui.IconErrorFilled16, {
+    color: _ui.colors.red700
+  }), /*#__PURE__*/_react.default.createElement("span", {
+    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "status-text"
+  }, validationMessage))))))))), /*#__PURE__*/_react.default.createElement(_ui.ModalActions, {
     dataTest: "calculation-modal-actions"
   }, /*#__PURE__*/_react.default.createElement(_ui.ButtonStrip, null, calculation.id && /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "delete-button"
