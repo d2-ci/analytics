@@ -39,7 +39,10 @@ const Operator = ({
   const style = {
     transform: _utilities.CSS.Translate.toString(transform)
   };
-  return /*#__PURE__*/_react.default.createElement("div", _extends({}, attributes, listeners, {
+  return /*#__PURE__*/_react.default.createElement("div", _extends({
+    role: "button",
+    tabIndex: 0
+  }, attributes, listeners, {
     ref: setNodeRef,
     style: style,
     onClick: () => onClick(data),

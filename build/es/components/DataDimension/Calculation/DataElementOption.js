@@ -33,7 +33,10 @@ const DataElementOption = ({
   };
   return /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "wrapper"
-  }, /*#__PURE__*/React.createElement("div", _extends({}, attributes, listeners, {
+  }, /*#__PURE__*/React.createElement("div", _extends({
+    role: "button",
+    tabIndex: 0
+  }, attributes, listeners, {
     ref: setNodeRef,
     style: style,
     onClick: () => onClick(data),

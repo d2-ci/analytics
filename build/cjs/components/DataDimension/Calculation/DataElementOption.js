@@ -40,7 +40,10 @@ const DataElementOption = ({
   };
   return /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_DataElementOptionStyle.default.__hash}` + " " + "wrapper"
-  }, /*#__PURE__*/_react.default.createElement("div", _extends({}, attributes, listeners, {
+  }, /*#__PURE__*/_react.default.createElement("div", _extends({
+    role: "button",
+    tabIndex: 0
+  }, attributes, listeners, {
     ref: setNodeRef,
     style: style,
     onClick: () => onClick(data),
