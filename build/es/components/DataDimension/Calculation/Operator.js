@@ -6,7 +6,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { EXPRESSION_TYPE_NUMBER, EXPRESSION_TYPE_OPERATOR } from '../../../modules/expressions.js';
-import { onActivationKeydown } from './DndContext.js';
+import draggableChipButtonStyles from './styles/DraggableChipButton.style.js';
 import formulaItemStyles from './styles/FormulaItem.style.js';
 import styles from './styles/Operator.style.js';
 const Operator = ({
@@ -32,24 +32,25 @@ const Operator = ({
   const style = {
     transform: CSS.Translate.toString(transform)
   };
-  return /*#__PURE__*/React.createElement("div", _extends({
-    role: "button",
-    tabIndex: 0
+  return /*#__PURE__*/React.createElement("button", _extends({
+    type: "button",
+    "data-drag-chip": true
   }, attributes, listeners, {
     ref: setNodeRef,
     style: style,
     onClick: () => onClick(data),
-    onKeyDown: onActivationKeydown(() => onClick(data)),
-    className: `jsx-${formulaItemStyles.__hash} jsx-${styles.__hash}` + " " + (listeners && listeners.className != null && listeners.className || attributes && attributes.className != null && attributes.className || "")
+    className: `jsx-${draggableChipButtonStyles.__hash} jsx-${formulaItemStyles.__hash} jsx-${styles.__hash}` + " " + (listeners && listeners.className != null && listeners.className || attributes && attributes.className != null && attributes.className || "draggable-item")
   }), /*#__PURE__*/React.createElement("div", {
     "data-test": "operator",
-    className: `jsx-${formulaItemStyles.__hash} jsx-${styles.__hash}` + " " + (cx('content', {
+    className: `jsx-${draggableChipButtonStyles.__hash} jsx-${formulaItemStyles.__hash} jsx-${styles.__hash}` + " " + (cx('content', {
       operator: type === EXPRESSION_TYPE_OPERATOR,
       number: type === EXPRESSION_TYPE_NUMBER
     }) || "")
   }, /*#__PURE__*/React.createElement("span", {
-    className: `jsx-${formulaItemStyles.__hash} jsx-${styles.__hash}`
+    className: `jsx-${draggableChipButtonStyles.__hash} jsx-${formulaItemStyles.__hash} jsx-${styles.__hash}`
   }, label)), /*#__PURE__*/React.createElement(_JSXStyle, {
+    id: draggableChipButtonStyles.__hash
+  }, draggableChipButtonStyles), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: formulaItemStyles.__hash
   }, formulaItemStyles), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash

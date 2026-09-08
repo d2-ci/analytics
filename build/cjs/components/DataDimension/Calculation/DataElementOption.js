@@ -12,8 +12,8 @@ var _react = _interopRequireDefault(require("react"));
 var _dataTypes = require("../../../modules/dataTypes.js");
 var _dimensionListItem = require("../../../modules/dimensionListItem.js");
 var _expressions = require("../../../modules/expressions.js");
-var _DndContext = require("./DndContext.js");
 var _DataElementOptionStyle = _interopRequireDefault(require("./styles/DataElementOption.style.js"));
+var _DraggableChipButtonStyle = _interopRequireDefault(require("./styles/DraggableChipButton.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 const DataElementOption = ({
@@ -39,24 +39,25 @@ const DataElementOption = ({
     transform: _utilities.CSS.Translate.toString(transform)
   };
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_DataElementOptionStyle.default.__hash}` + " " + "wrapper"
-  }, /*#__PURE__*/_react.default.createElement("div", _extends({
-    role: "button",
-    tabIndex: 0
+    className: `jsx-${_DraggableChipButtonStyle.default.__hash} jsx-${_DataElementOptionStyle.default.__hash}` + " " + "wrapper"
+  }, /*#__PURE__*/_react.default.createElement("button", _extends({
+    type: "button",
+    "data-drag-chip": true
   }, attributes, listeners, {
     ref: setNodeRef,
     style: style,
     onClick: () => onClick(data),
-    onKeyDown: (0, _DndContext.onActivationKeydown)(() => onClick(data)),
-    className: `jsx-${_DataElementOptionStyle.default.__hash}` + " " + (listeners && listeners.className != null && listeners.className || attributes && attributes.className != null && attributes.className || "draggable-item")
+    className: `jsx-${_DraggableChipButtonStyle.default.__hash} jsx-${_DataElementOptionStyle.default.__hash}` + " " + (listeners && listeners.className != null && listeners.className || attributes && attributes.className != null && attributes.className || "draggable-item")
   }), /*#__PURE__*/_react.default.createElement("div", {
     "data-test": "data-element-option",
-    className: `jsx-${_DataElementOptionStyle.default.__hash}` + " " + "chip"
+    className: `jsx-${_DraggableChipButtonStyle.default.__hash} jsx-${_DataElementOptionStyle.default.__hash}` + " " + "chip"
   }, /*#__PURE__*/_react.default.createElement("span", {
-    className: `jsx-${_DataElementOptionStyle.default.__hash}` + " " + "icon"
+    className: `jsx-${_DraggableChipButtonStyle.default.__hash} jsx-${_DataElementOptionStyle.default.__hash}` + " " + "icon"
   }, (0, _dimensionListItem.getIcon)(_dataTypes.DIMENSION_TYPE_DATA_ELEMENT)), /*#__PURE__*/_react.default.createElement("span", {
-    className: `jsx-${_DataElementOptionStyle.default.__hash}` + " " + "label"
+    className: `jsx-${_DraggableChipButtonStyle.default.__hash} jsx-${_DataElementOptionStyle.default.__hash}` + " " + "label"
   }, label))), /*#__PURE__*/_react.default.createElement(_style.default, {
+    id: _DraggableChipButtonStyle.default.__hash
+  }, _DraggableChipButtonStyle.default), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _DataElementOptionStyle.default.__hash
   }, _DataElementOptionStyle.default));
 };

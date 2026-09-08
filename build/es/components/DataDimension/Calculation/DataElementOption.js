@@ -7,8 +7,8 @@ import React from 'react';
 import { DIMENSION_TYPE_DATA_ELEMENT } from '../../../modules/dataTypes.js';
 import { getIcon } from '../../../modules/dimensionListItem.js';
 import { EXPRESSION_TYPE_DATA } from '../../../modules/expressions.js';
-import { onActivationKeydown } from './DndContext.js';
 import styles from './styles/DataElementOption.style.js';
+import draggableChipButtonStyles from './styles/DraggableChipButton.style.js';
 const DataElementOption = ({
   label,
   value,
@@ -32,24 +32,25 @@ const DataElementOption = ({
     transform: CSS.Translate.toString(transform)
   };
   return /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + "wrapper"
-  }, /*#__PURE__*/React.createElement("div", _extends({
-    role: "button",
-    tabIndex: 0
+    className: `jsx-${draggableChipButtonStyles.__hash} jsx-${styles.__hash}` + " " + "wrapper"
+  }, /*#__PURE__*/React.createElement("button", _extends({
+    type: "button",
+    "data-drag-chip": true
   }, attributes, listeners, {
     ref: setNodeRef,
     style: style,
     onClick: () => onClick(data),
-    onKeyDown: onActivationKeydown(() => onClick(data)),
-    className: `jsx-${styles.__hash}` + " " + (listeners && listeners.className != null && listeners.className || attributes && attributes.className != null && attributes.className || "draggable-item")
+    className: `jsx-${draggableChipButtonStyles.__hash} jsx-${styles.__hash}` + " " + (listeners && listeners.className != null && listeners.className || attributes && attributes.className != null && attributes.className || "draggable-item")
   }), /*#__PURE__*/React.createElement("div", {
     "data-test": "data-element-option",
-    className: `jsx-${styles.__hash}` + " " + "chip"
+    className: `jsx-${draggableChipButtonStyles.__hash} jsx-${styles.__hash}` + " " + "chip"
   }, /*#__PURE__*/React.createElement("span", {
-    className: `jsx-${styles.__hash}` + " " + "icon"
+    className: `jsx-${draggableChipButtonStyles.__hash} jsx-${styles.__hash}` + " " + "icon"
   }, getIcon(DIMENSION_TYPE_DATA_ELEMENT)), /*#__PURE__*/React.createElement("span", {
-    className: `jsx-${styles.__hash}` + " " + "label"
+    className: `jsx-${draggableChipButtonStyles.__hash} jsx-${styles.__hash}` + " " + "label"
   }, label))), /*#__PURE__*/React.createElement(_JSXStyle, {
+    id: draggableChipButtonStyles.__hash
+  }, draggableChipButtonStyles), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

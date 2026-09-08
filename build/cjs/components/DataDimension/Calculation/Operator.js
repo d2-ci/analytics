@@ -11,7 +11,7 @@ var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
 var _expressions = require("../../../modules/expressions.js");
-var _DndContext = require("./DndContext.js");
+var _DraggableChipButtonStyle = _interopRequireDefault(require("./styles/DraggableChipButton.style.js"));
 var _FormulaItemStyle = _interopRequireDefault(require("./styles/FormulaItem.style.js"));
 var _OperatorStyle = _interopRequireDefault(require("./styles/Operator.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -39,24 +39,25 @@ const Operator = ({
   const style = {
     transform: _utilities.CSS.Translate.toString(transform)
   };
-  return /*#__PURE__*/_react.default.createElement("div", _extends({
-    role: "button",
-    tabIndex: 0
+  return /*#__PURE__*/_react.default.createElement("button", _extends({
+    type: "button",
+    "data-drag-chip": true
   }, attributes, listeners, {
     ref: setNodeRef,
     style: style,
     onClick: () => onClick(data),
-    onKeyDown: (0, _DndContext.onActivationKeydown)(() => onClick(data)),
-    className: `jsx-${_FormulaItemStyle.default.__hash} jsx-${_OperatorStyle.default.__hash}` + " " + (listeners && listeners.className != null && listeners.className || attributes && attributes.className != null && attributes.className || "")
+    className: `jsx-${_DraggableChipButtonStyle.default.__hash} jsx-${_FormulaItemStyle.default.__hash} jsx-${_OperatorStyle.default.__hash}` + " " + (listeners && listeners.className != null && listeners.className || attributes && attributes.className != null && attributes.className || "draggable-item")
   }), /*#__PURE__*/_react.default.createElement("div", {
     "data-test": "operator",
-    className: `jsx-${_FormulaItemStyle.default.__hash} jsx-${_OperatorStyle.default.__hash}` + " " + ((0, _classnames.default)('content', {
+    className: `jsx-${_DraggableChipButtonStyle.default.__hash} jsx-${_FormulaItemStyle.default.__hash} jsx-${_OperatorStyle.default.__hash}` + " " + ((0, _classnames.default)('content', {
       operator: type === _expressions.EXPRESSION_TYPE_OPERATOR,
       number: type === _expressions.EXPRESSION_TYPE_NUMBER
     }) || "")
   }, /*#__PURE__*/_react.default.createElement("span", {
-    className: `jsx-${_FormulaItemStyle.default.__hash} jsx-${_OperatorStyle.default.__hash}`
+    className: `jsx-${_DraggableChipButtonStyle.default.__hash} jsx-${_FormulaItemStyle.default.__hash} jsx-${_OperatorStyle.default.__hash}`
   }, label)), /*#__PURE__*/_react.default.createElement(_style.default, {
+    id: _DraggableChipButtonStyle.default.__hash
+  }, _DraggableChipButtonStyle.default), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _FormulaItemStyle.default.__hash
   }, _FormulaItemStyle.default), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _OperatorStyle.default.__hash
