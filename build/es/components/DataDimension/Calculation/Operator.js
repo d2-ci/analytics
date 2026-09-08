@@ -35,11 +35,11 @@ const Operator = ({
   return /*#__PURE__*/React.createElement("div", _extends({}, attributes, listeners, {
     ref: setNodeRef,
     style: style,
+    onClick: () => onClick(data),
     onKeyDown: onActivationKeydown(() => onClick(data)),
     className: `jsx-${formulaItemStyles.__hash} jsx-${styles.__hash}` + " " + (listeners && listeners.className != null && listeners.className || attributes && attributes.className != null && attributes.className || "")
   }), /*#__PURE__*/React.createElement("div", {
     "data-test": "operator",
-    onClick: () => onClick(data),
     className: `jsx-${formulaItemStyles.__hash} jsx-${styles.__hash}` + " " + (cx('content', {
       operator: type === EXPRESSION_TYPE_OPERATOR,
       number: type === EXPRESSION_TYPE_NUMBER

@@ -43,10 +43,10 @@ const DataElementOption = ({
   }, /*#__PURE__*/_react.default.createElement("div", _extends({}, attributes, listeners, {
     ref: setNodeRef,
     style: style,
+    onClick: () => onClick(data),
     onKeyDown: (0, _DndContext.onActivationKeydown)(() => onClick(data)),
     className: `jsx-${_DataElementOptionStyle.default.__hash}` + " " + (listeners && listeners.className != null && listeners.className || attributes && attributes.className != null && attributes.className || "draggable-item")
   }), /*#__PURE__*/_react.default.createElement("div", {
-    onClick: () => onClick(data),
     "data-test": "data-element-option",
     className: `jsx-${_DataElementOptionStyle.default.__hash}` + " " + "chip"
   }, /*#__PURE__*/_react.default.createElement("span", {

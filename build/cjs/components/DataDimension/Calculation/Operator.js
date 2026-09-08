@@ -42,11 +42,11 @@ const Operator = ({
   return /*#__PURE__*/_react.default.createElement("div", _extends({}, attributes, listeners, {
     ref: setNodeRef,
     style: style,
+    onClick: () => onClick(data),
     onKeyDown: (0, _DndContext.onActivationKeydown)(() => onClick(data)),
     className: `jsx-${_FormulaItemStyle.default.__hash} jsx-${_OperatorStyle.default.__hash}` + " " + (listeners && listeners.className != null && listeners.className || attributes && attributes.className != null && attributes.className || "")
   }), /*#__PURE__*/_react.default.createElement("div", {
     "data-test": "operator",
-    onClick: () => onClick(data),
     className: `jsx-${_FormulaItemStyle.default.__hash} jsx-${_OperatorStyle.default.__hash}` + " " + ((0, _classnames.default)('content', {
       operator: type === _expressions.EXPRESSION_TYPE_OPERATOR,
       number: type === _expressions.EXPRESSION_TYPE_NUMBER

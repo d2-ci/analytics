@@ -36,10 +36,10 @@ const DataElementOption = ({
   }, /*#__PURE__*/React.createElement("div", _extends({}, attributes, listeners, {
     ref: setNodeRef,
     style: style,
+    onClick: () => onClick(data),
     onKeyDown: onActivationKeydown(() => onClick(data)),
     className: `jsx-${styles.__hash}` + " " + (listeners && listeners.className != null && listeners.className || attributes && attributes.className != null && attributes.className || "draggable-item")
   }), /*#__PURE__*/React.createElement("div", {
-    onClick: () => onClick(data),
     "data-test": "data-element-option",
     className: `jsx-${styles.__hash}` + " " + "chip"
   }, /*#__PURE__*/React.createElement("span", {
