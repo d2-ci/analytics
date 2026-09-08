@@ -3,7 +3,7 @@ import { useAlert, useDataMutation, useDataQuery } from '@dhis2/app-runtime';
 import { Button, Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, IconCheckmarkCircle16, IconErrorFilled16, InputField, colors } from '@dhis2/ui';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createCalculationMutation, deleteCalculationMutation, updateCalculationMutation, validateIndicatorExpressionMutation } from '../../../api/expression.js';
 import i18n from '../../../locales/index.js';
 import { parseExpressionToArray, parseArrayToExpression, validateExpression, getOperators, EXPRESSION_TYPE_DATA, EXPRESSION_TYPE_NUMBER, EXPRESSION_TYPE_OPERATOR, INVALID_EXPRESSION, VALID_EXPRESSION, getItemIdsFromExpression } from '../../../modules/expressions.js';
@@ -17,14 +17,10 @@ import styles from './styles/CalculationModal.style.js';
 const FIRST_POSITION = 0;
 const LAST_POSITION = -1;
 const CALCULATION_PROP_DEFAULT = {};
-const OPERATORS = getOperators();
-// Matches the content width of the previous fixed `large` Modal size, so
-// the modal never gets narrower than it used to on small windows.
-const MODAL_MIN_CONTENT_WIDTH = 740;
-// Caps how far the modal grows on wide screens, so the two columns don't
-// stretch out further than is useful.
+// Matches the content width of the previous fixed `large` Modal
+const MODAL_MIN_CONTENT_WIDTH = 752;
 const MODAL_MAX_CONTENT_WIDTH = 1000;
-const getContentWidthCSS = width => ({
+const getModalContentCSS = width => ({
   styles: /*#__PURE__*/React.createElement(_JSXStyle, {
     id: "3490052393",
     dynamic: [width]
@@ -59,7 +55,7 @@ const CalculationModal = ({
   const [doBackendValidation, {
     loading: isValidating
   }] = useDataMutation(validateIndicatorExpressionMutation, {
-    onError: error => showError((error === null || error === void 0 ? void 0 : error.message) || error || i18n.t('Could not validate the formula'))
+    onError: error => showError((error === null || error === void 0 ? void 0 : error.message) || i18n.t('Could not validate the formula'))
   });
   const query = {
     dataElements: {
@@ -115,9 +111,6 @@ const CalculationModal = ({
     }
   }, [data, calculation.expression]);
   const nextItemIdRef = useRef(1);
-  // State is read through this ref instead of a closure, so the
-  // document-level keydown listener can be registered once on mount
-  // and still see fresh state on every keystroke.
   const latestRef = useRef();
   const [validationOutput, setValidationOutput] = useState(null);
   const [expressionArray, setExpressionArray] = useState();
@@ -130,16 +123,18 @@ const CalculationModal = ({
     minWidth: MODAL_MIN_CONTENT_WIDTH,
     maxWidth: MODAL_MAX_CONTENT_WIDTH
   });
-  const contentWidthCSS = getContentWidthCSS(modalContentWidth);
+  const modalContentCSS = useMemo(() => getModalContentCSS(modalContentWidth), [modalContentWidth]);
   const expressionStatus = validationOutput === null || validationOutput === void 0 ? void 0 : validationOutput.status;
   const validationMessage = expressionStatus === VALID_EXPRESSION ? i18n.t('The formula is valid') : validationOutput === null || validationOutput === void 0 ? void 0 : validationOutput.message;
-  const selectItem = itemId => setSelectedItemId(prevSelected => {
+  const selectItem = itemId => {
+    var _latestRef$current;
+    const prevSelected = (_latestRef$current = latestRef.current) === null || _latestRef$current === void 0 ? void 0 : _latestRef$current.selectedItemId;
     const next = prevSelected !== itemId ? itemId : null;
     if (latestRef.current) {
       latestRef.current.selectedItemId = next;
     }
-    return next;
-  });
+    setSelectedItemId(next);
+  };
   const isLoading = isCreatingCalculation || isUpdatingCalculation || isDeletingCalculation || isSavingCalculation || isValidating;
   const addItem = ({
     label,
@@ -147,7 +142,7 @@ const CalculationModal = ({
     type,
     destIndex
   }) => {
-    var _latestRef$current;
+    var _latestRef$current2;
     if (isLoading || !expressionArray) {
       return;
     }
@@ -158,10 +153,7 @@ const CalculationModal = ({
       label,
       type
     };
-
-    // Without an explicit destIndex, insert after the selected item
-    // instead of always appending.
-    const selectedId = (_latestRef$current = latestRef.current) === null || _latestRef$current === void 0 ? void 0 : _latestRef$current.selectedItemId;
+    const selectedId = (_latestRef$current2 = latestRef.current) === null || _latestRef$current2 === void 0 ? void 0 : _latestRef$current2.selectedItemId;
     setExpressionArray(prevArray => {
       let insertAt = destIndex;
       if (insertAt === undefined) {
@@ -175,9 +167,6 @@ const CalculationModal = ({
     if (newItem.type === EXPRESSION_TYPE_NUMBER) {
       setFocusItemId(newItem.id);
     }
-
-    // Keep the newly added item selected so it becomes the anchor for
-    // the next typed operator or arrow-key move.
     setSelectedItemId(newItem.id);
     latestRef.current.selectedItemId = newItem.id;
   };
@@ -215,6 +204,9 @@ const CalculationModal = ({
       setSelectedItemId(null);
     }
   };
+
+  // Mirrored on every render so the keydown listener below, which is
+  // registered once on mount, still sees fresh values on every keystroke.
   latestRef.current = {
     isLoading,
     showDeletePrompt,
@@ -225,7 +217,6 @@ const CalculationModal = ({
   };
   useEffect(() => {
     const handleKeyDown = event => {
-      var _event$getModifierSta;
       const {
         isLoading,
         showDeletePrompt,
@@ -234,15 +225,10 @@ const CalculationModal = ({
         addItem,
         moveItem
       } = latestRef.current;
-
-      // On some layouts (e.g. German, French) operator characters
-      // like ( ) * are typed via AltGr, which browsers report as
-      // altKey/ctrlKey being set - don't let that block the shortcut.
-      const isAltGraph = (_event$getModifierSta = event.getModifierState) === null || _event$getModifierSta === void 0 ? void 0 : _event$getModifierSta.call(event, 'AltGraph');
-      if (isLoading || showDeletePrompt || event.metaKey || !isAltGraph && (event.ctrlKey || event.altKey) || isInteractiveElement(event.target)) {
+      if (isLoading || showDeletePrompt || event.metaKey || event.ctrlKey || event.altKey || isInteractiveElement(event.target)) {
         return;
       }
-      const operator = OPERATORS.find(op => op.type === EXPRESSION_TYPE_OPERATOR && op.value === event.key);
+      const operator = getOperators().find(op => op.type === EXPRESSION_TYPE_OPERATOR && op.value === event.key);
       if (operator) {
         event.preventDefault();
         addItem(operator);
@@ -309,9 +295,6 @@ const CalculationModal = ({
       const backendResult = await doBackendValidation({
         expression
       });
-
-      // useDataMutation never rejects; network/engine failures go to
-      // onError and this promise does not resolve.
       if (!backendResult) {
         return;
       }
@@ -390,7 +373,7 @@ const CalculationModal = ({
     onDragStart: () => setFocusItemId(null),
     onDragEnd: addOrMoveDraggedItem
   }, /*#__PURE__*/React.createElement("div", {
-    className: `jsx-${styles.__hash}` + " " + `content ${contentWidthCSS.className}`
+    className: `jsx-${styles.__hash}` + " " + (cx('content', modalContentCSS.className) || "")
   }, /*#__PURE__*/React.createElement("div", {
     className: `jsx-${styles.__hash}` + " " + "left-section"
   }, /*#__PURE__*/React.createElement(DataElementSelector, {
@@ -472,7 +455,7 @@ const CalculationModal = ({
   }, i18n.t('Cancel')), /*#__PURE__*/React.createElement(Button, {
     onClick: onDeleteClick,
     destructive: true
-  }, i18n.t('Yes, delete'))))), contentWidthCSS.styles, /*#__PURE__*/React.createElement(_JSXStyle, {
+  }, i18n.t('Yes, delete'))))), modalContentCSS.styles, /*#__PURE__*/React.createElement(_JSXStyle, {
     id: styles.__hash
   }, styles));
 };

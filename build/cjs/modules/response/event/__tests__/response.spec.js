@@ -186,5 +186,86 @@ describe('response', () => {
         });
       });
     });
+    describe('metaDataItemNames', () => {
+      const headerName = 'Zj7UnCAulEk.ou';
+      const response = {
+        headers: [{
+          name: headerName,
+          column: 'Organisation unit',
+          valueType: 'TEXT',
+          type: 'java.lang.String',
+          hidden: false,
+          meta: true
+        }],
+        metaData: {
+          items: {
+            ImspTQPwCqd: {
+              name: 'Sierra Leone'
+            },
+            [headerName]: {
+              name: 'Organisation unit'
+            }
+          },
+          dimensions: {
+            [headerName]: ['ImspTQPwCqd']
+          }
+        },
+        rows: [['ImspTQPwCqd']]
+      };
+      it('overrides the name the backend returned', () => {
+        const result = (0, _response.transformResponse)(response, {
+          metaDataItemNames: {
+            [headerName]: 'Event org. unit'
+          }
+        });
+        expect(result.metaData.items[headerName].name).toBe('Event org. unit');
+      });
+      it('keeps the other fields of the overridden item', () => {
+        const result = (0, _response.transformResponse)({
+          ...response,
+          metaData: {
+            ...response.metaData,
+            items: {
+              ...response.metaData.items,
+              [headerName]: {
+                name: 'Organisation unit',
+                dimensionType: 'ORGANISATION_UNIT'
+              }
+            }
+          }
+        }, {
+          metaDataItemNames: {
+            [headerName]: 'Event org. unit'
+          }
+        });
+        expect(result.metaData.items[headerName]).toEqual({
+          name: 'Event org. unit',
+          dimensionType: 'ORGANISATION_UNIT'
+        });
+      });
+      it('adds an item for a key the response has no item for', () => {
+        const result = (0, _response.transformResponse)(response, {
+          metaDataItemNames: {
+            lastupdated: 'Last updated on'
+          }
+        });
+        expect(result.metaData.items.lastupdated).toEqual({
+          name: 'Last updated on'
+        });
+      });
+      it('leaves items alone when no names are passed', () => {
+        expect((0, _response.transformResponse)(response)).toEqual((0, _response.transformResponse)(response, {
+          metaDataItemNames: {}
+        }));
+      });
+      it('does not mutate the original response', () => {
+        (0, _response.transformResponse)(response, {
+          metaDataItemNames: {
+            [headerName]: 'Event org. unit'
+          }
+        });
+        expect(response.metaData.items[headerName].name).toBe('Organisation unit');
+      });
+    });
   });
 });

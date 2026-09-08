@@ -25,14 +25,10 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 const FIRST_POSITION = 0;
 const LAST_POSITION = -1;
 const CALCULATION_PROP_DEFAULT = {};
-const OPERATORS = (0, _expressions.getOperators)();
-// Matches the content width of the previous fixed `large` Modal size, so
-// the modal never gets narrower than it used to on small windows.
-const MODAL_MIN_CONTENT_WIDTH = 740;
-// Caps how far the modal grows on wide screens, so the two columns don't
-// stretch out further than is useful.
+// Matches the content width of the previous fixed `large` Modal
+const MODAL_MIN_CONTENT_WIDTH = 752;
 const MODAL_MAX_CONTENT_WIDTH = 1000;
-const getContentWidthCSS = width => ({
+const getModalContentCSS = width => ({
   styles: /*#__PURE__*/_react.default.createElement(_style.default, {
     id: "3490052393",
     dynamic: [width]
@@ -67,7 +63,7 @@ const CalculationModal = ({
   const [doBackendValidation, {
     loading: isValidating
   }] = (0, _appRuntime.useDataMutation)(_expression.validateIndicatorExpressionMutation, {
-    onError: error => showError((error === null || error === void 0 ? void 0 : error.message) || error || _index.default.t('Could not validate the formula'))
+    onError: error => showError((error === null || error === void 0 ? void 0 : error.message) || _index.default.t('Could not validate the formula'))
   });
   const query = {
     dataElements: {
@@ -123,9 +119,6 @@ const CalculationModal = ({
     }
   }, [data, calculation.expression]);
   const nextItemIdRef = (0, _react.useRef)(1);
-  // State is read through this ref instead of a closure, so the
-  // document-level keydown listener can be registered once on mount
-  // and still see fresh state on every keystroke.
   const latestRef = (0, _react.useRef)();
   const [validationOutput, setValidationOutput] = (0, _react.useState)(null);
   const [expressionArray, setExpressionArray] = (0, _react.useState)();
@@ -138,16 +131,18 @@ const CalculationModal = ({
     minWidth: MODAL_MIN_CONTENT_WIDTH,
     maxWidth: MODAL_MAX_CONTENT_WIDTH
   });
-  const contentWidthCSS = getContentWidthCSS(modalContentWidth);
+  const modalContentCSS = (0, _react.useMemo)(() => getModalContentCSS(modalContentWidth), [modalContentWidth]);
   const expressionStatus = validationOutput === null || validationOutput === void 0 ? void 0 : validationOutput.status;
   const validationMessage = expressionStatus === _expressions.VALID_EXPRESSION ? _index.default.t('The formula is valid') : validationOutput === null || validationOutput === void 0 ? void 0 : validationOutput.message;
-  const selectItem = itemId => setSelectedItemId(prevSelected => {
+  const selectItem = itemId => {
+    var _latestRef$current;
+    const prevSelected = (_latestRef$current = latestRef.current) === null || _latestRef$current === void 0 ? void 0 : _latestRef$current.selectedItemId;
     const next = prevSelected !== itemId ? itemId : null;
     if (latestRef.current) {
       latestRef.current.selectedItemId = next;
     }
-    return next;
-  });
+    setSelectedItemId(next);
+  };
   const isLoading = isCreatingCalculation || isUpdatingCalculation || isDeletingCalculation || isSavingCalculation || isValidating;
   const addItem = ({
     label,
@@ -155,7 +150,7 @@ const CalculationModal = ({
     type,
     destIndex
   }) => {
-    var _latestRef$current;
+    var _latestRef$current2;
     if (isLoading || !expressionArray) {
       return;
     }
@@ -166,10 +161,7 @@ const CalculationModal = ({
       label,
       type
     };
-
-    // Without an explicit destIndex, insert after the selected item
-    // instead of always appending.
-    const selectedId = (_latestRef$current = latestRef.current) === null || _latestRef$current === void 0 ? void 0 : _latestRef$current.selectedItemId;
+    const selectedId = (_latestRef$current2 = latestRef.current) === null || _latestRef$current2 === void 0 ? void 0 : _latestRef$current2.selectedItemId;
     setExpressionArray(prevArray => {
       let insertAt = destIndex;
       if (insertAt === undefined) {
@@ -183,9 +175,6 @@ const CalculationModal = ({
     if (newItem.type === _expressions.EXPRESSION_TYPE_NUMBER) {
       setFocusItemId(newItem.id);
     }
-
-    // Keep the newly added item selected so it becomes the anchor for
-    // the next typed operator or arrow-key move.
     setSelectedItemId(newItem.id);
     latestRef.current.selectedItemId = newItem.id;
   };
@@ -223,6 +212,9 @@ const CalculationModal = ({
       setSelectedItemId(null);
     }
   };
+
+  // Mirrored on every render so the keydown listener below, which is
+  // registered once on mount, still sees fresh values on every keystroke.
   latestRef.current = {
     isLoading,
     showDeletePrompt,
@@ -233,7 +225,6 @@ const CalculationModal = ({
   };
   (0, _react.useEffect)(() => {
     const handleKeyDown = event => {
-      var _event$getModifierSta;
       const {
         isLoading,
         showDeletePrompt,
@@ -242,15 +233,10 @@ const CalculationModal = ({
         addItem,
         moveItem
       } = latestRef.current;
-
-      // On some layouts (e.g. German, French) operator characters
-      // like ( ) * are typed via AltGr, which browsers report as
-      // altKey/ctrlKey being set - don't let that block the shortcut.
-      const isAltGraph = (_event$getModifierSta = event.getModifierState) === null || _event$getModifierSta === void 0 ? void 0 : _event$getModifierSta.call(event, 'AltGraph');
-      if (isLoading || showDeletePrompt || event.metaKey || !isAltGraph && (event.ctrlKey || event.altKey) || (0, _DndContext.isInteractiveElement)(event.target)) {
+      if (isLoading || showDeletePrompt || event.metaKey || event.ctrlKey || event.altKey || (0, _DndContext.isInteractiveElement)(event.target)) {
         return;
       }
-      const operator = OPERATORS.find(op => op.type === _expressions.EXPRESSION_TYPE_OPERATOR && op.value === event.key);
+      const operator = (0, _expressions.getOperators)().find(op => op.type === _expressions.EXPRESSION_TYPE_OPERATOR && op.value === event.key);
       if (operator) {
         event.preventDefault();
         addItem(operator);
@@ -317,9 +303,6 @@ const CalculationModal = ({
       const backendResult = await doBackendValidation({
         expression
       });
-
-      // useDataMutation never rejects; network/engine failures go to
-      // onError and this promise does not resolve.
       if (!backendResult) {
         return;
       }
@@ -398,7 +381,7 @@ const CalculationModal = ({
     onDragStart: () => setFocusItemId(null),
     onDragEnd: addOrMoveDraggedItem
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + `content ${contentWidthCSS.className}`
+    className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + ((0, _classnames.default)('content', modalContentCSS.className) || "")
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_CalculationModalStyle.default.__hash}` + " " + "left-section"
   }, /*#__PURE__*/_react.default.createElement(_DataElementSelector.default, {
@@ -480,7 +463,7 @@ const CalculationModal = ({
   }, _index.default.t('Cancel')), /*#__PURE__*/_react.default.createElement(_ui.Button, {
     onClick: onDeleteClick,
     destructive: true
-  }, _index.default.t('Yes, delete'))))), contentWidthCSS.styles, /*#__PURE__*/_react.default.createElement(_style.default, {
+  }, _index.default.t('Yes, delete'))))), modalContentCSS.styles, /*#__PURE__*/_react.default.createElement(_style.default, {
     id: _CalculationModalStyle.default.__hash
   }, _CalculationModalStyle.default));
 };

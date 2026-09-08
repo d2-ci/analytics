@@ -4,13 +4,12 @@ import React from 'react';
 import { getOperators } from '../../../modules/expressions.js';
 import DraggableOperator from './Operator.js';
 import styles from './styles/MathOperatorSelector.style.js';
-const OPERATORS = getOperators();
 const MathOperatorSelector = ({
   onClick
 }) => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
   "data-test": "operators-list",
   className: `jsx-${styles.__hash}` + " " + "operators"
-}, OPERATORS.map(({
+}, getOperators().map(({
   label,
   value,
   type

@@ -52,7 +52,6 @@ const FormulaItem = ({
     }
   });
   const inputRef = (0, _react.useRef)(null);
-  const ignoreClickRef = (0, _react.useRef)(false);
   (0, _react.useEffect)(() => {
     if (hasFocus && inputRef.current) {
       // setTimeout seems to be needed in order for the cursor
@@ -90,10 +89,6 @@ const FormulaItem = ({
     insertPosition = AFTER;
   }
   const handleClick = e => {
-    if (ignoreClickRef.current) {
-      ignoreClickRef.current = false;
-      return;
-    }
     if ((0, _DndContext.isInteractiveElement)(e.target)) {
       inputRef.current && inputRef.current.focus();
       return;
@@ -107,11 +102,6 @@ const FormulaItem = ({
   const handleKeyDown = e => {
     if ((0, _DndContext.isInteractiveElement)(e.target)) {
       return;
-    }
-    if (e.key === 'Enter' || e.key === ' ') {
-      // role="button" from dnd-kit also synthesizes a click on Enter/Space;
-      // ignore that click so selection is not toggled off right after.
-      ignoreClickRef.current = true;
     }
     (0, _DndContext.onActivationKeydown)(() => onClick(id))(e);
   };

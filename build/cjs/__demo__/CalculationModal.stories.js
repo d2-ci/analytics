@@ -356,9 +356,7 @@ const DATA_ELEMENT_GROUPS = {
   }]
 };
 const VALIDATION_OK = {
-  status: 'OK',
-  message: 'Valid',
-  description: 'ANC 1st visit / 10 * ANC 4th or more visits'
+  status: 'OK'
 };
 const providerData = {
   dataElements: DATA_ELEMENTS,

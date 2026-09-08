@@ -61,8 +61,22 @@ const EXCLUDED_HEADER_SUFFIXES = ['.eventdate', '.enrollmentdate', '.scheduledda
 // rows would re-derive an empty members list and collapse the pivot table.
 const isExcludedHeaderName = name => EXCLUDED_HEADER_NAMES.has(name) || EXCLUDED_HEADER_SUFFIXES.some(suffix => name.endsWith(suffix) || name === suffix.slice(1));
 const isIncludedHeader = header => Boolean(header.meta) && !isExcludedHeaderName(header.name);
+
+/* Display names supplied by the consuming app, keyed by `metaData.items` key.
+ * The app has its own labels and fallbacks that the backend does not always
+ * match, so these win. A key with no item in the response gets one added. */
+const applyMetaDataItemNameOverrides = (items, metaDataItemNames) => Object.entries(metaDataItemNames).reduce((acc, [id, name]) => {
+  acc[id] = {
+    ...acc[id],
+    name
+  };
+  return acc;
+}, {
+  ...items
+});
 export const transformResponse = (response, {
-  hideNaData = false
+  hideNaData = false,
+  metaDataItemNames = {}
 } = {}) => {
   // Do not modify the original response
   // Rows is mapped by the handlers
@@ -70,9 +84,7 @@ export const transformResponse = (response, {
     ...response,
     metaData: {
       ...response.metaData,
-      items: {
-        ...response.metaData.items
-      },
+      items: applyMetaDataItemNameOverrides(response.metaData.items, metaDataItemNames),
       dimensions: {
         ...response.metaData.dimensions
       }

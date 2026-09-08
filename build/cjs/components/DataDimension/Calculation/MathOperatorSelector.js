@@ -11,13 +11,12 @@ var _expressions = require("../../../modules/expressions.js");
 var _Operator = _interopRequireDefault(require("./Operator.js"));
 var _MathOperatorSelectorStyle = _interopRequireDefault(require("./styles/MathOperatorSelector.style.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const OPERATORS = (0, _expressions.getOperators)();
 const MathOperatorSelector = ({
   onClick
 }) => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
   "data-test": "operators-list",
   className: `jsx-${_MathOperatorSelectorStyle.default.__hash}` + " " + "operators"
-}, OPERATORS.map(({
+}, (0, _expressions.getOperators)().map(({
   label,
   value,
   type
