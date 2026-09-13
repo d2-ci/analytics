@@ -1,0 +1,142 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.transformResponse = exports.getItemFormatterByValueType = exports.getItemFormatterByHeaderName = exports.getItemFormatter = exports.UNSUPPORTED_VALUE_TYPES = exports.PREFIX_SEPARATOR = exports.NA_VALUE_ITEM = exports.NA_VALUE = exports.D2__NOVALUE = void 0;
+var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
+var _predefinedDimensions = require("../../predefinedDimensions.js");
+var _valueTypes = require("../../valueTypes.js");
+var _default = require("./default.js");
+var _optionSet = require("./optionSet.js");
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+// Responses coming from these endpoints need transformation
+// before we can pass it to the pivot table engine:
+// - analytics/events/aggregate
+// - analytics/enrollments/aggregate
+
+const PREFIX_SEPARATOR = exports.PREFIX_SEPARATOR = '_';
+const NA_VALUE = exports.NA_VALUE = '';
+const D2__NOVALUE = exports.D2__NOVALUE = 'D2__NOVALUE';
+const NA_VALUE_ITEM = exports.NA_VALUE_ITEM = {
+  name: _d2I18n.default.t('No value'),
+  code: D2__NOVALUE,
+  style: {
+    color: '#6C7787'
+  }
+};
+const UNSUPPORTED_VALUE_TYPES = exports.UNSUPPORTED_VALUE_TYPES = [_valueTypes.VALUE_TYPE_COORDINATE, _valueTypes.VALUE_TYPE_GEOJSON, _valueTypes.VALUE_TYPE_FILE_RESOURCE, _valueTypes.VALUE_TYPE_IMAGE, _valueTypes.VALUE_TYPE_MULTI_TEXT, _valueTypes.VALUE_TYPE_REFERENCE];
+const STATUSES = {
+  ACTIVE: _d2I18n.default.t('Active'),
+  COMPLETED: _d2I18n.default.t('Completed'),
+  SCHEDULE: _d2I18n.default.t('Scheduled'),
+  CANCELLED: _d2I18n.default.t('Cancelled')
+};
+const formatStatus = value => STATUSES[value] || value;
+const getItemFormatter = ({
+  name,
+  valueType
+}) => getItemFormatterByHeaderName(name) || getItemFormatterByValueType(valueType);
+exports.getItemFormatter = getItemFormatter;
+const getItemFormatterByHeaderName = name => name.endsWith('eventstatus') || name.endsWith('programstatus') ? formatStatus : undefined;
+exports.getItemFormatterByHeaderName = getItemFormatterByHeaderName;
+const getItemFormatterByValueType = valueType => {
+  switch (valueType) {
+    case _valueTypes.VALUE_TYPE_AGE:
+    case _valueTypes.VALUE_TYPE_DATE:
+      return name => name.replace(/ 00:00:00\.0$/, '');
+    case _valueTypes.VALUE_TYPE_BOOLEAN:
+    case _valueTypes.VALUE_TYPE_TRUE_ONLY:
+      return name => name === '1' ? _d2I18n.default.t('Yes') : _d2I18n.default.t('No');
+    case _valueTypes.VALUE_TYPE_DATETIME:
+      return name => name.replace(/:00\.0$/, '');
+    case _valueTypes.VALUE_TYPE_PERCENTAGE:
+      return name => name.endsWith('.0') ? name.slice(0, -2) : name;
+    default:
+      return undefined;
+  }
+};
+exports.getItemFormatterByValueType = getItemFormatterByValueType;
+const EXCLUDED_HEADER_NAMES = new Set([_predefinedDimensions.DIMENSION_ID_PERIOD, _predefinedDimensions.DIMENSION_ID_ORGUNIT, 'lastupdated', 'created', 'completed']);
+const EXCLUDED_HEADER_SUFFIXES = ['.eventdate', '.enrollmentdate', '.scheduleddate', '.incidentdate', '.ou'];
+
+// Time/org-unit dimensions must keep the dimension members provided by the
+// server (e.g. all the period buckets of a relative period like LAST_12_MONTHS)
+// instead of having them re-derived from the data rows by applyDefaultHandler.
+// EXCLUDED_HEADER_SUFFIXES already covers the program-stage-prefixed forms
+// (e.g. "<stageId>.eventdate"); their bare, program-level counterparts
+// (e.g. "enrollmentdate") must be excluded too, otherwise a response with no
+// rows would re-derive an empty members list and collapse the pivot table.
+const isExcludedHeaderName = name => EXCLUDED_HEADER_NAMES.has(name) || EXCLUDED_HEADER_SUFFIXES.some(suffix => name.endsWith(suffix) || name === suffix.slice(1));
+const isIncludedHeader = header => Boolean(header.meta) && !isExcludedHeaderName(header.name);
+
+/* Display names supplied by the consuming app, keyed by `metaData.items` key.
+ * The app has its own labels and fallbacks that the backend does not always
+ * match, so these win. A key with no item in the response gets one added. */
+const applyMetaDataItemNameOverrides = (items, metaDataItemNames) => Object.entries(metaDataItemNames).reduce((acc, [id, name]) => {
+  acc[id] = {
+    ...acc[id],
+    name
+  };
+  return acc;
+}, {
+  ...items
+});
+const addNoValueItem = items => ({
+  ...items,
+  [NA_VALUE]: NA_VALUE_ITEM
+});
+const transformResponse = (response, {
+  hideNaData = false,
+  metaDataItemNames = {}
+} = {}) => {
+  // Do not modify the original response
+  // Rows is mapped by the handlers
+  let transformedResponse = {
+    ...response,
+    metaData: {
+      ...response.metaData,
+      items: addNoValueItem(applyMetaDataItemNameOverrides(response.metaData.items, metaDataItemNames)),
+      dimensions: {
+        ...response.metaData.dimensions
+      }
+    }
+  };
+
+  // Add index to all headers
+  // Include only headers that are "meta" and skip "pe" and "ou"
+  const metaHeaders = response.headers.map((header, index) => ({
+    ...header,
+    index
+  })).filter(isIncludedHeader);
+
+  // Legendsets use uids and do not need transformation
+  // Skip unsupported value types
+  // Option set and Boolean have separate handlers
+  // All other types use default handler with specific item formatter
+  metaHeaders.forEach(header => {
+    if (!(header.legendSet || UNSUPPORTED_VALUE_TYPES.includes(header.valueType))) {
+      if (header.optionSet) {
+        transformedResponse = (0, _optionSet.applyOptionSetHandler)(transformedResponse, header.index);
+      } else {
+        transformedResponse = (0, _default.applyDefaultHandler)(transformedResponse, header.index, {
+          itemFormatter: getItemFormatter(header)
+        });
+      }
+    }
+  });
+
+  // Add "No value" dimension item if
+  // - "Hide NA data" option is disabled
+  // - NA_VALUE is not already a dimension
+  // - there is at least one empty value
+  if (!hideNaData) {
+    metaHeaders.forEach(header => {
+      if (!transformedResponse.metaData.dimensions[header.name].includes(NA_VALUE) && response.rows.map(row => row[header.index]).includes(NA_VALUE)) {
+        transformedResponse.metaData.dimensions[header.name] = [...transformedResponse.metaData.dimensions[header.name], NA_VALUE];
+      }
+    });
+  }
+  return transformedResponse;
+};
+exports.transformResponse = transformResponse;
