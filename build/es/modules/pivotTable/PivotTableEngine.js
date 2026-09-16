@@ -47,7 +47,7 @@ const listByDimension = list => list.reduce((all, item) => {
   all[item.dimension] = item;
   return all;
 }, {});
-const ORGUNIT_DIMENSION_IDS = [DIMENSION_ID_ORGUNIT, DIMENSION_ID_ENROLLMENT_ORGUNIT];
+const ORGUNIT_DIMENSION_IDS = new Set([DIMENSION_ID_ORGUNIT, DIMENSION_ID_ENROLLMENT_ORGUNIT]);
 
 /* Event and enrollment analytics qualify the event org unit dimension with
  * the program stage (`<stageId>.ou`) and name the enrollment-scoped one
@@ -56,7 +56,7 @@ const ORGUNIT_DIMENSION_IDS = [DIMENSION_ID_ORGUNIT, DIMENSION_ID_ENROLLMENT_ORG
 const isOrgUnitDimension = ({
   dimension,
   meta
-}) => (meta === null || meta === void 0 ? void 0 : meta.dimensionType) === DIMENSION_TYPE_ORGANISATION_UNIT || ORGUNIT_DIMENSION_IDS.includes(dimension.split('.').pop());
+}) => (meta === null || meta === void 0 ? void 0 : meta.dimensionType) === DIMENSION_TYPE_ORGANISATION_UNIT || ORGUNIT_DIMENSION_IDS.has(dimension.split('.').pop());
 const sortByHierarchy = items => {
   items.sort((a, b) => {
     if (!a.hierarchy || !b.hierarchy) {
