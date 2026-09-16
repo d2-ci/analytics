@@ -28,16 +28,15 @@ const buildData = ouDimensionId => ({
     meta: false
   }],
   metaData: {
+    /* The analytics API returns only a name here — no id on the item. */
     items: {
       [ouDimensionId]: {
         name: 'Organisation unit'
       },
       [OU_A]: {
-        uid: OU_A,
         name: 'Bo'
       },
       [OU_B]: {
-        uid: OU_B,
         name: 'Bombali'
       }
     },
@@ -59,6 +58,14 @@ const buildVisualization = ouDimensionId => ({
   filters: []
 });
 const rowHierarchies = engine => [0, 1].map(row => engine.getRowHeader(row)[0].hierarchy);
+const rowNames = engine => [0, 1].map(row => engine.getRowHeader(row)[0].name);
+const cellValues = engine => [0, 1].map(row => {
+  var _engine$get;
+  return (_engine$get = engine.get({
+    row,
+    column: 0
+  })) === null || _engine$get === void 0 ? void 0 : _engine$get.renderedValue;
+});
 describe('PivotTableEngine org unit hierarchy', () => {
   it('applies the hierarchy to a bare `ou` dimension', () => {
     const engine = new _PivotTableEngine.PivotTableEngine(buildVisualization('ou'), buildData('ou'));
@@ -79,7 +86,15 @@ describe('PivotTableEngine org unit hierarchy', () => {
       showHierarchy: false
     }, buildData(`${STAGE}.ou`));
     expect(rowHierarchies(engine)).toEqual([undefined, undefined]);
-    expect(engine.getRowHeader(0)[0].uid).toBe(OU_A);
+    expect(engine.getRowHeader(0)[0].name).toBe('Bo');
+  });
+
+  /* Sorting rewrites itemIds, which the row lookup resolves data rows
+   * through. If the two fall out of step every cell renders empty. */
+  it('keeps values aligned with the re-sorted rows', () => {
+    const engine = new _PivotTableEngine.PivotTableEngine(buildVisualization(`${STAGE}.ou`), buildData(`${STAGE}.ou`));
+    expect(rowNames(engine)).toEqual(['Bombali', 'Bo']);
+    expect(cellValues(engine)).toEqual(['2', '1']);
   });
   it('leaves non-org-unit dimensions untouched', () => {
     const dimension = `${STAGE}.de1`;
