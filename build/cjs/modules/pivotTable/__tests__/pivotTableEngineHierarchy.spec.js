@@ -28,15 +28,16 @@ const buildData = ouDimensionId => ({
     meta: false
   }],
   metaData: {
-    /* The analytics API returns only a name here — no id on the item. */
     items: {
       [ouDimensionId]: {
         name: 'Organisation unit'
       },
       [OU_A]: {
+        uid: OU_A,
         name: 'Bo'
       },
       [OU_B]: {
+        uid: OU_B,
         name: 'Bombali'
       }
     },
@@ -86,7 +87,7 @@ describe('PivotTableEngine org unit hierarchy', () => {
       showHierarchy: false
     }, buildData(`${STAGE}.ou`));
     expect(rowHierarchies(engine)).toEqual([undefined, undefined]);
-    expect(engine.getRowHeader(0)[0].name).toBe('Bo');
+    expect(engine.getRowHeader(0)[0].uid).toBe(OU_A);
   });
 
   /* Sorting rewrites itemIds, which the row lookup resolves data rows

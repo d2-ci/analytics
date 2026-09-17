@@ -57,34 +57,23 @@ const isOrgUnitDimension = ({
   dimension,
   meta
 }) => (meta === null || meta === void 0 ? void 0 : meta.dimensionType) === DIMENSION_TYPE_ORGANISATION_UNIT || ORGUNIT_DIMENSION_IDS.has(dimension.split('.').pop());
-const compareByHierarchy = (a, b) => {
-  if (!a.hierarchy || !b.hierarchy) {
-    return 0;
-  }
-  return a.hierarchy.join('/').localeCompare(b.hierarchy.join('/'));
+const sortByHierarchy = items => {
+  items.sort((a, b) => {
+    if (!a.hierarchy || !b.hierarchy) {
+      return 0;
+    }
+    return a.hierarchy.join('/').localeCompare(b.hierarchy.join('/'));
+  });
 };
-
-/* A `metaData.items` entry holds only a name, so an org unit's id comes from
- * the matching `itemIds` entry rather than from the item itself. The two
- * arrays are positionally paired and must stay that way through the sort,
- * because the row lookup resolves a data row through `itemIds`. */
 const applyHierarchy = (ouDimension, ouNameHierarchy) => {
-  const entries = ouDimension.itemIds.map((uid, index) => ({
-    uid,
-    item: ouDimension.items[index]
-  }));
-  entries.forEach(({
-    uid,
-    item
-  }) => {
-    const hierarchy = ouNameHierarchy[uid];
+  ouDimension.items.forEach(ou => {
+    const hierarchy = ouNameHierarchy[ou.uid];
     if (hierarchy) {
-      item.hierarchy = hierarchy.split('/').filter(x => x.length);
+      ou.hierarchy = hierarchy.split('/').filter(x => x.length);
     }
   });
-  entries.sort((a, b) => compareByHierarchy(a.item, b.item));
-  ouDimension.items = entries.map(entry => entry.item);
-  ouDimension.itemIds = entries.map(entry => entry.uid);
+  sortByHierarchy(ouDimension.items);
+  ouDimension.itemIds = ouDimension.items.map(item => item.uid);
 };
 const buildDimensionLookup = (visualization, metadata, headers) => {
   const rows = visualization.rows.map(row => ({

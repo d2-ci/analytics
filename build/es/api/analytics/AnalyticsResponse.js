@@ -164,36 +164,5 @@ class AnalyticsResponse {
     });
     return map;
   }
-  sortOrganisationUnitsHierarchy() {
-    const organisationUnits = this.metaData.dimensions.ou;
-    organisationUnits.forEach((organisationUnit, i) => {
-      const hierarchyPrefix = this.metaData.ouHierarchy[organisationUnit];
-      const hierarchyIds = [organisationUnit];
-      const hierarchyNames = [];
-      hierarchyPrefix.split('/').reverse().forEach(ouId => {
-        hierarchyIds.unshift(ouId);
-      });
-      hierarchyIds.forEach(ouId => {
-        if (this.metaData.items[ouId]) {
-          hierarchyNames.push(this.metaData.items[ouId].name);
-        }
-      });
-      organisationUnits[i] = {
-        id: organisationUnit,
-        fullName: hierarchyNames.join(' / ')
-      };
-    });
-
-    // XXX how does this work with different languages/collations?
-    organisationUnits.sort((a, b) => {
-      const aFullName = a.fullName;
-      const bFullName = b.fullName;
-      if (aFullName < bFullName) {
-        return -1;
-      }
-      return aFullName > bFullName ? 1 : 0;
-    });
-    this.metaData.dimensions.ou = organisationUnits.map(ou => ou.id);
-  }
 }
 export default AnalyticsResponse;
