@@ -29,15 +29,40 @@ describe('analytics.events', () => {
       request = new _AnalyticsRequest.default().withLimit(10);
       fixture = _fixtures.default.get('/api/analytics/aggregate');
       dataEngineMock.query.mockReturnValue(Promise.resolve({
-        data: fixture
+        data: {
+          ...fixture,
+          metaData: undefined
+        },
+        metaData: {
+          metaData: fixture.metaData
+        }
       }));
     });
     it('should be a function', () => {
       expect(events.getAggregate).toBeInstanceOf(Function);
     });
-    it('should resolve a promise with data', () => events.getAggregate(request).then(data => {
-      expect(data).toEqual(fixture);
+    it('should resolve a promise with the merged data and metaData', () => events.getAggregate(request).then(data => {
+      expect(data.rows).toEqual(fixture.rows);
+      expect(data.headers).toEqual(fixture.headers);
+      expect(data.metaData).toEqual(fixture.metaData);
     }));
+    it('should request data and metaData separately', async () => {
+      await events.getAggregate(request);
+      const [queries, {
+        variables
+      }] = dataEngineMock.query.mock.calls[0];
+      expect(queries.data.id(variables)).toBe('events/aggregate');
+      expect(queries.metaData.id(variables)).toBe('events/aggregate');
+      expect(queries.data.params(variables)).toMatchObject({
+        skipMeta: true,
+        skipData: false
+      });
+      expect(queries.metaData.params(variables)).toMatchObject({
+        skipMeta: false,
+        skipData: true,
+        includeMetadataDetails: true
+      });
+    });
   });
   describe('.getCount()', () => {
     beforeEach(() => {

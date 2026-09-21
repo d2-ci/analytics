@@ -54,6 +54,16 @@ const listByDimension = list => list.reduce((all, item) => {
   all[item.dimension] = item;
   return all;
 }, {});
+const ORGUNIT_DIMENSION_IDS = new Set([_predefinedDimensions.DIMENSION_ID_ORGUNIT, _predefinedDimensions.DIMENSION_ID_ENROLLMENT_ORGUNIT]);
+
+/* Event and enrollment analytics qualify the event org unit dimension with
+ * the program stage (`<stageId>.ou`) and name the enrollment-scoped one
+ * `enrollmentou`. Neither carries `dimensionType` in `metaData.items`, so
+ * match on the unqualified dimension id where the type is unavailable. */
+const isOrgUnitDimension = ({
+  dimension,
+  meta
+}) => (meta === null || meta === void 0 ? void 0 : meta.dimensionType) === _dataTypes.DIMENSION_TYPE_ORGANISATION_UNIT || ORGUNIT_DIMENSION_IDS.has(dimension.split('.').pop());
 const sortByHierarchy = items => {
   items.sort((a, b) => {
     if (!a.hierarchy || !b.hierarchy) {
@@ -61,6 +71,16 @@ const sortByHierarchy = items => {
     }
     return a.hierarchy.join('/').localeCompare(b.hierarchy.join('/'));
   });
+};
+const applyHierarchy = (ouDimension, ouNameHierarchy) => {
+  ouDimension.items.forEach(ou => {
+    const hierarchy = ouNameHierarchy[ou.uid];
+    if (hierarchy) {
+      ou.hierarchy = hierarchy.split('/').filter(x => x.length);
+    }
+  });
+  sortByHierarchy(ouDimension.items);
+  ouDimension.itemIds = ouDimension.items.map(item => item.uid);
 };
 const buildDimensionLookup = (visualization, metadata, headers) => {
   const rows = visualization.rows.map(row => ({
@@ -94,16 +114,8 @@ const buildDimensionLookup = (visualization, metadata, headers) => {
     out[field] = headers.findIndex(header => header.name === field);
     return out;
   }, {});
-  const ouDimension = allByDimension[_predefinedDimensions.DIMENSION_ID_ORGUNIT];
-  if (visualization.showHierarchy && metadata.ouNameHierarchy && ouDimension) {
-    ouDimension.items.forEach(ou => {
-      const hierarchy = metadata.ouNameHierarchy[ou.uid];
-      if (hierarchy) {
-        ou.hierarchy = hierarchy.split('/').filter(x => x.length);
-      }
-    });
-    sortByHierarchy(ouDimension.items);
-    ouDimension.itemIds = ouDimension.items.map(item => item.uid);
+  if (visualization.showHierarchy && metadata.ouNameHierarchy) {
+    Object.values(allByDimension).filter(isOrgUnitDimension).forEach(ouDimension => applyHierarchy(ouDimension, metadata.ouNameHierarchy));
   }
   return {
     rows,

@@ -21,7 +21,7 @@ const D2__NOVALUE = exports.D2__NOVALUE = 'D2__NOVALUE';
 const NA_VALUE_ITEM = exports.NA_VALUE_ITEM = {
   name: _d2I18n.default.t('No value'),
   code: D2__NOVALUE,
-  style: {
+  dimensionItemStyle: {
     color: '#6C7787'
   }
 };
