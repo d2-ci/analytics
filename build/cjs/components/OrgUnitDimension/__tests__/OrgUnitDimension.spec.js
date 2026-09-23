@@ -10,7 +10,12 @@ jest.mock('@dhis2-ui/organisation-unit-tree', () => {
   const lib = jest.requireActual('@dhis2-ui/organisation-unit-tree');
   return {
     ...lib,
-    OrganisationUnitTree: () => /*#__PURE__*/_react2.default.createElement("div", null, "Org unit tree component mock")
+    // eslint-disable-next-line react/prop-types
+    OrganisationUnitTree: ({
+      displayProperty
+    }) => /*#__PURE__*/_react2.default.createElement("div", null, /*#__PURE__*/_react2.default.createElement("div", null, "Org unit tree component mock"), /*#__PURE__*/_react2.default.createElement("div", {
+      "data-test": "display-property"
+    }, displayProperty))
   };
 });
 describe('OrgUnitDimension', () => {
@@ -60,6 +65,14 @@ describe('OrgUnitDimension', () => {
     expect(_react.screen.getByRole('button', {
       name: 'Deselect all'
     })).toBeInTheDocument();
+  });
+  test('OrgUnitDimension forwards displayNameProp to the org unit tree as displayProperty', async () => {
+    renderOrgUnitDimension({
+      ...props,
+      displayNameProp: 'displayShortName'
+    });
+    await _react.screen.findByText('Org unit tree component mock');
+    expect(_react.screen.getByTestId('display-property')).toHaveTextContent('displayShortName');
   });
   test('OrgUnitDimension calls onSelect when an organisation unit is selected', async () => {
     const user = _userEvent.default.setup();

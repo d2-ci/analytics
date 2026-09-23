@@ -182,6 +182,7 @@ const OrgUnitDimension = ({
     initiallyExpanded: [...(roots.length === 1 ? [`/${roots[0]}`] : []), ...selected.filter(item => !DYNAMIC_ORG_UNITS.includes(item.id) && !_index2.ouIdHelper.hasLevelPrefix(item.id) && !_index2.ouIdHelper.hasGroupPrefix(item.id)).map(item => item.path.substring(0, item.path.lastIndexOf('/'))).filter(path => path)],
     selected: selected.filter(item => !DYNAMIC_ORG_UNITS.includes(item.id) && !_index2.ouIdHelper.hasLevelPrefix(item.id) && !_index2.ouIdHelper.hasGroupPrefix(item.id)).map(item => item.path),
     onChange: onSelectItems,
+    displayProperty: displayNameProp,
     dataTest: 'org-unit-tree'
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: `jsx-${_OrgUnitDimensionStyle.default.__hash}` + " " + ((0, _classnames.default)('selectsWrapper', {
