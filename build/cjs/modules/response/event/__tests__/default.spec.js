@@ -57,6 +57,55 @@ describe('default', () => {
         }
       });
     });
+    it('resolves names from the items map when value matches an item id', () => {
+      const items = {
+        C6nZpLKjEJr: {
+          name: 'African Medical and Research Foundation'
+        },
+        CW81uF03hvV: {
+          name: 'AIDSRelief Consortium'
+        }
+      };
+      expect((0, _default.getItems)(['C6nZpLKjEJr', 'CW81uF03hvV'], 'kO3z4Dhc038.LFsZ8v5v7rq', {
+        items
+      })).toEqual({
+        [`kO3z4Dhc038.LFsZ8v5v7rq${_response.PREFIX_SEPARATOR}C6nZpLKjEJr`]: {
+          name: 'African Medical and Research Foundation'
+        },
+        [`kO3z4Dhc038.LFsZ8v5v7rq${_response.PREFIX_SEPARATOR}CW81uF03hvV`]: {
+          name: 'AIDSRelief Consortium'
+        }
+      });
+    });
+    it('falls back to the raw value when no matching item exists (free text)', () => {
+      const items = {
+        jfuXZB3A1ko: {
+          name: 'Stage 1 - Repeatable'
+        }
+      };
+      expect((0, _default.getItems)(['email@address.com'], 'jfuXZB3A1ko.RUZ2EBP6HQn', {
+        items
+      })).toEqual({
+        [`jfuXZB3A1ko.RUZ2EBP6HQn${_response.PREFIX_SEPARATOR}email@address.com`]: {
+          name: 'email@address.com'
+        }
+      });
+    });
+    it('prefers the formatter over the items lookup when both are provided', () => {
+      const items = {
+        1: {
+          name: 'should not be used'
+        }
+      };
+      expect((0, _default.getItems)(['1'], 'foo', {
+        items,
+        itemFormatter: () => 'Yes'
+      })).toEqual({
+        [`foo${_response.PREFIX_SEPARATOR}1`]: {
+          name: 'Yes'
+        }
+      });
+    });
   });
   describe('getDimensions', () => {
     it('returns an object with dimensionId as key and correctly prefixed values', () => {

@@ -12,13 +12,24 @@ const getValuesUniqueSortedAsc = (values, valueType = _valueTypes.VALUE_TYPE_TEX
 exports.getValuesUniqueSortedAsc = getValuesUniqueSortedAsc;
 const getPrefixedValue = (value, prefix) => `${prefix}${_response.PREFIX_SEPARATOR}${value}`;
 exports.getPrefixedValue = getPrefixedValue;
+const resolveName = (value, itemFormatter, items) => {
+  var _items$value$name, _items$value;
+  if (itemFormatter) {
+    return itemFormatter(value);
+  }
+  /* Assume the value could be an ID, which means the name should
+   * be looked up in `metaData.items`. If that lookup fails the
+   * value is used directly. */
+  return (_items$value$name = items === null || items === void 0 || (_items$value = items[value]) === null || _items$value === void 0 ? void 0 : _items$value.name) !== null && _items$value$name !== void 0 ? _items$value$name : value;
+};
 const getItems = (values, dimensionId, {
-  itemFormatter
-} = {}) => values.reduce((items, value) => {
-  items[getPrefixedValue(value, dimensionId)] = {
-    name: itemFormatter ? itemFormatter(value) : value
+  itemFormatter,
+  items
+} = {}) => values.reduce((acc, value) => {
+  acc[getPrefixedValue(value, dimensionId)] = {
+    name: resolveName(value, itemFormatter, items)
   };
-  return items;
+  return acc;
 }, {});
 exports.getItems = getItems;
 const getDimensions = (values, dimensionId) => ({
@@ -51,7 +62,8 @@ const applyDefaultHandler = (response, headerIndex, {
       items: {
         ...response.metaData.items,
         ...getItems(uniqueSortedValuesAsc, header.name, {
-          itemFormatter
+          itemFormatter,
+          items: response.metaData.items
         })
       },
       dimensions: {

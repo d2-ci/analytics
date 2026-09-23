@@ -44,9 +44,10 @@ const dataItemsQuery = exports.dataItemsQuery = {
     nameProp,
     filter,
     searchTerm,
-    page
+    page,
+    supportsOptionSetId
   }) => {
-    let fields = `id,${nameProp}~rename(name),dimensionItemType,expression,optionSetId`;
+    let fields = `id,${nameProp}~rename(name),dimensionItemType,expression${supportsOptionSetId ? ',optionSetId' : ''}`;
     const filters = [];
 
     // TODO: Extract all of this logic out of the query?
@@ -266,7 +267,8 @@ const apiFetchOptions = ({
   nameProp,
   filter,
   searchTerm,
-  page
+  page,
+  supportsOptionSetId
 }) => {
   switch (filter === null || filter === void 0 ? void 0 : filter.dataType) {
     case _dataTypes.DIMENSION_TYPE_INDICATOR:
@@ -315,7 +317,8 @@ const apiFetchOptions = ({
         nameProp,
         filter,
         searchTerm,
-        page
+        page,
+        supportsOptionSetId
       });
   }
 };
@@ -404,7 +407,8 @@ const fetchDataItems = async ({
   nameProp,
   filter,
   searchTerm,
-  page
+  page,
+  supportsOptionSetId
 }) => {
   const dataItemsData = await dataEngine.query({
     dataItems: dataItemsQuery
@@ -413,7 +417,8 @@ const fetchDataItems = async ({
       nameProp,
       filter,
       searchTerm,
-      page
+      page,
+      supportsOptionSetId
     },
     onError: _index.onError
   });

@@ -60,9 +60,32 @@ const getItemFormatterByValueType = valueType => {
 exports.getItemFormatterByValueType = getItemFormatterByValueType;
 const EXCLUDED_HEADER_NAMES = new Set([_predefinedDimensions.DIMENSION_ID_PERIOD, _predefinedDimensions.DIMENSION_ID_ORGUNIT, 'lastupdated', 'created', 'completed']);
 const EXCLUDED_HEADER_SUFFIXES = ['.eventdate', '.enrollmentdate', '.scheduleddate', '.incidentdate', '.ou'];
-const isIncludedHeader = header => Boolean(header.meta) && !EXCLUDED_HEADER_NAMES.has(header.name) && !EXCLUDED_HEADER_SUFFIXES.some(suffix => header.name.endsWith(suffix));
+
+// Time/org-unit dimensions must keep the dimension members provided by the
+// server (e.g. all the period buckets of a relative period like LAST_12_MONTHS)
+// instead of having them re-derived from the data rows by applyDefaultHandler.
+// EXCLUDED_HEADER_SUFFIXES already covers the program-stage-prefixed forms
+// (e.g. "<stageId>.eventdate"); their bare, program-level counterparts
+// (e.g. "enrollmentdate") must be excluded too, otherwise a response with no
+// rows would re-derive an empty members list and collapse the pivot table.
+const isExcludedHeaderName = name => EXCLUDED_HEADER_NAMES.has(name) || EXCLUDED_HEADER_SUFFIXES.some(suffix => name.endsWith(suffix) || name === suffix.slice(1));
+const isIncludedHeader = header => Boolean(header.meta) && !isExcludedHeaderName(header.name);
+
+/* Display names supplied by the consuming app, keyed by `metaData.items` key.
+ * The app has its own labels and fallbacks that the backend does not always
+ * match, so these win. A key with no item in the response gets one added. */
+const applyMetaDataItemNameOverrides = (items, metaDataItemNames) => Object.entries(metaDataItemNames).reduce((acc, [id, name]) => {
+  acc[id] = {
+    ...acc[id],
+    name
+  };
+  return acc;
+}, {
+  ...items
+});
 const transformResponse = (response, {
-  hideNaData = false
+  hideNaData = false,
+  metaDataItemNames = {}
 } = {}) => {
   // Do not modify the original response
   // Rows is mapped by the handlers
@@ -70,9 +93,7 @@ const transformResponse = (response, {
     ...response,
     metaData: {
       ...response.metaData,
-      items: {
-        ...response.metaData.items
-      },
+      items: applyMetaDataItemNameOverrides(response.metaData.items, metaDataItemNames),
       dimensions: {
         ...response.metaData.dimensions
       }
