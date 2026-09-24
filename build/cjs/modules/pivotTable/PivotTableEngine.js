@@ -222,8 +222,10 @@ class PivotTableEngine {
       fixColumnHeaders: this.dimensionLookup.columns.length ? visualization.fixColumnHeaders : false,
       fixRowHeaders: this.dimensionLookup.rows.length ? visualization.fixRowHeaders : false,
       cumulativeValues: visualization.cumulativeValues,
-      // Rendering-only: the caller's filter line, which takes
-      // precedence over one derived from `visualization.filters`.
+      // Rendering-only: the caller's filter line, used in place of
+      // the text derived from `visualization.filters`. It does not
+      // affect whether the filter row is shown - that stays gated on
+      // the layout.
       filterText
     };
     this.adaptiveClippingController = new _AdaptiveClippingController.AdaptiveClippingController(this);
