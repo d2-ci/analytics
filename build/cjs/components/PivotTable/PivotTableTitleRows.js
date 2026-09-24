@@ -10,13 +10,6 @@ var _getFilterText = _interopRequireDefault(require("../../visualizations/util/g
 var _PivotTableEngineContext = require("./PivotTableEngineContext.js");
 var _PivotTableTitleRow = require("./PivotTableTitleRow.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-/* Whether there is a filter row at all is the layout's call, as it has
- * always been. `filterText` only says what goes in it: supplied by the
- * caller when there is one, derived from the layout when there is not. */
-const getFilterRowTitle = engine => {
-  var _engine$options$filte;
-  return (_engine$options$filte = engine.options.filterText) !== null && _engine$options$filte !== void 0 ? _engine$options$filte : (0, _getFilterText.default)(engine.visualization.filters, engine.rawData.metaData);
-};
 const PivotTableTitleRows = ({
   clippingResult,
   width
@@ -32,7 +25,7 @@ const PivotTableTitleRows = ({
     scrollPosition: clippingResult.scrollPosition,
     containerWidth: width
   }) : null, (_engine$visualization = engine.visualization.filters) !== null && _engine$visualization !== void 0 && _engine$visualization.length ? /*#__PURE__*/_react.default.createElement(_PivotTableTitleRow.PivotTableTitleRow, {
-    title: getFilterRowTitle(engine),
+    title: engine.options.filterText || (0, _getFilterText.default)(engine.visualization.filters, engine.rawData.metaData),
     scrollPosition: clippingResult.scrollPosition,
     containerWidth: width
   }) : null);
