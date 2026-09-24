@@ -4,26 +4,19 @@ import getFilterText from '../../visualizations/util/getFilterText.js';
 import { usePivotTableEngine } from './PivotTableEngineContext.js';
 import { PivotTableTitleRow } from './PivotTableTitleRow.js';
 
-/* Returns the filter line to render, or null for no filter row at all.
- * A caller-supplied `filterText` is authoritative - including the empty
- * string, which is how a caller says "this visualization has no filters".
- * Only when nothing was supplied is the line derived from the layout. */
+/* Whether there is a filter row at all is the layout's call, as it has
+ * always been. `filterText` only says what goes in it: supplied by the
+ * caller when there is one, derived from the layout when there is not. */
 const getFilterRowTitle = engine => {
-  var _engine$visualization;
-  const {
-    filterText
-  } = engine.options;
-  if (filterText !== undefined) {
-    return filterText || null;
-  }
-  return (_engine$visualization = engine.visualization.filters) !== null && _engine$visualization !== void 0 && _engine$visualization.length ? getFilterText(engine.visualization.filters, engine.rawData.metaData) : null;
+  var _engine$options$filte;
+  return (_engine$options$filte = engine.options.filterText) !== null && _engine$options$filte !== void 0 ? _engine$options$filte : getFilterText(engine.visualization.filters, engine.rawData.metaData);
 };
 export const PivotTableTitleRows = ({
   clippingResult,
   width
 }) => {
+  var _engine$visualization;
   const engine = usePivotTableEngine();
-  const filterRowTitle = getFilterRowTitle(engine);
   return /*#__PURE__*/React.createElement(React.Fragment, null, engine.options.title ? /*#__PURE__*/React.createElement(PivotTableTitleRow, {
     title: engine.options.title,
     scrollPosition: clippingResult.scrollPosition,
@@ -32,8 +25,8 @@ export const PivotTableTitleRows = ({
     title: engine.options.subtitle,
     scrollPosition: clippingResult.scrollPosition,
     containerWidth: width
-  }) : null, filterRowTitle !== null ? /*#__PURE__*/React.createElement(PivotTableTitleRow, {
-    title: filterRowTitle,
+  }) : null, (_engine$visualization = engine.visualization.filters) !== null && _engine$visualization !== void 0 && _engine$visualization.length ? /*#__PURE__*/React.createElement(PivotTableTitleRow, {
+    title: getFilterRowTitle(engine),
     scrollPosition: clippingResult.scrollPosition,
     containerWidth: width
   }) : null);

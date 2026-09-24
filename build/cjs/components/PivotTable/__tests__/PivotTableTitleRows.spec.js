@@ -59,13 +59,26 @@ describe('PivotTable title rows', () => {
     expect(titleRowTexts()).toEqual(['Hello', 'Goodbye', 'Age 5 - 10, Female']);
   });
 
-  /* The empty string is how a caller states that there are no filters, so
-   * it must not fall back to what the layout would have produced. */
-  it('renders no filter row for an empty supplied text', () => {
+  /* Whether there is a row remains the layout's call - supplying the text
+   * says what goes in the row, not whether there is one. */
+  it('does not render a supplied text the layout has no row for', () => {
+    renderTable({
+      visualization: {
+        ...visualization,
+        filters: []
+      },
+      filterText: 'Age 5 - 10, Female'
+    });
+    expect(titleRowTexts()).toEqual(['Hello', 'Goodbye']);
+  });
+
+  /* An empty string is a supplied text like any other, and must not fall
+   * back to the derived line. */
+  it('renders an empty row for an empty supplied text', () => {
     renderTable({
       filterText: ''
     });
-    expect(titleRowTexts()).toEqual(['Hello', 'Goodbye']);
+    expect(titleRowTexts()).toEqual(['Hello', 'Goodbye', '']);
   });
   it('leaves the title and subtitle to the visualization', () => {
     renderTable({
