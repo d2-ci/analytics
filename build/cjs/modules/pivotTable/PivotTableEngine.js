@@ -179,7 +179,12 @@ const applyTotalAggregationType = ({
   }
 };
 class PivotTableEngine {
-  constructor(visualization, data, legendSets) {
+  constructor({
+    visualization,
+    data,
+    legendSets,
+    filterText
+  }) {
     _defineProperty(this, "visualization", void 0);
     _defineProperty(this, "rawData", void 0);
     _defineProperty(this, "options", void 0);
@@ -216,7 +221,10 @@ class PivotTableEngine {
       // turn on fixed headers only when there are dimensions
       fixColumnHeaders: this.dimensionLookup.columns.length ? visualization.fixColumnHeaders : false,
       fixRowHeaders: this.dimensionLookup.rows.length ? visualization.fixRowHeaders : false,
-      cumulativeValues: visualization.cumulativeValues
+      cumulativeValues: visualization.cumulativeValues,
+      /* If visualization.filters is populated and this option is present,
+       * this text is used instead of the text derived from `visualization.filters` */
+      filterText
     };
     this.adaptiveClippingController = new _AdaptiveClippingController.AdaptiveClippingController(this);
     const doColumnSubtotals = this.options.showColumnSubtotals && this.dimensionLookup.rows.length > 1;

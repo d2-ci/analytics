@@ -12,6 +12,7 @@ const PivotTable = ({
   visualization,
   data,
   legendSets,
+  filterText,
   renderCounter,
   onToggleContextualMenu
 }) => {
@@ -20,7 +21,12 @@ const PivotTable = ({
     width,
     height
   } = useParentSize(containerRef, renderCounter);
-  const engine = useMemo(() => new PivotTableEngine(visualization, data, legendSets), [visualization, data, legendSets]);
+  const engine = useMemo(() => new PivotTableEngine({
+    visualization,
+    data,
+    legendSets,
+    filterText
+  }), [visualization, data, legendSets, filterText]);
   const {
     sortBy,
     onSortByColumn
@@ -50,6 +56,7 @@ const PivotTable = ({
 PivotTable.propTypes = {
   data: PropTypes.object.isRequired,
   visualization: PropTypes.object.isRequired,
+  filterText: PropTypes.string,
   legendSets: PropTypes.arrayOf(PropTypes.object),
   renderCounter: PropTypes.number,
   onToggleContextualMenu: PropTypes.func

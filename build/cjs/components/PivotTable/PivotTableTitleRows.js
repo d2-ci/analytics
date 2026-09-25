@@ -25,7 +25,7 @@ const PivotTableTitleRows = ({
     scrollPosition: clippingResult.scrollPosition,
     containerWidth: width
   }) : null, (_engine$visualization = engine.visualization.filters) !== null && _engine$visualization !== void 0 && _engine$visualization.length ? /*#__PURE__*/_react.default.createElement(_PivotTableTitleRow.PivotTableTitleRow, {
-    title: (0, _getFilterText.default)(engine.visualization.filters, engine.rawData.metaData),
+    title: engine.options.filterText || (0, _getFilterText.default)(engine.visualization.filters, engine.rawData.metaData),
     scrollPosition: clippingResult.scrollPosition,
     containerWidth: width
   }) : null);
