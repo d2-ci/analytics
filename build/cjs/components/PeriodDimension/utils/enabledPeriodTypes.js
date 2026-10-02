@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.filterEnabledRelativePeriodTypes = exports.filterEnabledFixedPeriodTypes = exports.applyPeriodNameOverrides = exports.applyFixedPeriodTypeDisplayLabels = exports.applyDisplayLabelOverrides = exports.SERVER_PT_TO_MULTI_CALENDAR_PT = exports.RP_CATEGORY_TO_FP_DEPENDENCIES = void 0;
+exports.filterEnabledRelativePeriodTypes = exports.filterEnabledFixedPeriodTypes = exports.applyPeriodNameOverrides = exports.applyFixedPeriodTypeDisplayLabels = exports.applyDisplayLabelOverrides = exports.WEEKLY_START_TO_PERIOD_TYPE = exports.SERVER_PT_TO_MULTI_CALENDAR_PT = exports.RP_CATEGORY_TO_FP_DEPENDENCIES = exports.FINANCIAL_YEAR_START_TO_PERIOD_TYPE = void 0;
 // Mapping from server period type names to multi-calendar-dates constants
 const SERVER_PT_TO_MULTI_CALENDAR_PT = exports.SERVER_PT_TO_MULTI_CALENDAR_PT = {
   Daily: 'DAILY',
@@ -29,6 +29,28 @@ const SERVER_PT_TO_MULTI_CALENDAR_PT = exports.SERVER_PT_TO_MULTI_CALENDAR_PT = 
   FinancialSep: 'FYSEP',
   FinancialOct: 'FYOCT',
   FinancialNov: 'FYNOV'
+};
+
+// VERSION-TOGGLE: analyticsWeeklyStart and analyticsFinancialYearStart are removed in v44
+// The period type of relative weeks, by the analyticsWeeklyStart setting
+const WEEKLY_START_TO_PERIOD_TYPE = exports.WEEKLY_START_TO_PERIOD_TYPE = {
+  WEEKLY: 'Weekly',
+  WEEKLY_WEDNESDAY: 'WeeklyWednesday',
+  WEEKLY_THURSDAY: 'WeeklyThursday',
+  WEEKLY_FRIDAY: 'WeeklyFriday',
+  WEEKLY_SATURDAY: 'WeeklySaturday',
+  WEEKLY_SUNDAY: 'WeeklySunday'
+};
+
+// The period type of relative financial years, by the analyticsFinancialYearStart setting
+const FINANCIAL_YEAR_START_TO_PERIOD_TYPE = exports.FINANCIAL_YEAR_START_TO_PERIOD_TYPE = {
+  FINANCIAL_YEAR_FEBRUARY: 'FinancialFeb',
+  FINANCIAL_YEAR_APRIL: 'FinancialApril',
+  FINANCIAL_YEAR_JULY: 'FinancialJuly',
+  FINANCIAL_YEAR_AUGUST: 'FinancialAug',
+  FINANCIAL_YEAR_SEPTEMBER: 'FinancialSep',
+  FINANCIAL_YEAR_OCTOBER: 'FinancialOct',
+  FINANCIAL_YEAR_NOVEMBER: 'FinancialNov'
 };
 
 // Mapping from relative period categories to their corresponding fixed period types

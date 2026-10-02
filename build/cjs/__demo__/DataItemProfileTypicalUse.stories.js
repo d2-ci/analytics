@@ -17,7 +17,7 @@ var _default = exports.default = {
   title: 'DataItemProfile/Typical use in Data Visualizer',
   decorators: [_DataItemProfileShared.Wrapper]
 };
-const STEPS = [['The user picks data items: DV loads their profiles, and where their data sets are assigned under the org units.', 'useDataItemProfiles(items, { orgUnits })'], ['The pickers mark each period type and each org unit level for those items.', "getDataItemCompatibility(itemId, { periods: [periodType], orgUnits: [boundary, 'LEVEL-n'] })"], ['Periods and org units selected, before Update: DV checks them, from current metadata only.', 'getDataItemCompatibility(itemId, { periods, orgUnits })']];
+const STEPS = [['The user picks data items: DV loads their profiles, and where their data sets and programs are assigned under the org units.', 'useDataItemProfiles(items, { orgUnits })'], ['The pickers mark each period type and each org unit level for those items.', "getDataItemCompatibility(itemId, { periods: [periodType], orgUnits: [parentOrgUnit, 'LEVEL-n'] })"], ['Periods and org units selected, before Update: DV checks them, from current metadata only.', 'getDataItemCompatibility(itemId, { periods, orgUnits })']];
 
 // The period types the picker offers in this demo, shortest first
 const PICKER_PERIOD_TYPES = ['Daily', 'Weekly', 'WeeklyWednesday', 'BiWeekly', 'Monthly', 'Quarterly', 'SixMonthly', 'Yearly', 'FinancialApril'];
@@ -41,20 +41,20 @@ const adviceFor = (result, profile) => {
   const typesLeftOut = getTypesLeftOut(result, profile).join(' and ');
   switch (status) {
     case 'full':
-      if (reasons.includes('CARRIED')) {
+      if (reasons.includes('EARLIER_PERIOD_VALUE')) {
         return 'Shown, from an earlier data period.';
       }
-      return reasons.includes('AVERAGED') ? 'Shown, repeated from the data period that holds it.' : 'Shown.';
+      return reasons.includes('REPEATED_VALUE') ? 'Shown, repeated from the data period that holds it.' : 'Shown.';
     case 'partial':
       return reasons.includes('OPERAND_PARTIAL') ? 'Shown, but computed from incomplete data: it can be off either way.' : `Partly shown: the ${typesLeftOut} data can’t fill this period.`;
     case 'none':
-      if (reasons.includes('REPORTING_RATE')) {
+      if (reasons.includes('REPORTING_RATE_TOO_SHORT')) {
         return 'Not shown: a reporting rate can’t be shown by this period.';
       }
-      if (reasons.includes('NOTHING_TO_CARRY')) {
+      if (reasons.includes('NO_EARLIER_PERIOD_VALUE')) {
         return 'Not shown: no earlier value in these years.';
       }
-      return `Not shown: collected ${typesLeftOut}.`;
+      return `Not shown: its data sets are ${typesLeftOut}.`;
     default:
       return 'Can’t tell.';
   }
@@ -79,27 +79,47 @@ const PeriodTypeMarks = ({
   periods: [periodType]
 }))))))));
 const formatCount = count => count.toLocaleString('en');
+const describeAssignment = ({
+  assigned,
+  total,
+  level
+}, levels) => {
+  var _levels$find;
+  const levelName = (_levels$find = levels.find(item => item.level === level)) === null || _levels$find === void 0 ? void 0 : _levels$find.name;
+  const counts = `${formatCount(assigned)} of ${formatCount(total)}`;
+  return `${counts} org units at level ${levelName !== null && levelName !== void 0 ? levelName : level}`;
+};
+const ORG_UNIT_NONE_ADVICE = {
+  ASSIGNED_AT_HIGHER_LEVEL: 'Not shown: its data sets are assigned at a higher level.',
+  STOPPED_BY_AGGREGATION_LEVEL: 'Not shown: its aggregation levels stop values before this level.',
+  EMPTY_GROUP: 'Leave it out: the group has no members.'
+};
+const getFullAdvice = (reasons, assignment, levels) => {
+  if (reasons.includes('ANY_ORG_UNIT') || !assignment) {
+    return 'Shown.';
+  }
+  const assignedTo = describeAssignment(assignment, levels);
+  return reasons.includes('PARTLY_ASSIGNED') ? `Shown: assigned to ${assignedTo}; the others collect nothing.` : `Shown: assigned to ${assignedTo}.`;
+};
 
 // What DV could say about an item, for one org unit selection item
 const orgUnitAdviceFor = ({
   status,
   reasons,
-  coverage
+  assignment
 }, levels) => {
-  var _levels$find;
-  const levelName = coverage && ((_levels$find = levels.find(({
-    level
-  }) => level === coverage.level)) === null || _levels$find === void 0 ? void 0 : _levels$find.name);
-  const counted = coverage && `${formatCount(coverage.assigned)} of ${formatCount(coverage.total)} units at level ${levelName !== null && levelName !== void 0 ? levelName : coverage.level}`;
   switch (status) {
     case 'full':
-      return reasons.includes('PARTLY_ASSIGNED') ? `Shown: assigned to ${counted}; the others don’t collect it.` : `Shown: assigned to ${counted}.`;
+      return getFullAdvice(reasons, assignment, levels);
     case 'partial':
-      return reasons.includes('OPERAND_PARTIAL') ? 'Shown, but computed from incomplete data: it can be off either way.' : 'Partly shown: data entered at a higher level is left out.';
+      return reasons.includes('OPERAND_PARTIAL') ? 'Shown, but computed from incomplete data: it can be off either way.' : 'Partly shown: values of data sets assigned at a higher level are left out.';
     case 'none':
-      return reasons.includes('BELOW_COLLECTION') ? 'Not shown: entered at a higher level.' : 'Not shown: its data sets aren’t assigned here.';
+      {
+        const reason = reasons.find(code => ORG_UNIT_NONE_ADVICE[code]);
+        return reason ? ORG_UNIT_NONE_ADVICE[reason] : 'Not shown: its data sets aren’t assigned here.';
+      }
     default:
-      return reasons.includes('EVENT_DATA') ? 'Can’t tell for event data yet.' : 'Can’t tell.';
+      return 'Can’t tell.';
   }
 };
 const OrgUnitLevelMarks = ({
@@ -167,7 +187,7 @@ const TypicalUse = () => {
   }) => selectedIds.includes(id)), [selectedIds]);
   const periods = (0, _react.useMemo)(() => (0, _DataItemProfileShared.splitList)(periodsText), [periodsText]);
   const orgUnits = (0, _react.useMemo)(() => (0, _DataItemProfileShared.splitList)(orgUnitsText), [orgUnitsText]);
-  // The country, for the levels in the picker, and the units selected
+  // The country, for the levels in the picker, and the org units selected
   const loadedOrgUnits = (0, _react.useMemo)(() => [...new Set([_DataItemProfileShared.SIERRA_LEONE, ...orgUnits])], [orgUnits]);
   const {
     loading,
@@ -213,7 +233,7 @@ const TypicalUse = () => {
       }) => setPeriodsText(value)
     })), /*#__PURE__*/_react.default.createElement(_ui.NoticeBox, {
       title: "Derived from current metadata only"
-    }, "Past data may have been collected with a different configuration."), /*#__PURE__*/_react.default.createElement("table", {
+    }, "Past data may have been entered with a different configuration."), /*#__PURE__*/_react.default.createElement("table", {
       className: "profiles"
     }, /*#__PURE__*/_react.default.createElement("tbody", null, items.map(({
       id,

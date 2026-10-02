@@ -87,22 +87,22 @@ describe('getDataItemProfileCompatibility', () => {
   it('gives results per period, per source and overall', () => {
     expect(compatibilityOf('monthly', ['2025W2', '202501'])).toEqual({
       status: 'none',
-      reasons: ['SHORTER'],
+      reasons: ['PERIOD_TOO_SHORT'],
       sources: [{
-        dataSetId: 'MonthlyForm',
+        sourceId: 'MonthlyForm',
         status: 'none',
-        reasons: ['SHORTER']
+        reasons: ['PERIOD_TOO_SHORT']
       }],
       periods: [{
         id: '2025W2',
         periodTypes: ['Weekly'],
         status: 'none',
-        reasons: ['SHORTER'],
+        reasons: ['PERIOD_TOO_SHORT'],
         alignsWithData: null,
         sources: [{
-          dataSetId: 'MonthlyForm',
+          sourceId: 'MonthlyForm',
           status: 'none',
-          reasons: ['SHORTER']
+          reasons: ['PERIOD_TOO_SHORT']
         }]
       }, {
         id: '202501',
@@ -111,7 +111,7 @@ describe('getDataItemProfileCompatibility', () => {
         reasons: [],
         alignsWithData: true,
         sources: [{
-          dataSetId: 'MonthlyForm',
+          sourceId: 'MonthlyForm',
           status: 'full',
           reasons: []
         }]
@@ -123,7 +123,7 @@ describe('getDataItemProfileCompatibility', () => {
       status: null,
       reasons: [],
       sources: [{
-        dataSetId: 'MonthlyForm',
+        sourceId: 'MonthlyForm',
         status: null,
         reasons: []
       }],
@@ -132,24 +132,24 @@ describe('getDataItemProfileCompatibility', () => {
   });
   it('takes period types', () => {
     expect(outcomeOf('monthly', ['Quarterly'])).toEqual(full());
-    expect(outcomeOf('monthly', ['Daily'])).toEqual(none(['SHORTER']));
+    expect(outcomeOf('monthly', ['Daily'])).toEqual(none(['PERIOD_TOO_SHORT']));
   });
   it('gives nothing for another type of the same length', () => {
-    expect(outcomeOf('wednesday', ['2025W2'])).toEqual(none(['OTHER_TYPE']));
-    expect(outcomeOf('yearly', ['2025April'])).toEqual(none(['OTHER_TYPE']));
+    expect(outcomeOf('wednesday', ['2025W2'])).toEqual(none(['PERIOD_TYPE_MISMATCH']));
+    expect(outcomeOf('yearly', ['2025April'])).toEqual(none(['PERIOD_TYPE_MISMATCH']));
   });
   describe('values not measured for the period', () => {
     it('are averaged for averaged data in shorter periods', () => {
-      expect(outcomeOf('population', ['202501'])).toEqual(full(['AVERAGED']));
+      expect(outcomeOf('population', ['202501'])).toEqual(full(['REPEATED_VALUE']));
       expect(outcomeOf('population', ['2025'])).toEqual(full());
     });
     describe('FIRST and LAST', () => {
       it('LAST carries the latest data period of the years touched', () => {
         // June's value, for a day in July
-        expect(outcomeOf('stock', ['20250715'])).toEqual(full(['CARRIED']));
+        expect(outcomeOf('stock', ['20250715'])).toEqual(full(['EARLIER_PERIOD_VALUE']));
         // December 2024 is outside the years 1 January 2025 touches
-        expect(outcomeOf('stock', ['20250101'])).toEqual(none(['NOTHING_TO_CARRY']));
-        expect(outcomeOf('stock', ['2025WedW1'])).toEqual(none(['NOTHING_TO_CARRY']));
+        expect(outcomeOf('stock', ['20250101'])).toEqual(none(['NO_EARLIER_PERIOD_VALUE']));
+        expect(outcomeOf('stock', ['2025WedW1'])).toEqual(none(['NO_EARLIER_PERIOD_VALUE']));
       });
       it('LAST is measured for the period when its data adds up into it', () => {
         expect(outcomeOf('stock', ['2025Q3'])).toEqual(full());
@@ -157,65 +157,65 @@ describe('getDataItemProfileCompatibility', () => {
       });
       it('FIRST takes the earliest data period of the years touched', () => {
         // January's value, for July and for the third quarter
-        expect(outcomeOf('firstMonthly', ['202507'])).toEqual(full(['CARRIED']));
-        expect(outcomeOf('firstMonthly', ['2025Q3'])).toEqual(full(['CARRIED']));
+        expect(outcomeOf('firstMonthly', ['202507'])).toEqual(full(['EARLIER_PERIOD_VALUE']));
+        expect(outcomeOf('firstMonthly', ['2025Q3'])).toEqual(full(['EARLIER_PERIOD_VALUE']));
         expect(outcomeOf('firstMonthly', ['2025'])).toEqual(full());
-        expect(outcomeOf('firstMonthly', ['20250101'])).toEqual(none(['NOTHING_TO_CARRY']));
+        expect(outcomeOf('firstMonthly', ['20250101'])).toEqual(none(['NO_EARLIER_PERIOD_VALUE']));
         // 1 January's value, not the day's own
-        expect(outcomeOf('firstDaily', ['20250715'])).toEqual(full(['CARRIED']));
+        expect(outcomeOf('firstDaily', ['20250715'])).toEqual(full(['EARLIER_PERIOD_VALUE']));
         expect(outcomeOf('firstDaily', ['20250101'])).toEqual(full());
         expect(outcomeOf('firstDaily', ['2025WedW1'])).toEqual(full());
       });
       it('read every period of the selection as one request', () => {
         // With 2024 in the request, December 2024 counts on 1 January
         const withYear = compatibilityOf('stock', ['20250101', '2024']);
-        expect(withYear.periods[0]).toMatchObject(full(['CARRIED']));
+        expect(withYear.periods[0]).toMatchObject(full(['EARLIER_PERIOD_VALUE']));
       });
       it('read the year in a data period id', () => {
         // 2024April (April 2024 to March 2025) is a 2024 period
-        expect(outcomeOf('lastFinancialApril', ['20250715'])).toEqual(none(['NOTHING_TO_CARRY']));
+        expect(outcomeOf('lastFinancialApril', ['20250715'])).toEqual(none(['NO_EARLIER_PERIOD_VALUE']));
         // …but it counts when the request touches 2024
-        expect(compatibilityOf('lastFinancialApril', ['20250715', '2024']).periods[0]).toMatchObject(full(['CARRIED']));
+        expect(compatibilityOf('lastFinancialApril', ['20250715', '2024']).periods[0]).toMatchObject(full(['EARLIER_PERIOD_VALUE']));
       });
       it('may carry when the selection has no dates', () => {
-        expect(outcomeOf('stock', ['Weekly'])).toEqual(full(['CARRIED']));
+        expect(outcomeOf('stock', ['Weekly'])).toEqual(full(['EARLIER_PERIOD_VALUE']));
         expect(outcomeOf('stock', ['LAST_12_MONTHS'])).toEqual(full());
         // FIRST gives January's value to every month of the year
-        expect(outcomeOf('firstMonthly', ['LAST_12_MONTHS'])).toEqual(full(['CARRIED']));
-        expect(compatibilityOf('stock', ['20250101', 'LAST_12_MONTHS']).periods[0]).toMatchObject(full(['CARRIED']));
+        expect(outcomeOf('firstMonthly', ['LAST_12_MONTHS'])).toEqual(full(['EARLIER_PERIOD_VALUE']));
+        expect(compatibilityOf('stock', ['20250101', 'LAST_12_MONTHS']).periods[0]).toMatchObject(full(['EARLIER_PERIOD_VALUE']));
       });
       it('may carry when the data type has no dates', () => {
-        expect(outcomeOf('lastTwoYearly', ['2025'])).toEqual(full(['CARRIED']));
+        expect(outcomeOf('lastTwoYearly', ['2025'])).toEqual(full(['EARLIER_PERIOD_VALUE']));
       });
     });
     it('show in each source', () => {
       expect(compatibilityOf('stock', ['20250715']).sources).toEqual([{
-        dataSetId: 'MonthlyForm',
+        sourceId: 'MonthlyForm',
         status: 'full',
-        reasons: ['CARRIED']
+        reasons: ['EARLIER_PERIOD_VALUE']
       }]);
     });
   });
   describe('expressions', () => {
     it('are complete with an averaged denominator, which they report', () => {
-      expect(outcomeOf(indicator('coverage'), ['202501'])).toEqual(full(['AVERAGED']));
+      expect(outcomeOf(indicator('coverage'), ['202501'])).toEqual(full(['REPEATED_VALUE']));
       expect(outcomeOf(indicator('coverage'), ['2025'])).toEqual(full());
     });
     it('are empty when one operand gives nothing, and say so', () => {
-      expect(outcomeOf(indicator('coverage'), ['2025W2'])).toEqual(none(['OPERAND_EMPTY', 'SHORTER', 'AVERAGED']));
-      expect(outcomeOf(indicator('share'), ['2025W2'])).toEqual(none(['OPERAND_EMPTY', 'SHORTER']));
+      expect(outcomeOf(indicator('coverage'), ['2025W2'])).toEqual(none(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT', 'REPEATED_VALUE']));
+      expect(outcomeOf(indicator('share'), ['2025W2'])).toEqual(none(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
     });
     it('are partial from a partial operand, and say so', () => {
       expect(outcomeOf(indicator('weeklyShareOfMonthly'), ['2025W2'])).toEqual({
         status: 'partial',
-        reasons: ['OPERAND_PARTIAL', 'OTHER_TYPE']
+        reasons: ['OPERAND_PARTIAL', 'PERIOD_TYPE_MISMATCH']
       });
     });
     it('say nothing more with one operand', () => {
-      expect(outcomeOf(indicator('timesTwelve'), ['2025W2'])).toEqual(none(['SHORTER']));
+      expect(outcomeOf(indicator('timesTwelve'), ['2025W2'])).toEqual(none(['PERIOD_TOO_SHORT']));
     });
     it('report every kind of indirect value', () => {
-      expect(outcomeOf(indicator('stockPerHead'), ['20250715'])).toEqual(full(['AVERAGED', 'CARRIED']));
+      expect(outcomeOf(indicator('stockPerHead'), ['20250715'])).toEqual(full(['REPEATED_VALUE', 'EARLIER_PERIOD_VALUE']));
     });
   });
   describe('an element in several data sets', () => {
@@ -241,25 +241,25 @@ describe('getDataItemProfileCompatibility', () => {
         periods: ['2025W2', '202501']
       })).toMatchObject({
         status: 'partial',
-        reasons: ['SHORTER'],
+        reasons: ['PERIOD_TOO_SHORT'],
         sources: [{
-          dataSetId: 'surveillance',
+          sourceId: 'surveillance',
           status: 'full'
         }, {
-          dataSetId: 'report',
+          sourceId: 'report',
           status: 'none'
         }],
         periods: [{
           status: 'partial',
-          reasons: ['SHORTER'],
+          reasons: ['PERIOD_TOO_SHORT'],
           sources: [{
-            dataSetId: 'surveillance',
+            sourceId: 'surveillance',
             status: 'full',
             reasons: []
           }, {
-            dataSetId: 'report',
+            sourceId: 'report',
             status: 'none',
-            reasons: ['SHORTER']
+            reasons: ['PERIOD_TOO_SHORT']
           }]
         }, full()]
       });
@@ -267,12 +267,12 @@ describe('getDataItemProfileCompatibility', () => {
     it('is complete when the others give averaged values', () => {
       expect((0, _getDataItemProfileCompatibility.getDataItemProfileCompatibility)(malaria('AVERAGE'), {
         periods: ['2025W2']
-      })).toMatchObject(full(['AVERAGED']));
+      })).toMatchObject(full(['REPEATED_VALUE']));
     });
     it('is empty when every data set gives nothing', () => {
       expect((0, _getDataItemProfileCompatibility.getDataItemProfileCompatibility)(malaria('SUM'), {
         periods: ['20250115']
-      })).toMatchObject(none(['SHORTER']));
+      })).toMatchObject(none(['PERIOD_TOO_SHORT']));
     });
   });
   it('reads a reporting rate in a shorter period as empty', () => {
@@ -289,15 +289,52 @@ describe('getDataItemProfileCompatibility', () => {
     expect((0, _getDataItemProfileCompatibility.getDataItemProfileCompatibility)(profile, {
       periods: ['2025W2']
     })).toMatchObject({
-      ...none(['REPORTING_RATE']),
+      ...none(['REPORTING_RATE_TOO_SHORT']),
       sources: [{
-        dataSetId: 'form',
-        ...none(['REPORTING_RATE'])
+        sourceId: 'form',
+        ...none(['REPORTING_RATE_TOO_SHORT'])
       }]
     });
     expect((0, _getDataItemProfileCompatibility.getDataItemProfileCompatibility)(profile, {
       periods: ['2025Q1']
     })).toMatchObject(full());
+  });
+  describe('a program indicator without period boundaries', () => {
+    const profile = (0, _getDataItemProfile.getDataItemProfile)({
+      id: 'pi',
+      dimensionItemType: 'PROGRAM_INDICATOR'
+    }, {
+      programIndicators: {
+        pi: {
+          program: 'pr',
+          hasPeriodBoundaries: false
+        }
+      },
+      programs: {
+        pr: {}
+      }
+    });
+    const judge = serverVersion => (0, _getDataItemProfileCompatibility.getDataItemProfileCompatibility)(profile, {
+      periods: ['2025Q1']
+    }, {
+      serverVersion
+    });
+    it('is unknown before 2.43, which can’t query it', () => {
+      expect(judge({
+        major: 2,
+        minor: 42
+      })).toMatchObject({
+        status: 'unknown',
+        reasons: ['UNSUPPORTED_VERSION']
+      });
+    });
+    it('is full from 2.43, or without a server version', () => {
+      expect(judge({
+        major: 2,
+        minor: 43
+      })).toMatchObject(full());
+      expect(judge()).toMatchObject(full());
+    });
   });
   it('is full for event data, placed by its own dates', () => {
     const profile = (0, _getDataItemProfile.getDataItemProfile)({
@@ -318,7 +355,7 @@ describe('getDataItemProfileCompatibility', () => {
     })).toMatchObject({
       ...full(),
       sources: [{
-        dataSetId: null,
+        sourceId: 'pr',
         status: 'full',
         reasons: []
       }]
@@ -345,7 +382,7 @@ describe('getDataItemProfileCompatibility', () => {
       })).toMatchObject({
         ...unknown(['PROFILE_UNKNOWN']),
         sources: [{
-          dataSetId: 'hourly',
+          sourceId: 'hourly',
           ...unknown(['PROFILE_UNKNOWN'])
         }]
       });
@@ -375,18 +412,18 @@ describe('getDataItemProfileCompatibility', () => {
   });
   it('ranks empty, then partial, then unknown, then complete', () => {
     expect(outcomeOf('monthly', ['202501', 'NEXT_CENTURY'])).toEqual(unknown(['UNKNOWN_PERIOD']));
-    expect(outcomeOf('monthly', ['NEXT_CENTURY', '2025W2'])).toEqual(none(['SHORTER', 'UNKNOWN_PERIOD']));
+    expect(outcomeOf('monthly', ['NEXT_CENTURY', '2025W2'])).toEqual(none(['PERIOD_TOO_SHORT', 'UNKNOWN_PERIOD']));
   });
   describe('relative periods', () => {
     it('read their type', () => {
       expect(outcomeOf('monthly', ['LAST_12_MONTHS'])).toEqual(full());
-      expect(outcomeOf('monthly', ['LAST_7_DAYS'])).toEqual(none(['SHORTER']));
+      expect(outcomeOf('monthly', ['LAST_7_DAYS'])).toEqual(none(['PERIOD_TOO_SHORT']));
     });
     it('hold when every type they could be agrees', () => {
-      expect(outcomeOf('monthly', ['LAST_4_WEEKS'])).toEqual(none(['SHORTER']));
+      expect(outcomeOf('monthly', ['LAST_4_WEEKS'])).toEqual(none(['PERIOD_TOO_SHORT']));
       expect(outcomeOf('monthly', ['THIS_FINANCIAL_YEAR'])).toEqual(full());
       // Yearly data gives nothing in any financial year
-      expect(outcomeOf('yearly', ['THIS_FINANCIAL_YEAR'])).toEqual(none(['OTHER_TYPE']));
+      expect(outcomeOf('yearly', ['THIS_FINANCIAL_YEAR'])).toEqual(none(['PERIOD_TYPE_MISMATCH']));
     });
     it('are unknown when their type depends on a setting not given', () => {
       expect(outcomeOf('weekly', ['LAST_4_WEEKS'])).toEqual(unknown(['SETTING_MISSING']));
@@ -398,7 +435,7 @@ describe('getDataItemProfileCompatibility', () => {
       })).toEqual(full());
       expect(outcomeOf('weekly', ['LAST_4_WEEKS'], {
         weeklyPeriodType: 'WeeklySunday'
-      })).toEqual(none(['OTHER_TYPE']));
+      })).toEqual(none(['PERIOD_TYPE_MISMATCH']));
       expect(outcomeOf('financialOct', ['THIS_FINANCIAL_YEAR'], {
         financialYearPeriodType: 'FinancialOct'
       })).toEqual(full());

@@ -1,35 +1,37 @@
 import { useConfig } from '@dhis2/app-runtime';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { fetchDataItemProfileMetadata } from '../../api/dataItemProfile.js';
-import { fetchOrgUnitCoverage, getProfilesSources } from '../../api/orgUnitCoverage.js';
+import { getCountableSources } from '../../api/dataItemProfile/assignedOrgUnitCounts.js';
+import { fetchDataItemProfileMetadata } from '../../api/dataItemProfile/fetchDataItemProfileMetadata.js';
+import { fetchOrgUnitCoverage } from '../../api/dataItemProfile/fetchOrgUnitCoverage.js';
 import { getDataItemProfile } from '../../modules/dataItemProfile/getDataItemProfile.js';
 import { getDataItemProfileCompatibility } from '../../modules/dataItemProfile/getDataItemProfileCompatibility.js';
-import { withOrgUnitSide } from '../../modules/dataItemProfile/orgUnitSide.js';
+import { addAssignedOrgUnitLevels } from '../../modules/dataItemProfile/profile/assignedOrgUnitLevels.js';
 import { fetchRelativePeriodTypeOptions, getItemsKey, parseItemsKey, useCalendar, useEngineRef } from './utils.js';
 
 /**
- * The profiles of data items, and whether a selection suits them
- * (capabilities 1 and 2).
+ * The profiles of data items, and whether a selection suits them.
  *
  * `items` are { id, dimensionItemType }, as in a visualization's dx items.
- * Each profile has its org unit side (the levels its data sets are assigned
- * at) unless `orgUnitLevels: false`; then it gets it once `orgUnits` are
- * given and their coverage is loaded.
- * `profiles` are keyed by item id. `getDataItemCompatibility(itemId,
- * { periods })` runs getDataItemProfileCompatibility on the item's profile,
- * with the server's settings for relative weeks and financial years, its
- * calendar and its version; it gives undefined for an item not loaded.
+ * `profiles` are keyed by item id. Each has its assigned org unit levels
+ * unless `withAssignedOrgUnitCounts: false`; it then gets them once
+ * `orgUnits` are given and their coverage is loaded.
  *
- * With `orgUnits` (DV's org unit items), it also loads where the items' data
- * sets are assigned under them (fetchOrgUnitCoverage, `orgUnitCoverage`), so
- * `getDataItemCompatibility(itemId, { periods, orgUnits })` judges org units
- * too: any selection whose units it loaded, such as a level under one of
+ * `getDataItemCompatibility(itemId, { periods, orgUnits })` runs
+ * getDataItemProfileCompatibility on the item's profile, with the server's
+ * settings for relative weeks and financial years, its calendar and its
+ * version; it gives undefined for an item not loaded.
+ *
+ * Periods need no request, so they are only passed to
+ * getDataItemCompatibility. Org units do: `orgUnits` (DV's org unit items)
+ * loads where the items' data sets and programs are assigned under them
+ * (fetchOrgUnitCoverage, `orgUnitCoverage`), so getDataItemCompatibility can
+ * judge any selection whose org units it loaded, such as a level under one of
  * them.
  */
 export const useDataItemProfiles = (items, {
   calendar,
   orgUnits,
-  orgUnitLevels = true
+  withAssignedOrgUnitCounts = true
 } = {}) => {
   var _state$metadata, _state$error;
   const engineRef = useEngineRef();
@@ -68,7 +70,7 @@ export const useDataItemProfiles = (items, {
       error: undefined
     }));
     Promise.all([fetchDataItemProfileMetadata(engine, requestedItems, {
-      orgUnitLevels
+      withAssignedOrgUnitCounts
     }), fetchRelativePeriodTypeOptions(engine)]).then(([metadata, options]) => {
       if (!cancelled) {
         setState({
@@ -89,10 +91,10 @@ export const useDataItemProfiles = (items, {
     return () => {
       cancelled = true;
     };
-  }, [engineRef, itemsKey, orgUnitLevels]);
+  }, [engineRef, itemsKey, withAssignedOrgUnitCounts]);
   const metadataProfiles = useMemo(() => state.metadata && Object.fromEntries(parseItemsKey(itemsKey).map(item => [item.id, getDataItemProfile(item, state.metadata)])), [itemsKey, state.metadata]);
-  const sourcesKey = JSON.stringify(metadataProfiles ? getProfilesSources(Object.values(metadataProfiles)) : null);
-  const knownAssignedLevels = (_state$metadata = state.metadata) === null || _state$metadata === void 0 ? void 0 : _state$metadata.dataSetOrgUnitLevels;
+  const sourcesKey = JSON.stringify(metadataProfiles ? getCountableSources(Object.values(metadataProfiles)) : null);
+  const knownAssignedOrgUnitCounts = (_state$metadata = state.metadata) === null || _state$metadata === void 0 ? void 0 : _state$metadata.assignedOrgUnitCounts;
   useEffect(() => {
     const engine = engineRef.current;
     const sources = JSON.parse(sourcesKey);
@@ -113,7 +115,7 @@ export const useDataItemProfiles = (items, {
     fetchOrgUnitCoverage(engine, {
       sources,
       orgUnits: requestedOrgUnits,
-      assignedLevels: knownAssignedLevels
+      assignedOrgUnitCounts: knownAssignedOrgUnitCounts
     }).then(coverage => {
       if (!cancelled) {
         setCoverageState({
@@ -132,10 +134,10 @@ export const useDataItemProfiles = (items, {
     return () => {
       cancelled = true;
     };
-  }, [engineRef, sourcesKey, orgUnitsKey, knownAssignedLevels]);
+  }, [engineRef, sourcesKey, orgUnitsKey, knownAssignedOrgUnitCounts]);
 
-  // Without the counts in the metadata, the coverage gives the org unit side
-  const profiles = useMemo(() => metadataProfiles && Object.fromEntries(Object.entries(metadataProfiles).map(([id, profile]) => [id, profile.orgUnit || !coverageState.coverage ? profile : withOrgUnitSide(profile, coverageState.coverage.assignedLevels)])), [metadataProfiles, coverageState.coverage]);
+  // Without the counts in the metadata, the coverage gives the assigned org unit levels
+  const profiles = useMemo(() => metadataProfiles && Object.fromEntries(Object.entries(metadataProfiles).map(([id, profile]) => [id, profile.assignedOrgUnitLevels || !coverageState.coverage ? profile : addAssignedOrgUnitLevels(profile, coverageState.coverage.assignedOrgUnitCounts)])), [metadataProfiles, coverageState.coverage]);
   const options = useMemo(() => ({
     ...state.options,
     calendar: resolvedCalendar,

@@ -2,6 +2,7 @@
 
 var _dataItemProfileMetadata = require("../../../__fixtures__/dataItemProfileMetadata.js");
 var _getDataItemProfile = require("../getDataItemProfile.js");
+var _collectSources = require("../profile/collectSources.js");
 const dataElement = (periodTypes, aggregationType = 'SUM') => ({
   aggregationType,
   valueType: 'INTEGER',
@@ -124,10 +125,10 @@ describe('getDataItemProfile', () => {
           }],
           reportingRate: false
         }],
-        period: {
+        assignedPeriodTypes: {
           types: ['Monthly'],
-          finest: 'Monthly',
-          mixed: false
+          shortestDirectType: 'Monthly',
+          hasSeveral: false
         }
       });
     });
@@ -158,31 +159,31 @@ describe('getDataItemProfile', () => {
     });
     it('reads an operand by its data element, and keeps it', () => {
       const operand = profile('monthly.cocA', 'DATA_ELEMENT_OPERAND');
-      expect(operand.period.finest).toBe('Monthly');
+      expect(operand.assignedPeriodTypes.shortestDirectType).toBe('Monthly');
       expect(operand.sources[0].elements).toEqual([expect.objectContaining({
         id: 'monthly',
         operand: 'monthly.cocA'
       })]);
     });
-    it('lists mixed types, and the finest is the longest', () => {
+    it('lists several types, and the shortest direct type is the longest', () => {
       expect(profile('weeklyAndMonthly', 'DATA_ELEMENT')).toMatchObject({
-        period: {
+        assignedPeriodTypes: {
           types: ['Weekly', 'Monthly'],
-          finest: 'Monthly',
-          mixed: true
+          shortestDirectType: 'Monthly',
+          hasSeveral: true
         }
       });
     });
     it('goes up a type when two types have the same length', () => {
       expect(profile('mondayAndWednesday', 'DATA_ELEMENT')).toMatchObject({
-        period: {
+        assignedPeriodTypes: {
           types: ['Weekly', 'WeeklyWednesday'],
-          finest: 'BiWeekly',
-          mixed: true
+          shortestDirectType: 'BiWeekly',
+          hasSeveral: true
         }
       });
     });
-    it.each([['population', 'AVERAGE', 'Yearly'], ['stock', 'AVERAGE', 'Monthly']])('counts averaged data in the finest type: %s', (id, periodAggregationType, finest) => {
+    it.each([['population', 'AVERAGE', 'Yearly'], ['stock', 'AVERAGE', 'Monthly']])('counts averaged data in the shortest direct type: %s', (id, periodAggregationType, shortestDirectType) => {
       expect(profile(id, 'DATA_ELEMENT')).toMatchObject({
         unknown: false,
         sources: [{
@@ -190,8 +191,8 @@ describe('getDataItemProfile', () => {
             periodAggregationType
           }]
         }],
-        period: {
-          finest
+        assignedPeriodTypes: {
+          shortestDirectType
         }
       });
     });
@@ -217,9 +218,9 @@ describe('getDataItemProfile', () => {
             id: 'noDataSet'
           }]
         }],
-        period: {
+        assignedPeriodTypes: {
           types: [],
-          finest: null
+          shortestDirectType: null
         }
       });
     });
@@ -231,7 +232,7 @@ describe('getDataItemProfile', () => {
           id: 'oddType',
           periodType: 'Hourly'
         }],
-        period: {
+        assignedPeriodTypes: {
           types: []
         }
       });
@@ -257,9 +258,9 @@ describe('getDataItemProfile', () => {
           elements: [],
           reportingRate: true
         }],
-        period: {
+        assignedPeriodTypes: {
           types: ['Weekly'],
-          finest: 'Weekly'
+          shortestDirectType: 'Weekly'
         }
       });
     });
@@ -271,7 +272,7 @@ describe('getDataItemProfile', () => {
     it('are unknown with a period type it does not know', () => {
       expect(profile('oddForm.REPORTING_RATE', 'REPORTING_RATE')).toMatchObject({
         unknown: true,
-        period: {
+        assignedPeriodTypes: {
           types: []
         }
       });
@@ -281,10 +282,10 @@ describe('getDataItemProfile', () => {
     it('read numerator and denominator', () => {
       // The yearly population is measured directly by year only
       expect(profile('coverage', 'INDICATOR')).toMatchObject({
-        period: {
+        assignedPeriodTypes: {
           types: ['Monthly', 'Yearly'],
-          finest: 'Yearly',
-          mixed: true
+          shortestDirectType: 'Yearly',
+          hasSeveral: true
         }
       });
     });
@@ -332,20 +333,20 @@ describe('getDataItemProfile', () => {
     });
     it('mix the types of their data elements', () => {
       expect(profile('weeklyShare', 'INDICATOR')).toMatchObject({
-        period: {
-          finest: 'Monthly',
-          mixed: true
+        assignedPeriodTypes: {
+          shortestDirectType: 'Monthly',
+          hasSeveral: true
         }
       });
     });
     it('read nested indicators', () => {
-      expect(profile('nested', 'INDICATOR').period.finest).toBe('Yearly');
+      expect(profile('nested', 'INDICATOR').assignedPeriodTypes.shortestDirectType).toBe('Yearly');
     });
     it('read indicators that refer to each other once', () => {
       expect(profile('loopA', 'INDICATOR')).toMatchObject({
         unknown: false,
-        period: {
-          finest: 'Weekly'
+        assignedPeriodTypes: {
+          shortestDirectType: 'Weekly'
         }
       });
     });
@@ -357,20 +358,20 @@ describe('getDataItemProfile', () => {
             periodAggregationType: 'LAST'
           }]
         }],
-        period: {
-          finest: 'Yearly'
+        assignedPeriodTypes: {
+          shortestDirectType: 'Yearly'
         }
       });
     });
     it('take a reporting rate operand', () => {
-      expect(profile('reportingRate', 'INDICATOR').period.finest).toBe('Weekly');
+      expect(profile('reportingRate', 'INDICATOR').assignedPeriodTypes.shortestDirectType).toBe('Weekly');
     });
     it('are not limited by event data, constants or days', () => {
       expect(profile('eventsOnly', 'INDICATOR')).toMatchObject({
         unknown: false,
-        period: {
+        assignedPeriodTypes: {
           types: [],
-          finest: null
+          shortestDirectType: null
         }
       });
     });
@@ -396,9 +397,9 @@ describe('getDataItemProfile', () => {
   describe('expression dimension items', () => {
     it('read their expression', () => {
       expect(profile('weeklyPlusMonthly', 'EXPRESSION_DIMENSION_ITEM')).toMatchObject({
-        period: {
-          finest: 'Monthly',
-          mixed: true
+        assignedPeriodTypes: {
+          shortestDirectType: 'Monthly',
+          hasSeveral: true
         }
       });
     });
@@ -415,9 +416,9 @@ describe('getDataItemProfile', () => {
             id: 'pr'
           }
         }],
-        period: {
+        assignedPeriodTypes: {
           types: [],
-          finest: null
+          shortestDirectType: null
         }
       });
     });
@@ -440,9 +441,13 @@ describe('getDataItemProfile', () => {
         reportingRate: false
       }]);
     });
-    it('has no source without a program in its id', () => {
+    it('is unknown without a program in its id', () => {
       expect(profile('de', 'EVENT_DATA_ITEM')).toMatchObject({
-        unknown: false,
+        unknown: true,
+        reasons: [{
+          code: 'MISSING_PROGRAM',
+          id: 'de'
+        }],
         sources: []
       });
     });
@@ -479,6 +484,6 @@ describe('getDataItemProfile', () => {
 });
 describe('getPeriodAggregationType', () => {
   it.each([['SUM', 'SUM'], ['AVERAGE', 'AVERAGE'], ['AVERAGE_SUM_ORG_UNIT', 'AVERAGE'], ['LAST', 'LAST'], ['LAST_AVERAGE_ORG_UNIT', 'LAST'], ['LAST_LAST_ORG_UNIT', 'LAST'], ['LAST_IN_PERIOD_AVERAGE_ORG_UNIT', 'LAST_IN_PERIOD'], ['FIRST_AVERAGE_ORG_UNIT', 'FIRST'], ['FIRST_FIRST_ORG_UNIT', 'FIRST'], ['MAX_SUM_ORG_UNIT', 'MAX'], ['MIN_SUM_ORG_UNIT', 'MIN'], [undefined, undefined]])('%s aggregates over time as %s', (aggregationType, expected) => {
-    expect((0, _getDataItemProfile.getPeriodAggregationType)(aggregationType)).toBe(expected);
+    expect((0, _collectSources.getPeriodAggregationType)(aggregationType)).toBe(expected);
   });
 });

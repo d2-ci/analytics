@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.useEngineRef = exports.useCalendar = exports.parseItemsKey = exports.getItemsKey = exports.fetchRelativePeriodTypeOptions = void 0;
 var _appRuntime = require("@dhis2/app-runtime");
 var _react = require("react");
-var _periodTypes = require("../../modules/dataItemProfile/periodTypes.js");
+var _periodTypes = require("../../modules/dataItemProfile/periods/periodTypes.js");
 const SETTING_KEYS = ['analyticsWeeklyStart', 'analyticsFinancialYearStart'];
 
 // A setting a version doesn't have is left out, never guessed
