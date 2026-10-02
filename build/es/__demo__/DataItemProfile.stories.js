@@ -25,18 +25,6 @@ const describeCollection = ({
   return isCollectedByDate(profile) ? 'event dates' : 'unknown';
 };
 
-// A suggestion from metadata, for a fixed period that doesn't suit the item
-const Suggestion = ({
-  periods
-}) => periods ? /*#__PURE__*/React.createElement("div", {
-  className: "jsx-2884615928"
-}, "Suggestion: ", periods.join(', '), /*#__PURE__*/React.createElement(_JSXStyle, {
-  id: "2884615928"
-}, ["div.jsx-2884615928{margin-block-start:4px;font-size:12px;color:#4a5768;}"])) : null;
-Suggestion.propTypes = {
-  periods: PropTypes.arrayOf(PropTypes.string)
-};
-
 // How many units at the deepest level entered the data sets are assigned to
 const Coverage = ({
   coverage
@@ -71,8 +59,7 @@ export const ProfilesAndCompatibility = () => {
     error,
     profiles,
     relativePeriodTypes,
-    getDataItemCompatibility,
-    getDataItemSuggestion
+    getDataItemCompatibility
   } = useDataItemProfiles(ITEMS, {
     orgUnits
   });
@@ -80,10 +67,10 @@ export const ProfilesAndCompatibility = () => {
     signature: "useDataItemProfiles(items, { orgUnits })",
     runs: "When the items or the org units change (metadata only)",
     input: "items: [{ id, dimensionItemType }], as in a visualization's dx items; orgUnits: DV's org unit items (ids, LEVEL-n, OU_GROUP-id, USER_ORGUNIT\u2026)",
-    summary: "For each data item: how it is collected (period types, finest type, mixed or not), a function that tells whether chosen periods and org units will return values, and one that suggests periods that would.",
+    summary: "For each data item: how it is collected (period types, finest type, mixed or not), a function that tells whether chosen periods and org units will return values.",
     basedOn: "Metadata only (each element's data sets and their period types, indicator expressions; where the data sets are assigned, as counts per level under the org units), the server's weekly and financial year settings, its calendar and version. No analytics request.",
-    returns: "{ loading, error, profiles, orgUnitCoverage, relativePeriodTypes, getDataItemCompatibility(itemId, { periods, orgUnits }), getDataItemSuggestion(itemId, { periods, periodTypes }) }",
-    uses: "fetchDataItemProfileMetadata, fetchOrgUnitCoverage, getDataItemProfile, getDataItemProfileCompatibility, getDataItemOrgUnitCompatibility, suggestDataItemPeriods",
+    returns: "{ loading, error, profiles, orgUnitCoverage, relativePeriodTypes, getDataItemCompatibility(itemId, { periods, orgUnits }) }",
+    uses: "fetchDataItemProfileMetadata, fetchOrgUnitCoverage, getDataItemProfile, getDataItemProfileCompatibility, getDataItemOrgUnitCompatibility",
     references: [{
       title: 'Compatibility statuses',
       columns: ['Status', 'Meaning', 'Period example', 'Org unit example'],
@@ -127,7 +114,7 @@ export const ProfilesAndCompatibility = () => {
   }, "Profile ", /*#__PURE__*/React.createElement("code", null, "getDataItemProfile")), periods.length > 0 && /*#__PURE__*/React.createElement("th", {
     colSpan: periods.length,
     className: "group"
-  }, "Compatibility", ' ', /*#__PURE__*/React.createElement("code", null, "getDataItemCompatibility"), ", suggestion", ' ', /*#__PURE__*/React.createElement("code", null, "getDataItemSuggestion")), orgUnitItems.length > 0 && /*#__PURE__*/React.createElement("th", {
+  }, "Compatibility", ' ', /*#__PURE__*/React.createElement("code", null, "getDataItemCompatibility")), orgUnitItems.length > 0 && /*#__PURE__*/React.createElement("th", {
     colSpan: orgUnitItems.length,
     className: "group"
   }, "Org units", ' ', /*#__PURE__*/React.createElement("code", null, "getDataItemCompatibility"))), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "JSON"), /*#__PURE__*/React.createElement("th", null, "Collected at"), /*#__PURE__*/React.createElement("th", null, "Levels"), /*#__PURE__*/React.createElement("th", null, "Finest"), periods.map(period => /*#__PURE__*/React.createElement("th", {
@@ -155,11 +142,7 @@ export const ProfilesAndCompatibility = () => {
       className: "json"
     }, JSON.stringify(profile, null, 2)))), /*#__PURE__*/React.createElement("td", null, describeCollection(profile)), /*#__PURE__*/React.createElement("td", null, describeLevels(profile)), /*#__PURE__*/React.createElement("td", null, describeFinest(profile)), compatibility.periods.map(result => /*#__PURE__*/React.createElement("td", {
       key: result.id
-    }, /*#__PURE__*/React.createElement(Status, result), /*#__PURE__*/React.createElement(Suggestion, {
-      periods: getDataItemSuggestion(id, {
-        periods: [result.id]
-      })
-    }))), (_compatibility$orgUni = compatibility.orgUnits) === null || _compatibility$orgUni === void 0 ? void 0 : _compatibility$orgUni.map(result => /*#__PURE__*/React.createElement("td", {
+    }, /*#__PURE__*/React.createElement(Status, result))), (_compatibility$orgUni = compatibility.orgUnits) === null || _compatibility$orgUni === void 0 ? void 0 : _compatibility$orgUni.map(result => /*#__PURE__*/React.createElement("td", {
       key: result.id
     }, /*#__PURE__*/React.createElement(Status, result), /*#__PURE__*/React.createElement(Coverage, {
       coverage: result.coverage

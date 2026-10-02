@@ -250,8 +250,6 @@ var _exportNames = {
   aggregatesInto: true,
   getPeriodRelation: true,
   widenToWholePeriods: true,
-  suggestDataItemPeriods: true,
-  SUGGESTION_PERIOD_TYPES: true,
   getDataItemOrgUnitCompatibility: true,
   REASON_NOT_ASSIGNED: true,
   REASON_BELOW_COLLECTION: true,
@@ -1148,12 +1146,6 @@ Object.defineProperty(exports, "SIXMONTHLYAPR", {
   enumerable: true,
   get: function () {
     return _index12.SIXMONTHLYAPR;
-  }
-});
-Object.defineProperty(exports, "SUGGESTION_PERIOD_TYPES", {
-  enumerable: true,
-  get: function () {
-    return _suggestDataItemPeriods.SUGGESTION_PERIOD_TYPES;
   }
 });
 Object.defineProperty(exports, "SaveAsDialog", {
@@ -2164,12 +2156,6 @@ Object.defineProperty(exports, "preparePayloadForSaveAs", {
     return _utils.preparePayloadForSaveAs;
   }
 });
-Object.defineProperty(exports, "suggestDataItemPeriods", {
-  enumerable: true,
-  get: function () {
-    return _suggestDataItemPeriods.suggestDataItemPeriods;
-  }
-});
 Object.defineProperty(exports, "transformEventAggregateResponse", {
   enumerable: true,
   get: function () {
@@ -2336,7 +2322,6 @@ var _renderValue = require("./modules/renderValue.js");
 var _getDataItemProfile = require("./modules/dataItemProfile/getDataItemProfile.js");
 var _getDataItemProfileCompatibility = require("./modules/dataItemProfile/getDataItemProfileCompatibility.js");
 var _periodTypeRelations = require("./modules/dataItemProfile/periodTypeRelations.js");
-var _suggestDataItemPeriods = require("./modules/dataItemProfile/suggestDataItemPeriods.js");
 var _getDataItemOrgUnitCompatibility = require("./modules/dataItemProfile/getDataItemOrgUnitCompatibility.js");
 var _dataItemProfile = require("./api/dataItemProfile.js");
 var _orgUnitCoverage = require("./api/orgUnitCoverage.js");

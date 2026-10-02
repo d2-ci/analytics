@@ -1,5 +1,5 @@
 import _JSXStyle from "styled-jsx/style";
-import { Button, Checkbox, InputField, NoticeBox } from '@dhis2/ui';
+import { Checkbox, InputField, NoticeBox } from '@dhis2/ui';
 import PropTypes from 'prop-types';
 import React, { useMemo, useState } from 'react';
 import { useDataItemProfiles } from '../components/DataItemProfile/useDataItemProfiles.js';
@@ -9,7 +9,7 @@ export default {
   title: 'DataItemProfile/Typical use in Data Visualizer',
   decorators: [Wrapper]
 };
-const STEPS = [['The user picks data items: DV loads their profiles, and where their data sets are assigned under the org units.', 'useDataItemProfiles(items, { orgUnits })'], ['The pickers mark each period type and each org unit level for those items.', "getDataItemCompatibility(itemId, { periods: [periodType], orgUnits: [boundary, 'LEVEL-n'] })"], ['Periods and org units selected, before Update: DV checks them, and may suggest other periods, from current metadata only.', 'getDataItemCompatibility(itemId, { periods, orgUnits }), getDataItemSuggestion']];
+const STEPS = [['The user picks data items: DV loads their profiles, and where their data sets are assigned under the org units.', 'useDataItemProfiles(items, { orgUnits })'], ['The pickers mark each period type and each org unit level for those items.', "getDataItemCompatibility(itemId, { periods: [periodType], orgUnits: [boundary, 'LEVEL-n'] })"], ['Periods and org units selected, before Update: DV checks them, from current metadata only.', 'getDataItemCompatibility(itemId, { periods, orgUnits })']];
 
 // The period types the picker offers in this demo, shortest first
 const PICKER_PERIOD_TYPES = ['Daily', 'Weekly', 'WeeklyWednesday', 'BiWeekly', 'Monthly', 'Quarterly', 'SixMonthly', 'Yearly', 'FinancialApril'];
@@ -150,22 +150,6 @@ Columns.propTypes = {
   orgUnit: PropTypes.node,
   period: PropTypes.node
 };
-
-/* A period that suits the item, from current metadata only, when the period
- * asked for doesn't */
-const TrySuggestion = ({
-  result,
-  suggestion,
-  onUse
-}) => result.status !== 'full' && suggestion ? /*#__PURE__*/React.createElement(React.Fragment, null, "Try ", suggestion.join(', '), ' ', /*#__PURE__*/React.createElement(Button, {
-  small: true,
-  onClick: () => onUse(suggestion)
-}, "Use")) : null;
-TrySuggestion.propTypes = {
-  result: PropTypes.object,
-  suggestion: PropTypes.arrayOf(PropTypes.string),
-  onUse: PropTypes.func
-};
 export const TypicalUse = () => {
   const [selectedIds, setSelectedIds] = useState(['fbfJHSPpUQD', 'Uvn6LCg7dVU', 'YazgqXbizv1']);
   const [periodsText, setPeriodsText] = useState('2025W2');
@@ -182,8 +166,7 @@ export const TypicalUse = () => {
     error,
     profiles,
     orgUnitCoverage,
-    getDataItemCompatibility,
-    getDataItemSuggestion
+    getDataItemCompatibility
   } = useDataItemProfiles(items, {
     orgUnits: loadedOrgUnits
   });
@@ -235,13 +218,7 @@ export const TypicalUse = () => {
         periods
       })) === null || _getDataItemCompatibi === void 0 ? void 0 : _getDataItemCompatibi.periods.map(result => /*#__PURE__*/React.createElement("div", {
         key: result.id
-      }, /*#__PURE__*/React.createElement("code", null, result.id), ' ', /*#__PURE__*/React.createElement(Status, result), ' ', adviceFor(result, profiles[id]), ' ', /*#__PURE__*/React.createElement(TrySuggestion, {
-        result: result,
-        suggestion: getDataItemSuggestion(id, {
-          periods: [result.id]
-        }),
-        onUse: ids => setPeriodsText(ids.join(', '))
-      })))));
+      }, /*#__PURE__*/React.createElement("code", null, result.id), ' ', /*#__PURE__*/React.createElement(Status, result), ' ', adviceFor(result, profiles[id]), ' '))));
     })))),
     orgUnit: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
       className: "inputs"

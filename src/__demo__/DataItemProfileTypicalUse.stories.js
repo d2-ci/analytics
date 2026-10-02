@@ -1,4 +1,4 @@
-import { Button, Checkbox, InputField, NoticeBox } from '@dhis2/ui'
+import { Checkbox, InputField, NoticeBox } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useMemo, useState } from 'react'
 import { useDataItemProfiles } from '../components/DataItemProfile/useDataItemProfiles.js'
@@ -29,8 +29,8 @@ const STEPS = [
         "getDataItemCompatibility(itemId, { periods: [periodType], orgUnits: [boundary, 'LEVEL-n'] })",
     ],
     [
-        'Periods and org units selected, before Update: DV checks them, and may suggest other periods, from current metadata only.',
-        'getDataItemCompatibility(itemId, { periods, orgUnits }), getDataItemSuggestion',
+        'Periods and org units selected, before Update: DV checks them, from current metadata only.',
+        'getDataItemCompatibility(itemId, { periods, orgUnits })',
     ],
 ]
 
@@ -224,24 +224,6 @@ const Columns = ({ period, orgUnit }) => (
 
 Columns.propTypes = { orgUnit: PropTypes.node, period: PropTypes.node }
 
-/* A period that suits the item, from current metadata only, when the period
- * asked for doesn't */
-const TrySuggestion = ({ result, suggestion, onUse }) =>
-    result.status !== 'full' && suggestion ? (
-        <>
-            Try {suggestion.join(', ')}{' '}
-            <Button small onClick={() => onUse(suggestion)}>
-                Use
-            </Button>
-        </>
-    ) : null
-
-TrySuggestion.propTypes = {
-    result: PropTypes.object,
-    suggestion: PropTypes.arrayOf(PropTypes.string),
-    onUse: PropTypes.func,
-}
-
 export const TypicalUse = () => {
     const [selectedIds, setSelectedIds] = useState([
         'fbfJHSPpUQD',
@@ -267,7 +249,6 @@ export const TypicalUse = () => {
         profiles,
         orgUnitCoverage,
         getDataItemCompatibility,
-        getDataItemSuggestion,
     } = useDataItemProfiles(items, { orgUnits: loadedOrgUnits })
 
     const toggle = (id) =>
@@ -361,25 +342,6 @@ export const TypicalUse = () => {
                                                                 result,
                                                                 profiles[id]
                                                             )}{' '}
-                                                            <TrySuggestion
-                                                                result={result}
-                                                                suggestion={getDataItemSuggestion(
-                                                                    id,
-                                                                    {
-                                                                        periods:
-                                                                            [
-                                                                                result.id,
-                                                                            ],
-                                                                    }
-                                                                )}
-                                                                onUse={(ids) =>
-                                                                    setPeriodsText(
-                                                                        ids.join(
-                                                                            ', '
-                                                                        )
-                                                                    )
-                                                                }
-                                                            />
                                                         </div>
                                                     ))}
                                                 </td>

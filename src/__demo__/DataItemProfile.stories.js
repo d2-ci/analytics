@@ -40,23 +40,6 @@ const describeCollection = ({ period, ...profile }) => {
     return isCollectedByDate(profile) ? 'event dates' : 'unknown'
 }
 
-// A suggestion from metadata, for a fixed period that doesn't suit the item
-const Suggestion = ({ periods }) =>
-    periods ? (
-        <div>
-            Suggestion: {periods.join(', ')}
-            <style jsx>{`
-                div {
-                    margin-block-start: 4px;
-                    font-size: 12px;
-                    color: #4a5768;
-                }
-            `}</style>
-        </div>
-    ) : null
-
-Suggestion.propTypes = { periods: PropTypes.arrayOf(PropTypes.string) }
-
 // How many units at the deepest level entered the data sets are assigned to
 const Coverage = ({ coverage }) =>
     coverage ? (
@@ -102,7 +85,6 @@ export const ProfilesAndCompatibility = () => {
         profiles,
         relativePeriodTypes,
         getDataItemCompatibility,
-        getDataItemSuggestion,
     } = useDataItemProfiles(ITEMS, { orgUnits })
 
     return (
@@ -112,10 +94,10 @@ export const ProfilesAndCompatibility = () => {
                 signature="useDataItemProfiles(items, { orgUnits })"
                 runs="When the items or the org units change (metadata only)"
                 input="items: [{ id, dimensionItemType }], as in a visualization's dx items; orgUnits: DV's org unit items (ids, LEVEL-n, OU_GROUP-id, USER_ORGUNIT…)"
-                summary="For each data item: how it is collected (period types, finest type, mixed or not), a function that tells whether chosen periods and org units will return values, and one that suggests periods that would."
+                summary="For each data item: how it is collected (period types, finest type, mixed or not), a function that tells whether chosen periods and org units will return values."
                 basedOn="Metadata only (each element's data sets and their period types, indicator expressions; where the data sets are assigned, as counts per level under the org units), the server's weekly and financial year settings, its calendar and version. No analytics request."
-                returns="{ loading, error, profiles, orgUnitCoverage, relativePeriodTypes, getDataItemCompatibility(itemId, { periods, orgUnits }), getDataItemSuggestion(itemId, { periods, periodTypes }) }"
-                uses="fetchDataItemProfileMetadata, fetchOrgUnitCoverage, getDataItemProfile, getDataItemProfileCompatibility, getDataItemOrgUnitCompatibility, suggestDataItemPeriods"
+                returns="{ loading, error, profiles, orgUnitCoverage, relativePeriodTypes, getDataItemCompatibility(itemId, { periods, orgUnits }) }"
+                uses="fetchDataItemProfileMetadata, fetchOrgUnitCoverage, getDataItemProfile, getDataItemProfileCompatibility, getDataItemOrgUnitCompatibility"
                 references={[
                     {
                         title: 'Compatibility statuses',
@@ -181,9 +163,7 @@ export const ProfilesAndCompatibility = () => {
                                         className="group"
                                     >
                                         Compatibility{' '}
-                                        <code>getDataItemCompatibility</code>,
-                                        suggestion{' '}
-                                        <code>getDataItemSuggestion</code>
+                                        <code>getDataItemCompatibility</code>
                                     </th>
                                 )}
                                 {orgUnitItems.length > 0 && (
@@ -250,12 +230,6 @@ export const ProfilesAndCompatibility = () => {
                                         {compatibility.periods.map((result) => (
                                             <td key={result.id}>
                                                 <Status {...result} />
-                                                <Suggestion
-                                                    periods={getDataItemSuggestion(
-                                                        id,
-                                                        { periods: [result.id] }
-                                                    )}
-                                                />
                                             </td>
                                         ))}
                                         {compatibility.orgUnits?.map(

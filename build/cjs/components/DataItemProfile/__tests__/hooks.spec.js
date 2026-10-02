@@ -280,23 +280,6 @@ describe('useDataItemProfiles', () => {
     expect(result.current.error.message).toBe('no levels');
     expect(result.current.orgUnitCoverage).toBeUndefined();
   });
-  it('suggests periods that suit an item, from its profile', async () => {
-    const {
-      result
-    } = renderProfiles([MONTHLY]);
-    await (0, _react.waitFor)(() => expect(result.current.profiles).toBeDefined());
-    expect(result.current.getDataItemSuggestion('monthly', {
-      periods: ['2025W2']
-    })).toEqual(['202501']);
-    expect(result.current.getDataItemSuggestion('monthly', {
-      periods: ['2025W2'],
-      periodTypes: ['Yearly']
-    })).toEqual(['2025']);
-    expect(result.current.getDataItemSuggestion('monthly')).toBeNull();
-    expect(result.current.getDataItemSuggestion('other', {
-      periods: ['2025W2']
-    })).toBe(undefined);
-  });
   it('is unknown for relative weeks on a version without the setting', async () => {
     const data = createData();
     delete data['systemSettings/analyticsWeeklyStart'];

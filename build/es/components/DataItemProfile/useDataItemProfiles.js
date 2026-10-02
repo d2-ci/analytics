@@ -5,7 +5,6 @@ import { fetchOrgUnitCoverage, getProfilesSources } from '../../api/orgUnitCover
 import { getDataItemProfile } from '../../modules/dataItemProfile/getDataItemProfile.js';
 import { getDataItemProfileCompatibility } from '../../modules/dataItemProfile/getDataItemProfileCompatibility.js';
 import { withOrgUnitSide } from '../../modules/dataItemProfile/orgUnitSide.js';
-import { suggestDataItemPeriods } from '../../modules/dataItemProfile/suggestDataItemPeriods.js';
 import { fetchRelativePeriodTypeOptions, getItemsKey, parseItemsKey, useCalendar, useEngineRef } from './utils.js';
 
 /**
@@ -20,9 +19,6 @@ import { fetchRelativePeriodTypeOptions, getItemsKey, parseItemsKey, useCalendar
  * { periods })` runs getDataItemProfileCompatibility on the item's profile,
  * with the server's settings for relative weeks and financial years, its
  * calendar and its version; it gives undefined for an item not loaded.
- * `getDataItemSuggestion(itemId, { periods, periodTypes })` runs
- * suggestDataItemPeriods the same way: from current metadata, a guess to
- * check before Update.
  *
  * With `orgUnits` (DV's org unit items), it also loads where the items' data
  * sets are assigned under them (fetchOrgUnitCoverage, `orgUnitCoverage`), so
@@ -147,20 +143,12 @@ export const useDataItemProfiles = (items, {
     orgUnitCoverage: coverageState.coverage
   }), [state.options, resolvedCalendar, serverVersion, coverageState.coverage]);
   const getDataItemCompatibility = useCallback((itemId, selection) => profiles !== null && profiles !== void 0 && profiles[itemId] ? getDataItemProfileCompatibility(profiles[itemId], selection, options) : undefined, [profiles, options]);
-  const getDataItemSuggestion = useCallback((itemId, {
-    periods,
-    periodTypes
-  } = {}) => profiles !== null && profiles !== void 0 && profiles[itemId] ? suggestDataItemPeriods(profiles[itemId], periods, {
-    ...options,
-    periodTypes
-  }) : undefined, [profiles, options]);
   return {
     loading: state.loading || coverageState.loading,
     error: (_state$error = state.error) !== null && _state$error !== void 0 ? _state$error : coverageState.error,
     profiles,
     orgUnitCoverage: coverageState.coverage,
     relativePeriodTypes: state.options,
-    getDataItemCompatibility,
-    getDataItemSuggestion
+    getDataItemCompatibility
   };
 };

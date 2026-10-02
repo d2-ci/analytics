@@ -8,7 +8,6 @@ import {
 import { getDataItemProfile } from '../../modules/dataItemProfile/getDataItemProfile.js'
 import { getDataItemProfileCompatibility } from '../../modules/dataItemProfile/getDataItemProfileCompatibility.js'
 import { withOrgUnitSide } from '../../modules/dataItemProfile/orgUnitSide.js'
-import { suggestDataItemPeriods } from '../../modules/dataItemProfile/suggestDataItemPeriods.js'
 import {
     fetchRelativePeriodTypeOptions,
     getItemsKey,
@@ -29,9 +28,6 @@ import {
  * { periods })` runs getDataItemProfileCompatibility on the item's profile,
  * with the server's settings for relative weeks and financial years, its
  * calendar and its version; it gives undefined for an item not loaded.
- * `getDataItemSuggestion(itemId, { periods, periodTypes })` runs
- * suggestDataItemPeriods the same way: from current metadata, a guess to
- * check before Update.
  *
  * With `orgUnits` (DV's org unit items), it also loads where the items' data
  * sets are assigned under them (fetchOrgUnitCoverage, `orgUnitCoverage`), so
@@ -195,17 +191,6 @@ export const useDataItemProfiles = (
         [profiles, options]
     )
 
-    const getDataItemSuggestion = useCallback(
-        (itemId, { periods, periodTypes } = {}) =>
-            profiles?.[itemId]
-                ? suggestDataItemPeriods(profiles[itemId], periods, {
-                      ...options,
-                      periodTypes,
-                  })
-                : undefined,
-        [profiles, options]
-    )
-
     return {
         loading: state.loading || coverageState.loading,
         error: state.error ?? coverageState.error,
@@ -213,6 +198,5 @@ export const useDataItemProfiles = (
         orgUnitCoverage: coverageState.coverage,
         relativePeriodTypes: state.options,
         getDataItemCompatibility,
-        getDataItemSuggestion,
     }
 }

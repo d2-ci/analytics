@@ -363,10 +363,6 @@ export {
     widenToWholePeriods,
 } from './modules/dataItemProfile/periodTypeRelations.js'
 export {
-    suggestDataItemPeriods,
-    SUGGESTION_PERIOD_TYPES,
-} from './modules/dataItemProfile/suggestDataItemPeriods.js'
-export {
     getDataItemOrgUnitCompatibility,
     REASON_NOT_ASSIGNED,
     REASON_BELOW_COLLECTION,
