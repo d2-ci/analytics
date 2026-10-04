@@ -1,0 +1,1 @@
+export const addToTotalIfNumber = (value, total) => typeof value === 'number' && Number.isFinite(value) ? (total !== null && total !== void 0 ? total : 0) + value : total;
