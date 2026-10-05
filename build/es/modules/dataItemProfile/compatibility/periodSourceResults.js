@@ -1,10 +1,10 @@
-import { COMPATIBILITY_FULL, COMPATIBILITY_NONE, COMPATIBILITY_PARTIAL, PERIOD_AGGREGATION_AVERAGE, PERIOD_AGGREGATION_FIRST, PERIOD_AGGREGATION_LAST, REASON_EARLIER_PERIOD_VALUE, REASON_NO_EARLIER_PERIOD_VALUE, REASON_PERIOD_TOO_SHORT, REASON_PERIOD_TYPE_MISMATCH, REASON_REPEATED_VALUE, REASON_REPORTING_RATE_TOO_SHORT, REASON_UNSUPPORTED_VERSION } from '../constants.js';
+import { COMPATIBILITY_FULL, COMPATIBILITY_NONE, PERIOD_AGGREGATION_AVERAGE, PERIOD_AGGREGATION_FIRST, PERIOD_AGGREGATION_LAST, REASON_EARLIER_PERIOD_VALUE, REASON_NO_EARLIER_PERIOD_VALUE, REASON_PERIOD_TOO_SHORT, REASON_PERIOD_TYPE_MISMATCH, REASON_REPEATED_VALUE, REASON_REPORTING_RATE_TOO_SHORT, REASON_UNSUPPORTED_VERSION } from '../constants.js';
 import { getFirstOrLastValuePeriod } from '../periods/firstLastValues.js';
 import { getFixedPeriodOfTypeByDate } from '../periods/periodRanges.js';
 import { canAggregateInto, getFrequencyOrder } from '../periods/periodTypes.js';
 import { getSourcePeriodType } from '../profile/assignedPeriodTypes.js';
 import { isProgramSource } from '../sources.js';
-import { combineResults, createResult, getUnknownResult, unionOfReasons } from './combineResults.js';
+import { combineAddedUpResults, combineResults, createResult, getUnknownResult } from './combineResults.js';
 
 /* The period rules for one source and one query ({ periodType, dates, years,
  * calendar, serverVersion }): a fixed period's dates, the years the request
@@ -72,25 +72,13 @@ export const getSourceResult = (source, query) => {
   }
   return combineResults(results);
 };
-
-// The values of one element over its data sets add up: some missing is partial
-const combineSources = results => {
-  const statuses = results.map(({
-    status
-  }) => status);
-  const reasons = unionOfReasons(results);
-  if (statuses.every(status => status === COMPATIBILITY_NONE)) {
-    return createResult(COMPATIBILITY_NONE, reasons);
-  }
-  return createResult(statuses.some(status => status === COMPATIBILITY_NONE) ? COMPATIBILITY_PARTIAL : COMPATIBILITY_FULL, reasons);
-};
 export const getOperandResult = ({
   element,
   reportingRate,
   sources
 }, query) => {
   if (element) {
-    return combineSources(sources.map(source => getElementResult(element, getSourcePeriodType(source), query)));
+    return combineAddedUpResults(sources.map(source => getElementResult(element, getSourcePeriodType(source), query)));
   }
   return reportingRate ? getReportingRateResult(getSourcePeriodType(sources[0]), query) : getProgramResult(sources[0], query);
 };

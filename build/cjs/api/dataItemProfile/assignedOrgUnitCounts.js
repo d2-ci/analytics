@@ -3,16 +3,16 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getCountableSources = exports.fetchAssignedOrgUnitCounts = void 0;
+exports.getDataItemProfileSourceKeys = exports.fetchAssignedOrgUnitCounts = void 0;
 var _sources = require("../../modules/dataItemProfile/sources.js");
 var _orgUnitQueries = require("./orgUnitQueries.js");
 /**
- * The data sets and programs behind profiles (getDataItemProfile results)
- * whose assignment can be counted: `[{ id, field }]`, `field` being the org
- * unit field that lists them (dataSets or programs). Program indicators
- * whose values can be at any org unit are left out.
+ * The source keys of profiles (getDataItemProfile results): the data sets and
+ * programs whose assignment can be counted, as `[{ id, field }]`, `field`
+ * being the org unit field that lists them (dataSets or programs). Program
+ * indicators whose values can be at any org unit are left out.
  */
-const getCountableSources = (profiles = []) => [...new Map(profiles.flatMap(profile => {
+const getDataItemProfileSourceKeys = (profiles = []) => [...new Map(profiles.flatMap(profile => {
   var _profile$sources;
   return (_profile$sources = profile === null || profile === void 0 ? void 0 : profile.sources) !== null && _profile$sources !== void 0 ? _profile$sources : [];
 }).filter(source => (0, _sources.getSourceId)(source) && !(0, _sources.canBeAtAnyOrgUnit)(source)).map(source => [(0, _sources.getSourceId)(source), {
@@ -21,24 +21,35 @@ const getCountableSources = (profiles = []) => [...new Map(profiles.flatMap(prof
 }])).values()];
 
 /**
- * The number of org units each data set or program (`sources`, from
- * getCountableSources) is assigned to, per level, across the hierarchy: one
- * count per source and level. `levels` are fetched when not given. Gives
+ * The number of org units each data set or program (`sourceKeys`, from
+ * getDataItemProfileSourceKeys) is assigned to, per level, across the hierarchy: one
+ * count per source and level. `levels` are fetched when not given; `signal`
+ * cancels the requests. Gives
  * `{ levels, assignedOrgUnitCounts: { [sourceId]: { [level]: count } },
  * requests }`.
  */
-exports.getCountableSources = getCountableSources;
-const fetchAssignedOrgUnitCounts = async (engine, sources, levels) => {
-  const knownLevels = levels !== null && levels !== void 0 ? levels : (0, _orgUnitQueries.readLevels)(await engine.query(_orgUnitQueries.levelsQuery));
-  const queries = sources.flatMap(source => knownLevels.map(({
+exports.getDataItemProfileSourceKeys = getDataItemProfileSourceKeys;
+const fetchAssignedOrgUnitCounts = async (engine, sourceKeys, {
+  levels,
+  signal
+} = {}) => {
+  const knownLevels = levels !== null && levels !== void 0 ? levels : (0, _orgUnitQueries.readLevels)(await engine.query(_orgUnitQueries.levelsQuery, {
+    signal
+  }));
+  const queries = sourceKeys.flatMap(sourceKey => knownLevels.map(({
     level
-  }) => [[source.id, level], (0, _orgUnitQueries.countQuery)([`level:eq:${level}`, (0, _orgUnitQueries.assignedTo)(source)])]));
-  const response = await (0, _orgUnitQueries.queryAll)(engine, queries);
-  const assignedOrgUnitCounts = Object.fromEntries(sources.map(({
+  }) => [[sourceKey.id, level], (0, _orgUnitQueries.countQuery)([`level:eq:${level}`, (0, _orgUnitQueries.assignedTo)(sourceKey)])]));
+  const {
+    responses,
+    requests
+  } = await (0, _orgUnitQueries.queryAll)(engine, queries, {
+    signal
+  });
+  const assignedOrgUnitCounts = Object.fromEntries(sourceKeys.map(({
     id
   }) => [id, {}]));
   queries.forEach(([[sourceId, level]], i) => {
-    const total = (0, _orgUnitQueries.getTotal)(response[`count${i}`]);
+    const total = (0, _orgUnitQueries.getTotal)(responses[i]);
     if (total) {
       assignedOrgUnitCounts[sourceId][level] = total;
     }
@@ -46,7 +57,7 @@ const fetchAssignedOrgUnitCounts = async (engine, sources, levels) => {
   return {
     levels: knownLevels,
     assignedOrgUnitCounts,
-    requests: queries.length
+    requests
   };
 };
 exports.fetchAssignedOrgUnitCounts = fetchAssignedOrgUnitCounts;

@@ -1,347 +1,14 @@
 "use strict";
 
-var _dataItemProfileMetadata = require("../../../../__fixtures__/dataItemProfileMetadata.js");
-var _getDataItemProfile = require("../../getDataItemProfile.js");
-var _getDataItemProfileCompatibility = require("../../getDataItemProfileCompatibility.js");
+var _dataItemProfileOrgUnits = require("../../../../__fixtures__/dataItemProfileOrgUnits.js");
 var _getDataItemProfileOrgUnitCompatibility = require("../getDataItemProfileOrgUnitCompatibility.js");
-const METADATA = {
-  dataElements: {
-    facility: {
-      aggregationType: 'SUM',
-      dataSets: (0, _dataItemProfileMetadata.inDataSets)(['Monthly'])
-    },
-    district: {
-      aggregationType: 'SUM',
-      dataSets: (0, _dataItemProfileMetadata.inDataSets)(['Quarterly'])
-    },
-    twoForms: {
-      aggregationType: 'SUM',
-      dataSets: (0, _dataItemProfileMetadata.inDataSets)(['Monthly', 'Weekly'])
-    },
-    twoLevels: {
-      aggregationType: 'SUM',
-      dataSets: (0, _dataItemProfileMetadata.inDataSets)(['Monthly', 'Quarterly'])
-    },
-    cappedAtDistrict: {
-      aggregationType: 'SUM',
-      dataSets: (0, _dataItemProfileMetadata.inDataSets)(['Monthly']),
-      aggregationLevels: [2]
-    },
-    cappedWithDistrictForm: {
-      aggregationType: 'SUM',
-      dataSets: (0, _dataItemProfileMetadata.inDataSets)(['Monthly', 'Quarterly']),
-      aggregationLevels: [2]
-    },
-    orphan: {
-      aggregationType: 'SUM',
-      dataSets: []
-    }
-  },
-  dataSets: {
-    MonthlyForm: {
-      periodType: 'Monthly'
-    }
-  },
-  programs: {
-    eventProgra: {
-      programType: 'WITHOUT_REGISTRATION'
-    }
-  },
-  programIndicators: {
-    pi: {
-      program: 'eventProgra'
-    },
-    piByOwner: {
-      program: 'eventProgra',
-      orgUnitField: 'OWNER_AT_END'
-    },
-    piByRegistr: {
-      program: 'eventProgra',
-      orgUnitField: 'REGISTRATION'
-    },
-    piByAttribu: {
-      program: 'eventProgra',
-      orgUnitField: 'attributeAAA'
-    }
-  },
-  indicators: {
-    ratio: {
-      numerator: '#{facility}',
-      denominator: '#{district}'
-    },
-    completeness: {
-      numerator: '#{facility}',
-      denominator: 'R{MonthlyForm.REPORTING_RATE}'
-    },
-    partOfTotal: {
-      numerator: '#{twoLevels}',
-      denominator: '#{facility}'
-    },
-    casesPerFacility: {
-      numerator: 'I{pi}',
-      denominator: '#{facility}'
-    },
-    constantsOnly: {
-      numerator: 'C{constantAA}',
-      denominator: '[days]'
-    }
-  }
-};
-const profileOf = (id, dimensionItemType = 'DATA_ELEMENT') => (0, _getDataItemProfile.getDataItemProfile)({
-  id,
-  dimensionItemType
-}, METADATA);
-
-/* A nation (level 1) with 2 districts (2) and 4 facilities (3).
- * MonthlyForm: 3 of the 4 facilities (missing facilityDDD, under districtBBB),
- * and the nation. QuarterlyForm: both districts. WeeklyForm: facilityDDD. */
-const unit = (id, level, path) => ({
-  id,
-  level,
-  path
-});
-const COVERAGE = {
-  levels: [{
-    id: 'levelNation',
-    level: 1
-  }, {
-    id: 'levelDistri',
-    level: 2
-  }, {
-    id: 'levelFacili',
-    level: 3
-  }],
-  orgUnits: {
-    nationUnit1: unit('nationUnit1', 1, '/nationUnit1'),
-    districtAAA: unit('districtAAA', 2, '/nationUnit1/districtAAA'),
-    districtBBB: unit('districtBBB', 2, '/nationUnit1/districtBBB'),
-    facilityAAA: unit('facilityAAA', 3, '/nationUnit1/districtAAA/facilityAAA'),
-    facilityDDD: unit('facilityDDD', 3, '/nationUnit1/districtBBB/facilityDDD')
-  },
-  rootIds: ['nationUnit1'],
-  userOrgUnitIds: ['districtBBB'],
-  // clinicGroup: facilityAAA and facilityDDD. mixedGroupA: districtBBB and facilityAAA
-  groups: {
-    clinicGroup: {
-      3: 2
-    },
-    mixedGroupA: {
-      2: 1,
-      3: 1
-    },
-    emptyGroupA: {}
-  },
-  assignedOrgUnitCounts: {
-    MonthlyForm: {
-      1: 1,
-      3: 3
-    },
-    QuarterlyForm: {
-      2: 2
-    },
-    WeeklyForm: {
-      3: 1
-    },
-    eventProgra: {
-      3: 2
-    }
-  },
-  counts: {
-    nationUnit1: {
-      totals: {
-        1: 1,
-        2: 2,
-        3: 4
-      },
-      sources: {
-        MonthlyForm: {
-          byLevel: {
-            1: 1,
-            3: 3
-          }
-        },
-        QuarterlyForm: {
-          byLevel: {
-            2: 2
-          }
-        },
-        WeeklyForm: {
-          byLevel: {
-            3: 1
-          }
-        },
-        eventProgra: {
-          byLevel: {
-            3: 2
-          }
-        }
-      }
-    },
-    districtAAA: {
-      totals: {
-        2: 1,
-        3: 2
-      },
-      sources: {
-        MonthlyForm: {
-          byLevel: {
-            3: 2
-          },
-          ancestors: 1
-        },
-        QuarterlyForm: {
-          byLevel: {
-            2: 1
-          }
-        },
-        WeeklyForm: {
-          byLevel: {}
-        }
-      }
-    },
-    districtBBB: {
-      totals: {
-        2: 1,
-        3: 2
-      },
-      sources: {
-        MonthlyForm: {
-          byLevel: {
-            3: 1
-          },
-          ancestors: 1
-        },
-        QuarterlyForm: {
-          byLevel: {
-            2: 1
-          }
-        },
-        WeeklyForm: {
-          byLevel: {
-            3: 1
-          }
-        }
-      }
-    },
-    facilityAAA: {
-      totals: {
-        3: 1
-      },
-      sources: {
-        MonthlyForm: {
-          byLevel: {
-            3: 1
-          },
-          ancestors: 1
-        },
-        QuarterlyForm: {
-          byLevel: {},
-          ancestors: 1
-        }
-      }
-    },
-    facilityDDD: {
-      totals: {
-        3: 1
-      },
-      sources: {
-        eventProgra: {
-          byLevel: {}
-        },
-        MonthlyForm: {
-          byLevel: {},
-          ancestors: 1
-        },
-        QuarterlyForm: {
-          byLevel: {},
-          ancestors: 1
-        },
-        WeeklyForm: {
-          byLevel: {
-            3: 1
-          }
-        }
-      }
-    },
-    'clinicGroup:3:': {
-      totals: {
-        3: 2
-      },
-      sources: {
-        MonthlyForm: {
-          byLevel: {
-            3: 1
-          },
-          ancestors: 1
-        },
-        QuarterlyForm: {
-          byLevel: {},
-          ancestors: 2
-        }
-      }
-    },
-    'mixedGroupA:2:': {
-      totals: {
-        2: 1,
-        3: 2
-      },
-      sources: {
-        MonthlyForm: {
-          byLevel: {
-            3: 1
-          },
-          ancestors: 1
-        }
-      }
-    },
-    'mixedGroupA:3:': {
-      totals: {
-        3: 1
-      },
-      sources: {
-        MonthlyForm: {
-          byLevel: {
-            3: 1
-          },
-          ancestors: 1
-        }
-      }
-    },
-    'mixedGroupA:2:districtAAA': {
-      totals: {
-        2: 0,
-        3: 0
-      },
-      sources: {
-        MonthlyForm: {
-          byLevel: {
-            3: 0
-          },
-          ancestors: 1
-        }
-      }
-    },
-    'mixedGroupA:3:districtAAA': {
-      totals: {
-        3: 1
-      },
-      sources: {
-        MonthlyForm: {
-          byLevel: {
-            3: 1
-          },
-          ancestors: 1
-        }
-      }
-    }
-  }
-};
 const judge = (id, orgUnits, {
   type,
-  coverage = COVERAGE
-} = {}) => (0, _getDataItemProfileOrgUnitCompatibility.getDataItemProfileOrgUnitCompatibility)(profileOf(id, type), {
-  orgUnits,
-  coverage
+  coverage = _dataItemProfileOrgUnits.ORG_UNIT_COVERAGE
+} = {}) => (0, _getDataItemProfileOrgUnitCompatibility.getDataItemProfileOrgUnitCompatibility)((0, _dataItemProfileOrgUnits.orgUnitProfileOf)(id, type), {
+  orgUnits
+}, {
+  orgUnitCoverage: coverage
 });
 describe('getDataItemProfileOrgUnitCompatibility', () => {
   it('is full where every org unit at the deepest level assigned is', () => {
@@ -356,7 +23,7 @@ describe('getDataItemProfileOrgUnitCompatibility', () => {
       }
     }]);
   });
-  it('is full where only some are, since the others collect nothing', () => {
+  it('is full where only some are, since the others aren’t assigned', () => {
     expect(judge('facility', ['nationUnit1'])).toEqual([{
       id: 'nationUnit1',
       status: 'full',
@@ -368,8 +35,17 @@ describe('getDataItemProfileOrgUnitCompatibility', () => {
       }
     }]);
   });
-  it('is none at an org unit not assigned, though assigned at its level elsewhere', () => {
+  it('is none, assigned higher, where only an ancestor of the org unit is assigned', () => {
     expect(judge('facility', ['facilityDDD'])).toMatchObject([{
+      status: 'none',
+      reasons: ['ASSIGNED_AT_HIGHER_LEVEL'],
+      assignment: null
+    }]);
+  });
+  it('is none, not assigned, where neither the org unit nor its ancestors are', () => {
+    expect(judge('pi', ['facilityDDD'], {
+      type: 'PROGRAM_INDICATOR'
+    })).toMatchObject([{
       status: 'none',
       reasons: ['NOT_ASSIGNED'],
       assignment: null
@@ -387,8 +63,10 @@ describe('getDataItemProfileOrgUnitCompatibility', () => {
     }]);
   });
   it('counts an element where any of its data sets is assigned', () => {
+    // The monthly form is assigned to the nation above facilityDDD: its values are left out there
     expect(judge('twoForms', ['facilityDDD'])).toMatchObject([{
-      status: 'full'
+      status: 'partial',
+      reasons: ['ASSIGNED_AT_HIGHER_LEVEL']
     }]);
     expect(judge('twoForms', ['nationUnit1'])).toMatchObject([{
       status: 'full',
@@ -396,6 +74,44 @@ describe('getDataItemProfileOrgUnitCompatibility', () => {
       assignment: {
         assigned: 3,
         total: 4
+      }
+    }]);
+  });
+  it('is not partly assigned when one data set is assigned to every org unit', () => {
+    const coverage = {
+      ..._dataItemProfileOrgUnits.ORG_UNIT_COVERAGE,
+      counts: {
+        ..._dataItemProfileOrgUnits.ORG_UNIT_COVERAGE.counts,
+        districtBBB: {
+          totals: {
+            2: 1,
+            3: 2
+          },
+          sources: {
+            MonthlyForm: {
+              byLevel: {
+                3: 2
+              }
+            },
+            WeeklyForm: {
+              byLevel: {
+                3: 1
+              }
+            }
+          }
+        }
+      }
+    };
+    expect(judge('twoForms', ['districtBBB'], {
+      coverage
+    })).toEqual([{
+      id: 'districtBBB',
+      status: 'full',
+      reasons: [],
+      assignment: {
+        assigned: 2,
+        total: 2,
+        level: 3
       }
     }]);
   });
@@ -427,7 +143,15 @@ describe('getDataItemProfileOrgUnitCompatibility', () => {
       type: 'INDICATOR'
     })).toMatchObject([{
       status: 'none',
-      reasons: ['OPERAND_EMPTY', 'NOT_ASSIGNED']
+      reasons: ['OPERAND_EMPTY', 'ASSIGNED_AT_HIGHER_LEVEL']
+    }]);
+  });
+  it('is partial for a sum where one item has no value, which counts as 0', () => {
+    expect(judge('facilityPlusDistrict', ['facilityAAA'], {
+      type: 'INDICATOR'
+    })).toMatchObject([{
+      status: 'partial',
+      reasons: ['OPERAND_EMPTY', 'ASSIGNED_AT_HIGHER_LEVEL']
     }]);
   });
   it('says an expression is computed from a partial operand', () => {
@@ -494,12 +218,85 @@ describe('getDataItemProfileOrgUnitCompatibility', () => {
       }
     }]);
   });
-  it('is none for a level above every parent org unit', () => {
+  it('is none, with no org units there, for a level above every parent or below the hierarchy', () => {
     expect(judge('facility', ['facilityAAA', 'LEVEL-2'])).toEqual([{
       id: 'LEVEL-2',
       status: 'none',
-      reasons: ['NOT_ASSIGNED'],
+      reasons: ['NO_ORG_UNITS_AT_LEVEL'],
       assignment: null
+    }]);
+    expect(judge('facility', ['nationUnit1', 'LEVEL-9'])).toMatchObject([{
+      status: 'none',
+      reasons: ['NO_ORG_UNITS_AT_LEVEL']
+    }]);
+  });
+  it('adds up a level under several parents: one with nothing assigned only lowers the counts', () => {
+    expect(judge('pi', ['districtAAA', 'districtBBB', 'LEVEL-3'], {
+      type: 'PROGRAM_INDICATOR'
+    })).toEqual([{
+      id: 'LEVEL-3',
+      status: 'full',
+      reasons: ['PARTLY_ASSIGNED'],
+      assignment: {
+        assigned: 2,
+        total: 4,
+        level: 3
+      }
+    }]);
+  });
+  it('is partial for a level under several parents where values are left out', () => {
+    expect(judge('twoLevels', ['districtAAA', 'districtBBB', 'LEVEL-3'])).toMatchObject([{
+      status: 'partial',
+      reasons: ['ASSIGNED_AT_HIGHER_LEVEL', 'PARTLY_ASSIGNED'],
+      assignment: {
+        assigned: 3,
+        total: 4,
+        level: 3
+      }
+    }]);
+  });
+  it('is partial for a level under several parents where an operand has no value under one', () => {
+    // districtBBB: facilities collect the numerator, nothing the denominator
+    const coverage = {
+      ..._dataItemProfileOrgUnits.ORG_UNIT_COVERAGE,
+      counts: {
+        ..._dataItemProfileOrgUnits.ORG_UNIT_COVERAGE.counts,
+        districtBBB: {
+          totals: {
+            2: 1,
+            3: 2
+          },
+          sources: {
+            MonthlyForm: {
+              byLevel: {
+                3: 1
+              }
+            },
+            QuarterlyForm: {
+              byLevel: {}
+            }
+          }
+        }
+      }
+    };
+    expect(judge('ratio', ['LEVEL-2', 'districtAAA', 'districtBBB'], {
+      type: 'INDICATOR',
+      coverage
+    })).toMatchObject([{
+      status: 'partial',
+      reasons: ['OPERAND_EMPTY', 'PARTLY_ASSIGNED']
+    }]);
+  });
+  it('takes the user org units as parents of a level', () => {
+    expect(judge('facility', ['USER_ORGUNIT', 'LEVEL-3'])).toEqual([{
+      id: 'LEVEL-3',
+      status: 'full',
+      reasons: ['PARTLY_ASSIGNED'],
+      assignment: {
+        assigned: 1,
+        total: 2,
+        level: 3
+      }
     }]);
   });
   it('judges event data where its program is assigned', () => {
@@ -533,7 +330,7 @@ describe('getDataItemProfileOrgUnitCompatibility', () => {
       type: 'INDICATOR'
     })).toMatchObject([{
       status: 'none',
-      reasons: ['OPERAND_EMPTY', 'NOT_ASSIGNED']
+      reasons: ['OPERAND_EMPTY', 'NOT_ASSIGNED', 'ASSIGNED_AT_HIGHER_LEVEL']
     }]);
   });
   it('judges a group where its members are', () => {
@@ -648,45 +445,5 @@ describe('getDataItemProfileOrgUnitCompatibility', () => {
       status: 'unknown',
       reasons: ['PROFILE_UNKNOWN']
     }]);
-  });
-});
-describe('getDataItemProfileCompatibility, with org units', () => {
-  it('judges periods and org units apart, and combines them overall', () => {
-    const result = (0, _getDataItemProfileCompatibility.getDataItemProfileCompatibility)(profileOf('facility'), {
-      periods: ['2025Q1'],
-      orgUnits: ['nationUnit1', 'facilityDDD']
-    }, {
-      orgUnitCoverage: COVERAGE
-    });
-    expect(result).toMatchObject({
-      status: 'none',
-      reasons: ['NOT_ASSIGNED', 'PARTLY_ASSIGNED'],
-      periods: [{
-        id: '2025Q1',
-        status: 'full'
-      }],
-      orgUnits: [{
-        id: 'nationUnit1',
-        status: 'full'
-      }, {
-        id: 'facilityDDD',
-        status: 'none'
-      }]
-    });
-  });
-  it('leaves org units out when none are asked', () => {
-    expect((0, _getDataItemProfileCompatibility.getDataItemProfileCompatibility)(profileOf('facility'), {
-      periods: ['2025Q1']
-    })).not.toHaveProperty('orgUnits');
-  });
-  it('judges org units alone', () => {
-    expect((0, _getDataItemProfileCompatibility.getDataItemProfileCompatibility)(profileOf('facility'), {
-      orgUnits: ['districtAAA']
-    }, {
-      orgUnitCoverage: COVERAGE
-    })).toMatchObject({
-      status: 'full',
-      periods: []
-    });
   });
 });

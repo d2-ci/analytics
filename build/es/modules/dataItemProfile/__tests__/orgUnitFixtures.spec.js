@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { createFakeOrgUnitServer } from '../../../__fixtures__/fakeOrgUnitServer.js';
-import { getCountableSources } from '../../../api/dataItemProfile/assignedOrgUnitCounts.js';
+import { getDataItemProfileSourceKeys } from '../../../api/dataItemProfile/assignedOrgUnitCounts.js';
 import { fetchOrgUnitCoverage } from '../../../api/dataItemProfile/fetchOrgUnitCoverage.js';
 import { normalizeDataItemProfileMetadata } from '../../../api/dataItemProfile/metadataQueries.js';
 import { getDataItemProfileOrgUnitCompatibility } from '../compatibility/getDataItemProfileOrgUnitCompatibility.js';
@@ -27,7 +27,11 @@ const PREDICTION_DIFFERENCES = {
   }
 };
 
-// The tool's reason names, before the library renamed them
+/* Cases at the region, where the tool leaves out PARTLY_ASSIGNED (only some
+ * of its districts or facilities are assigned): the library notes it */
+const TOOL_LEAVES_OUT_PARTLY_ASSIGNED = new Set(['ou-above__level-3-region', 'ou-above__region', 'ou-agg-d1-3__region', 'ou-prog-event__region']);
+
+// The tool's names for the library's reasons
 const REASON_BY_TOOL_NAME = {
   BELOW_COLLECTION: 'ASSIGNED_AT_HIGHER_LEVEL',
   AGGREGATION_LEVEL: 'STOPPED_BY_AGGREGATION_LEVEL',
@@ -163,12 +167,13 @@ const judgeCase = async (hierarchy, {
   }, getMetadata(itemId, item));
   const orgUnits = query.orgUnits.map(key => toSelectionItem(key, hierarchy));
   const coverage = await fetchOrgUnitCoverage(createServer(hierarchy, item).createEngine(), {
-    sources: getCountableSources([profile]),
+    sourceKeys: getDataItemProfileSourceKeys([profile]),
     orgUnits
   });
   return getDataItemProfileOrgUnitCompatibility(profile, {
-    orgUnits,
-    coverage
+    orgUnits
+  }, {
+    orgUnitCoverage: coverage
   })[0];
 };
 const getExpected = ({
@@ -182,31 +187,36 @@ const getExpected = ({
   const isRefused = Object.values(observed).every(({
     error
   }) => error === null || error === void 0 ? void 0 : error.startsWith('E7143'));
-  return isRefused ? {
-    status: 'none',
-    reasons: ['EMPTY_GROUP']
-  } : {
+  if (isRefused) {
+    return {
+      status: 'none',
+      reasons: ['EMPTY_GROUP']
+    };
+  }
+  const reasons = expected.reasons.map(reason => {
+    var _REASON_BY_TOOL_NAME$;
+    return (_REASON_BY_TOOL_NAME$ = REASON_BY_TOOL_NAME[reason]) !== null && _REASON_BY_TOOL_NAME$ !== void 0 ? _REASON_BY_TOOL_NAME$ : reason;
+  });
+  return {
     status: expected.compatibility,
-    reasons: expected.reasons.map(reason => {
-      var _REASON_BY_TOOL_NAME$;
-      return (_REASON_BY_TOOL_NAME$ = REASON_BY_TOOL_NAME[reason]) !== null && _REASON_BY_TOOL_NAME$ !== void 0 ? _REASON_BY_TOOL_NAME$ : reason;
-    })
+    reasons: TOOL_LEAVES_OUT_PARTLY_ASSIGNED.has(id) ? [...reasons, 'PARTLY_ASSIGNED'] : reasons
   };
 };
 
 /* What analytics must have returned on every version for the library's
- * status: none, nothing (or the refusal of an empty group); otherwise, never
- * an error. A full result says nothing is left out, not that there is data:
- * a program with no event in an org unit gives nothing there. */
+ * status: none, nothing (or the refusal of an empty group); partial, some
+ * values (the ones that reach the org unit); full, never an error. A full
+ * result says nothing is left out, not that there is data: a program with no
+ * event in an org unit gives nothing there. */
+const ANSWERS_BY_STATUS = {
+  none: ['EMPTY'],
+  partial: ['VALUE'],
+  full: ['VALUE', 'EMPTY']
+};
 const agreesWithAnalytics = ({
   status,
   reasons
-}, observed) => Object.values(observed).every(answer => {
-  if (reasons.includes('EMPTY_GROUP')) {
-    return answer.status === 'ERROR';
-  }
-  return status === 'none' ? answer.status === 'EMPTY' : answer.status !== 'ERROR';
-});
+}, observed) => Object.values(observed).every(answer => reasons.includes('EMPTY_GROUP') ? answer.status === 'ERROR' : ANSWERS_BY_STATUS[status].includes(answer.status));
 describe('org unit fixtures', () => {
   describe.each(CASE_GROUPS)('%s', group => {
     const {
@@ -215,15 +225,9 @@ describe('org unit fixtures', () => {
     } = readFixture(group);
     it.each(cases.map(fixtureCase => [fixtureCase.id, fixtureCase]))('%s: the library judges as the tool expects, and as analytics answered', async (_, fixtureCase) => {
       const result = await judgeCase(hierarchy, fixtureCase);
-
-      /* PARTLY_ASSIGNED is informational: the tool leaves it out
-       * where the org unit has other children at that level */
       expect({
         status: result.status,
-        reasons: result.reasons.filter(reason => {
-          var _fixtureCase$expected;
-          return reason !== 'PARTLY_ASSIGNED' || ((_fixtureCase$expected = fixtureCase.expected.reasons) === null || _fixtureCase$expected === void 0 ? void 0 : _fixtureCase$expected.includes(reason));
-        })
+        reasons: result.reasons
       }).toEqual(getExpected(fixtureCase));
       expect(agreesWithAnalytics(result, fixtureCase.observed)).toBe(true);
     });

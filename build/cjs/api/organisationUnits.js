@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.apiFetchOrganisationUnits = exports.apiFetchOrganisationUnitRoots = exports.apiFetchOrganisationUnitLevels = exports.apiFetchOrganisationUnitGroups = exports.apiFetchOrganisationUnit = void 0;
+exports.orgUnitLevelsQuery = exports.apiFetchOrganisationUnits = exports.apiFetchOrganisationUnitRoots = exports.apiFetchOrganisationUnitLevels = exports.apiFetchOrganisationUnitGroups = exports.apiFetchOrganisationUnit = void 0;
 var _index = require("./index.js");
-const orgUnitLevelsQuery = {
+const orgUnitLevelsQuery = exports.orgUnitLevelsQuery = {
   resource: 'organisationUnitLevels',
   params: ({
     displayNameProp = 'displayName'

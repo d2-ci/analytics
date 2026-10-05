@@ -84,14 +84,15 @@ const describeAssignment = ({
 const ORG_UNIT_NONE_ADVICE = {
   ASSIGNED_AT_HIGHER_LEVEL: 'Not shown: its data sets are assigned at a higher level.',
   STOPPED_BY_AGGREGATION_LEVEL: 'Not shown: its aggregation levels stop values before this level.',
-  EMPTY_GROUP: 'Leave it out: the group has no members.'
+  EMPTY_GROUP: 'Leave it out: the group has no members.',
+  NO_ORG_UNITS_AT_LEVEL: 'Not shown: no org unit at this level there.'
 };
 const getFullAdvice = (reasons, assignment, levels) => {
   if (reasons.includes('ANY_ORG_UNIT') || !assignment) {
     return 'Shown.';
   }
   const assignedTo = describeAssignment(assignment, levels);
-  return reasons.includes('PARTLY_ASSIGNED') ? `Shown: assigned to ${assignedTo}; the others collect nothing.` : `Shown: assigned to ${assignedTo}.`;
+  return reasons.includes('PARTLY_ASSIGNED') ? `Shown: assigned to ${assignedTo}; the others aren’t assigned.` : `Shown: assigned to ${assignedTo}.`;
 };
 
 // What DV could say about an item, for one org unit selection item

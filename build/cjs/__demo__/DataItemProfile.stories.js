@@ -63,7 +63,13 @@ const ProfilesAndCompatibility = () => {
   var _relativePeriodTypes$, _relativePeriodTypes$2;
   const [periodsText, setPeriodsText] = (0, _react.useState)('2025W2, 202501, 2025Q1, 2025, LAST_12_MONTHS, LAST_4_WEEKS, Weekly');
   const periods = (0, _react.useMemo)(() => (0, _DataItemProfileShared.splitList)(periodsText), [periodsText]);
+  // Typed org units apply on blur: each change sends requests
   const [orgUnitsText, setOrgUnitsText] = (0, _react.useState)(ORG_UNIT_SCENARIOS[0][1]);
+  const [orgUnitsDraft, setOrgUnitsDraft] = (0, _react.useState)(orgUnitsText);
+  const applyOrgUnits = text => {
+    setOrgUnitsDraft(text);
+    setOrgUnitsText(text);
+  };
   const orgUnits = (0, _react.useMemo)(() => (0, _DataItemProfileShared.splitList)(orgUnitsText), [orgUnitsText]);
   const orgUnitItems = (0, _orgUnitSelection.readOrgUnitSelection)(orgUnits).selectionItems.map(({
     id
@@ -111,17 +117,21 @@ const ProfilesAndCompatibility = () => {
     className: "jsx-1349894501" + " " + "inputs"
   }, /*#__PURE__*/_react.default.createElement(_ui.InputField, {
     label: "Org units: ids, LEVEL-n or OU_GROUP-id (the ids are then their parents), USER_ORGUNIT\u2026",
-    value: orgUnitsText,
+    helpText: "Applied when the field loses focus",
+    value: orgUnitsDraft,
     onChange: ({
       value
-    }) => setOrgUnitsText(value),
+    }) => setOrgUnitsDraft(value),
+    onBlur: ({
+      value
+    }) => applyOrgUnits(value),
     inputWidth: "600px"
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "jsx-1349894501" + " " + "scenarios"
   }, ORG_UNIT_SCENARIOS.map(([label, text]) => /*#__PURE__*/_react.default.createElement(_ui.Button, {
     key: label,
     small: true,
-    onClick: () => setOrgUnitsText(text)
+    onClick: () => applyOrgUnits(text)
   }, label))), /*#__PURE__*/_react.default.createElement(_style.default, {
     id: "1349894501"
   }, [".scenarios.jsx-1349894501{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;gap:8px;margin-block-start:8px;}"])), loading && /*#__PURE__*/_react.default.createElement(_DataItemProfileShared.Loading, null), error && /*#__PURE__*/_react.default.createElement(_DataItemProfileShared.ErrorNotice, {

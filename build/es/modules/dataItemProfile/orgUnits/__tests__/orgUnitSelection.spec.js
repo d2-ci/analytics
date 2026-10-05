@@ -22,6 +22,8 @@ describe('parseOrgUnitSelectionItem', () => {
     depth: 2
   }], ['not an id', {
     type: 'UNKNOWN'
+  }], ['toString', {
+    type: 'UNKNOWN'
   }]])('reads %s', (id, expected) => {
     expect(parseOrgUnitSelectionItem(id)).toEqual({
       id,
@@ -30,7 +32,7 @@ describe('parseOrgUnitSelectionItem', () => {
   });
 });
 describe('readOrgUnitSelection', () => {
-  it('judges units on their own', () => {
+  it('judges org units on their own', () => {
     expect(readOrgUnitSelection(['unitAAAAAAA', 'unitBBBBBBB'])).toEqual({
       selectionItems: [{
         id: 'unitAAAAAAA',
@@ -39,32 +41,35 @@ describe('readOrgUnitSelection', () => {
         id: 'unitBBBBBBB',
         type: 'ORG_UNIT'
       }],
-      parentOrgUnitIds: []
+      parentItems: []
     });
   });
-  it('takes the units as boundaries of a level or a group', () => {
+  it('takes the org units and the user org units as parents of a level or a group', () => {
     expect(readOrgUnitSelection(['unitAAAAAAA', 'LEVEL-3', 'USER_ORGUNIT'])).toEqual({
       selectionItems: [{
         id: 'LEVEL-3',
         type: 'LEVEL',
         level: 3
+      }],
+      parentItems: [{
+        id: 'unitAAAAAAA',
+        type: 'ORG_UNIT'
       }, {
         id: 'USER_ORGUNIT',
         type: 'USER',
         depth: 0
-      }],
-      parentOrgUnitIds: ['unitAAAAAAA']
+      }]
     });
   });
   it('reads nothing from no selection', () => {
     expect(readOrgUnitSelection()).toEqual({
       selectionItems: [],
-      parentOrgUnitIds: []
+      parentItems: []
     });
   });
 });
 describe('getOrgUnitsToFetch', () => {
-  it('counts the units of a selection', () => {
+  it('fetches the org units of a selection', () => {
     expect(getOrgUnitsToFetch(['unitAAAAAAA', 'LEVEL-2'])).toEqual({
       orgUnitIds: ['unitAAAAAAA'],
       needsRoots: false,
@@ -72,10 +77,14 @@ describe('getOrgUnitsToFetch', () => {
       groupIds: []
     });
   });
-  it('counts the roots for a level alone, and the user units', () => {
+  it('fetches the roots for a level alone, and the user org units', () => {
+    expect(getOrgUnitsToFetch(['LEVEL-2'])).toMatchObject({
+      needsRoots: true,
+      needsUserOrgUnits: false
+    });
     expect(getOrgUnitsToFetch(['LEVEL-2', 'USER_ORGUNIT_CHILDREN'])).toEqual({
       orgUnitIds: [],
-      needsRoots: true,
+      needsRoots: false,
       needsUserOrgUnits: true,
       groupIds: []
     });
@@ -103,23 +112,32 @@ describe('getRequestedLevels', () => {
     }, {
       id: 'levelDistri',
       level: 2
+    }, {
+      id: 'levelChiefd',
+      level: 3
+    }, {
+      id: 'levelFacili',
+      level: 4
     }],
     orgUnits: {
-      nation: {
-        id: 'nation',
-        level: 1
+      nationUnit1: {
+        id: 'nationUnit1',
+        level: 1,
+        path: '/nationUnit1'
       },
-      district: {
-        id: 'district',
-        level: 2
+      districtAAA: {
+        id: 'districtAAA',
+        level: 2,
+        path: '/nationUnit1/districtAAA'
       },
-      facility: {
-        id: 'facility',
-        level: 4
+      facilityAAA: {
+        id: 'facilityAAA',
+        level: 4,
+        path: '/nationUnit1/districtAAA/chiefdomAAA/facilityAAA'
       }
     },
-    rootIds: ['nation'],
-    userOrgUnitIds: ['district'],
+    rootIds: ['nationUnit1'],
+    userOrgUnitIds: ['districtAAA'],
     groups: {
       groupAAAAAA: {
         2: 3,
@@ -128,32 +146,54 @@ describe('getRequestedLevels', () => {
       }
     }
   };
-  const targets = (id, boundaries = [], coverage = COVERAGE) => getRequestedLevels(parseOrgUnitSelectionItem(id), boundaries, coverage);
-  it('asks a unit at its own level', () => {
-    expect(targets('district')).toBeNull();
-    expect(getRequestedLevels({
-      id: 'district',
-      type: 'ORG_UNIT'
-    }, [], COVERAGE)).toEqual([{
-      countsKey: 'district',
+  const targets = (id, parents = [], coverage = COVERAGE) => getRequestedLevels(parseOrgUnitSelectionItem(id), parents.map(parseOrgUnitSelectionItem), coverage);
+  it('asks an org unit at its own level', () => {
+    expect(targets('districtAAA')).toEqual([{
+      countsKey: 'districtAAA',
       level: 2
     }]);
   });
-  it('asks a level under each boundary that is above it', () => {
-    expect(targets('LEVEL-3', ['nation', 'facility'])).toEqual([{
-      countsKey: 'nation',
+  it('asks a level under each parent that holds it', () => {
+    expect(targets('LEVEL-3', ['nationUnit1', 'facilityAAA'])).toEqual([{
+      countsKey: 'nationUnit1',
       level: 3
     }]);
   });
-  it('asks a level under the roots without boundaries, by number or id', () => {
+  it('asks a level once under a parent given twice, or within another', () => {
+    expect(targets('LEVEL-4', ['districtAAA', 'districtAAA', 'facilityAAA'])).toEqual([{
+      countsKey: 'districtAAA',
+      level: 4
+    }]);
+    expect(targets('LEVEL-4', ['USER_ORGUNIT', 'USER_ORGUNIT_CHILDREN'])).toEqual([{
+      countsKey: 'districtAAA',
+      level: 4
+    }]);
+  });
+  it('keeps a parent within another that holds fewer levels', () => {
+    expect(targets('LEVEL-3', ['USER_ORGUNIT_GRANDCHILDREN', 'districtAAA'])).toEqual([{
+      countsKey: 'districtAAA',
+      level: 3
+    }]);
+  });
+  it('asks a level under the user org units, below the depth of the user item', () => {
+    expect(targets('LEVEL-3', ['USER_ORGUNIT_CHILDREN'])).toEqual([{
+      countsKey: 'districtAAA',
+      level: 3
+    }]);
+    expect(targets('LEVEL-2', ['USER_ORGUNIT_CHILDREN'])).toEqual([]);
+  });
+  it('asks nothing for a level deeper than the hierarchy', () => {
+    expect(targets('LEVEL-7', ['nationUnit1'])).toEqual([]);
+  });
+  it('asks a level under the roots without parents, by number or id', () => {
     expect(targets('LEVEL-levelDistri')).toEqual([{
-      countsKey: 'nation',
+      countsKey: 'nationUnit1',
       level: 2
     }]);
   });
-  it('asks the user units at their level plus the depth', () => {
+  it('asks the user org units at their level plus the depth', () => {
     expect(targets('USER_ORGUNIT_GRANDCHILDREN')).toEqual([{
-      countsKey: 'district',
+      countsKey: 'districtAAA',
       level: 4
     }]);
   });
@@ -168,22 +208,23 @@ describe('getRequestedLevels', () => {
       groupId: 'groupAAAAAA'
     }]);
   });
-  it('asks a group under each boundary at or above its members', () => {
-    expect(targets('OU_GROUP-groupAAAAAA', ['district', 'facility'])).toEqual([{
-      countsKey: 'groupAAAAAA:2:district',
+  it('asks a group under each parent at or above its members, inside no other', () => {
+    expect(targets('OU_GROUP-groupAAAAAA', ['districtAAA', 'facilityAAA'])).toEqual([{
+      countsKey: 'groupAAAAAA:2:districtAAA',
       level: 2,
       groupId: 'groupAAAAAA'
     }, {
-      countsKey: 'groupAAAAAA:4:district',
+      countsKey: 'groupAAAAAA:4:districtAAA',
       level: 4,
       groupId: 'groupAAAAAA'
-    }, {
-      countsKey: 'groupAAAAAA:4:facility',
+    }]);
+    expect(targets('OU_GROUP-groupAAAAAA', ['facilityAAA'])).toEqual([{
+      countsKey: 'groupAAAAAA:4:facilityAAA',
       level: 4,
       groupId: 'groupAAAAAA'
     }]);
   });
-  it('cannot tell for a group, an unknown level, or units not loaded', () => {
+  it('cannot tell for a group, an unknown level, or org units not loaded', () => {
     expect(targets('OU_GROUP-notLoadedGr')).toBeNull();
     expect(targets('OU_GROUP-groupAAAAAA', ['notLoadedUn'])).toBeNull();
     expect(targets('LEVEL-unknownLvl')).toBeNull();

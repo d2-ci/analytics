@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.usesProgramOrgUnits = exports.isProgramSource = exports.getSourceId = exports.getItemOperands = exports.getAssignmentField = exports.canBeAtAnyOrgUnit = void 0;
+exports.usesProgramOrgUnits = exports.isProgramSource = exports.getSourceId = exports.getReportingRateOperandKey = exports.getProgramOperandKey = exports.getItemOperands = exports.getElementOperandKey = exports.getAssignmentField = exports.canBeAtAnyOrgUnit = void 0;
 var _constants = require("./constants.js");
 /* A profile source is where an item's data comes from:
  * - a data set: { dataSet: { id, periodType }, elements, reportingRate };
@@ -11,7 +11,7 @@ var _constants = require("./constants.js");
  *   with `orgUnitField` when its values can be at any org unit, and
  *   `missingPeriodBoundaries` for a program indicator without them;
  * - a data element in no data set: { dataSet: null, elements, reportingRate: false },
- *   which nothing collects. */
+ *   assigned nowhere. */
 
 const isProgramSource = ({
   program
@@ -41,19 +41,36 @@ const canBeAtAnyOrgUnit = ({
   orgUnitField
 }) => !usesProgramOrgUnits(orgUnitField);
 
-/**
- * The operands an item's value is computed from: each data element (by id
- * and aggregation type) with the sources it is in, each reporting rate, and
- * each program. An expression needs them all; one element adds up over its
- * sources.
- */
+/* Operand keys: how a profile's expression (profile.expression) names the
+ * operands getItemOperands gives */
 exports.canBeAtAnyOrgUnit = canBeAtAnyOrgUnit;
+const getElementOperandKey = ({
+  id,
+  aggregationType
+}) => `element:${id}:${aggregationType}`;
+exports.getElementOperandKey = getElementOperandKey;
+const getReportingRateOperandKey = dataSetId => `reportingRate:${dataSetId}`;
+exports.getReportingRateOperandKey = getReportingRateOperandKey;
+const getProgramOperandKey = ({
+  program,
+  orgUnitField,
+  missingPeriodBoundaries
+}) => ['program', program.id, orgUnitField !== null && orgUnitField !== void 0 ? orgUnitField : '', missingPeriodBoundaries ? 'missingPeriodBoundaries' : ''].join(':');
+
+/**
+ * The operands an item's value is computed from, each with its `key`: each
+ * data element (by id and aggregation type) with the sources it is in, each
+ * reporting rate, and each program. One element adds up over its sources;
+ * profile.expression says how the operands combine.
+ */
+exports.getProgramOperandKey = getProgramOperandKey;
 const getItemOperands = profile => {
   const elements = new Map();
   profile.sources.forEach(source => source.elements.forEach(element => {
     var _elements$get;
-    const key = `${element.id}:${element.aggregationType}`;
+    const key = getElementOperandKey(element);
     const operand = (_elements$get = elements.get(key)) !== null && _elements$get !== void 0 ? _elements$get : {
+      key,
       element,
       sources: []
     };
@@ -63,9 +80,11 @@ const getItemOperands = profile => {
   return [...elements.values(), ...profile.sources.filter(({
     reportingRate
   }) => reportingRate).map(source => ({
+    key: getReportingRateOperandKey(source.dataSet.id),
     reportingRate: true,
     sources: [source]
   })), ...profile.sources.filter(isProgramSource).map(source => ({
+    key: getProgramOperandKey(source),
     program: true,
     sources: [source]
   }))];

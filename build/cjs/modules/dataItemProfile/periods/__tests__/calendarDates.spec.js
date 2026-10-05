@@ -5,6 +5,7 @@ describe('calendarDates', () => {
   it('needs no conversion for the ISO calendars only', () => {
     expect((0, _calendarDates.isIsoCalendar)()).toBe(true);
     expect((0, _calendarDates.isIsoCalendar)('iso8601')).toBe(true);
+    expect((0, _calendarDates.isIsoCalendar)('gregorian')).toBe(true);
     expect((0, _calendarDates.isIsoCalendar)('nepali')).toBe(false);
   });
   it('formats and reads dates', () => {
@@ -23,15 +24,18 @@ describe('calendarDates', () => {
   });
   it('shifts a date of another calendar in that calendar', () => {
     expect((0, _calendarDates.shiftDate)('2081-01-03', 1, 'nepali')).toBe('2081-01-04');
-    expect((0, _calendarDates.toIsoDate)((0, _calendarDates.shiftDate)('2081-01-03', 1, 'nepali'), 'nepali')).toBe('2024-04-16');
+    expect((0, _calendarDates.fromIsoDate)('2024-04-16', 'nepali')).toBe('2081-01-04');
   });
 });
-describe('toIsoDate', () => {
-  it('keeps ISO dates', () => {
-    expect((0, _calendarDates.toIsoDate)('2025-01-06')).toBe('2025-01-06');
-    expect((0, _calendarDates.toIsoDate)('2025-01-06', 'iso8601')).toBe('2025-01-06');
+describe('fromIsoDate', () => {
+  it('keeps ISO dates, and converts them to other calendars', () => {
+    expect((0, _calendarDates.fromIsoDate)('2025-01-06')).toBe('2025-01-06');
+    expect((0, _calendarDates.fromIsoDate)('2024-04-15', 'nepali')).toBe('2081-01-03');
   });
-  it('converts dates of other calendars', () => {
-    expect((0, _calendarDates.toIsoDate)('2081-01-03', 'nepali')).toBe('2024-04-15');
+});
+describe('a conversion that fails', () => {
+  it('gives null, never throws', () => {
+    expect((0, _calendarDates.fromIsoDate)('2024-04-15', 'noSuchCalendar')).toBeNull();
+    expect((0, _calendarDates.shiftDate)('2081-01-03', 1, 'noSuchCalendar')).toBeNull();
   });
 });

@@ -2,12 +2,12 @@ import { canBeAtAnyOrgUnit, getAssignmentField, getSourceId } from '../../module
 import { assignedTo, countQuery, getTotal, levelsQuery, queryAll, readLevels } from './orgUnitQueries.js';
 
 /**
- * The data sets and programs behind profiles (getDataItemProfile results)
- * whose assignment can be counted: `[{ id, field }]`, `field` being the org
- * unit field that lists them (dataSets or programs). Program indicators
- * whose values can be at any org unit are left out.
+ * The source keys of profiles (getDataItemProfile results): the data sets and
+ * programs whose assignment can be counted, as `[{ id, field }]`, `field`
+ * being the org unit field that lists them (dataSets or programs). Program
+ * indicators whose values can be at any org unit are left out.
  */
-export const getCountableSources = (profiles = []) => [...new Map(profiles.flatMap(profile => {
+export const getDataItemProfileSourceKeys = (profiles = []) => [...new Map(profiles.flatMap(profile => {
   var _profile$sources;
   return (_profile$sources = profile === null || profile === void 0 ? void 0 : profile.sources) !== null && _profile$sources !== void 0 ? _profile$sources : [];
 }).filter(source => getSourceId(source) && !canBeAtAnyOrgUnit(source)).map(source => [getSourceId(source), {
@@ -16,23 +16,34 @@ export const getCountableSources = (profiles = []) => [...new Map(profiles.flatM
 }])).values()];
 
 /**
- * The number of org units each data set or program (`sources`, from
- * getCountableSources) is assigned to, per level, across the hierarchy: one
- * count per source and level. `levels` are fetched when not given. Gives
+ * The number of org units each data set or program (`sourceKeys`, from
+ * getDataItemProfileSourceKeys) is assigned to, per level, across the hierarchy: one
+ * count per source and level. `levels` are fetched when not given; `signal`
+ * cancels the requests. Gives
  * `{ levels, assignedOrgUnitCounts: { [sourceId]: { [level]: count } },
  * requests }`.
  */
-export const fetchAssignedOrgUnitCounts = async (engine, sources, levels) => {
-  const knownLevels = levels !== null && levels !== void 0 ? levels : readLevels(await engine.query(levelsQuery));
-  const queries = sources.flatMap(source => knownLevels.map(({
+export const fetchAssignedOrgUnitCounts = async (engine, sourceKeys, {
+  levels,
+  signal
+} = {}) => {
+  const knownLevels = levels !== null && levels !== void 0 ? levels : readLevels(await engine.query(levelsQuery, {
+    signal
+  }));
+  const queries = sourceKeys.flatMap(sourceKey => knownLevels.map(({
     level
-  }) => [[source.id, level], countQuery([`level:eq:${level}`, assignedTo(source)])]));
-  const response = await queryAll(engine, queries);
-  const assignedOrgUnitCounts = Object.fromEntries(sources.map(({
+  }) => [[sourceKey.id, level], countQuery([`level:eq:${level}`, assignedTo(sourceKey)])]));
+  const {
+    responses,
+    requests
+  } = await queryAll(engine, queries, {
+    signal
+  });
+  const assignedOrgUnitCounts = Object.fromEntries(sourceKeys.map(({
     id
   }) => [id, {}]));
   queries.forEach(([[sourceId, level]], i) => {
-    const total = getTotal(response[`count${i}`]);
+    const total = getTotal(responses[i]);
     if (total) {
       assignedOrgUnitCounts[sourceId][level] = total;
     }
@@ -40,6 +51,6 @@ export const fetchAssignedOrgUnitCounts = async (engine, sources, levels) => {
   return {
     levels: knownLevels,
     assignedOrgUnitCounts,
-    requests: queries.length
+    requests
   };
 };

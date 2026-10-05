@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getYearsTouched = exports.getFirstOrLastValuePeriod = void 0;
 var _constants = require("../constants.js");
 var _calendarDates = require("./calendarDates.js");
+var _memoize = require("./memoize.js");
 var _multiCalendarPatches = require("./multiCalendarPatches.js");
 var _periodRanges = require("./periodRanges.js");
 /* How analytics answers FIRST and LAST data (checked by the test tool on 2.40
@@ -15,14 +16,14 @@ var _periodRanges = require("./periodRanges.js");
  * gives no value. So FIRST in July gives January's value, and LAST on
  * 1 January gives nothing. */
 
-// Enough to cross the years between two in a request, one period at a time at most
+// Enough to reach the last periods of the next year in the request, after a jump
 const MAX_STEPS = 20;
 const getLastPeriodEndingBy = (periodType, date, calendar) => {
   const holding = (0, _periodRanges.getFixedPeriodOfTypeByDate)(periodType, date, calendar);
   if (!holding || holding.endDate <= date) {
     return holding;
   }
-  return (0, _periodRanges.getFixedPeriodOfTypeByDate)(periodType, (0, _calendarDates.shiftDate)(holding.startDate, -1, calendar), calendar);
+  return (0, _periodRanges.getPreviousPeriod)(periodType, holding, calendar);
 };
 const getLatestCounting = ({
   periodType,
@@ -44,9 +45,15 @@ const getLatestCounting = ({
     if (!lowerYears.length) {
       return null;
     }
-    const yearEnd = `${(0, _calendarDates.pad)(Math.max(...lowerYears) + 1, 4)}-12-31`;
+
+    /* Jump to just after the highest year left: its last periods end by
+     * then (a week of that year can end in early January) */
+    const afterYear = `${(0, _calendarDates.pad)(Math.max(...lowerYears) + 1, 4)}-01-07`;
     const before = (0, _calendarDates.shiftDate)(period.startDate, -1, calendar);
-    date = yearEnd < before ? yearEnd : before;
+    if (!before) {
+      return null;
+    }
+    date = afterYear < before ? afterYear : before;
   }
   return null;
 };
@@ -62,7 +69,7 @@ const getEarliestCounting = ({
     if ((0, _multiCalendarPatches.getPeriodIdYear)(period, periodType) >= firstYear) {
       return period.endDate <= dates.endDate ? period : null;
     }
-    period = (0, _periodRanges.getFixedPeriodOfTypeByDate)(periodType, (0, _calendarDates.shiftDate)(period.endDate, 1, calendar), calendar);
+    period = (0, _periodRanges.getNextPeriod)(periodType, period, calendar);
   }
   return null;
 };
@@ -72,24 +79,31 @@ const getEarliestCounting = ({
  * `periodType`, in a period with `dates`, when the request touches the
  * calendar `years`; null when there is none.
  */
+const findFirstOrLastValuePeriod = (0, _memoize.memoize)(({
+  periodAggregationType,
+  ...query
+}) => periodAggregationType === _constants.PERIOD_AGGREGATION_FIRST ? getEarliestCounting(query) : getLatestCounting(query), {
+  getKey: ({
+    periodAggregationType,
+    periodType,
+    dates,
+    years,
+    calendar
+  }) => [periodAggregationType, periodType, dates.startDate, dates.endDate, years.join(','), calendar].join('|')
+});
 const getFirstOrLastValuePeriod = ({
   periodAggregationType,
   periodType,
   dates,
   years,
   calendar = 'gregory'
-}) => {
-  if (!years.length) {
-    return null;
-  }
-  const query = {
-    periodType,
-    dates,
-    years,
-    calendar
-  };
-  return periodAggregationType === _constants.PERIOD_AGGREGATION_FIRST ? getEarliestCounting(query) : getLatestCounting(query);
-};
+}) => years.length ? findFirstOrLastValuePeriod({
+  periodAggregationType,
+  periodType,
+  dates,
+  years,
+  calendar
+}) : null;
 
 // The calendar years a range's dates fall in
 exports.getFirstOrLastValuePeriod = getFirstOrLastValuePeriod;

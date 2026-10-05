@@ -10,11 +10,11 @@ const byIds = fields => ({
 export const dataItemProfileMetadataQueries = {
   dataElements: {
     resource: 'dataElements',
-    ...byIds('id,aggregationType,aggregationLevels,valueType,domainType,dataSetElements[dataSet[id,periodType]]')
+    ...byIds('id,aggregationType,aggregationLevels,dataSetElements[dataSet[id,periodType]]')
   },
   indicators: {
     resource: 'indicators',
-    ...byIds('id,numerator,denominator,annualized')
+    ...byIds('id,numerator,denominator')
   },
   dataSets: {
     resource: 'dataSets',
@@ -22,7 +22,7 @@ export const dataItemProfileMetadataQueries = {
   },
   expressionDimensionItems: {
     resource: 'expressionDimensionItems',
-    ...byIds('id,expression')
+    ...byIds('id,expression,missingValueStrategy')
   },
   programIndicators: {
     resource: 'programIndicators',
@@ -30,7 +30,7 @@ export const dataItemProfileMetadataQueries = {
   },
   programs: {
     resource: 'programs',
-    ...byIds('id,programType')
+    ...byIds('id')
   }
 };
 export const METADATA_RESOURCES = Object.keys(dataItemProfileMetadataQueries);
@@ -41,27 +41,17 @@ const getList = (response, resource) => {
   var _response$resource;
   return Array.isArray(response) ? response : (_response$resource = response === null || response === void 0 ? void 0 : response[resource]) !== null && _response$resource !== void 0 ? _response$resource : [];
 };
-
-// By id, or by period type when a version sends no id
-const getDataSetKey = ({
-  id,
-  periodType
-}) => id !== null && id !== void 0 ? id : periodType;
-const uniqueDataSets = dataSets => dataSets.filter((dataSet, i) => dataSets.findIndex(other => getDataSetKey(other) === getDataSetKey(dataSet)) === i);
+const uniqueDataSets = dataSets => [...new Map(dataSets.map(dataSet => [dataSet.id, dataSet])).values()];
 const normalizers = {
   dataElements: ({
     aggregationType,
     aggregationLevels,
-    valueType,
-    domainType,
     dataSetElements
   }) => ({
     aggregationType,
     ...((aggregationLevels === null || aggregationLevels === void 0 ? void 0 : aggregationLevels.length) && {
       aggregationLevels
     }),
-    valueType,
-    domainType,
     dataSets: uniqueDataSets((dataSetElements !== null && dataSetElements !== void 0 ? dataSetElements : []).map(({
       dataSet
     }) => dataSet).filter(dataSet => dataSet === null || dataSet === void 0 ? void 0 : dataSet.periodType).map(({
@@ -74,12 +64,10 @@ const normalizers = {
   }),
   indicators: ({
     numerator,
-    denominator,
-    annualized
+    denominator
   }) => ({
     numerator,
-    denominator,
-    annualized
+    denominator
   }),
   dataSets: ({
     periodType
@@ -87,9 +75,13 @@ const normalizers = {
     periodType: getPeriodTypeName(periodType)
   }),
   expressionDimensionItems: ({
-    expression
+    expression,
+    missingValueStrategy
   }) => ({
-    expression
+    expression,
+    ...(missingValueStrategy && {
+      missingValueStrategy
+    })
   }),
   programIndicators: ({
     program,
@@ -104,11 +96,7 @@ const normalizers = {
       hasPeriodBoundaries: analyticsPeriodBoundaries.length > 0
     })
   }),
-  programs: ({
-    programType
-  }) => ({
-    programType
-  })
+  programs: () => ({})
 };
 
 /**

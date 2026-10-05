@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sortPeriodTypes = exports.isPeriodTypeSupported = exports.isPeriodType = exports.getRelativePeriodTypeOptions = exports.getPeriodTypeOfPeriodId = exports.getFrequencyOrder = exports.getCandidatePeriodTypes = exports.compareByFrequency = exports.canAggregateInto = void 0;
+exports.sortPeriodTypes = exports.isPeriodTypeSupported = exports.isPeriodType = exports.getRelativePeriodTypeOptions = exports.getRelativePeriodShape = exports.getPeriodTypeOfPeriodId = exports.getFrequencyOrder = exports.getCandidatePeriodTypes = exports.canAggregateInto = void 0;
 var _enabledPeriodTypes = require("../../../components/PeriodDimension/utils/enabledPeriodTypes.js");
 var _fixedPeriods = require("../../../components/PeriodDimension/utils/fixedPeriods.js");
 var _relativePeriods = require("../../../components/PeriodDimension/utils/relativePeriods.js");
@@ -13,11 +13,9 @@ const isPeriodType = value => PERIOD_TYPE_NAMES.has(value);
 exports.isPeriodType = isPeriodType;
 const getFrequencyOrder = periodType => _constants.PERIOD_TYPE_FREQUENCY_ORDER[periodType];
 
-// For sorting: shortest period type first
+// Shortest first, then in the server's order
 exports.getFrequencyOrder = getFrequencyOrder;
-const compareByFrequency = (a, b) => getFrequencyOrder(a) - getFrequencyOrder(b);
-exports.compareByFrequency = compareByFrequency;
-const sortPeriodTypes = periodTypes => [...periodTypes].sort((a, b) => compareByFrequency(a, b) || _constants.PERIOD_TYPES.indexOf(a) - _constants.PERIOD_TYPES.indexOf(b));
+const sortPeriodTypes = periodTypes => [...periodTypes].sort((a, b) => getFrequencyOrder(a) - getFrequencyOrder(b) || _constants.PERIOD_TYPES.indexOf(a) - _constants.PERIOD_TYPES.indexOf(b));
 
 /**
  * Whether analytics adds up values of data sets with `dataPeriodType` into
@@ -59,6 +57,24 @@ const getPeriodTypeOfPeriodId = periodId => {
   return (_PERIOD_ID_PATTERNS$f = (_PERIOD_ID_PATTERNS$f2 = PERIOD_ID_PATTERNS.find(([, regex]) => regex.test(periodId))) === null || _PERIOD_ID_PATTERNS$f2 === void 0 ? void 0 : _PERIOD_ID_PATTERNS$f2[0]) !== null && _PERIOD_ID_PATTERNS$f !== void 0 ? _PERIOD_ID_PATTERNS$f : null;
 };
 exports.getPeriodTypeOfPeriodId = getPeriodTypeOfPeriodId;
+let relativePeriodShapes;
+
+/* The type (category), offset and duration of a relative period, or
+ * undefined: PeriodDimension builds its table, with names, on each call */
+const getRelativePeriodShape = periodId => {
+  relativePeriodShapes ??= Object.fromEntries(Object.values((0, _relativePeriods.getRelativePeriodsDetails)()).map(({
+    id,
+    type,
+    offset,
+    duration
+  }) => [id, {
+    type,
+    offset,
+    duration
+  }]));
+  return relativePeriodShapes[periodId];
+};
+exports.getRelativePeriodShape = getRelativePeriodShape;
 const WEEKLY_PERIOD_TYPES = _constants.PERIOD_TYPES.filter(type => type.startsWith('Weekly'));
 const FINANCIAL_PERIOD_TYPES = _constants.PERIOD_TYPES.filter(type => type.startsWith('Financial'));
 
@@ -93,7 +109,7 @@ const getRelativePeriodTypes = (category, options) => {
  * when it isn't recognized.
  */
 const getCandidatePeriodTypes = (period, options = {}) => {
-  var _getRelativePeriodsDe;
+  var _getRelativePeriodSha;
   if (isPeriodType(period)) {
     return [period];
   }
@@ -101,7 +117,7 @@ const getCandidatePeriodTypes = (period, options = {}) => {
   if (fixedPeriodType) {
     return [fixedPeriodType];
   }
-  const category = (_getRelativePeriodsDe = (0, _relativePeriods.getRelativePeriodsDetails)()[period]) === null || _getRelativePeriodsDe === void 0 ? void 0 : _getRelativePeriodsDe.type;
+  const category = (_getRelativePeriodSha = getRelativePeriodShape(period)) === null || _getRelativePeriodSha === void 0 ? void 0 : _getRelativePeriodSha.type;
   return category ? getRelativePeriodTypes(category, options) : [];
 };
 

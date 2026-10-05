@@ -5,7 +5,11 @@ const settingsEngine = settings => ({
   }) => {
     const key = setting.resource.split('/')[1];
     if (!(key in settings)) {
-      throw new Error('not found');
+      throw Object.assign(new Error('Setting does not exist'), {
+        details: {
+          httpStatusCode: 404
+        }
+      });
     }
     return {
       setting: {
@@ -32,6 +36,12 @@ describe('fetchRelativePeriodTypeOptions', () => {
       financialYearPeriodType: undefined
     });
   });
+  it('fails on any other error', async () => {
+    const engine = {
+      query: jest.fn().mockRejectedValue(new Error('Unauthorized'))
+    };
+    await expect(fetchRelativePeriodTypeOptions(engine)).rejects.toThrow('Unauthorized');
+  });
 });
 describe('items keys', () => {
   it('compare items by value, and read them back', () => {
@@ -43,11 +53,18 @@ describe('items keys', () => {
     expect(getItemsKey([...items])).toBe(key);
     expect(parseItemsKey(key)).toEqual(items);
   });
-  it('accept ids alone, and no items', () => {
-    expect(parseItemsKey(getItemsKey(['elementAAAA']))).toEqual([{
+  it('ignore the order of items', () => {
+    const elementA = {
       id: 'elementAAAA',
-      dimensionItemType: undefined
-    }]);
+      dimensionItemType: 'DATA_ELEMENT'
+    };
+    const elementB = {
+      id: 'elementBBBB',
+      dimensionItemType: 'DATA_ELEMENT'
+    };
+    expect(getItemsKey([elementB, elementA])).toBe(getItemsKey([elementA, elementB]));
+  });
+  it('accept no items', () => {
     expect(getItemsKey()).toBe('[]');
   });
 });

@@ -32,7 +32,10 @@ describe('fetchGroupMembersByLevel', () => {
       orgUnits: ORG_UNITS,
       groups: GROUPS
     });
-    expect(await (0, _orgUnitGroupCounts.fetchGroupMembersByLevel)(createEngine(), ['groupAAAAAA', 'emptyGroupA'], LEVELS)).toEqual({
+    expect(await (0, _orgUnitGroupCounts.fetchGroupMembersByLevel)(createEngine(), {
+      groupIds: ['groupAAAAAA', 'emptyGroupA'],
+      levels: LEVELS
+    })).toEqual({
       groups: {
         groupAAAAAA: {
           2: 1,
@@ -45,22 +48,29 @@ describe('fetchGroupMembersByLevel', () => {
   });
 });
 describe('getGroupCountQueries', () => {
-  const queriesFor = (parentOrgUnitIds = []) => (0, _orgUnitGroupCounts.getGroupCountQueries)({
-    groups: {
-      groupAAAAAA: {
-        2: 1
+  const orgUnitsById = Object.fromEntries(ORG_UNITS.map(orgUnit => [orgUnit.id, orgUnit]));
+  const queriesFor = parentIds => {
+    var _parentIds$map;
+    return (0, _orgUnitGroupCounts.getGroupCountQueries)({
+      groups: {
+        groupAAAAAA: {
+          2: 1
+        }
+      },
+      parents: (_parentIds$map = parentIds === null || parentIds === void 0 ? void 0 : parentIds.map(id => ({
+        orgUnitId: id,
+        minLevel: orgUnitsById[id].level
+      }))) !== null && _parentIds$map !== void 0 ? _parentIds$map : null,
+      orgUnits: orgUnitsById,
+      sourceKeys: [FORM_MONTH],
+      assignedOrgUnitCounts: {
+        formMonth: {
+          1: 1,
+          3: 2
+        }
       }
-    },
-    parentOrgUnitIds,
-    orgUnits: Object.fromEntries(ORG_UNITS.map(unit => [unit.id, unit])),
-    sources: [FORM_MONTH],
-    assignedOrgUnitCounts: {
-      formMonth: {
-        1: 1,
-        3: 2
-      }
-    }
-  });
+    });
+  };
   it('counts org units below the members, and the sources above them', () => {
     expect(filtersOf(queriesFor())).toEqual({
       'groupAAAAAA:2:|total|2': ['organisationUnitGroups.id:eq:groupAAAAAA', 'level:eq:2'],
@@ -69,9 +79,14 @@ describe('getGroupCountQueries', () => {
       'groupAAAAAA:2:|formMonth|3': ['parent.organisationUnitGroups.id:eq:groupAAAAAA', 'level:eq:3', 'dataSets.id:eq:formMonth']
     });
   });
-  it('keeps the members under each parent at or above them', () => {
+  it('keeps the members, and the org units above them, under each parent at or above them', () => {
     const filters = filtersOf(queriesFor(['nationUnit1', 'facilityAAA']));
     expect(filters['groupAAAAAA:2:nationUnit1|total|2']).toEqual(['path:like:nationUnit1', 'organisationUnitGroups.id:eq:groupAAAAAA', 'level:eq:2']);
+    expect(filters['groupAAAAAA:2:nationUnit1|formMonth|ancestors']).toEqual(['path:like:nationUnit1', 'children.organisationUnitGroups.id:eq:groupAAAAAA', 'level:eq:1', 'dataSets.id:eq:formMonth']);
     expect(Object.keys(filters).some(key => key.includes('facilityAAA'))).toBe(false);
+  });
+  it('takes the ancestors above a parent from its path', () => {
+    const filters = filtersOf(queriesFor(['districtAAA']));
+    expect(filters['groupAAAAAA:2:districtAAA|formMonth|ancestors']).toEqual(['id:in:[nationUnit1]', 'level:eq:1', 'dataSets.id:eq:formMonth']);
   });
 });

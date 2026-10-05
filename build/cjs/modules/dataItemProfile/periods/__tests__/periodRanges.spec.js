@@ -32,27 +32,6 @@ describe('getPeriodDates', () => {
     expect((0, _periodRanges.getPeriodDates)('2025X1')).toBeNull();
   });
 });
-describe('comparePeriodRanges', () => {
-  const jan = {
-    startDate: '2025-01-01',
-    endDate: '2025-01-31'
-  };
-  const q1 = {
-    startDate: '2025-01-01',
-    endDate: '2025-03-31'
-  };
-  const week1 = {
-    startDate: '2024-12-30',
-    endDate: '2025-01-05'
-  };
-  const feb = {
-    startDate: '2025-02-01',
-    endDate: '2025-02-28'
-  };
-  it.each([[jan, jan, 'same'], [jan, q1, 'within'], [q1, jan, 'contains'], [week1, jan, 'overlaps'], [jan, feb, 'disjoint'], [feb, jan, 'disjoint']])('%j to %j: %s', (a, b, expected) => {
-    expect((0, _periodRanges.comparePeriodRanges)(a, b)).toBe(expected);
-  });
-});
 describe('getFixedPeriodOfTypeByDate', () => {
   it('finds the period of a type that holds a date', () => {
     expect((0, _periodRanges.getFixedPeriodOfTypeByDate)('WeeklyWednesday', '2025-01-10')).toMatchObject({
@@ -75,6 +54,7 @@ describe('getFixedPeriodOfTypeByDate', () => {
   });
   it('is null for a date it cannot read', () => {
     expect((0, _periodRanges.getFixedPeriodOfTypeByDate)('Monthly', 'not a date')).toBeNull();
+    expect((0, _periodRanges.getFixedPeriodOfTypeByDate)('Monthly', null)).toBeNull();
   });
 });
 describe('getCoveringPeriodRange', () => {
@@ -95,5 +75,23 @@ describe('getCoveringPeriodRange', () => {
 describe('isAlignedWithPeriodType', () => {
   it.each([['2025Q1', 'Monthly', true], ['2025', 'Quarterly', true], ['2025W2', 'Daily', true], ['2025BiW1', 'Weekly', true], ['202501', 'Weekly', false], ['2025', 'WeeklyWednesday', false], ['2025April', 'Quarterly', true], ['2025April', 'SixMonthly', false], ['2025Q1', 'TwoYearly', null]])('%s on %s data: %s', (periodId, periodType, expected) => {
     expect((0, _periodRanges.isAlignedWithPeriodType)((0, _periodRanges.getPeriodDates)(periodId), periodType)).toBe(expected);
+  });
+});
+describe('getPreviousPeriod and getNextPeriod', () => {
+  it('step to the adjacent period of the same type', () => {
+    const january = (0, _periodRanges.getFixedPeriodOfTypeByDate)('Monthly', '2025-01-15');
+    expect((0, _periodRanges.getPreviousPeriod)('Monthly', january).id).toBe('202412');
+    expect((0, _periodRanges.getNextPeriod)('Monthly', january).id).toBe('202502');
+  });
+  it('step across November periods, which the library dates itself', () => {
+    const quarter = (0, _periodRanges.getFixedPeriodOfTypeByDate)('QuarterlyNov', '2025-01-15');
+    expect((0, _periodRanges.getNextPeriod)('QuarterlyNov', quarter).id).toBe('2025NovQ2');
+  });
+  it('are null when the date of a calendar cannot be converted', () => {
+    const period = {
+      startDate: '2081-01-01',
+      endDate: '2081-01-31'
+    };
+    expect((0, _periodRanges.getPreviousPeriod)('Monthly', period, 'noSuchCalendar')).toBeNull();
   });
 });

@@ -3,9 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getAssignedOrgUnitLevels = exports.addAssignedOrgUnitLevels = void 0;
+exports.getLevelsWithOrgUnits = exports.getAssignedOrgUnitLevels = exports.addAssignedOrgUnitLevels = void 0;
 var _sources = require("../sources.js");
-const getLevelsWithUnits = (countsByLevel = {}) => Object.keys(countsByLevel).map(Number).filter(level => countsByLevel[level] > 0);
+// The levels with at least one org unit, from counts by level
+const getLevelsWithOrgUnits = (countsByLevel = {}) => Object.keys(countsByLevel).map(Number).filter(level => countsByLevel[level] > 0);
 
 /**
  * The org unit levels an item's data sets and programs are assigned at,
@@ -13,13 +14,14 @@ const getLevelsWithUnits = (countsByLevel = {}) => Object.keys(countsByLevel).ma
  * (`deepestLevel`); and whether sources have different deepest levels
  * (`hasSeveral`).
  */
+exports.getLevelsWithOrgUnits = getLevelsWithOrgUnits;
 const getAssignedOrgUnitLevels = sources => {
   var _levels$;
   const levelsBySource = sources.filter(({
     assignedOrgUnitCounts
   }) => assignedOrgUnitCounts).map(({
     assignedOrgUnitCounts
-  }) => getLevelsWithUnits(assignedOrgUnitCounts));
+  }) => getLevelsWithOrgUnits(assignedOrgUnitCounts));
   const levels = [...new Set(levelsBySource.flat())].sort((a, b) => b - a);
   const deepestOfEach = levelsBySource.filter(sourceLevels => sourceLevels.length).map(sourceLevels => Math.max(...sourceLevels));
   return {

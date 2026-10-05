@@ -13,7 +13,8 @@ var _sources = require("../sources.js");
 const createCollector = () => ({
   sources: new Map(),
   reasons: [],
-  visitedIndicators: new Set()
+  // The indicators being read, against indicators that refer to each other
+  indicatorsInProgress: new Set()
 });
 exports.createCollector = createCollector;
 const addReason = (collector, reason) => collector.reasons.push(reason);
@@ -27,7 +28,7 @@ const getSource = (collector, key, createSource) => {
 const getDataSetSource = (collector, {
   id,
   periodType
-}) => getSource(collector, `dataSet:${id !== null && id !== void 0 ? id : periodType}`, () => ({
+}) => getSource(collector, `dataSet:${id}`, () => ({
   dataSet: {
     id,
     periodType
@@ -58,11 +59,11 @@ const getProgramSource = (collector, metadata, {
       code: _constants.PROFILE_REASON_MISSING_METADATA,
       id
     });
-    return;
+    return null;
   }
   const atAnyOrgUnit = !(0, _sources.usesProgramOrgUnits)(orgUnitField);
   const key = [`program:${id}`, atAnyOrgUnit && orgUnitField, missingPeriodBoundaries && 'missingPeriodBoundaries'].filter(Boolean).join(':');
-  getSource(collector, key, () => ({
+  return getSource(collector, key, () => ({
     dataSet: null,
     program: {
       id

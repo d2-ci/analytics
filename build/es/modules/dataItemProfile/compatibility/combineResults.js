@@ -1,4 +1,4 @@
-import { COMPATIBILITY_FULL, COMPATIBILITY_NONE, COMPATIBILITY_PARTIAL, COMPATIBILITY_SEVERITY, COMPATIBILITY_UNKNOWN, REASON_OPERAND_EMPTY, REASON_OPERAND_PARTIAL, REASON_ORDER } from '../constants.js';
+import { COMPATIBILITY_FULL, COMPATIBILITY_NONE, COMPATIBILITY_PARTIAL, COMPATIBILITY_SEVERITY, COMPATIBILITY_UNKNOWN, REASON_OPERAND_EMPTY, REASON_OPERAND_PARTIAL, REASON_ORDER, SKIP_IF_ANY_VALUE_MISSING } from '../constants.js';
 export const createResult = (status, reasons = []) => ({
   status,
   reasons
@@ -18,21 +18,82 @@ export const combineResults = results => {
   var _getMostSevere$status, _getMostSevere;
   return createResult((_getMostSevere$status = (_getMostSevere = getMostSevere(results)) === null || _getMostSevere === void 0 ? void 0 : _getMostSevere.status) !== null && _getMostSevere$status !== void 0 ? _getMostSevere$status : COMPATIBILITY_FULL, unionOfReasons(results));
 };
+const hasStatus = (...statuses) => ({
+  status
+}) => statuses.includes(status);
+
+/**
+ * Results whose values add up, such as a relative period over its fixed
+ * periods, or a selection over its periods and org units: none when all are,
+ * partial when some give values and others none or only some, otherwise the
+ * most severe of the rest. When those without none are all unknown, so is
+ * the result.
+ */
+export const combineAddedUpResults = results => {
+  var _getMostSevere$status2, _getMostSevere2;
+  const reasons = unionOfReasons(results);
+  const isNone = hasStatus(COMPATIBILITY_NONE);
+  if (results.length && results.every(isNone)) {
+    return createResult(COMPATIBILITY_NONE, reasons);
+  }
+  const givesValues = results.some(hasStatus(COMPATIBILITY_FULL, COMPATIBILITY_PARTIAL));
+  if (results.some(hasStatus(COMPATIBILITY_PARTIAL))) {
+    return createResult(COMPATIBILITY_PARTIAL, reasons);
+  }
+  if (results.some(isNone)) {
+    return createResult(givesValues ? COMPATIBILITY_PARTIAL : COMPATIBILITY_UNKNOWN, reasons);
+  }
+  return createResult((_getMostSevere$status2 = (_getMostSevere2 = getMostSevere(results)) === null || _getMostSevere2 === void 0 ? void 0 : _getMostSevere2.status) !== null && _getMostSevere$status2 !== void 0 ? _getMostSevere$status2 : COMPATIBILITY_FULL, reasons);
+};
 const OPERAND_REASON_BY_STATUS = {
   [COMPATIBILITY_NONE]: REASON_OPERAND_EMPTY,
   [COMPATIBILITY_PARTIAL]: REASON_OPERAND_PARTIAL
 };
 
 /**
- * An expression's result, from its operands': the most severe decides, and
- * with more than one operand, a none or partial result says so first with
- * OPERAND_EMPTY or OPERAND_PARTIAL.
+ * An expression's result, from its operands', by its missing value
+ * strategy. SKIP_IF_ANY_VALUE_MISSING (the default): the most severe
+ * decides. SKIP_IF_ALL_VALUES_MISSING or NEVER_SKIP: a missing value counts
+ * as 0, so the operands add up (combineAddedUpResults). With more than one
+ * operand, OPERAND_EMPTY and OPERAND_PARTIAL say first that one gives none
+ * or only some values.
  */
-export const combineOperandResults = results => {
-  const combined = combineResults(results);
-  const reason = results.length > 1 && OPERAND_REASON_BY_STATUS[combined.status];
-  return reason ? {
-    ...combined,
-    reasons: [reason, ...combined.reasons]
-  } : combined;
+export const combineOperandResults = (results, missingValueStrategy = SKIP_IF_ANY_VALUE_MISSING) => {
+  const needsAll = missingValueStrategy === SKIP_IF_ANY_VALUE_MISSING;
+  const combined = needsAll ? combineResults(results) : combineAddedUpResults(results);
+  if (results.length < 2) {
+    return combined;
+  }
+  const operandReasons = needsAll ? [OPERAND_REASON_BY_STATUS[combined.status]] : results.map(({
+    status
+  }) => OPERAND_REASON_BY_STATUS[status]);
+  return createResult(combined.status, unionOfReasons([{
+    reasons: operandReasons.filter(Boolean)
+  }, combined]));
+};
+
+/**
+ * An item's result from its operands' results (`resultOf(key)`), combined
+ * as its expression says (profile.expression); without one, all are needed.
+ * A part with no operand (constants only) never misses: it is left out.
+ */
+export const combineExpressionResults = (expression, operandKeys, resultOf) => {
+  var _combine;
+  const combine = ({
+    operand,
+    missingValueStrategy,
+    parts
+  }) => {
+    if (operand) {
+      return resultOf(operand);
+    }
+    const results = parts.map(combine).filter(Boolean);
+    return results.length ? combineOperandResults(results, missingValueStrategy) : null;
+  };
+  return (_combine = combine(expression !== null && expression !== void 0 ? expression : {
+    missingValueStrategy: SKIP_IF_ANY_VALUE_MISSING,
+    parts: operandKeys.map(key => ({
+      operand: key
+    }))
+  })) !== null && _combine !== void 0 ? _combine : createResult(COMPATIBILITY_FULL);
 };

@@ -98,10 +98,3 @@ describe('canAggregateInto', () => {
     expect((0, _periodTypes.canAggregateInto)('Monthly', undefined)).toBeNull();
   });
 });
-describe('compareByFrequency', () => {
-  it('orders by frequency', () => {
-    expect((0, _periodTypes.compareByFrequency)('Weekly', 'Monthly')).toBeLessThan(0);
-    expect((0, _periodTypes.compareByFrequency)('Yearly', 'FinancialApril')).toBe(0);
-    expect((0, _periodTypes.compareByFrequency)('TwoYearly', 'Yearly')).toBeGreaterThan(0);
-  });
-});

@@ -77,26 +77,14 @@ const getSourceResult = (source, query) => {
   }
   return (0, _combineResults.combineResults)(results);
 };
-
-// The values of one element over its data sets add up: some missing is partial
 exports.getSourceResult = getSourceResult;
-const combineSources = results => {
-  const statuses = results.map(({
-    status
-  }) => status);
-  const reasons = (0, _combineResults.unionOfReasons)(results);
-  if (statuses.every(status => status === _constants.COMPATIBILITY_NONE)) {
-    return (0, _combineResults.createResult)(_constants.COMPATIBILITY_NONE, reasons);
-  }
-  return (0, _combineResults.createResult)(statuses.some(status => status === _constants.COMPATIBILITY_NONE) ? _constants.COMPATIBILITY_PARTIAL : _constants.COMPATIBILITY_FULL, reasons);
-};
 const getOperandResult = ({
   element,
   reportingRate,
   sources
 }, query) => {
   if (element) {
-    return combineSources(sources.map(source => getElementResult(element, (0, _assignedPeriodTypes.getSourcePeriodType)(source), query)));
+    return (0, _combineResults.combineAddedUpResults)(sources.map(source => getElementResult(element, (0, _assignedPeriodTypes.getSourcePeriodType)(source), query)));
   }
   return reportingRate ? getReportingRateResult((0, _assignedPeriodTypes.getSourcePeriodType)(sources[0]), query) : getProgramResult(sources[0], query);
 };

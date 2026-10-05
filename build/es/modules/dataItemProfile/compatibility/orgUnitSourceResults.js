@@ -1,4 +1,5 @@
 import { COMPATIBILITY_FULL, COMPATIBILITY_NONE, COMPATIBILITY_PARTIAL, LEFT_OUT_REASONS, REASON_ANY_ORG_UNIT, REASON_ASSIGNED_AT_HIGHER_LEVEL, REASON_NOT_ASSIGNED, REASON_PARTLY_ASSIGNED, REASON_STOPPED_BY_AGGREGATION_LEVEL } from '../constants.js';
+import { getLevelsWithOrgUnits } from '../profile/assignedOrgUnitLevels.js';
 import { canBeAtAnyOrgUnit, getSourceId } from '../sources.js';
 import { createResult, unionOfReasons } from './combineResults.js';
 
@@ -8,7 +9,6 @@ export const withAssignment = (result, assignment = null) => ({
   ...result,
   assignment
 });
-const getLevelsWithOrgUnits = countsByLevel => Object.keys(countsByLevel).map(Number).filter(level => countsByLevel[level] > 0);
 
 /* Analytics nulls the levels up to each aggregation level for values from
  * org units below it (dhis2-core AggregationLevelsHelper): a value from
@@ -16,16 +16,15 @@ const getLevelsWithOrgUnits = countsByLevel => Object.keys(countsByLevel).map(Nu
  * between them (requestedLevel ≤ L < assignedLevel; checked by the test tool
  * on 2.40 to 2.44) */
 const isBlockedByAggregationLevel = (assignedLevel, requestedLevel, aggregationLevels) => aggregationLevels.some(aggregationLevel => requestedLevel <= aggregationLevel && aggregationLevel < assignedLevel);
+
+/* Values that don't reach the level asked are assigned higher when the
+ * source is assigned above it, within the org unit (its ancestors, or higher
+ * levels under a parent); otherwise the org unit simply isn't assigned */
 const getNotReachingReason = ({
   byLevel,
   ancestors,
-  assignedOrgUnitCounts,
   level
-}) => {
-  const assignedAtThisLevelElsewhere = getLevelsWithOrgUnits(assignedOrgUnitCounts).some(assignedLevel => assignedLevel >= level);
-  const assignedHigher = ancestors > 0 || getLevelsWithOrgUnits(byLevel).some(assignedLevel => assignedLevel < level);
-  return assignedHigher && !assignedAtThisLevelElsewhere ? REASON_ASSIGNED_AT_HIGHER_LEVEL : REASON_NOT_ASSIGNED;
-};
+}) => ancestors > 0 || getLevelsWithOrgUnits(byLevel).some(assignedLevel => assignedLevel < level) ? REASON_ASSIGNED_AT_HIGHER_LEVEL : REASON_NOT_ASSIGNED;
 
 /* One data set or program at one requested level, from its assignment
  * counts. Values add up from lower levels, but are never split down, so a
@@ -33,7 +32,6 @@ const getNotReachingReason = ({
  * deepest level assigned says how much of the org unit it covers. */
 const getSourceResult = ({
   sourceCounts,
-  assignedOrgUnitCounts = {},
   aggregationLevels = [],
   totals,
   level
@@ -52,7 +50,6 @@ const getSourceResult = ({
     return withAssignment(createResult(COMPATIBILITY_NONE, [getNotReachingReason({
       byLevel,
       ancestors,
-      assignedOrgUnitCounts,
       level
     })]));
   }
@@ -63,7 +60,7 @@ const getSourceResult = ({
     level: deepestLevel
   };
 
-  // Org units it isn't assigned to collect nothing: nothing is left out
+  // Org units it isn't assigned to have no values: nothing is left out
   return withAssignment(createResult(COMPATIBILITY_FULL, assignment.assigned < assignment.total ? [REASON_PARTLY_ASSIGNED] : []), assignment);
 };
 const AT_ANY_ORG_UNIT = withAssignment(createResult(COMPATIBILITY_FULL, [REASON_ANY_ORG_UNIT]));
@@ -87,22 +84,22 @@ const combineSources = bySource => {
   const bestAssignment = filling.map(({
     assignment
   }) => assignment).filter(Boolean).sort((a, b) => b.assigned / b.total - a.assigned / a.total)[0];
-  return withAssignment(createResult(leftOut ? COMPATIBILITY_PARTIAL : COMPATIBILITY_FULL, reasons.filter(reason => reason !== REASON_NOT_ASSIGNED)), bestAssignment);
+  // Partly assigned only when no source is assigned to all its org units
+  const isPartlyAssigned = bestAssignment && bestAssignment.assigned < bestAssignment.total;
+  return withAssignment(createResult(leftOut ? COMPATIBILITY_PARTIAL : COMPATIBILITY_FULL, reasons.filter(reason => reason !== REASON_NOT_ASSIGNED && (reason !== REASON_PARTLY_ASSIGNED || isPartlyAssigned))), bestAssignment);
 };
 
 /**
  * One operand ({ element, sources }, getItemOperands) at one requested level,
- * from the counts kept for it in the coverage, with the `level` asked and the
- * sources' `assignedOrgUnitCounts` across the hierarchy.
+ * from the counts kept for it in the coverage, with the `level` asked.
  */
 export const getOperandResult = ({
   element,
   sources
 }, counts) => combineSources(sources.map(source => {
-  var _counts$sources, _counts$assignedOrgUn, _counts$totals;
+  var _counts$sources, _counts$totals;
   return canBeAtAnyOrgUnit(source) ? AT_ANY_ORG_UNIT : getSourceResult({
     sourceCounts: (_counts$sources = counts.sources) === null || _counts$sources === void 0 ? void 0 : _counts$sources[getSourceId(source)],
-    assignedOrgUnitCounts: (_counts$assignedOrgUn = counts.assignedOrgUnitCounts) === null || _counts$assignedOrgUn === void 0 ? void 0 : _counts$assignedOrgUn[getSourceId(source)],
     aggregationLevels: element === null || element === void 0 ? void 0 : element.aggregationLevels,
     totals: (_counts$totals = counts.totals) !== null && _counts$totals !== void 0 ? _counts$totals : {},
     level: counts.level

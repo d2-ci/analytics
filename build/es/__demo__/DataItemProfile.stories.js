@@ -57,7 +57,13 @@ export const ProfilesAndCompatibility = () => {
   var _relativePeriodTypes$, _relativePeriodTypes$2;
   const [periodsText, setPeriodsText] = useState('2025W2, 202501, 2025Q1, 2025, LAST_12_MONTHS, LAST_4_WEEKS, Weekly');
   const periods = useMemo(() => splitList(periodsText), [periodsText]);
+  // Typed org units apply on blur: each change sends requests
   const [orgUnitsText, setOrgUnitsText] = useState(ORG_UNIT_SCENARIOS[0][1]);
+  const [orgUnitsDraft, setOrgUnitsDraft] = useState(orgUnitsText);
+  const applyOrgUnits = text => {
+    setOrgUnitsDraft(text);
+    setOrgUnitsText(text);
+  };
   const orgUnits = useMemo(() => splitList(orgUnitsText), [orgUnitsText]);
   const orgUnitItems = readOrgUnitSelection(orgUnits).selectionItems.map(({
     id
@@ -105,17 +111,21 @@ export const ProfilesAndCompatibility = () => {
     className: "jsx-1349894501" + " " + "inputs"
   }, /*#__PURE__*/React.createElement(InputField, {
     label: "Org units: ids, LEVEL-n or OU_GROUP-id (the ids are then their parents), USER_ORGUNIT\u2026",
-    value: orgUnitsText,
+    helpText: "Applied when the field loses focus",
+    value: orgUnitsDraft,
     onChange: ({
       value
-    }) => setOrgUnitsText(value),
+    }) => setOrgUnitsDraft(value),
+    onBlur: ({
+      value
+    }) => applyOrgUnits(value),
     inputWidth: "600px"
   }), /*#__PURE__*/React.createElement("div", {
     className: "jsx-1349894501" + " " + "scenarios"
   }, ORG_UNIT_SCENARIOS.map(([label, text]) => /*#__PURE__*/React.createElement(Button, {
     key: label,
     small: true,
-    onClick: () => setOrgUnitsText(text)
+    onClick: () => applyOrgUnits(text)
   }, label))), /*#__PURE__*/React.createElement(_JSXStyle, {
     id: "1349894501"
   }, [".scenarios.jsx-1349894501{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;gap:8px;margin-block-start:8px;}"])), loading && /*#__PURE__*/React.createElement(Loading, null), error && /*#__PURE__*/React.createElement(ErrorNotice, {

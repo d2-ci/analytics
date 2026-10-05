@@ -1,5 +1,5 @@
 import { PERIOD_TYPES } from '../../constants.js';
-import { canAggregateInto, compareByFrequency, getCandidatePeriodTypes, getPeriodTypeOfPeriodId, getRelativePeriodTypeOptions, isPeriodType, isPeriodTypeSupported, sortPeriodTypes } from '../periodTypes.js';
+import { canAggregateInto, getCandidatePeriodTypes, getPeriodTypeOfPeriodId, getRelativePeriodTypeOptions, isPeriodType, isPeriodTypeSupported, sortPeriodTypes } from '../periodTypes.js';
 describe('PERIOD_TYPES', () => {
   it('lists the 24 server period types', () => {
     expect(PERIOD_TYPES).toHaveLength(24);
@@ -94,12 +94,5 @@ describe('canAggregateInto', () => {
   it('is null for an unknown type', () => {
     expect(canAggregateInto('Hourly', 'Monthly')).toBeNull();
     expect(canAggregateInto('Monthly', undefined)).toBeNull();
-  });
-});
-describe('compareByFrequency', () => {
-  it('orders by frequency', () => {
-    expect(compareByFrequency('Weekly', 'Monthly')).toBeLessThan(0);
-    expect(compareByFrequency('Yearly', 'FinancialApril')).toBe(0);
-    expect(compareByFrequency('TwoYearly', 'Yearly')).toBeGreaterThan(0);
   });
 });

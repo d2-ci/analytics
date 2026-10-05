@@ -13,6 +13,11 @@ var _collectSources = require("./profile/collectSources.js");
  *
  * - `sources`: one per data set it is assigned to, with the item's elements
  *   in it (a reporting rate is its data set), and one per program.
+ * - `expression`, for an indicator or expression dimension item: how its
+ *   operands combine, `{ missingValueStrategy, parts }`, each part an
+ *   `{ operand }` (a key of getItemOperands) or an expression. An indicator
+ *   needs both sides (SKIP_IF_ANY_VALUE_MISSING); each side has a value
+ *   when one of its operands has (SKIP_IF_ALL_VALUES_MISSING).
  * - `assignedPeriodTypes`: the period types of those data sets
  *   (getAssignedPeriodTypes).
  * - `assignedOrgUnitLevels`: the org unit levels its data sets and programs
@@ -24,10 +29,14 @@ var _collectSources = require("./profile/collectSources.js");
 const getDataItemProfile = (item, metadata = {}) => {
   const {
     sources,
-    reasons
+    reasons,
+    expression
   } = (0, _collectSources.collectSources)(item, metadata);
   const profile = {
     sources,
+    ...(expression && {
+      expression
+    }),
     unknown: reasons.length > 0,
     reasons,
     assignedPeriodTypes: (0, _assignedPeriodTypes.getAssignedPeriodTypes)(sources)

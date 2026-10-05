@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.withAssignment = exports.getOperandResult = void 0;
 var _constants = require("../constants.js");
+var _assignedOrgUnitLevels = require("../profile/assignedOrgUnitLevels.js");
 var _sources = require("../sources.js");
 var _combineResults = require("./combineResults.js");
 /* Org unit results carry `assignment`: how many org units at the deepest
@@ -13,25 +14,23 @@ const withAssignment = (result, assignment = null) => ({
   ...result,
   assignment
 });
-exports.withAssignment = withAssignment;
-const getLevelsWithOrgUnits = countsByLevel => Object.keys(countsByLevel).map(Number).filter(level => countsByLevel[level] > 0);
 
 /* Analytics nulls the levels up to each aggregation level for values from
  * org units below it (dhis2-core AggregationLevelsHelper): a value from
  * `assignedLevel` can't reach `requestedLevel` when an aggregation level lies
  * between them (requestedLevel ≤ L < assignedLevel; checked by the test tool
  * on 2.40 to 2.44) */
+exports.withAssignment = withAssignment;
 const isBlockedByAggregationLevel = (assignedLevel, requestedLevel, aggregationLevels) => aggregationLevels.some(aggregationLevel => requestedLevel <= aggregationLevel && aggregationLevel < assignedLevel);
+
+/* Values that don't reach the level asked are assigned higher when the
+ * source is assigned above it, within the org unit (its ancestors, or higher
+ * levels under a parent); otherwise the org unit simply isn't assigned */
 const getNotReachingReason = ({
   byLevel,
   ancestors,
-  assignedOrgUnitCounts,
   level
-}) => {
-  const assignedAtThisLevelElsewhere = getLevelsWithOrgUnits(assignedOrgUnitCounts).some(assignedLevel => assignedLevel >= level);
-  const assignedHigher = ancestors > 0 || getLevelsWithOrgUnits(byLevel).some(assignedLevel => assignedLevel < level);
-  return assignedHigher && !assignedAtThisLevelElsewhere ? _constants.REASON_ASSIGNED_AT_HIGHER_LEVEL : _constants.REASON_NOT_ASSIGNED;
-};
+}) => ancestors > 0 || (0, _assignedOrgUnitLevels.getLevelsWithOrgUnits)(byLevel).some(assignedLevel => assignedLevel < level) ? _constants.REASON_ASSIGNED_AT_HIGHER_LEVEL : _constants.REASON_NOT_ASSIGNED;
 
 /* One data set or program at one requested level, from its assignment
  * counts. Values add up from lower levels, but are never split down, so a
@@ -39,7 +38,6 @@ const getNotReachingReason = ({
  * deepest level assigned says how much of the org unit it covers. */
 const getSourceResult = ({
   sourceCounts,
-  assignedOrgUnitCounts = {},
   aggregationLevels = [],
   totals,
   level
@@ -49,7 +47,7 @@ const getSourceResult = ({
     byLevel = {},
     ancestors = 0
   } = sourceCounts !== null && sourceCounts !== void 0 ? sourceCounts : {};
-  const assignedAtOrBelow = getLevelsWithOrgUnits(byLevel).filter(assignedLevel => assignedLevel >= level);
+  const assignedAtOrBelow = (0, _assignedOrgUnitLevels.getLevelsWithOrgUnits)(byLevel).filter(assignedLevel => assignedLevel >= level);
   const reaching = assignedAtOrBelow.filter(assignedLevel => !isBlockedByAggregationLevel(assignedLevel, level, aggregationLevels));
   if (assignedAtOrBelow.length && !reaching.length) {
     return withAssignment((0, _combineResults.createResult)(_constants.COMPATIBILITY_NONE, [_constants.REASON_STOPPED_BY_AGGREGATION_LEVEL]));
@@ -58,7 +56,6 @@ const getSourceResult = ({
     return withAssignment((0, _combineResults.createResult)(_constants.COMPATIBILITY_NONE, [getNotReachingReason({
       byLevel,
       ancestors,
-      assignedOrgUnitCounts,
       level
     })]));
   }
@@ -69,7 +66,7 @@ const getSourceResult = ({
     level: deepestLevel
   };
 
-  // Org units it isn't assigned to collect nothing: nothing is left out
+  // Org units it isn't assigned to have no values: nothing is left out
   return withAssignment((0, _combineResults.createResult)(_constants.COMPATIBILITY_FULL, assignment.assigned < assignment.total ? [_constants.REASON_PARTLY_ASSIGNED] : []), assignment);
 };
 const AT_ANY_ORG_UNIT = withAssignment((0, _combineResults.createResult)(_constants.COMPATIBILITY_FULL, [_constants.REASON_ANY_ORG_UNIT]));
@@ -93,22 +90,22 @@ const combineSources = bySource => {
   const bestAssignment = filling.map(({
     assignment
   }) => assignment).filter(Boolean).sort((a, b) => b.assigned / b.total - a.assigned / a.total)[0];
-  return withAssignment((0, _combineResults.createResult)(leftOut ? _constants.COMPATIBILITY_PARTIAL : _constants.COMPATIBILITY_FULL, reasons.filter(reason => reason !== _constants.REASON_NOT_ASSIGNED)), bestAssignment);
+  // Partly assigned only when no source is assigned to all its org units
+  const isPartlyAssigned = bestAssignment && bestAssignment.assigned < bestAssignment.total;
+  return withAssignment((0, _combineResults.createResult)(leftOut ? _constants.COMPATIBILITY_PARTIAL : _constants.COMPATIBILITY_FULL, reasons.filter(reason => reason !== _constants.REASON_NOT_ASSIGNED && (reason !== _constants.REASON_PARTLY_ASSIGNED || isPartlyAssigned))), bestAssignment);
 };
 
 /**
  * One operand ({ element, sources }, getItemOperands) at one requested level,
- * from the counts kept for it in the coverage, with the `level` asked and the
- * sources' `assignedOrgUnitCounts` across the hierarchy.
+ * from the counts kept for it in the coverage, with the `level` asked.
  */
 const getOperandResult = ({
   element,
   sources
 }, counts) => combineSources(sources.map(source => {
-  var _counts$sources, _counts$assignedOrgUn, _counts$totals;
+  var _counts$sources, _counts$totals;
   return (0, _sources.canBeAtAnyOrgUnit)(source) ? AT_ANY_ORG_UNIT : getSourceResult({
     sourceCounts: (_counts$sources = counts.sources) === null || _counts$sources === void 0 ? void 0 : _counts$sources[(0, _sources.getSourceId)(source)],
-    assignedOrgUnitCounts: (_counts$assignedOrgUn = counts.assignedOrgUnitCounts) === null || _counts$assignedOrgUn === void 0 ? void 0 : _counts$assignedOrgUn[(0, _sources.getSourceId)(source)],
     aggregationLevels: element === null || element === void 0 ? void 0 : element.aggregationLevels,
     totals: (_counts$totals = counts.totals) !== null && _counts$totals !== void 0 ? _counts$totals : {},
     level: counts.level

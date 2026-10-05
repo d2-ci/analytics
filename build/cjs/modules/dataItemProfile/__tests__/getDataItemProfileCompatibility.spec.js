@@ -1,6 +1,7 @@
 "use strict";
 
 var _dataItemProfileMetadata = require("../../../__fixtures__/dataItemProfileMetadata.js");
+var _dataItemProfileOrgUnits = require("../../../__fixtures__/dataItemProfileOrgUnits.js");
 var _getDataItemProfile = require("../getDataItemProfile.js");
 var _getDataItemProfileCompatibility = require("../getDataItemProfileCompatibility.js");
 const dataElement = (periodTypes, aggregationType = 'SUM') => ({
@@ -19,6 +20,7 @@ const metadata = {
     firstMonthly: dataElement(['Monthly'], 'FIRST'),
     firstDaily: dataElement(['Daily'], 'FIRST'),
     lastFinancialApril: dataElement(['FinancialApril'], 'LAST'),
+    lastYearly: dataElement(['Yearly'], 'LAST'),
     lastTwoYearly: dataElement(['TwoYearly'], 'LAST'),
     twoYearly: dataElement(['TwoYearly']),
     mondayWednesday: dataElement(['Weekly', 'WeeklyWednesday'])
@@ -43,6 +45,32 @@ const metadata = {
     timesTwelve: {
       numerator: '#{monthly} * 12',
       denominator: '1'
+    },
+    // A missing item of a side counts as 0
+    monthlyPlusYearly: {
+      numerator: '#{monthly} + #{yearly}',
+      denominator: '1'
+    },
+    weeklyPlusWeekly: {
+      numerator: '#{weekly} + #{wednesday}',
+      denominator: '1'
+    },
+    sumOverRatio: {
+      numerator: 'N{monthlyPlusYearly}',
+      denominator: '#{yearly}'
+    }
+  },
+  expressionDimensionItems: {
+    sumByDefault: {
+      expression: '#{monthly} + #{yearly}'
+    },
+    sumNeedingAll: {
+      expression: '#{monthly} + #{yearly}',
+      missingValueStrategy: 'SKIP_IF_ANY_VALUE_MISSING'
+    },
+    sumNeverSkipped: {
+      expression: '#{monthly} + #{yearly}',
+      missingValueStrategy: 'NEVER_SKIP'
     }
   }
 };
@@ -75,6 +103,10 @@ const full = (reasons = []) => ({
   status: 'full',
   reasons
 });
+const partial = reasons => ({
+  status: 'partial',
+  reasons
+});
 const none = reasons => ({
   status: 'none',
   reasons
@@ -84,13 +116,13 @@ const unknown = reasons => ({
   reasons
 });
 describe('getDataItemProfileCompatibility', () => {
-  it('gives results per period, per source and overall', () => {
+  it('gives results per period, per source and overall, which add up', () => {
     expect(compatibilityOf('monthly', ['2025W2', '202501'])).toEqual({
-      status: 'none',
+      status: 'partial',
       reasons: ['PERIOD_TOO_SHORT'],
       sources: [{
         sourceId: 'MonthlyForm',
-        status: 'none',
+        status: 'partial',
         reasons: ['PERIOD_TOO_SHORT']
       }],
       periods: [{
@@ -144,7 +176,7 @@ describe('getDataItemProfileCompatibility', () => {
       expect(outcomeOf('population', ['2025'])).toEqual(full());
     });
     describe('FIRST and LAST', () => {
-      it('LAST carries the latest data period of the years touched', () => {
+      it('LAST takes the latest data period of the years touched', () => {
         // June's value, for a day in July
         expect(outcomeOf('stock', ['20250715'])).toEqual(full(['EARLIER_PERIOD_VALUE']));
         // December 2024 is outside the years 1 January 2025 touches
@@ -177,14 +209,35 @@ describe('getDataItemProfileCompatibility', () => {
         // …but it counts when the request touches 2024
         expect(compatibilityOf('lastFinancialApril', ['20250715', '2024']).periods[0]).toMatchObject(full(['EARLIER_PERIOD_VALUE']));
       });
-      it('may carry when the selection has no dates', () => {
+      it('judges a period type by type alone, as it has no dates', () => {
         expect(outcomeOf('stock', ['Weekly'])).toEqual(full(['EARLIER_PERIOD_VALUE']));
-        expect(outcomeOf('stock', ['LAST_12_MONTHS'])).toEqual(full());
-        // FIRST gives January's value to every month of the year
-        expect(outcomeOf('firstMonthly', ['LAST_12_MONTHS'])).toEqual(full(['EARLIER_PERIOD_VALUE']));
-        expect(compatibilityOf('stock', ['20250101', 'LAST_12_MONTHS']).periods[0]).toMatchObject(full(['EARLIER_PERIOD_VALUE']));
+        expect(outcomeOf('stock', ['Quarterly'])).toEqual(full());
       });
-      it('may carry when the data type has no dates', () => {
+      describe('with relative periods, resolved on relativePeriodDate', () => {
+        const ON_15_JUNE_2025 = {
+          relativePeriodDate: '2025-06-15'
+        };
+        it('judges each fixed period they cover', () => {
+          // June 2024 to May 2025: each month has its own value
+          expect(outcomeOf('stock', ['LAST_12_MONTHS'], ON_15_JUNE_2025)).toEqual(full());
+          // FIRST gives January 2024's value to every month
+          expect(outcomeOf('firstMonthly', ['LAST_12_MONTHS'], ON_15_JUNE_2025)).toEqual(full(['EARLIER_PERIOD_VALUE']));
+        });
+        it('count the years they touch for the fixed periods beside them', () => {
+          expect(compatibilityOf('stock', ['20250101']).periods[0]).toMatchObject(none(['NO_EARLIER_PERIOD_VALUE']));
+          // LAST_12_MONTHS adds 2024: December 2024 counts
+          expect(compatibilityOf('stock', ['20250101', 'LAST_12_MONTHS'], ON_15_JUNE_2025).periods[0]).toMatchObject(full(['EARLIER_PERIOD_VALUE']));
+        });
+        it('is partial when only some of their fixed periods have a value', () => {
+          /* The months of 2025 touch only 2025: the 2025 value ends in
+           * December, and 2024's year isn't in the request */
+          expect(outcomeOf('lastYearly', ['MONTHS_THIS_YEAR'], ON_15_JUNE_2025)).toEqual({
+            status: 'partial',
+            reasons: ['NO_EARLIER_PERIOD_VALUE', 'EARLIER_PERIOD_VALUE']
+          });
+        });
+      });
+      it('may take an earlier value when the data type has no dates', () => {
         expect(outcomeOf('lastTwoYearly', ['2025'])).toEqual(full(['EARLIER_PERIOD_VALUE']));
       });
     });
@@ -210,6 +263,25 @@ describe('getDataItemProfileCompatibility', () => {
         status: 'partial',
         reasons: ['OPERAND_PARTIAL', 'PERIOD_TYPE_MISMATCH']
       });
+    });
+    it('are partial when some items of a side give nothing, which count as 0', () => {
+      expect(outcomeOf(indicator('monthlyPlusYearly'), ['202501'])).toEqual(partial(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
+      expect(outcomeOf(indicator('monthlyPlusYearly'), ['2025'])).toEqual(full());
+    });
+    it('are empty when all items of a side give nothing', () => {
+      expect(outcomeOf(indicator('weeklyPlusWeekly'), ['20250115'])).toEqual(none(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
+    });
+    it('need both sides of a nested indicator', () => {
+      expect(outcomeOf(indicator('sumOverRatio'), ['202501'])).toEqual(none(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
+    });
+    it('follow the missing value strategy of an expression dimension item', () => {
+      const expressionItem = id => ({
+        id,
+        dimensionItemType: 'EXPRESSION_DIMENSION_ITEM'
+      });
+      expect(outcomeOf(expressionItem('sumByDefault'), ['202501'])).toEqual(partial(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
+      expect(outcomeOf(expressionItem('sumNeverSkipped'), ['202501'])).toEqual(partial(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
+      expect(outcomeOf(expressionItem('sumNeedingAll'), ['202501'])).toEqual(none(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
     });
     it('say nothing more with one operand', () => {
       expect(outcomeOf(indicator('timesTwelve'), ['2025W2'])).toEqual(none(['PERIOD_TOO_SHORT']));
@@ -247,7 +319,7 @@ describe('getDataItemProfileCompatibility', () => {
           status: 'full'
         }, {
           sourceId: 'report',
-          status: 'none'
+          status: 'partial'
         }],
         periods: [{
           status: 'partial',
@@ -410,9 +482,12 @@ describe('getDataItemProfileCompatibility', () => {
       expect(outcomeOf('monthly', ['2025Q1'], on(40))).toEqual(full());
     });
   });
-  it('ranks empty, then partial, then unknown, then complete', () => {
+  it('adds up periods: none when all are, partial when some give values', () => {
+    expect(outcomeOf('monthly', ['2025W2', '2025W3'])).toEqual(none(['PERIOD_TOO_SHORT']));
+    expect(outcomeOf('monthly', ['202501', '2025W2'])).toEqual(partial(['PERIOD_TOO_SHORT']));
     expect(outcomeOf('monthly', ['202501', 'NEXT_CENTURY'])).toEqual(unknown(['UNKNOWN_PERIOD']));
-    expect(outcomeOf('monthly', ['NEXT_CENTURY', '2025W2'])).toEqual(none(['PERIOD_TOO_SHORT', 'UNKNOWN_PERIOD']));
+    // Nothing from one, and the other can't be told
+    expect(outcomeOf('monthly', ['NEXT_CENTURY', '2025W2'])).toEqual(unknown(['PERIOD_TOO_SHORT', 'UNKNOWN_PERIOD']));
   });
   describe('relative periods', () => {
     it('read their type', () => {
@@ -482,6 +557,46 @@ describe('getDataItemProfileCompatibility', () => {
         status: 'partial',
         alignsWithData: true
       });
+    });
+  });
+});
+describe('getDataItemProfileCompatibility, with org units', () => {
+  it('judges periods and org units apart, and adds them up overall', () => {
+    const result = (0, _getDataItemProfileCompatibility.getDataItemProfileCompatibility)((0, _dataItemProfileOrgUnits.orgUnitProfileOf)('facility'), {
+      periods: ['2025Q1'],
+      orgUnits: ['nationUnit1', 'facilityDDD']
+    }, {
+      orgUnitCoverage: _dataItemProfileOrgUnits.ORG_UNIT_COVERAGE
+    });
+    expect(result).toMatchObject({
+      status: 'partial',
+      reasons: ['ASSIGNED_AT_HIGHER_LEVEL', 'PARTLY_ASSIGNED'],
+      periods: [{
+        id: '2025Q1',
+        status: 'full'
+      }],
+      orgUnits: [{
+        id: 'nationUnit1',
+        status: 'full'
+      }, {
+        id: 'facilityDDD',
+        status: 'none'
+      }]
+    });
+  });
+  it('leaves org units out when none are asked', () => {
+    expect((0, _getDataItemProfileCompatibility.getDataItemProfileCompatibility)((0, _dataItemProfileOrgUnits.orgUnitProfileOf)('facility'), {
+      periods: ['2025Q1']
+    })).not.toHaveProperty('orgUnits');
+  });
+  it('judges org units alone', () => {
+    expect((0, _getDataItemProfileCompatibility.getDataItemProfileCompatibility)((0, _dataItemProfileOrgUnits.orgUnitProfileOf)('facility'), {
+      orgUnits: ['districtAAA']
+    }, {
+      orgUnitCoverage: _dataItemProfileOrgUnits.ORG_UNIT_COVERAGE
+    })).toMatchObject({
+      status: 'full',
+      periods: []
     });
   });
 });

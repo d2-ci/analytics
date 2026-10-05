@@ -7,7 +7,7 @@ import { formatDate, getYear } from './calendarDates.js';
  * server doesn't know (2024NovemberQ1), and puts 2025Nov a year late. Only the
  * ISO calendar is patched. */
 
-const NOVEMBER_PERIOD_ID = /^(\d{4})Nov(?:([QS])([1-4]))?$/;
+const NOVEMBER_PERIOD_ID = /^(\d{4})Nov(?:(Q)([1-4])|(S)([12]))?$/;
 const NOVEMBER_PERIOD_TYPES = {
   FinancialNov: {
     idPart: '',
@@ -31,12 +31,13 @@ const toDateString = date => formatDate({
   day: date.getUTCDate()
 });
 export const getNovemberPeriodDates = periodId => {
-  var _Q$S$idPart;
-  const [, year, idPart, number] = periodId.match(NOVEMBER_PERIOD_ID);
-  const months = (_Q$S$idPart = {
-    Q: 3,
-    S: 6
-  }[idPart]) !== null && _Q$S$idPart !== void 0 ? _Q$S$idPart : 12;
+  var _ref;
+  const [, year, quarter, quarterNumber, sixMonths, sixMonthsNumber] = periodId.match(NOVEMBER_PERIOD_ID);
+  const idPart = (_ref = quarter !== null && quarter !== void 0 ? quarter : sixMonths) !== null && _ref !== void 0 ? _ref : '';
+  const number = quarterNumber !== null && quarterNumber !== void 0 ? quarterNumber : sixMonthsNumber;
+  const {
+    months
+  } = Object.values(NOVEMBER_PERIOD_TYPES).find(type => type.idPart === idPart);
   const firstMonth = 10 + (Number(number !== null && number !== void 0 ? number : 1) - 1) * months;
   const start = new Date(Date.UTC(Number(year) - 1, firstMonth, 1));
   const end = new Date(Date.UTC(Number(year) - 1, firstMonth + months, 0));

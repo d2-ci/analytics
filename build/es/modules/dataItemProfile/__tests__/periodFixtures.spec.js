@@ -5,7 +5,7 @@ import { inDataSets } from '../../../__fixtures__/dataItemProfileMetadata.js';
 import { getDataItemProfile } from '../getDataItemProfile.js';
 import { getDataItemProfileCompatibility } from '../getDataItemProfileCompatibility.js';
 import { getFirstOrLastValuePeriod, getYearsTouched } from '../periods/firstLastValues.js';
-import { getPeriodDates } from '../periods/periodRanges.js';
+import { getFixedPeriodOfTypeByDate, getPeriodDates } from '../periods/periodRanges.js';
 import { getPeriodTypeOfPeriodId } from '../periods/periodTypes.js';
 import { getPeriodAggregationType } from '../profile/collectSources.js';
 
@@ -30,14 +30,14 @@ const LIBRARY_STATUS = {
   // Analytics refuses the query: aggregation type NONE, or QuarterlyNov on 2.40
   ERROR: 'unknown'
 };
-const CARRYING = /^(FIRST|LAST)(_AVERAGE_ORG_UNIT|_FIRST_ORG_UNIT|_LAST_ORG_UNIT)?$/;
+const FIRST_OR_LAST_AGGREGATION = /^(FIRST|LAST)(_AVERAGE_ORG_UNIT|_FIRST_ORG_UNIT|_LAST_ORG_UNIT)?$/;
 const getItemParts = item => {
   var _item$operands;
   return [item, ...((_item$operands = item.operands) !== null && _item$operands !== void 0 ? _item$operands : [])];
 };
-const isCarrying = item => getItemParts(item).some(({
+const takesFirstOrLast = item => getItemParts(item).some(({
   aggregationType
-}) => CARRYING.test(aggregationType));
+}) => FIRST_OR_LAST_AGGREGATION.test(aggregationType));
 const hasReportingRate = item => getItemParts(item).some(({
   dimensionItemType
 }) => dimensionItemType === 'REPORTING_RATE');
@@ -67,7 +67,7 @@ const toExpected = ({
         reason: 'REPORTING_RATE_TOO_SHORT'
       };
     }
-    return isCarrying(item) ? {
+    return takesFirstOrLast(item) ? {
       status: 'full',
       reason: 'EARLIER_PERIOD_VALUE'
     } : {
@@ -75,7 +75,7 @@ const toExpected = ({
       reason: 'REPEATED_VALUE'
     };
   }
-  if (status === 'EMPTY' && isCarrying(item)) {
+  if (status === 'EMPTY' && takesFirstOrLast(item)) {
     return {
       status: 'none',
       reason: 'NO_EARLIER_PERIOD_VALUE'
@@ -96,11 +96,11 @@ const describeLibrary = ({
 }) => reasons.length ? `${status} [${reasons.join(', ')}]` : status;
 
 /* Cases the metadata can't see: the library's answer differs from what
- * analytics returns, on purpose, so they are not compared. Capability 4 (the
- * collected period types) is the way to find them. */
+ * analytics returns, on purpose, so they are not compared. The empty-result
+ * check after Update is the way to find them. */
 const TEST_DATA_START = '2024-01-01';
 
-// The periods asked in one request: the case's, and another one in group 7
+// The periods asked in one request: the case's, and in the carry-windows group the other one of the pair
 const getRequestPeriods = ({
   query
 }) => [query.period, query.withPeriod].filter(Boolean);
@@ -108,10 +108,10 @@ const isFirstOrLast = ({
   aggregationType
 }) => ['FIRST', 'LAST'].includes(getPeriodAggregationType(aggregationType));
 
-/* The data period the library says FIRST or LAST data carries into the case's
- * period, by the dates of the request's periods; null when none, undefined
- * when it doesn't apply */
-const predictCarriedSource = fixtureCase => {
+/* The data period whose value the library says FIRST or LAST data takes for
+ * the case's period, by the dates of the request's periods; null when none,
+ * undefined when it doesn't apply */
+const predictFirstOrLastValuePeriod = fixtureCase => {
   var _item$collectionPerio;
   const {
     item,
@@ -128,9 +128,23 @@ const predictCarriedSource = fixtureCase => {
     years: [...new Set(requestDates.flatMap(getYearsTouched))]
   });
 };
+
+/* What analytics can answer when FIRST or LAST should take a period before
+ * the test data: nothing, or (where it names the data period) the first one
+ * with data. Any other answer is compared, so a wrong prediction fails. */
+const answersWithoutEarlierData = fixtureCase => {
+  const firstDataPeriod = getFixedPeriodOfTypeByDate(fixtureCase.item.collectionPeriodTypes[0], TEST_DATA_START);
+  return getOutcomes(fixtureCase).every(([, {
+    value,
+    source
+  }]) => {
+    var _getPeriodDates;
+    return source ? ((_getPeriodDates = getPeriodDates(source)) === null || _getPeriodDates === void 0 ? void 0 : _getPeriodDates.startDate) === (firstDataPeriod === null || firstDataPeriod === void 0 ? void 0 : firstDataPeriod.startDate) : value === null || value === undefined;
+  });
+};
 const METADATA_BLIND_SPOTS = [{
   pattern: /^mixed-place__.*__(A|B)$/,
-  reason: 'the library does not read which org units a data set is assigned to'
+  reason: 'periods and org units are judged apart: the library does not judge a data set by org unit and period type together'
 }, {
   pattern: /^mixed-history__.*__r-2024/,
   reason: 'the metadata only shows the data sets of today'
@@ -144,17 +158,17 @@ const METADATA_BLIND_SPOTS = [{
   applies: ({
     query
   }) => {
-    var _getPeriodDates;
-    return ((_getPeriodDates = getPeriodDates(query.period)) === null || _getPeriodDates === void 0 ? void 0 : _getPeriodDates.startDate) <= TEST_DATA_START;
+    var _getPeriodDates2;
+    return ((_getPeriodDates2 = getPeriodDates(query.period)) === null || _getPeriodDates2 === void 0 ? void 0 : _getPeriodDates2.startDate) <= TEST_DATA_START;
   },
   reason: 'periodOffset(-1) reads a period before the test data'
 }, {
   pattern: /^(agg|carry-dense|carry-pair)-/,
   applies: fixtureCase => {
-    const source = predictCarriedSource(fixtureCase);
-    return Boolean(source) && source.endDate < TEST_DATA_START;
+    const source = predictFirstOrLastValuePeriod(fixtureCase);
+    return Boolean(source) && source.endDate < TEST_DATA_START && answersWithoutEarlierData(fixtureCase);
   },
-  reason: 'FIRST or LAST carries a period before the test data'
+  reason: 'FIRST or LAST takes a period before the test data'
 }, {
   pattern: /^carry-sparse-/,
   reason: 'the library does not know which periods hold data',
@@ -165,8 +179,8 @@ const METADATA_BLIND_SPOTS = [{
   applies: ({
     query
   }) => {
-    var _getPeriodDates2;
-    return ((_getPeriodDates2 = getPeriodDates(query.period)) === null || _getPeriodDates2 === void 0 ? void 0 : _getPeriodDates2.endDate) < TEST_DATA_START;
+    var _getPeriodDates3;
+    return ((_getPeriodDates3 = getPeriodDates(query.period)) === null || _getPeriodDates3 === void 0 ? void 0 : _getPeriodDates3.endDate) < TEST_DATA_START;
   },
   reason: 'the period ends before the test data'
 }];
@@ -175,7 +189,7 @@ const isBlindSpot = fixtureCase => METADATA_BLIND_SPOTS.some(({
   applies = () => true
 }) => pattern.test(fixtureCase.id) && applies(fixtureCase));
 
-// collectionSources is optional (Addendum 1): one data set per period type otherwise
+// collectionSources is optional in the fixtures: one data set per period type otherwise
 const getDataSets = ({
   collectionSources,
   collectionPeriodTypes
@@ -325,8 +339,9 @@ const getLibraryAnswer = (fixtureCase, version) => {
   return libraryAnswers.get(key);
 };
 
-/* A case the library can't read yet: a request without a period type
- * (detection requests), or operands without ids */
+/* A case the metadata check can't read: a request without a period type
+ * (the detection requests, for the after-Update check), or operands without
+ * ids */
 const canRead = fixtureCase => {
   try {
     var _fixtureCase$item, _fixtureCase$query;
@@ -363,12 +378,16 @@ const summarize = mismatches => Object.values(mismatches.reduce((patterns, misma
   example
 }) => `${count}× ${key}, e.g. ${example}`);
 const fixtures = readFixtures(FIXTURES_DIR);
-const groups = [...new Set(fixtures.map(({
-  group
-}) => group))];
 const allCases = fixtures.flatMap(({
   cases
 }) => cases);
+const casesOf = group => fixtures.filter(fixture => fixture.group === group).flatMap(fixture => fixture.cases);
+const allGroups = [...new Set(fixtures.map(({
+  group
+}) => group))];
+// The detection requests are for the after-Update check: nothing to compare here
+const NOT_COMPARED_GROUPS = ['detection-requests'];
+const groups = allGroups.filter(group => !NOT_COMPARED_GROUPS.includes(group));
 describe('period type fixtures', () => {
   it('are there', () => {
     expect(allCases.length).toBeGreaterThan(0);
@@ -389,17 +408,18 @@ describe('period type fixtures', () => {
     }) => reason)).toEqual([]);
   });
 
-  /* Group 7 names the data period each value comes from. Where every period
-   * holds data (the dense layout), the library must pick the same one. */
-  it('carry the data period analytics names', () => {
-    const cases = allCases.filter(fixtureCase => fixtureCase.id.startsWith('carry-') && !isBlindSpot(fixtureCase) && predictCarriedSource(fixtureCase) !== undefined);
+  /* The carry-windows group names the data period each FIRST or LAST value
+   * comes from. Where every period holds data (the dense layout), the
+   * library must pick the same one. */
+  it('pick the data period analytics names for FIRST and LAST', () => {
+    const cases = allCases.filter(fixtureCase => fixtureCase.id.startsWith('carry-') && !isBlindSpot(fixtureCase) && predictFirstOrLastValuePeriod(fixtureCase) !== undefined);
     const startOf = period => {
-      var _getPeriodDates$start, _getPeriodDates3;
-      return period ? (_getPeriodDates$start = (_getPeriodDates3 = getPeriodDates(period)) === null || _getPeriodDates3 === void 0 ? void 0 : _getPeriodDates3.startDate) !== null && _getPeriodDates$start !== void 0 ? _getPeriodDates$start : period : null;
+      var _getPeriodDates$start, _getPeriodDates4;
+      return period ? (_getPeriodDates$start = (_getPeriodDates4 = getPeriodDates(period)) === null || _getPeriodDates4 === void 0 ? void 0 : _getPeriodDates4.startDate) !== null && _getPeriodDates$start !== void 0 ? _getPeriodDates$start : period : null;
     };
     const mismatches = cases.flatMap(fixtureCase => {
-      var _predictCarriedSource, _predictCarriedSource2;
-      const predicted = (_predictCarriedSource = (_predictCarriedSource2 = predictCarriedSource(fixtureCase)) === null || _predictCarriedSource2 === void 0 ? void 0 : _predictCarriedSource2.startDate) !== null && _predictCarriedSource !== void 0 ? _predictCarriedSource : null;
+      var _predictFirstOrLastVa, _predictFirstOrLastVa2;
+      const predicted = (_predictFirstOrLastVa = (_predictFirstOrLastVa2 = predictFirstOrLastValuePeriod(fixtureCase)) === null || _predictFirstOrLastVa2 === void 0 ? void 0 : _predictFirstOrLastVa2.startDate) !== null && _predictFirstOrLastVa !== void 0 ? _predictFirstOrLastVa : null;
       return getOutcomes(fixtureCase).filter(([, {
         source
       }]) => startOf(source) !== predicted).map(([version, {
@@ -409,8 +429,12 @@ describe('period type fixtures', () => {
     expect(cases.length).toBeGreaterThan(0);
     expect(mismatches.slice(0, 20)).toEqual([]);
   });
+  it('leave out only the groups the metadata check can’t read', () => {
+    expect(allGroups.filter(group => !casesOf(group).some(canRead))).toEqual(NOT_COMPARED_GROUPS);
+  });
   it.each(groups)('%s: the library agrees with analytics', group => {
-    const cases = fixtures.filter(fixture => fixture.group === group).flatMap(fixture => fixture.cases).filter(fixtureCase => canRead(fixtureCase) && !isBlindSpot(fixtureCase));
+    const cases = casesOf(group).filter(fixtureCase => canRead(fixtureCase) && !isBlindSpot(fixtureCase));
+    expect(cases.length).toBeGreaterThan(0);
     const mismatches = cases.flatMap(fixtureCase => getOutcomes(fixtureCase).map(([version, outcome]) => ({
       fixtureCase,
       version,

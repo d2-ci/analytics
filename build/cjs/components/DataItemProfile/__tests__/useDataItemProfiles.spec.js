@@ -24,6 +24,7 @@ const OBJECTS = {
       aggregationType: 'SUM',
       dataSetElements: [{
         dataSet: {
+          id: 'formMonthly',
           periodType: 'Monthly'
         }
       }]
@@ -32,6 +33,7 @@ const OBJECTS = {
       aggregationType: 'SUM',
       dataSetElements: [{
         dataSet: {
+          id: 'formWeeklyA',
           periodType: 'Weekly'
         }
       }]
@@ -41,6 +43,7 @@ const OBJECTS = {
       // An object, as some versions send it
       dataSetElements: [{
         dataSet: {
+          id: 'formYearlyA',
           periodType: {
             name: 'Yearly'
           }
@@ -96,7 +99,7 @@ const createData = (overrides = {}) => ({
       level: 1
     }]
   },
-  // Counts with pageSize=1 (3 units, 2 of them with filters on a data set)
+  // Counts with pageSize=1 (3 org units, 2 of them with filters on a data set)
   organisationUnits: (type, {
     params
   }) => params.pageSize === 1 ? {
@@ -281,8 +284,13 @@ describe('useDataItemProfiles', () => {
     expect(result.current.orgUnitCoverage).toBeUndefined();
   });
   it('is unknown for relative weeks on a version without the setting', async () => {
-    const data = createData();
-    delete data['systemSettings/analyticsWeeklyStart'];
+    const data = createData({
+      'systemSettings/analyticsWeeklyStart': () => Promise.reject(Object.assign(new Error('Setting does not exist'), {
+        details: {
+          httpStatusCode: 404
+        }
+      }))
+    });
     const {
       result
     } = renderProfiles([WEEKLY], data);
@@ -321,7 +329,7 @@ describe('useDataItemProfiles', () => {
     expect(result.current.error.message).toBe('offline');
     expect(result.current.profiles).toBeUndefined();
   });
-  it('sends nothing without items', () => {
+  it('sends nothing without items, but the settings', async () => {
     const data = createData();
     const {
       result
@@ -330,6 +338,7 @@ describe('useDataItemProfiles', () => {
       loading: false,
       profiles: undefined
     });
+    await (0, _react.waitFor)(() => expect(result.current.relativePeriodTypes.weeklyPeriodType).toBe('Weekly'));
     expect(data.dataElements).not.toHaveBeenCalled();
   });
   it('sends nothing again for the same items in a new array', async () => {
@@ -357,6 +366,93 @@ describe('useDataItemProfiles', () => {
     });
     expect(result.current.profiles.monthly).toBeUndefined();
   });
+  it('keeps the loaded profiles while new items load, and fetches only those', async () => {
+    const data = createData();
+    const {
+      result,
+      rerender
+    } = renderProfiles([MONTHLY], data);
+    await (0, _react.waitFor)(() => expect(result.current.profiles).toBeDefined());
+    const monthlyProfile = result.current.profiles.monthly;
+    rerender([MONTHLY, WEEKLY]);
+    expect(result.current.loading).toBe(true);
+    expect(result.current.profiles).toEqual({
+      monthly: monthlyProfile
+    });
+    await (0, _react.waitFor)(() => {
+      var _result$current$profi2;
+      return expect((_result$current$profi2 = result.current.profiles) === null || _result$current$profi2 === void 0 ? void 0 : _result$current$profi2.weekly).toMatchObject({
+        unknown: false
+      });
+    });
+    const filters = data.dataElements.mock.calls.map(([, {
+      params
+    }]) => params.filter);
+    expect(filters[1]).toContain('weekly');
+    expect(filters[1]).not.toContain('monthly');
+  });
+  it('fetches the settings once', async () => {
+    const settings = jest.fn(() => ({
+      analyticsWeeklyStart: 'WEEKLY'
+    }));
+    const {
+      result,
+      rerender
+    } = renderProfiles([MONTHLY], createData({
+      'systemSettings/analyticsWeeklyStart': settings
+    }));
+    await (0, _react.waitFor)(() => expect(result.current.profiles).toBeDefined());
+    rerender([WEEKLY]);
+    await (0, _react.waitFor)(() => {
+      var _result$current$profi3;
+      return expect((_result$current$profi3 = result.current.profiles) === null || _result$current$profi3 === void 0 ? void 0 : _result$current$profi3.weekly).toBeDefined();
+    });
+    expect(settings).toHaveBeenCalledTimes(1);
+  });
+  it('gives the error of a failed setting request', async () => {
+    const {
+      result
+    } = renderProfiles([MONTHLY], createData({
+      'systemSettings/analyticsWeeklyStart': () => Promise.reject(new Error('Unauthorized'))
+    }));
+    await (0, _react.waitFor)(() => expect(result.current.error).toBeDefined());
+    expect(result.current.error.message).toBe('Unauthorized');
+  });
+  it('gives the same result for the same selection', async () => {
+    const {
+      result
+    } = renderProfiles([MONTHLY]);
+    await (0, _react.waitFor)(() => expect(result.current.profiles).toBeDefined());
+    const check = () => result.current.getDataItemCompatibility('monthly', {
+      periods: ['202501']
+    });
+    expect(check()).toBe(check());
+  });
+  it('gives no coverage of earlier org units while new ones load', async () => {
+    const {
+      result,
+      rerender
+    } = (0, _react.renderHook)(({
+      orgUnits
+    }) => (0, _useDataItemProfiles.useDataItemProfiles)([{
+      id: 'assigned',
+      dimensionItemType: 'DATA_ELEMENT'
+    }], {
+      orgUnits
+    }), {
+      initialProps: {
+        orgUnits: ['nationUnit1']
+      },
+      wrapper: createWrapper(createData())
+    });
+    await (0, _react.waitFor)(() => expect(result.current.orgUnitCoverage).toBeDefined());
+    rerender({
+      orgUnits: ['LEVEL-1']
+    });
+    expect(result.current.orgUnitCoverage).toBeUndefined();
+    await (0, _react.waitFor)(() => expect(result.current.orgUnitCoverage).toBeDefined());
+    expect(result.current.orgUnitCoverage.orgUnits.nationUnit1).toBeDefined();
+  });
   it('ignores a failure that came after the items changed', async () => {
     let rejectFirst;
     const data = createData({
@@ -371,8 +467,8 @@ describe('useDataItemProfiles', () => {
     await (0, _react.waitFor)(() => expect(rejectFirst).toBeDefined());
     rerender([WEEKLY]);
     await (0, _react.waitFor)(() => {
-      var _result$current$profi2;
-      return expect((_result$current$profi2 = result.current.profiles) === null || _result$current$profi2 === void 0 ? void 0 : _result$current$profi2.weekly).toBeDefined();
+      var _result$current$profi4;
+      return expect((_result$current$profi4 = result.current.profiles) === null || _result$current$profi4 === void 0 ? void 0 : _result$current$profi4.weekly).toBeDefined();
     });
     await (0, _react.act)(async () => rejectFirst(new Error('late')));
     expect(result.current.error).toBeUndefined();

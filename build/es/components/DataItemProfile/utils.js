@@ -3,16 +3,31 @@ import { useRef } from 'react';
 import { getRelativePeriodTypeOptions } from '../../modules/dataItemProfile/periods/periodTypes.js';
 const SETTING_KEYS = ['analyticsWeeklyStart', 'analyticsFinancialYearStart'];
 
+// The server answers 404 (E1005) for a setting its version doesn't have
+const isMissingSetting = error => {
+  var _error$details;
+  return (error === null || error === void 0 || (_error$details = error.details) === null || _error$details === void 0 ? void 0 : _error$details.httpStatusCode) === 404;
+};
+
 // A setting a version doesn't have is left out, never guessed
-const fetchSetting = (engine, key) => engine.query({
+const fetchSetting = (engine, key, signal) => engine.query({
   setting: {
     resource: `systemSettings/${key}`
   }
+}, {
+  signal
 }).then(({
   setting
-}) => setting === null || setting === void 0 ? void 0 : setting[key]).catch(() => undefined);
-export const fetchRelativePeriodTypeOptions = async engine => {
-  const values = await Promise.all(SETTING_KEYS.map(key => fetchSetting(engine, key)));
+}) => setting === null || setting === void 0 ? void 0 : setting[key]).catch(error => {
+  if (isMissingSetting(error)) {
+    return undefined;
+  }
+  throw error;
+});
+export const fetchRelativePeriodTypeOptions = async (engine, {
+  signal
+} = {}) => {
+  const values = await Promise.all(SETTING_KEYS.map(key => fetchSetting(engine, key, signal)));
   return getRelativePeriodTypeOptions(Object.fromEntries(SETTING_KEYS.map((key, i) => [key, values[i]])));
 };
 export const useCalendar = calendar => {
@@ -23,8 +38,12 @@ export const useCalendar = calendar => {
   return (_ref = calendar !== null && calendar !== void 0 ? calendar : systemInfo === null || systemInfo === void 0 ? void 0 : systemInfo.calendar) !== null && _ref !== void 0 ? _ref : 'gregory';
 };
 
-// Items are compared by value, so a new array with the same items sends no request
-export const getItemsKey = (items = []) => JSON.stringify(items.map(item => typeof item === 'string' ? [item] : [item.id, item.dimensionItemType]));
+/* Items ({ id, dimensionItemType }) are compared by value, in any order, so
+ * a new array with the same items sends no request */
+export const getItemsKey = (items = []) => JSON.stringify(items.map(({
+  id,
+  dimensionItemType
+}) => [id, dimensionItemType]).sort(([a], [b]) => a.localeCompare(b)));
 export const parseItemsKey = itemsKey => JSON.parse(itemsKey).map(([id, dimensionItemType]) => ({
   id,
   dimensionItemType

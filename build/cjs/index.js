@@ -234,10 +234,6 @@ var _exportNames = {
   getDataItemProfileCompatibility: true,
   getDataItemProfilePeriodCompatibility: true,
   getDataItemProfileOrgUnitCompatibility: true,
-  canAggregateInto: true,
-  getCandidatePeriodTypes: true,
-  comparePeriodRanges: true,
-  getCoveringPeriodRange: true,
   COMPATIBILITY_FULL: true,
   COMPATIBILITY_PARTIAL: true,
   COMPATIBILITY_NONE: true,
@@ -253,6 +249,7 @@ var _exportNames = {
   REASON_NOT_ASSIGNED: true,
   REASON_ASSIGNED_AT_HIGHER_LEVEL: true,
   REASON_STOPPED_BY_AGGREGATION_LEVEL: true,
+  REASON_NO_ORG_UNITS_AT_LEVEL: true,
   REASON_EMPTY_GROUP: true,
   REASON_PARTLY_ASSIGNED: true,
   REASON_ANY_ORG_UNIT: true,
@@ -261,14 +258,19 @@ var _exportNames = {
   REASON_SETTING_MISSING: true,
   REASON_UNSUPPORTED_VERSION: true,
   REASON_UNKNOWN_ORG_UNIT: true,
-  PERIOD_RANGE_SAME: true,
-  PERIOD_RANGE_WITHIN: true,
-  PERIOD_RANGE_CONTAINS: true,
-  PERIOD_RANGE_OVERLAPS: true,
-  PERIOD_RANGE_DISJOINT: true,
+  PROFILE_REASON_MISSING_METADATA: true,
+  PROFILE_REASON_MISSING_PROGRAM: true,
+  PROFILE_REASON_UNKNOWN_OPERAND: true,
+  PROFILE_REASON_UNKNOWN_PERIOD_TYPE: true,
+  PROFILE_REASON_UNSUPPORTED_ITEM_TYPE: true,
+  PROFILE_REASON_NO_DATA_SET: true,
+  PROFILE_REASON_NOT_AGGREGATABLE: true,
+  SKIP_IF_ANY_VALUE_MISSING: true,
+  SKIP_IF_ALL_VALUES_MISSING: true,
+  NEVER_SKIP: true,
   fetchDataItemProfileMetadata: true,
   fetchAssignedOrgUnitCounts: true,
-  getCountableSources: true,
+  getDataItemProfileSourceKeys: true,
   fetchOrgUnitCoverage: true,
   transformEventAggregateResponse: true,
   COLOR_SET_DEFAULT: true,
@@ -982,6 +984,12 @@ Object.defineProperty(exports, "MONTHLY", {
     return _index12.MONTHLY;
   }
 });
+Object.defineProperty(exports, "NEVER_SKIP", {
+  enumerable: true,
+  get: function () {
+    return _constants.NEVER_SKIP;
+  }
+});
 Object.defineProperty(exports, "OfflineTooltip", {
   enumerable: true,
   get: function () {
@@ -1000,40 +1008,52 @@ Object.defineProperty(exports, "OrgUnitDimension", {
     return _OrgUnitDimension.default;
   }
 });
-Object.defineProperty(exports, "PERIOD_RANGE_CONTAINS", {
-  enumerable: true,
-  get: function () {
-    return _constants.PERIOD_RANGE_CONTAINS;
-  }
-});
-Object.defineProperty(exports, "PERIOD_RANGE_DISJOINT", {
-  enumerable: true,
-  get: function () {
-    return _constants.PERIOD_RANGE_DISJOINT;
-  }
-});
-Object.defineProperty(exports, "PERIOD_RANGE_OVERLAPS", {
-  enumerable: true,
-  get: function () {
-    return _constants.PERIOD_RANGE_OVERLAPS;
-  }
-});
-Object.defineProperty(exports, "PERIOD_RANGE_SAME", {
-  enumerable: true,
-  get: function () {
-    return _constants.PERIOD_RANGE_SAME;
-  }
-});
-Object.defineProperty(exports, "PERIOD_RANGE_WITHIN", {
-  enumerable: true,
-  get: function () {
-    return _constants.PERIOD_RANGE_WITHIN;
-  }
-});
 Object.defineProperty(exports, "PERIOD_TYPE_REGEX", {
   enumerable: true,
   get: function () {
     return _fixedPeriods.PERIOD_TYPE_REGEX;
+  }
+});
+Object.defineProperty(exports, "PROFILE_REASON_MISSING_METADATA", {
+  enumerable: true,
+  get: function () {
+    return _constants.PROFILE_REASON_MISSING_METADATA;
+  }
+});
+Object.defineProperty(exports, "PROFILE_REASON_MISSING_PROGRAM", {
+  enumerable: true,
+  get: function () {
+    return _constants.PROFILE_REASON_MISSING_PROGRAM;
+  }
+});
+Object.defineProperty(exports, "PROFILE_REASON_NOT_AGGREGATABLE", {
+  enumerable: true,
+  get: function () {
+    return _constants.PROFILE_REASON_NOT_AGGREGATABLE;
+  }
+});
+Object.defineProperty(exports, "PROFILE_REASON_NO_DATA_SET", {
+  enumerable: true,
+  get: function () {
+    return _constants.PROFILE_REASON_NO_DATA_SET;
+  }
+});
+Object.defineProperty(exports, "PROFILE_REASON_UNKNOWN_OPERAND", {
+  enumerable: true,
+  get: function () {
+    return _constants.PROFILE_REASON_UNKNOWN_OPERAND;
+  }
+});
+Object.defineProperty(exports, "PROFILE_REASON_UNKNOWN_PERIOD_TYPE", {
+  enumerable: true,
+  get: function () {
+    return _constants.PROFILE_REASON_UNKNOWN_PERIOD_TYPE;
+  }
+});
+Object.defineProperty(exports, "PROFILE_REASON_UNSUPPORTED_ITEM_TYPE", {
+  enumerable: true,
+  get: function () {
+    return _constants.PROFILE_REASON_UNSUPPORTED_ITEM_TYPE;
   }
 });
 Object.defineProperty(exports, "PeriodDimension", {
@@ -1088,6 +1108,12 @@ Object.defineProperty(exports, "REASON_NO_EARLIER_PERIOD_VALUE", {
   enumerable: true,
   get: function () {
     return _constants.REASON_NO_EARLIER_PERIOD_VALUE;
+  }
+});
+Object.defineProperty(exports, "REASON_NO_ORG_UNITS_AT_LEVEL", {
+  enumerable: true,
+  get: function () {
+    return _constants.REASON_NO_ORG_UNITS_AT_LEVEL;
   }
 });
 Object.defineProperty(exports, "REASON_OPERAND_EMPTY", {
@@ -1184,6 +1210,18 @@ Object.defineProperty(exports, "SIXMONTHLYAPR", {
   enumerable: true,
   get: function () {
     return _index12.SIXMONTHLYAPR;
+  }
+});
+Object.defineProperty(exports, "SKIP_IF_ALL_VALUES_MISSING", {
+  enumerable: true,
+  get: function () {
+    return _constants.SKIP_IF_ALL_VALUES_MISSING;
+  }
+});
+Object.defineProperty(exports, "SKIP_IF_ANY_VALUE_MISSING", {
+  enumerable: true,
+  get: function () {
+    return _constants.SKIP_IF_ANY_VALUE_MISSING;
   }
 });
 Object.defineProperty(exports, "SaveAsDialog", {
@@ -1678,12 +1716,6 @@ Object.defineProperty(exports, "axisIsEmpty", {
     return _axisIsEmpty.axisIsEmpty;
   }
 });
-Object.defineProperty(exports, "canAggregateInto", {
-  enumerable: true,
-  get: function () {
-    return _periodTypes.canAggregateInto;
-  }
-});
 Object.defineProperty(exports, "canDimensionBeAddedToAxis", {
   enumerable: true,
   get: function () {
@@ -1694,12 +1726,6 @@ Object.defineProperty(exports, "colorSets", {
   enumerable: true,
   get: function () {
     return _colorSets.colorSets;
-  }
-});
-Object.defineProperty(exports, "comparePeriodRanges", {
-  enumerable: true,
-  get: function () {
-    return _periodRanges.comparePeriodRanges;
   }
 });
 Object.defineProperty(exports, "convertOuLevelsToUids", {
@@ -1864,28 +1890,10 @@ Object.defineProperty(exports, "getAxisPerLockedDimension", {
     return _index10.getAxisPerLockedDimension;
   }
 });
-Object.defineProperty(exports, "getCandidatePeriodTypes", {
-  enumerable: true,
-  get: function () {
-    return _periodTypes.getCandidatePeriodTypes;
-  }
-});
 Object.defineProperty(exports, "getColorByValueFromLegendSet", {
   enumerable: true,
   get: function () {
     return _legends.getColorByValueFromLegendSet;
-  }
-});
-Object.defineProperty(exports, "getCountableSources", {
-  enumerable: true,
-  get: function () {
-    return _assignedOrgUnitCounts.getCountableSources;
-  }
-});
-Object.defineProperty(exports, "getCoveringPeriodRange", {
-  enumerable: true,
-  get: function () {
-    return _periodRanges.getCoveringPeriodRange;
   }
 });
 Object.defineProperty(exports, "getDataItemProfile", {
@@ -1910,6 +1918,12 @@ Object.defineProperty(exports, "getDataItemProfilePeriodCompatibility", {
   enumerable: true,
   get: function () {
     return _getDataItemProfilePeriodCompatibility.getDataItemProfilePeriodCompatibility;
+  }
+});
+Object.defineProperty(exports, "getDataItemProfileSourceKeys", {
+  enumerable: true,
+  get: function () {
+    return _assignedOrgUnitCounts.getDataItemProfileSourceKeys;
   }
 });
 Object.defineProperty(exports, "getDimensionById", {
@@ -2381,8 +2395,6 @@ var _assignedOrgUnitLevels = require("./modules/dataItemProfile/profile/assigned
 var _getDataItemProfileCompatibility = require("./modules/dataItemProfile/getDataItemProfileCompatibility.js");
 var _getDataItemProfilePeriodCompatibility = require("./modules/dataItemProfile/compatibility/getDataItemProfilePeriodCompatibility.js");
 var _getDataItemProfileOrgUnitCompatibility = require("./modules/dataItemProfile/compatibility/getDataItemProfileOrgUnitCompatibility.js");
-var _periodTypes = require("./modules/dataItemProfile/periods/periodTypes.js");
-var _periodRanges = require("./modules/dataItemProfile/periods/periodRanges.js");
 var _constants = require("./modules/dataItemProfile/constants.js");
 var _fetchDataItemProfileMetadata = require("./api/dataItemProfile/fetchDataItemProfileMetadata.js");
 var _assignedOrgUnitCounts = require("./api/dataItemProfile/assignedOrgUnitCounts.js");

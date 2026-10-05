@@ -4,13 +4,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.parseExpressionOperands = void 0;
+var _dataSets = require("../dataSets.js");
 var _dataTypes = require("../dataTypes.js");
 var _constants = require("./constants.js");
 /* The full indicator and expression syntax (the library's parseExpression in
  * modules/expressions.js reads only the #{} of calculations) */
 const OPERAND_TYPE_BY_PREFIX = {
   '#': _dataTypes.DIMENSION_TYPE_DATA_ELEMENT,
-  R: _constants.DIMENSION_TYPE_REPORTING_RATE,
+  R: _dataSets.REPORTING_RATE,
   N: _dataTypes.DIMENSION_TYPE_INDICATOR,
   I: _dataTypes.DIMENSION_TYPE_PROGRAM_INDICATOR,
   D: _dataTypes.DIMENSION_TYPE_PROGRAM_DATA_ELEMENT,
@@ -19,8 +20,8 @@ const OPERAND_TYPE_BY_PREFIX = {
   OUG: _constants.OPERAND_TYPE_ORG_UNIT_GROUP
 };
 
-// An operand: `#{de.coc}`, `R{ds.REPORTING_RATE}`, `[days]`…
-const OPERAND_REGEX = /(#|[A-Z]+)\{([^}]*)\}|\[days\]/g;
+// An operand: `#{de.coc}`, `R{ds.REPORTING_RATE}`, `[days]`… (prefixes are 1 to 3 letters)
+const OPERAND_REGEX = /(#|[A-Z]{1,3})\{([^}]*)\}|\[days\]/g;
 // One function chained after it: `.periodOffset(-1)`, `.aggregationType(LAST)`
 const FUNCTION_REGEX = /\.([a-zA-Z]+)\(([^)]*)\)/y;
 
@@ -43,7 +44,9 @@ const readFunctions = (expression, position) => {
 
 /* The object to fetch for the operand: the data element of `#{de.coc.aoc}`,
  * the data set of `R{ds.REPORTING_RATE}`, the whole content otherwise */
-const getOperandObjectId = (type, content) => type === _dataTypes.DIMENSION_TYPE_DATA_ELEMENT || type === _constants.DIMENSION_TYPE_REPORTING_RATE ? content.split('.')[0] : content;
+const getOperandObjectId = (type, content) => type === _dataTypes.DIMENSION_TYPE_DATA_ELEMENT || type === _dataSets.REPORTING_RATE ? content.split('.')[0] : content;
+
+// One operand found by OPERAND_REGEX: its type, the object behind it, its token and functions
 const toOperand = (expression, match) => {
   var _OPERAND_TYPE_BY_PREF, _functions$find;
   const [operandToken, prefix, content] = match;
