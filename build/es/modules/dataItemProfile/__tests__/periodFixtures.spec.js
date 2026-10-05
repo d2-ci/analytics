@@ -4,13 +4,14 @@ import path from 'path';
 import { inDataSets } from '../../../__fixtures__/dataItemProfileMetadata.js';
 import { getDataItemProfile } from '../getDataItemProfile.js';
 import { getDataItemProfileCompatibility } from '../getDataItemProfileCompatibility.js';
+import { getYear } from '../periods/calendarDates.js';
 import { getFirstOrLastValuePeriod, getYearsTouched } from '../periods/firstLastValues.js';
 import { getFixedPeriodOfTypeByDate, getPeriodDates } from '../periods/periodRanges.js';
 import { getPeriodTypeOfPeriodId } from '../periods/periodTypes.js';
 import { getPeriodAggregationType } from '../profile/collectSources.js';
 
 /* The fixtures come from the test tool in dhis2/maps-tools
- * (test-data-period-types). PERIOD_TYPES_FIXTURES_DIR points the test at the
+ * (test-data-item-profile). PERIOD_TYPES_FIXTURES_DIR points the test at the
  * tool's full export; a folder in it holds one group split in parts. */
 const FIXTURES_DIR = (_process$env$PERIOD_T = process.env.PERIOD_TYPES_FIXTURES_DIR) !== null && _process$env$PERIOD_T !== void 0 ? _process$env$PERIOD_T : path.join(__dirname, '../../../__fixtures__/period-types');
 const readFixtures = dir => fs.readdirSync(dir, {
@@ -98,7 +99,9 @@ const describeLibrary = ({
 /* Cases the metadata can't see: the library's answer differs from what
  * analytics returns, on purpose, so they are not compared. The empty-result
  * check after Update is the way to find them. */
+// The test data covers the periods of 2024 and 2025
 const TEST_DATA_START = '2024-01-01';
+const TEST_DATA_END = '2025-12-31';
 
 // The periods asked in one request: the case's, and in the carry-windows group the other one of the pair
 const getRequestPeriods = ({
@@ -110,8 +113,12 @@ const isFirstOrLast = ({
 
 /* The data period whose value the library says FIRST or LAST data takes for
  * the case's period, by the dates of the request's periods; null when none,
- * undefined when it doesn't apply */
-const predictFirstOrLastValuePeriod = fixtureCase => {
+ * undefined when it doesn't apply. `fromYear` leaves out the years before it,
+ * as when they hold no data. */
+const predictFirstOrLastValuePeriod = (fixtureCase, {
+  periodAggregationType,
+  fromYear = -Infinity
+} = {}) => {
   var _item$collectionPerio;
   const {
     item,
@@ -121,25 +128,32 @@ const predictFirstOrLastValuePeriod = fixtureCase => {
   if (!isFirstOrLast(item) || ((_item$collectionPerio = item.collectionPeriodTypes) !== null && _item$collectionPerio !== void 0 ? _item$collectionPerio : []).length !== 1 || requestDates.includes(null)) {
     return undefined;
   }
-  return getFirstOrLastValuePeriod({
-    periodAggregationType: getPeriodAggregationType(item.aggregationType),
+  const years = [...new Set(requestDates.flatMap(getYearsTouched))].filter(year => year >= fromYear);
+  return years.length ? getFirstOrLastValuePeriod({
+    periodAggregationType: periodAggregationType !== null && periodAggregationType !== void 0 ? periodAggregationType : getPeriodAggregationType(item.aggregationType),
     periodType: item.collectionPeriodTypes[0],
     dates: getPeriodDates(query.period),
-    years: [...new Set(requestDates.flatMap(getYearsTouched))]
-  });
+    years
+  }) : null;
 };
 
 /* What analytics can answer when FIRST or LAST should take a period before
  * the test data: nothing, or (where it names the data period) the first one
- * with data. Any other answer is compared, so a wrong prediction fails. */
+ * with data among the years the request touches. That is the period holding
+ * the start of the test data (it overlaps 2024, so it holds data), or the
+ * first that counts in a year after it. Any other answer is compared, so a
+ * wrong prediction fails. */
 const answersWithoutEarlierData = fixtureCase => {
-  const firstDataPeriod = getFixedPeriodOfTypeByDate(fixtureCase.item.collectionPeriodTypes[0], TEST_DATA_START);
+  const firstDataPeriods = [getFixedPeriodOfTypeByDate(fixtureCase.item.collectionPeriodTypes[0], TEST_DATA_START), predictFirstOrLastValuePeriod(fixtureCase, {
+    periodAggregationType: 'FIRST',
+    fromYear: getYear(TEST_DATA_START)
+  })].map(period => period === null || period === void 0 ? void 0 : period.startDate);
   return getOutcomes(fixtureCase).every(([, {
     value,
     source
   }]) => {
     var _getPeriodDates;
-    return source ? ((_getPeriodDates = getPeriodDates(source)) === null || _getPeriodDates === void 0 ? void 0 : _getPeriodDates.startDate) === (firstDataPeriod === null || firstDataPeriod === void 0 ? void 0 : firstDataPeriod.startDate) : value === null || value === undefined;
+    return source ? firstDataPeriods.includes((_getPeriodDates = getPeriodDates(source)) === null || _getPeriodDates === void 0 ? void 0 : _getPeriodDates.startDate) : value === null || value === undefined;
   });
 };
 const METADATA_BLIND_SPOTS = [{
@@ -183,6 +197,18 @@ const METADATA_BLIND_SPOTS = [{
     return ((_getPeriodDates3 = getPeriodDates(query.period)) === null || _getPeriodDates3 === void 0 ? void 0 : _getPeriodDates3.endDate) < TEST_DATA_START;
   },
   reason: 'the period ends before the test data'
+}, {
+  // Group 7 asks periods up to mid-2026
+  pattern: /^carry-/,
+  applies: ({
+    query
+  }) => {
+    var _getPeriodDates4;
+    return ((_getPeriodDates4 = getPeriodDates(query.period)) === null || _getPeriodDates4 === void 0 ? void 0 : _getPeriodDates4.endDate) > TEST_DATA_END;
+  },
+  reason: 'the period ends after the test data',
+  // The smoke subset keeps none
+  optional: true
 }];
 const isBlindSpot = fixtureCase => METADATA_BLIND_SPOTS.some(({
   pattern,
@@ -414,8 +440,8 @@ describe('period type fixtures', () => {
   it('pick the data period analytics names for FIRST and LAST', () => {
     const cases = allCases.filter(fixtureCase => fixtureCase.id.startsWith('carry-') && !isBlindSpot(fixtureCase) && predictFirstOrLastValuePeriod(fixtureCase) !== undefined);
     const startOf = period => {
-      var _getPeriodDates$start, _getPeriodDates4;
-      return period ? (_getPeriodDates$start = (_getPeriodDates4 = getPeriodDates(period)) === null || _getPeriodDates4 === void 0 ? void 0 : _getPeriodDates4.startDate) !== null && _getPeriodDates$start !== void 0 ? _getPeriodDates$start : period : null;
+      var _getPeriodDates$start, _getPeriodDates5;
+      return period ? (_getPeriodDates$start = (_getPeriodDates5 = getPeriodDates(period)) === null || _getPeriodDates5 === void 0 ? void 0 : _getPeriodDates5.startDate) !== null && _getPeriodDates$start !== void 0 ? _getPeriodDates$start : period : null;
     };
     const mismatches = cases.flatMap(fixtureCase => {
       var _predictFirstOrLastVa, _predictFirstOrLastVa2;

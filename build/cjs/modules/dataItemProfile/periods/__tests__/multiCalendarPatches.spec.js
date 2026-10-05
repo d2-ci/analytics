@@ -23,11 +23,4 @@ describe('multiCalendarPatches', () => {
   it.each([['FinancialNov', '2024-11-01', '2025Nov'], ['FinancialNov', '2025-10-31', '2025Nov'], ['QuarterlyNov', '2024-12-15', '2025NovQ1'], ['QuarterlyNov', '2025-02-01', '2025NovQ2'], ['SixMonthlyNov', '2025-05-01', '2025NovS2']])('finds the %s period holding %s: %s', (periodType, date, id) => {
     expect((0, _multiCalendarPatches.getNovemberPeriodByDate)(periodType, date).id).toBe(id);
   });
-  it('gives the year in a period id, the end year for November types', () => {
-    const novemberQuarter = (0, _multiCalendarPatches.getNovemberPeriodByDate)('QuarterlyNov', '2024-12-15');
-    expect((0, _multiCalendarPatches.getPeriodIdYear)(novemberQuarter, 'QuarterlyNov')).toBe(2025);
-    expect((0, _multiCalendarPatches.getPeriodIdYear)({
-      id: '2024W52'
-    }, 'Weekly')).toBe(2024);
-  });
 });

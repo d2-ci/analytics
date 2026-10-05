@@ -67,8 +67,8 @@ const resolveRelativePeriod = (0, _memoize.memoize)((periodId, periodType, {
     return null;
   }
   const periods = [first];
-  while (periods[periods.length - 1].id !== last.id && periods.length < MAX_PERIODS) {
-    const next = (0, _periodRanges.getNextPeriod)(periodType, periods[periods.length - 1], calendar);
+  while (periods.at(-1).id !== last.id && periods.length < MAX_PERIODS) {
+    const next = (0, _periodRanges.getNextPeriod)(periodType, periods.at(-1), calendar);
     if (!next) {
       return null;
     }

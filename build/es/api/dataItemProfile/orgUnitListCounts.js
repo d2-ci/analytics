@@ -9,10 +9,10 @@ const GROUP_FILTER = /^((?:parent\.|children\.)*)organisationUnitGroups\.id$/;
 // For a group: its members' ids, and the ids of the org units `height` levels above a member
 const indexGroup = memberPaths => {
   const members = memberPaths.map(getPathIds);
-  const aboveMembers = height => new Set(members.filter(ids => ids.length > height).map(ids => ids[ids.length - 1 - height]));
+  const aboveMembers = height => new Set(members.filter(ids => ids.length > height).map(ids => ids.at(-1 - height)));
   const aboveByHeight = new Map();
   return {
-    memberIds: new Set(members.map(ids => ids[ids.length - 1])),
+    memberIds: new Set(members.map(ids => ids.at(-1))),
     isAboveMembers: (id, height) => {
       if (!aboveByHeight.has(height)) {
         aboveByHeight.set(height, aboveMembers(height));
@@ -28,9 +28,9 @@ const passesGroupFilter = (ids, steps, group) => {
   const parents = ((_steps$match = steps.match(/parent\./g)) !== null && _steps$match !== void 0 ? _steps$match : []).length;
   const children = ((_steps$match2 = steps.match(/children\./g)) !== null && _steps$match2 !== void 0 ? _steps$match2 : []).length;
   if (children) {
-    return group.isAboveMembers(ids[ids.length - 1], children);
+    return group.isAboveMembers(ids.at(-1), children);
   }
-  const ancestor = ids[ids.length - 1 - parents];
+  const ancestor = ids.at(-1 - parents);
   return Boolean(ancestor) && group.memberIds.has(ancestor);
 };
 const passesFilter = (ids, condition, groups) => {
@@ -46,7 +46,7 @@ const passesFilter = (ids, condition, groups) => {
     case 'path:like':
       return ids.includes(value);
     case 'id:in':
-      return value.slice(1, -1).split(',').includes(ids[ids.length - 1]);
+      return value.slice(1, -1).split(',').includes(ids.at(-1));
     default:
       return false;
   }

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isNovemberPeriodType = exports.isNovemberPeriodId = exports.getPeriodIdYear = exports.getNovemberPeriodDates = exports.getNovemberPeriodByDate = void 0;
+exports.isNovemberPeriodType = exports.isNovemberPeriodId = exports.getNovemberPeriodDates = exports.getNovemberPeriodByDate = void 0;
 var _calendarDates = require("./calendarDates.js");
 /* Workarounds for multi-calendar-dates 1.3.2, to remove once it is fixed
  * upstream. November period types name the year they end in: 2025Nov is
@@ -71,8 +71,4 @@ const getNovemberPeriodByDate = (periodType, date) => {
     ...getNovemberPeriodDates(id)
   };
 };
-
-// The year in a period's id: the year November periods end in
 exports.getNovemberPeriodByDate = getNovemberPeriodByDate;
-const getPeriodIdYear = (period, periodType) => isNovemberPeriodType(periodType) ? (0, _calendarDates.getYear)(period.endDate) : Number(period.id.slice(0, 4));
-exports.getPeriodIdYear = getPeriodIdYear;
