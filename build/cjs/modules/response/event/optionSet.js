@@ -26,8 +26,8 @@ const getOptionIdRows = (rows, optionCodeIdMap, headerIndex) => {
 exports.getOptionIdRows = getOptionIdRows;
 const applyOptionSetHandler = (response, headerIndex) => {
   const header = response.headers[headerIndex];
-  const optionIds = response.metaData.dimensions[header.name];
-  const optionCodeIdMap = getOptionCodeIdMap(optionIds, response.metaData.items);
+  response.metaData.dimensions[header.name] = response.metaData.dimensions[header.name].map(id => id === _response.D2__NOVALUE ? _response.NA_VALUE : id);
+  const optionCodeIdMap = getOptionCodeIdMap(response.metaData.dimensions[header.name], response.metaData.items);
   return {
     ...response,
     rows: getOptionIdRows(response.rows, optionCodeIdMap, headerIndex)

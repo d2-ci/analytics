@@ -228,7 +228,6 @@ var _exportNames = {
   HIDE_EMPTY_ROW_ITEMS_ALL: true,
   formatValue: true,
   transformEventAggregateResponse: true,
-  transformEventVisualization: true,
   COLOR_SET_DEFAULT: true,
   COLOR_SET_BASIC: true,
   COLOR_SET_EXTENDED: true,
@@ -1936,12 +1935,6 @@ Object.defineProperty(exports, "transformEventAggregateResponse", {
     return _response.transformResponse;
   }
 });
-Object.defineProperty(exports, "transformEventVisualization", {
-  enumerable: true,
-  get: function () {
-    return _eventVisualization.transformEventVisualization;
-  }
-});
 Object.defineProperty(exports, "useCachedDataQuery", {
   enumerable: true,
   get: function () {
@@ -2081,7 +2074,6 @@ var _legends = require("./modules/legends.js");
 var _hideEmptyRowItems = require("./modules/hideEmptyRowItems.js");
 var _renderValue = require("./modules/renderValue.js");
 var _response = require("./modules/response/event/response.js");
-var _eventVisualization = require("./modules/eventVisualization/eventVisualization.js");
 var _colorSets = require("./visualizations/util/colors/colorSets.js");
 var _index12 = require("./components/PeriodDimension/utils/index.js");
 var _relativePeriods = require("./components/PeriodDimension/utils/relativePeriods.js");

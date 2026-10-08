@@ -1,0 +1,1466 @@
+# Translators:
+# Philip Larsen Donnelly, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-05-28T08:40:06.387Z\n"
+"PO-Revision-Date: 2020-04-28 22:05+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
+"Language-Team: Pashto (https://app.transifex.com/hisp-uio/teams/100509/ps/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ps\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "view only"
+msgstr ""
+
+msgid "view and edit"
+msgstr ""
+
+msgid "all users ({{accessLevel}})"
+msgstr ""
+
+msgid "{{userOrGroup}} ({{accessLevel}})"
+msgstr ""
+
+msgid "Shared with {{commaSeparatedListOfUsersAndGroups}}"
+msgstr ""
+
+msgid "Not shared with any users or groups"
+msgstr ""
+
+msgid "No description"
+msgstr "هېڅ ډول تشریح نه لري"
+
+msgid "Last updated {{time}}"
+msgstr ""
+
+msgid "Created {{time}} by {{author}}"
+msgstr ""
+
+msgid "Created {{time}}"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
+
+msgid "You're subscribed and getting updates about new interpretations."
+msgstr ""
+
+msgid "Unsubscribe"
+msgstr ""
+
+msgid "Subscribe to get updates about new interpretations."
+msgstr ""
+
+msgid "Subscribe"
+msgstr ""
+
+msgid "About this map"
+msgstr ""
+
+msgid "About this line list"
+msgstr ""
+
+msgid "About this visualization"
+msgstr ""
+
+msgid "About this event chart"
+msgstr ""
+
+msgid "About this event report"
+msgstr ""
+
+msgid "This app could not retrieve required data."
+msgstr ""
+
+msgid "Network error"
+msgstr ""
+
+msgid "Data / Edit calculation"
+msgstr ""
+
+msgid "Data / New calculation"
+msgstr ""
+
+msgid "Remove item"
+msgstr ""
+
+msgid "Check formula"
+msgstr ""
+
+msgid "Calculation name"
+msgstr ""
+
+msgid "Shown in table headers and chart axes/legends"
+msgstr ""
+
+msgid "Delete calculation"
+msgstr ""
+
+msgid "Cancel"
+msgstr "رد یې کړئ [ ژباړه ـ ردول ]"
+
+msgid "The calculation can only be saved with a valid formula"
+msgstr ""
+
+msgid "Add a name to save this calculation"
+msgstr ""
+
+msgid "Save calculation"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete this calculation? It may be used by other "
+"visualizations."
+msgstr ""
+
+msgid "Yes, delete"
+msgstr ""
+
+msgid "Totals only"
+msgstr ""
+
+msgid "Details only"
+msgstr ""
+
+msgid "Loading"
+msgstr "د پورته کېدو یا لوډینګ په حال کې"
+
+msgid "Data elements"
+msgstr "د مالوماتو (ډاټا) برخې"
+
+msgid "Search by data element name"
+msgstr ""
+
+msgid "No data elements found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No data elements found"
+msgstr ""
+
+msgid ""
+"Drag items here, or double click in the list, to start building a "
+"calculation formula"
+msgstr ""
+
+msgid "Math operators"
+msgstr ""
+
+msgid "Expression description"
+msgstr ""
+
+msgid "Error loading value"
+msgstr ""
+
+msgid "None"
+msgstr "هېڅ یو"
+
+msgid "Data set(s)"
+msgstr ""
+
+msgid "Zero is significant"
+msgstr ""
+
+msgid "True"
+msgstr "صحیح"
+
+msgid "False"
+msgstr "غلط"
+
+msgid "Value type"
+msgstr "د ارزښت ډول"
+
+msgid "Aggregation type"
+msgstr "نوع مجموعه"
+
+msgid "Category combo"
+msgstr ""
+
+msgid "Option set"
+msgstr "د غوروي ټولګه"
+
+msgid "Group membership"
+msgstr ""
+
+msgid "Legend set(s)"
+msgstr ""
+
+msgid "Category option name"
+msgstr ""
+
+msgid "Category combo name"
+msgstr ""
+
+msgid "Categories name"
+msgstr ""
+
+msgid "Period type"
+msgstr "د مودې ډول"
+
+msgid "Indicators"
+msgstr "شاخصونه"
+
+msgid "Expiry days"
+msgstr ""
+
+msgid "Type"
+msgstr "نمونه/ډول"
+
+msgid "Data element"
+msgstr "د مالوماتو (ډاټا) برخه"
+
+msgid "Tracked entity attribute"
+msgstr "د تعقیب شوي نهاد ځانګړتیا"
+
+msgid "Numerator description"
+msgstr "د کسري عدد تشریح [ ژباړه ـ نښه ـ کسري عدد ـ تشریح ]"
+
+msgid "Numerator expression"
+msgstr ""
+
+msgid "Denominator description"
+msgstr "د وېشونکي تشریح [ وېشونکی ـ تشریح ]"
+
+msgid "Denominator expression"
+msgstr ""
+
+msgid "Annualized"
+msgstr "د کال پر اساس ټاکل"
+
+msgid "Yes"
+msgstr "هو"
+
+msgid "No"
+msgstr "نه"
+
+msgid "Indicator type"
+msgstr "د شاخص نمونه"
+
+msgid "Decimals in output"
+msgstr ""
+
+msgid "There was a problem loading information for this data item."
+msgstr ""
+
+msgid "Name"
+msgstr "نوم"
+
+msgid "Description"
+msgstr "تشریح [ ژباړه ـ نښه ـ تشریح ]"
+
+msgid "Code"
+msgstr "کوډ یا شفر"
+
+msgid "ID"
+msgstr "د هویت څرګندونه"
+
+msgid "Last updated date"
+msgstr ""
+
+msgid "Created date"
+msgstr ""
+
+msgid "Created by"
+msgstr "لخوا ایجاد یا رامنځ ته شوی"
+
+msgid "Custom"
+msgstr "ځانګړی"
+
+msgid "Program"
+msgstr "پروګرام"
+
+msgid "Analytics type"
+msgstr ""
+
+msgid "Enrollment"
+msgstr "شاملول یا نوم لیکنه"
+
+msgid "Event"
+msgstr "پېښه"
+
+msgid "Analytics period boundaries"
+msgstr ""
+
+msgid "{{ offsetPeriodType }} × {{ offsetPeriods }}"
+msgstr ""
+
+msgid "Expression"
+msgstr "اصطلاح (شاخص)"
+
+msgid "Filter"
+msgstr "فیلټر"
+
+msgid "All available options are already selected"
+msgstr ""
+
+msgid "No available options for this item"
+msgstr ""
+
+msgid "Search by option name"
+msgstr ""
+
+msgid "Back to all items"
+msgstr ""
+
+msgid "Options"
+msgstr "ګزینه"
+
+msgid "Selected items"
+msgstr ""
+
+msgid "Data Type"
+msgstr ""
+
+msgid "Only {{dataType}} can be used in {{visType}}"
+msgstr ""
+
+msgid "All types"
+msgstr ""
+
+msgid "Disaggregation"
+msgstr ""
+
+msgid "No data"
+msgstr "د مالوماتو (ډاټا) نشتوالۍ"
+
+msgid "Search by data item name"
+msgstr ""
+
+msgid "Selected Items"
+msgstr ""
+
+msgid "All available items are already selected"
+msgstr ""
+
+msgid "Calculation"
+msgstr ""
+
+msgid "Metric type"
+msgstr ""
+
+msgid "All metrics"
+msgstr "ټول متریک"
+
+msgid "No items selected"
+msgstr ""
+
+msgid "No indicators found"
+msgstr ""
+
+msgid "No data sets found"
+msgstr ""
+
+msgid "No event data items found"
+msgstr ""
+
+msgid "No program indicators found"
+msgstr ""
+
+msgid "No calculations found"
+msgstr ""
+
+msgid "No indicators found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No data sets found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No event data items found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No program indicators found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No calculations found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "Nothing found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "Click to choose from available options"
+msgstr ""
+
+msgid "Move to {{axisName}}"
+msgstr ""
+
+msgid "Add to {{axisName}}"
+msgstr ""
+
+msgid "Not available for {{visualizationType}}"
+msgstr ""
+
+msgid "Remove Assigned Categories"
+msgstr ""
+
+msgid "Add Assigned Categories"
+msgstr ""
+
+msgid "Remove"
+msgstr "لرې کول"
+
+msgid "Filter dimensions"
+msgstr ""
+
+msgid "Main dimensions"
+msgstr ""
+
+msgid "Your dimensions"
+msgstr ""
+
+msgid "Dimension recommended with selected data"
+msgstr ""
+
+msgid "All items"
+msgstr ""
+
+msgid "Automatically include all items"
+msgstr ""
+
+msgid ""
+"Select all {{- dimensionTitle}} items. With this option, new items added in "
+"the future will be automatically included."
+msgstr ""
+
+msgid "Manually select items..."
+msgstr ""
+
+msgid "Nothing found in {{- dimensionTitle}}"
+msgstr ""
+
+msgid "Search"
+msgstr "جستجو"
+
+msgid "Delete {{fileType}}"
+msgstr ""
+
+msgid ""
+"This {{fileType}} and related interpretations will be deleted. Continue?"
+msgstr ""
+
+msgid "Delete"
+msgstr "خذف یې کړئ"
+
+msgid "File"
+msgstr "فایل"
+
+msgid "New"
+msgstr "نوی"
+
+msgid "Open…"
+msgstr ""
+
+msgid "Save"
+msgstr "ثبت یې کړئ [ ژباړه - ثبت کړئ ]"
+
+msgid "Save…"
+msgstr ""
+
+msgid "Save as…"
+msgstr ""
+
+msgid "Rename…"
+msgstr ""
+
+msgid "Translate…"
+msgstr ""
+
+msgid "Share…"
+msgstr ""
+
+msgid "Get link…"
+msgstr ""
+
+msgid "Open in this app"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Close"
+msgstr "بند یې کړئ"
+
+msgid "Rename {{fileType}}"
+msgstr ""
+
+msgid "Rename"
+msgstr "بیا نومول"
+
+msgid "{{- objectName}} (copy)"
+msgstr ""
+
+msgid "Save {{fileType}} as"
+msgstr ""
+
+msgid "event report"
+msgstr ""
+
+msgid "line list"
+msgstr ""
+
+msgid "map"
+msgstr ""
+
+msgid "visualization"
+msgstr ""
+
+msgid "Untitled {{visualizationType}}, {{date}}"
+msgstr ""
+
+msgid "Back to all interpretations"
+msgstr ""
+
+msgid "Could not load interpretation details"
+msgstr ""
+
+msgid "The request to fetch interpretation comments failed"
+msgstr ""
+
+msgid "Edit"
+msgstr "درست یې کړئ"
+
+msgid "Write a reply"
+msgstr ""
+
+msgid "Could not post reply"
+msgstr ""
+
+msgid "Post reply"
+msgstr ""
+
+msgid "Could not delete comment"
+msgstr ""
+
+msgid "Could not update comment"
+msgstr ""
+
+msgid "Enter comment text"
+msgstr ""
+
+msgid "Update"
+msgstr "تجدید یا نوي یې کړئ"
+
+msgid "Viewing interpretation: {{- visualisationName}}"
+msgstr ""
+
+msgid "Could not load interpretation"
+msgstr ""
+
+msgid ""
+"The interpretation couldn’t be displayed. Try again or contact your system "
+"administrator."
+msgstr ""
+
+msgid "Hide interpretation"
+msgstr ""
+
+msgid "Write an interpretation"
+msgstr ""
+
+msgid "Could not post interpretation"
+msgstr ""
+
+msgid ""
+"Other people viewing this interpretation in the future may see more data."
+msgstr ""
+
+msgid "Post interpretation"
+msgstr ""
+
+msgid "Interpretations"
+msgstr "شفاهي ژباړې"
+
+msgid "Error loading interpretations"
+msgstr ""
+
+msgid "Could not load interpretations"
+msgstr ""
+
+msgid "Reply"
+msgstr "ځواب ورکړئ"
+
+msgid "View replies"
+msgstr ""
+
+msgid "Unlike"
+msgstr "نه خوښول."
+
+msgid "Like"
+msgstr "د خوښې وړ."
+
+msgid "See interpretation"
+msgstr ""
+
+msgid "Open in app"
+msgstr ""
+
+msgid "Share"
+msgstr "شریک یې کړئ"
+
+msgid "Could not delete interpretation"
+msgstr ""
+
+msgid "Manage sharing"
+msgstr ""
+
+msgid "Could not update interpretation text"
+msgstr ""
+
+msgid "Could not update interpretation"
+msgstr ""
+
+msgid "Enter interpretation text"
+msgstr ""
+
+msgid "Not available offline"
+msgstr ""
+
+msgid "Anyone"
+msgstr ""
+
+msgid "Only you"
+msgstr ""
+
+msgid "Others"
+msgstr ""
+
+msgid "Not supported by this app yet"
+msgstr ""
+
+msgid "Filter by name"
+msgstr "د نوم له مخې یې فیلټر کړئ"
+
+msgid "Created"
+msgstr "ایجاد شوی دی"
+
+msgid "Last updated"
+msgstr "د وروستي ځل لپاره تجدید شوې"
+
+msgid "Clear filters"
+msgstr ""
+
+msgid "{{firstItemIndex}}-{{lastItemIndex}} of {{totalNumberOfItems}}"
+msgstr ""
+
+msgid "Open"
+msgstr "خلاص یې کړئ"
+
+msgid "Couldn't load items"
+msgstr ""
+
+msgid ""
+"There was a problem loading items. Try again or contact your system "
+"administrator."
+msgstr ""
+
+msgid "No items found. Create a new to get started."
+msgstr ""
+
+msgid ""
+"No items found. Try adjusting your search or filter options to find what "
+"you're looking for."
+msgstr ""
+
+msgid "Create new"
+msgstr ""
+
+msgid "Open a visualization"
+msgstr ""
+
+msgid "Loading visualizations"
+msgstr ""
+
+msgid "Couldn't load visualizations"
+msgstr ""
+
+msgid ""
+"There was a problem loading visualizations. Try again or contact your system"
+" administrator."
+msgstr ""
+
+msgid "No visualizations found. Click New visualization to get started."
+msgstr ""
+
+msgid ""
+"No visualizations found. Try adjusting your search or filter options to find"
+" what you're looking for."
+msgstr ""
+
+msgid "New visualization"
+msgstr ""
+
+msgid "Open a map"
+msgstr ""
+
+msgid "Loading maps"
+msgstr ""
+
+msgid "Couldn't load maps"
+msgstr ""
+
+msgid ""
+"There was a problem loading maps. Try again or contact your system "
+"administrator."
+msgstr ""
+
+msgid "No maps found. Click New map to get started."
+msgstr ""
+
+msgid ""
+"No maps found. Try adjusting your search or filter options to find what "
+"you're looking for."
+msgstr ""
+
+msgid "New map"
+msgstr ""
+
+msgid "Open a line list"
+msgstr ""
+
+msgid "Loading line lists"
+msgstr ""
+
+msgid "Couldn't load line lists"
+msgstr ""
+
+msgid ""
+"There was a problem loading line lists. Try again or contact your system "
+"administrator."
+msgstr ""
+
+msgid "No line lists found. Click New line list to get started."
+msgstr ""
+
+msgid ""
+"No line lists found. Try adjusting your search or filter options to find "
+"what you're looking for."
+msgstr ""
+
+msgid "New line list"
+msgstr ""
+
+msgid "Hide"
+msgstr "پټ یې کړئ"
+
+msgid "Selected: {{commaSeparatedListOfOrganisationUnits}}"
+msgstr ""
+
+msgid "Nothing selected"
+msgstr ""
+
+msgid "User organisation unit"
+msgstr "کارکوڼکی واحدو سازمان"
+
+msgid "User sub-units"
+msgstr "واحد های فرعی استفاده کننده"
+
+msgid "User sub-x2-units"
+msgstr "واحد های نیم فرعی استفاده کننده"
+
+msgid "Select a level"
+msgstr ""
+
+msgid "Select a group"
+msgstr ""
+
+msgid "Deselect all"
+msgstr ""
+
+msgid "Year"
+msgstr "کال"
+
+msgid "Select year"
+msgstr "کال ټاکل"
+
+msgid "Period"
+msgstr "معیاد"
+
+msgid "Selected Periods"
+msgstr ""
+
+msgid "No period types available"
+msgstr ""
+
+msgid ""
+"No period types are enabled in the system. Please contact your system "
+"administrator."
+msgstr ""
+
+msgid "Relative periods"
+msgstr "اړونده مودط"
+
+msgid "Fixed periods"
+msgstr "ثابتې مودې"
+
+msgid "No periods selected"
+msgstr "هېڅ مودې نه دي غوره شوې"
+
+msgid "Daily"
+msgstr "ورځني [ د مودې ډول ]"
+
+msgid "Weekly"
+msgstr "اوونیز"
+
+msgid "Weekly (Start Wednesday)"
+msgstr ""
+
+msgid "Weekly (Start Thursday)"
+msgstr ""
+
+msgid "Weekly (Start Friday)"
+msgstr ""
+
+msgid "Weekly (Start Saturday)"
+msgstr ""
+
+msgid "Weekly (Start Sunday)"
+msgstr ""
+
+msgid "Bi-weekly"
+msgstr ""
+
+msgid "Monthly"
+msgstr "میاشتنۍ"
+
+msgid "Bi-monthly"
+msgstr "دوه میاشتنۍ"
+
+msgid "Quarterly"
+msgstr "درې میاشتنۍ"
+
+msgid "Six-monthly"
+msgstr "شپږ- میاشتنۍ"
+
+msgid "Six-monthly April"
+msgstr "شپږ - د اپرېل میاشتنۍ"
+
+msgid "Yearly"
+msgstr "کلنۍ"
+
+msgid "Financial year (Start February)"
+msgstr ""
+
+msgid "Financial year (Start April)"
+msgstr "مالی کال- آپریل"
+
+msgid "Financial year (Start July)"
+msgstr "مالی کال- جولای"
+
+msgid "Financial year (Start August)"
+msgstr ""
+
+msgid "Financial year (Start September)"
+msgstr ""
+
+msgid "Financial year (Start October)"
+msgstr "مالی کال- اکتوبر"
+
+msgid "Financial year (Start November)"
+msgstr ""
+
+msgid "Today"
+msgstr "نن ورځ"
+
+msgid "Yesterday"
+msgstr "پرونۍ ورځ"
+
+msgid "Last 3 days"
+msgstr "تېرې درې ورځې"
+
+msgid "Last 7 days"
+msgstr "تېرې اوه ورځې"
+
+msgid "Last 14 days"
+msgstr "تېرې څورلس ورځې"
+
+msgid "Last 30 days"
+msgstr ""
+
+msgid "Last 60 days"
+msgstr ""
+
+msgid "Last 90 days"
+msgstr ""
+
+msgid "Last 180 days"
+msgstr ""
+
+msgid "This week"
+msgstr "هفته هذا"
+
+msgid "Last week"
+msgstr "تېره اونۍ"
+
+msgid "Last 4 weeks"
+msgstr "تېرې 4 اونۍ"
+
+msgid "Last 12 weeks"
+msgstr "تېرو 12 اونۍ"
+
+msgid "Last 52 weeks"
+msgstr "تېرې دوه پنځوس اونۍ"
+
+msgid "Weeks this year"
+msgstr "په روان کال کې اونۍ"
+
+msgid "This bi-week"
+msgstr ""
+
+msgid "Last bi-week"
+msgstr ""
+
+msgid "Last 4 bi-weeks"
+msgstr ""
+
+msgid "This month"
+msgstr "ماه هذا"
+
+msgid "Last month"
+msgstr "تېره میاشت"
+
+msgid "Last 3 months"
+msgstr "تېرې 3 میاشتې"
+
+msgid "Last 6 months"
+msgstr "تېرې شپږ میاشتې"
+
+msgid "Last 12 months"
+msgstr "تېرې 12 میاشتې"
+
+msgid "Months this year"
+msgstr "د روان کال میاشتې"
+
+msgid "This bi-month"
+msgstr "این دوماهه"
+
+msgid "Last bi-month"
+msgstr "تېرې دوه میاشتې"
+
+msgid "Last 6 bi-months"
+msgstr "په تېرو شپږو میاشتو کې ډوه ځلې"
+
+msgid "Bi-months this year"
+msgstr "په روان کال کې دوه میاشتې"
+
+msgid "This quarter"
+msgstr "ربع هذا"
+
+msgid "Last quarter"
+msgstr "تېره ربعه"
+
+msgid "Last 4 quarters"
+msgstr "تېرې 4ربعې"
+
+msgid "Quarters this year"
+msgstr "د سږ کال ربعې"
+
+msgid "This six-month"
+msgstr "شش ماه هذا"
+
+msgid "Last six-month"
+msgstr "تېرې شپږ میاشتې [ تېرې ـ شپږ ـ میاشتې ]"
+
+msgid "Last 2 six-month"
+msgstr ""
+
+msgid "This financial year"
+msgstr "سږنۍ مالي کال"
+
+msgid "Last financial year"
+msgstr "تېر مالي کال"
+
+msgid "Last 5 financial years"
+msgstr "تېر 5 مالي کلونه"
+
+msgid "This year"
+msgstr "روان کال"
+
+msgid "Last year"
+msgstr "تېر کال"
+
+msgid "Last 5 years"
+msgstr "تېر 5 کلونه"
+
+msgid "Last 10 years"
+msgstr "لس کلونه"
+
+msgid "Days"
+msgstr "ورځې"
+
+msgid "Weeks"
+msgstr "اونۍ"
+
+msgid "Bi-weeks"
+msgstr ""
+
+msgid "Months"
+msgstr "میاشت"
+
+msgid "Bi-months"
+msgstr "دوه میاشتنۍ"
+
+msgid "Quarters"
+msgstr "ربعې"
+
+msgid "Six-months"
+msgstr "شپږ میاشتې"
+
+msgid "Financial Years"
+msgstr ""
+
+msgid "Years"
+msgstr "کلونه"
+
+msgid "Value: {{value}}"
+msgstr ""
+
+msgid "Bold text"
+msgstr ""
+
+msgid "Italic text"
+msgstr ""
+
+msgid "Link to a URL"
+msgstr ""
+
+msgid "Mention a user"
+msgstr ""
+
+msgid "Add emoji"
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "Back to write mode"
+msgstr ""
+
+msgid "Interpretations and details"
+msgstr ""
+
+msgid "Translating to"
+msgstr ""
+
+msgid "Choose a locale"
+msgstr ""
+
+msgid "Base locale reference"
+msgstr ""
+
+msgid "Choose a locale to translate from the menu above"
+msgstr ""
+
+msgid "Translate: {{objectName}}"
+msgstr ""
+
+msgid "Save translations"
+msgstr ""
+
+msgid "Cannot save while offline"
+msgstr ""
+
+msgid "Could not load translations"
+msgstr ""
+
+msgid "Retry"
+msgstr ""
+
+msgid "Too many results. Try refining the search."
+msgstr ""
+
+msgid "Search for a user"
+msgstr ""
+
+msgid "Searching for \"{{- searchText}}\""
+msgstr ""
+
+msgid "No results found"
+msgstr "هېڅ پایله ترلاسه نه شوه"
+
+msgid "Series"
+msgstr "سلسله (لړۍ)"
+
+msgid "Category"
+msgstr "کټګوري"
+
+msgid "Columns"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
+
+msgid "Points"
+msgstr ""
+
+msgid "Reporting rate"
+msgstr ""
+
+msgid "Reporting rate on time"
+msgstr ""
+
+msgid "Actual reports"
+msgstr ""
+
+msgid "Actual reports on time"
+msgstr ""
+
+msgid "Expected reports"
+msgstr ""
+
+msgid "Select a program"
+msgstr ""
+
+msgid "Indicator group"
+msgstr "د شاخص ګروپ"
+
+msgid "All groups"
+msgstr ""
+
+msgid "Indicator"
+msgstr "شاخص"
+
+msgid "No indicator groups found"
+msgstr ""
+
+msgid "Loading indicator groups"
+msgstr ""
+
+msgid "Data element group"
+msgstr "د مالوماتو (ډاټا) د برخې ګروپ"
+
+msgid "No data element groups found"
+msgstr ""
+
+msgid "Loading data element groups"
+msgstr ""
+
+msgid "Data sets"
+msgstr "د مالوماتو یا ډاټا ټولګې"
+
+msgid "Data set"
+msgstr "د مالوماتو (ډاټا) ټولګه"
+
+msgid "All data sets"
+msgstr ""
+
+msgid "Loading data sets"
+msgstr ""
+
+msgid "Event data items"
+msgstr "د پېښې د ډاټا یا مالوماتو محتویات"
+
+msgid "All programs"
+msgstr ""
+
+msgid "Event data item"
+msgstr "لایه رویداد"
+
+msgid "No programs found"
+msgstr ""
+
+msgid "Loading programs"
+msgstr ""
+
+msgid "Program indicators"
+msgstr "د پروګرام شاخص"
+
+msgid "Program indicator"
+msgstr ""
+
+msgid "Calculations"
+msgstr ""
+
+msgid "Option"
+msgstr "اختیار یا غوروۍ"
+
+msgid "Number"
+msgstr "عدد [ بشپړ عدد ]"
+
+msgid "Formula is empty. Add items to the formula from the lists on the left."
+msgstr ""
+
+msgid "Consecutive math operators"
+msgstr ""
+
+msgid "Consecutive data elements"
+msgstr ""
+
+msgid "Starts or ends with a math operator"
+msgstr ""
+
+msgid "Empty parentheses"
+msgstr ""
+
+msgid "Missing right parenthesis )"
+msgstr ""
+
+msgid "Missing left parenthesis ("
+msgstr ""
+
+msgid "Extra Small"
+msgstr ""
+
+msgid "Small"
+msgstr "کوچنۍ"
+
+msgid "Regular"
+msgstr ""
+
+msgid "Large"
+msgstr "لوی"
+
+msgid "Extra Large"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "Middle"
+msgstr ""
+
+msgid "End"
+msgstr ""
+
+msgid "Top"
+msgstr "پورتنۍ برخه"
+
+msgid "Bottom"
+msgstr "لاندینۍ برخه"
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr ""
+
+msgid "{{percentage}}% of total x values"
+msgstr ""
+
+msgid "{{percentage}}% of total y values"
+msgstr ""
+
+msgid "{{thresholdFactor}} × IQR Q1"
+msgstr ""
+
+msgid "{{thresholdFactor}} × IQR Q3"
+msgstr ""
+
+msgid "{{thresholdFactor}} × Modified Z-score low"
+msgstr ""
+
+msgid "{{thresholdFactor}} × Modified Z-score high"
+msgstr ""
+
+msgid "{{thresholdFactor}} × Z-score low"
+msgstr ""
+
+msgid "{{thresholdFactor}} × Z-score high"
+msgstr ""
+
+msgid "Not applicable"
+msgstr ""
+
+msgid "Data"
+msgstr "مالومات (ډاټا)"
+
+msgid "Organisation unit"
+msgstr "د سازمان واحد"
+
+msgid "Assigned Categories"
+msgstr ""
+
+msgid "No value"
+msgstr "هېڅ ارزښت نشته"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Completed"
+msgstr "بشپړ شوی"
+
+msgid "Scheduled"
+msgstr "پروګرام شوی"
+
+msgid "Cancelled"
+msgstr "لغوه شوی"
+
+msgid "Text"
+msgstr "ليکنه یا متن"
+
+msgid "Long text"
+msgstr "اوږد متن"
+
+msgid "Multi text"
+msgstr ""
+
+msgid "Letter"
+msgstr ""
+
+msgid "Phone number"
+msgstr "شماره تیلفون"
+
+msgid "Email"
+msgstr "ایمیل"
+
+msgid "Yes/No"
+msgstr "هو/نه [ هو/نه ]"
+
+msgid "Yes Only"
+msgstr "هو، یوازې"
+
+msgid "Date"
+msgstr "نېټه"
+
+msgid "Date & Time"
+msgstr "نېټه او مهال"
+
+msgid "Time"
+msgstr ""
+
+msgid "Unit interval"
+msgstr "د واحد ترمنځ فاصله"
+
+msgid "Percentage"
+msgstr "سلنه"
+
+msgid "Integer"
+msgstr "صحیح عدد"
+
+msgid "Positive Integer"
+msgstr "مثبت عدد"
+
+msgid "Negative Integer"
+msgstr "منفي بشپړ عدد"
+
+msgid "Positive or Zero Integer"
+msgstr "مثبت یا صفر بشپړ عدد"
+
+msgid "Tracker Associate"
+msgstr ""
+
+msgid "Username"
+msgstr "کارېدونکی نوم"
+
+msgid "Coordinate"
+msgstr "همغږي کول"
+
+msgid "Reference"
+msgstr "مرجع / مأخذ"
+
+msgid "Age"
+msgstr ""
+
+msgid "URL"
+msgstr "یو. آر. اېل"
+
+msgid "Image"
+msgstr "انځورول"
+
+msgid "GeoJSON"
+msgstr ""
+
+msgid "Pivot table"
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Stacked area"
+msgstr ""
+
+msgid "Bar"
+msgstr ""
+
+msgid "Stacked bar"
+msgstr ""
+
+msgid "Column"
+msgstr "ستون"
+
+msgid "Year over year (column)"
+msgstr ""
+
+msgid "Stacked column"
+msgstr ""
+
+msgid "Gauge"
+msgstr ""
+
+msgid "Line"
+msgstr ""
+
+msgid "Line list"
+msgstr ""
+
+msgid "Year over year (line)"
+msgstr ""
+
+msgid "Pie"
+msgstr ""
+
+msgid "Radar"
+msgstr ""
+
+msgid "Scatter"
+msgstr ""
+
+msgid "Single value"
+msgstr ""
+
+msgid "Outlier table"
+msgstr ""
+
+msgid "All charts"
+msgstr ""
+
+msgid "Map"
+msgstr "نقشه"
+
+msgid "{{seriesName}} (trend)"
+msgstr ""
+
+msgid "Trend"
+msgstr "محاسبه"
+
+msgid "No legend for this series"
+msgstr ""
+
+msgid "and {{amount}} more..."
+msgstr ""
+
+msgid "Linear Regression"
+msgstr ""
+
+msgid "Target"
+msgstr "هدف"
+
+msgid "Base"
+msgstr "اساس"
+
+msgid "Axis {{axisId}}"
+msgstr ""
+
+msgid "Reset zoom"
+msgstr ""

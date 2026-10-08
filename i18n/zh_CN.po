@@ -1,0 +1,1466 @@
+# Translators:
+# 晓东 林 <13981924470@126.com>, 2026
+# easylin <lin_xd@126.com>, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-05-28T08:40:06.387Z\n"
+"PO-Revision-Date: 2020-04-28 22:05+0000\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2026\n"
+"Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "view only"
+msgstr ""
+
+msgid "view and edit"
+msgstr ""
+
+msgid "all users ({{accessLevel}})"
+msgstr ""
+
+msgid "{{userOrGroup}} ({{accessLevel}})"
+msgstr ""
+
+msgid "Shared with {{commaSeparatedListOfUsersAndGroups}}"
+msgstr ""
+
+msgid "Not shared with any users or groups"
+msgstr ""
+
+msgid "No description"
+msgstr "没有描述"
+
+msgid "Last updated {{time}}"
+msgstr "最近更新的{{time}}"
+
+msgid "Created {{time}} by {{author}}"
+msgstr ""
+
+msgid "Created {{time}}"
+msgstr ""
+
+msgid "Notifications"
+msgstr "通知"
+
+msgid "You're subscribed and getting updates about new interpretations."
+msgstr ""
+
+msgid "Unsubscribe"
+msgstr ""
+
+msgid "Subscribe to get updates about new interpretations."
+msgstr ""
+
+msgid "Subscribe"
+msgstr ""
+
+msgid "About this map"
+msgstr ""
+
+msgid "About this line list"
+msgstr ""
+
+msgid "About this visualization"
+msgstr ""
+
+msgid "About this event chart"
+msgstr ""
+
+msgid "About this event report"
+msgstr ""
+
+msgid "This app could not retrieve required data."
+msgstr ""
+
+msgid "Network error"
+msgstr "网络错误"
+
+msgid "Data / Edit calculation"
+msgstr ""
+
+msgid "Data / New calculation"
+msgstr ""
+
+msgid "Remove item"
+msgstr ""
+
+msgid "Check formula"
+msgstr ""
+
+msgid "Calculation name"
+msgstr ""
+
+msgid "Shown in table headers and chart axes/legends"
+msgstr ""
+
+msgid "Delete calculation"
+msgstr ""
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "The calculation can only be saved with a valid formula"
+msgstr ""
+
+msgid "Add a name to save this calculation"
+msgstr ""
+
+msgid "Save calculation"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete this calculation? It may be used by other "
+"visualizations."
+msgstr ""
+
+msgid "Yes, delete"
+msgstr ""
+
+msgid "Totals only"
+msgstr ""
+
+msgid "Details only"
+msgstr ""
+
+msgid "Loading"
+msgstr "载入"
+
+msgid "Data elements"
+msgstr "数据元"
+
+msgid "Search by data element name"
+msgstr ""
+
+msgid "No data elements found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No data elements found"
+msgstr ""
+
+msgid ""
+"Drag items here, or double click in the list, to start building a "
+"calculation formula"
+msgstr ""
+
+msgid "Math operators"
+msgstr ""
+
+msgid "Expression description"
+msgstr "表达式描述"
+
+msgid "Error loading value"
+msgstr ""
+
+msgid "None"
+msgstr "无"
+
+msgid "Data set(s)"
+msgstr ""
+
+msgid "Zero is significant"
+msgstr ""
+
+msgid "True"
+msgstr "真"
+
+msgid "False"
+msgstr "假"
+
+msgid "Value type"
+msgstr "值类型"
+
+msgid "Aggregation type"
+msgstr "汇总类型"
+
+msgid "Category combo"
+msgstr "分类组合"
+
+msgid "Option set"
+msgstr "值域选项集"
+
+msgid "Group membership"
+msgstr ""
+
+msgid "Legend set(s)"
+msgstr ""
+
+msgid "Category option name"
+msgstr ""
+
+msgid "Category combo name"
+msgstr ""
+
+msgid "Categories name"
+msgstr ""
+
+msgid "Period type"
+msgstr "周期类型"
+
+msgid "Indicators"
+msgstr "指标"
+
+msgid "Expiry days"
+msgstr "过期满天数"
+
+msgid "Type"
+msgstr "类型"
+
+msgid "Data element"
+msgstr "数据元"
+
+msgid "Tracked entity attribute"
+msgstr "跟踪实体属性"
+
+msgid "Numerator description"
+msgstr "描述"
+
+msgid "Numerator expression"
+msgstr ""
+
+msgid "Denominator description"
+msgstr "分母描述"
+
+msgid "Denominator expression"
+msgstr ""
+
+msgid "Annualized"
+msgstr "年度"
+
+msgid "Yes"
+msgstr "是"
+
+msgid "No"
+msgstr "否"
+
+msgid "Indicator type"
+msgstr "指标类型"
+
+msgid "Decimals in output"
+msgstr ""
+
+msgid "There was a problem loading information for this data item."
+msgstr ""
+
+msgid "Name"
+msgstr "名称"
+
+msgid "Description"
+msgstr "描述"
+
+msgid "Code"
+msgstr "代码"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Last updated date"
+msgstr ""
+
+msgid "Created date"
+msgstr ""
+
+msgid "Created by"
+msgstr "创建自"
+
+msgid "Custom"
+msgstr "定制"
+
+msgid "Program"
+msgstr "项目"
+
+msgid "Analytics type"
+msgstr "分析类型"
+
+msgid "Enrollment"
+msgstr "报名"
+
+msgid "Event"
+msgstr "事件"
+
+msgid "Analytics period boundaries"
+msgstr "分析期间边界"
+
+msgid "{{ offsetPeriodType }} × {{ offsetPeriods }}"
+msgstr ""
+
+msgid "Expression"
+msgstr "表达式"
+
+msgid "Filter"
+msgstr "过滤器"
+
+msgid "All available options are already selected"
+msgstr ""
+
+msgid "No available options for this item"
+msgstr ""
+
+msgid "Search by option name"
+msgstr ""
+
+msgid "Back to all items"
+msgstr ""
+
+msgid "Options"
+msgstr "选项"
+
+msgid "Selected items"
+msgstr ""
+
+msgid "Data Type"
+msgstr ""
+
+msgid "Only {{dataType}} can be used in {{visType}}"
+msgstr ""
+
+msgid "All types"
+msgstr ""
+
+msgid "Disaggregation"
+msgstr "分解"
+
+msgid "No data"
+msgstr "无数据"
+
+msgid "Search by data item name"
+msgstr ""
+
+msgid "Selected Items"
+msgstr ""
+
+msgid "All available items are already selected"
+msgstr ""
+
+msgid "Calculation"
+msgstr ""
+
+msgid "Metric type"
+msgstr ""
+
+msgid "All metrics"
+msgstr "所有尺度"
+
+msgid "No items selected"
+msgstr ""
+
+msgid "No indicators found"
+msgstr ""
+
+msgid "No data sets found"
+msgstr ""
+
+msgid "No event data items found"
+msgstr ""
+
+msgid "No program indicators found"
+msgstr ""
+
+msgid "No calculations found"
+msgstr ""
+
+msgid "No indicators found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No data sets found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No event data items found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No program indicators found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No calculations found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "Nothing found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "Click to choose from available options"
+msgstr ""
+
+msgid "Move to {{axisName}}"
+msgstr ""
+
+msgid "Add to {{axisName}}"
+msgstr "添加到 {{axisName}}"
+
+msgid "Not available for {{visualizationType}}"
+msgstr ""
+
+msgid "Remove Assigned Categories"
+msgstr ""
+
+msgid "Add Assigned Categories"
+msgstr "添加指定的分类"
+
+msgid "Remove"
+msgstr "移除"
+
+msgid "Filter dimensions"
+msgstr "过滤器维度"
+
+msgid "Main dimensions"
+msgstr "主要维度"
+
+msgid "Your dimensions"
+msgstr "你的维度"
+
+msgid "Dimension recommended with selected data"
+msgstr ""
+
+msgid "All items"
+msgstr "所有条目"
+
+msgid "Automatically include all items"
+msgstr ""
+
+msgid ""
+"Select all {{- dimensionTitle}} items. With this option, new items added in "
+"the future will be automatically included."
+msgstr ""
+
+msgid "Manually select items..."
+msgstr ""
+
+msgid "Nothing found in {{- dimensionTitle}}"
+msgstr ""
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Delete {{fileType}}"
+msgstr "删除{{fileType}}"
+
+msgid ""
+"This {{fileType}} and related interpretations will be deleted. Continue?"
+msgstr ""
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "File"
+msgstr "文件"
+
+msgid "New"
+msgstr "新建"
+
+msgid "Open…"
+msgstr ""
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Save…"
+msgstr ""
+
+msgid "Save as…"
+msgstr ""
+
+msgid "Rename…"
+msgstr ""
+
+msgid "Translate…"
+msgstr ""
+
+msgid "Share…"
+msgstr ""
+
+msgid "Get link…"
+msgstr ""
+
+msgid "Open in this app"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr "复制到剪贴板"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Rename {{fileType}}"
+msgstr ""
+
+msgid "Rename"
+msgstr "重命名"
+
+msgid "{{- objectName}} (copy)"
+msgstr ""
+
+msgid "Save {{fileType}} as"
+msgstr ""
+
+msgid "event report"
+msgstr ""
+
+msgid "line list"
+msgstr ""
+
+msgid "map"
+msgstr ""
+
+msgid "visualization"
+msgstr ""
+
+msgid "Untitled {{visualizationType}}, {{date}}"
+msgstr ""
+
+msgid "Back to all interpretations"
+msgstr "回到所有注释"
+
+msgid "Could not load interpretation details"
+msgstr ""
+
+msgid "The request to fetch interpretation comments failed"
+msgstr ""
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Write a reply"
+msgstr ""
+
+msgid "Could not post reply"
+msgstr ""
+
+msgid "Post reply"
+msgstr ""
+
+msgid "Could not delete comment"
+msgstr ""
+
+msgid "Could not update comment"
+msgstr ""
+
+msgid "Enter comment text"
+msgstr ""
+
+msgid "Update"
+msgstr "更新"
+
+msgid "Viewing interpretation: {{- visualisationName}}"
+msgstr ""
+
+msgid "Could not load interpretation"
+msgstr ""
+
+msgid ""
+"The interpretation couldn’t be displayed. Try again or contact your system "
+"administrator."
+msgstr ""
+
+msgid "Hide interpretation"
+msgstr ""
+
+msgid "Write an interpretation"
+msgstr ""
+
+msgid "Could not post interpretation"
+msgstr ""
+
+msgid ""
+"Other people viewing this interpretation in the future may see more data."
+msgstr ""
+
+msgid "Post interpretation"
+msgstr ""
+
+msgid "Interpretations"
+msgstr "注释"
+
+msgid "Error loading interpretations"
+msgstr ""
+
+msgid "Could not load interpretations"
+msgstr ""
+
+msgid "Reply"
+msgstr "回复"
+
+msgid "View replies"
+msgstr ""
+
+msgid "Unlike"
+msgstr "不喜欢"
+
+msgid "Like"
+msgstr "Like"
+
+msgid "See interpretation"
+msgstr ""
+
+msgid "Open in app"
+msgstr ""
+
+msgid "Share"
+msgstr "分享"
+
+msgid "Could not delete interpretation"
+msgstr ""
+
+msgid "Manage sharing"
+msgstr ""
+
+msgid "Could not update interpretation text"
+msgstr ""
+
+msgid "Could not update interpretation"
+msgstr ""
+
+msgid "Enter interpretation text"
+msgstr ""
+
+msgid "Not available offline"
+msgstr "离线不可用"
+
+msgid "Anyone"
+msgstr "任何人"
+
+msgid "Only you"
+msgstr ""
+
+msgid "Others"
+msgstr "其它"
+
+msgid "Not supported by this app yet"
+msgstr ""
+
+msgid "Filter by name"
+msgstr "按名称过滤"
+
+msgid "Created"
+msgstr "已创建"
+
+msgid "Last updated"
+msgstr "上次更新"
+
+msgid "Clear filters"
+msgstr "清除过滤器"
+
+msgid "{{firstItemIndex}}-{{lastItemIndex}} of {{totalNumberOfItems}}"
+msgstr ""
+
+msgid "Open"
+msgstr "打开"
+
+msgid "Couldn't load items"
+msgstr ""
+
+msgid ""
+"There was a problem loading items. Try again or contact your system "
+"administrator."
+msgstr ""
+
+msgid "No items found. Create a new to get started."
+msgstr ""
+
+msgid ""
+"No items found. Try adjusting your search or filter options to find what "
+"you're looking for."
+msgstr ""
+
+msgid "Create new"
+msgstr "新建"
+
+msgid "Open a visualization"
+msgstr ""
+
+msgid "Loading visualizations"
+msgstr ""
+
+msgid "Couldn't load visualizations"
+msgstr ""
+
+msgid ""
+"There was a problem loading visualizations. Try again or contact your system"
+" administrator."
+msgstr ""
+
+msgid "No visualizations found. Click New visualization to get started."
+msgstr ""
+
+msgid ""
+"No visualizations found. Try adjusting your search or filter options to find"
+" what you're looking for."
+msgstr ""
+
+msgid "New visualization"
+msgstr ""
+
+msgid "Open a map"
+msgstr ""
+
+msgid "Loading maps"
+msgstr ""
+
+msgid "Couldn't load maps"
+msgstr ""
+
+msgid ""
+"There was a problem loading maps. Try again or contact your system "
+"administrator."
+msgstr ""
+
+msgid "No maps found. Click New map to get started."
+msgstr ""
+
+msgid ""
+"No maps found. Try adjusting your search or filter options to find what "
+"you're looking for."
+msgstr ""
+
+msgid "New map"
+msgstr ""
+
+msgid "Open a line list"
+msgstr ""
+
+msgid "Loading line lists"
+msgstr ""
+
+msgid "Couldn't load line lists"
+msgstr ""
+
+msgid ""
+"There was a problem loading line lists. Try again or contact your system "
+"administrator."
+msgstr ""
+
+msgid "No line lists found. Click New line list to get started."
+msgstr ""
+
+msgid ""
+"No line lists found. Try adjusting your search or filter options to find "
+"what you're looking for."
+msgstr ""
+
+msgid "New line list"
+msgstr ""
+
+msgid "Hide"
+msgstr "隐藏"
+
+msgid "Selected: {{commaSeparatedListOfOrganisationUnits}}"
+msgstr "已选择：{{commaSeparatedListOfOrganisationUnits}}"
+
+msgid "Nothing selected"
+msgstr "未选择任何内容"
+
+msgid "User organisation unit"
+msgstr "用户所在机构"
+
+msgid "User sub-units"
+msgstr "下属机构"
+
+msgid "User sub-x2-units"
+msgstr "二级下属机构"
+
+msgid "Select a level"
+msgstr "选择一个等级"
+
+msgid "Select a group"
+msgstr ""
+
+msgid "Deselect all"
+msgstr "去全选"
+
+msgid "Year"
+msgstr "年"
+
+msgid "Select year"
+msgstr "选择年份"
+
+msgid "Period"
+msgstr "周期"
+
+msgid "Selected Periods"
+msgstr ""
+
+msgid "No period types available"
+msgstr ""
+
+msgid ""
+"No period types are enabled in the system. Please contact your system "
+"administrator."
+msgstr ""
+
+msgid "Relative periods"
+msgstr "相对期间"
+
+msgid "Fixed periods"
+msgstr "固定期间"
+
+msgid "No periods selected"
+msgstr ""
+
+msgid "Daily"
+msgstr "每日"
+
+msgid "Weekly"
+msgstr "每周"
+
+msgid "Weekly (Start Wednesday)"
+msgstr "每周（始于周二）"
+
+msgid "Weekly (Start Thursday)"
+msgstr "每周（始于周四）"
+
+msgid "Weekly (Start Friday)"
+msgstr ""
+
+msgid "Weekly (Start Saturday)"
+msgstr "每周（始于周六）"
+
+msgid "Weekly (Start Sunday)"
+msgstr "每周（始于周日）"
+
+msgid "Bi-weekly"
+msgstr "双周"
+
+msgid "Monthly"
+msgstr "每月"
+
+msgid "Bi-monthly"
+msgstr "每两月"
+
+msgid "Quarterly"
+msgstr "季度"
+
+msgid "Six-monthly"
+msgstr "六个月"
+
+msgid "Six-monthly April"
+msgstr "半年的四月"
+
+msgid "Yearly"
+msgstr "每年"
+
+msgid "Financial year (Start February)"
+msgstr ""
+
+msgid "Financial year (Start April)"
+msgstr "财务四月"
+
+msgid "Financial year (Start July)"
+msgstr "财务七月"
+
+msgid "Financial year (Start August)"
+msgstr ""
+
+msgid "Financial year (Start September)"
+msgstr ""
+
+msgid "Financial year (Start October)"
+msgstr "财务十月"
+
+msgid "Financial year (Start November)"
+msgstr ""
+
+msgid "Today"
+msgstr "今天"
+
+msgid "Yesterday"
+msgstr "昨天"
+
+msgid "Last 3 days"
+msgstr "最近3天"
+
+msgid "Last 7 days"
+msgstr "最近7天"
+
+msgid "Last 14 days"
+msgstr "最近14天"
+
+msgid "Last 30 days"
+msgstr "最近30天"
+
+msgid "Last 60 days"
+msgstr "最近60天"
+
+msgid "Last 90 days"
+msgstr "最近90天"
+
+msgid "Last 180 days"
+msgstr "最近180天"
+
+msgid "This week"
+msgstr "本周"
+
+msgid "Last week"
+msgstr "上周"
+
+msgid "Last 4 weeks"
+msgstr "最近四周"
+
+msgid "Last 12 weeks"
+msgstr "最近12周"
+
+msgid "Last 52 weeks"
+msgstr "最近52周"
+
+msgid "Weeks this year"
+msgstr "今年的星期"
+
+msgid "This bi-week"
+msgstr "这两周"
+
+msgid "Last bi-week"
+msgstr "最近双周"
+
+msgid "Last 4 bi-weeks"
+msgstr "最近四个双周"
+
+msgid "This month"
+msgstr "本月"
+
+msgid "Last month"
+msgstr "上月"
+
+msgid "Last 3 months"
+msgstr "最近3个月"
+
+msgid "Last 6 months"
+msgstr "最近六个月<br>"
+
+msgid "Last 12 months"
+msgstr "最近12月"
+
+msgid "Months this year"
+msgstr "今年的月份"
+
+msgid "This bi-month"
+msgstr "本两月"
+
+msgid "Last bi-month"
+msgstr "最近双月"
+
+msgid "Last 6 bi-months"
+msgstr "最近六个双月"
+
+msgid "Bi-months this year"
+msgstr "今年的双月"
+
+msgid "This quarter"
+msgstr "本季"
+
+msgid "Last quarter"
+msgstr "最近一季"
+
+msgid "Last 4 quarters"
+msgstr "最近四个季度"
+
+msgid "Quarters this year"
+msgstr "今年的季度"
+
+msgid "This six-month"
+msgstr "本半年"
+
+msgid "Last six-month"
+msgstr "最近六个月"
+
+msgid "Last 2 six-month"
+msgstr ""
+
+msgid "This financial year"
+msgstr "本财政年"
+
+msgid "Last financial year"
+msgstr "上一财政年"
+
+msgid "Last 5 financial years"
+msgstr "最近五个财政年"
+
+msgid "This year"
+msgstr "今年"
+
+msgid "Last year"
+msgstr "去年"
+
+msgid "Last 5 years"
+msgstr "最近5年"
+
+msgid "Last 10 years"
+msgstr "最近10年"
+
+msgid "Days"
+msgstr "天数"
+
+msgid "Weeks"
+msgstr "周"
+
+msgid "Bi-weeks"
+msgstr ""
+
+msgid "Months"
+msgstr "月"
+
+msgid "Bi-months"
+msgstr "俩月"
+
+msgid "Quarters"
+msgstr "季节"
+
+msgid "Six-months"
+msgstr ""
+
+msgid "Financial Years"
+msgstr ""
+
+msgid "Years"
+msgstr "年"
+
+msgid "Value: {{value}}"
+msgstr ""
+
+msgid "Bold text"
+msgstr ""
+
+msgid "Italic text"
+msgstr ""
+
+msgid "Link to a URL"
+msgstr ""
+
+msgid "Mention a user"
+msgstr ""
+
+msgid "Add emoji"
+msgstr ""
+
+msgid "Preview"
+msgstr "预览"
+
+msgid "Back to write mode"
+msgstr ""
+
+msgid "Interpretations and details"
+msgstr ""
+
+msgid "Translating to"
+msgstr ""
+
+msgid "Choose a locale"
+msgstr ""
+
+msgid "Base locale reference"
+msgstr ""
+
+msgid "Choose a locale to translate from the menu above"
+msgstr ""
+
+msgid "Translate: {{objectName}}"
+msgstr ""
+
+msgid "Save translations"
+msgstr ""
+
+msgid "Cannot save while offline"
+msgstr ""
+
+msgid "Could not load translations"
+msgstr ""
+
+msgid "Retry"
+msgstr "重试"
+
+msgid "Too many results. Try refining the search."
+msgstr ""
+
+msgid "Search for a user"
+msgstr ""
+
+msgid "Searching for \"{{- searchText}}\""
+msgstr ""
+
+msgid "No results found"
+msgstr "没有结果"
+
+msgid "Series"
+msgstr "系列"
+
+msgid "Category"
+msgstr "分类"
+
+msgid "Columns"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
+
+msgid "Points"
+msgstr ""
+
+msgid "Reporting rate"
+msgstr "上报率"
+
+msgid "Reporting rate on time"
+msgstr "准时上报率"
+
+msgid "Actual reports"
+msgstr "实际上报"
+
+msgid "Actual reports on time"
+msgstr "实际准时上报"
+
+msgid "Expected reports"
+msgstr "预期上报"
+
+msgid "Select a program"
+msgstr ""
+
+msgid "Indicator group"
+msgstr "指标组"
+
+msgid "All groups"
+msgstr ""
+
+msgid "Indicator"
+msgstr "指标"
+
+msgid "No indicator groups found"
+msgstr ""
+
+msgid "Loading indicator groups"
+msgstr ""
+
+msgid "Data element group"
+msgstr "数据元组"
+
+msgid "No data element groups found"
+msgstr ""
+
+msgid "Loading data element groups"
+msgstr ""
+
+msgid "Data sets"
+msgstr "数据集"
+
+msgid "Data set"
+msgstr "数据集"
+
+msgid "All data sets"
+msgstr ""
+
+msgid "Loading data sets"
+msgstr "载入数据集"
+
+msgid "Event data items"
+msgstr "事件数据项"
+
+msgid "All programs"
+msgstr ""
+
+msgid "Event data item"
+msgstr "事件数据条目"
+
+msgid "No programs found"
+msgstr ""
+
+msgid "Loading programs"
+msgstr ""
+
+msgid "Program indicators"
+msgstr "项目指标"
+
+msgid "Program indicator"
+msgstr "项目指标"
+
+msgid "Calculations"
+msgstr ""
+
+msgid "Option"
+msgstr "选项"
+
+msgid "Number"
+msgstr "数字"
+
+msgid "Formula is empty. Add items to the formula from the lists on the left."
+msgstr ""
+
+msgid "Consecutive math operators"
+msgstr ""
+
+msgid "Consecutive data elements"
+msgstr ""
+
+msgid "Starts or ends with a math operator"
+msgstr ""
+
+msgid "Empty parentheses"
+msgstr ""
+
+msgid "Missing right parenthesis )"
+msgstr ""
+
+msgid "Missing left parenthesis ("
+msgstr ""
+
+msgid "Extra Small"
+msgstr ""
+
+msgid "Small"
+msgstr "小"
+
+msgid "Regular"
+msgstr "定期"
+
+msgid "Large"
+msgstr "较大"
+
+msgid "Extra Large"
+msgstr ""
+
+msgid "Left"
+msgstr "左"
+
+msgid "Center"
+msgstr "居中"
+
+msgid "Right"
+msgstr "右"
+
+msgid "Start"
+msgstr "开始"
+
+msgid "Middle"
+msgstr ""
+
+msgid "End"
+msgstr ""
+
+msgid "Top"
+msgstr ""
+
+msgid "Bottom"
+msgstr ""
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr ""
+
+msgid "{{percentage}}% of total x values"
+msgstr ""
+
+msgid "{{percentage}}% of total y values"
+msgstr ""
+
+msgid "{{thresholdFactor}} × IQR Q1"
+msgstr ""
+
+msgid "{{thresholdFactor}} × IQR Q3"
+msgstr ""
+
+msgid "{{thresholdFactor}} × Modified Z-score low"
+msgstr ""
+
+msgid "{{thresholdFactor}} × Modified Z-score high"
+msgstr ""
+
+msgid "{{thresholdFactor}} × Z-score low"
+msgstr ""
+
+msgid "{{thresholdFactor}} × Z-score high"
+msgstr ""
+
+msgid "Not applicable"
+msgstr ""
+
+msgid "Data"
+msgstr "数据"
+
+msgid "Organisation unit"
+msgstr "机构"
+
+msgid "Assigned Categories"
+msgstr ""
+
+msgid "No value"
+msgstr "没有值"
+
+msgid "Active"
+msgstr "活跃的"
+
+msgid "Completed"
+msgstr "完成"
+
+msgid "Scheduled"
+msgstr "已经调度"
+
+msgid "Cancelled"
+msgstr "已取消"
+
+msgid "Text"
+msgstr "文本"
+
+msgid "Long text"
+msgstr "长文本"
+
+msgid "Multi text"
+msgstr ""
+
+msgid "Letter"
+msgstr "字符"
+
+msgid "Phone number"
+msgstr "电话号码"
+
+msgid "Email"
+msgstr "邮件"
+
+msgid "Yes/No"
+msgstr "是/否"
+
+msgid "Yes Only"
+msgstr "仅是"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Date & Time"
+msgstr "日期 &时间"
+
+msgid "Time"
+msgstr "时间"
+
+msgid "Unit interval"
+msgstr "单位间隔"
+
+msgid "Percentage"
+msgstr "百分比"
+
+msgid "Integer"
+msgstr "整型"
+
+msgid "Positive Integer"
+msgstr "正数"
+
+msgid "Negative Integer"
+msgstr "负整数"
+
+msgid "Positive or Zero Integer"
+msgstr "正整数或零"
+
+msgid "Tracker Associate"
+msgstr "随访相关"
+
+msgid "Username"
+msgstr "用户名"
+
+msgid "Coordinate"
+msgstr "坐标"
+
+msgid "Reference"
+msgstr "引用"
+
+msgid "Age"
+msgstr "年龄"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Image"
+msgstr "图片(PNG)"
+
+msgid "GeoJSON"
+msgstr "GeoJSON"
+
+msgid "Pivot table"
+msgstr ""
+
+msgid "Area"
+msgstr "面积"
+
+msgid "Stacked area"
+msgstr ""
+
+msgid "Bar"
+msgstr ""
+
+msgid "Stacked bar"
+msgstr ""
+
+msgid "Column"
+msgstr "列"
+
+msgid "Year over year (column)"
+msgstr ""
+
+msgid "Stacked column"
+msgstr ""
+
+msgid "Gauge"
+msgstr ""
+
+msgid "Line"
+msgstr ""
+
+msgid "Line list"
+msgstr ""
+
+msgid "Year over year (line)"
+msgstr ""
+
+msgid "Pie"
+msgstr ""
+
+msgid "Radar"
+msgstr ""
+
+msgid "Scatter"
+msgstr ""
+
+msgid "Single value"
+msgstr ""
+
+msgid "Outlier table"
+msgstr ""
+
+msgid "All charts"
+msgstr ""
+
+msgid "Map"
+msgstr "地图"
+
+msgid "{{seriesName}} (trend)"
+msgstr ""
+
+msgid "Trend"
+msgstr ""
+
+msgid "No legend for this series"
+msgstr ""
+
+msgid "and {{amount}} more..."
+msgstr ""
+
+msgid "Linear Regression"
+msgstr ""
+
+msgid "Target"
+msgstr "目标"
+
+msgid "Base"
+msgstr "基"
+
+msgid "Axis {{axisId}}"
+msgstr "轴{{axisId}}"
+
+msgid "Reset zoom"
+msgstr ""

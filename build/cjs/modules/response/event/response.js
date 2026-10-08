@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.transformResponse = exports.getItemFormatterByValueType = exports.getItemFormatterByHeaderName = exports.getItemFormatter = exports.UNSUPPORTED_VALUE_TYPES = exports.PREFIX_SEPARATOR = exports.NA_VALUE_ITEM = exports.NA_VALUE = void 0;
+exports.transformResponse = exports.getItemFormatterByValueType = exports.getItemFormatterByHeaderName = exports.getItemFormatter = exports.UNSUPPORTED_VALUE_TYPES = exports.PREFIX_SEPARATOR = exports.NA_VALUE_ITEM = exports.NA_VALUE = exports.D2__NOVALUE = void 0;
 var _d2I18n = _interopRequireDefault(require("@dhis2/d2-i18n"));
 var _predefinedDimensions = require("../../predefinedDimensions.js");
 var _valueTypes = require("../../valueTypes.js");
@@ -17,13 +17,12 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 
 const PREFIX_SEPARATOR = exports.PREFIX_SEPARATOR = '_';
 const NA_VALUE = exports.NA_VALUE = '';
+const D2__NOVALUE = exports.D2__NOVALUE = 'D2__NOVALUE';
 const NA_VALUE_ITEM = exports.NA_VALUE_ITEM = {
   name: _d2I18n.default.t('No value'),
-  style: {
-    fontStyle: 'italic',
-    color: '#6C7787',
-    fontFamily: 'monospace',
-    letterSpacing: '-0.3px'
+  code: D2__NOVALUE,
+  dimensionItemStyle: {
+    color: '#6C7787'
   }
 };
 const UNSUPPORTED_VALUE_TYPES = exports.UNSUPPORTED_VALUE_TYPES = [_valueTypes.VALUE_TYPE_COORDINATE, _valueTypes.VALUE_TYPE_GEOJSON, _valueTypes.VALUE_TYPE_FILE_RESOURCE, _valueTypes.VALUE_TYPE_IMAGE, _valueTypes.VALUE_TYPE_MULTI_TEXT, _valueTypes.VALUE_TYPE_REFERENCE];
@@ -83,6 +82,10 @@ const applyMetaDataItemNameOverrides = (items, metaDataItemNames) => Object.entr
 }, {
   ...items
 });
+const addNoValueItem = items => ({
+  ...items,
+  [NA_VALUE]: NA_VALUE_ITEM
+});
 const transformResponse = (response, {
   hideNaData = false,
   metaDataItemNames = {}
@@ -93,7 +96,7 @@ const transformResponse = (response, {
     ...response,
     metaData: {
       ...response.metaData,
-      items: applyMetaDataItemNameOverrides(response.metaData.items, metaDataItemNames),
+      items: addNoValueItem(applyMetaDataItemNameOverrides(response.metaData.items, metaDataItemNames)),
       dimensions: {
         ...response.metaData.dimensions
       }
@@ -123,13 +126,14 @@ const transformResponse = (response, {
     }
   });
 
-  // Add "No value" dimension item if "Hide NA data" option is disabled
-  // Only add if there is at least one empty value
+  // Add "No value" dimension item if
+  // - "Hide NA data" option is disabled
+  // - NA_VALUE is not already a dimension
+  // - there is at least one empty value
   if (!hideNaData) {
     metaHeaders.forEach(header => {
-      if (response.rows.map(row => row[header.index]).includes(NA_VALUE)) {
+      if (!transformedResponse.metaData.dimensions[header.name].includes(NA_VALUE) && response.rows.some(row => row[header.index] === NA_VALUE)) {
         transformedResponse.metaData.dimensions[header.name] = [...transformedResponse.metaData.dimensions[header.name], NA_VALUE];
-        transformedResponse.metaData.items[NA_VALUE] = NA_VALUE_ITEM;
       }
     });
   }

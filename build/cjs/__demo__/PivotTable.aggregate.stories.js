@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.TruncatedHeaderCell = exports.SmallEmptyRowsShown = exports.SmallEmptyRowsHidden = exports.SimpleTitleSubtitleFilter = exports.SimpleRow = exports.SimpleNoRowsSmall = exports.SimpleNoRowsLarge = exports.SimpleNoColumnsSingleCell = exports.SimpleNoColumnsLabel = exports.SimpleNoColumnsDeep = exports.SimpleNoColumns = exports.SimpleDataAsFilter = exports.SimpleCommaDgs = exports.SimpleColumn = exports.SimpleAvgTotalAggregationTypeRows = exports.SimpleAvgTotalAggregationTypeColumns = exports.Simple = exports.NarrativeDataAsFilter = exports.Narrative = exports.LegendFixedText = exports.LegendFixedRow = exports.LegendFixedLightFill = exports.LegendFixedDarkFill = exports.LegendByDataItem = exports.HierarchyRows = exports.HierarchyNone = exports.HierarchyColumns = exports.EmptyRowsShown = exports.EmptyRowsHidden = exports.EmptyColumnsWeeklyShown = exports.EmptyColumnsWeeklyHidden = exports.EmptyColumnsShown = exports.EmptyColumnsHidden = exports.EmptyColumnsAssignedCatsShown = exports.EmptyColumnsAssignedCatsHidden = exports.Degs = exports.DeepTotals = exports.DeepTitleSubtitleFilter = exports.DeepSubtotals = exports.DeepSmallCompact = exports.DeepRow = exports.DeepResize = exports.DeepLargeComfortable = exports.DeepFilter = exports.DeepDimensionLabels = exports.DeepColumn = exports.DeepAllTotals = exports.Deep = exports.CumulativeEmptyColumnsWeeklyShown = exports.CumulativeEmptyColumnsWeeklyHidden = void 0;
+exports.default = exports.TruncatedHeaderCell = exports.SmallEmptyRowsShown = exports.SmallEmptyRowsHidden = exports.SimpleTitleSubtitleFilter = exports.SimpleRow = exports.SimpleNoRowsSmall = exports.SimpleNoRowsLarge = exports.SimpleNoColumnsSingleCell = exports.SimpleNoColumnsLabel = exports.SimpleNoColumnsDeep = exports.SimpleNoColumns = exports.SimpleDataAsFilter = exports.SimpleCommaDgs = exports.SimpleColumn = exports.SimpleAvgTotalAggregationTypeRows = exports.SimpleAvgTotalAggregationTypeColumns = exports.Simple = exports.NarrativeDataAsFilter = exports.Narrative = exports.LegendFixedText = exports.LegendFixedRow = exports.LegendFixedLightFill = exports.LegendFixedDarkFill = exports.LegendByDataItem = exports.HierarchyRows = exports.HierarchyNone = exports.HierarchyColumns = exports.EmptyRowsShown = exports.EmptyRowsHidden = exports.EmptyColumnsWeeklyShown = exports.EmptyColumnsWeeklyHidden = exports.EmptyColumnsShown = exports.EmptyColumnsHidden = exports.EmptyColumnsAssignedCatsShown = exports.EmptyColumnsAssignedCatsHidden = exports.Degs = exports.DeepTotals = exports.DeepTitleSubtitleFilter = exports.DeepSuppliedFilterText = exports.DeepSubtotals = exports.DeepSmallCompact = exports.DeepRow = exports.DeepResize = exports.DeepLargeComfortable = exports.DeepFilter = exports.DeepDimensionLabels = exports.DeepColumn = exports.DeepAllTotals = exports.Deep = exports.CumulativeEmptyColumnsWeeklyShown = exports.CumulativeEmptyColumnsWeeklyHidden = void 0;
 var _ui = require("@dhis2/ui");
 var _cloneDeep = _interopRequireDefault(require("lodash/cloneDeep"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -508,6 +508,51 @@ exports.DeepFilter = DeepFilter;
 DeepFilter.story = {
   name: 'deep - filter'
 };
+
+/* This layout has a filter the lib can read, so it derives "Eastern Area".
+ * A caller that would rather format the line itself passes `filterText`.
+ * Whether there is a row at all stays the layout's call either way, which
+ * the third mode shows. */
+const filterTextModes = [{
+  label: 'Derived by the lib'
+}, {
+  label: 'Supplied by the caller',
+  filterText: 'Age: 5 - 10, Female'
+}, {
+  label: 'Supplied, but the layout has no filters',
+  filterText: 'Age: 5 - 10, Female',
+  filters: []
+}];
+const DeepSuppliedFilterText = (_, {
+  pivotTableOptions
+}) => {
+  var _mode$filters;
+  const [modeIndex, setModeIndex] = (0, _react.useState)(0);
+  const mode = filterTextModes[modeIndex];
+  const visualization = {
+    ..._deepWithFiltersVisualization.default,
+    ...visualizationReset,
+    ...pivotTableOptions,
+    showDimensionLabels: false,
+    filters: (_mode$filters = mode.filters) !== null && _mode$filters !== void 0 ? _mode$filters : _deepWithFiltersVisualization.default.filters
+  };
+  return /*#__PURE__*/_react.default.createElement("div", null, filterTextModes.map((each, index) => /*#__PURE__*/_react.default.createElement("button", {
+    key: each.label,
+    disabled: index === modeIndex,
+    onClick: () => setModeIndex(index)
+  }, each.label)), /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: 800,
+      height: 600
+    }
+  }, /*#__PURE__*/_react.default.createElement(_index.PivotTable, {
+    data: _deepWithFiltersData.default,
+    visualization: visualization,
+    filterText: mode.filterText
+  })));
+};
+exports.DeepSuppliedFilterText = DeepSuppliedFilterText;
+DeepSuppliedFilterText.storyName = 'deep - filter text supplied by the caller';
 const DeepTitleSubtitleFilter = (_, {
   pivotTableOptions
 }) => {

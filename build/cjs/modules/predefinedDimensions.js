@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPredefinedDimensions = exports.getPredefinedDimensionProp = exports.getFixedDimensions = exports.getDynamicDimensions = exports.getDimensionById = exports.filterOutPredefinedDimensions = exports.DIMENSION_PROP_NO_ITEMS = exports.DIMENSION_ID_PERIOD = exports.DIMENSION_ID_ORGUNIT = exports.DIMENSION_ID_DATA = exports.DIMENSION_ID_ASSIGNED_CATEGORIES = void 0;
+exports.getPredefinedDimensions = exports.getPredefinedDimensionProp = exports.getFixedDimensions = exports.getDynamicDimensions = exports.getDimensionById = exports.filterOutPredefinedDimensions = exports.DIMENSION_PROP_NO_ITEMS = exports.DIMENSION_ID_PERIOD = exports.DIMENSION_ID_ORGUNIT = exports.DIMENSION_ID_ENROLLMENT_ORGUNIT = exports.DIMENSION_ID_DATA = exports.DIMENSION_ID_ASSIGNED_CATEGORIES = void 0;
 var _ui = require("@dhis2/ui");
 var _AssignedCategoriesIcon = _interopRequireDefault(require("../assets/AssignedCategoriesIcon.js"));
 var _index = _interopRequireDefault(require("../locales/index.js"));
@@ -11,6 +11,7 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 const DIMENSION_ID_DATA = exports.DIMENSION_ID_DATA = 'dx';
 const DIMENSION_ID_PERIOD = exports.DIMENSION_ID_PERIOD = 'pe';
 const DIMENSION_ID_ORGUNIT = exports.DIMENSION_ID_ORGUNIT = 'ou';
+const DIMENSION_ID_ENROLLMENT_ORGUNIT = exports.DIMENSION_ID_ENROLLMENT_ORGUNIT = 'enrollmentou';
 const DIMENSION_ID_ASSIGNED_CATEGORIES = exports.DIMENSION_ID_ASSIGNED_CATEGORIES = 'co';
 const DIMENSION_PROP_NO_ITEMS = exports.DIMENSION_PROP_NO_ITEMS = 'noItems';
 const getFixedDimensions = () => ({

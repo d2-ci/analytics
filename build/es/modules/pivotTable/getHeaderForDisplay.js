@@ -33,8 +33,8 @@ export const getHeaderForDisplay = ({
     span,
     label,
     includesHierarchy,
-    ...(currentHeader !== null && currentHeader !== void 0 && currentHeader.style ? {
-      style: currentHeader.style
+    ...(currentHeader !== null && currentHeader !== void 0 && currentHeader.dimensionItemStyle ? {
+      style: currentHeader.dimensionItemStyle
     } : {})
   };
 };

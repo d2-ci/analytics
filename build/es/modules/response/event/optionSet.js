@@ -1,4 +1,4 @@
-import { NA_VALUE } from './response.js';
+import { D2__NOVALUE, NA_VALUE } from './response.js';
 export const getOptionCodeIdMap = (optionIds, items) => optionIds.reduce((map, optionId) => {
   map[items[optionId].code] = optionId;
   return map;
@@ -18,8 +18,8 @@ export const getOptionIdRows = (rows, optionCodeIdMap, headerIndex) => {
 };
 export const applyOptionSetHandler = (response, headerIndex) => {
   const header = response.headers[headerIndex];
-  const optionIds = response.metaData.dimensions[header.name];
-  const optionCodeIdMap = getOptionCodeIdMap(optionIds, response.metaData.items);
+  response.metaData.dimensions[header.name] = response.metaData.dimensions[header.name].map(id => id === D2__NOVALUE ? NA_VALUE : id);
+  const optionCodeIdMap = getOptionCodeIdMap(response.metaData.dimensions[header.name], response.metaData.items);
   return {
     ...response,
     rows: getOptionIdRows(response.rows, optionCodeIdMap, headerIndex)

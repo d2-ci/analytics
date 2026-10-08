@@ -4,7 +4,7 @@ function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = 
 import i18n from '@dhis2/d2-i18n';
 import times from 'lodash/times';
 import { DIMENSION_TYPE_DATA, DIMENSION_TYPE_DATA_ELEMENT_GROUP_SET, DIMENSION_TYPE_ORGANISATION_UNIT, DIMENSION_TYPE_PERIOD } from '../dataTypes.js';
-import { DIMENSION_ID_ORGUNIT } from '../predefinedDimensions.js';
+import { DIMENSION_ID_ENROLLMENT_ORGUNIT, DIMENSION_ID_ORGUNIT } from '../predefinedDimensions.js';
 import { renderValue } from '../renderValue.js';
 import { VALUE_TYPE_NUMBER, VALUE_TYPE_TEXT, isBooleanValueType, isCumulativeValueType, isNumericValueType } from '../valueTypes.js';
 import { AdaptiveClippingController } from './AdaptiveClippingController.js';
@@ -47,6 +47,16 @@ const listByDimension = list => list.reduce((all, item) => {
   all[item.dimension] = item;
   return all;
 }, {});
+const ORGUNIT_DIMENSION_IDS = new Set([DIMENSION_ID_ORGUNIT, DIMENSION_ID_ENROLLMENT_ORGUNIT]);
+
+/* Event and enrollment analytics qualify the event org unit dimension with
+ * the program stage (`<stageId>.ou`) and name the enrollment-scoped one
+ * `enrollmentou`. Neither carries `dimensionType` in `metaData.items`, so
+ * match on the unqualified dimension id where the type is unavailable. */
+const isOrgUnitDimension = ({
+  dimension,
+  meta
+}) => (meta === null || meta === void 0 ? void 0 : meta.dimensionType) === DIMENSION_TYPE_ORGANISATION_UNIT || ORGUNIT_DIMENSION_IDS.has(dimension.split('.').pop());
 const sortByHierarchy = items => {
   items.sort((a, b) => {
     if (!a.hierarchy || !b.hierarchy) {
@@ -54,6 +64,16 @@ const sortByHierarchy = items => {
     }
     return a.hierarchy.join('/').localeCompare(b.hierarchy.join('/'));
   });
+};
+const applyHierarchy = (ouDimension, ouNameHierarchy) => {
+  ouDimension.items.forEach(ou => {
+    const hierarchy = ouNameHierarchy[ou.uid];
+    if (hierarchy) {
+      ou.hierarchy = hierarchy.split('/').filter(x => x.length);
+    }
+  });
+  sortByHierarchy(ouDimension.items);
+  ouDimension.itemIds = ouDimension.items.map(item => item.uid);
 };
 const buildDimensionLookup = (visualization, metadata, headers) => {
   const rows = visualization.rows.map(row => ({
@@ -87,16 +107,8 @@ const buildDimensionLookup = (visualization, metadata, headers) => {
     out[field] = headers.findIndex(header => header.name === field);
     return out;
   }, {});
-  const ouDimension = allByDimension[DIMENSION_ID_ORGUNIT];
-  if (visualization.showHierarchy && metadata.ouNameHierarchy && ouDimension) {
-    ouDimension.items.forEach(ou => {
-      const hierarchy = metadata.ouNameHierarchy[ou.uid];
-      if (hierarchy) {
-        ou.hierarchy = hierarchy.split('/').filter(x => x.length);
-      }
-    });
-    sortByHierarchy(ouDimension.items);
-    ouDimension.itemIds = ouDimension.items.map(item => item.uid);
+  if (visualization.showHierarchy && metadata.ouNameHierarchy) {
+    Object.values(allByDimension).filter(isOrgUnitDimension).forEach(ouDimension => applyHierarchy(ouDimension, metadata.ouNameHierarchy));
   }
   return {
     rows,
@@ -160,7 +172,12 @@ const applyTotalAggregationType = ({
   }
 };
 export class PivotTableEngine {
-  constructor(visualization, data, legendSets) {
+  constructor({
+    visualization,
+    data,
+    legendSets,
+    filterText
+  }) {
     _defineProperty(this, "visualization", void 0);
     _defineProperty(this, "rawData", void 0);
     _defineProperty(this, "options", void 0);
@@ -197,7 +214,10 @@ export class PivotTableEngine {
       // turn on fixed headers only when there are dimensions
       fixColumnHeaders: this.dimensionLookup.columns.length ? visualization.fixColumnHeaders : false,
       fixRowHeaders: this.dimensionLookup.rows.length ? visualization.fixRowHeaders : false,
-      cumulativeValues: visualization.cumulativeValues
+      cumulativeValues: visualization.cumulativeValues,
+      /* If visualization.filters is populated and this option is present,
+       * this text is used instead of the text derived from `visualization.filters` */
+      filterText
     };
     this.adaptiveClippingController = new AdaptiveClippingController(this);
     const doColumnSubtotals = this.options.showColumnSubtotals && this.dimensionLookup.rows.length > 1;

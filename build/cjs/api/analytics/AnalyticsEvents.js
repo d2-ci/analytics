@@ -36,7 +36,7 @@ class AnalyticsEvents extends _AnalyticsBase.default {
    *  .then(console.log);
    */
   getAggregate(req) {
-    return this.fetch(req.withPath('events/aggregate'));
+    return this.get(req.withPath('events/aggregate'));
   }
 
   /**
