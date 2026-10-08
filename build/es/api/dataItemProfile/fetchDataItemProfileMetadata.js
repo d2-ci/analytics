@@ -1,16 +1,21 @@
-import { parseExpressionOperands } from '../../modules/dataItemProfile/expressionOperands.js';
-import { getDataItemProfile } from '../../modules/dataItemProfile/getDataItemProfile.js';
+import { getCategoryOptionComboId, parseExpressionOperands } from '../../modules/dataItemProfile/expressionOperands.js';
 import { REPORTING_RATE } from '../../modules/dataSets.js';
 import { DIMENSION_TYPE_DATA_ELEMENT, DIMENSION_TYPE_DATA_ELEMENT_OPERAND, DIMENSION_TYPE_EVENT_DATA_ITEM, DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, DIMENSION_TYPE_INDICATOR, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION, DIMENSION_TYPE_PROGRAM_INDICATOR } from '../../modules/dataTypes.js';
-import { fetchAssignedOrgUnitCounts, getDataItemProfileSourceKeys } from './assignedOrgUnitCounts.js';
 import { dataItemProfileMetadataQueries, METADATA_RESOURCES, normalizeDataItemProfileMetadata } from './metadataQueries.js';
-import { levelsQuery, readLevels } from './orgUnitQueries.js';
 const createPending = () => Object.fromEntries(METADATA_RESOURCES.map(resource => [resource, new Set()]));
 
 // The program of program.element or program.attribute, if the id names one
 const addProgramOfItem = (pending, id) => {
   if (id.includes('.')) {
     pending.programs.add(id.split('.')[0]);
+  }
+};
+
+// The category option combo of a disaggregation, to tell which data sets collect it
+const addCategoryOptionCombo = (pending, operand) => {
+  const id = getCategoryOptionComboId(operand);
+  if (id) {
+    pending.categoryOptionCombos.add(id);
   }
 };
 const addItem = (pending, {
@@ -21,6 +26,7 @@ const addItem = (pending, {
     case DIMENSION_TYPE_DATA_ELEMENT:
     case DIMENSION_TYPE_DATA_ELEMENT_OPERAND:
       pending.dataElements.add(id.split('.')[0]);
+      addCategoryOptionCombo(pending, id);
       break;
     case REPORTING_RATE:
       pending.dataSets.add(id.split('.')[0]);
@@ -54,11 +60,13 @@ const RESOURCE_BY_OPERAND_TYPE = {
 const PROGRAM_ITEM_OPERAND_TYPES = new Set([DIMENSION_TYPE_PROGRAM_DATA_ELEMENT, DIMENSION_TYPE_PROGRAM_ATTRIBUTE]);
 const addOperands = (pending, expression) => parseExpressionOperands(expression).forEach(({
   type,
-  id
+  id,
+  operand
 }) => {
   const resource = RESOURCE_BY_OPERAND_TYPE[type];
   if (resource) {
     pending[resource].add(id);
+    addCategoryOptionCombo(pending, operand);
   } else if (PROGRAM_ITEM_OPERAND_TYPES.has(type)) {
     addProgramOfItem(pending, id);
   }
@@ -125,69 +133,26 @@ const getRequested = known => Object.fromEntries(METADATA_RESOURCES.map(resource
   var _known$resource;
   return [resource, new Set(Object.keys((_known$resource = known === null || known === void 0 ? void 0 : known[resource]) !== null && _known$resource !== void 0 ? _known$resource : {}))];
 }));
-const fetchAssignedCounts = async (dataEngine, {
-  items,
-  metadata,
-  known,
-  levels,
-  signal
-}) => {
-  var _known$assignedOrgUni;
-  const knownCounts = (_known$assignedOrgUni = known === null || known === void 0 ? void 0 : known.assignedOrgUnitCounts) !== null && _known$assignedOrgUni !== void 0 ? _known$assignedOrgUni : {};
-  // Only the sources the items' profiles use, and not counted yet
-  const sourceKeys = getDataItemProfileSourceKeys(items.map(item => getDataItemProfile(item, metadata))).filter(({
-    id
-  }) => !knownCounts[id]);
-  const counted = await fetchAssignedOrgUnitCounts(dataEngine, sourceKeys, {
-    levels,
-    signal
-  });
-  return {
-    orgUnitLevels: counted.levels,
-    assignedOrgUnitCounts: {
-      ...knownCounts,
-      ...counted.assignedOrgUnitCounts
-    }
-  };
-};
 
 /**
  * Fetches the metadata getDataItemProfile needs for `items`
  * ({ id, dimensionItemType }): data elements, data sets, indicators and their
  * operands, nested indicators, expression dimension items, program
- * indicators and programs. By default it also counts the org units each data
- * set and program is assigned to per level (fetchAssignedOrgUnitCounts), for
- * the profile's assigned org unit levels, with the levels (`orgUnitLevels`);
- * `{ withAssignedOrgUnitCounts: false }` leaves them out. `known`, metadata
- * fetched before, is reused: only what it lacks is fetched. `signal` cancels
- * the requests.
+ * indicators and programs. `known`, metadata fetched before, is reused: only
+ * what it lacks is fetched. `signal` cancels the requests. Where data sets
+ * and programs are assigned is fetched apart (fetchOrgUnitCoverage), only
+ * when org units are asked.
  */
 export const fetchDataItemProfileMetadata = async (dataEngine, items = [], {
-  withAssignedOrgUnitCounts = true,
   known,
   signal
 } = {}) => {
   const pending = createPending();
   items.forEach(item => addItem(pending, item));
-
-  // The levels, alongside the first round
-  const levelsRequest = withAssignedOrgUnitCounts && !(known !== null && known !== void 0 && known.orgUnitLevels) ? dataEngine.query(levelsQuery, {
-    signal
-  }).then(readLevels) : Promise.resolve(known === null || known === void 0 ? void 0 : known.orgUnitLevels);
-  const [metadata, levels] = await Promise.all([fetchRound(dataEngine, {
+  return fetchRound(dataEngine, {
     metadata: mergeMetadata(normalizeDataItemProfileMetadata(), known !== null && known !== void 0 ? known : {}),
     pending,
     requested: getRequested(known),
     signal
-  }), levelsRequest]);
-  return withAssignedOrgUnitCounts ? {
-    ...metadata,
-    ...(await fetchAssignedCounts(dataEngine, {
-      items,
-      metadata,
-      known,
-      levels,
-      signal
-    }))
-  } : metadata;
+  });
 };

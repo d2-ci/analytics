@@ -7,6 +7,7 @@ exports.getDataItemProfileCompatibility = void 0;
 var _combineResults = require("./compatibility/combineResults.js");
 var _getDataItemProfileOrgUnitCompatibility = require("./compatibility/getDataItemProfileOrgUnitCompatibility.js");
 var _getDataItemProfilePeriodCompatibility = require("./compatibility/getDataItemProfilePeriodCompatibility.js");
+var _periodAtOrgUnitResults = require("./compatibility/periodAtOrgUnitResults.js");
 var _sources = require("./sources.js");
 const NO_RESULT = {
   status: null,
@@ -28,13 +29,17 @@ const NO_RESULT = {
  *   one result per selection item, from `options.orgUnitCoverage`
  *   (fetchOrgUnitCoverage). Given only when org units are asked.
  * - `sources`: each source over the periods (aligned with `profile.sources`).
- * - Overall: the periods and org units add up, as the fixed periods of a
- *   relative period do: none when all are none, partial when some give
- *   values and others none, with every reason.
+ * - Overall: with periods and org units, each period at each org unit
+ *   (getPeriodAtOrgUnitResults), where only the data sets and programs
+ *   assigned there count; with one of them alone, its results. They add up,
+ *   as the fixed periods of a relative period do: none when all are none,
+ *   partial when some give values and others none, with every reason.
  *
- * Periods and org units are judged apart: a data set assigned to some org
- * units only, at another period type than the others, isn't judged per org
- * unit.
+ * `periods` and `orgUnits` are each judged alone, for pickers: by week, an
+ * element in a monthly data set at district A and a weekly one at B is
+ * partial (the monthly values are left out), and at A it is full (the
+ * weekly data set isn't assigned there). Only the overall result sees that
+ * by week at A it has nothing.
  * `options` are passed to the period check (relative period settings,
  * relativePeriodDate, calendar, server version).
  */
@@ -53,9 +58,16 @@ const getDataItemProfileCompatibility = (profile, {
   }, {
     orgUnitCoverage
   }) : [];
-  const all = [...periodResults, ...orgUnitResults];
+  const periodAtOrgUnitResults = periods.length && orgUnits.length ? (0, _periodAtOrgUnitResults.getPeriodAtOrgUnitResults)(profile, {
+    periods,
+    orgUnits
+  }, {
+    orgUnitCoverage,
+    ...options
+  }) : [];
+  const overall = periodAtOrgUnitResults.length ? periodAtOrgUnitResults : [...periodResults, ...orgUnitResults];
   return {
-    ...(all.length ? (0, _combineResults.combineAddedUpResults)(all) : NO_RESULT),
+    ...(overall.length ? (0, _combineResults.combineAddedUpResults)(overall) : NO_RESULT),
     sources: profile.sources.map((source, i) => ({
       sourceId: (0, _sources.getSourceId)(source),
       ...(periodResults.length ? (0, _combineResults.combineAddedUpResults)(periodResults.map(({

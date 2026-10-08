@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getDataItemProfilePeriodCompatibility = void 0;
+exports.judgePeriodQueries = exports.getSelectionYears = exports.getPeriodQueries = exports.getDataItemProfilePeriodCompatibility = void 0;
 var _constants = require("../constants.js");
 var _firstLastValues = require("../periods/firstLastValues.js");
 var _periodRanges = require("../periods/periodRanges.js");
@@ -70,6 +70,7 @@ const getSelectionYears = (periods, options) => {
 
 /* A result for each range of the query, added up: a relative period is
  * judged over its fixed periods. Without ranges, by type alone. */
+exports.getSelectionYears = getSelectionYears;
 const judgeRanges = (query, getResult) => query.ranges ? (0, _combineResults.combineAddedUpResults)(query.ranges.map(dates => getResult({
   ...query,
   dates
@@ -91,24 +92,52 @@ const getUnknownPeriodResult = (profile, {
     ...(0, _combineResults.getUnknownResult)(reason)
   }))
 });
-const getPeriodResult = (profile, period, options) => {
-  var _queries$0$ranges;
+
+/**
+ * The queries a period is judged by, one per type it can be (`options`
+ * holding the `selectionYears`), or the reason it can't be: `{ periodTypes,
+ * queries }` or `{ periodTypes, unknownReason }`. judgePeriodQueries judges
+ * them.
+ */
+const getPeriodQueries = (profile, period, options) => {
   const periodTypes = (0, _periodTypes.getCandidatePeriodTypes)(period, options);
   if (profile.unknown || !periodTypes.length) {
+    return {
+      periodTypes,
+      unknownReason: profile.unknown ? _constants.REASON_PROFILE_UNKNOWN : _constants.REASON_UNKNOWN_PERIOD
+    };
+  }
+  return {
+    periodTypes,
+    queries: periodTypes.map(periodType => ({
+      periodType,
+      ranges: getPeriodRanges(period, periodType, options),
+      years: options.selectionYears,
+      calendar: options.calendar,
+      serverVersion: options.serverVersion,
+      supported: (0, _periodTypes.isPeriodTypeSupported)(periodType, options.serverVersion)
+    }))
+  };
+};
+
+// A result from `getResult(query)` for each type and range, as one result for the period
+exports.getPeriodQueries = getPeriodQueries;
+const judgePeriodQueries = (queries, getResult) => agreeOn(queries, query => judgeRanges(query, getResult));
+exports.judgePeriodQueries = judgePeriodQueries;
+const getPeriodResult = (profile, period, options) => {
+  var _queries$0$ranges;
+  const {
+    periodTypes,
+    queries,
+    unknownReason
+  } = getPeriodQueries(profile, period, options);
+  if (unknownReason) {
     return getUnknownPeriodResult(profile, {
       period,
       periodTypes,
-      reason: profile.unknown ? _constants.REASON_PROFILE_UNKNOWN : _constants.REASON_UNKNOWN_PERIOD
+      reason: unknownReason
     });
   }
-  const queries = periodTypes.map(periodType => ({
-    periodType,
-    ranges: getPeriodRanges(period, periodType, options),
-    years: options.selectionYears,
-    calendar: options.calendar,
-    serverVersion: options.serverVersion,
-    supported: (0, _periodTypes.isPeriodTypeSupported)(periodType, options.serverVersion)
-  }));
   const item = {
     expression: profile.expression,
     operands: (0, _sources.getItemOperands)(profile)
@@ -117,14 +146,14 @@ const getPeriodResult = (profile, period, options) => {
   return {
     id: period,
     periodTypes,
-    ...agreeOn(queries, query => judgeRanges(query, rangeQuery => getItemResult(item, rangeQuery))),
+    ...judgePeriodQueries(queries, query => getItemResult(item, query)),
     alignsWithData: isFixed ? getAlignsWithData(profile, {
       ...queries[0],
       dates: (_queries$0$ranges = queries[0].ranges) === null || _queries$0$ranges === void 0 ? void 0 : _queries$0$ranges[0]
     }) : null,
     sources: profile.sources.map(source => ({
       sourceId: (0, _sources.getSourceId)(source),
-      ...agreeOn(queries, query => judgeRanges(query, rangeQuery => (0, _periodSourceResults.getSourceResult)(source, rangeQuery)))
+      ...judgePeriodQueries(queries, query => (0, _periodSourceResults.getSourceResult)(source, query))
     }))
   };
 };

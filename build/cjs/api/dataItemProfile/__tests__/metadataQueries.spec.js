@@ -37,7 +37,7 @@ const splitFields = fields => {
 /* Fields the test tool's requests named after a resource don't ask for, so
  * their shape on each version is unchecked: aggregationLevels has a request
  * of its own (dataElements-aggregationLevels); the others aren't recorded */
-const NOT_RECORDED = ['aggregationLevels', 'analyticsPeriodBoundaries[id]', 'missingValueStrategy'];
+const NOT_RECORDED = ['aggregationLevels', 'analyticsPeriodBoundaries[id]', 'missingValueStrategy', 'categoryCombo[id]', 'dataSetElements[dataSet[id,periodType],categoryCombo[id]]'];
 describe('normalizeDataItemProfileMetadata', () => {
   describe.each(Object.entries(_metadataShapes.default.versions))('the responses of %s', (_, shapes) => {
     const responses = getResponses(shapes);
@@ -179,7 +179,62 @@ describe('normalizeDataItemProfileMetadata', () => {
       indicators: {},
       expressionDimensionItems: {},
       programIndicators: {},
-      programs: {}
+      programs: {},
+      categoryOptionCombos: {}
+    });
+  });
+  it('keeps the category combo each data set gives an element, its own by default', () => {
+    expect((0, _metadataQueries.normalizeDataItemProfileMetadata)({
+      dataElements: {
+        dataElements: [{
+          id: 'deathsUnder5',
+          aggregationType: 'SUM',
+          categoryCombo: {
+            id: 'defaultComb'
+          },
+          dataSetElements: [{
+            dataSet: {
+              id: 'mortality',
+              periodType: 'Monthly'
+            }
+          }, {
+            dataSet: {
+              id: 'byAgeGroup',
+              periodType: 'Monthly'
+            },
+            categoryCombo: {
+              id: 'ageGroupsCo'
+            }
+          }]
+        }]
+      },
+      categoryOptionCombos: {
+        categoryOptionCombos: [{
+          id: 'under1Year1',
+          categoryCombo: {
+            id: 'ageGroupsCo'
+          }
+        }]
+      }
+    })).toMatchObject({
+      dataElements: {
+        deathsUnder5: {
+          dataSets: [{
+            id: 'mortality',
+            periodType: 'Monthly',
+            categoryComboId: 'defaultComb'
+          }, {
+            id: 'byAgeGroup',
+            periodType: 'Monthly',
+            categoryComboId: 'ageGroupsCo'
+          }]
+        }
+      },
+      categoryOptionCombos: {
+        under1Year1: {
+          categoryComboId: 'ageGroupsCo'
+        }
+      }
     });
   });
   it('keeps the missing value strategy of an expression dimension item', () => {

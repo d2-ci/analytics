@@ -17,9 +17,8 @@ var _utils = require("./utils.js");
  * The profiles of data items, and whether a selection suits them.
  *
  * `items` are { id, dimensionItemType }, as in a visualization's dx items.
- * `profiles` are keyed by item id. Each has its assigned org unit levels
- * unless `withAssignedOrgUnitCounts: false`; it then gets them once
- * `orgUnits` are given and their coverage is loaded.
+ * `profiles` are keyed by item id. Once `orgUnits` are given and their
+ * coverage is loaded, each also has its assigned org unit levels.
  *
  * `getDataItemCompatibility(itemId, { periods, orgUnits })` runs
  * getDataItemProfileCompatibility on the item's profile, with the server's
@@ -33,7 +32,8 @@ var _utils = require("./utils.js");
  * loads where the items' data sets and programs are assigned under them
  * (fetchOrgUnitCoverage, `orgUnitCoverage`), so getDataItemCompatibility can
  * judge any selection whose org units it loaded, such as a level under one of
- * them.
+ * them. `withAssignmentTotals` also counts the org units under them, for "x
+ * of y" and PARTLY_ASSIGNED (fetchOrgUnitCoverage).
  *
  * Changes fetch only what is missing: metadata of new items, counts of new
  * org units. While new items load, the loaded ones keep their profiles.
@@ -42,9 +42,9 @@ const useDataItemProfiles = (items, {
   calendar,
   orgUnits,
   relativePeriodDate,
-  withAssignedOrgUnitCounts = true
+  withAssignmentTotals = false
 } = {}) => {
-  var _state$metadata, _ref, _settingsState$error;
+  var _ref, _settingsState$error;
   const engineRef = (0, _utils.useEngineRef)();
   const itemsKey = (0, _utils.getItemsKey)(items);
   const resolvedCalendar = (0, _utils.useCalendar)(calendar);
@@ -109,7 +109,6 @@ const useDataItemProfiles = (items, {
       error: undefined
     }));
     (0, _fetchDataItemProfileMetadata.fetchDataItemProfileMetadata)(engineRef.current, requestedItems, {
-      withAssignedOrgUnitCounts,
       known: metadataRef.current,
       signal: controller.signal
     }).then(metadata => {
@@ -131,7 +130,7 @@ const useDataItemProfiles = (items, {
       }
     });
     return () => controller.abort();
-  }, [engineRef, itemsKey, withAssignedOrgUnitCounts]);
+  }, [engineRef, itemsKey]);
 
   /* Profiles from the metadata of the items it was fetched for: while new
    * items load, the others keep theirs */
@@ -145,8 +144,7 @@ const useDataItemProfiles = (items, {
     return loadedItems.length ? Object.fromEntries(loadedItems.map(item => [item.id, (0, _getDataItemProfile.getDataItemProfile)(item, state.metadata)])) : undefined;
   }, [itemsKey, state.metadata, state.metadataItemsKey]);
   const sourceKeysKey = JSON.stringify(metadataProfiles ? (0, _assignedOrgUnitCounts.getDataItemProfileSourceKeys)(Object.values(metadataProfiles)) : null);
-  const coverageKey = `${sourceKeysKey}|${orgUnitsKey}`;
-  const knownAssignedOrgUnitCounts = (_state$metadata = state.metadata) === null || _state$metadata === void 0 ? void 0 : _state$metadata.assignedOrgUnitCounts;
+  const coverageKey = `${sourceKeysKey}|${orgUnitsKey}|${withAssignmentTotals}`;
   (0, _react.useEffect)(() => {
     const sourceKeys = JSON.parse(sourceKeysKey);
     const requestedOrgUnits = JSON.parse(orgUnitsKey);
@@ -166,7 +164,7 @@ const useDataItemProfiles = (items, {
     (0, _fetchOrgUnitCoverage.fetchOrgUnitCoverage)(engineRef.current, {
       sourceKeys,
       orgUnits: requestedOrgUnits,
-      assignedOrgUnitCounts: knownAssignedOrgUnitCounts,
+      withAssignmentTotals,
       previous: coverageRef.current,
       signal: controller.signal
     }).then(coverage => {
@@ -174,7 +172,7 @@ const useDataItemProfiles = (items, {
         setCoverageState({
           loading: false,
           coverage,
-          coverageKey: `${sourceKeysKey}|${orgUnitsKey}`
+          coverageKey: `${sourceKeysKey}|${orgUnitsKey}|${withAssignmentTotals}`
         });
       }
     }).catch(error => {
@@ -188,18 +186,18 @@ const useDataItemProfiles = (items, {
       }
     });
     return () => controller.abort();
-  }, [engineRef, sourceKeysKey, orgUnitsKey, knownAssignedOrgUnitCounts]);
+  }, [engineRef, sourceKeysKey, orgUnitsKey, withAssignmentTotals]);
 
   // Only the coverage of these sources and org units, never an earlier one
   const coverage = coverageState.coverageKey === coverageKey ? coverageState.coverage : undefined;
 
-  /* None before the settings, which relative periods need. Without the
-   * counts in the metadata, the coverage gives the assigned org unit levels. */
+  /* None before the settings, which relative periods need. The coverage
+   * gives the assigned org unit levels. */
   const profiles = (0, _react.useMemo)(() => {
     if (settingsState.loading || !metadataProfiles) {
       return undefined;
     }
-    return Object.fromEntries(Object.entries(metadataProfiles).map(([id, profile]) => [id, profile.assignedOrgUnitLevels || !coverage ? profile : (0, _assignedOrgUnitLevels.addAssignedOrgUnitLevels)(profile, coverage.assignedOrgUnitCounts)]));
+    return Object.fromEntries(Object.entries(metadataProfiles).map(([id, profile]) => [id, !coverage ? profile : (0, _assignedOrgUnitLevels.addAssignedOrgUnitLevels)(profile, coverage.assignedOrgUnitCounts)]));
   }, [settingsState.loading, metadataProfiles, coverage]);
   const options = (0, _react.useMemo)(() => ({
     ...settingsState.options,

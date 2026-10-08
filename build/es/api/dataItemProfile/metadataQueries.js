@@ -10,7 +10,7 @@ const byIds = fields => ({
 export const dataItemProfileMetadataQueries = {
   dataElements: {
     resource: 'dataElements',
-    ...byIds('id,aggregationType,aggregationLevels,dataSetElements[dataSet[id,periodType]]')
+    ...byIds('id,aggregationType,aggregationLevels,categoryCombo[id],dataSetElements[dataSet[id,periodType],categoryCombo[id]]')
   },
   indicators: {
     resource: 'indicators',
@@ -31,6 +31,10 @@ export const dataItemProfileMetadataQueries = {
   programs: {
     resource: 'programs',
     ...byIds('id')
+  },
+  categoryOptionCombos: {
+    resource: 'categoryOptionCombos',
+    ...byIds('id,categoryCombo[id]')
   }
 };
 export const METADATA_RESOURCES = Object.keys(dataItemProfileMetadataQueries);
@@ -43,24 +47,34 @@ const getList = (response, resource) => {
 };
 const uniqueDataSets = dataSets => [...new Map(dataSets.map(dataSet => [dataSet.id, dataSet])).values()];
 const normalizers = {
+  /* A data set can give an element another category combo than its own:
+   * each data set keeps the one its values are entered with */
   dataElements: ({
     aggregationType,
     aggregationLevels,
+    categoryCombo,
     dataSetElements
   }) => ({
     aggregationType,
     ...((aggregationLevels === null || aggregationLevels === void 0 ? void 0 : aggregationLevels.length) && {
       aggregationLevels
     }),
-    dataSets: uniqueDataSets((dataSetElements !== null && dataSetElements !== void 0 ? dataSetElements : []).map(({
+    dataSets: uniqueDataSets((dataSetElements !== null && dataSetElements !== void 0 ? dataSetElements : []).filter(({
       dataSet
-    }) => dataSet).filter(dataSet => dataSet === null || dataSet === void 0 ? void 0 : dataSet.periodType).map(({
-      id,
-      periodType
-    }) => ({
-      id,
-      periodType: getPeriodTypeName(periodType)
-    })))
+    }) => dataSet === null || dataSet === void 0 ? void 0 : dataSet.periodType).map(({
+      dataSet,
+      categoryCombo: dataSetCategoryCombo
+    }) => {
+      var _dataSetCategoryCombo;
+      const categoryComboId = (_dataSetCategoryCombo = dataSetCategoryCombo === null || dataSetCategoryCombo === void 0 ? void 0 : dataSetCategoryCombo.id) !== null && _dataSetCategoryCombo !== void 0 ? _dataSetCategoryCombo : categoryCombo === null || categoryCombo === void 0 ? void 0 : categoryCombo.id;
+      return {
+        id: dataSet.id,
+        periodType: getPeriodTypeName(dataSet.periodType),
+        ...(categoryComboId && {
+          categoryComboId
+        })
+      };
+    }))
   }),
   indicators: ({
     numerator,
@@ -96,7 +110,12 @@ const normalizers = {
       hasPeriodBoundaries: analyticsPeriodBoundaries.length > 0
     })
   }),
-  programs: () => ({})
+  programs: () => ({}),
+  categoryOptionCombos: ({
+    categoryCombo
+  }) => ({
+    categoryComboId: categoryCombo === null || categoryCombo === void 0 ? void 0 : categoryCombo.id
+  })
 };
 
 /**

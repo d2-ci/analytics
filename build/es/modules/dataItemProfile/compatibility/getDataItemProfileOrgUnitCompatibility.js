@@ -2,11 +2,12 @@ import { COMPATIBILITY_NONE, COMPATIBILITY_PARTIAL, LEFT_OUT_REASONS, ORG_UNIT_I
 import { getRequestedLevels, readOrgUnitSelection } from '../orgUnits/orgUnitSelection.js';
 import { getItemOperands } from '../sources.js';
 import { combineExpressionResults, createResult, getMostSevere, getUnknownResult, unionOfReasons } from './combineResults.js';
-import { getOperandResult, withAssignment } from './orgUnitSourceResults.js';
+import { getOperandResult, isPartlyAssigned, withAssignment } from './orgUnitSourceResults.js';
 
 /* The org units of all requested levels add up: only those that are
  * assigned count, and the assignment adds up over all of them (an org unit
- * with nothing assigned adds its org units to the total) */
+ * with nothing assigned adds its org units to the total). The total is
+ * known only when every part's total was counted. */
 const addUpAssignments = judged => {
   const assignments = judged.map(({
     result
@@ -16,16 +17,18 @@ const addUpAssignments = judged => {
   }
   const level = Math.max(...assignments.map(assignment => assignment.level));
   const assigned = assignments.reduce((sum, item) => sum + item.assigned, 0);
-  const total = judged.reduce((sum, {
+  const totals = judged.map(({
     result,
     counts
   }) => {
-    var _ref, _result$assignment$to, _result$assignment, _counts$totals;
-    return sum + ((_ref = (_result$assignment$to = (_result$assignment = result.assignment) === null || _result$assignment === void 0 ? void 0 : _result$assignment.total) !== null && _result$assignment$to !== void 0 ? _result$assignment$to : (_counts$totals = counts.totals) === null || _counts$totals === void 0 ? void 0 : _counts$totals[level]) !== null && _ref !== void 0 ? _ref : 0);
-  }, 0);
+    var _result$assignment$to, _result$assignment, _counts$totals;
+    return (_result$assignment$to = (_result$assignment = result.assignment) === null || _result$assignment === void 0 ? void 0 : _result$assignment.total) !== null && _result$assignment$to !== void 0 ? _result$assignment$to : (_counts$totals = counts.totals) === null || _counts$totals === void 0 ? void 0 : _counts$totals[level];
+  });
   return {
     assigned,
-    total,
+    ...(totals.every(total => total !== undefined) && {
+      total: totals.reduce((sum, total) => sum + total, 0)
+    }),
     level
   };
 };
@@ -57,11 +60,11 @@ const combineRequestedLevels = judged => {
   const status = results.some(leavesValuesOut) ? COMPATIBILITY_PARTIAL : getMostSevere(results.filter(({
     status
   }) => status !== COMPATIBILITY_NONE)).status;
-  const isPartlyAssigned = assignment && assignment.assigned < assignment.total;
+  const isPartly = Boolean(assignment) && isPartlyAssigned(assignment);
   return withAssignment(createResult(status, unionOfReasons([{
     reasons: reasons.filter(reason => reason !== REASON_NOT_ASSIGNED && reason !== REASON_PARTLY_ASSIGNED)
   }, {
-    reasons: isPartlyAssigned ? [REASON_PARTLY_ASSIGNED] : []
+    reasons: isPartly ? [REASON_PARTLY_ASSIGNED] : []
   }])), assignment);
 };
 
@@ -79,19 +82,29 @@ const isEmptyGroup = (selectionItem, coverage) => {
   var _coverage$groups;
   return selectionItem.type === ORG_UNIT_ITEM_TYPE_GROUP && ((_coverage$groups = coverage.groups) === null || _coverage$groups === void 0 ? void 0 : _coverage$groups[selectionItem.groupId]) && !Object.values(coverage.groups[selectionItem.groupId]).some(members => members > 0);
 };
-const getSelectionItemCompatibility = (selectionItem, {
-  item,
+
+/**
+ * The counts a selection item is judged by, one per level analytics
+ * aggregates to under each parent (`{ levels: [counts] }`, each with the
+ * `level` asked), or its result when it needs none (`{ result }`: an empty
+ * group, an org unit not loaded, no org unit there).
+ */
+export const getSelectionItemLevels = (selectionItem, {
   parentItems,
   coverage
 }) => {
   if (isEmptyGroup(selectionItem, coverage)) {
-    return withAssignment(createResult(COMPATIBILITY_NONE, [REASON_EMPTY_GROUP]));
+    return {
+      result: withAssignment(createResult(COMPATIBILITY_NONE, [REASON_EMPTY_GROUP]))
+    };
   }
   const requestedLevels = getRequestedLevels(selectionItem, parentItems, coverage);
   if (!requestedLevels) {
-    return withAssignment(getUnknownResult(REASON_UNKNOWN_ORG_UNIT));
+    return {
+      result: withAssignment(getUnknownResult(REASON_UNKNOWN_ORG_UNIT))
+    };
   }
-  const judged = requestedLevels
+  const levels = requestedLevels
   // Parents a group has no member under add nothing
   .filter(({
     groupId,
@@ -103,19 +116,35 @@ const getSelectionItemCompatibility = (selectionItem, {
   }).map(({
     countsKey,
     level
-  }) => {
-    const counts = {
-      ...coverage.counts[countsKey],
-      level
-    };
-    return {
-      counts,
-      result: getResultAtLevel(item, counts)
-    };
+  }) => ({
+    ...coverage.counts[countsKey],
+    level
+  }));
+  return levels.length ? {
+    levels
+  } : {
+    result: withAssignment(createResult(COMPATIBILITY_NONE, [REASON_NO_ORG_UNITS_AT_LEVEL]))
+  };
+};
+const getSelectionItemCompatibility = (selectionItem, {
+  item,
+  parentItems,
+  coverage
+}) => {
+  const {
+    result,
+    levels
+  } = getSelectionItemLevels(selectionItem, {
+    parentItems,
+    coverage
   });
-  if (!judged.length) {
-    return withAssignment(createResult(COMPATIBILITY_NONE, [REASON_NO_ORG_UNITS_AT_LEVEL]));
+  if (result) {
+    return result;
   }
+  const judged = levels.map(counts => ({
+    counts,
+    result: getResultAtLevel(item, counts)
+  }));
   return judged.length === 1 ? judged[0].result : combineRequestedLevels(judged);
 };
 

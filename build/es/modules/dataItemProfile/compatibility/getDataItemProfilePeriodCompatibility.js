@@ -55,7 +55,7 @@ const getPeriodRanges = (period, periodType, options) => {
 /* The calendar years the selection's periods touch, as one request would, or
  * null when a fixed or relative period can't be dated. Period types aren't
  * periods of a request: they don't count. */
-const getSelectionYears = (periods, options) => {
+export const getSelectionYears = (periods, options) => {
   const ranges = periods.filter(period => !isPeriodType(period)).flatMap(period => getCandidatePeriodTypes(period, options).map(periodType => getPeriodRanges(period, periodType, options)));
   if (!ranges.length || ranges.includes(null)) {
     return null;
@@ -86,24 +86,50 @@ const getUnknownPeriodResult = (profile, {
     ...getUnknownResult(reason)
   }))
 });
-const getPeriodResult = (profile, period, options) => {
-  var _queries$0$ranges;
+
+/**
+ * The queries a period is judged by, one per type it can be (`options`
+ * holding the `selectionYears`), or the reason it can't be: `{ periodTypes,
+ * queries }` or `{ periodTypes, unknownReason }`. judgePeriodQueries judges
+ * them.
+ */
+export const getPeriodQueries = (profile, period, options) => {
   const periodTypes = getCandidatePeriodTypes(period, options);
   if (profile.unknown || !periodTypes.length) {
+    return {
+      periodTypes,
+      unknownReason: profile.unknown ? REASON_PROFILE_UNKNOWN : REASON_UNKNOWN_PERIOD
+    };
+  }
+  return {
+    periodTypes,
+    queries: periodTypes.map(periodType => ({
+      periodType,
+      ranges: getPeriodRanges(period, periodType, options),
+      years: options.selectionYears,
+      calendar: options.calendar,
+      serverVersion: options.serverVersion,
+      supported: isPeriodTypeSupported(periodType, options.serverVersion)
+    }))
+  };
+};
+
+// A result from `getResult(query)` for each type and range, as one result for the period
+export const judgePeriodQueries = (queries, getResult) => agreeOn(queries, query => judgeRanges(query, getResult));
+const getPeriodResult = (profile, period, options) => {
+  var _queries$0$ranges;
+  const {
+    periodTypes,
+    queries,
+    unknownReason
+  } = getPeriodQueries(profile, period, options);
+  if (unknownReason) {
     return getUnknownPeriodResult(profile, {
       period,
       periodTypes,
-      reason: profile.unknown ? REASON_PROFILE_UNKNOWN : REASON_UNKNOWN_PERIOD
+      reason: unknownReason
     });
   }
-  const queries = periodTypes.map(periodType => ({
-    periodType,
-    ranges: getPeriodRanges(period, periodType, options),
-    years: options.selectionYears,
-    calendar: options.calendar,
-    serverVersion: options.serverVersion,
-    supported: isPeriodTypeSupported(periodType, options.serverVersion)
-  }));
   const item = {
     expression: profile.expression,
     operands: getItemOperands(profile)
@@ -112,14 +138,14 @@ const getPeriodResult = (profile, period, options) => {
   return {
     id: period,
     periodTypes,
-    ...agreeOn(queries, query => judgeRanges(query, rangeQuery => getItemResult(item, rangeQuery))),
+    ...judgePeriodQueries(queries, query => getItemResult(item, query)),
     alignsWithData: isFixed ? getAlignsWithData(profile, {
       ...queries[0],
       dates: (_queries$0$ranges = queries[0].ranges) === null || _queries$0$ranges === void 0 ? void 0 : _queries$0$ranges[0]
     }) : null,
     sources: profile.sources.map(source => ({
       sourceId: getSourceId(source),
-      ...agreeOn(queries, query => judgeRanges(query, rangeQuery => getSourceResult(source, rangeQuery)))
+      ...judgePeriodQueries(queries, query => getSourceResult(source, query))
     }))
   };
 };

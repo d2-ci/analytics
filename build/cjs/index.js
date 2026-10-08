@@ -234,6 +234,7 @@ var _exportNames = {
   getDataItemProfileCompatibility: true,
   getDataItemProfilePeriodCompatibility: true,
   getDataItemProfileOrgUnitCompatibility: true,
+  getPeriodAtOrgUnitResults: true,
   COMPATIBILITY_FULL: true,
   COMPATIBILITY_PARTIAL: true,
   COMPATIBILITY_NONE: true,
@@ -1986,6 +1987,12 @@ Object.defineProperty(exports, "getPeriodAggregationType", {
     return _collectSources.getPeriodAggregationType;
   }
 });
+Object.defineProperty(exports, "getPeriodAtOrgUnitResults", {
+  enumerable: true,
+  get: function () {
+    return _periodAtOrgUnitResults.getPeriodAtOrgUnitResults;
+  }
+});
 Object.defineProperty(exports, "getPredefinedDimensionProp", {
   enumerable: true,
   get: function () {
@@ -2395,6 +2402,7 @@ var _assignedOrgUnitLevels = require("./modules/dataItemProfile/profile/assigned
 var _getDataItemProfileCompatibility = require("./modules/dataItemProfile/getDataItemProfileCompatibility.js");
 var _getDataItemProfilePeriodCompatibility = require("./modules/dataItemProfile/compatibility/getDataItemProfilePeriodCompatibility.js");
 var _getDataItemProfileOrgUnitCompatibility = require("./modules/dataItemProfile/compatibility/getDataItemProfileOrgUnitCompatibility.js");
+var _periodAtOrgUnitResults = require("./modules/dataItemProfile/compatibility/periodAtOrgUnitResults.js");
 var _constants = require("./modules/dataItemProfile/constants.js");
 var _fetchDataItemProfileMetadata = require("./api/dataItemProfile/fetchDataItemProfileMetadata.js");
 var _assignedOrgUnitCounts = require("./api/dataItemProfile/assignedOrgUnitCounts.js");

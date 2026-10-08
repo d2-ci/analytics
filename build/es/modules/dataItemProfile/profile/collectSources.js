@@ -1,7 +1,7 @@
 import { REPORTING_RATE } from '../../dataSets.js';
 import { DIMENSION_TYPE_DATA_ELEMENT, DIMENSION_TYPE_DATA_ELEMENT_OPERAND, DIMENSION_TYPE_EVENT_DATA_ITEM, DIMENSION_TYPE_EXPRESSION_DIMENSION_ITEM, DIMENSION_TYPE_INDICATOR, DIMENSION_TYPE_PROGRAM_ATTRIBUTE, DIMENSION_TYPE_PROGRAM_ATTRIBUTE_OPTION, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT, DIMENSION_TYPE_PROGRAM_DATA_ELEMENT_OPTION, DIMENSION_TYPE_PROGRAM_INDICATOR } from '../../dataTypes.js';
 import { NOT_AGGREGATABLE_AGGREGATION_TYPES, SKIP_IF_ALL_VALUES_MISSING, SKIP_IF_ANY_VALUE_MISSING, PERIOD_AGGREGATION_AVERAGE, PERIOD_AGGREGATION_FIRST, PERIOD_AGGREGATION_LAST, OPERAND_TYPE_UNKNOWN, PROFILE_REASON_MISSING_METADATA, PROFILE_REASON_MISSING_PROGRAM, PROFILE_REASON_NO_DATA_SET, PROFILE_REASON_NOT_AGGREGATABLE, PROFILE_REASON_UNKNOWN_OPERAND, PROFILE_REASON_UNSUPPORTED_ITEM_TYPE } from '../constants.js';
-import { parseExpressionOperands } from '../expressionOperands.js';
+import { getCategoryOptionComboId, parseExpressionOperands } from '../expressionOperands.js';
 import { getElementOperandKey, getProgramOperandKey, getReportingRateOperandKey } from '../sources.js';
 import { addElementToSource, addReason, checkDataSetPeriodType, createCollector, getDataSetSource, getProgramSource, getUnassignedElementSource } from './sourceCollector.js';
 
@@ -30,6 +30,19 @@ export const getPeriodAggregationType = aggregationType => {
 const toPart = key => ({
   operand: key
 });
+
+/* A disaggregation (de.coc) is collected only by the data sets whose
+ * category combo holds its option combo: others give the element another
+ * combo. When either combo isn't known, every data set counts. */
+const getCollectingDataSets = (dataSets, {
+  operand,
+  metadata
+}) => {
+  var _metadata$categoryOpt;
+  const optionComboId = getCategoryOptionComboId(operand);
+  const categoryComboId = optionComboId && ((_metadata$categoryOpt = metadata.categoryOptionCombos) === null || _metadata$categoryOpt === void 0 || (_metadata$categoryOpt = _metadata$categoryOpt[optionComboId]) === null || _metadata$categoryOpt === void 0 ? void 0 : _metadata$categoryOpt.categoryComboId);
+  return categoryComboId ? dataSets.filter(dataSet => !dataSet.categoryComboId || dataSet.categoryComboId === categoryComboId) : dataSets;
+};
 const addDataElement = (collector, metadata, {
   id,
   operand,
@@ -45,7 +58,10 @@ const addDataElement = (collector, metadata, {
     return null;
   }
   const aggregationType = aggregationTypeOverride !== null && aggregationTypeOverride !== void 0 ? aggregationTypeOverride : dataElement.aggregationType;
-  const dataSets = (_dataElement$dataSets = dataElement.dataSets) !== null && _dataElement$dataSets !== void 0 ? _dataElement$dataSets : [];
+  const dataSets = getCollectingDataSets((_dataElement$dataSets = dataElement.dataSets) !== null && _dataElement$dataSets !== void 0 ? _dataElement$dataSets : [], {
+    operand,
+    metadata
+  });
   /* `operand`: the disaggregation analytics is asked for (de.coc), if any.
    * `aggregationLevels`: the org unit levels values from lower levels stop at */
   const element = {

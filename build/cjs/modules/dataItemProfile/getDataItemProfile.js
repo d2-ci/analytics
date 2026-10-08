@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getDataItemProfile = void 0;
-var _assignedOrgUnitLevels = require("./profile/assignedOrgUnitLevels.js");
 var _assignedPeriodTypes = require("./profile/assignedPeriodTypes.js");
 var _collectSources = require("./profile/collectSources.js");
 /**
@@ -20,9 +19,9 @@ var _collectSources = require("./profile/collectSources.js");
  *   when one of its operands has (SKIP_IF_ALL_VALUES_MISSING).
  * - `assignedPeriodTypes`: the period types of those data sets
  *   (getAssignedPeriodTypes).
- * - `assignedOrgUnitLevels`: the org unit levels its data sets and programs
- *   are assigned at (getAssignedOrgUnitLevels), when the metadata has the
- *   counts (`assignedOrgUnitCounts`, fetched by default).
+ * - `assignedOrgUnitLevels` is added by addAssignedOrgUnitLevels, from
+ *   counts fetched apart (fetchAssignedOrgUnitCounts, or an org unit
+ *   coverage).
  * - `unknown` and `reasons`: missing metadata makes the item unknown; it is
  *   never guessed.
  */
@@ -32,7 +31,7 @@ const getDataItemProfile = (item, metadata = {}) => {
     reasons,
     expression
   } = (0, _collectSources.collectSources)(item, metadata);
-  const profile = {
+  return {
     sources,
     ...(expression && {
       expression
@@ -41,6 +40,5 @@ const getDataItemProfile = (item, metadata = {}) => {
     reasons,
     assignedPeriodTypes: (0, _assignedPeriodTypes.getAssignedPeriodTypes)(sources)
   };
-  return metadata.assignedOrgUnitCounts ? (0, _assignedOrgUnitLevels.addAssignedOrgUnitLevels)(profile, metadata.assignedOrgUnitCounts) : profile;
 };
 exports.getDataItemProfile = getDataItemProfile;

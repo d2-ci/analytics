@@ -84,3 +84,12 @@ const toOperand = (expression, match) => {
  * functions chained after it.
  */
 export const parseExpressionOperands = expression => [...(expression !== null && expression !== void 0 ? expression : '').matchAll(OPERAND_REGEX)].map(match => toOperand(expression, match));
+
+/**
+ * The category option combo a disaggregation asks for (`de.coc`,
+ * `de.coc.aoc`), or undefined for a whole element or a wildcard (`de.*`).
+ */
+export const getCategoryOptionComboId = operand => {
+  const id = operand === null || operand === void 0 ? void 0 : operand.split('.')[1];
+  return id && id !== '*' ? id : undefined;
+};

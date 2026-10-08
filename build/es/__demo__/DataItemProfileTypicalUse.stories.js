@@ -71,6 +71,8 @@ const PeriodTypeMarks = ({
   periods: [periodType]
 }))))))));
 const formatCount = count => count.toLocaleString('en');
+
+// The total is there only when the org units were counted too (withAssignmentTotals)
 const describeAssignment = ({
   assigned,
   total,
@@ -78,7 +80,7 @@ const describeAssignment = ({
 }, levels) => {
   var _levels$find;
   const levelName = (_levels$find = levels.find(item => item.level === level)) === null || _levels$find === void 0 ? void 0 : _levels$find.name;
-  const counts = `${formatCount(assigned)} of ${formatCount(total)}`;
+  const counts = total === undefined ? formatCount(assigned) : `${formatCount(assigned)} of ${formatCount(total)}`;
   return `${counts} org units at level ${levelName !== null && levelName !== void 0 ? levelName : level}`;
 };
 const ORG_UNIT_NONE_ADVICE = {
@@ -153,24 +155,29 @@ const Columns = ({
   period,
   orgUnit
 }) => /*#__PURE__*/React.createElement("div", {
-  className: "jsx-2882414800" + " " + "columns"
+  className: "jsx-1264346061" + " " + "columns"
 }, /*#__PURE__*/React.createElement("section", {
-  className: "jsx-2882414800"
+  className: "jsx-1264346061"
 }, /*#__PURE__*/React.createElement("h4", {
-  className: "jsx-2882414800"
+  className: "jsx-1264346061"
 }, "Period"), period), /*#__PURE__*/React.createElement("section", {
-  className: "jsx-2882414800"
+  className: "jsx-1264346061"
 }, /*#__PURE__*/React.createElement("h4", {
-  className: "jsx-2882414800"
+  className: "jsx-1264346061"
 }, "Org unit"), orgUnit !== null && orgUnit !== void 0 ? orgUnit : /*#__PURE__*/React.createElement("p", {
-  className: "jsx-2882414800"
+  className: "jsx-1264346061"
 }, "Coming soon.")), /*#__PURE__*/React.createElement(_JSXStyle, {
-  id: "2882414800"
-}, [".columns.jsx-2882414800{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;-webkit-align-items:start;-webkit-box-align:start;-ms-flex-align:start;align-items:start;}", "h4.jsx-2882414800{margin-block:0 8px;font-size:14px;color:#4a5768;}", "section.jsx-2882414800+section.jsx-2882414800{border-inline-start:1px solid #d5dde5;padding-inline-start:16px;}"]));
+  id: "1264346061"
+}, [".columns.jsx-1264346061{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;-webkit-align-items:start;-webkit-box-align:start;-ms-flex-align:start;align-items:start;}", "h4.jsx-1264346061{margin-block:0 8px;font-size:14px;color:#4a5768;}", "section.jsx-1264346061{overflow-x:auto;}", "section.jsx-1264346061+section.jsx-1264346061{border-inline-start:1px solid #d5dde5;padding-inline-start:16px;}"]));
 Columns.propTypes = {
   orgUnit: PropTypes.node,
   period: PropTypes.node
 };
+
+// Before Update, both checks read today's metadata only
+const MetadataOnlyNotice = () => /*#__PURE__*/React.createElement(NoticeBox, {
+  title: "Derived from current metadata only"
+}, "Past data may have been entered with a different configuration.");
 export const TypicalUse = () => {
   const [selectedIds, setSelectedIds] = useState(['fbfJHSPpUQD', 'Uvn6LCg7dVU', 'YazgqXbizv1']);
   const [periodsText, setPeriodsText] = useState('2025W2');
@@ -191,6 +198,10 @@ export const TypicalUse = () => {
   } = useDataItemProfiles(items, {
     orgUnits: loadedOrgUnits
   });
+  // While a newly picked item loads, the others keep their profiles
+  const loadedItems = items.filter(({
+    id
+  }) => profiles === null || profiles === void 0 ? void 0 : profiles[id]);
   const toggle = id => setSelectedIds(ids => ids.includes(id) ? ids.filter(other => other !== id) : [...ids, id]);
   return /*#__PURE__*/React.createElement("div", null, tableStyle, /*#__PURE__*/React.createElement(ScenarioPanel, {
     title: "A user builds a chart in Data Visualizer",
@@ -205,13 +216,13 @@ export const TypicalUse = () => {
     onChange: () => toggle(id)
   })), loading && /*#__PURE__*/React.createElement(Loading, null), error && /*#__PURE__*/React.createElement(ErrorNotice, {
     error: error
-  }), profiles && items.length > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h3", null, "Pickers"), /*#__PURE__*/React.createElement(Columns, {
+  }), loadedItems.length > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h3", null, "Pickers"), /*#__PURE__*/React.createElement(Columns, {
     period: /*#__PURE__*/React.createElement(PeriodTypeMarks, {
-      items: items,
+      items: loadedItems,
       getDataItemCompatibility: getDataItemCompatibility
     }),
     orgUnit: orgUnitCoverage ? /*#__PURE__*/React.createElement(OrgUnitLevelMarks, {
-      items: items,
+      items: loadedItems,
       levels: orgUnitCoverage.levels,
       getDataItemCompatibility: getDataItemCompatibility
     }) : /*#__PURE__*/React.createElement(Loading, null)
@@ -224,11 +235,9 @@ export const TypicalUse = () => {
       onChange: ({
         value
       }) => setPeriodsText(value)
-    })), /*#__PURE__*/React.createElement(NoticeBox, {
-      title: "Derived from current metadata only"
-    }, "Past data may have been entered with a different configuration."), /*#__PURE__*/React.createElement("table", {
+    })), /*#__PURE__*/React.createElement(MetadataOnlyNotice, null), /*#__PURE__*/React.createElement("table", {
       className: "profiles"
-    }, /*#__PURE__*/React.createElement("tbody", null, items.map(({
+    }, /*#__PURE__*/React.createElement("tbody", null, loadedItems.map(({
       id,
       name
     }) => {
@@ -249,9 +258,9 @@ export const TypicalUse = () => {
       onChange: ({
         value
       }) => setOrgUnitsText(value)
-    })), /*#__PURE__*/React.createElement("table", {
+    })), /*#__PURE__*/React.createElement(MetadataOnlyNotice, null), /*#__PURE__*/React.createElement("table", {
       className: "profiles"
-    }, /*#__PURE__*/React.createElement("tbody", null, items.map(({
+    }, /*#__PURE__*/React.createElement("tbody", null, loadedItems.map(({
       id,
       name
     }) => {

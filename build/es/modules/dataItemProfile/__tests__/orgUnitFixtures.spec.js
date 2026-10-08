@@ -166,9 +166,12 @@ const judgeCase = async (hierarchy, {
     dimensionItemType: item.dimensionItemType
   }, getMetadata(itemId, item));
   const orgUnits = query.orgUnits.map(key => toSelectionItem(key, hierarchy));
-  const coverage = await fetchOrgUnitCoverage(createServer(hierarchy, item).createEngine(), {
+  const coverage = await fetchOrgUnitCoverage(createServer(hierarchy, item).createEngine(),
+  // With the totals, to check PARTLY_ASSIGNED too
+  {
     sourceKeys: getDataItemProfileSourceKeys([profile]),
-    orgUnits
+    orgUnits,
+    withAssignmentTotals: true
   });
   return getDataItemProfileOrgUnitCompatibility(profile, {
     orgUnits

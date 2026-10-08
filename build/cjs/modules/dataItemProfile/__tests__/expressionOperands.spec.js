@@ -97,3 +97,12 @@ describe('parseExpressionOperands', () => {
     expect((0, _expressionOperands.parseExpressionOperands)('1 + 2')).toEqual([]);
   });
 });
+describe('getCategoryOptionComboId', () => {
+  it('reads the option combo of a disaggregation', () => {
+    expect((0, _expressionOperands.getCategoryOptionComboId)('de.coc')).toBe('coc');
+    expect((0, _expressionOperands.getCategoryOptionComboId)('de.coc.aoc')).toBe('coc');
+    expect((0, _expressionOperands.getCategoryOptionComboId)('de.*.aoc')).toBeUndefined();
+    expect((0, _expressionOperands.getCategoryOptionComboId)('de')).toBeUndefined();
+    expect((0, _expressionOperands.getCategoryOptionComboId)(undefined)).toBeUndefined();
+  });
+});

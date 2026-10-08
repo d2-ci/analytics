@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getSourceResult = exports.getOperandResult = void 0;
+exports.getSourceResult = exports.getOperandSourceResults = exports.getOperandResult = void 0;
 var _constants = require("../constants.js");
 var _firstLastValues = require("../periods/firstLastValues.js");
 var _periodRanges = require("../periods/periodRanges.js");
@@ -77,15 +77,21 @@ const getSourceResult = (source, query) => {
   }
   return (0, _combineResults.combineResults)(results);
 };
+
+// Each source of one operand (getItemOperands) for one query, aligned with its `sources`
 exports.getSourceResult = getSourceResult;
-const getOperandResult = ({
+const getOperandSourceResults = ({
   element,
   reportingRate,
   sources
-}, query) => {
+}, query) => sources.map(source => {
   if (element) {
-    return (0, _combineResults.combineAddedUpResults)(sources.map(source => getElementResult(element, (0, _assignedPeriodTypes.getSourcePeriodType)(source), query)));
+    return getElementResult(element, (0, _assignedPeriodTypes.getSourcePeriodType)(source), query);
   }
-  return reportingRate ? getReportingRateResult((0, _assignedPeriodTypes.getSourcePeriodType)(sources[0]), query) : getProgramResult(sources[0], query);
-};
+  return reportingRate ? getReportingRateResult((0, _assignedPeriodTypes.getSourcePeriodType)(source), query) : getProgramResult(source, query);
+});
+
+// One operand for one query: an element adds up over its data sets
+exports.getOperandSourceResults = getOperandSourceResults;
+const getOperandResult = (operand, query) => (0, _combineResults.combineAddedUpResults)(getOperandSourceResults(operand, query));
 exports.getOperandResult = getOperandResult;

@@ -79,6 +79,9 @@ const byIdFilter = resource => jest.fn((type, {
     }))
   };
 });
+const isAssignedCount = ({
+  filter
+}) => filter.some(condition => condition.startsWith('dataSets.id'));
 const createData = (overrides = {}) => ({
   dataElements: byIdFilter('dataElements'),
   indicators: byIdFilter('indicators'),
@@ -96,12 +99,12 @@ const createData = (overrides = {}) => ({
       level: 1
     }]
   },
-  // Counts with pageSize=1 (3 org units, 2 of them with filters on a data set)
+  // Counts with pageSize=1: 3 org units, 2 of them assigned the data set
   organisationUnits: (type, {
     params
   }) => params.pageSize === 1 ? {
     pager: {
-      total: params.filter.length === 3 ? 2 : 3
+      total: isAssignedCount(params) ? 2 : 3
     }
   } : {
     organisationUnits: [{
@@ -190,39 +193,35 @@ describe('useDataItemProfiles', () => {
     })).toBe(undefined);
   });
   it('judges org units from where data sets are assigned', async () => {
-    const organisationUnits = jest.fn((type, {
-      params
-    }) => params.pageSize === 1 ? {
-      pager: {
-        total: params.filter.length === 3 ? 2 : 3
-      }
-    } : {
-      organisationUnits: [{
-        id: 'nationUnit1',
-        level: 1,
-        path: '/nationUnit1'
-      }]
-    });
-    const {
-      result
-    } = renderProfiles([{
+    const assigned = [{
       id: 'assigned',
       dimensionItemType: 'DATA_ELEMENT'
-    }], createData({
-      organisationUnits,
-      organisationUnitLevels: {
-        organisationUnitLevels: [{
-          id: 'levelOne111',
-          level: 1
-        }]
+    }];
+    const resultAt = async options => {
+      const {
+        result
+      } = renderProfiles(assigned, createData(), {
+        orgUnits: ['nationUnit1'],
+        ...options
+      });
+      await waitFor(() => expect(result.current.orgUnitCoverage).toBeDefined());
+      expect(result.current.loading).toBe(false);
+      return result.current.getDataItemCompatibility('assigned', {
+        orgUnits: ['nationUnit1']
+      }).orgUnits[0];
+    };
+    expect(await resultAt()).toEqual({
+      id: 'nationUnit1',
+      status: 'full',
+      reasons: [],
+      assignment: {
+        assigned: 2,
+        level: 1
       }
-    }), {
-      orgUnits: ['nationUnit1']
     });
-    await waitFor(() => expect(result.current.orgUnitCoverage).toBeDefined());
-    expect(result.current.getDataItemCompatibility('assigned', {
-      orgUnits: ['nationUnit1']
-    }).orgUnits).toEqual([{
+    expect(await resultAt({
+      withAssignmentTotals: true
+    })).toEqual({
       id: 'nationUnit1',
       status: 'full',
       reasons: ['PARTLY_ASSIGNED'],
@@ -231,32 +230,21 @@ describe('useDataItemProfiles', () => {
         total: 3,
         level: 1
       }
-    }]);
-    expect(result.current.loading).toBe(false);
+    });
   });
-  it('gives profiles their assigned org unit levels, or from the coverage when told not to count them', async () => {
+  it('gives profiles their assigned org unit levels once org units are loaded', async () => {
     const assigned = [{
       id: 'assigned',
       dimensionItemType: 'DATA_ELEMENT'
     }];
-    const byDefault = renderProfiles(assigned);
-    await waitFor(() => expect(byDefault.result.current.profiles).toBeDefined());
-    expect(byDefault.result.current.profiles.assigned.assignedOrgUnitLevels).toEqual({
-      levels: [1],
-      deepestLevel: 1,
-      hasSeveral: false
-    });
-    const skipped = renderProfiles(assigned, createData(), {
-      withAssignedOrgUnitCounts: false
-    });
-    await waitFor(() => expect(skipped.result.current.profiles).toBeDefined());
-    expect(skipped.result.current.profiles.assigned.assignedOrgUnitLevels).toBeUndefined();
-    const filledLater = renderProfiles(assigned, createData(), {
-      withAssignedOrgUnitCounts: false,
+    const withoutOrgUnits = renderProfiles(assigned);
+    await waitFor(() => expect(withoutOrgUnits.result.current.profiles).toBeDefined());
+    expect(withoutOrgUnits.result.current.profiles.assigned.assignedOrgUnitLevels).toBeUndefined();
+    const withOrgUnits = renderProfiles(assigned, createData(), {
       orgUnits: ['nationUnit1']
     });
-    await waitFor(() => expect(filledLater.result.current.orgUnitCoverage).toBeDefined());
-    expect(filledLater.result.current.profiles.assigned.assignedOrgUnitLevels).toEqual({
+    await waitFor(() => expect(withOrgUnits.result.current.orgUnitCoverage).toBeDefined());
+    expect(withOrgUnits.result.current.profiles.assigned.assignedOrgUnitLevels).toEqual({
       levels: [1],
       deepestLevel: 1,
       hasSeveral: false

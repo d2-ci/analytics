@@ -65,6 +65,13 @@ describe('fetchDataItemProfileMetadata', () => {
       prB: {
         programType: 'WITHOUT_REGISTRATION'
       }
+    },
+    categoryOptionCombos: {
+      coc: {
+        categoryCombo: {
+          id: 'comboA'
+        }
+      }
     }
   };
   const createEngine = (objects = server) => ({
@@ -84,11 +91,7 @@ describe('fetchDataItemProfileMetadata', () => {
       };
     })
   });
-
-  // Without the org unit level counts, which have their own test
-  const fetchMetadata = (engine, items) => fetchDataItemProfileMetadata(engine, items, {
-    withAssignedOrgUnitCounts: false
-  });
+  const fetchMetadata = (engine, items) => fetchDataItemProfileMetadata(engine, items);
   const requestsOf = engine => engine.query.mock.calls.map(([query, {
     variables
   }]) => [Object.keys(query)[0], variables.ids]);
@@ -104,7 +107,9 @@ describe('fetchDataItemProfileMetadata', () => {
       id: 'pi',
       dimensionItemType: 'PROGRAM_INDICATOR'
     }]);
-    expect(requestsOf(engine)).toEqual([['indicators', ['outer']], ['expressionDimensionItems', ['edi']], ['programIndicators', ['pi']], ['dataElements', ['deA']], ['indicators', ['coverage']], ['dataSets', ['dsA']], ['programs', ['prB', 'prA']], ['dataElements', ['dePop']]]);
+    expect(requestsOf(engine)).toEqual([['indicators', ['outer']], ['expressionDimensionItems', ['edi']], ['programIndicators', ['pi']], ['dataElements', ['deA']], ['indicators', ['coverage']], ['dataSets', ['dsA']], ['programs', ['prB', 'prA']], ['dataElements', ['dePop']],
+    // The disaggregation of #{deA.coc}, to tell which data sets collect it
+    ['categoryOptionCombos', ['coc']]]);
     expect(getDataItemProfile({
       id: 'outer',
       dimensionItemType: 'INDICATOR'
@@ -147,7 +152,7 @@ describe('fetchDataItemProfileMetadata', () => {
       id: 'dsA.REPORTING_RATE',
       dimensionItemType: 'REPORTING_RATE'
     }]);
-    expect(requestsOf(engine)).toEqual([['dataElements', ['deA', 'dePop']], ['dataSets', ['dsA']]]);
+    expect(requestsOf(engine)).toEqual([['dataElements', ['deA', 'dePop']], ['dataSets', ['dsA']], ['categoryOptionCombos', ['coc']]]);
   });
   it('sends nothing without items that need metadata', async () => {
     const engine = createEngine();
@@ -202,51 +207,6 @@ describe('fetchDataItemProfileMetadata', () => {
       dimensionItemType: 'DATA_ELEMENT'
     }])).rejects.toThrow('offline');
   });
-  it('counts the org units each data set is assigned to per level, by default', async () => {
-    const metadataEngine = createEngine();
-    const engine = {
-      query: jest.fn(async (query, options) => {
-        if (query.levels) {
-          return {
-            levels: {
-              organisationUnitLevels: [{
-                id: 'levelTwo222',
-                level: 2
-              }, {
-                id: 'levelOne111',
-                level: 1
-              }]
-            }
-          };
-        }
-        const counts = Object.entries(query).filter(([key]) => key.startsWith('query'));
-        return counts.length ? Object.fromEntries(counts.map(([key, {
-          params
-        }]) => [key, {
-          pager: {
-            total: params.filter.includes('level:eq:2') ? 5 : 0
-          }
-        }])) : metadataEngine.query(query, options);
-      })
-    };
-    const metadata = await fetchDataItemProfileMetadata(engine, [{
-      id: 'dsA.REPORTING_RATE',
-      dimensionItemType: 'REPORTING_RATE'
-    }]);
-    expect(metadata.assignedOrgUnitCounts).toMatchObject({
-      dsA: {
-        2: 5
-      }
-    });
-    expect(getDataItemProfile({
-      id: 'dsA.REPORTING_RATE',
-      dimensionItemType: 'REPORTING_RATE'
-    }, metadata).assignedOrgUnitLevels).toEqual({
-      levels: [2],
-      deepestLevel: 2,
-      hasSeveral: false
-    });
-  });
   it('fetches only what the known metadata lacks', async () => {
     const engine = createEngine();
     const known = await fetchMetadata(engine, [{
@@ -261,41 +221,9 @@ describe('fetchDataItemProfileMetadata', () => {
       id: 'dePop',
       dimensionItemType: 'DATA_ELEMENT'
     }], {
-      withAssignedOrgUnitCounts: false,
       known
     });
     expect(requestsOf(engine)).toEqual([['dataElements', ['dePop']]]);
     expect(Object.keys(metadata.dataElements)).toEqual(['deA', 'dePop']);
-  });
-  it('reuses known levels and assigned counts', async () => {
-    const engine = createEngine();
-    const metadata = await fetchDataItemProfileMetadata(engine, [{
-      id: 'deA',
-      dimensionItemType: 'DATA_ELEMENT'
-    }], {
-      known: {
-        orgUnitLevels: [{
-          id: 'levelOne111',
-          level: 1
-        }],
-        assignedOrgUnitCounts: {
-          dsMonthly: {
-            1: 3
-          }
-        }
-      }
-    });
-    expect(requestsOf(engine)).toEqual([['dataElements', ['deA']]]);
-    expect(metadata).toMatchObject({
-      orgUnitLevels: [{
-        id: 'levelOne111',
-        level: 1
-      }],
-      assignedOrgUnitCounts: {
-        dsMonthly: {
-          1: 3
-        }
-      }
-    });
   });
 });

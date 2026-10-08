@@ -3,24 +3,36 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.withAssignment = exports.getOperandResult = void 0;
+exports.withAssignment = exports.isPartlyAssigned = exports.isNotAssigned = exports.getOperandSourceResults = exports.getOperandResult = void 0;
 var _constants = require("../constants.js");
 var _assignedOrgUnitLevels = require("../profile/assignedOrgUnitLevels.js");
 var _sources = require("../sources.js");
 var _combineResults = require("./combineResults.js");
 /* Org unit results carry `assignment`: how many org units at the deepest
- * level assigned are assigned ({ assigned, total, level }), or null */
+ * level assigned are assigned ({ assigned, level }, and `total` when the
+ * coverage counted the org units there), or null */
 const withAssignment = (result, assignment = null) => ({
   ...result,
   assignment
 });
+
+// Known only when the coverage counted the org units at that level
+exports.withAssignment = withAssignment;
+const isPartlyAssigned = ({
+  assigned,
+  total
+}) => total !== undefined && assigned < total;
+exports.isPartlyAssigned = isPartlyAssigned;
+const getAssignedShare = ({
+  assigned,
+  total
+}) => total ? assigned / total : 1;
 
 /* Analytics nulls the levels up to each aggregation level for values from
  * org units below it (dhis2-core AggregationLevelsHelper): a value from
  * `assignedLevel` can't reach `requestedLevel` when an aggregation level lies
  * between them (requestedLevel ≤ L < assignedLevel; checked by the test tool
  * on 2.40 to 2.44) */
-exports.withAssignment = withAssignment;
 const isBlockedByAggregationLevel = (assignedLevel, requestedLevel, aggregationLevels) => aggregationLevels.some(aggregationLevel => requestedLevel <= aggregationLevel && aggregationLevel < assignedLevel);
 
 /* Values that don't reach the level asked are assigned higher when the
@@ -42,7 +54,6 @@ const getSourceResult = ({
   totals,
   level
 }) => {
-  var _totals$deepestLevel;
   const {
     byLevel = {},
     ancestors = 0
@@ -62,12 +73,14 @@ const getSourceResult = ({
   const deepestLevel = Math.max(...reaching);
   const assignment = {
     assigned: byLevel[deepestLevel],
-    total: (_totals$deepestLevel = totals[deepestLevel]) !== null && _totals$deepestLevel !== void 0 ? _totals$deepestLevel : byLevel[deepestLevel],
+    ...(totals[deepestLevel] !== undefined && {
+      total: totals[deepestLevel]
+    }),
     level: deepestLevel
   };
 
   // Org units it isn't assigned to have no values: nothing is left out
-  return withAssignment((0, _combineResults.createResult)(_constants.COMPATIBILITY_FULL, assignment.assigned < assignment.total ? [_constants.REASON_PARTLY_ASSIGNED] : []), assignment);
+  return withAssignment((0, _combineResults.createResult)(_constants.COMPATIBILITY_FULL, isPartlyAssigned(assignment) ? [_constants.REASON_PARTLY_ASSIGNED] : []), assignment);
 };
 const AT_ANY_ORG_UNIT = withAssignment((0, _combineResults.createResult)(_constants.COMPATIBILITY_FULL, [_constants.REASON_ANY_ORG_UNIT]));
 const isLeftOut = ({
@@ -89,20 +102,21 @@ const combineSources = bySource => {
   }
   const bestAssignment = filling.map(({
     assignment
-  }) => assignment).filter(Boolean).sort((a, b) => b.assigned / b.total - a.assigned / a.total)[0];
+  }) => assignment).filter(Boolean).sort((a, b) => getAssignedShare(b) - getAssignedShare(a))[0];
   // Partly assigned only when no source is assigned to all its org units
-  const isPartlyAssigned = bestAssignment && bestAssignment.assigned < bestAssignment.total;
-  return withAssignment((0, _combineResults.createResult)(leftOut ? _constants.COMPATIBILITY_PARTIAL : _constants.COMPATIBILITY_FULL, reasons.filter(reason => reason !== _constants.REASON_NOT_ASSIGNED && (reason !== _constants.REASON_PARTLY_ASSIGNED || isPartlyAssigned))), bestAssignment);
+  const isPartly = Boolean(bestAssignment) && isPartlyAssigned(bestAssignment);
+  return withAssignment((0, _combineResults.createResult)(leftOut ? _constants.COMPATIBILITY_PARTIAL : _constants.COMPATIBILITY_FULL, reasons.filter(reason => reason !== _constants.REASON_NOT_ASSIGNED && (reason !== _constants.REASON_PARTLY_ASSIGNED || isPartly))), bestAssignment);
 };
 
 /**
- * One operand ({ element, sources }, getItemOperands) at one requested level,
- * from the counts kept for it in the coverage, with the `level` asked.
+ * Each source of one operand ({ element, sources }, getItemOperands) at one
+ * requested level, from the counts kept for it in the coverage, with the
+ * `level` asked; aligned with `sources`.
  */
-const getOperandResult = ({
+const getOperandSourceResults = ({
   element,
   sources
-}, counts) => combineSources(sources.map(source => {
+}, counts) => sources.map(source => {
   var _counts$sources, _counts$totals;
   return (0, _sources.canBeAtAnyOrgUnit)(source) ? AT_ANY_ORG_UNIT : getSourceResult({
     sourceCounts: (_counts$sources = counts.sources) === null || _counts$sources === void 0 ? void 0 : _counts$sources[(0, _sources.getSourceId)(source)],
@@ -110,5 +124,16 @@ const getOperandResult = ({
     totals: (_counts$totals = counts.totals) !== null && _counts$totals !== void 0 ? _counts$totals : {},
     level: counts.level
   });
-}));
+});
+
+// A source not assigned there doesn't apply: it leaves nothing out
+exports.getOperandSourceResults = getOperandSourceResults;
+const isNotAssigned = ({
+  status,
+  reasons
+}) => status === _constants.COMPATIBILITY_NONE && reasons.every(reason => reason === _constants.REASON_NOT_ASSIGNED);
+
+// One operand at one requested level, over its sources
+exports.isNotAssigned = isNotAssigned;
+const getOperandResult = (operand, counts) => combineSources(getOperandSourceResults(operand, counts));
 exports.getOperandResult = getOperandResult;

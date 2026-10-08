@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.parseExpressionOperands = void 0;
+exports.parseExpressionOperands = exports.getCategoryOptionComboId = void 0;
 var _dataSets = require("../dataSets.js");
 var _dataTypes = require("../dataTypes.js");
 var _constants = require("./constants.js");
@@ -89,4 +89,14 @@ const toOperand = (expression, match) => {
  * functions chained after it.
  */
 const parseExpressionOperands = expression => [...(expression !== null && expression !== void 0 ? expression : '').matchAll(OPERAND_REGEX)].map(match => toOperand(expression, match));
+
+/**
+ * The category option combo a disaggregation asks for (`de.coc`,
+ * `de.coc.aoc`), or undefined for a whole element or a wildcard (`de.*`).
+ */
 exports.parseExpressionOperands = parseExpressionOperands;
+const getCategoryOptionComboId = operand => {
+  const id = operand === null || operand === void 0 ? void 0 : operand.split('.')[1];
+  return id && id !== '*' ? id : undefined;
+};
+exports.getCategoryOptionComboId = getCategoryOptionComboId;

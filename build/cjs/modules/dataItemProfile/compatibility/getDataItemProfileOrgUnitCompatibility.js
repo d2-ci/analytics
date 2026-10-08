@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getDataItemProfileOrgUnitCompatibility = void 0;
+exports.getSelectionItemLevels = exports.getDataItemProfileOrgUnitCompatibility = void 0;
 var _constants = require("../constants.js");
 var _orgUnitSelection = require("../orgUnits/orgUnitSelection.js");
 var _sources = require("../sources.js");
@@ -11,7 +11,8 @@ var _combineResults = require("./combineResults.js");
 var _orgUnitSourceResults = require("./orgUnitSourceResults.js");
 /* The org units of all requested levels add up: only those that are
  * assigned count, and the assignment adds up over all of them (an org unit
- * with nothing assigned adds its org units to the total) */
+ * with nothing assigned adds its org units to the total). The total is
+ * known only when every part's total was counted. */
 const addUpAssignments = judged => {
   const assignments = judged.map(({
     result
@@ -21,16 +22,18 @@ const addUpAssignments = judged => {
   }
   const level = Math.max(...assignments.map(assignment => assignment.level));
   const assigned = assignments.reduce((sum, item) => sum + item.assigned, 0);
-  const total = judged.reduce((sum, {
+  const totals = judged.map(({
     result,
     counts
   }) => {
-    var _ref, _result$assignment$to, _result$assignment, _counts$totals;
-    return sum + ((_ref = (_result$assignment$to = (_result$assignment = result.assignment) === null || _result$assignment === void 0 ? void 0 : _result$assignment.total) !== null && _result$assignment$to !== void 0 ? _result$assignment$to : (_counts$totals = counts.totals) === null || _counts$totals === void 0 ? void 0 : _counts$totals[level]) !== null && _ref !== void 0 ? _ref : 0);
-  }, 0);
+    var _result$assignment$to, _result$assignment, _counts$totals;
+    return (_result$assignment$to = (_result$assignment = result.assignment) === null || _result$assignment === void 0 ? void 0 : _result$assignment.total) !== null && _result$assignment$to !== void 0 ? _result$assignment$to : (_counts$totals = counts.totals) === null || _counts$totals === void 0 ? void 0 : _counts$totals[level];
+  });
   return {
     assigned,
-    total,
+    ...(totals.every(total => total !== undefined) && {
+      total: totals.reduce((sum, total) => sum + total, 0)
+    }),
     level
   };
 };
@@ -62,11 +65,11 @@ const combineRequestedLevels = judged => {
   const status = results.some(leavesValuesOut) ? _constants.COMPATIBILITY_PARTIAL : (0, _combineResults.getMostSevere)(results.filter(({
     status
   }) => status !== _constants.COMPATIBILITY_NONE)).status;
-  const isPartlyAssigned = assignment && assignment.assigned < assignment.total;
+  const isPartly = Boolean(assignment) && (0, _orgUnitSourceResults.isPartlyAssigned)(assignment);
   return (0, _orgUnitSourceResults.withAssignment)((0, _combineResults.createResult)(status, (0, _combineResults.unionOfReasons)([{
     reasons: reasons.filter(reason => reason !== _constants.REASON_NOT_ASSIGNED && reason !== _constants.REASON_PARTLY_ASSIGNED)
   }, {
-    reasons: isPartlyAssigned ? [_constants.REASON_PARTLY_ASSIGNED] : []
+    reasons: isPartly ? [_constants.REASON_PARTLY_ASSIGNED] : []
   }])), assignment);
 };
 
@@ -84,19 +87,29 @@ const isEmptyGroup = (selectionItem, coverage) => {
   var _coverage$groups;
   return selectionItem.type === _constants.ORG_UNIT_ITEM_TYPE_GROUP && ((_coverage$groups = coverage.groups) === null || _coverage$groups === void 0 ? void 0 : _coverage$groups[selectionItem.groupId]) && !Object.values(coverage.groups[selectionItem.groupId]).some(members => members > 0);
 };
-const getSelectionItemCompatibility = (selectionItem, {
-  item,
+
+/**
+ * The counts a selection item is judged by, one per level analytics
+ * aggregates to under each parent (`{ levels: [counts] }`, each with the
+ * `level` asked), or its result when it needs none (`{ result }`: an empty
+ * group, an org unit not loaded, no org unit there).
+ */
+const getSelectionItemLevels = (selectionItem, {
   parentItems,
   coverage
 }) => {
   if (isEmptyGroup(selectionItem, coverage)) {
-    return (0, _orgUnitSourceResults.withAssignment)((0, _combineResults.createResult)(_constants.COMPATIBILITY_NONE, [_constants.REASON_EMPTY_GROUP]));
+    return {
+      result: (0, _orgUnitSourceResults.withAssignment)((0, _combineResults.createResult)(_constants.COMPATIBILITY_NONE, [_constants.REASON_EMPTY_GROUP]))
+    };
   }
   const requestedLevels = (0, _orgUnitSelection.getRequestedLevels)(selectionItem, parentItems, coverage);
   if (!requestedLevels) {
-    return (0, _orgUnitSourceResults.withAssignment)((0, _combineResults.getUnknownResult)(_constants.REASON_UNKNOWN_ORG_UNIT));
+    return {
+      result: (0, _orgUnitSourceResults.withAssignment)((0, _combineResults.getUnknownResult)(_constants.REASON_UNKNOWN_ORG_UNIT))
+    };
   }
-  const judged = requestedLevels
+  const levels = requestedLevels
   // Parents a group has no member under add nothing
   .filter(({
     groupId,
@@ -108,19 +121,36 @@ const getSelectionItemCompatibility = (selectionItem, {
   }).map(({
     countsKey,
     level
-  }) => {
-    const counts = {
-      ...coverage.counts[countsKey],
-      level
-    };
-    return {
-      counts,
-      result: getResultAtLevel(item, counts)
-    };
+  }) => ({
+    ...coverage.counts[countsKey],
+    level
+  }));
+  return levels.length ? {
+    levels
+  } : {
+    result: (0, _orgUnitSourceResults.withAssignment)((0, _combineResults.createResult)(_constants.COMPATIBILITY_NONE, [_constants.REASON_NO_ORG_UNITS_AT_LEVEL]))
+  };
+};
+exports.getSelectionItemLevels = getSelectionItemLevels;
+const getSelectionItemCompatibility = (selectionItem, {
+  item,
+  parentItems,
+  coverage
+}) => {
+  const {
+    result,
+    levels
+  } = getSelectionItemLevels(selectionItem, {
+    parentItems,
+    coverage
   });
-  if (!judged.length) {
-    return (0, _orgUnitSourceResults.withAssignment)((0, _combineResults.createResult)(_constants.COMPATIBILITY_NONE, [_constants.REASON_NO_ORG_UNITS_AT_LEVEL]));
+  if (result) {
+    return result;
   }
+  const judged = levels.map(counts => ({
+    counts,
+    result: getResultAtLevel(item, counts)
+  }));
   return judged.length === 1 ? judged[0].result : combineRequestedLevels(judged);
 };
 
