@@ -28,7 +28,7 @@ const dataItemProfileMetadataQueries = exports.dataItemProfileMetadataQueries = 
   },
   expressionDimensionItems: {
     resource: 'expressionDimensionItems',
-    ...byIds('id,expression,missingValueStrategy')
+    ...byIds('id,expression')
   },
   programIndicators: {
     resource: 'programIndicators',
@@ -95,13 +95,9 @@ const normalizers = {
     periodType: getPeriodTypeName(periodType)
   }),
   expressionDimensionItems: ({
-    expression,
-    missingValueStrategy
+    expression
   }) => ({
-    expression,
-    ...(missingValueStrategy && {
-      missingValueStrategy
-    })
+    expression
   }),
   programIndicators: ({
     program,

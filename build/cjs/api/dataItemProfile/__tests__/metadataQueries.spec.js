@@ -1,7 +1,9 @@
 "use strict";
 
 var _metadataShapes = _interopRequireDefault(require("../../../__fixtures__/period-types/metadata-shapes.json"));
+var _constants = require("../../../modules/dataItemProfile/constants.js");
 var _metadataQueries = require("../metadataQueries.js");
+var _orgUnitQueries = require("../orgUnitQueries.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const getResponses = ({
   requests
@@ -37,7 +39,7 @@ const splitFields = fields => {
 /* Fields the test tool's requests named after a resource don't ask for, so
  * their shape on each version is unchecked: aggregationLevels has a request
  * of its own (dataElements-aggregationLevels); the others aren't recorded */
-const NOT_RECORDED = ['aggregationLevels', 'analyticsPeriodBoundaries[id]', 'missingValueStrategy', 'categoryCombo[id]', 'dataSetElements[dataSet[id,periodType],categoryCombo[id]]'];
+const NOT_RECORDED = ['aggregationLevels', 'analyticsPeriodBoundaries[id]', 'categoryCombo[id]', 'dataSetElements[dataSet[id,periodType],categoryCombo[id]]'];
 describe('normalizeDataItemProfileMetadata', () => {
   describe.each(Object.entries(_metadataShapes.default.versions))('the responses of %s', (_, shapes) => {
     const responses = getResponses(shapes);
@@ -71,6 +73,31 @@ describe('normalizeDataItemProfileMetadata', () => {
     });
     it('give each expression dimension item its expression', () => {
       Object.values(metadata.expressionDimensionItems).forEach(item => expect(typeof item.expression).toBe('string'));
+    });
+
+    // The smoke subset keeps a few of each version's types; the full export matched all of them
+    it('list period types with the frequency order the library keeps', () => {
+      const {
+        periodTypes
+      } = responses.periodTypes;
+      expect(periodTypes.length).toBeGreaterThan(0);
+      periodTypes.forEach(({
+        name,
+        frequencyOrder
+      }) => expect([name, _constants.PERIOD_TYPE_FREQUENCY_ORDER[name]]).toEqual([name, frequencyOrder]));
+    });
+    it('give each org unit count in the pager', () => {
+      const counts = shapes.requests.filter(({
+        name
+      }) => name.startsWith('count-'));
+      expect(counts.length).toBeGreaterThan(0);
+      counts.forEach(({
+        name,
+        response
+      }) => expect([name, (0, _orgUnitQueries.getTotal)(response)]).toEqual([name, response.pager.total]));
+      counts.forEach(({
+        response
+      }) => expect(typeof response.pager.total).toBe('number'));
     });
     it('were recorded with every field the library asks for', () => {
       shapes.requests.filter(({
@@ -234,28 +261,6 @@ describe('normalizeDataItemProfileMetadata', () => {
         under1Year1: {
           categoryComboId: 'ageGroupsCo'
         }
-      }
-    });
-  });
-  it('keeps the missing value strategy of an expression dimension item', () => {
-    expect((0, _metadataQueries.normalizeDataItemProfileMetadata)({
-      expressionDimensionItems: {
-        expressionDimensionItems: [{
-          id: 'sumNeedingA',
-          expression: '#{a}+#{b}',
-          missingValueStrategy: 'SKIP_IF_ANY_VALUE_MISSING'
-        }, {
-          id: 'sumByDefaul',
-          expression: '#{a}+#{b}'
-        }]
-      }
-    }).expressionDimensionItems).toEqual({
-      sumNeedingA: {
-        expression: '#{a}+#{b}',
-        missingValueStrategy: 'SKIP_IF_ANY_VALUE_MISSING'
-      },
-      sumByDefaul: {
-        expression: '#{a}+#{b}'
       }
     });
   });

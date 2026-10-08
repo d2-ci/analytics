@@ -272,14 +272,15 @@ describe('getDataItemProfileCompatibility', () => {
     it('need both sides of a nested indicator', () => {
       expect(outcomeOf(indicator('sumOverRatio'), ['202501'])).toEqual(none(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
     });
-    it('follow the missing value strategy of an expression dimension item', () => {
+    it('add up the operands of an expression dimension item, whatever its strategy', () => {
       const expressionItem = id => ({
         id,
         dimensionItemType: 'EXPRESSION_DIMENSION_ITEM'
       });
       expect(outcomeOf(expressionItem('sumByDefault'), ['202501'])).toEqual(partial(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
       expect(outcomeOf(expressionItem('sumNeverSkipped'), ['202501'])).toEqual(partial(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
-      expect(outcomeOf(expressionItem('sumNeedingAll'), ['202501'])).toEqual(none(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
+      // Analytics ignores SKIP_IF_ANY_VALUE_MISSING: a value comes back
+      expect(outcomeOf(expressionItem('sumNeedingAll'), ['202501'])).toEqual(partial(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
     });
     it('say nothing more with one operand', () => {
       expect(outcomeOf(indicator('timesTwelve'), ['2025W2'])).toEqual(none(['PERIOD_TOO_SHORT']));

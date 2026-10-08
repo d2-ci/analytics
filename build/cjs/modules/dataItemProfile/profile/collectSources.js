@@ -206,12 +206,14 @@ const addIndicator = (collector, metadata, id) => {
     parts: sides
   };
 };
+
+/* Analytics evaluates an expression dimension item with
+ * SKIP_IF_ALL_VALUES_MISSING, whatever strategy it is saved with: a missing
+ * operand counts as 0, and no value comes back only when all are missing,
+ * even with NEVER_SKIP (checked by the test tool on 2.40 to 2.44) */
 const addExpressionDimensionItem = (collector, metadata, id) => {
-  var _metadata$expressionD, _metadata$expressionD2;
-  const {
-    expression,
-    missingValueStrategy
-  } = (_metadata$expressionD = (_metadata$expressionD2 = metadata.expressionDimensionItems) === null || _metadata$expressionD2 === void 0 ? void 0 : _metadata$expressionD2[id]) !== null && _metadata$expressionD !== void 0 ? _metadata$expressionD : {};
+  var _metadata$expressionD;
+  const expression = (_metadata$expressionD = metadata.expressionDimensionItems) === null || _metadata$expressionD === void 0 || (_metadata$expressionD = _metadata$expressionD[id]) === null || _metadata$expressionD === void 0 ? void 0 : _metadata$expressionD.expression;
   if (expression === undefined) {
     (0, _sourceCollector.addReason)(collector, {
       code: _constants.PROFILE_REASON_MISSING_METADATA,
@@ -221,7 +223,7 @@ const addExpressionDimensionItem = (collector, metadata, id) => {
   }
   return addExpression(collector, metadata, {
     expression,
-    missingValueStrategy: missingValueStrategy !== null && missingValueStrategy !== void 0 ? missingValueStrategy : _constants.SKIP_IF_ALL_VALUES_MISSING
+    missingValueStrategy: _constants.SKIP_IF_ALL_VALUES_MISSING
   });
 };
 const addItem = (collector, metadata, {

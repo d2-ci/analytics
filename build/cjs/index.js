@@ -268,7 +268,6 @@ var _exportNames = {
   PROFILE_REASON_NOT_AGGREGATABLE: true,
   SKIP_IF_ANY_VALUE_MISSING: true,
   SKIP_IF_ALL_VALUES_MISSING: true,
-  NEVER_SKIP: true,
   fetchDataItemProfileMetadata: true,
   fetchAssignedOrgUnitCounts: true,
   getDataItemProfileSourceKeys: true,
@@ -983,12 +982,6 @@ Object.defineProperty(exports, "MONTHLY", {
   enumerable: true,
   get: function () {
     return _index12.MONTHLY;
-  }
-});
-Object.defineProperty(exports, "NEVER_SKIP", {
-  enumerable: true,
-  get: function () {
-    return _constants.NEVER_SKIP;
   }
 });
 Object.defineProperty(exports, "OfflineTooltip", {

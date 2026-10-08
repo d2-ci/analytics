@@ -50,7 +50,7 @@ describe('combineResults', () => {
     });
     it('adds operands up when a missing value counts as 0', () => {
       expect((0, _combineResults.combineOperandResults)([full(), none(['PERIOD_TOO_SHORT'])], 'SKIP_IF_ALL_VALUES_MISSING')).toEqual(partial(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
-      expect((0, _combineResults.combineOperandResults)([none(['PERIOD_TOO_SHORT']), partial(['REPEATED_VALUE'])], 'NEVER_SKIP')).toEqual(partial(['OPERAND_EMPTY', 'OPERAND_PARTIAL', 'PERIOD_TOO_SHORT', 'REPEATED_VALUE']));
+      expect((0, _combineResults.combineOperandResults)([none(['PERIOD_TOO_SHORT']), partial(['REPEATED_VALUE'])], 'SKIP_IF_ALL_VALUES_MISSING')).toEqual(partial(['OPERAND_EMPTY', 'OPERAND_PARTIAL', 'PERIOD_TOO_SHORT', 'REPEATED_VALUE']));
       expect((0, _combineResults.combineOperandResults)([none(['PERIOD_TOO_SHORT']), none(['PERIOD_TOO_SHORT'])], 'SKIP_IF_ALL_VALUES_MISSING')).toEqual(none(['OPERAND_EMPTY', 'PERIOD_TOO_SHORT']));
     });
     it('says nothing more for a single operand, or a full result', () => {
