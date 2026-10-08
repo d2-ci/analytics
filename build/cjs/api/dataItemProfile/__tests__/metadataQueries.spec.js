@@ -2,6 +2,7 @@
 
 var _metadataShapes = _interopRequireDefault(require("../../../__fixtures__/period-types/metadata-shapes.json"));
 var _constants = require("../../../modules/dataItemProfile/constants.js");
+var _getDataItemProfile = require("../../../modules/dataItemProfile/getDataItemProfile.js");
 var _metadataQueries = require("../metadataQueries.js");
 var _orgUnitQueries = require("../orgUnitQueries.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -36,10 +37,9 @@ const splitFields = fields => {
   return [...result, current];
 };
 
-/* Fields the test tool's requests named after a resource don't ask for, so
- * their shape on each version is unchecked: aggregationLevels has a request
- * of its own (dataElements-aggregationLevels); the others aren't recorded */
-const NOT_RECORDED = ['aggregationLevels', 'analyticsPeriodBoundaries[id]', 'categoryCombo[id]', 'dataSetElements[dataSet[id,periodType],categoryCombo[id]]'];
+/* Fields the test tool's requests named after a resource don't ask for:
+ * aggregationLevels has a request of its own (dataElements-aggregationLevels) */
+const NOT_RECORDED = ['aggregationLevels'];
 describe('normalizeDataItemProfileMetadata', () => {
   describe.each(Object.entries(_metadataShapes.default.versions))('the responses of %s', (_, shapes) => {
     const responses = getResponses(shapes);
@@ -73,6 +73,24 @@ describe('normalizeDataItemProfileMetadata', () => {
     });
     it('give each expression dimension item its expression', () => {
       Object.values(metadata.expressionDimensionItems).forEach(item => expect(typeof item.expression).toBe('string'));
+    });
+    it('give a disaggregation only the data sets whose category combo holds it', () => {
+      const element = idOfCode('PTT_DIS_BOTH');
+      const quarterlyDataSet = metadata.dataElements[element].dataSets.find(({
+        periodType
+      }) => periodType === 'Quarterly');
+      const optionCombo = Object.entries(metadata.categoryOptionCombos).find(([, {
+        categoryComboId
+      }]) => categoryComboId === quarterlyDataSet.categoryComboId)[0];
+      const profileOf = id => (0, _getDataItemProfile.getDataItemProfile)({
+        id,
+        dimensionItemType: 'DATA_ELEMENT_OPERAND'
+      }, metadata);
+      expect(profileOf(`${element}.${optionCombo}`).assignedPeriodTypes.types).toEqual(['Quarterly']);
+      expect((0, _getDataItemProfile.getDataItemProfile)({
+        id: element,
+        dimensionItemType: 'DATA_ELEMENT'
+      }, metadata).assignedPeriodTypes.types).toEqual(['Monthly', 'Quarterly']);
     });
 
     // The smoke subset keeps a few of each version's types; the full export matched all of them

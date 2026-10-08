@@ -88,13 +88,7 @@ const toExpected = ({
     status: LIBRARY_STATUS[status]
   };
 };
-const EXPRESSION_TYPES = new Set(['INDICATOR', 'EXPRESSION_DIMENSION_ITEM']);
-
-/* A sum with an operand that gives nothing returns the others' value, which
- * the tool records as VALUE: it can't tell it from a whole sum. The library
- * says partial, with OPERAND_EMPTY: values are left out. */
-const isSumWithoutAnOperand = (expected, library, item) => EXPRESSION_TYPES.has(item.dimensionItemType) && expected.status === 'full' && library.status === 'partial' && library.reasons.includes('OPERAND_EMPTY');
-const agrees = (expected, library, item) => isSumWithoutAnOperand(expected, library, item) || expected.status === library.status && (!expected.reason || library.reasons.includes(expected.reason));
+const agrees = (expected, library) => expected.status === library.status && (!expected.reason || library.reasons.includes(expected.reason));
 const describeExpected = ({
   status,
   reason
@@ -109,7 +103,6 @@ const describeLibrary = ({
  * check after Update is the way to find them. */
 // The test data covers the periods of 2024 and 2025
 const TEST_DATA_START = '2024-01-01';
-const TEST_DATA_END = '2025-12-31';
 
 // The periods asked in one request: the case's, and in the carry-windows group the other one of the pair
 const getRequestPeriods = ({
@@ -202,18 +195,6 @@ const METADATA_BLIND_SPOTS = [{
     return ((_getPeriodDates3 = (0, _periodRanges.getPeriodDates)(query.period)) === null || _getPeriodDates3 === void 0 ? void 0 : _getPeriodDates3.endDate) < TEST_DATA_START;
   },
   reason: 'the period ends before the test data'
-}, {
-  // Group 7 asks periods up to mid-2026
-  pattern: /^carry-/,
-  applies: ({
-    query
-  }) => {
-    var _getPeriodDates4;
-    return ((_getPeriodDates4 = (0, _periodRanges.getPeriodDates)(query.period)) === null || _getPeriodDates4 === void 0 ? void 0 : _getPeriodDates4.endDate) > TEST_DATA_END;
-  },
-  reason: 'the period ends after the test data',
-  // The smoke subset keeps none
-  optional: true
 }];
 const isBlindSpot = fixtureCase => METADATA_BLIND_SPOTS.some(({
   pattern,
@@ -221,16 +202,49 @@ const isBlindSpot = fixtureCase => METADATA_BLIND_SPOTS.some(({
 }) => pattern.test(fixtureCase.id) && applies(fixtureCase));
 
 // collectionSources is optional in the fixtures: one data set per period type otherwise
+// With the category combo each data set gives the element, when the case names it
 const getDataSets = ({
   collectionSources,
   collectionPeriodTypes
 }) => collectionSources ? collectionSources.map(({
   dataSet,
-  periodType
+  periodType,
+  categoryCombo
 }) => ({
   id: dataSet,
-  periodType
+  periodType,
+  ...(categoryCombo && {
+    categoryComboId: categoryCombo.id
+  })
 })) : (0, _dataItemProfileMetadata.inDataSets)(collectionPeriodTypes);
+
+/* A disaggregation (group 16): the operand asked, and the category combo of
+ * its option combo, which the case names by key */
+const getDisaggregation = item => {
+  var _combos$find;
+  const optionCombo = item.categoryOptionCombo;
+  if (!optionCombo) {
+    return {
+      id: 'de',
+      categoryOptionCombos: {}
+    };
+  }
+  const combos = [item.categoryCombo, ...item.collectionSources].map(source => {
+    var _source$categoryCombo;
+    return (_source$categoryCombo = source.categoryCombo) !== null && _source$categoryCombo !== void 0 ? _source$categoryCombo : source;
+  });
+  const categoryComboId = (_combos$find = combos.find(({
+    key
+  }) => key === optionCombo.categoryCombo)) === null || _combos$find === void 0 ? void 0 : _combos$find.id;
+  return {
+    id: `de.${optionCombo.id}`,
+    categoryOptionCombos: {
+      [optionCombo.id]: {
+        categoryComboId
+      }
+    }
+  };
+};
 
 // Indicator operands need the id their expression uses
 const addOperands = (metadata, operands = []) => {
@@ -295,15 +309,22 @@ const toMetadata = ({
         metadata
       };
     default:
-      metadata.dataElements.de = {
-        aggregationType: item.aggregationType,
-        valueType: item.valueType,
-        dataSets: getDataSets(item)
-      };
-      return {
-        id: 'de',
-        metadata
-      };
+      {
+        const {
+          id,
+          categoryOptionCombos
+        } = getDisaggregation(item);
+        metadata.dataElements.de = {
+          aggregationType: item.aggregationType,
+          valueType: item.valueType,
+          dataSets: getDataSets(item)
+        };
+        metadata.categoryOptionCombos = categoryOptionCombos;
+        return {
+          id,
+          metadata
+        };
+      }
   }
 };
 
@@ -525,8 +546,8 @@ describe('period type fixtures', () => {
   it('pick the data period analytics names for FIRST and LAST', () => {
     const cases = allCases.filter(fixtureCase => fixtureCase.id.startsWith('carry-') && !isBlindSpot(fixtureCase) && predictFirstOrLastValuePeriod(fixtureCase) !== undefined);
     const startOf = period => {
-      var _getPeriodDates$start, _getPeriodDates5;
-      return period ? (_getPeriodDates$start = (_getPeriodDates5 = (0, _periodRanges.getPeriodDates)(period)) === null || _getPeriodDates5 === void 0 ? void 0 : _getPeriodDates5.startDate) !== null && _getPeriodDates$start !== void 0 ? _getPeriodDates$start : period : null;
+      var _getPeriodDates$start, _getPeriodDates4;
+      return period ? (_getPeriodDates$start = (_getPeriodDates4 = (0, _periodRanges.getPeriodDates)(period)) === null || _getPeriodDates4 === void 0 ? void 0 : _getPeriodDates4.startDate) !== null && _getPeriodDates$start !== void 0 ? _getPeriodDates$start : period : null;
     };
     const mismatches = cases.flatMap(fixtureCase => {
       var _predictFirstOrLastVa, _predictFirstOrLastVa2;
@@ -555,7 +576,7 @@ describe('period type fixtures', () => {
     })).filter(({
       expected,
       library
-    }) => !agrees(expected, library, fixtureCase.item)));
+    }) => !agrees(expected, library)));
     expect(summarize(mismatches)).toEqual([]);
   });
 });
