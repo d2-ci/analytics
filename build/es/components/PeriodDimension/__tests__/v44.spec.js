@@ -278,10 +278,13 @@ describe('useV44DataOutputPeriodTypes', () => {
     mockQueryState.v44Refetch = jest.fn();
     mockQueryState.localeRefetch = jest.fn();
     mockQueryState.v44Data = undefined;
-    useDataQuery.mockImplementation((query, options) => {
+    mockQueryState.localeData = undefined;
+    mockQueryState.localeError = undefined;
+    useDataQuery.mockImplementation(query => {
       if (query.userSettings) {
-        mockQueryState.localeOptions = options;
         return {
+          data: mockQueryState.localeData,
+          error: mockQueryState.localeError,
           refetch: mockQueryState.localeRefetch
         };
       }
@@ -299,23 +302,43 @@ describe('useV44DataOutputPeriodTypes', () => {
     expect(mockQueryState.localeRefetch).not.toHaveBeenCalled();
     expect(mockQueryState.v44Refetch).not.toHaveBeenCalled();
   });
-  it('fetches period types in the user ui locale', () => {
-    renderHook(() => useV44DataOutputPeriodTypes({
-      enabled: true
-    }));
-    expect(mockQueryState.localeRefetch).toHaveBeenCalledTimes(1);
-    mockQueryState.localeOptions.onComplete({
+  it('does not fetch period types when disabled and the user locale is loaded elsewhere', () => {
+    // the userSettings query is shared with identical queries, e.g. in PeriodDimension
+    mockQueryState.localeData = {
       userSettings: {
         keyUiLocale: 'fr'
       }
-    });
+    };
+    renderHook(() => useV44DataOutputPeriodTypes({
+      enabled: false
+    }));
+    expect(mockQueryState.v44Refetch).not.toHaveBeenCalled();
+  });
+  it('fetches period types in the user ui locale', () => {
+    const {
+      rerender
+    } = renderHook(() => useV44DataOutputPeriodTypes({
+      enabled: true
+    }));
+    expect(mockQueryState.localeRefetch).toHaveBeenCalledTimes(1);
+    expect(mockQueryState.v44Refetch).not.toHaveBeenCalled();
+    mockQueryState.localeData = {
+      userSettings: {
+        keyUiLocale: 'fr'
+      }
+    };
+    rerender();
+    expect(mockQueryState.v44Refetch).toHaveBeenCalledTimes(1);
     expect(mockQueryState.v44Refetch).toHaveBeenCalledWith({
       locale: 'fr'
     });
-
-    // still fetches period types if the user locale request fails
-    mockQueryState.localeOptions.onError();
-    expect(mockQueryState.v44Refetch).toHaveBeenLastCalledWith({});
+  });
+  it('still fetches period types if the user locale request fails', () => {
+    mockQueryState.localeError = new Error('failed');
+    renderHook(() => useV44DataOutputPeriodTypes({
+      enabled: true
+    }));
+    expect(mockQueryState.v44Refetch).toHaveBeenCalledWith({});
   });
   it('returns enabled types and relative period name overrides', () => {
     mockQueryState.v44Data = {

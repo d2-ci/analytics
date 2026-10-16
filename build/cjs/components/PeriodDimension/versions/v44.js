@@ -66,6 +66,7 @@ const getRelativePeriodsFromPeriodType = periodType => Object.entries(periodType
 const useV44DataOutputPeriodTypes = ({
   enabled
 }) => {
+  var _localeData$userSetti;
   const {
     data,
     error,
@@ -73,22 +74,32 @@ const useV44DataOutputPeriodTypes = ({
   } = (0, _appRuntime.useDataQuery)(v44Query, {
     lazy: true
   });
+  // Not using onComplete: the query is shared with other identical
+  // userSettings queries (e.g. in PeriodDimension), whose completion would
+  // trigger the period types request also when disabled
   const {
+    data: localeData,
+    error: localeError,
     refetch: fetchUserLocale
   } = (0, _appRuntime.useDataQuery)(userLocaleQuery, {
-    lazy: true,
-    onComplete: ({
-      userSettings
-    }) => refetch({
-      locale: userSettings === null || userSettings === void 0 ? void 0 : userSettings.keyUiLocale
-    }),
-    onError: () => refetch({})
+    lazy: true
   });
   (0, _react.useEffect)(() => {
     if (enabled) {
       fetchUserLocale();
     }
   }, [enabled, fetchUserLocale]);
+  const locale = localeData === null || localeData === void 0 || (_localeData$userSetti = localeData.userSettings) === null || _localeData$userSetti === void 0 ? void 0 : _localeData$userSetti.keyUiLocale;
+  (0, _react.useEffect)(() => {
+    if (!enabled || !localeData && !localeError) {
+      return;
+    }
+
+    // still fetch period types if the user locale request fails
+    refetch(locale ? {
+      locale
+    } : {});
+  }, [enabled, locale, localeData, localeError, refetch]);
   return (0, _react.useMemo)(() => {
     var _data$analysisRelativ, _data$weeklyStart, _data$financialYearSt;
     if (!enabled || error || !(data !== null && data !== void 0 && data.periodTypes)) {
