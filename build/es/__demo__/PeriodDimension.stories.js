@@ -169,8 +169,13 @@ V44CustomLabels.decorators = [withServer({
   })
 })];
 export const V44Translated = () => {
-  return /*#__PURE__*/React.createElement(PeriodDimension, {
-    selectedPeriods: selectedPeriods,
+  return /*#__PURE__*/React.createElement(PeriodDimension
+  // stored name of a saved visualization is replaced by the translation
+  , {
+    selectedPeriods: [{
+      id: 'LAST_12_MONTHS',
+      name: 'Last 12 months'
+    }],
     onSelect: selected => console.log(selected)
   });
 };
