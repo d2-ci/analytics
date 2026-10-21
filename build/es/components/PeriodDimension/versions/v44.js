@@ -37,6 +37,10 @@ const RP_CATEGORY_TO_SERVER_PTS = {
   ...RP_CATEGORY_TO_FP_DEPENDENCIES,
   [FINANCIAL]: ['FinancialFeb', 'FinancialApril', 'FinancialJuly', 'FinancialAug', 'FinancialSep', 'FinancialOct', 'FinancialNov']
 };
+
+// Relative period categories whose relative periods refer to the start variant
+// selected in the system settings (see relativePeriodStartTypes)
+const START_SETTING_CATEGORIES = [WEEKLY, FINANCIAL];
 const getRelativeCategoryId = serverPtName => Object.keys(RP_CATEGORY_TO_SERVER_PTS).find(categoryId => RP_CATEGORY_TO_SERVER_PTS[categoryId].includes(serverPtName));
 const getRelativePeriodsFromPeriodType = periodType => Object.entries(periodType.relativePeriods || {}).map(([id, {
   displayName
@@ -119,8 +123,7 @@ const getV44RelativeOption = (categoryId, enabledTypes, relativePeriodStartTypes
   // type of the family. Weekly and financial year relative periods refer to
   // the start variant selected in the system settings, so they are only
   // available when that variant is enabled.
-  const startTypeName = relativePeriodStartTypes === null || relativePeriodStartTypes === void 0 ? void 0 : relativePeriodStartTypes[categoryId];
-  const sourceType = startTypeName !== undefined ? familyTypes.find(pt => pt.name === startTypeName) : familyTypes[0];
+  const sourceType = START_SETTING_CATEGORIES.includes(categoryId) ? familyTypes.find(pt => pt.name === (relativePeriodStartTypes === null || relativePeriodStartTypes === void 0 ? void 0 : relativePeriodStartTypes[categoryId])) : familyTypes[0];
   const periods = sourceType ? getRelativePeriodsFromPeriodType(sourceType) : [];
   if (!periods.length) {
     return null;

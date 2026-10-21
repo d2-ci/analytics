@@ -250,10 +250,18 @@ PeriodTransfer.propTypes = {
   enabledPeriodTypesData: _propTypes.default.shape({
     analysisRelativePeriod: _propTypes.default.string,
     enabledTypes: _propTypes.default.array,
+    // v43 only
     financialYearDisplayLabel: _propTypes.default.string,
     financialYearStart: _propTypes.default.string,
+    metaData: _propTypes.default.objectOf(_propTypes.default.shape({
+      name: _propTypes.default.string
+    })),
     noEnabledTypes: _propTypes.default.bool,
-    version: _propTypes.default.number
+    // v44 only
+    relativePeriodStartTypes: _propTypes.default.objectOf(_propTypes.default.string),
+    version: _propTypes.default.oneOf([43, 44]),
+    // v43 only
+    weeklyDisplayLabel: _propTypes.default.string
   }),
   excludedPeriodTypes: _propTypes.default.arrayOf(_propTypes.default.string),
   height: _propTypes.default.string,
