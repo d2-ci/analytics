@@ -7,6 +7,7 @@ import { useDataQuery } from '@dhis2/app-runtime';
 import { useEffect, useMemo } from 'react';
 import { RP_CATEGORY_TO_FP_DEPENDENCIES, SERVER_PT_TO_MULTI_CALENDAR_PT, FY_SETTING_TO_SERVER_PT, WEEKLY_START_TO_SERVER_PT, applyPeriodNameOverrides, filterEnabledFixedPeriodTypes } from '../utils/enabledPeriodTypes.js';
 import { getFixedPeriodsOptions } from '../utils/fixedPeriods.js';
+import { filterPeriodTypesById } from '../utils/index.js';
 import { getRelativePeriodsOptions } from '../utils/relativePeriods.js';
 const v43Query = {
   enabledPeriodTypes: {
@@ -215,7 +216,8 @@ export const filterEnabledRelativePeriodTypes = (allRelativePeriodOptions, enabl
 };
 export const getV43PeriodTypeOptions = ({
   enabledPeriodTypesData,
-  periodsSettings
+  periodsSettings,
+  excludedPeriodTypes
 }) => {
   const {
     enabledTypes,
@@ -225,11 +227,11 @@ export const getV43PeriodTypeOptions = ({
     metaData
   } = enabledPeriodTypesData;
   return {
-    fixedOptions: applyFixedPeriodTypeDisplayLabels(filterEnabledFixedPeriodTypes(getFixedPeriodsOptions(periodsSettings), enabledTypes), enabledTypes),
-    relativeOptions: applyDisplayLabelOverrides(filterEnabledRelativePeriodTypes(getRelativePeriodsOptions(), enabledTypes, financialYearStart), {
+    fixedOptions: filterPeriodTypesById(applyFixedPeriodTypeDisplayLabels(filterEnabledFixedPeriodTypes(getFixedPeriodsOptions(periodsSettings), enabledTypes), enabledTypes), excludedPeriodTypes),
+    relativeOptions: filterPeriodTypesById(applyDisplayLabelOverrides(filterEnabledRelativePeriodTypes(getRelativePeriodsOptions(), enabledTypes, financialYearStart), {
       financialYearDisplayLabel,
       weeklyDisplayLabel,
       metaData
-    })
+    }), excludedPeriodTypes)
   };
 };

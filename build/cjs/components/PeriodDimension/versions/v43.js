@@ -8,6 +8,7 @@ var _appRuntime = require("@dhis2/app-runtime");
 var _react = require("react");
 var _enabledPeriodTypes = require("../utils/enabledPeriodTypes.js");
 var _fixedPeriods = require("../utils/fixedPeriods.js");
+var _index = require("../utils/index.js");
 var _relativePeriods = require("../utils/relativePeriods.js");
 // v43: enabled period types from /configuration/dataOutputPeriodTypes, with a
 // single `label` per period type. Relative period names are derived client side
@@ -226,7 +227,8 @@ const filterEnabledRelativePeriodTypes = (allRelativePeriodOptions, enabledServe
 exports.filterEnabledRelativePeriodTypes = filterEnabledRelativePeriodTypes;
 const getV43PeriodTypeOptions = ({
   enabledPeriodTypesData,
-  periodsSettings
+  periodsSettings,
+  excludedPeriodTypes
 }) => {
   const {
     enabledTypes,
@@ -236,12 +238,12 @@ const getV43PeriodTypeOptions = ({
     metaData
   } = enabledPeriodTypesData;
   return {
-    fixedOptions: applyFixedPeriodTypeDisplayLabels((0, _enabledPeriodTypes.filterEnabledFixedPeriodTypes)((0, _fixedPeriods.getFixedPeriodsOptions)(periodsSettings), enabledTypes), enabledTypes),
-    relativeOptions: applyDisplayLabelOverrides(filterEnabledRelativePeriodTypes((0, _relativePeriods.getRelativePeriodsOptions)(), enabledTypes, financialYearStart), {
+    fixedOptions: (0, _index.filterPeriodTypesById)(applyFixedPeriodTypeDisplayLabels((0, _enabledPeriodTypes.filterEnabledFixedPeriodTypes)((0, _fixedPeriods.getFixedPeriodsOptions)(periodsSettings), enabledTypes), enabledTypes), excludedPeriodTypes),
+    relativeOptions: (0, _index.filterPeriodTypesById)(applyDisplayLabelOverrides(filterEnabledRelativePeriodTypes((0, _relativePeriods.getRelativePeriodsOptions)(), enabledTypes, financialYearStart), {
       financialYearDisplayLabel,
       weeklyDisplayLabel,
       metaData
-    })
+    }), excludedPeriodTypes)
   };
 };
 exports.getV43PeriodTypeOptions = getV43PeriodTypeOptions;
