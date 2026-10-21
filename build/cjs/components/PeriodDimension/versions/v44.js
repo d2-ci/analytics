@@ -11,32 +11,20 @@ var _fixedPeriods = require("../utils/fixedPeriods.js");
 var _index = require("../utils/index.js");
 // v44: /configuration/dataOutputPeriodTypes returns the enabled period types
 // with their relative periods nested, all with a `displayName` that already
-// resolves label translation -> label -> default name for the requested locale.
+// resolves label translation -> label -> default name. No locale is passed, so
+// the server uses the user's db locale (keyDbLocale), like for other metadata.
 // The client no longer derives any names, it only maps server period types to
 // the client period type ids used for generating fixed periods.
 // Weekly and financial year relative periods have one set of labels; the
 // analyticsWeeklyStart and analyticsFinancialYearStart system settings decide
 // which start variant they refer to.
 
-const userLocaleQuery = {
-  userSettings: {
-    resource: 'userSettings',
-    params: {
-      key: ['keyUiLocale']
-    }
-  }
-};
 const v44Query = {
   periodTypes: {
     resource: 'configuration/dataOutputPeriodTypes',
-    params: ({
-      locale
-    }) => ({
-      fields: 'name,displayName,relativePeriods',
-      ...(locale && {
-        locale
-      })
-    })
+    params: {
+      fields: 'name,displayName,relativePeriods'
+    }
   },
   analysisRelativePeriod: {
     resource: 'systemSettings/keyAnalysisRelativePeriod'
@@ -66,7 +54,6 @@ const getRelativePeriodsFromPeriodType = periodType => Object.entries(periodType
 const useV44DataOutputPeriodTypes = ({
   enabled
 }) => {
-  var _localeData$userSetti;
   const {
     data,
     error,
@@ -74,32 +61,11 @@ const useV44DataOutputPeriodTypes = ({
   } = (0, _appRuntime.useDataQuery)(v44Query, {
     lazy: true
   });
-  // Not using onComplete: the query is shared with other identical
-  // userSettings queries (e.g. in PeriodDimension), whose completion would
-  // trigger the period types request also when disabled
-  const {
-    data: localeData,
-    error: localeError,
-    refetch: fetchUserLocale
-  } = (0, _appRuntime.useDataQuery)(userLocaleQuery, {
-    lazy: true
-  });
   (0, _react.useEffect)(() => {
     if (enabled) {
-      fetchUserLocale();
+      refetch();
     }
-  }, [enabled, fetchUserLocale]);
-  const locale = localeData === null || localeData === void 0 || (_localeData$userSetti = localeData.userSettings) === null || _localeData$userSetti === void 0 ? void 0 : _localeData$userSetti.keyUiLocale;
-  (0, _react.useEffect)(() => {
-    if (!enabled || !localeData && !localeError) {
-      return;
-    }
-
-    // still fetch period types if the user locale request fails
-    refetch(locale ? {
-      locale
-    } : {});
-  }, [enabled, locale, localeData, localeError, refetch]);
+  }, [enabled, refetch]);
   return (0, _react.useMemo)(() => {
     var _data$analysisRelativ, _data$weeklyStart, _data$financialYearSt;
     if (!enabled || error || !(data !== null && data !== void 0 && data.periodTypes)) {

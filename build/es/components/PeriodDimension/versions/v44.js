@@ -1,6 +1,7 @@
 // v44: /configuration/dataOutputPeriodTypes returns the enabled period types
 // with their relative periods nested, all with a `displayName` that already
-// resolves label translation -> label -> default name for the requested locale.
+// resolves label translation -> label -> default name. No locale is passed, so
+// the server uses the user's db locale (keyDbLocale), like for other metadata.
 // The client no longer derives any names, it only maps server period types to
 // the client period type ids used for generating fixed periods.
 // Weekly and financial year relative periods have one set of labels; the
@@ -11,25 +12,12 @@ import { useEffect, useMemo } from 'react';
 import { FY_SETTING_TO_SERVER_PT, RP_CATEGORY_TO_FP_DEPENDENCIES, SERVER_PT_TO_MULTI_CALENDAR_PT, WEEKLY_START_TO_SERVER_PT } from '../utils/enabledPeriodTypes.js';
 import { getFixedPeriodsOptions } from '../utils/fixedPeriods.js';
 import { FINANCIAL, WEEKLY, filterPeriodTypesById } from '../utils/index.js';
-const userLocaleQuery = {
-  userSettings: {
-    resource: 'userSettings',
-    params: {
-      key: ['keyUiLocale']
-    }
-  }
-};
 const v44Query = {
   periodTypes: {
     resource: 'configuration/dataOutputPeriodTypes',
-    params: ({
-      locale
-    }) => ({
-      fields: 'name,displayName,relativePeriods',
-      ...(locale && {
-        locale
-      })
-    })
+    params: {
+      fields: 'name,displayName,relativePeriods'
+    }
   },
   analysisRelativePeriod: {
     resource: 'systemSettings/keyAnalysisRelativePeriod'
@@ -59,7 +47,6 @@ const getRelativePeriodsFromPeriodType = periodType => Object.entries(periodType
 export const useV44DataOutputPeriodTypes = ({
   enabled
 }) => {
-  var _localeData$userSetti;
   const {
     data,
     error,
@@ -67,32 +54,11 @@ export const useV44DataOutputPeriodTypes = ({
   } = useDataQuery(v44Query, {
     lazy: true
   });
-  // Not using onComplete: the query is shared with other identical
-  // userSettings queries (e.g. in PeriodDimension), whose completion would
-  // trigger the period types request also when disabled
-  const {
-    data: localeData,
-    error: localeError,
-    refetch: fetchUserLocale
-  } = useDataQuery(userLocaleQuery, {
-    lazy: true
-  });
   useEffect(() => {
     if (enabled) {
-      fetchUserLocale();
+      refetch();
     }
-  }, [enabled, fetchUserLocale]);
-  const locale = localeData === null || localeData === void 0 || (_localeData$userSetti = localeData.userSettings) === null || _localeData$userSetti === void 0 ? void 0 : _localeData$userSetti.keyUiLocale;
-  useEffect(() => {
-    if (!enabled || !localeData && !localeError) {
-      return;
-    }
-
-    // still fetch period types if the user locale request fails
-    refetch(locale ? {
-      locale
-    } : {});
-  }, [enabled, locale, localeData, localeError, refetch]);
+  }, [enabled, refetch]);
   return useMemo(() => {
     var _data$analysisRelativ, _data$weeklyStart, _data$financialYearSt;
     if (!enabled || error || !(data !== null && data !== void 0 && data.periodTypes)) {

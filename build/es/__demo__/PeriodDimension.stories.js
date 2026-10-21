@@ -48,13 +48,13 @@ const v44Data = ({
   }) => name),
   periodTypeLabels = {},
   relativePeriodLabels = {},
-  uiLocale = 'en',
   weeklyStart = 'WEEKLY',
   financialYearStart = 'FINANCIAL_YEAR_OCTOBER',
   analysisRelativePeriod = 'LAST_12_MONTHS'
 } = {}) => ({
+  // PeriodDimension reads keyUiLocale for generating fixed periods
   userSettings: {
-    keyUiLocale: uiLocale
+    keyUiLocale: 'en'
   },
   'configuration/dataOutputPeriodTypes': applyV44Labels(periodTypesV44.filter(({
     name
@@ -179,11 +179,10 @@ export const V44Translated = () => {
     onSelect: selected => console.log(selected)
   });
 };
-V44Translated.storyName = 'v44: label translations (ui locale fr)';
+V44Translated.storyName = 'v44: label translations (db locale fr)';
 V44Translated.decorators = [withServer({
   minor: 44,
   data: v44Data({
-    uiLocale: 'fr',
     enabledPeriodTypes: ['Daily', 'Weekly', 'Monthly', 'Yearly'],
     periodTypeLabels: {
       Daily: 'Quotidien',
