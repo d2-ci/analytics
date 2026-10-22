@@ -1,47 +1,29 @@
 import { useConfig } from '@dhis2/app-runtime';
-import { getV42PeriodTypeOptions } from './versions/v42.js';
-import { getV43PeriodTypeOptions, useV43DataOutputPeriodTypes } from './versions/v43.js';
-import { getV44PeriodTypeOptions, useV44DataOutputPeriodTypes } from './versions/v44.js';
+import { useV43DataOutputPeriodTypes } from './versions/v43.js';
+import { useV44DataOutputPeriodTypes } from './versions/v44.js';
 const useDataOutputPeriodTypes = () => {
   const {
     serverVersion
   } = useConfig();
   const supportsEnabledPeriodTypes = serverVersion.minor >= 43;
   const supportsPeriodLabelTranslations = serverVersion.minor >= 44;
-  const v43Data = useV43DataOutputPeriodTypes({
+  const v43 = useV43DataOutputPeriodTypes({
     enabled: supportsEnabledPeriodTypes && !supportsPeriodLabelTranslations
   });
-  const v44Data = useV44DataOutputPeriodTypes({
+  const v44 = useV44DataOutputPeriodTypes({
     enabled: supportsPeriodLabelTranslations
   });
+
+  // enabledPeriodTypesData stays null on v42 and when the request fails,
+  // loading tells consumers whether to wait for it
+  const {
+    enabledPeriodTypesData,
+    loading
+  } = supportsPeriodLabelTranslations ? v44 : v43;
   return {
     supportsEnabledPeriodTypes,
-    enabledPeriodTypesData: supportsPeriodLabelTranslations ? v44Data : v43Data
+    enabledPeriodTypesData,
+    loading
   };
 };
-const getPeriodTypeOptions = ({
-  enabledPeriodTypesData,
-  periodsSettings,
-  excludedPeriodTypes
-}) => {
-  switch (enabledPeriodTypesData === null || enabledPeriodTypesData === void 0 ? void 0 : enabledPeriodTypesData.version) {
-    case 44:
-      return getV44PeriodTypeOptions({
-        enabledPeriodTypesData,
-        periodsSettings,
-        excludedPeriodTypes
-      });
-    case 43:
-      return getV43PeriodTypeOptions({
-        enabledPeriodTypesData,
-        periodsSettings,
-        excludedPeriodTypes
-      });
-    default:
-      return getV42PeriodTypeOptions({
-        periodsSettings,
-        excludedPeriodTypes
-      });
-  }
-};
-export { useDataOutputPeriodTypes, getPeriodTypeOptions };
+export { useDataOutputPeriodTypes };

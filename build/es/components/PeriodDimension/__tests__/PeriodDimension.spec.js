@@ -2,11 +2,12 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import PeriodDimension from '../PeriodDimension.js';
+let mockServerMinorVersion = 42;
 jest.mock('@dhis2/app-runtime', () => ({
   useConfig: () => ({
     systemInfo: {},
     serverVersion: {
-      minor: 42
+      minor: mockServerMinorVersion
     }
   }),
   useDataQuery: jest.fn().mockImplementation((_query, options) => {
@@ -32,7 +33,10 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
   unobserve: jest.fn(),
   disconnect: jest.fn()
 }));
-afterEach(jest.clearAllMocks);
+afterEach(() => {
+  jest.clearAllMocks();
+  mockServerMinorVersion = 42;
+});
 const props = {
   selectedPeriods: [],
   onSelect: jest.fn(),
@@ -52,4 +56,12 @@ test('PeriodDimension can toggle between relative and fixed period tab', async (
   expect(fixedPeriodButton).toBeInTheDocument();
   await user.click(fixedPeriodButton);
   expect(screen.getByTestId('period-dimension-fixed-period-filter')).toBeInTheDocument();
+});
+test('PeriodDimension shows a loader while the enabled period types are loading', () => {
+  mockServerMinorVersion = 44;
+  const {
+    container
+  } = render(/*#__PURE__*/React.createElement(PeriodDimension, props));
+  expect(container.querySelector('[data-test="period-dimension-loader"]')).toBeInTheDocument();
+  expect(screen.queryByText('Relative periods')).not.toBeInTheDocument();
 });

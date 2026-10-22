@@ -5,8 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _appRuntime = require("@dhis2/app-runtime");
+var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
+var _dimensionSelectorHelper = require("../../modules/dimensionSelectorHelper.js");
 var _predefinedDimensions = require("../../modules/predefinedDimensions.js");
 var _PeriodTransfer = _interopRequireDefault(require("./PeriodTransfer.js"));
 var _useDataOutputPeriodTypes = require("./useDataOutputPeriodTypes.js");
@@ -35,7 +37,8 @@ const PeriodDimension = ({
   } = config;
   const userSettingsResult = (0, _appRuntime.useDataQuery)(userSettingsQuery);
   const {
-    enabledPeriodTypesData
+    enabledPeriodTypesData,
+    loading
   } = (0, _useDataOutputPeriodTypes.useDataOutputPeriodTypes)();
   const {
     calendar = 'gregory'
@@ -58,6 +61,22 @@ const PeriodDimension = ({
     });
   };
   const selectedPeriodsWithCustomDisplayNames = (0, _enabledPeriodTypes.applyPeriodNameOverrides)(selectedPeriods, enabledPeriodTypesData === null || enabledPeriodTypesData === void 0 ? void 0 : enabledPeriodTypesData.metaData);
+
+  // wait for the enabled period types, otherwise the transfer briefly shows
+  // the full client lists and picks its default period type from them
+  if (loading) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: height || _dimensionSelectorHelper.TRANSFER_HEIGHT
+      },
+      "data-test": "period-dimension-loader"
+    }, /*#__PURE__*/_react.default.createElement(_ui.CircularLoader, {
+      small: true
+    }));
+  }
   return /*#__PURE__*/_react.default.createElement(_PeriodTransfer.default, {
     onSelect: selectPeriods,
     selectedItems: selectedPeriodsWithCustomDisplayNames,

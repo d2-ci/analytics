@@ -1,6 +1,8 @@
 import { useConfig, useDataQuery } from '@dhis2/app-runtime';
+import { CircularLoader } from '@dhis2/ui';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { TRANSFER_HEIGHT } from '../../modules/dimensionSelectorHelper.js';
 import { DIMENSION_ID_PERIOD } from '../../modules/predefinedDimensions.js';
 import PeriodTransfer from './PeriodTransfer.js';
 import { useDataOutputPeriodTypes } from './useDataOutputPeriodTypes.js';
@@ -28,7 +30,8 @@ const PeriodDimension = ({
   } = config;
   const userSettingsResult = useDataQuery(userSettingsQuery);
   const {
-    enabledPeriodTypesData
+    enabledPeriodTypesData,
+    loading
   } = useDataOutputPeriodTypes();
   const {
     calendar = 'gregory'
@@ -51,6 +54,22 @@ const PeriodDimension = ({
     });
   };
   const selectedPeriodsWithCustomDisplayNames = applyPeriodNameOverrides(selectedPeriods, enabledPeriodTypesData === null || enabledPeriodTypesData === void 0 ? void 0 : enabledPeriodTypesData.metaData);
+
+  // wait for the enabled period types, otherwise the transfer briefly shows
+  // the full client lists and picks its default period type from them
+  if (loading) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: height || TRANSFER_HEIGHT
+      },
+      "data-test": "period-dimension-loader"
+    }, /*#__PURE__*/React.createElement(CircularLoader, {
+      small: true
+    }));
+  }
   return /*#__PURE__*/React.createElement(PeriodTransfer, {
     onSelect: selectPeriods,
     selectedItems: selectedPeriodsWithCustomDisplayNames,

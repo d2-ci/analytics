@@ -5,11 +5,12 @@ var _userEvent = _interopRequireDefault(require("@testing-library/user-event"));
 var _react2 = _interopRequireDefault(require("react"));
 var _PeriodDimension = _interopRequireDefault(require("../PeriodDimension.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+let mockServerMinorVersion = 42;
 jest.mock('@dhis2/app-runtime', () => ({
   useConfig: () => ({
     systemInfo: {},
     serverVersion: {
-      minor: 42
+      minor: mockServerMinorVersion
     }
   }),
   useDataQuery: jest.fn().mockImplementation((_query, options) => {
@@ -35,7 +36,10 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
   unobserve: jest.fn(),
   disconnect: jest.fn()
 }));
-afterEach(jest.clearAllMocks);
+afterEach(() => {
+  jest.clearAllMocks();
+  mockServerMinorVersion = 42;
+});
 const props = {
   selectedPeriods: [],
   onSelect: jest.fn(),
@@ -55,4 +59,12 @@ test('PeriodDimension can toggle between relative and fixed period tab', async (
   expect(fixedPeriodButton).toBeInTheDocument();
   await user.click(fixedPeriodButton);
   expect(_react.screen.getByTestId('period-dimension-fixed-period-filter')).toBeInTheDocument();
+});
+test('PeriodDimension shows a loader while the enabled period types are loading', () => {
+  mockServerMinorVersion = 44;
+  const {
+    container
+  } = (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_PeriodDimension.default, props));
+  expect(container.querySelector('[data-test="period-dimension-loader"]')).toBeInTheDocument();
+  expect(_react.screen.queryByText('Relative periods')).not.toBeInTheDocument();
 });

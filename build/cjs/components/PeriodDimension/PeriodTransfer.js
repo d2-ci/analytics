@@ -15,8 +15,8 @@ var _dimensionSelectorHelper = require("../../modules/dimensionSelectorHelper.js
 var _DimensionSelectorStyle = _interopRequireDefault(require("../styles/DimensionSelector.style.js"));
 var _TransferOption = require("../TransferOption.js");
 var _FixedPeriodFilter = _interopRequireDefault(require("./FixedPeriodFilter.js"));
+var _periodTypeOptions = require("./periodTypeOptions.js");
 var _RelativePeriodFilter = _interopRequireDefault(require("./RelativePeriodFilter.js"));
-var _useDataOutputPeriodTypes = require("./useDataOutputPeriodTypes.js");
 var _index2 = require("./utils/index.js");
 function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -57,7 +57,7 @@ const PeriodTransfer = ({
   const {
     fixedOptions: filteredFixedOptions,
     relativeOptions: filteredRelativeOptions
-  } = (0, _react.useMemo)(() => (0, _useDataOutputPeriodTypes.getPeriodTypeOptions)({
+  } = (0, _react.useMemo)(() => (0, _periodTypeOptions.getPeriodTypeOptions)({
     enabledPeriodTypesData,
     periodsSettings,
     excludedPeriodTypes

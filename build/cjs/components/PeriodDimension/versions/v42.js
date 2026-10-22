@@ -9,7 +9,7 @@ var _index = require("../utils/index.js");
 var _relativePeriods = require("../utils/relativePeriods.js");
 // v42: no enabled period types API, all period types and relative periods
 // come from the hardcoded client lists.
-// Remove this file (and its branch in getPeriodTypeOptions) when v42 is no longer supported.
+// Remove this file (and its branch in periodTypeOptions.js) when v42 is no longer supported.
 
 // period types that were introduced in v43
 const V43_PERIOD_TYPES = [_index.WEEKLYFRI, _index.FYFEB, _index.FYAUG, _index.FYSEP];

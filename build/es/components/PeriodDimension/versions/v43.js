@@ -1,8 +1,8 @@
 // v43: enabled period types from /configuration/dataOutputPeriodTypes, with a
 // single `label` per period type. Relative period names are derived client side
 // from that label ("This {label}", "Last {label}", ...).
-// Remove this file (and its branch in useDataOutputPeriodTypes and
-// getPeriodTypeOptions) when v43 is no longer supported.
+// Remove this file (and its branches in useDataOutputPeriodTypes and
+// periodTypeOptions.js) when v43 is no longer supported.
 import { useDataQuery } from '@dhis2/app-runtime';
 import { useEffect, useMemo } from 'react';
 import { RP_CATEGORY_TO_FP_DEPENDENCIES, SERVER_PT_TO_MULTI_CALENDAR_PT, FY_SETTING_TO_SERVER_PT, WEEKLY_START_TO_SERVER_PT, applyPeriodNameOverrides, filterEnabledFixedPeriodTypes } from '../utils/enabledPeriodTypes.js';
@@ -38,7 +38,7 @@ export const useV43DataOutputPeriodTypes = ({
       v43Refetch();
     }
   }, [enabled, v43Refetch]);
-  return useMemo(() => {
+  const enabledPeriodTypesData = useMemo(() => {
     var _v43Data$financialYea, _v43Data$weeklyStart, _v43Data$analysisRela;
     if (!enabled) {
       return null;
@@ -123,6 +123,10 @@ export const useV43DataOutputPeriodTypes = ({
       noEnabledTypes: false
     };
   }, [enabled, v43Data, v43Error]);
+  return {
+    enabledPeriodTypesData,
+    loading: enabled && !v43Data && !v43Error
+  };
 };
 
 /**

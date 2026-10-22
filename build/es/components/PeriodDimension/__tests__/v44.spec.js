@@ -67,6 +67,15 @@ const quarterlyNov = {
   displayName: 'Quarterly Nov',
   relativePeriods: quarterlyRelativePeriods
 };
+const sixMonthlyApril = {
+  name: 'SixMonthlyApril',
+  displayName: 'Six-monthly April',
+  relativePeriods: {
+    THIS_SIX_MONTH: {
+      displayName: 'Ce semestre'
+    }
+  }
+};
 const financialRelativePeriods = {
   THIS_FINANCIAL_YEAR: {
     displayName: 'Cet exercice'
@@ -224,15 +233,22 @@ describe('v44 period type options', () => {
       periods: ['THIS_FINANCIAL_YEAR:Cet exercice', 'LAST_FINANCIAL_YEAR:Exercice précédent']
     }]);
   });
-  it('shows one quarterly category named after the first enabled quarterly type', () => {
+  it('shows quarterly relative periods for the standard quarterly type', () => {
     expect(summarize(getOptions([quarterly, quarterlyNov]).relativeOptions)).toEqual([{
       id: 'QUARTERLY',
       name: 'Trimestriel',
       periods: ['THIS_QUARTER:Ce trimestre']
     }]);
-    expect(getOptions([quarterlyNov]).relativeOptions.map(({
-      name
-    }) => name)).toEqual(['Quarterly Nov']);
+  });
+  it('hides quarterly and six-monthly relative periods when only a start variant is enabled', () => {
+    const {
+      fixedOptions,
+      relativeOptions
+    } = getOptions([quarterlyNov, sixMonthlyApril]);
+    expect(fixedOptions.map(({
+      id
+    }) => id)).toEqual(['SIXMONTHLYAPR']);
+    expect(relativeOptions).toEqual([]);
   });
   it('hides a category when the server returns no relative periods for it', () => {
     const {
@@ -277,17 +293,47 @@ describe('useV44DataOutputPeriodTypes', () => {
     } = require('@dhis2/app-runtime');
     mockQueryState.v44Refetch = jest.fn();
     mockQueryState.v44Data = undefined;
+    mockQueryState.v44Error = undefined;
     useDataQuery.mockImplementation(() => ({
       data: mockQueryState.v44Data,
-      error: undefined,
+      error: mockQueryState.v44Error,
       refetch: mockQueryState.v44Refetch
     }));
   });
   it('does not fetch when disabled', () => {
-    renderHook(() => useV44DataOutputPeriodTypes({
+    const {
+      result
+    } = renderHook(() => useV44DataOutputPeriodTypes({
       enabled: false
     }));
     expect(mockQueryState.v44Refetch).not.toHaveBeenCalled();
+    expect(result.current).toEqual({
+      enabledPeriodTypesData: null,
+      loading: false
+    });
+  });
+  it('is loading until the period types have been fetched', () => {
+    const {
+      result
+    } = renderHook(() => useV44DataOutputPeriodTypes({
+      enabled: true
+    }));
+    expect(result.current).toEqual({
+      enabledPeriodTypesData: null,
+      loading: true
+    });
+  });
+  it('stops loading without data when the request fails', () => {
+    mockQueryState.v44Error = new Error('Request failed');
+    const {
+      result
+    } = renderHook(() => useV44DataOutputPeriodTypes({
+      enabled: true
+    }));
+    expect(result.current).toEqual({
+      enabledPeriodTypesData: null,
+      loading: false
+    });
   });
   it('fetches period types without a locale (server uses the user db locale)', () => {
     const {
@@ -319,7 +365,7 @@ describe('useV44DataOutputPeriodTypes', () => {
     } = renderHook(() => useV44DataOutputPeriodTypes({
       enabled: true
     }));
-    expect(result.current).toEqual({
+    expect(result.current.enabledPeriodTypesData).toEqual({
       version: 44,
       enabledTypes: [daily, monthly],
       analysisRelativePeriod: 'LAST_12_MONTHS',
@@ -356,7 +402,7 @@ describe('useV44DataOutputPeriodTypes', () => {
     } = renderHook(() => useV44DataOutputPeriodTypes({
       enabled: true
     }));
-    expect(result.current.relativePeriodStartTypes).toEqual({
+    expect(result.current.enabledPeriodTypesData.relativePeriodStartTypes).toEqual({
       WEEKLY: 'Weekly',
       FINANCIAL: null
     });
@@ -370,7 +416,7 @@ describe('useV44DataOutputPeriodTypes', () => {
     } = renderHook(() => useV44DataOutputPeriodTypes({
       enabled: true
     }));
-    expect(result.current.enabledTypes.map(({
+    expect(result.current.enabledPeriodTypesData.enabledTypes.map(({
       name
     }) => name)).toEqual(['Daily', 'Monthly', 'FinancialOct']);
   });
@@ -383,6 +429,6 @@ describe('useV44DataOutputPeriodTypes', () => {
     } = renderHook(() => useV44DataOutputPeriodTypes({
       enabled: true
     }));
-    expect(result.current.noEnabledTypes).toBe(true);
+    expect(result.current.enabledPeriodTypesData.noEnabledTypes).toBe(true);
   });
 });
