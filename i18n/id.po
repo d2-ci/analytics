@@ -1,0 +1,1484 @@
+# Translators:
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2025
+# Raja Fathurrahim, 2025
+# Philip Larsen Donnelly, 2025
+# Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2025
+# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2026
+# Carwoto Sa'an <carwoto@gmail.com>, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
+# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-08-27T11:56:55.720Z\n"
+"PO-Revision-Date: 2020-04-28 22:05+0000\n"
+"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2026\n"
+"Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: id\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "view only"
+msgstr ""
+
+msgid "view and edit"
+msgstr ""
+
+msgid "all users ({{accessLevel}})"
+msgstr ""
+
+msgid "{{userOrGroup}} ({{accessLevel}})"
+msgstr ""
+
+msgid "Shared with {{commaSeparatedListOfUsersAndGroups}}"
+msgstr ""
+
+msgid "Not shared with any users or groups"
+msgstr ""
+
+msgid "No description"
+msgstr "Tidak ada deskripsi"
+
+msgid "Last updated {{time}}"
+msgstr "Terakhir diperbarui {{time}}"
+
+msgid "Created {{time}} by {{author}}"
+msgstr ""
+
+msgid "Created {{time}}"
+msgstr ""
+
+msgid "Viewed {{count}} times"
+msgid_plural "Viewed {{count}} times"
+msgstr[0] ""
+
+msgid "Notifications"
+msgstr ""
+
+msgid "You're subscribed and getting updates about new interpretations."
+msgstr ""
+
+msgid "Unsubscribe"
+msgstr ""
+
+msgid "Subscribe to get updates about new interpretations."
+msgstr ""
+
+msgid "Subscribe"
+msgstr ""
+
+msgid "About this map"
+msgstr ""
+
+msgid "About this line list"
+msgstr ""
+
+msgid "About this visualization"
+msgstr ""
+
+msgid "About this event chart"
+msgstr ""
+
+msgid "About this event report"
+msgstr ""
+
+msgid "This app could not retrieve required data."
+msgstr ""
+
+msgid "Network error"
+msgstr ""
+
+msgid "Data / Edit calculation"
+msgstr ""
+
+msgid "Data / New calculation"
+msgstr ""
+
+msgid "Remove item"
+msgstr ""
+
+msgid "Check formula"
+msgstr ""
+
+msgid "Calculation name"
+msgstr ""
+
+msgid "Shown in table headers and chart axes/legends"
+msgstr ""
+
+msgid "Delete calculation"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Batal"
+
+msgid "The calculation can only be saved with a valid formula"
+msgstr ""
+
+msgid "Add a name to save this calculation"
+msgstr ""
+
+msgid "Save calculation"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete this calculation? It may be used by other "
+"visualizations."
+msgstr ""
+
+msgid "Yes, delete"
+msgstr ""
+
+msgid "Totals only"
+msgstr "Total saja"
+
+msgid "Details only"
+msgstr "Detail saja"
+
+msgid "Loading"
+msgstr "Loading"
+
+msgid "Data elements"
+msgstr "Data elemen"
+
+msgid "Search by data element name"
+msgstr ""
+
+msgid "No data elements found for \"{{- searchTerm}}\""
+msgstr "Tidak ada elemen data yang ditemukan untuk \"{{- searchTerm}}\""
+
+msgid "No data elements found"
+msgstr "Tidak ada elemen data yang ditemukan"
+
+msgid ""
+"Drag items here, or double click in the list, to start building a "
+"calculation formula"
+msgstr ""
+
+msgid "Math operators"
+msgstr ""
+
+msgid "Expression description"
+msgstr "Deskripsi expression"
+
+msgid "Error loading value"
+msgstr ""
+
+msgid "None"
+msgstr "Tidak ada"
+
+msgid "Data set(s)"
+msgstr ""
+
+msgid "Zero is significant"
+msgstr ""
+
+msgid "True"
+msgstr ""
+
+msgid "False"
+msgstr ""
+
+msgid "Value type"
+msgstr "Tipe nilai"
+
+msgid "Aggregation type"
+msgstr "Tipe agregasi"
+
+msgid "Category combo"
+msgstr ""
+
+msgid "Option set"
+msgstr ""
+
+msgid "Group membership"
+msgstr ""
+
+msgid "Legend set(s)"
+msgstr ""
+
+msgid "Category option name"
+msgstr ""
+
+msgid "Category combo name"
+msgstr ""
+
+msgid "Categories name"
+msgstr ""
+
+msgid "Period type"
+msgstr "Tipe periode"
+
+msgid "Indicators"
+msgstr "Indikator"
+
+msgid "Expiry days"
+msgstr "Batas Kadaluarsa"
+
+msgid "Type"
+msgstr "Tipe"
+
+msgid "Data element"
+msgstr "Elemen data"
+
+msgid "Tracked entity attribute"
+msgstr "Atribut"
+
+msgid "Numerator description"
+msgstr ""
+
+msgid "Numerator expression"
+msgstr ""
+
+msgid "Denominator description"
+msgstr ""
+
+msgid "Denominator expression"
+msgstr ""
+
+msgid "Annualized"
+msgstr ""
+
+msgid "Yes"
+msgstr "Iya"
+
+msgid "No"
+msgstr "Tidak"
+
+msgid "Indicator type"
+msgstr ""
+
+msgid "Decimals in output"
+msgstr ""
+
+msgid "There was a problem loading information for this data item."
+msgstr ""
+
+msgid "Name"
+msgstr "Nama"
+
+msgid "Description"
+msgstr "Deskripsi"
+
+msgid "Code"
+msgstr "Kode"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Last updated date"
+msgstr ""
+
+msgid "Created date"
+msgstr ""
+
+msgid "Created by"
+msgstr "Dibuat oleh"
+
+msgid "Custom"
+msgstr "Kustom"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Analytics type"
+msgstr ""
+
+msgid "Enrollment"
+msgstr "Pendaftaran"
+
+msgid "Event"
+msgstr "Even"
+
+msgid "Analytics period boundaries"
+msgstr ""
+
+msgid "{{ offsetPeriodType }} × {{ offsetPeriods }}"
+msgstr ""
+
+msgid "Expression"
+msgstr ""
+
+msgid "Filter"
+msgstr "Saring"
+
+msgid "All available options are already selected"
+msgstr ""
+
+msgid "No available options for this item"
+msgstr ""
+
+msgid "Search by option name"
+msgstr ""
+
+msgid "Back to all items"
+msgstr ""
+
+msgid "Options"
+msgstr "Opsi"
+
+msgid "Selected items"
+msgstr ""
+
+msgid "Data Type"
+msgstr "Tipe Data"
+
+msgid "Only {{dataType}} can be used in {{visType}}"
+msgstr ""
+
+msgid "All types"
+msgstr "Semua jenis"
+
+msgid "Disaggregation"
+msgstr "Disagregasi"
+
+msgid "No data"
+msgstr "Tidak ada data"
+
+msgid "Search by data item name"
+msgstr "Cari berdasarkan nama item data"
+
+msgid "Selected Items"
+msgstr "Item yang Dipilih"
+
+msgid "All available items are already selected"
+msgstr ""
+
+msgid "Calculation"
+msgstr ""
+
+msgid "Metric type"
+msgstr "Jenis metrik"
+
+msgid "All metrics"
+msgstr "Semua metrik"
+
+msgid "No items selected"
+msgstr "Tidak ada item yang dipilih"
+
+msgid "No indicators found"
+msgstr "Tidak ada indikator yang ditemukan"
+
+msgid "No data sets found"
+msgstr "Tidak ada kumpulan data yang ditemukan"
+
+msgid "No event data items found"
+msgstr "Tidak ada item data acara yang ditemukan"
+
+msgid "No program indicators found"
+msgstr "Tidak ada indikator program yang ditemukan"
+
+msgid "No calculations found"
+msgstr ""
+
+msgid "No indicators found for \"{{- searchTerm}}\""
+msgstr "Tidak ada indikator yang ditemukan untuk \"{{- searchTerm}}\""
+
+msgid "No data sets found for \"{{- searchTerm}}\""
+msgstr "Tidak ada kumpulan data yang ditemukan untuk \"{{- searchTerm}}\""
+
+msgid "No event data items found for \"{{- searchTerm}}\""
+msgstr "Tidak ditemukan item data peristiwa untuk \"{{- searchTerm}}\""
+
+msgid "No program indicators found for \"{{- searchTerm}}\""
+msgstr "Tidak ada indikator program yang ditemukan untuk \"{{- searchTerm}}\""
+
+msgid "No calculations found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "Nothing found for \"{{- searchTerm}}\""
+msgstr "Tidak ada yang ditemukan untuk \"{{- searchTerm}}\""
+
+msgid "Click to choose from available options"
+msgstr ""
+
+msgid "Move to {{axisName}}"
+msgstr "Pindah ke {{axisName}}"
+
+msgid "Add to {{axisName}}"
+msgstr "Tambahkan ke {{axisName}}"
+
+msgid "Not available for {{visualizationType}}"
+msgstr "Tidak tersedia untuk {{visualizationType}}"
+
+msgid "Remove Assigned Categories"
+msgstr "Hapus Kategori yang Ditugaskan"
+
+msgid "Add Assigned Categories"
+msgstr "Tambahkan Kategori yang Ditugaskan"
+
+msgid "Remove"
+msgstr "Hapus"
+
+msgid "Filter dimensions"
+msgstr "Filter dimensi"
+
+msgid "Main dimensions"
+msgstr "Dimensi utama"
+
+msgid "Your dimensions"
+msgstr "Dimensi Anda"
+
+msgid "Dimension recommended with selected data"
+msgstr "Dimensi yang direkomendasikan dengan data terpilih"
+
+msgid "All items"
+msgstr ""
+
+msgid "Automatically include all items"
+msgstr ""
+
+msgid ""
+"Select all {{- dimensionTitle}} items. With this option, new items added in "
+"the future will be automatically included."
+msgstr ""
+
+msgid "Manually select items..."
+msgstr ""
+
+msgid "Nothing found in {{- dimensionTitle}}"
+msgstr ""
+
+msgid "Search"
+msgstr "Pencarian"
+
+msgid "Delete {{fileType}}"
+msgstr "Hapus {{fileType}}"
+
+msgid ""
+"This {{fileType}} and related interpretations will be deleted. Continue?"
+msgstr "{{fileType}} ini dan interpretasi terkait akan dihapus. Terus?"
+
+msgid "Delete"
+msgstr "Hapus"
+
+msgid "File"
+msgstr "Mengajukan"
+
+msgid "New"
+msgstr "Baru"
+
+msgid "Open…"
+msgstr "Buka…"
+
+msgid "Save"
+msgstr "Simpan"
+
+msgid "Save…"
+msgstr "Menyimpan…"
+
+msgid "Save as…"
+msgstr "Simpan sebagai…"
+
+msgid "Rename…"
+msgstr "Ganti nama…"
+
+msgid "Translate…"
+msgstr "Menterjemahkan…"
+
+msgid "Share…"
+msgstr "Bagikan…"
+
+msgid "Get link…"
+msgstr "Dapatkan tautan…"
+
+msgid "Open in this app"
+msgstr "Buka di aplikasi ini"
+
+msgid "Copy to clipboard"
+msgstr "Menyalin ke clipboard"
+
+msgid "Close"
+msgstr "Tutup"
+
+msgid "Rename {{fileType}}"
+msgstr "Ganti nama {{fileType}}"
+
+msgid "Rename"
+msgstr "Ganti nama"
+
+msgid "{{- objectName}} (copy)"
+msgstr ""
+
+msgid "Save {{fileType}} as"
+msgstr "Simpan {{fileType}} sebagai"
+
+msgid "event report"
+msgstr ""
+
+msgid "line list"
+msgstr ""
+
+msgid "map"
+msgstr ""
+
+msgid "visualization"
+msgstr ""
+
+msgid "Untitled {{visualizationType}}, {{date}}"
+msgstr ""
+
+msgid "Back to all interpretations"
+msgstr ""
+
+msgid "Could not load interpretation details"
+msgstr ""
+
+msgid "The request to fetch interpretation comments failed"
+msgstr ""
+
+msgid "Edit"
+msgstr "Sunting"
+
+msgid "Write a reply"
+msgstr ""
+
+msgid "Could not post reply"
+msgstr ""
+
+msgid "Post reply"
+msgstr ""
+
+msgid "Could not delete comment"
+msgstr ""
+
+msgid "Could not update comment"
+msgstr ""
+
+msgid "Enter comment text"
+msgstr ""
+
+msgid "Update"
+msgstr "Perbarui"
+
+msgid "Viewing interpretation: {{- visualisationName}}"
+msgstr ""
+
+msgid "Could not load interpretation"
+msgstr ""
+
+msgid ""
+"The interpretation couldn’t be displayed. Try again or contact your system "
+"administrator."
+msgstr ""
+
+msgid "Hide interpretation"
+msgstr ""
+
+msgid "Write an interpretation"
+msgstr ""
+
+msgid "Could not post interpretation"
+msgstr ""
+
+msgid ""
+"Other people viewing this interpretation in the future may see more data."
+msgstr ""
+
+msgid "Post interpretation"
+msgstr ""
+
+msgid "Interpretations"
+msgstr "Interpretasi"
+
+msgid "Error loading interpretations"
+msgstr ""
+
+msgid "Could not load interpretations"
+msgstr ""
+
+msgid "Reply"
+msgstr "Balas"
+
+msgid "{{count}} replies"
+msgid_plural "{{count}} replies"
+msgstr[0] "balasan {{count}} "
+
+msgid "View replies"
+msgstr ""
+
+msgid "Unlike"
+msgstr "Batalkan Suka"
+
+msgid "Like"
+msgstr "Suka"
+
+msgid "See interpretation"
+msgstr ""
+
+msgid "Open in app"
+msgstr ""
+
+msgid "Share"
+msgstr "Bagikan"
+
+msgid "Could not delete interpretation"
+msgstr ""
+
+msgid "Manage sharing"
+msgstr ""
+
+msgid "Could not update interpretation text"
+msgstr ""
+
+msgid "Could not update interpretation"
+msgstr ""
+
+msgid "Enter interpretation text"
+msgstr ""
+
+msgid "Not available offline"
+msgstr ""
+
+msgid "Anyone"
+msgstr "Siapa saja"
+
+msgid "Only you"
+msgstr "Hanya kamu"
+
+msgid "Others"
+msgstr "Yang lain"
+
+msgid "Not supported by this app yet"
+msgstr ""
+
+msgid "Filter by name"
+msgstr "Filter menurut nama"
+
+msgid "Created"
+msgstr "Dibuat"
+
+msgid "Last updated"
+msgstr "Terakhir diperbarui"
+
+msgid "Clear filters"
+msgstr "Hapus penyaring"
+
+msgid "{{firstItemIndex}}-{{lastItemIndex}} of {{totalNumberOfItems}}"
+msgstr "{{firstItemIndex}}-{{lastItemIndex}} dari {{totalNumberOfItems}}"
+
+msgid "Open"
+msgstr "Buka"
+
+msgid "Couldn't load items"
+msgstr "Tidak dapat memuat item"
+
+msgid ""
+"There was a problem loading items. Try again or contact your system "
+"administrator."
+msgstr ""
+"Terjadi masalah saat memuat item. Coba lagi atau hubungi administrator "
+"sistem Anda."
+
+msgid "No items found. Create a new to get started."
+msgstr "Tidak ada item yang ditemukan. Buat yang baru untuk memulai."
+
+msgid ""
+"No items found. Try adjusting your search or filter options to find what "
+"you're looking for."
+msgstr ""
+"Tidak ada item yang ditemukan. Coba sesuaikan opsi penelusuran atau filter "
+"untuk menemukan apa yang Anda cari."
+
+msgid "Create new"
+msgstr "Membuat baru"
+
+msgid "Open a visualization"
+msgstr "Buka visualisasi"
+
+msgid "Loading visualizations"
+msgstr "Memuat visualisasi"
+
+msgid "Couldn't load visualizations"
+msgstr "Tidak dapat memuat visualisasi"
+
+msgid ""
+"There was a problem loading visualizations. Try again or contact your system"
+" administrator."
+msgstr ""
+"Terjadi masalah saat memuat visualisasi. Coba lagi atau hubungi "
+"administrator sistem Anda."
+
+msgid "No visualizations found. Click New visualization to get started."
+msgstr ""
+"Tidak ada visualisasi yang ditemukan. Klik Visualisasi baru untuk memulai."
+
+msgid ""
+"No visualizations found. Try adjusting your search or filter options to find"
+" what you're looking for."
+msgstr ""
+"Tidak ada visualisasi yang ditemukan. Coba sesuaikan opsi penelusuran atau "
+"filter untuk menemukan apa yang Anda cari."
+
+msgid "New visualization"
+msgstr "Visualisasi baru"
+
+msgid "Open a map"
+msgstr "Buka peta"
+
+msgid "Loading maps"
+msgstr "Memuat peta"
+
+msgid "Couldn't load maps"
+msgstr "Tidak dapat memuat peta"
+
+msgid ""
+"There was a problem loading maps. Try again or contact your system "
+"administrator."
+msgstr ""
+"Terjadi masalah saat memuat peta. Coba lagi atau hubungi administrator "
+"sistem Anda."
+
+msgid "No maps found. Click New map to get started."
+msgstr "Tidak ada peta yang ditemukan. Klik Peta baru untuk memulai."
+
+msgid ""
+"No maps found. Try adjusting your search or filter options to find what "
+"you're looking for."
+msgstr ""
+"Tidak ada peta yang ditemukan. Coba sesuaikan opsi penelusuran atau filter "
+"untuk menemukan apa yang Anda cari."
+
+msgid "New map"
+msgstr "peta baru"
+
+msgid "Hide"
+msgstr "Sembunyikan"
+
+msgid "{{count}} org units"
+msgid_plural "{{count}} org units"
+msgstr[0] ""
+
+msgid "{{count}} levels"
+msgid_plural "{{count}} levels"
+msgstr[0] ""
+
+msgid "{{count}} groups"
+msgid_plural "{{count}} groups"
+msgstr[0] ""
+
+msgid "Selected: {{commaSeparatedListOfOrganisationUnits}}"
+msgstr ""
+
+msgid "Nothing selected"
+msgstr ""
+
+msgid "User organisation unit"
+msgstr ""
+
+msgid "User sub-units"
+msgstr "Subunit pengguna"
+
+msgid "User sub-x2-units"
+msgstr "Sub-x2-unit pengguna"
+
+msgid "Select a level"
+msgstr ""
+
+msgid "Select a group"
+msgstr ""
+
+msgid "Deselect all"
+msgstr "Batal pilih semua"
+
+msgid "Year"
+msgstr "Tahun"
+
+msgid "Select year"
+msgstr "Pilih tahun"
+
+msgid "Period"
+msgstr "Periode"
+
+msgid "Selected Periods"
+msgstr "Periode yang Dipilih"
+
+msgid "No period types available"
+msgstr ""
+
+msgid ""
+"No period types are enabled in the system. Please contact your system "
+"administrator."
+msgstr ""
+
+msgid "Relative periods"
+msgstr "Periode relatif"
+
+msgid "Fixed periods"
+msgstr "Periode tetap"
+
+msgid "No periods selected"
+msgstr "Tidak ada periode yang dipilih"
+
+msgid "Daily"
+msgstr "Harian"
+
+msgid "Weekly"
+msgstr "Mingguan"
+
+msgid "Weekly (Start Wednesday)"
+msgstr "Mingguan (Mulai Rabu)"
+
+msgid "Weekly (Start Thursday)"
+msgstr "Mingguan (Mulai Kamis)"
+
+msgid "Weekly (Start Friday)"
+msgstr ""
+
+msgid "Weekly (Start Saturday)"
+msgstr "Mingguan (Mulai Sabtu)"
+
+msgid "Weekly (Start Sunday)"
+msgstr "Mingguan (Mulai Minggu)"
+
+msgid "Bi-weekly"
+msgstr "Dwiwulanan"
+
+msgid "Monthly"
+msgstr "Bulanan"
+
+msgid "Bi-monthly"
+msgstr "Dwiwulanan"
+
+msgid "Quarterly"
+msgstr "Triwulanan"
+
+msgid "Six-monthly"
+msgstr "Semester"
+
+msgid "Six-monthly April"
+msgstr "Semester April"
+
+msgid "Yearly"
+msgstr "Tahunan"
+
+msgid "Financial year (Start February)"
+msgstr ""
+
+msgid "Financial year (Start April)"
+msgstr "Financial April"
+
+msgid "Financial year (Start July)"
+msgstr "Financial July"
+
+msgid "Financial year (Start August)"
+msgstr ""
+
+msgid "Financial year (Start September)"
+msgstr ""
+
+msgid "Financial year (Start October)"
+msgstr "Financial October"
+
+msgid "Financial year (Start November)"
+msgstr "Keuangan tahunan (Mulai November)"
+
+msgid "Today"
+msgstr "Hari ini"
+
+msgid "Yesterday"
+msgstr "Kemarin"
+
+msgid "Last 3 days"
+msgstr "3 hari terakhir"
+
+msgid "Last 7 days"
+msgstr "7 hari terakhir"
+
+msgid "Last 14 days"
+msgstr "14 hari terakhir"
+
+msgid "Last 30 days"
+msgstr "30 hari terakhir"
+
+msgid "Last 60 days"
+msgstr "60 hari terakhir"
+
+msgid "Last 90 days"
+msgstr "90 hari terakhir"
+
+msgid "Last 180 days"
+msgstr "180 hari terakhir"
+
+msgid "This week"
+msgstr "Minggu ini"
+
+msgid "Last week"
+msgstr "Minggu lalu"
+
+msgid "Last 4 weeks"
+msgstr "4 minggu terakhir"
+
+msgid "Last 12 weeks"
+msgstr "12 minggu terakhir"
+
+msgid "Last 52 weeks"
+msgstr "52 minggu terakhir"
+
+msgid "Weeks this year"
+msgstr "Mingguan tahun ini"
+
+msgid "This bi-week"
+msgstr "Dwiwulan ini"
+
+msgid "Last bi-week"
+msgstr "Dwiwulan terakhir"
+
+msgid "Last 4 bi-weeks"
+msgstr "4 dwiwulan terakhir"
+
+msgid "This month"
+msgstr "Bulan ini"
+
+msgid "Last month"
+msgstr "Bulan lalu"
+
+msgid "Last 3 months"
+msgstr "3 bulan terakhir"
+
+msgid "Last 6 months"
+msgstr "6 bulan terakhir"
+
+msgid "Last 12 months"
+msgstr "12 bulan terakhir"
+
+msgid "Months this year"
+msgstr "Bulanan tahun ini"
+
+msgid "This bi-month"
+msgstr "2 bulan ini"
+
+msgid "Last bi-month"
+msgstr "Dwiwulan terakhir"
+
+msgid "Last 6 bi-months"
+msgstr "6 dwiwulan terakhir"
+
+msgid "Bi-months this year"
+msgstr "Dwiwulanan tahun ini"
+
+msgid "This quarter"
+msgstr "Triwulan ini"
+
+msgid "Last quarter"
+msgstr "Triwulan yang lalu"
+
+msgid "Last 4 quarters"
+msgstr "4 triwulan terakhir"
+
+msgid "Quarters this year"
+msgstr "Triwulanan tahun ini"
+
+msgid "This six-month"
+msgstr "6 bulan ini"
+
+msgid "Last six-month"
+msgstr "Semester lalu"
+
+msgid "Last 2 six-month"
+msgstr "2 enam bulan terakhir"
+
+msgid "This financial year"
+msgstr "Tahun finansial ini"
+
+msgid "Last financial year"
+msgstr "Tahun finansial kemarin"
+
+msgid "Last 5 financial years"
+msgstr "5 tahun finansial terakhir"
+
+msgid "This year"
+msgstr "Tahun ini"
+
+msgid "Last year"
+msgstr "Tahun kemarin"
+
+msgid "Last 5 years"
+msgstr "5 tahun terakhir"
+
+msgid "Last 10 years"
+msgstr "10 tahun terakhir"
+
+msgid "Days"
+msgstr "Hari"
+
+msgid "Weeks"
+msgstr "Minggu"
+
+msgid "Bi-weeks"
+msgstr "Dwiwulan"
+
+msgid "Months"
+msgstr "Bulan"
+
+msgid "Bi-months"
+msgstr "Dwiwulan"
+
+msgid "Quarters"
+msgstr "Triwulan"
+
+msgid "Six-months"
+msgstr "Semester"
+
+msgid "Financial Years"
+msgstr "Keuangan tahunan"
+
+msgid "Years"
+msgstr "Tahun"
+
+msgid "Value: {{value}}"
+msgstr ""
+
+msgid "Bold text"
+msgstr ""
+
+msgid "Italic text"
+msgstr ""
+
+msgid "Link to a URL"
+msgstr ""
+
+msgid "Mention a user"
+msgstr ""
+
+msgid "Add emoji"
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "Back to write mode"
+msgstr ""
+
+msgid "Interpretations and details"
+msgstr ""
+
+msgid "Translating to"
+msgstr ""
+
+msgid "Choose a locale"
+msgstr ""
+
+msgid "Base locale reference"
+msgstr ""
+
+msgid "Choose a locale to translate from the menu above"
+msgstr ""
+
+msgid "Translate: {{objectName}}"
+msgstr ""
+
+msgid "Save translations"
+msgstr ""
+
+msgid "Cannot save while offline"
+msgstr ""
+
+msgid "Could not load translations"
+msgstr ""
+
+msgid "Retry"
+msgstr ""
+
+msgid "Too many results. Try refining the search."
+msgstr ""
+
+msgid "Search for a user"
+msgstr ""
+
+msgid "Searching for \"{{- searchText}}\""
+msgstr ""
+
+msgid "No results found"
+msgstr "Tidak ada hasil ditemukan"
+
+msgid "Series"
+msgstr "Seri"
+
+msgid "Category"
+msgstr "Kategori"
+
+msgid "Columns"
+msgstr "kolom"
+
+msgid "Rows"
+msgstr "Baris"
+
+msgid "Points"
+msgstr "Poin"
+
+msgid "Reporting rate"
+msgstr "Tingkat pelaporan"
+
+msgid "Reporting rate on time"
+msgstr "Tingkat pelaporan tepat waktu"
+
+msgid "Actual reports"
+msgstr "Laporan sesungguhnya"
+
+msgid "Actual reports on time"
+msgstr "Laporan sesungguhnya yang tepat waktu"
+
+msgid "Expected reports"
+msgstr "Laporan yang diharapkan"
+
+msgid "Select a program"
+msgstr "Pilih program"
+
+msgid "Indicator group"
+msgstr "grup indikator"
+
+msgid "All groups"
+msgstr "Semua grup"
+
+msgid "Indicator"
+msgstr "Indikator"
+
+msgid "No indicator groups found"
+msgstr "Tidak ada grup indikator yang ditemukan"
+
+msgid "Loading indicator groups"
+msgstr "Memuat grup indikator"
+
+msgid "Data element group"
+msgstr "Grup elemen data"
+
+msgid "No data element groups found"
+msgstr "Tidak ada grup elemen data yang ditemukan"
+
+msgid "Loading data element groups"
+msgstr "Memuat grup elemen data"
+
+msgid "Data sets"
+msgstr "Data set"
+
+msgid "Data set"
+msgstr "Data set"
+
+msgid "All data sets"
+msgstr "Semua kumpulan data"
+
+msgid "Loading data sets"
+msgstr "Memuat kumpulan data"
+
+msgid "Event data items"
+msgstr "Item data event"
+
+msgid "All programs"
+msgstr "Semua program"
+
+msgid "Event data item"
+msgstr "Data item pada even"
+
+msgid "No programs found"
+msgstr "Tidak ada program yang ditemukan"
+
+msgid "Loading programs"
+msgstr "Memuat program"
+
+msgid "Program indicators"
+msgstr "Indikator program"
+
+msgid "Program indicator"
+msgstr "Indikator program"
+
+msgid "Calculations"
+msgstr ""
+
+msgid "Option"
+msgstr ""
+
+msgid "Number"
+msgstr "Angka"
+
+msgid "Formula is empty. Add items to the formula from the lists on the left."
+msgstr ""
+
+msgid "Consecutive math operators"
+msgstr ""
+
+msgid "Consecutive data elements"
+msgstr ""
+
+msgid "Starts or ends with a math operator"
+msgstr ""
+
+msgid "Empty parentheses"
+msgstr ""
+
+msgid "Missing right parenthesis )"
+msgstr ""
+
+msgid "Missing left parenthesis ("
+msgstr ""
+
+msgid "Extra Small"
+msgstr "Ekstra kecil"
+
+msgid "Small"
+msgstr "Kecil"
+
+msgid "Regular"
+msgstr "Reguler"
+
+msgid "Large"
+msgstr "Besar"
+
+msgid "Extra Large"
+msgstr "Ekstra besar"
+
+msgid "Left"
+msgstr "Kiri"
+
+msgid "Center"
+msgstr "Pusat"
+
+msgid "Right"
+msgstr "Kanan"
+
+msgid "Start"
+msgstr "Mulai"
+
+msgid "Middle"
+msgstr "Tengah"
+
+msgid "End"
+msgstr "Akhir"
+
+msgid "Top"
+msgstr "Atas"
+
+msgid "Bottom"
+msgstr "Bawah"
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr "{{dynamicOuNames}} dan {{lastOuName}}"
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr "{{allDynamicOuNames}} level"
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr "{{allDynamicOuNames}} grup"
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} level di {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} grup di {{staticOuNames}}"
+
+msgid "{{percentage}}% of total x values"
+msgstr "{{percentage}}% dari total nilai x"
+
+msgid "{{percentage}}% of total y values"
+msgstr "{{percentage}}% dari total nilai y"
+
+msgid "{{thresholdFactor}} × IQR Q1"
+msgstr "{{thresholdFactor}} × IQR Q1"
+
+msgid "{{thresholdFactor}} × IQR Q3"
+msgstr "{{thresholdFactor}} × IQR Q3"
+
+msgid "{{thresholdFactor}} × Modified Z-score low"
+msgstr "{{thresholdFactor}} × Modifikasi Z-score rendah"
+
+msgid "{{thresholdFactor}} × Modified Z-score high"
+msgstr "{{thresholdFactor}} × Modifikasi Z-score tinggi"
+
+msgid "{{thresholdFactor}} × Z-score low"
+msgstr "{{thresholdFactor}} × Z-skor rendah"
+
+msgid "{{thresholdFactor}} × Z-score high"
+msgstr "{{thresholdFactor}} × Z-skor tinggi"
+
+msgid "Not applicable"
+msgstr ""
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Organisation unit"
+msgstr "Unit organisasi"
+
+msgid "Assigned Categories"
+msgstr "Kategori yang Ditugaskan"
+
+msgid "No value"
+msgstr "NO_VALUE"
+
+msgid "Active"
+msgstr "Aktif"
+
+msgid "Completed"
+msgstr "Selesai"
+
+msgid "Scheduled"
+msgstr "Terjadwal"
+
+msgid "Cancelled"
+msgstr "Dibatalkan"
+
+msgid "Text"
+msgstr ""
+
+msgid "Long text"
+msgstr ""
+
+msgid "Multi text"
+msgstr ""
+
+msgid "Letter"
+msgstr ""
+
+msgid "Phone number"
+msgstr "No. Telp."
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Yes/No"
+msgstr "Ya/Tidak"
+
+msgid "Yes Only"
+msgstr "Hanya Ya"
+
+msgid "Date"
+msgstr "Tanggal"
+
+msgid "Date & Time"
+msgstr "Tanggal & Waktu"
+
+msgid "Time"
+msgstr "Waktu"
+
+msgid "Unit interval"
+msgstr "Interval Satuan"
+
+msgid "Percentage"
+msgstr ""
+
+msgid "Integer"
+msgstr "Bilangan bulat"
+
+msgid "Positive Integer"
+msgstr "Bilangan bulat positif"
+
+msgid "Negative Integer"
+msgstr "Bilangan bulat negatif"
+
+msgid "Positive or Zero Integer"
+msgstr ""
+
+msgid "Tracker Associate"
+msgstr ""
+
+msgid "Username"
+msgstr "Nama pengguna"
+
+msgid "Coordinate"
+msgstr "Koordinat"
+
+msgid "Reference"
+msgstr "Referensi"
+
+msgid "Age"
+msgstr "Usia(tahun)"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Image"
+msgstr "Gambar"
+
+msgid "GeoJSON"
+msgstr ""
+
+msgid "Pivot table"
+msgstr "Tabel Pivot"
+
+msgid "Area"
+msgstr "Area"
+
+msgid "Stacked area"
+msgstr "Area bertumpuk"
+
+msgid "Bar"
+msgstr "Bar"
+
+msgid "Stacked bar"
+msgstr "Bar tumpuk"
+
+msgid "Column"
+msgstr "Kolom"
+
+msgid "Year over year (column)"
+msgstr "Tahun ke tahun (kolom)"
+
+msgid "Stacked column"
+msgstr "Kolom tumpuk"
+
+msgid "Gauge"
+msgstr "Meteran"
+
+msgid "Line"
+msgstr "Garis"
+
+msgid "Line list"
+msgstr "Daftar garis"
+
+msgid "Year over year (line)"
+msgstr "Tahun ke tahun (garis)"
+
+msgid "Pie"
+msgstr "Pie"
+
+msgid "Radar"
+msgstr "Radar"
+
+msgid "Scatter"
+msgstr "Scatter"
+
+msgid "Single value"
+msgstr "Nilai tunggal"
+
+msgid "Outlier table"
+msgstr ""
+
+msgid "All charts"
+msgstr "Semua grafik"
+
+msgid "Map"
+msgstr "Peta"
+
+msgid "{{seriesName}} (trend)"
+msgstr "{{seriesName}} (tren)"
+
+msgid "Trend"
+msgstr "Tren"
+
+msgid "No legend for this series"
+msgstr "Tidak ada legenda untuk seri ini"
+
+msgid "and {{amount}} more..."
+msgstr "dan {{amount}} lainnya..."
+
+msgid "Linear Regression"
+msgstr "Regresi linier"
+
+msgid "Target"
+msgstr "Target"
+
+msgid "Base"
+msgstr "Dasar"
+
+msgid "Axis {{axisId}}"
+msgstr "Sumbu {{axisId}}"
+
+msgid "{{count}} items"
+msgid_plural "{{count}} items"
+msgstr[0] ""
+
+msgid "Reset zoom"
+msgstr "Setel ulang zoom"
