@@ -1,0 +1,1468 @@
+# Translators:
+# Viktor Varland <viktor@dhis2.org>, 2025
+# Mozafar Haider, 2025
+# Philip Larsen Donnelly, 2026
+# Thiago Rocha, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-05-28T08:40:06.387Z\n"
+"PO-Revision-Date: 2020-04-28 22:05+0000\n"
+"Last-Translator: Thiago Rocha, 2026\n"
+"Language-Team: Portuguese (Brazil) (https://app.transifex.com/hisp-uio/teams/100509/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+msgid "view only"
+msgstr ""
+
+msgid "view and edit"
+msgstr ""
+
+msgid "all users ({{accessLevel}})"
+msgstr ""
+
+msgid "{{userOrGroup}} ({{accessLevel}})"
+msgstr ""
+
+msgid "Shared with {{commaSeparatedListOfUsersAndGroups}}"
+msgstr ""
+
+msgid "Not shared with any users or groups"
+msgstr ""
+
+msgid "No description"
+msgstr ""
+
+msgid "Last updated {{time}}"
+msgstr ""
+
+msgid "Created {{time}} by {{author}}"
+msgstr ""
+
+msgid "Created {{time}}"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
+
+msgid "You're subscribed and getting updates about new interpretations."
+msgstr ""
+
+msgid "Unsubscribe"
+msgstr ""
+
+msgid "Subscribe to get updates about new interpretations."
+msgstr ""
+
+msgid "Subscribe"
+msgstr ""
+
+msgid "About this map"
+msgstr ""
+
+msgid "About this line list"
+msgstr ""
+
+msgid "About this visualization"
+msgstr ""
+
+msgid "About this event chart"
+msgstr ""
+
+msgid "About this event report"
+msgstr ""
+
+msgid "This app could not retrieve required data."
+msgstr ""
+
+msgid "Network error"
+msgstr "Erro de rede"
+
+msgid "Data / Edit calculation"
+msgstr ""
+
+msgid "Data / New calculation"
+msgstr ""
+
+msgid "Remove item"
+msgstr ""
+
+msgid "Check formula"
+msgstr ""
+
+msgid "Calculation name"
+msgstr ""
+
+msgid "Shown in table headers and chart axes/legends"
+msgstr ""
+
+msgid "Delete calculation"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "The calculation can only be saved with a valid formula"
+msgstr ""
+
+msgid "Add a name to save this calculation"
+msgstr ""
+
+msgid "Save calculation"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete this calculation? It may be used by other "
+"visualizations."
+msgstr ""
+
+msgid "Yes, delete"
+msgstr "Sim, excluir"
+
+msgid "Totals only"
+msgstr ""
+
+msgid "Details only"
+msgstr ""
+
+msgid "Loading"
+msgstr "Carregando.."
+
+msgid "Data elements"
+msgstr "Os elementos de dados"
+
+msgid "Search by data element name"
+msgstr ""
+
+msgid "No data elements found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No data elements found"
+msgstr ""
+
+msgid ""
+"Drag items here, or double click in the list, to start building a "
+"calculation formula"
+msgstr ""
+
+msgid "Math operators"
+msgstr ""
+
+msgid "Expression description"
+msgstr ""
+
+msgid "Error loading value"
+msgstr ""
+
+msgid "None"
+msgstr "Nenhum"
+
+msgid "Data set(s)"
+msgstr ""
+
+msgid "Zero is significant"
+msgstr ""
+
+msgid "True"
+msgstr ""
+
+msgid "False"
+msgstr ""
+
+msgid "Value type"
+msgstr "Tipo de valor"
+
+msgid "Aggregation type"
+msgstr "Tipo de agregacão"
+
+msgid "Category combo"
+msgstr ""
+
+msgid "Option set"
+msgstr "Conjunto de opções"
+
+msgid "Group membership"
+msgstr ""
+
+msgid "Legend set(s)"
+msgstr ""
+
+msgid "Category option name"
+msgstr ""
+
+msgid "Category combo name"
+msgstr ""
+
+msgid "Categories name"
+msgstr ""
+
+msgid "Period type"
+msgstr "Tipo de período"
+
+msgid "Indicators"
+msgstr "Indicadores"
+
+msgid "Expiry days"
+msgstr "Dias de validade"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Data element"
+msgstr "Elemento de dado"
+
+msgid "Tracked entity attribute"
+msgstr "Atributo de entidade rastreada"
+
+msgid "Numerator description"
+msgstr "Descrição do numerador"
+
+msgid "Numerator expression"
+msgstr ""
+
+msgid "Denominator description"
+msgstr "Descrição do Denominador"
+
+msgid "Denominator expression"
+msgstr ""
+
+msgid "Annualized"
+msgstr "Anualizado"
+
+msgid "Yes"
+msgstr "Sim"
+
+msgid "No"
+msgstr "Não"
+
+msgid "Indicator type"
+msgstr "Tipo de Indicador"
+
+msgid "Decimals in output"
+msgstr ""
+
+msgid "There was a problem loading information for this data item."
+msgstr ""
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Description"
+msgstr "Descrição"
+
+msgid "Code"
+msgstr "Código"
+
+msgid "ID"
+msgstr "Id"
+
+msgid "Last updated date"
+msgstr ""
+
+msgid "Created date"
+msgstr ""
+
+msgid "Created by"
+msgstr "Criado por"
+
+msgid "Custom"
+msgstr ""
+
+msgid "Program"
+msgstr "Programa"
+
+msgid "Analytics type"
+msgstr ""
+
+msgid "Enrollment"
+msgstr "Inscrição"
+
+msgid "Event"
+msgstr "Evento"
+
+msgid "Analytics period boundaries"
+msgstr ""
+
+msgid "{{ offsetPeriodType }} × {{ offsetPeriods }}"
+msgstr ""
+
+msgid "Expression"
+msgstr "Expressão"
+
+msgid "Filter"
+msgstr "Filtro"
+
+msgid "All available options are already selected"
+msgstr ""
+
+msgid "No available options for this item"
+msgstr ""
+
+msgid "Search by option name"
+msgstr ""
+
+msgid "Back to all items"
+msgstr ""
+
+msgid "Options"
+msgstr "Opções"
+
+msgid "Selected items"
+msgstr ""
+
+msgid "Data Type"
+msgstr ""
+
+msgid "Only {{dataType}} can be used in {{visType}}"
+msgstr ""
+
+msgid "All types"
+msgstr ""
+
+msgid "Disaggregation"
+msgstr "Desagregação"
+
+msgid "No data"
+msgstr "Não ha dados"
+
+msgid "Search by data item name"
+msgstr ""
+
+msgid "Selected Items"
+msgstr ""
+
+msgid "All available items are already selected"
+msgstr ""
+
+msgid "Calculation"
+msgstr ""
+
+msgid "Metric type"
+msgstr ""
+
+msgid "All metrics"
+msgstr ""
+
+msgid "No items selected"
+msgstr ""
+
+msgid "No indicators found"
+msgstr ""
+
+msgid "No data sets found"
+msgstr ""
+
+msgid "No event data items found"
+msgstr ""
+
+msgid "No program indicators found"
+msgstr ""
+
+msgid "No calculations found"
+msgstr ""
+
+msgid "No indicators found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No data sets found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No event data items found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No program indicators found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "No calculations found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "Nothing found for \"{{- searchTerm}}\""
+msgstr ""
+
+msgid "Click to choose from available options"
+msgstr ""
+
+msgid "Move to {{axisName}}"
+msgstr ""
+
+msgid "Add to {{axisName}}"
+msgstr ""
+
+msgid "Not available for {{visualizationType}}"
+msgstr ""
+
+msgid "Remove Assigned Categories"
+msgstr ""
+
+msgid "Add Assigned Categories"
+msgstr ""
+
+msgid "Remove"
+msgstr "Remover"
+
+msgid "Filter dimensions"
+msgstr ""
+
+msgid "Main dimensions"
+msgstr ""
+
+msgid "Your dimensions"
+msgstr ""
+
+msgid "Dimension recommended with selected data"
+msgstr ""
+
+msgid "All items"
+msgstr ""
+
+msgid "Automatically include all items"
+msgstr ""
+
+msgid ""
+"Select all {{- dimensionTitle}} items. With this option, new items added in "
+"the future will be automatically included."
+msgstr ""
+
+msgid "Manually select items..."
+msgstr ""
+
+msgid "Nothing found in {{- dimensionTitle}}"
+msgstr ""
+
+msgid "Search"
+msgstr "Pesquisar"
+
+msgid "Delete {{fileType}}"
+msgstr ""
+
+msgid ""
+"This {{fileType}} and related interpretations will be deleted. Continue?"
+msgstr ""
+
+msgid "Delete"
+msgstr "Apagar"
+
+msgid "File"
+msgstr "Arquivo"
+
+msgid "New"
+msgstr "Novo"
+
+msgid "Open…"
+msgstr ""
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Save…"
+msgstr ""
+
+msgid "Save as…"
+msgstr ""
+
+msgid "Rename…"
+msgstr ""
+
+msgid "Translate…"
+msgstr ""
+
+msgid "Share…"
+msgstr ""
+
+msgid "Get link…"
+msgstr ""
+
+msgid "Open in this app"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr "Copiar para área de transferência"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "Rename {{fileType}}"
+msgstr ""
+
+msgid "Rename"
+msgstr "Renomear"
+
+msgid "{{- objectName}} (copy)"
+msgstr ""
+
+msgid "Save {{fileType}} as"
+msgstr ""
+
+msgid "event report"
+msgstr ""
+
+msgid "line list"
+msgstr ""
+
+msgid "map"
+msgstr ""
+
+msgid "visualization"
+msgstr ""
+
+msgid "Untitled {{visualizationType}}, {{date}}"
+msgstr ""
+
+msgid "Back to all interpretations"
+msgstr ""
+
+msgid "Could not load interpretation details"
+msgstr ""
+
+msgid "The request to fetch interpretation comments failed"
+msgstr ""
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Write a reply"
+msgstr ""
+
+msgid "Could not post reply"
+msgstr ""
+
+msgid "Post reply"
+msgstr ""
+
+msgid "Could not delete comment"
+msgstr ""
+
+msgid "Could not update comment"
+msgstr ""
+
+msgid "Enter comment text"
+msgstr ""
+
+msgid "Update"
+msgstr "Actualizar"
+
+msgid "Viewing interpretation: {{- visualisationName}}"
+msgstr ""
+
+msgid "Could not load interpretation"
+msgstr ""
+
+msgid ""
+"The interpretation couldn’t be displayed. Try again or contact your system "
+"administrator."
+msgstr ""
+
+msgid "Hide interpretation"
+msgstr ""
+
+msgid "Write an interpretation"
+msgstr ""
+
+msgid "Could not post interpretation"
+msgstr ""
+
+msgid ""
+"Other people viewing this interpretation in the future may see more data."
+msgstr ""
+
+msgid "Post interpretation"
+msgstr ""
+
+msgid "Interpretations"
+msgstr "Interpretações"
+
+msgid "Error loading interpretations"
+msgstr ""
+
+msgid "Could not load interpretations"
+msgstr ""
+
+msgid "Reply"
+msgstr "Responder"
+
+msgid "View replies"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
+msgid "Like"
+msgstr "como"
+
+msgid "See interpretation"
+msgstr ""
+
+msgid "Open in app"
+msgstr ""
+
+msgid "Share"
+msgstr "Partilhar"
+
+msgid "Could not delete interpretation"
+msgstr ""
+
+msgid "Manage sharing"
+msgstr ""
+
+msgid "Could not update interpretation text"
+msgstr ""
+
+msgid "Could not update interpretation"
+msgstr ""
+
+msgid "Enter interpretation text"
+msgstr ""
+
+msgid "Not available offline"
+msgstr ""
+
+msgid "Anyone"
+msgstr ""
+
+msgid "Only you"
+msgstr ""
+
+msgid "Others"
+msgstr "Outros"
+
+msgid "Not supported by this app yet"
+msgstr ""
+
+msgid "Filter by name"
+msgstr "Filtrar por nome"
+
+msgid "Created"
+msgstr "Criado"
+
+msgid "Last updated"
+msgstr "Última actualização"
+
+msgid "Clear filters"
+msgstr "Limpar filtros"
+
+msgid "{{firstItemIndex}}-{{lastItemIndex}} of {{totalNumberOfItems}}"
+msgstr ""
+
+msgid "Open"
+msgstr "Abrir"
+
+msgid "Couldn't load items"
+msgstr ""
+
+msgid ""
+"There was a problem loading items. Try again or contact your system "
+"administrator."
+msgstr ""
+
+msgid "No items found. Create a new to get started."
+msgstr ""
+
+msgid ""
+"No items found. Try adjusting your search or filter options to find what "
+"you're looking for."
+msgstr ""
+
+msgid "Create new"
+msgstr ""
+
+msgid "Open a visualization"
+msgstr ""
+
+msgid "Loading visualizations"
+msgstr ""
+
+msgid "Couldn't load visualizations"
+msgstr ""
+
+msgid ""
+"There was a problem loading visualizations. Try again or contact your system"
+" administrator."
+msgstr ""
+
+msgid "No visualizations found. Click New visualization to get started."
+msgstr ""
+
+msgid ""
+"No visualizations found. Try adjusting your search or filter options to find"
+" what you're looking for."
+msgstr ""
+
+msgid "New visualization"
+msgstr ""
+
+msgid "Open a map"
+msgstr ""
+
+msgid "Loading maps"
+msgstr ""
+
+msgid "Couldn't load maps"
+msgstr ""
+
+msgid ""
+"There was a problem loading maps. Try again or contact your system "
+"administrator."
+msgstr ""
+
+msgid "No maps found. Click New map to get started."
+msgstr ""
+
+msgid ""
+"No maps found. Try adjusting your search or filter options to find what "
+"you're looking for."
+msgstr ""
+
+msgid "New map"
+msgstr ""
+
+msgid "Open a line list"
+msgstr ""
+
+msgid "Loading line lists"
+msgstr ""
+
+msgid "Couldn't load line lists"
+msgstr ""
+
+msgid ""
+"There was a problem loading line lists. Try again or contact your system "
+"administrator."
+msgstr ""
+
+msgid "No line lists found. Click New line list to get started."
+msgstr ""
+
+msgid ""
+"No line lists found. Try adjusting your search or filter options to find "
+"what you're looking for."
+msgstr ""
+
+msgid "New line list"
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Selected: {{commaSeparatedListOfOrganisationUnits}}"
+msgstr ""
+
+msgid "Nothing selected"
+msgstr ""
+
+msgid "User organisation unit"
+msgstr ""
+
+msgid "User sub-units"
+msgstr ""
+
+msgid "User sub-x2-units"
+msgstr ""
+
+msgid "Select a level"
+msgstr ""
+
+msgid "Select a group"
+msgstr ""
+
+msgid "Deselect all"
+msgstr "Desmarcar todos"
+
+msgid "Year"
+msgstr "Ano"
+
+msgid "Select year"
+msgstr ""
+
+msgid "Period"
+msgstr "Período"
+
+msgid "Selected Periods"
+msgstr ""
+
+msgid "No period types available"
+msgstr ""
+
+msgid ""
+"No period types are enabled in the system. Please contact your system "
+"administrator."
+msgstr ""
+
+msgid "Relative periods"
+msgstr "Períodos relativos"
+
+msgid "Fixed periods"
+msgstr "Periodos fixos"
+
+msgid "No periods selected"
+msgstr "Não há períodos relativos seleccionados"
+
+msgid "Daily"
+msgstr "Diário"
+
+msgid "Weekly"
+msgstr "Semanal"
+
+msgid "Weekly (Start Wednesday)"
+msgstr ""
+
+msgid "Weekly (Start Thursday)"
+msgstr ""
+
+msgid "Weekly (Start Friday)"
+msgstr ""
+
+msgid "Weekly (Start Saturday)"
+msgstr ""
+
+msgid "Weekly (Start Sunday)"
+msgstr ""
+
+msgid "Bi-weekly"
+msgstr ""
+
+msgid "Monthly"
+msgstr "Mensal"
+
+msgid "Bi-monthly"
+msgstr "Bimensal"
+
+msgid "Quarterly"
+msgstr "Trimestral"
+
+msgid "Six-monthly"
+msgstr "Semestral"
+
+msgid "Six-monthly April"
+msgstr ""
+
+msgid "Yearly"
+msgstr "Anual"
+
+msgid "Financial year (Start February)"
+msgstr ""
+
+msgid "Financial year (Start April)"
+msgstr ""
+
+msgid "Financial year (Start July)"
+msgstr ""
+
+msgid "Financial year (Start August)"
+msgstr ""
+
+msgid "Financial year (Start September)"
+msgstr ""
+
+msgid "Financial year (Start October)"
+msgstr ""
+
+msgid "Financial year (Start November)"
+msgstr ""
+
+msgid "Today"
+msgstr "Hoje"
+
+msgid "Yesterday"
+msgstr "Ontém"
+
+msgid "Last 3 days"
+msgstr ""
+
+msgid "Last 7 days"
+msgstr "Últimos 7 dias"
+
+msgid "Last 14 days"
+msgstr ""
+
+msgid "Last 30 days"
+msgstr "Últimos 30 dias"
+
+msgid "Last 60 days"
+msgstr ""
+
+msgid "Last 90 days"
+msgstr ""
+
+msgid "Last 180 days"
+msgstr ""
+
+msgid "This week"
+msgstr ""
+
+msgid "Last week"
+msgstr "Última semana"
+
+msgid "Last 4 weeks"
+msgstr "Últimas 4 semanas"
+
+msgid "Last 12 weeks"
+msgstr "Últimoas 12 semanas"
+
+msgid "Last 52 weeks"
+msgstr ""
+
+msgid "Weeks this year"
+msgstr ""
+
+msgid "This bi-week"
+msgstr ""
+
+msgid "Last bi-week"
+msgstr ""
+
+msgid "Last 4 bi-weeks"
+msgstr ""
+
+msgid "This month"
+msgstr ""
+
+msgid "Last month"
+msgstr "Mês passado"
+
+msgid "Last 3 months"
+msgstr "Últimos 3 meses"
+
+msgid "Last 6 months"
+msgstr "Últimos 6 meses"
+
+msgid "Last 12 months"
+msgstr "Últimos 12 meses"
+
+msgid "Months this year"
+msgstr "Meses deste ano"
+
+msgid "This bi-month"
+msgstr ""
+
+msgid "Last bi-month"
+msgstr ""
+
+msgid "Last 6 bi-months"
+msgstr "Últimos 6 bi-meses"
+
+msgid "Bi-months this year"
+msgstr ""
+
+msgid "This quarter"
+msgstr ""
+
+msgid "Last quarter"
+msgstr "Último trimestre"
+
+msgid "Last 4 quarters"
+msgstr "Últimos 4 trimestresÚltimo 4 trimestre"
+
+msgid "Quarters this year"
+msgstr "Trimestres deste ano"
+
+msgid "This six-month"
+msgstr ""
+
+msgid "Last six-month"
+msgstr "Últimos 6 meses"
+
+msgid "Last 2 six-month"
+msgstr ""
+
+msgid "This financial year"
+msgstr ""
+
+msgid "Last financial year"
+msgstr "último ano financeiro"
+
+msgid "Last 5 financial years"
+msgstr "Últimos 5 anos financeiros"
+
+msgid "This year"
+msgstr "Este ano"
+
+msgid "Last year"
+msgstr "Ano passado"
+
+msgid "Last 5 years"
+msgstr "Últimos 5 anos"
+
+msgid "Last 10 years"
+msgstr ""
+
+msgid "Days"
+msgstr "Dias"
+
+msgid "Weeks"
+msgstr ""
+
+msgid "Bi-weeks"
+msgstr ""
+
+msgid "Months"
+msgstr "Meses"
+
+msgid "Bi-months"
+msgstr ""
+
+msgid "Quarters"
+msgstr "Trimestres"
+
+msgid "Six-months"
+msgstr ""
+
+msgid "Financial Years"
+msgstr ""
+
+msgid "Years"
+msgstr "Anos"
+
+msgid "Value: {{value}}"
+msgstr ""
+
+msgid "Bold text"
+msgstr ""
+
+msgid "Italic text"
+msgstr ""
+
+msgid "Link to a URL"
+msgstr ""
+
+msgid "Mention a user"
+msgstr ""
+
+msgid "Add emoji"
+msgstr ""
+
+msgid "Preview"
+msgstr "Pré-visualização"
+
+msgid "Back to write mode"
+msgstr ""
+
+msgid "Interpretations and details"
+msgstr ""
+
+msgid "Translating to"
+msgstr ""
+
+msgid "Choose a locale"
+msgstr ""
+
+msgid "Base locale reference"
+msgstr ""
+
+msgid "Choose a locale to translate from the menu above"
+msgstr ""
+
+msgid "Translate: {{objectName}}"
+msgstr ""
+
+msgid "Save translations"
+msgstr ""
+
+msgid "Cannot save while offline"
+msgstr ""
+
+msgid "Could not load translations"
+msgstr ""
+
+msgid "Retry"
+msgstr ""
+
+msgid "Too many results. Try refining the search."
+msgstr ""
+
+msgid "Search for a user"
+msgstr ""
+
+msgid "Searching for \"{{- searchText}}\""
+msgstr ""
+
+msgid "No results found"
+msgstr "Nenhum resultado encontrado"
+
+msgid "Series"
+msgstr "Série"
+
+msgid "Category"
+msgstr "Categoria"
+
+msgid "Columns"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
+
+msgid "Points"
+msgstr ""
+
+msgid "Reporting rate"
+msgstr ""
+
+msgid "Reporting rate on time"
+msgstr ""
+
+msgid "Actual reports"
+msgstr ""
+
+msgid "Actual reports on time"
+msgstr ""
+
+msgid "Expected reports"
+msgstr ""
+
+msgid "Select a program"
+msgstr ""
+
+msgid "Indicator group"
+msgstr "Grupo do indicador"
+
+msgid "All groups"
+msgstr ""
+
+msgid "Indicator"
+msgstr "Indicador"
+
+msgid "No indicator groups found"
+msgstr ""
+
+msgid "Loading indicator groups"
+msgstr ""
+
+msgid "Data element group"
+msgstr "Grupo de elemento de dado"
+
+msgid "No data element groups found"
+msgstr ""
+
+msgid "Loading data element groups"
+msgstr ""
+
+msgid "Data sets"
+msgstr "Agregação de Dados"
+
+msgid "Data set"
+msgstr "Conjunto de dados"
+
+msgid "All data sets"
+msgstr ""
+
+msgid "Loading data sets"
+msgstr ""
+
+msgid "Event data items"
+msgstr ""
+
+msgid "All programs"
+msgstr ""
+
+msgid "Event data item"
+msgstr ""
+
+msgid "No programs found"
+msgstr ""
+
+msgid "Loading programs"
+msgstr ""
+
+msgid "Program indicators"
+msgstr "Indicador do programa"
+
+msgid "Program indicator"
+msgstr ""
+
+msgid "Calculations"
+msgstr ""
+
+msgid "Option"
+msgstr "Opção"
+
+msgid "Number"
+msgstr "Número"
+
+msgid "Formula is empty. Add items to the formula from the lists on the left."
+msgstr ""
+
+msgid "Consecutive math operators"
+msgstr ""
+
+msgid "Consecutive data elements"
+msgstr ""
+
+msgid "Starts or ends with a math operator"
+msgstr ""
+
+msgid "Empty parentheses"
+msgstr ""
+
+msgid "Missing right parenthesis )"
+msgstr ""
+
+msgid "Missing left parenthesis ("
+msgstr ""
+
+msgid "Extra Small"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Regular"
+msgstr "Regula"
+
+msgid "Large"
+msgstr ""
+
+msgid "Extra Large"
+msgstr ""
+
+msgid "Left"
+msgstr "Esquerda"
+
+msgid "Center"
+msgstr ""
+
+msgid "Right"
+msgstr "Direita"
+
+msgid "Start"
+msgstr "Inicio"
+
+msgid "Middle"
+msgstr ""
+
+msgid "End"
+msgstr ""
+
+msgid "Top"
+msgstr ""
+
+msgid "Bottom"
+msgstr ""
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr ""
+
+msgid "{{percentage}}% of total x values"
+msgstr ""
+
+msgid "{{percentage}}% of total y values"
+msgstr ""
+
+msgid "{{thresholdFactor}} × IQR Q1"
+msgstr ""
+
+msgid "{{thresholdFactor}} × IQR Q3"
+msgstr ""
+
+msgid "{{thresholdFactor}} × Modified Z-score low"
+msgstr ""
+
+msgid "{{thresholdFactor}} × Modified Z-score high"
+msgstr ""
+
+msgid "{{thresholdFactor}} × Z-score low"
+msgstr ""
+
+msgid "{{thresholdFactor}} × Z-score high"
+msgstr ""
+
+msgid "Not applicable"
+msgstr ""
+
+msgid "Data"
+msgstr "Dados"
+
+msgid "Organisation unit"
+msgstr "Unidade organizacional"
+
+msgid "Assigned Categories"
+msgstr ""
+
+msgid "No value"
+msgstr "Sem Valor"
+
+msgid "Active"
+msgstr "Activo"
+
+msgid "Completed"
+msgstr "Concluído"
+
+msgid "Scheduled"
+msgstr "Agendado"
+
+msgid "Cancelled"
+msgstr "Cancelado"
+
+msgid "Text"
+msgstr "Texto"
+
+msgid "Long text"
+msgstr ""
+
+msgid "Multi text"
+msgstr ""
+
+msgid "Letter"
+msgstr "Carta"
+
+msgid "Phone number"
+msgstr "Número de telefone"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Yes/No"
+msgstr "Sim/Não"
+
+msgid "Yes Only"
+msgstr "Sim apenas"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Date & Time"
+msgstr "Data & Hora "
+
+msgid "Time"
+msgstr "Tempo"
+
+msgid "Unit interval"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
+
+msgid "Integer"
+msgstr "Número"
+
+msgid "Positive Integer"
+msgstr "Inteiro posetivo"
+
+msgid "Negative Integer"
+msgstr "Inteiro negativo"
+
+msgid "Positive or Zero Integer"
+msgstr "Número inteiro positivo ou zero"
+
+msgid "Tracker Associate"
+msgstr "Rastreio associado "
+
+msgid "Username"
+msgstr "Nome do usuário"
+
+msgid "Coordinate"
+msgstr "Coordenada"
+
+msgid "Reference"
+msgstr "Referência"
+
+msgid "Age"
+msgstr "Idade"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Image"
+msgstr "Imagem (PNG)"
+
+msgid "GeoJSON"
+msgstr ""
+
+msgid "Pivot table"
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Stacked area"
+msgstr ""
+
+msgid "Bar"
+msgstr ""
+
+msgid "Stacked bar"
+msgstr ""
+
+msgid "Column"
+msgstr "Coluna"
+
+msgid "Year over year (column)"
+msgstr ""
+
+msgid "Stacked column"
+msgstr ""
+
+msgid "Gauge"
+msgstr ""
+
+msgid "Line"
+msgstr ""
+
+msgid "Line list"
+msgstr ""
+
+msgid "Year over year (line)"
+msgstr ""
+
+msgid "Pie"
+msgstr ""
+
+msgid "Radar"
+msgstr ""
+
+msgid "Scatter"
+msgstr ""
+
+msgid "Single value"
+msgstr ""
+
+msgid "Outlier table"
+msgstr ""
+
+msgid "All charts"
+msgstr ""
+
+msgid "Map"
+msgstr "Mapa"
+
+msgid "{{seriesName}} (trend)"
+msgstr ""
+
+msgid "Trend"
+msgstr "Tendência"
+
+msgid "No legend for this series"
+msgstr ""
+
+msgid "and {{amount}} more..."
+msgstr ""
+
+msgid "Linear Regression"
+msgstr ""
+
+msgid "Target"
+msgstr "Meta"
+
+msgid "Base"
+msgstr ""
+
+msgid "Axis {{axisId}}"
+msgstr ""
+
+msgid "Reset zoom"
+msgstr ""
