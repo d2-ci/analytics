@@ -248,6 +248,8 @@
     "Year": "Year",
     "Select year": "Select year",
     "Period": "Period",
+    "Could not load period types": "Could not load period types",
+    "Something went wrong when loading the period types. Try again later or contact your system administrator.": "Something went wrong when loading the period types. Try again later or contact your system administrator.",
     "Selected Periods": "Selected Periods",
     "No period types available": "No period types available",
     "No period types are enabled in the system. Please contact your system administrator.": "No period types are enabled in the system. Please contact your system administrator.",

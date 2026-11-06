@@ -14,16 +14,20 @@ const useDataOutputPeriodTypes = () => {
     enabled: supportsPeriodLabelTranslations
   });
 
-  // enabledPeriodTypesData stays null on v42 and when the request fails,
-  // loading tells consumers whether to wait for it
+  // enabledPeriodTypesData is null on v42, while loading and when the request
+  // fails. Consumers should wait while loading and handle the error instead of
+  // falling back to the hardcoded client lists, as those would show period
+  // types that are disabled on the server.
   const {
     enabledPeriodTypesData,
-    loading
+    loading,
+    error
   } = supportsPeriodLabelTranslations ? v44 : v43;
   return {
     supportsEnabledPeriodTypes,
     enabledPeriodTypesData,
-    loading
+    loading,
+    error
   };
 };
 export { useDataOutputPeriodTypes };

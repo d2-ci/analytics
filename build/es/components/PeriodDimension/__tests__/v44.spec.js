@@ -309,7 +309,8 @@ describe('useV44DataOutputPeriodTypes', () => {
     expect(mockQueryState.v44Refetch).not.toHaveBeenCalled();
     expect(result.current).toEqual({
       enabledPeriodTypesData: null,
-      loading: false
+      loading: false,
+      error: null
     });
   });
   it('is loading until the period types have been fetched', () => {
@@ -320,11 +321,13 @@ describe('useV44DataOutputPeriodTypes', () => {
     }));
     expect(result.current).toEqual({
       enabledPeriodTypesData: null,
-      loading: true
+      loading: true,
+      error: null
     });
   });
-  it('stops loading without data when the request fails', () => {
-    mockQueryState.v44Error = new Error('Request failed');
+  it('stops loading and returns the error when the request fails', () => {
+    const error = new Error('Request failed');
+    mockQueryState.v44Error = error;
     const {
       result
     } = renderHook(() => useV44DataOutputPeriodTypes({
@@ -332,7 +335,8 @@ describe('useV44DataOutputPeriodTypes', () => {
     }));
     expect(result.current).toEqual({
       enabledPeriodTypesData: null,
-      loading: false
+      loading: false,
+      error
     });
   });
   it('fetches period types without a locale (server uses the user db locale)', () => {

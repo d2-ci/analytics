@@ -132,7 +132,8 @@ const useV43DataOutputPeriodTypes = ({
   }, [enabled, v43Data, v43Error]);
   return {
     enabledPeriodTypesData,
-    loading: enabled && !v43Data && !v43Error
+    loading: enabled && !v43Data && !v43Error,
+    error: enabled && v43Error || null
   };
 };
 

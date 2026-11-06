@@ -100,7 +100,8 @@ export const useV44DataOutputPeriodTypes = ({
   }, [enabled, data, error]);
   return {
     enabledPeriodTypesData,
-    loading: enabled && !data && !error
+    loading: enabled && !data && !error,
+    error: enabled && error || null
   };
 };
 const getV44FixedOptions = ({

@@ -6,6 +6,7 @@ var _react2 = _interopRequireDefault(require("react"));
 var _PeriodDimension = _interopRequireDefault(require("../PeriodDimension.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 let mockServerMinorVersion = 42;
+let mockLazyQueryError;
 jest.mock('@dhis2/app-runtime', () => ({
   useConfig: () => ({
     systemInfo: {},
@@ -17,7 +18,7 @@ jest.mock('@dhis2/app-runtime', () => ({
     if (options !== null && options !== void 0 && options.lazy) {
       return {
         data: null,
-        error: undefined,
+        error: mockLazyQueryError,
         loading: false,
         refetch: jest.fn()
       };
@@ -39,6 +40,7 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
 afterEach(() => {
   jest.clearAllMocks();
   mockServerMinorVersion = 42;
+  mockLazyQueryError = undefined;
 });
 const props = {
   selectedPeriods: [],
@@ -66,5 +68,13 @@ test('PeriodDimension shows a loader while the enabled period types are loading'
     container
   } = (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_PeriodDimension.default, props));
   expect(container.querySelector('[data-test="period-dimension-loader"]')).toBeInTheDocument();
+  expect(_react.screen.queryByText('Relative periods')).not.toBeInTheDocument();
+});
+test.each([43, 44])('PeriodDimension shows an error instead of the client lists when the period types request fails (v%i)', minor => {
+  mockServerMinorVersion = minor;
+  mockLazyQueryError = new Error('Request failed');
+  (0, _react.render)(/*#__PURE__*/_react2.default.createElement(_PeriodDimension.default, props));
+  expect(_react.screen.getByTestId('period-dimension-error')).toBeInTheDocument();
+  expect(_react.screen.getByText('Could not load period types')).toBeInTheDocument();
   expect(_react.screen.queryByText('Relative periods')).not.toBeInTheDocument();
 });

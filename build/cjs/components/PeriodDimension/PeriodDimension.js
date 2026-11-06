@@ -8,6 +8,7 @@ var _appRuntime = require("@dhis2/app-runtime");
 var _ui = require("@dhis2/ui");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _react = _interopRequireDefault(require("react"));
+var _index = _interopRequireDefault(require("../../locales/index.js"));
 var _dimensionSelectorHelper = require("../../modules/dimensionSelectorHelper.js");
 var _predefinedDimensions = require("../../modules/predefinedDimensions.js");
 var _PeriodTransfer = _interopRequireDefault(require("./PeriodTransfer.js"));
@@ -38,7 +39,8 @@ const PeriodDimension = ({
   const userSettingsResult = (0, _appRuntime.useDataQuery)(userSettingsQuery);
   const {
     enabledPeriodTypesData,
-    loading
+    loading,
+    error
   } = (0, _useDataOutputPeriodTypes.useDataOutputPeriodTypes)();
   const {
     calendar = 'gregory'
@@ -76,6 +78,16 @@ const PeriodDimension = ({
     }, /*#__PURE__*/_react.default.createElement(_ui.CircularLoader, {
       small: true
     }));
+  }
+
+  // don't fall back to the hardcoded client lists, they would show period
+  // types that are disabled on the server
+  if (error) {
+    return /*#__PURE__*/_react.default.createElement(_ui.NoticeBox, {
+      error: true,
+      title: _index.default.t('Could not load period types'),
+      dataTest: "period-dimension-error"
+    }, _index.default.t('Something went wrong when loading the period types. Try again later or contact your system administrator.'));
   }
   return /*#__PURE__*/_react.default.createElement(_PeriodTransfer.default, {
     onSelect: selectPeriods,
