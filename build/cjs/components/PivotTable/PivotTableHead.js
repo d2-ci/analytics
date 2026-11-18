@@ -15,7 +15,6 @@ const PivotTableHead = ({
   sortBy,
   onSortByColumn
 }) => /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement(_PivotTableTitleRows.PivotTableTitleRows, {
-  clippingResult: clippingResult,
   width: width
 }), /*#__PURE__*/_react.default.createElement(_PivotTableColumnHeaders.PivotTableColumnHeaders, {
   clippingResult: clippingResult,

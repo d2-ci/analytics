@@ -7,17 +7,14 @@ import { usePivotTableEngine } from './PivotTableEngineContext.js';
 import { cell as cellStyle } from './styles/PivotTable.style.js';
 export const PivotTableTitleRow = ({
   title,
-  scrollPosition,
   containerWidth
 }) => {
-  var _scrollPosition$x;
   const containerRef = useRef(null);
   const [scrollWidth, setScrollWidth] = useState(0);
   const [isTitleTruncated, setIsTitleTruncated] = useState(false);
   const engine = usePivotTableEngine();
   const columnCount = engine.width + engine.rowDepth;
   const maxWidth = containerWidth - (engine.cellPadding * 2 + 2);
-  const marginLeft = Math.max(0, (_scrollPosition$x = scrollPosition === null || scrollPosition === void 0 ? void 0 : scrollPosition.x) !== null && _scrollPosition$x !== void 0 ? _scrollPosition$x : 0);
   useEffect(() => {
     if (containerRef.current) {
       /* Only set `scrollWidth` once, because during a CSS transition
@@ -45,7 +42,6 @@ export const PivotTableTitleRow = ({
     colSpan: columnCount
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      marginLeft,
       maxWidth
     },
     ref: containerRef,
@@ -69,8 +65,5 @@ export const PivotTableTitleRow = ({
 };
 PivotTableTitleRow.propTypes = {
   containerWidth: PropTypes.number.isRequired,
-  scrollPosition: PropTypes.shape({
-    x: PropTypes.number.isRequired
-  }).isRequired,
   title: PropTypes.string.isRequired
 };

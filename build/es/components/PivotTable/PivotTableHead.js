@@ -8,7 +8,6 @@ export const PivotTableHead = ({
   sortBy,
   onSortByColumn
 }) => /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement(PivotTableTitleRows, {
-  clippingResult: clippingResult,
   width: width
 }), /*#__PURE__*/React.createElement(PivotTableColumnHeaders, {
   clippingResult: clippingResult,

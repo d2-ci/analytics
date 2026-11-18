@@ -15,17 +15,14 @@ function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const PivotTableTitleRow = ({
   title,
-  scrollPosition,
   containerWidth
 }) => {
-  var _scrollPosition$x;
   const containerRef = (0, _react.useRef)(null);
   const [scrollWidth, setScrollWidth] = (0, _react.useState)(0);
   const [isTitleTruncated, setIsTitleTruncated] = (0, _react.useState)(false);
   const engine = (0, _PivotTableEngineContext.usePivotTableEngine)();
   const columnCount = engine.width + engine.rowDepth;
   const maxWidth = containerWidth - (engine.cellPadding * 2 + 2);
-  const marginLeft = Math.max(0, (_scrollPosition$x = scrollPosition === null || scrollPosition === void 0 ? void 0 : scrollPosition.x) !== null && _scrollPosition$x !== void 0 ? _scrollPosition$x : 0);
   (0, _react.useEffect)(() => {
     if (containerRef.current) {
       /* Only set `scrollWidth` once, because during a CSS transition
@@ -53,7 +50,6 @@ const PivotTableTitleRow = ({
     colSpan: columnCount
   }, /*#__PURE__*/_react.default.createElement("div", {
     style: {
-      marginLeft,
       maxWidth
     },
     ref: containerRef,
@@ -78,8 +74,5 @@ const PivotTableTitleRow = ({
 exports.PivotTableTitleRow = PivotTableTitleRow;
 PivotTableTitleRow.propTypes = {
   containerWidth: _propTypes.default.number.isRequired,
-  scrollPosition: _propTypes.default.shape({
-    x: _propTypes.default.number.isRequired
-  }).isRequired,
   title: _propTypes.default.string.isRequired
 };
