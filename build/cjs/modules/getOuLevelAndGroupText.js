@@ -39,6 +39,9 @@ const getLevelAndGroupText = (items, metaData, isLevel) => {
   if (lastItem) {
     const lastOuName = getNameFromMetadata(_index2.ouIdHelper.removePrefix(lastItem.id));
     allDynamicOuNames = _index.default.t('{{dynamicOuNames}} and {{lastOuName}}', {
+      interpolation: {
+        escapeValue: false
+      },
       dynamicOuNames,
       lastOuName
     });
@@ -50,21 +53,33 @@ const getLevelAndGroupText = (items, metaData, isLevel) => {
   if (!staticOuNames) {
     if (isLevel) {
       ouLevelAndGroupText = _index.default.t('{{allDynamicOuNames}} levels', {
+        interpolation: {
+          escapeValue: false
+        },
         allDynamicOuNames
       });
     } else {
       ouLevelAndGroupText = _index.default.t('{{allDynamicOuNames}} groups', {
+        interpolation: {
+          escapeValue: false
+        },
         allDynamicOuNames
       });
     }
   } else {
     if (isLevel) {
       ouLevelAndGroupText = _index.default.t('{{allDynamicOuNames}} levels in {{staticOuNames}}', {
+        interpolation: {
+          escapeValue: false
+        },
         allDynamicOuNames,
         staticOuNames
       });
     } else {
       ouLevelAndGroupText = _index.default.t('{{allDynamicOuNames}} groups in {{staticOuNames}}', {
+        interpolation: {
+          escapeValue: false
+        },
         allDynamicOuNames,
         staticOuNames
       });

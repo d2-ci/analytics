@@ -116,3 +116,16 @@ describe('analytics.events', () => {
     }));
   });
 });
+describe('AnalyticsEvents options', () => {
+  it.each([['getAggregate', 'get', 'events/aggregate'], ['getCount', 'fetch', 'events/count'], ['getCluster', 'fetch', 'events/cluster'], ['getQuery', 'fetch', 'events/query']])('.%s() should pass options to .%s()', async (method, target, path) => {
+    const instance = new _AnalyticsEvents.default({});
+    const spy = jest.spyOn(instance, target).mockResolvedValue({});
+    const options = {
+      signal: new AbortController().signal
+    };
+    await instance[method](new _AnalyticsRequest.default(), options);
+    expect(spy).toHaveBeenCalledWith(expect.objectContaining({
+      path
+    }), options);
+  });
+});

@@ -123,6 +123,9 @@ const OrgUnitDimension = ({
       summary = i18n.t('Selected: {{commaSeparatedListOfOrganisationUnits}}', {
         keySeparator: '>',
         nsSeparator: '|',
+        interpolation: {
+          escapeValue: false
+        },
         commaSeparatedListOfOrganisationUnits: formatList(parts)
       });
     } else {

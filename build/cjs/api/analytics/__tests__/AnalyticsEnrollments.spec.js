@@ -82,3 +82,16 @@ describe('analytics.enrollments', () => {
     }));
   });
 });
+describe('AnalyticsEnrollments options', () => {
+  it.each([['getAggregate', 'get', 'enrollments/aggregate'], ['getQuery', 'fetch', 'enrollments/query']])('.%s() should pass options to .%s()', async (method, target, path) => {
+    const instance = new _AnalyticsEnrollments.default({});
+    const spy = jest.spyOn(instance, target).mockResolvedValue({});
+    const options = {
+      signal: new AbortController().signal
+    };
+    await instance[method](new _AnalyticsRequest.default(), options);
+    expect(spy).toHaveBeenCalledWith(expect.objectContaining({
+      path
+    }), options);
+  });
+});

@@ -131,6 +131,9 @@ const OrgUnitDimension = ({
       summary = _index.default.t('Selected: {{commaSeparatedListOfOrganisationUnits}}', {
         keySeparator: '>',
         nsSeparator: '|',
+        interpolation: {
+          escapeValue: false
+        },
         commaSeparatedListOfOrganisationUnits: (0, _list.formatList)(parts)
       });
     } else {

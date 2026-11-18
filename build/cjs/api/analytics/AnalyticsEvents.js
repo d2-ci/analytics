@@ -19,6 +19,7 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 class AnalyticsEvents extends _AnalyticsBase.default {
   /**
    * @param {!AnalyticsRequest} req Request object
+   * @param {Object} [options] Optional configurations, see {@link module:analytics.AnalyticsBase#get}
    *
    * @returns {Promise} Promise that resolves with the analytics aggregate data from the api.
    *
@@ -35,12 +36,13 @@ class AnalyticsEvents extends _AnalyticsBase.default {
    * analytics.events.getAggregate(req)
    *  .then(console.log);
    */
-  getAggregate(req) {
-    return this.get(req.withPath('events/aggregate'));
+  getAggregate(req, options) {
+    return this.get(req.withPath('events/aggregate'), options);
   }
 
   /**
    * @param {!AnalyticsRequest} req Request object
+   * @param {Object} [options] Optional configurations, see {@link module:analytics.AnalyticsBase#fetch}
    *
    * @returns {Promise} Promise that resolves with the analytics count data from the api.
    *
@@ -57,13 +59,14 @@ class AnalyticsEvents extends _AnalyticsBase.default {
    *  analytics.events.getCount(req)
    *  .then(console.log);
    */
-  getCount(req) {
-    return this.fetch(req.withPath('events/count'));
+  getCount(req, options) {
+    return this.fetch(req.withPath('events/count'), options);
   }
 
   /**
    * @param {!AnalyticsRequest} req Request object
    * Must contain clusterSize and bbox parameters.
+   * @param {Object} [options] Optional configurations, see {@link module:analytics.AnalyticsBase#fetch}
    *
    * @returns {Promise} Promise that resolves with the analytics cluster data from the api.
    *
@@ -82,12 +85,13 @@ class AnalyticsEvents extends _AnalyticsBase.default {
    *  analytics.events.getCluster(req)
    *  .then(console.log);
    */
-  getCluster(req) {
-    return this.fetch(req.withPath('events/cluster'));
+  getCluster(req, options) {
+    return this.fetch(req.withPath('events/cluster'), options);
   }
 
   /**
    * @param {!AnalyticsRequest} req Request object
+   * @param {Object} [options] Optional configurations, see {@link module:analytics.AnalyticsBase#fetch}
    *
    * @returns {Promise} Promise that resolves with the analytics query data from the api.
    *
@@ -104,8 +108,8 @@ class AnalyticsEvents extends _AnalyticsBase.default {
    *  analytics.events.getQuery(req)
    *  .then(console.log);
    */
-  getQuery(req) {
-    return this.fetch(req.withPath('events/query'));
+  getQuery(req, options) {
+    return this.fetch(req.withPath('events/query'), options);
   }
 }
 var _default = exports.default = AnalyticsEvents;

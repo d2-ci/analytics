@@ -19,6 +19,7 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 class AnalyticsAggregate extends _AnalyticsBase.default {
   /**
    * @param {!AnalyticsRequest} req Request object
+   * @param {Object} [options] Optional configurations, see {@link module:analytics.AnalyticsBase#fetch}
    *
    * @returns {Promise} Promise that resolves with the analytics data value set data from the API.
    *
@@ -34,12 +35,13 @@ class AnalyticsAggregate extends _AnalyticsBase.default {
    * analytics.aggregate.getDataValueSet(req)
    * .then(console.log);
    */
-  getDataValueSet(req) {
-    return this.fetch(req.withPath('dataValueSet'));
+  getDataValueSet(req, options) {
+    return this.fetch(req.withPath('dataValueSet'), options);
   }
 
   /**
    * @param {!AnalyticsRequest} req Request object
+   * @param {Object} [options] Optional configurations, see {@link module:analytics.AnalyticsBase#fetch}
    *
    * @returns {Promise} Promise that resolves with the raw data from the API.
    *
@@ -56,12 +58,13 @@ class AnalyticsAggregate extends _AnalyticsBase.default {
    *  analytics.aggregate.getRawData(req)
    *  .then(console.log);
    */
-  getRawData(req) {
-    return this.fetch(req.withPath('rawData'));
+  getRawData(req, options) {
+    return this.fetch(req.withPath('rawData'), options);
   }
 
   /**
    * @param {!AnalyticsRequest} req Request object
+   * @param {Object} [options] Optional configurations, see {@link module:analytics.AnalyticsBase#fetch}
    *
    * @returns {Promise} Promise that resolves with the SQL statement used to query the database.
    *
@@ -77,12 +80,13 @@ class AnalyticsAggregate extends _AnalyticsBase.default {
    *  analytics.aggregate.getDebugSql(req)
    *  .then(console.log);
    */
-  getDebugSql(req) {
-    return this.fetch(req.withPath('debug/sql'));
+  getDebugSql(req, options) {
+    return this.fetch(req.withPath('debug/sql'), options);
   }
 
   /**
    * @param {!AnalyticsRequest} req Request object
+   * @param {Object} [options] Optional configurations, see {@link module:analytics.AnalyticsBase#fetch}
    *
    * @returns {Promise} Promise that resolves with the SQL statement used to query the database.
    *
@@ -103,8 +107,8 @@ class AnalyticsAggregate extends _AnalyticsBase.default {
    *  analytics.aggregate.getOutliersData(req)
    *  .then(console.log);
    */
-  getOutliersData(req) {
-    return this.fetch(req.withPath('outlierDetection'));
+  getOutliersData(req, options) {
+    return this.fetch(req.withPath('outlierDetection'), options);
   }
 }
 var _default = exports.default = AnalyticsAggregate;
