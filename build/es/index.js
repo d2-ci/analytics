@@ -5,6 +5,7 @@ export { default as DataDimension } from './components/DataDimension/DataDimensi
 export { default as PeriodDimension } from './components/PeriodDimension/PeriodDimension.js';
 export { default as FixedPeriodSelect } from './components/PeriodDimension/FixedPeriodSelect.js';
 export { useDataOutputPeriodTypes } from './components/PeriodDimension/useDataOutputPeriodTypes.js';
+export { useRelativePeriodsNames } from './components/PeriodDimension/useRelativePeriodsNames.js';
 export { default as OrgUnitDimension } from './components/OrgUnitDimension/OrgUnitDimension.js';
 export { default as DynamicDimension, ALL_DYNAMIC_DIMENSION_ITEMS } from './components/DynamicDimension/DynamicDimension.js';
 export { default as DimensionsPanel } from './components/DimensionsPanel/DimensionsPanel.js';
