@@ -1,0 +1,48 @@
+import i18n from '../../../../locales/index.js'
+import { getLegendByValueFromLegendSet } from '../../../../modules/legends.js'
+import { isNumeric } from '../../../../modules/utils.js'
+
+const OUT_OF_BOUNDS_COLOR = '#CCCCCC'
+
+const getLegend = (value, legendSet) =>
+    value && legendSet ? getLegendByValueFromLegendSet(legendSet, value) : {}
+
+export const applyLegendSet = (seriesObj = {}, legendSet) =>
+    !seriesObj.type
+        ? {
+              ...seriesObj,
+              data: seriesObj.data.map((value) =>
+                  isNumeric(value) // Single category pass data as [value1, value2]
+                      ? {
+                            y: value,
+                            color:
+                                getLegend(value, legendSet)?.color ||
+                                OUT_OF_BOUNDS_COLOR,
+                            legend: getLegend(value, legendSet)?.name || '-',
+                            legendSet: legendSet.name,
+                        }
+                      : Array.isArray(value) // Dual category pass data as [[position1, value1], [position2, value2]]
+                      ? {
+                            x: value[0],
+                            y: value[1],
+                            color:
+                                getLegend(value[1], legendSet)?.color ||
+                                OUT_OF_BOUNDS_COLOR,
+                            legend: getLegend(value[1], legendSet)?.name || '-',
+                            legendSet: legendSet.name,
+                        }
+                      : value
+              ),
+          }
+        : { ...seriesObj }
+
+export const getLegendSetTooltip = () => ({
+    pointFormatter: function () {
+        return (
+            `<span style="color:${this.color}">●</span> ${this.series.name}: <b>${this.y}</b><br>` +
+            (this.legend
+                ? `${this.legendSet}: <b>${this.legend}</b>`
+                : `${i18n.t('No legend for this series')}`)
+        )
+    },
+})

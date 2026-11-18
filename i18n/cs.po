@@ -1,0 +1,1507 @@
+# Translators:
+# Philip Larsen Donnelly, 2024
+# Jiří Podhorecký <jirka.p@volny.cz>, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-08-27T11:56:55.720Z\n"
+"PO-Revision-Date: 2020-04-28 22:05+0000\n"
+"Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2026\n"
+"Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+msgid "view only"
+msgstr "pouze zobrazit"
+
+msgid "view and edit"
+msgstr "zobrazit a upravit"
+
+msgid "all users ({{accessLevel}})"
+msgstr "všichni uživatelé ({{accessLevel}})"
+
+msgid "{{userOrGroup}} ({{accessLevel}})"
+msgstr "{{userOrGroup}} ({{accessLevel}})"
+
+msgid "Shared with {{commaSeparatedListOfUsersAndGroups}}"
+msgstr "Sdíleno s {{commaSeparatedListOfUsersAndGroups}}"
+
+msgid "Not shared with any users or groups"
+msgstr "Nesdíleno s žádnými uživateli ani skupinami"
+
+msgid "No description"
+msgstr "Bez popisu"
+
+msgid "Last updated {{time}}"
+msgstr "Poslední aktualizace {{time}}"
+
+msgid "Created {{time}} by {{author}}"
+msgstr "Vytvořeno {{time}} uživatelem {{author}}"
+
+msgid "Created {{time}}"
+msgstr "Vytvořeno {{time}}"
+
+msgid "Viewed {{count}} times"
+msgid_plural "Viewed {{count}} times"
+msgstr[0] "Zobrazeno 1 krát"
+msgstr[1] "Zobrazeno {{count}}krát"
+msgstr[2] "Zobrazeno {{count}}krát"
+msgstr[3] "Zobrazeno {{count}}krát"
+
+msgid "Notifications"
+msgstr "Oznámení"
+
+msgid "You're subscribed and getting updates about new interpretations."
+msgstr ""
+"Jste přihlášeni k odběru a dostáváte aktualizace o nových interpretacích."
+
+msgid "Unsubscribe"
+msgstr "Odhlásit odběr"
+
+msgid "Subscribe to get updates about new interpretations."
+msgstr "Přihlaste se k odběru novinek o nových interpretacích."
+
+msgid "Subscribe"
+msgstr "Odebírat"
+
+msgid "About this map"
+msgstr "O této mapě"
+
+msgid "About this line list"
+msgstr "O seznamu řádků"
+
+msgid "About this visualization"
+msgstr "O této vizualizaci"
+
+msgid "About this event chart"
+msgstr "O tomto grafu událostí"
+
+msgid "About this event report"
+msgstr "O této zprávě o události"
+
+msgid "This app could not retrieve required data."
+msgstr "Tato aplikace nemohla načíst požadovaná data."
+
+msgid "Network error"
+msgstr "Chyba sítě"
+
+msgid "Data / Edit calculation"
+msgstr "Data / Upravit výpočet"
+
+msgid "Data / New calculation"
+msgstr "Data / Nový výpočet"
+
+msgid "Remove item"
+msgstr "Odebrat položku"
+
+msgid "Check formula"
+msgstr "Zkontrolujte vzorec"
+
+msgid "Calculation name"
+msgstr "Název výpočtu"
+
+msgid "Shown in table headers and chart axes/legends"
+msgstr "Zobrazeno v záhlaví tabulky a osy/legendy grafu"
+
+msgid "Delete calculation"
+msgstr "Smazat výpočet"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "The calculation can only be saved with a valid formula"
+msgstr "Výpočet lze uložit pouze s platným vzorcem"
+
+msgid "Add a name to save this calculation"
+msgstr "Přidejte název pro uložení tohoto výpočtu"
+
+msgid "Save calculation"
+msgstr "Uložit výpočet"
+
+msgid ""
+"Are you sure you want to delete this calculation? It may be used by other "
+"visualizations."
+msgstr ""
+"Opravdu chcete tento výpočet smazat? Může být použit jinými vizualizacemi."
+
+msgid "Yes, delete"
+msgstr "Ano, smazat"
+
+msgid "Totals only"
+msgstr "Pouze součty"
+
+msgid "Details only"
+msgstr "Pouze podrobnosti"
+
+msgid "Loading"
+msgstr "Načítání"
+
+msgid "Data elements"
+msgstr "Datové prvky"
+
+msgid "Search by data element name"
+msgstr "Vyhledávání podle názvu datového prvku"
+
+msgid "No data elements found for \"{{- searchTerm}}\""
+msgstr "Nebyly nalezeny žádné datové prvky pro „{{- searchTerm}}“"
+
+msgid "No data elements found"
+msgstr "Nebyly nalezeny žádné datové prvky"
+
+msgid ""
+"Drag items here, or double click in the list, to start building a "
+"calculation formula"
+msgstr ""
+"Přetáhněte položky sem nebo dvakrát klikněte na seznam a začněte vytvářet "
+"vzorec výpočtu"
+
+msgid "Math operators"
+msgstr "Matematické operátory"
+
+msgid "Expression description"
+msgstr "Popis výrazu"
+
+msgid "Error loading value"
+msgstr "Chyba načítaní hodnoty"
+
+msgid "None"
+msgstr "Žádný"
+
+msgid "Data set(s)"
+msgstr "Datová sada(y)"
+
+msgid "Zero is significant"
+msgstr "Nula je významná"
+
+msgid "True"
+msgstr "True"
+
+msgid "False"
+msgstr "False"
+
+msgid "Value type"
+msgstr "Typ hodnoty"
+
+msgid "Aggregation type"
+msgstr "Typ agregace"
+
+msgid "Category combo"
+msgstr "Kombinovaná kategorie"
+
+msgid "Option set"
+msgstr "Sada možností"
+
+msgid "Group membership"
+msgstr "Členství ve skupině"
+
+msgid "Legend set(s)"
+msgstr "Sada(y) legend"
+
+msgid "Category option name"
+msgstr "Název možnosti kategorie"
+
+msgid "Category combo name"
+msgstr "Název kombinace kategorií"
+
+msgid "Categories name"
+msgstr "Název kategorie"
+
+msgid "Period type"
+msgstr "Typ období"
+
+msgid "Indicators"
+msgstr "Indikátory"
+
+msgid "Expiry days"
+msgstr "Konec platnosti"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Data element"
+msgstr "Datový prvek"
+
+msgid "Tracked entity attribute"
+msgstr "Atribut trasované entity"
+
+msgid "Numerator description"
+msgstr "Popis čitatele"
+
+msgid "Numerator expression"
+msgstr "Výraz čitatele"
+
+msgid "Denominator description"
+msgstr "Popis jmenovatele"
+
+msgid "Denominator expression"
+msgstr "Výraz jmenovatele"
+
+msgid "Annualized"
+msgstr "Anualizováno"
+
+msgid "Yes"
+msgstr "Ano"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "Indicator type"
+msgstr "Typ indikátoru"
+
+msgid "Decimals in output"
+msgstr "Desetinná místa ve výstupu"
+
+msgid "There was a problem loading information for this data item."
+msgstr "Při načítání informací pro tuto datovou položku došlo k problému."
+
+msgid "Name"
+msgstr "Název"
+
+msgid "Description"
+msgstr "Popis"
+
+msgid "Code"
+msgstr "Kód"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Last updated date"
+msgstr "Datum poslední aktualizace"
+
+msgid "Created date"
+msgstr "Datum vytvoření"
+
+msgid "Created by"
+msgstr "Vytvořil"
+
+msgid "Custom"
+msgstr "Vlastní"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Analytics type"
+msgstr "Typ analytiky"
+
+msgid "Enrollment"
+msgstr "Zápis"
+
+msgid "Event"
+msgstr "Událost"
+
+msgid "Analytics period boundaries"
+msgstr "Hranice období Analytiky"
+
+msgid "{{ offsetPeriodType }} × {{ offsetPeriods }}"
+msgstr "{{ offsetPeriodType }} × {{ offsetPeriods }}"
+
+msgid "Expression"
+msgstr "Výraz"
+
+msgid "Filter"
+msgstr "Filtr"
+
+msgid "All available options are already selected"
+msgstr "Všechny dostupné možnosti jsou již vybrány."
+
+msgid "No available options for this item"
+msgstr "Pro tuto položku nejsou k dispozici žádné možnosti."
+
+msgid "Search by option name"
+msgstr "Hledat podle názvu možnosti"
+
+msgid "Back to all items"
+msgstr "Zpět na všechny položky"
+
+msgid "Options"
+msgstr "Možnosti"
+
+msgid "Selected items"
+msgstr "Vybrané položky"
+
+msgid "Data Type"
+msgstr "Typ dat"
+
+msgid "Only {{dataType}} can be used in {{visType}}"
+msgstr "Pouze {{dataType}} lze použít v {{visType}}"
+
+msgid "All types"
+msgstr "Všechny typy"
+
+msgid "Disaggregation"
+msgstr "Rozčlenění"
+
+msgid "No data"
+msgstr "Nejsou data"
+
+msgid "Search by data item name"
+msgstr "Hledání podle názvu datové položky"
+
+msgid "Selected Items"
+msgstr "Vybrané položky"
+
+msgid "All available items are already selected"
+msgstr "Všechny dostupné položky jsou již vybrány"
+
+msgid "Calculation"
+msgstr "Výpočet"
+
+msgid "Metric type"
+msgstr "Metrický typ"
+
+msgid "All metrics"
+msgstr "Všechny metriky"
+
+msgid "No items selected"
+msgstr "Nevybrány žádné položky"
+
+msgid "No indicators found"
+msgstr "Nebyly nalezeny žádné indikátory"
+
+msgid "No data sets found"
+msgstr "Nebyly nalezeny žádné datové soubory"
+
+msgid "No event data items found"
+msgstr "Nebyly nalezeny žádné datové položky události"
+
+msgid "No program indicators found"
+msgstr "Nebyly nalezeny žádné programové indikátory"
+
+msgid "No calculations found"
+msgstr "Nenalezeny žádné výpočty"
+
+msgid "No indicators found for \"{{- searchTerm}}\""
+msgstr "Nebyly nalezeny žádné indikátory pro „{{- searchTerm}}“"
+
+msgid "No data sets found for \"{{- searchTerm}}\""
+msgstr "Nebyly nalezeny žádné soubory dat pro „{{- searchTerm}}“"
+
+msgid "No event data items found for \"{{- searchTerm}}\""
+msgstr "Pro „{{- searchTerm}}“ nebyly nalezeny žádné datové položky události"
+
+msgid "No program indicators found for \"{{- searchTerm}}\""
+msgstr "Nebyly nalezeny žádné programové indikátory pro „{{- searchTerm}}“"
+
+msgid "No calculations found for \"{{- searchTerm}}\""
+msgstr "Nenalezeny žádné výpočty pro \"{{- searchTerm}}\""
+
+msgid "Nothing found for \"{{- searchTerm}}\""
+msgstr "Pro dotaz „{{- searchTerm}}“ nebylo nic nalezeno"
+
+msgid "Click to choose from available options"
+msgstr "Kliknutím vyberete z dostupných možností"
+
+msgid "Move to {{axisName}}"
+msgstr "Přesunout na {{axisName}}"
+
+msgid "Add to {{axisName}}"
+msgstr "Přidat k {{axisName}}"
+
+msgid "Not available for {{visualizationType}}"
+msgstr "Není k dispozici pro {{visualizationType}}"
+
+msgid "Remove Assigned Categories"
+msgstr "Odebrat přiřazené kategorie"
+
+msgid "Add Assigned Categories"
+msgstr "Přidat přiřazené kategorie"
+
+msgid "Remove"
+msgstr "Odebrat"
+
+msgid "Filter dimensions"
+msgstr "Rozsahy filtru"
+
+msgid "Main dimensions"
+msgstr "Hlavní rozměry"
+
+msgid "Your dimensions"
+msgstr "Vaše rozměry"
+
+msgid "Dimension recommended with selected data"
+msgstr "U vybraných dat je doporučen rozsah"
+
+msgid "All items"
+msgstr "Všechny položky"
+
+msgid "Automatically include all items"
+msgstr "Automaticky zahrnout všechny položky"
+
+msgid ""
+"Select all {{- dimensionTitle}} items. With this option, new items added in "
+"the future will be automatically included."
+msgstr ""
+"Vyberte všechny položky {{- dimensionTitle}}. Díky této možnosti budou "
+"automaticky přidány nové položky přidané v budoucnosti."
+
+msgid "Manually select items..."
+msgstr "Ručně vybrat položky ..."
+
+msgid "Nothing found in {{- dimensionTitle}}"
+msgstr "V {{- dimensionTitle}} nebylo nic nalezeno"
+
+msgid "Search"
+msgstr "Hledat"
+
+msgid "Delete {{fileType}}"
+msgstr "Smazat {{fileType}}"
+
+msgid ""
+"This {{fileType}} and related interpretations will be deleted. Continue?"
+msgstr ""
+"Tento {{fileType}} a související interpretace budou smazány. Pokračovat?"
+
+msgid "Delete"
+msgstr "Smazat"
+
+msgid "File"
+msgstr "Soubor"
+
+msgid "New"
+msgstr "Nový"
+
+msgid "Open…"
+msgstr "Otevřít…"
+
+msgid "Save"
+msgstr "Uložit"
+
+msgid "Save…"
+msgstr "Uložit…"
+
+msgid "Save as…"
+msgstr "Uložit jako…"
+
+msgid "Rename…"
+msgstr "Přejmenovat…"
+
+msgid "Translate…"
+msgstr "Přeložit…"
+
+msgid "Share…"
+msgstr "Sdílet…"
+
+msgid "Get link…"
+msgstr "Získat odkaz ..."
+
+msgid "Open in this app"
+msgstr "Otevřít v této aplikaci"
+
+msgid "Copy to clipboard"
+msgstr "Zkopírovat do schránky"
+
+msgid "Close"
+msgstr "Zavřít"
+
+msgid "Rename {{fileType}}"
+msgstr "Přejmenovat {{fileType}}"
+
+msgid "Rename"
+msgstr "Přejmenovat"
+
+msgid "{{- objectName}} (copy)"
+msgstr "{{- objectName}} (kopie)"
+
+msgid "Save {{fileType}} as"
+msgstr "Uložit {{fileType}} jako"
+
+msgid "event report"
+msgstr "zpráva o události"
+
+msgid "line list"
+msgstr "seznam řádků"
+
+msgid "map"
+msgstr "mapa"
+
+msgid "visualization"
+msgstr "vizualizace"
+
+msgid "Untitled {{visualizationType}}, {{date}}"
+msgstr "Bez názvu {{visualizationType}}, {{date}}"
+
+msgid "Back to all interpretations"
+msgstr "Zpět ke všem interpretacím"
+
+msgid "Could not load interpretation details"
+msgstr "Nepodařilo se načíst podrobnosti výkladu"
+
+msgid "The request to fetch interpretation comments failed"
+msgstr "Požadavek na načtení komentářů k výkladu se nezdařil"
+
+msgid "Edit"
+msgstr "Upravit"
+
+msgid "Write a reply"
+msgstr "Napsat odpověď"
+
+msgid "Could not post reply"
+msgstr "Nelze odeslat odpověď"
+
+msgid "Post reply"
+msgstr "Odpovědět"
+
+msgid "Could not delete comment"
+msgstr "Nelze odstranit komentář"
+
+msgid "Could not update comment"
+msgstr "Komentář se nepodařilo aktualizovat"
+
+msgid "Enter comment text"
+msgstr "Zadejte text komentáře"
+
+msgid "Update"
+msgstr "Aktualizovat"
+
+msgid "Viewing interpretation: {{- visualisationName}}"
+msgstr "Zobrazení interpretace: {{- visualisationName}}"
+
+msgid "Could not load interpretation"
+msgstr "Interpretaci nelze načíst"
+
+msgid ""
+"The interpretation couldn’t be displayed. Try again or contact your system "
+"administrator."
+msgstr ""
+"Interpretaci se nepodařilo zobrazit. Zkuste to znovu nebo se obraťte na "
+"správce systému."
+
+msgid "Hide interpretation"
+msgstr "Skrýt interpretaci"
+
+msgid "Write an interpretation"
+msgstr "Napsat interpretaci"
+
+msgid "Could not post interpretation"
+msgstr "Nelze zveřejnit výklad"
+
+msgid ""
+"Other people viewing this interpretation in the future may see more data."
+msgstr ""
+"Další osoby, které si tento výklad prohlédnou v budoucnu, mohou vidět více "
+"údajů."
+
+msgid "Post interpretation"
+msgstr "Vložit interpretaci"
+
+msgid "Interpretations"
+msgstr "Interpretace"
+
+msgid "Error loading interpretations"
+msgstr "Chyba při načítání výkladů"
+
+msgid "Could not load interpretations"
+msgstr "Nelze načíst interpretace"
+
+msgid "Reply"
+msgstr "Odpovědět"
+
+msgid "{{count}} replies"
+msgid_plural "{{count}} replies"
+msgstr[0] "{{count}} odpověď"
+msgstr[1] " {{count}} odpovědi"
+msgstr[2] "{{count}} odpovědí"
+msgstr[3] "{{count}} odpovědi"
+
+msgid "View replies"
+msgstr "Zobrazit odpovědi"
+
+msgid "Unlike"
+msgstr "Na rozdíl od"
+
+msgid "Like"
+msgstr "Jako"
+
+msgid "See interpretation"
+msgstr "Zobrazit interpretaci"
+
+msgid "Open in app"
+msgstr "Otevřít v aplikaci"
+
+msgid "Share"
+msgstr "Sdílet"
+
+msgid "Could not delete interpretation"
+msgstr "Nelze odstranit výklad"
+
+msgid "Manage sharing"
+msgstr "Spravovat sdílení"
+
+msgid "Could not update interpretation text"
+msgstr "Nelze aktualizovat text výkladu"
+
+msgid "Could not update interpretation"
+msgstr "Interpretaci nelze aktualizovat"
+
+msgid "Enter interpretation text"
+msgstr "Zadejte text interpretace"
+
+msgid "Not available offline"
+msgstr "Není k dispozici offline"
+
+msgid "Anyone"
+msgstr "Kdokoliv"
+
+msgid "Only you"
+msgstr "Jen vy"
+
+msgid "Others"
+msgstr "Ostatní"
+
+msgid "Not supported by this app yet"
+msgstr "Tato aplikace zatím nepodporuje"
+
+msgid "Filter by name"
+msgstr "Filtrovat podle názvu"
+
+msgid "Created"
+msgstr "Vytvořeno"
+
+msgid "Last updated"
+msgstr "Naposledy aktualizováno"
+
+msgid "Clear filters"
+msgstr "Vymazat filtry"
+
+msgid "{{firstItemIndex}}-{{lastItemIndex}} of {{totalNumberOfItems}}"
+msgstr "{{firstItemIndex}}-{{lastItemIndex}} z {{totalNumberOfItems}}"
+
+msgid "Open"
+msgstr "Otevřít"
+
+msgid "Couldn't load items"
+msgstr "Položky nelze načíst"
+
+msgid ""
+"There was a problem loading items. Try again or contact your system "
+"administrator."
+msgstr ""
+"Při načítání položek došlo k problému. Zkuste to znovu nebo se obraťte na "
+"správce systému."
+
+msgid "No items found. Create a new to get started."
+msgstr "Žádné položky nenalezeny. Začněte vytvořením nové."
+
+msgid ""
+"No items found. Try adjusting your search or filter options to find what "
+"you're looking for."
+msgstr ""
+"Žádné položky nenalezeny. Zkuste upravit možnosti vyhledávání nebo "
+"filtrování, abyste našli to, co hledáte."
+
+msgid "Create new"
+msgstr "Vytvořit nový"
+
+msgid "Open a visualization"
+msgstr "Otevřít vizualizaci"
+
+msgid "Loading visualizations"
+msgstr "Načítání vizualizací"
+
+msgid "Couldn't load visualizations"
+msgstr "Nelze načíst vizualizace"
+
+msgid ""
+"There was a problem loading visualizations. Try again or contact your system"
+" administrator."
+msgstr ""
+"Při načítání vizualizací došlo k problému. Zkuste to znovu nebo se obraťte "
+"na správce systému."
+
+msgid "No visualizations found. Click New visualization to get started."
+msgstr ""
+"Nebyly nalezeny žádné vizualizace. Začněte kliknutím na Nová vizualizace."
+
+msgid ""
+"No visualizations found. Try adjusting your search or filter options to find"
+" what you're looking for."
+msgstr ""
+"Nenalezeny žádné vizualizace. Zkuste upravit možnosti vyhledávání nebo "
+"filtrování, abyste našli to, co hledáte."
+
+msgid "New visualization"
+msgstr "Nová vizualizace"
+
+msgid "Open a map"
+msgstr "Otevřít mapu"
+
+msgid "Loading maps"
+msgstr "Načítání map"
+
+msgid "Couldn't load maps"
+msgstr "Mapy se nepodařilo načíst"
+
+msgid ""
+"There was a problem loading maps. Try again or contact your system "
+"administrator."
+msgstr ""
+"Při načítání map došlo k problému. Zkuste to znovu nebo se obraťte na "
+"správce systému."
+
+msgid "No maps found. Click New map to get started."
+msgstr "Nenalezeny žádné mapy. Začněte kliknutím na Nová mapa."
+
+msgid ""
+"No maps found. Try adjusting your search or filter options to find what "
+"you're looking for."
+msgstr ""
+"Nenalezeny žádné mapy. Zkuste upravit možnosti vyhledávání nebo filtrování, "
+"abyste našli to, co hledáte."
+
+msgid "New map"
+msgstr "Nová mapa"
+
+msgid "Hide"
+msgstr "Skrýt"
+
+msgid "{{count}} org units"
+msgid_plural "{{count}} org units"
+msgstr[0] "{{count}} organizační jednotka"
+msgstr[1] "{{count}} organizační jednotky"
+msgstr[2] "{{count}} organizačních jednotek"
+msgstr[3] "{{count}} organizačních jednotek"
+
+msgid "{{count}} levels"
+msgid_plural "{{count}} levels"
+msgstr[0] "{{count}} úroveň"
+msgstr[1] "{{count}} úrovně"
+msgstr[2] "{{count}} úrovní"
+msgstr[3] "{{count}} úrovní"
+
+msgid "{{count}} groups"
+msgid_plural "{{count}} groups"
+msgstr[0] "{{count}} skupina"
+msgstr[1] "{{count}} skupiny"
+msgstr[2] "{{count}} skupin"
+msgstr[3] "{{count}} skupin"
+
+msgid "Selected: {{commaSeparatedListOfOrganisationUnits}}"
+msgstr "Vybráno: {{commaSeparatedListOfOrganisationUnits}}"
+
+msgid "Nothing selected"
+msgstr "Není vybráno nic"
+
+msgid "User organisation unit"
+msgstr "Organizační jednotka uživatele"
+
+msgid "User sub-units"
+msgstr "Podjednotky uživatele"
+
+msgid "User sub-x2-units"
+msgstr "Jednotky 2. řádu uživatele"
+
+msgid "Select a level"
+msgstr "Vybrat úroveň"
+
+msgid "Select a group"
+msgstr "Vybrat skupinu"
+
+msgid "Deselect all"
+msgstr "Odznačit vše"
+
+msgid "Year"
+msgstr "Rok"
+
+msgid "Select year"
+msgstr "Vybrat rok"
+
+msgid "Period"
+msgstr "Období"
+
+msgid "Selected Periods"
+msgstr "Vybraná období"
+
+msgid "No period types available"
+msgstr ""
+
+msgid ""
+"No period types are enabled in the system. Please contact your system "
+"administrator."
+msgstr ""
+
+msgid "Relative periods"
+msgstr "Relativní období"
+
+msgid "Fixed periods"
+msgstr "Pevné období"
+
+msgid "No periods selected"
+msgstr "Nejsou vybrána žádná období"
+
+msgid "Daily"
+msgstr "Denně"
+
+msgid "Weekly"
+msgstr "Týdně"
+
+msgid "Weekly (Start Wednesday)"
+msgstr "Týdně (od středy)"
+
+msgid "Weekly (Start Thursday)"
+msgstr "Týdně (od čtvrtka)"
+
+msgid "Weekly (Start Friday)"
+msgstr ""
+
+msgid "Weekly (Start Saturday)"
+msgstr "Týdně (od soboty)"
+
+msgid "Weekly (Start Sunday)"
+msgstr "Týdně (začíná nedělí)"
+
+msgid "Bi-weekly"
+msgstr "po 14ti dnech"
+
+msgid "Monthly"
+msgstr "Měsíčně"
+
+msgid "Bi-monthly"
+msgstr "Dvakrát za měsíc"
+
+msgid "Quarterly"
+msgstr "Čtvrtletně"
+
+msgid "Six-monthly"
+msgstr "Šestiměsíční"
+
+msgid "Six-monthly April"
+msgstr "Duben šest měsíců"
+
+msgid "Yearly"
+msgstr "Ročně"
+
+msgid "Financial year (Start February)"
+msgstr ""
+
+msgid "Financial year (Start April)"
+msgstr "Finanční rok (od dubna)"
+
+msgid "Financial year (Start July)"
+msgstr "Finanční rok (od července)"
+
+msgid "Financial year (Start August)"
+msgstr ""
+
+msgid "Financial year (Start September)"
+msgstr ""
+
+msgid "Financial year (Start October)"
+msgstr "Finanční rok (od října)"
+
+msgid "Financial year (Start November)"
+msgstr "Finanční rok (od listopadu)"
+
+msgid "Today"
+msgstr "Dnes"
+
+msgid "Yesterday"
+msgstr "Včera"
+
+msgid "Last 3 days"
+msgstr "Poslední 3 dny"
+
+msgid "Last 7 days"
+msgstr "Posledních 7 dní"
+
+msgid "Last 14 days"
+msgstr "Posledních 14 dní"
+
+msgid "Last 30 days"
+msgstr "Poledních 30 dní"
+
+msgid "Last 60 days"
+msgstr "Posledních 60 dní"
+
+msgid "Last 90 days"
+msgstr "Posledních 90 dní"
+
+msgid "Last 180 days"
+msgstr "Posledních 180 dní"
+
+msgid "This week"
+msgstr "Tento týden"
+
+msgid "Last week"
+msgstr "Minulý týden"
+
+msgid "Last 4 weeks"
+msgstr "Poslední 4 týdny"
+
+msgid "Last 12 weeks"
+msgstr "Posledních 12 týdnů"
+
+msgid "Last 52 weeks"
+msgstr "Posledních 52 týdnů"
+
+msgid "Weeks this year"
+msgstr "Týdny tohoto roku"
+
+msgid "This bi-week"
+msgstr "Těchto 14 dní"
+
+msgid "Last bi-week"
+msgstr "Posledních dní "
+
+msgid "Last 4 bi-weeks"
+msgstr "4 poslední dvoutýdny"
+
+msgid "This month"
+msgstr "Tento měsíc"
+
+msgid "Last month"
+msgstr "Minulý měsíc"
+
+msgid "Last 3 months"
+msgstr "Poslední 3 měsíce"
+
+msgid "Last 6 months"
+msgstr "Posledních 6 měsíců"
+
+msgid "Last 12 months"
+msgstr "Posledních 12 měsíců"
+
+msgid "Months this year"
+msgstr "Měsíce tohoto roku"
+
+msgid "This bi-month"
+msgstr "Těchto 14 dní"
+
+msgid "Last bi-month"
+msgstr "Poslední dva měsíce"
+
+msgid "Last 6 bi-months"
+msgstr "Posledních 6 dvou-měsíců"
+
+msgid "Bi-months this year"
+msgstr "Dvouměsíčně tento rok"
+
+msgid "This quarter"
+msgstr "Toto čtvrtletí"
+
+msgid "Last quarter"
+msgstr "Poslední čtvrtletí"
+
+msgid "Last 4 quarters"
+msgstr "Poslední 4 čtvrtletí "
+
+msgid "Quarters this year"
+msgstr "Čtvrtletí tohoto roku"
+
+msgid "This six-month"
+msgstr "Tento půlrok"
+
+msgid "Last six-month"
+msgstr "Poslední půlrok"
+
+msgid "Last 2 six-month"
+msgstr "Poslední 2 půlroky"
+
+msgid "This financial year"
+msgstr "Tento finanční rok"
+
+msgid "Last financial year"
+msgstr "Poslední finanční rok"
+
+msgid "Last 5 financial years"
+msgstr "Posledních 5 finančních roků"
+
+msgid "This year"
+msgstr "Tento rok"
+
+msgid "Last year"
+msgstr "Poslední rok"
+
+msgid "Last 5 years"
+msgstr "Posledních 5 let"
+
+msgid "Last 10 years"
+msgstr "Posledních 10 let"
+
+msgid "Days"
+msgstr "Dnů"
+
+msgid "Weeks"
+msgstr "Týdnů"
+
+msgid "Bi-weeks"
+msgstr "14 dní"
+
+msgid "Months"
+msgstr "Měsíce"
+
+msgid "Bi-months"
+msgstr "Dva měsíce"
+
+msgid "Quarters"
+msgstr "Čtvrtletí"
+
+msgid "Six-months"
+msgstr "Půlrok"
+
+msgid "Financial Years"
+msgstr "Finanční roky"
+
+msgid "Years"
+msgstr "Let"
+
+msgid "Value: {{value}}"
+msgstr "Hodnota: {{value}}"
+
+msgid "Bold text"
+msgstr "Tučné písmo"
+
+msgid "Italic text"
+msgstr "Text kurzívou"
+
+msgid "Link to a URL"
+msgstr "Odkaz na URL"
+
+msgid "Mention a user"
+msgstr "Zmínit uživatele"
+
+msgid "Add emoji"
+msgstr "Přidat emotikony"
+
+msgid "Preview"
+msgstr "Náhled"
+
+msgid "Back to write mode"
+msgstr "Zpět do režimu zápisu"
+
+msgid "Interpretations and details"
+msgstr "Výklady a podrobnosti"
+
+msgid "Translating to"
+msgstr "Překlad do"
+
+msgid "Choose a locale"
+msgstr "Vyberte národní prostředí"
+
+msgid "Base locale reference"
+msgstr "Odkaz na základní národní prostředí"
+
+msgid "Choose a locale to translate from the menu above"
+msgstr "Z nabídky výše vyberte národní prostředí, které chcete přeložit"
+
+msgid "Translate: {{objectName}}"
+msgstr "Přeložit: {{objectName}}"
+
+msgid "Save translations"
+msgstr "Uložit překlady"
+
+msgid "Cannot save while offline"
+msgstr "Nelze ukládat v režimu offline"
+
+msgid "Could not load translations"
+msgstr "Nelze načíst překlady"
+
+msgid "Retry"
+msgstr "Opakovat"
+
+msgid "Too many results. Try refining the search."
+msgstr "Příliš mnoho výsledků. Zkuste upřesnit vyhledávání."
+
+msgid "Search for a user"
+msgstr "Vyhledat uživatele"
+
+msgid "Searching for \"{{- searchText}}\""
+msgstr "Hledání \"{{- searchText}}\""
+
+msgid "No results found"
+msgstr "Nenalezeny žádné výsledky"
+
+msgid "Series"
+msgstr "Série"
+
+msgid "Category"
+msgstr "Kategorie"
+
+msgid "Columns"
+msgstr "Sloupce"
+
+msgid "Rows"
+msgstr "Řádky"
+
+msgid "Points"
+msgstr "Body"
+
+msgid "Reporting rate"
+msgstr "Míra hlášení"
+
+msgid "Reporting rate on time"
+msgstr "Četnost hlášení na čas"
+
+msgid "Actual reports"
+msgstr "Aktuální zprávy"
+
+msgid "Actual reports on time"
+msgstr "Aktuální zprávy včas"
+
+msgid "Expected reports"
+msgstr "Očekávané zprávy"
+
+msgid "Select a program"
+msgstr "Vybrat program"
+
+msgid "Indicator group"
+msgstr "Skupina indikátorů"
+
+msgid "All groups"
+msgstr "Všechny skupiny"
+
+msgid "Indicator"
+msgstr "Indikátor"
+
+msgid "No indicator groups found"
+msgstr "Nebyly nalezeny žádné skupiny indikátorů"
+
+msgid "Loading indicator groups"
+msgstr "Načítání skupin indikátorů"
+
+msgid "Data element group"
+msgstr "Skupina datových prvků"
+
+msgid "No data element groups found"
+msgstr "Nenalezeny žádné skupiny datových prvků"
+
+msgid "Loading data element groups"
+msgstr "Načítání skupin datových prvků"
+
+msgid "Data sets"
+msgstr "Datové sady"
+
+msgid "Data set"
+msgstr "Datová sada"
+
+msgid "All data sets"
+msgstr "Všechny datové soubory"
+
+msgid "Loading data sets"
+msgstr "Načítání datových sad"
+
+msgid "Event data items"
+msgstr "Položky dat události"
+
+msgid "All programs"
+msgstr "Všechny programy"
+
+msgid "Event data item"
+msgstr "Datová položka události"
+
+msgid "No programs found"
+msgstr "Nebyly nalezeny žádné programy"
+
+msgid "Loading programs"
+msgstr "Načítání programů"
+
+msgid "Program indicators"
+msgstr "Indikátory programu"
+
+msgid "Program indicator"
+msgstr "Indikátor programu"
+
+msgid "Calculations"
+msgstr "Výpočty"
+
+msgid "Option"
+msgstr "Volba"
+
+msgid "Number"
+msgstr "Číslo"
+
+msgid "Formula is empty. Add items to the formula from the lists on the left."
+msgstr "Vzorec je prázdný. Přidejte položky do vzorce ze seznamů vlevo."
+
+msgid "Consecutive math operators"
+msgstr "Po sobě jdoucí matematické operátory"
+
+msgid "Consecutive data elements"
+msgstr "Po sobě jdoucí datové prvky"
+
+msgid "Starts or ends with a math operator"
+msgstr "Začíná nebo končí matematickým operátorem"
+
+msgid "Empty parentheses"
+msgstr "Prázdné závorky"
+
+msgid "Missing right parenthesis )"
+msgstr "Chybí pravá závorka )"
+
+msgid "Missing left parenthesis ("
+msgstr "Chybí levá závorka ("
+
+msgid "Extra Small"
+msgstr "Velmi malý"
+
+msgid "Small"
+msgstr "Malý"
+
+msgid "Regular"
+msgstr "Pravidelný"
+
+msgid "Large"
+msgstr "Velký"
+
+msgid "Extra Large"
+msgstr "Velmi velký"
+
+msgid "Left"
+msgstr "Vlevo"
+
+msgid "Center"
+msgstr "střed"
+
+msgid "Right"
+msgstr "Vpravo"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Middle"
+msgstr "Střední"
+
+msgid "End"
+msgstr "Konec"
+
+msgid "Top"
+msgstr "Nahoře"
+
+msgid "Bottom"
+msgstr "Dole"
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr "{{dynamicOuNames}} a {{lastOuName}}"
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr "úrovně {{allDynamicOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr "skupiny {{allDynamicOuNames}}"
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr "úrovně {{allDynamicOuNames}} v {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr "Skupiny {{allDynamicOuNames}} v {{staticOuNames}}"
+
+msgid "{{percentage}}% of total x values"
+msgstr "{{percentage}}% z celkových hodnot x"
+
+msgid "{{percentage}}% of total y values"
+msgstr "{{percentage}}% z celkových hodnot y"
+
+msgid "{{thresholdFactor}} × IQR Q1"
+msgstr "{{thresholdFactor}} × IQR Q1"
+
+msgid "{{thresholdFactor}} × IQR Q3"
+msgstr "{{thresholdFactor}} × IQR Q3"
+
+msgid "{{thresholdFactor}} × Modified Z-score low"
+msgstr "{{thresholdFactor}} × Upravené nízké Z-skóre"
+
+msgid "{{thresholdFactor}} × Modified Z-score high"
+msgstr "{{thresholdFactor}} × Upravené vysoké Z-skóre"
+
+msgid "{{thresholdFactor}} × Z-score low"
+msgstr "{{thresholdFactor}} × nízké Z-skóre"
+
+msgid "{{thresholdFactor}} × Z-score high"
+msgstr "{{thresholdFactor}} × Z-skóre vysoké"
+
+msgid "Not applicable"
+msgstr "Nelze použít"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Organisation unit"
+msgstr "Organizační jednotka"
+
+msgid "Assigned Categories"
+msgstr "Přiřazené kategorie"
+
+msgid "No value"
+msgstr "Žádná hodnota"
+
+msgid "Active"
+msgstr "Aktivní"
+
+msgid "Completed"
+msgstr "Dokončeno"
+
+msgid "Scheduled"
+msgstr "Naplánováno"
+
+msgid "Cancelled"
+msgstr "Zrušeno"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Long text"
+msgstr "Dlouhý text"
+
+msgid "Multi text"
+msgstr "Více textů"
+
+msgid "Letter"
+msgstr "Písmeno"
+
+msgid "Phone number"
+msgstr "Telefonní číslo"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Yes/No"
+msgstr "Ano / Ne"
+
+msgid "Yes Only"
+msgstr "Pouze ano"
+
+msgid "Date"
+msgstr "datum"
+
+msgid "Date & Time"
+msgstr "Datum a čas"
+
+msgid "Time"
+msgstr "Čas"
+
+msgid "Unit interval"
+msgstr "Jednotkový interval"
+
+msgid "Percentage"
+msgstr "Procento"
+
+msgid "Integer"
+msgstr "Celé číslo"
+
+msgid "Positive Integer"
+msgstr "Kladné celé číslo"
+
+msgid "Negative Integer"
+msgstr "Záporné celé číslo"
+
+msgid "Positive or Zero Integer"
+msgstr "Kladné nebo nulové celé číslo"
+
+msgid "Tracker Associate"
+msgstr "Spolupracující trasovač"
+
+msgid "Username"
+msgstr "Uživatelské jméno"
+
+msgid "Coordinate"
+msgstr "Souřadnice"
+
+msgid "Reference"
+msgstr "Odkaz"
+
+msgid "Age"
+msgstr "Stáří"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Image"
+msgstr "Obrázek"
+
+msgid "GeoJSON"
+msgstr "GeoJSON"
+
+msgid "Pivot table"
+msgstr "Kontingenční tabulka"
+
+msgid "Area"
+msgstr "Oblast"
+
+msgid "Stacked area"
+msgstr "Skládaná plocha"
+
+msgid "Bar"
+msgstr "LIšta"
+
+msgid "Stacked bar"
+msgstr "Skládaný lištový graf"
+
+msgid "Column"
+msgstr "Sloupec"
+
+msgid "Year over year (column)"
+msgstr "Rok po roce (sloupce)"
+
+msgid "Stacked column"
+msgstr "Skládaný sloupec"
+
+msgid "Gauge"
+msgstr "Gauge"
+
+msgid "Line"
+msgstr "Linie"
+
+msgid "Line list"
+msgstr "Seznam řádků"
+
+msgid "Year over year (line)"
+msgstr "Rok po roce (řádek)"
+
+msgid "Pie"
+msgstr "Výseč"
+
+msgid "Radar"
+msgstr "Radar"
+
+msgid "Scatter"
+msgstr "Rozptyl"
+
+msgid "Single value"
+msgstr "Jedna hodnota"
+
+msgid "Outlier table"
+msgstr "Tabulka odlehlých hodnot"
+
+msgid "All charts"
+msgstr "Všechny grafy"
+
+msgid "Map"
+msgstr "Mapa"
+
+msgid "{{seriesName}} (trend)"
+msgstr "{{seriesName}} (trend)"
+
+msgid "Trend"
+msgstr "Trend"
+
+msgid "No legend for this series"
+msgstr "Pro tuto sérii není legenda"
+
+msgid "and {{amount}} more..."
+msgstr "a {{amount}} další ..."
+
+msgid "Linear Regression"
+msgstr "Lineární regrese"
+
+msgid "Target"
+msgstr "Cíl"
+
+msgid "Base"
+msgstr "Základ"
+
+msgid "Axis {{axisId}}"
+msgstr "Osa {{axisId}}"
+
+msgid "{{count}} items"
+msgid_plural "{{count}} items"
+msgstr[0] "{{count}} položka"
+msgstr[1] " {{count}} položky"
+msgstr[2] " {{count}} položek"
+msgstr[3] "{{count}} položek"
+
+msgid "Reset zoom"
+msgstr "Obnovit přiblížení"

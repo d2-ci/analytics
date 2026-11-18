@@ -1,0 +1,10 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _ui = require("@dhis2/ui");
+const _defaultExport = [`.popover.jsx-681815212{width:480px;height:360px;border:1px solid ${_ui.colors.grey400};overflow-x:hidden;overflow-y:auto;}`, ".loader.jsx-681815212{height:100%;width:100%;}", `.error.jsx-681815212{height:100%;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;font-size:14px;color:${_ui.colors.grey700};}`, `.data-table.jsx-681815212{display:table;width:100%;border-collapse:collapse;font-size:13px;line-height:17px;margin:${_ui.spacers.dp4} 0 0 0;color:${_ui.colors.grey900};}`, ".data-table.jsx-681815212 th.jsx-681815212{text-align:left;font-weight:500;padding:8px 0 8px 12px;width:128px;vertical-align:top;}", ".data-table.jsx-681815212 td.jsx-681815212{padding:8px 4px 8px 16px;vertical-align:top;}", ".data-table.jsx-681815212 .content-wrap.jsx-681815212{max-height:240px;overflow-y:auto;}", `.data-table.jsx-681815212 tr.jsx-681815212:hover{background:${_ui.colors.grey100};}`, `ul.jsx-681815212{margin:0;padding:0 0 0 ${_ui.spacers.dp16};list-style-position:outside;}`, `li.jsx-681815212+li.jsx-681815212{margin:${_ui.spacers.dp4} 0 0 0;}`, `details.jsx-681815212 ul.jsx-681815212{margin:${_ui.spacers.dp4} 0 0 ${_ui.spacers.dp16};}`, `.data-table.jsx-681815212 .code.jsx-681815212{font-size:11px;line-height:15px;display:inline-block;border-radius:2px;background-color:${_ui.colors.grey200};outline:3px solid ${_ui.colors.grey200};color:${_ui.colors.grey900};font-family:ui-monospace,'Cascadia Code','Source Code Pro',Menlo, Consolas,'DejaVu Sans Mono',monospace;font-weight:normal;}`, `.data-table.jsx-681815212 .none.jsx-681815212,.data-table.jsx-681815212 .label.jsx-681815212{color:${_ui.colors.grey600};}`];
+_defaultExport.__hash = "681815212";
+var _default = exports.default = _defaultExport;
